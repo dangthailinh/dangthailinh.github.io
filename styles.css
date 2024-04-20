@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAI-09-hitoshi</title>
+    <style>
+        /* Resetting default margins and paddings */
+        body, h1, h2, h3, p, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0055be; /* Màu xanh nước biển */
+            background-image: url('https://www.bing.com/images/blob?bcid=r9PUAfnvte4GQ2lfeOrIXemz1Bqg.....1Q'); 
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+    
+
+        header {
+            background-image: url('https://i0.wp.com/wallpapercave.com/wp/wp6289040.jpg'); /* Example header image URL */
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-image: url('https://th.bing.com/th/id/R.e8b0c0d1e0272e8b94e8705cdfc5da85?rik=dedBfextGIU58w&pid=ImgRaw&r=0'); 
+            background-size: cover;
+            background-position: center;
+            background-color: #333;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            background-image: url('https://th.bing.com/th/id/OIP.9m6e1xmuGRswiJmQqcCPggHaGP?rs=1&pid=ImgDetMain'); 
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block; /* Đảm bảo các liên kết điều hướng được hiển thị theo hàng */
+        }
+
+        nav a:hover {
+            background-color: #555555;
+        }
+
+        section {
+            padding: 50px 20px;
+            text-align: center;
+            display: none; /* Ban đầu ẩn tất cả các phần */
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Nền mờ cho nội dung */
+            padding: 20px;
+            border-radius: 10px; /* Góc bo cho nội dung */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Bóng nhẹ cho chiều sâu */
+            border: 2px solid #ccc; /* Kẻ khung cho nội dung */
+        }
+
+        h1, h2, h3 {
+            color: #0d0404; /* Màu đen cho các tiêu đề */
+        }
+
+        h2 {
+            margin-bottom: 20px; /* Khoảng cách dưới các tiêu đề */
+        }
+
+        ul {
+            list-style-type: none; /* Loại bỏ các điểm danh mặc định */
+            padding-left: 0; /* Loại bỏ padding trái mặc định */
+        }
+
+        ul li {
+            margin-bottom: 10px; /* Khoảng cách dọc giữa các mục danh sách */
+        }
+
+        blockquote {
+            font-style: italic; /* Làm nghiêng blockquote */
+            margin: 20px 0; /* Khoảng cách xung quanh blockquote */
+            color: #666; /* Màu xám nhạt */
+        }
+
+        blockquote p {
+            line-height: 1.6;
+        }
+
+        .colorful-text {
+            color: #ffcc00; /* Màu cho văn bản đặc biệt */
+        }
+
+        img {
+            max-width: 100%; /* Đảm bảo hình ảnh không tràn qua container */
+            height: auto; /* Giữ tỷ lệ chiều cao */
+            display: block; /* Đảm bảo hình ảnh hoạt động như các phần tử khối */
+            margin: 0 auto 20px; /* Khoảng cách dưới hình ảnh */
+            border-radius: 5px; /* Góc bo cho hình ảnh */
+            border: 2px solid #ccc; /* Kẻ khung cho hình ảnh */
+        }
+
+        iframe {
+            max-width: 100%; /* Đảm bảo iframe không tràn qua container */
+            display: block; /* Đảm bảo iframe hoạt động như các phần tử khối */
+            margin: 0 auto 20px; /* Khoảng cách dưới iframe */
+            border: 2px solid #ccc; /* Kẻ khung cho iframe */
+        }
+
+        
+
+
+        /* Phần liên hệ */
+        #contact {
+            background-color: rgba(255, 255, 255, 0.8); /* Nền mờ cho phần liên hệ */
+            padding: 50px 20px;
+            border-radius: 10px; /* Góc bo cho phần liên hệ */
+            margin: 20px 0; /* Khoảng cách với các phần khác */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Bóng nhẹ cho chiều sâu */
+        }
+
+        #contact h2 {
+            color: #0d0404; /* Màu đen cho tiêu đề phần liên hệ */
+            margin-bottom: 20px; /* Khoảng cách dưới tiêu đề phần liên hệ */
+        }
+
+        #contact .content {
+            text-align: left;
+        }
+
+        #contact ul {
+            list-style-type: none; /* Loại bỏ các điểm danh mặc định */
+            padding-left: 0; /* Loại bỏ padding trái mặc định */
+            display: flex; /* Sắp xếp các phần tử trong danh sách theo chiều ngang */
+            justify-content: space-around; /* Canh giữa các phần tử trong danh sách */
+            flex-wrap: wrap; /* Cho phép các phần tử tràn xuống hàng mới nếu không đủ không gian */
+        }
+
+        #contact ul li {
+            margin-bottom: 20px; /* Khoảng cách dưới mỗi mục danh sách */
+        }
+
+        #contact ul li a {
+            text-decoration: none; /* Loại bỏ gạch chân cho liên kết */
+            color: #000; /* Màu đen cho liên kết */
+            display: block; /* Đảm bảo liên kết được hiển thị như phần tử khối */
+            text-align: center; /* Căn giữa nội dung liên kết */
+        }
+
+        #contact ul li img {
+            max-width: 100px; /* Đảm bảo hình ảnh không quá rộng */
+            border-radius: 50%; /* Hình ảnh tròn */
+            margin: 0 auto 10px; /* Khoảng cách dưới hình ảnh */
+        }
+
+        /* Phần home */
+        #home {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        #home .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #home h2 {
+            color: #fff; /* Màu trắng cho tiêu đề */
+            margin-bottom: 30px; /* Khoảng cách dưới tiêu đề */
+        }
+
+        .card-deck {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Khoảng cách giữa các card */
+        }
+
+        .card {
+            flex: 1 1 300px;
+            max-width: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            color: #0d0404;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nội dung HTML của bạn -->
+</body>
+</html>
+
