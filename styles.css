@@ -55,7 +55,25 @@
         nav a:hover {
             background-color: #555555;
         }
-
+        footer {
+            background-image: url('https://th.bing.com/th/id/R.34c0d07845af7fc2cb7491e7c4dbda87?rik=gq3Xi100MNxz9w&pid=ImgRaw&r=0'); 
+            background-size: cover;
+            background-position: center;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transition: height 0.5s ease; /* Tạo hiệu ứng chuyển động mượt mà */
+        }
+        @media (max-width: 600px) {
+            footer {
+                height: 50px; /* Chiều cao của footer khi màn hình có kích thước nhỏ hơn 600px */
+            }
+        }
         section {
             padding: 50px 20px;
             text-align: center;
@@ -236,4 +254,3 @@
     <!-- Nội dung HTML của bạn -->
 </body>
 </html>
-
