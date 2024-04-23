@@ -23,7 +23,7 @@ header {
 }
 
 nav {
-    background-image: url('https://th.bing.com/th/id/R.e8b0c0d1e0272e8b94e8705cdfc5da85?rik=dedBfextGIU58w&pid=ImgRaw&r=0'); 
+    background-image: url('https://giffiles.alphacoders.com/210/210541.gif'); 
     background-size: cover;
     background-position: center;
     background-color: #333;
@@ -46,11 +46,11 @@ nav a:hover {
 }
 
 /* Footer */
+
 footer {
-    background-image: url('https://th.bing.com/th/id/R.34c0d07845af7fc2cb7491e7c4dbda87?rik=gq3Xi100MNxz9w&pid=ImgRaw&r=0'); 
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 100%), url('https://cdnb.artstation.com/p/assets/images/images/014/665/033/original/yargon-kerman-webp-net-gifmaker-39.gif?1544919451');
     background-size: cover;
     background-position: center;
-    background-color: #333;
     color: #fff;
     text-align: center;
     padding: 20px 0;
@@ -58,13 +58,15 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    transition: height 0.5s ease; /* Tạo hiệu ứng chuyển động mượt mà */
+    border-top-left-radius: 50% 20px;
+    border-top-right-radius: 50% 20px;
+    transition: transform 0.5s ease-out;
+    transform: translateY(100%);
+    z-index: -1; /* Ensure footer is below content */
 }
 
-@media (max-width: 600px) {
-    footer {
-        height: 50px; /* Chiều cao của footer khi màn hình có kích thước nhỏ hơn 600px */
-    }
+footer.show {
+    transform: translateY(0);
 }
 
 section {
@@ -279,6 +281,6 @@ iframe {
     /* Tùy chỉnh nút play */
 }
 
-/* Tùy chỉnh các controls khác */
+
 
 

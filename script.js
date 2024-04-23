@@ -92,6 +92,18 @@
             cardDeck.appendChild(card);
         });
     });
+    window.addEventListener("scroll", function() {
+    var footer = document.querySelector("footer");
+    var scrollPosition = window.innerHeight + window.pageYOffset;
+    var documentHeight = document.body.offsetHeight;
+
+    if (scrollPosition >= documentHeight) {
+        footer.classList.add("show");
+    } else {
+        footer.classList.remove("show");
+    }
+});
+
 </script>
 
 </body>
