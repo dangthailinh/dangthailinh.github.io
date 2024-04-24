@@ -102,6 +102,11 @@
         var nav = document.getElementById('slide-nav');
         nav.classList.toggle('show');
     }
+    // Function to change cursor icon
+    function changeCursor() {
+        document.body.style.cursor = "url('https://image.pngaaa.com/417/1278417-middle.png'), auto";
+    }
 </script>
+
 </body>
 </html>

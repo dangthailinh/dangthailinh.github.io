@@ -280,6 +280,87 @@ iframe {
 #audio-player::-webkit-media-controls-play-button {
     /* Tùy chỉnh nút play */
 }
+/* styles.css */
+
+/* Define styles for home section */
+#home {
+    background-image: url('https://wallpapercave.com/wp/wp2757868.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px 0;
+    
+}
+
+/* Define styles for footer section */
+#footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 50px 0;
+}
+
+/* Define styles for container */
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Define styles for card-deck */
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+/* Define styles for card */
+.card {
+    margin-bottom: 30px;
+    border: none;
+    overflow: hidden;
+}
+
+/* Define styles for card-body */
+.card-body {
+    padding: 20px;
+}
+
+/* Define styles for card-title */
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Define styles for card-text */
+.card-text {
+    font-size: 16px;
+}
+
+/* Define styles for card-note */
+.card-note {
+    font-style: italic;
+}
+
+/* Define styles for blockquote */
+blockquote {
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* Define styles for h3 */
+h3 {
+    font-size: 24px;
+}
+
+/* Define styles for p */
+p {
+    font-size: 16px;
+}
+
 
 
 
