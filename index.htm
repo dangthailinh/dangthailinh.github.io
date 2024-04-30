@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="About linh thái đặng">
+	<meta name="keywords" content="linh thái đặng, artist, artwork, gallery">
+	<link rel="stylesheet" type="text/css" href="https://controlpanel.artweb.com/css/smoothdivscroll/smoothDivScroll.css">
+	<link rel="stylesheet" href="https://s3.amazonaws.com/wbstaticfiles/users/129865/style-1714469897.gz.css" type="text/css">
+	<link title="Text-only version" rel="alternate" href="?text_only=true" media="aural, braille, tty">
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="/feed/">
+	<link rel="shortcut icon" href="https://s3.amazonaws.com/wbstaticfiles/users/129865/favicon.ico" type="image/x-icon">
+	<!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@artweb">
+	<meta name="twitter:title" content="Home">
+	<meta name="twitter:description" content="About linh thái đặng">
+	<meta name="twitter:creator" content="@TheArtistsWeb">
+	<meta name="twitter:image" content="https://s3.amazonaws.com/wbstaticfiles/users/129865/909954_438098533-972182854914110-2118512038700251819-n.jpg">
+	<meta name="twitter:domain" content="https://controlpanel.artweb.com/">
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content="Home">
+	<meta property="og:url" content="https://controlpanel.artweb.com/">
+	<meta property="og:type" content="article">
+	<meta property="og:description" content="About linh thái đặng">
+	<meta property="og:site_name" content="linh thái đặng">
+	<meta property="og:image" content="https://s3.amazonaws.com/wbstaticfiles/users/129865/909954_438098533-972182854914110-2118512038700251819-n.jpg">
+	<meta property="fb:app_id" content="134280063332237">
+	<meta property="fb:admins" content="706037480">
+	<link rel="Index" href="/">
+	<link rel="Start" href="/">
+	<link rel="Next" href="/">
+	<link rel="Prev" href="/">
+</head>
+<body id="template17" data-dev-status="production" data-page-type="gallery">
+	<div id="template17-layout">
+		<div id="header">
+			<div class="navbar">
+				<div id="headerText" class="brand">
+					<a href="/">linh thái đặng</a>
+				</div>
+				<a type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" id="mobile-menu-button">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<div class="nav-collapse">
+					<ul id="filter" class="nav menu">
+						<li id="home-menu-item"><a href="/">Home</a></li>
+						<li class="pages"><a target="_self" href="/about-me">About Me</a></li>
+						<li class="pages"><a target="_self" href="/contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="content gallery">
+			<div id="gallery-container" data-gallery-query="#grid .item a.image-lnk">
+				<div id="grid" class="masonry">
+					<div class="item" style="width: 400px">
+						<a class="image-lnk" href="/home/909954_438098533-972182854914110-2118512038700251819-n.html" title="438098533 972182854914110 2118512038700251819 n" data-thumbnail-type="SQUARE_LARGE_THUMBNAIL">
+							<img width="400" height="auto" src="https://s3.amazonaws.com/wbstaticfiles/users/129865/ts_909954_438098533-972182854914110-2118512038700251819-n.jpg" alt="438098533 972182854914110 2118512038700251819 n">
+						</a>
+						<a class="image-overlay" href="/home/909954_438098533-972182854914110-2118512038700251819-n.html">
+							<span class="title">438098533 972182854914110 2118512038700251819 n</span>
+							<span class="notes"></span>
+						</a>
+					</div>
+					<!-- More items go here -->
+				</div>
+			</div>
+			<div class="page-title">
+				<h1>Home</h1>
+			</div>
+			<div class="page-content">
+				Welcome to my site!
+				<div>
+					<div id="bookmarkit"></div>
+					<div id="shareit"></div>
+				</div>
+				<div id="commentContainer"></div>
+			</div>
+		</div>
+		<footer id='footer'>
+			<div>
+				<div id="artweb-footer-spacer"></div>
+				<div id="artweb-footer" class="artweb">
+					<div id="artweb-footer-right">
+						<div id="artweb-footer-logo">
+							<a href="https://www.artweb.com/?Ref=free_footer_logo"><img src="/images/artweb/200.png" alt="artweb logo"></a>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="https://controlpanel.artweb.com//css/bootstrap/assets/js/bootstrap.js"></script>
+	<script type="text/javascript" src="https://controlpanel.artweb.com/js/jquery-masonry.min.js"></script>
+	<script type="text/javascript">
+		$("#mobile-menu-button").on('click', function() {
+			var current = $("div.content").data('state');
+			if (current == 'open') {
+				$("div.content").css('z-index', 'inherit');
+				$("div.content").data('state', 'closed');
+			} else {
+				$("div.content").css('z-index', '-1');
+				$("div.content").data('state', 'open');
+			}
+		});
+		function generator_callback() {
+			var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+			if (w > 399) w = 400;
+			$("#grid img").each(function() {
+				if (w < 400 && w > 0) {
+					$(this).attr('width', w).width(w);
+					$(this).parents('.item').width(w);
+				}
+				var h = $(this).height() + "px";
+				$(this).parents('.item').css({ height: h });
+			});
+			var container = document.querySelector('#grid');
+			var msnry = new Masonry(container, {
+				columnWidth: w,
+				itemSelector: '.item',
+				gutter: 10
+			});
+		}
+		$(window).on('load', function() {
+			generator_callback();
+		});
+	</script>
+</body>
+</html>
