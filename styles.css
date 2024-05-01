@@ -410,8 +410,42 @@ p {
 .carousel-inner .carousel-item.active {
     display: block;
 }
+#ART .card {
+    margin-top: 20px;
+    transition: transform .2s; /* Animation for card hover */
+}
 
+#ART .card:hover {
+    transform: scale(1.05); /* Slightly enlarge cards on hover */
+}
 
+#ART .card-img-overlay {
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+    border-radius: 0; /* Optional: aligns with the card's border-radius */
+}
 
+#ART h2 {
+    margin-bottom: 30px;
+    color: #ffc107; /* Stylish color for the heading */
+}
+
+#ART p {
+    font-size: 1.1rem; /* Larger font for better readability */
+    color: #f8f9fa; /* Light color for contrast against dark background */
+}
+#ART .accordion-button {
+    color: #fff;
+    background-color: #343a40;
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+
+#ART .accordion-button:not(.collapsed) {
+    color: #fff;
+    background-color: #495057;
+}
+
+#ART .accordion-item {
+    border-color: #495057;
+}
 
 
