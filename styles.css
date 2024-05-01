@@ -46,28 +46,50 @@ nav a:hover {
 }
 
 /* Footer */
-
+/* Footer */
 footer {
-    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 100%), url('https://cdnb.artstation.com/p/assets/images/images/014/665/033/original/yargon-kerman-webp-net-gifmaker-39.gif?1544919451');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
+    padding: 3px 8px; /* Reduced padding for an even smaller appearance */
+    color: white;
     text-align: center;
-    padding: 20px 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top-left-radius: 50% 20px;
-    border-top-right-radius: 50% 20px;
-    transition: transform 0.5s ease-out;
-    transform: translateY(100%);
-    z-index: -1; /* Ensure footer is below content */
+    border-radius: 15px; /* Increased border-radius for more pronounced rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* Keeps footer relative but at the bottom */
+    width: 100%; /* Ensures the footer extends full width */
+
+    /* Handling Multiple Backgrounds */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
+                url('https://w.wallhaven.cc/full/q2/wallhaven-q2x677.png'); /* Background image URL */
+    background-repeat: no-repeat; /* Prevents the background from repeating */
+    background-position: center; /* Centers the background image */
+    background-size: cover; /* Ensures the background covers the entire footer area */
 }
 
-footer.show {
-    transform: translateY(0);
+.footer-content {
+    max-width: 800px; /* Further reduced max width for a more condensed look */
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.social-icons a {
+    margin: 0 4px; /* Slightly smaller margin between icons */
+}
+
+.social-icons img {
+    height: 25px; /* Further reduced icon size */
+    transition: transform 0.3s ease;
+}
+
+.social-icons a:hover img {
+    transform: scale(1.1);
+}
+
+
+
+
+/* Footer now flows naturally at the bottom of the content */
+/* It will appear only when you scroll to the bottom of the page */
 
 section {
     padding: 50px 20px;
@@ -449,3 +471,18 @@ p {
 }
 
 
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer img {
+    vertical-align: middle;
+}
