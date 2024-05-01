@@ -15,12 +15,28 @@ body {
 }
 
 header {
-    background-image: url('https://i0.wp.com/wallpapercave.com/wp/wp6289040.jpg'); /* Example header image URL */
+    position: relative; /* Cần thiết để xác định vị trí tuyệt đối cho phần tử con */
+    background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/38094b95235473.5e92ecc4409a8.gif'); /* Example header image URL */
     background-size: cover;
     background-position: center;
+    color: #fff;
     padding: 100px 0;
     text-align: center;
 }
+
+.small-image {
+    position: absolute; /* Đặt vị trí tuyệt đối */
+    top: 0; /* Đặt vị trí ở trên cùng */
+    left: 50%; /* Đặt vị trí ở giữa theo chiều ngang */
+    transform: translateX(-50%); /* Dịch chuyển về trái để căn giữa */
+    width: 100px; /* Độ rộng của ảnh nhỏ */
+    height: px; /* Chiều cao của ảnh nhỏ */
+    background-image: url(''); /* Đường dẫn đến ảnh nhỏ */
+    background-size: cover;
+}
+
+
+
 
 nav {
     background-image: url('https://giffiles.alphacoders.com/210/210541.gif'); 
@@ -486,3 +502,12 @@ footer a {
 footer img {
     vertical-align: middle;
 }
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.bouncing-text {
+    animation: pulse 1s infinite;
+}
+
