@@ -506,7 +506,11 @@ footer img {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
+} }
+.bouncing-text {
+    animation: pulse 1s infinite;
 }
+
 .bouncing-text {
     animation: pulse 1s infinite;
 }
