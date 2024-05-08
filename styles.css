@@ -204,7 +204,7 @@ iframe {
     text-decoration: none; /* Loại bỏ gạch chân cho liên kết */
     color: #000; /* Màu đen cho liên kết */
     display: block; /* Đảm bảo liên kết được hiển thị như phần tử khối */
-    text-align: center; /* Căn giữa nội dung liên kết */
+    text-align: center; /
 }
 
 #contact ul li img {
@@ -509,5 +509,10 @@ footer img {
 }
 .bouncing-text {
     animation: pulse 1s infinite;
+}
+/* File CSS của bạn */
+a img {
+
+    border: none;
 }
 
