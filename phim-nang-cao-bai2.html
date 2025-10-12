@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Walter White: Cái Giá Của Cái Tôi + Sự Tha Hóa - Phân Tích - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@400,500,700&display=swap" rel="stylesheet"> <!-- Font tragic: Playfair italic for somber -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #2d1b14 0%, #1a0f0f 100%); color: #e0d7b0; } /* Somber brown-gray for tragedy */
+        /* Hero Section tragic pitiful */
+        .hero-film-detail {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1608043152269-423dbba4e7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); /* Breaking Bad somber Unsplash */
+            background-size: cover;
+            background-position: center;
+            color: #e0d7b0;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9), 0 0 10px rgba(139,69,19,0.3); /* Brown glow for pitiful */
+            animation: tragicFade 6s ease-in-out infinite alternate;
+        }
+        @keyframes tragicFade {
+            0%, 100% { opacity: 0.95; filter: sepia(0.3) brightness(0.9); }
+            50% { opacity: 0.85; filter: sepia(0.5) brightness(0.8); }
+        }
+        .hero-film-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(139,69,19,0.2) 0%, transparent 70%);
+            z-index: 1;
+            mix-blend-mode: multiply;
+        }
+        .hero-film-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-film-detail h1 { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 10px; letter-spacing: 1px; line-height: 1.2; font-weight: 500; font-style: italic; color: #8b4513; animation: typewriter 3s steps(30) 0s 1 normal both; white-space: nowrap; overflow: hidden; border-right: 2px solid #8b4513; }
+        .hero-film-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 0.5px; font-weight: 300; animation: fadeInUp 1s ease 3s both; font-style: italic; color: #e0d7b0; }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main tragic pitiful style */
+        .main { background: linear-gradient(135deg, #2d1b14 0%, #3e2c1f 100%); padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(139,69,19,0.1); max-width: 1200px; margin: 0 auto; border: 2px solid #8b4513; position: relative; overflow: hidden; }
+        .main::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #8b4513, transparent); animation: sorrowScan 8s linear infinite;
+        }
+        @keyframes sorrowScan { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .back-btn { background: #8b4513; color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Playfair Display', serif; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px #8b4513; font-style: italic; }
+        .back-btn:hover { box-shadow: 0 0 25px #8b4513; transform: scale(1.05); }
+        .main h1 { color: #e0d7b0; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Playfair Display', serif; letter-spacing: 1px; font-style: italic; text-shadow: 0 0 10px #8b4513; }
+        .main h2 { color: #8b4513; font-size: 20px; margin: 30px 0 15px; font-family: 'Playfair Display', serif; letter-spacing: 1px; text-shadow: 0 0 5px #8b4513; border-bottom: 1px solid #8b4513; padding-bottom: 5px; position: relative; font-style: italic; }
+        .main h2::after { content: '🎭'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; } /* Mask for tragedy */
+        .main p { text-align: left; font-size: 16px; color: #d4cdcd; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(139,69,19,0.1); padding: 15px; border-left: 4px solid #8b4513; border-radius: 0 5px 5px 0; position: relative; font-style: italic; }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
+        .main ul { color: #d4cdcd; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '⚖️'; position: absolute; left: 0; color: #8b4513; font-size: 14px; } /* Scales for price of ego */
+        .main img { width: 100%; height: auto; border-radius: 0; margin: 20px 0; box-shadow: 0 5px 20px rgba(139,69,19,0.3); border: 2px solid #8b4513; filter: sepia(0.4) brightness(0.9); } /* Muted sepia for pitiful */
+
+        /* Sidebar */
+        .sidebar { background: linear-gradient(135deg, #3e2c1f 0%, #4d3b2e 100%); padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(139,69,19,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #8b4513; }
+        .sidebar h3 { color: #8b4513; border-bottom: 2px dashed #8b4513; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Playfair Display', serif; letter-spacing: 1px; text-shadow: 0 0 5px #8b4513; font-style: italic; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #2d1b14; border-radius: 0; text-decoration: none; color: #e0d7b0; transition: all 0.3s ease; border-left: 3px solid transparent; font-style: italic; }
+        .sidebar a:hover { background: #8b4513; color: #fff; transform: scale(1.02); border-left-color: #fff; box-shadow: 0 0 10px #8b4513; }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-film-detail { padding: 80px 15px 60px; }
+            .hero-film-detail h1 { font-size: 28px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Kiến Thức VN</div>
+      
+        <div class="header-right">
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-film-detail">
+        <div class="hero-film-detail-content">
+            <h1>Mr. Walter White: Cái Giá Của Cái Tôi + Sự Tha Hóa</h1>
+            <p>Bi Kịch Của Heisenberg - Tragic Fall From Grace</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>PHIM LIÊN QUAN</h3>
+            <ul>
+                <li><a href="phim-nang-cao-bai0.htm">Viktor</a></li>
+                <li><a href="phim-nang-cao-bai1.html">Joker</a></li>
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Breaking Bad</a></li>
+                <li><a href="#">Walter White</a></li>
+                <li><a href="#">Tragedy</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='phim.html'">← Quay lại Phim</button>
+            
+            <h2>Giới Thiệu</h2>
+            <p>Walter White's transformation từ teacher to Heisenberg là bi kịch tha hóa kinh điển, nơi cái tôi dẫn đến downfall. Phân tích này khám phá giá của pride và corruption, như một episode Breaking Bad đầy nước mắt.</p>
+
+            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Walter White Heisenberg" style="width: 100%; border-radius: 0; border: 2px solid #8b4513; box-shadow: 0 0 20px #8b4513; margin: 20px 0; filter: sepia(0.4) brightness(0.9);">
+
+            <h2>Cái Giá Của Cái Tôi</h2>
+            <p>Walt's ego starts innocent - cancer diagnosis fuel ambition. Pride turns him from provider to kingpin, sacrificing family. Điểm 9.5/10 - Cranston's performance pitiful, show ego's cost.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Arc gradual, relatable descent.</li>
+                <li><strong>Điểm yếu:</strong> Some choices feel forced for plot.</li>
+            </ul>
+
+            <h2>Sự Tha Hóa</h2>
+            <p>Tha hóa Walt qua blue meth empire, from reluctant to ruthless. Themes morality gray, addiction power. Jesse's suffering mirror Walt's corruption, tragic bond.</p>
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Blue Meth Lab" style="width: 100%; border-radius: 0; border: 2px solid #8b4513; box-shadow: 0 0 20px #8b4513; margin: 20px 0; filter: sepia(0.4) brightness(0.9);">
+
+            <h2>Ý Nghĩa Trong Series</h2>
+            <p>Walt's tha hóa critique American Dream, power corrupts absolutely. Vince Gilligan's writing masterclass, influence true crime dramas.</p>
+
+            <h2>Kết Luận</h2>
+            <p>Walt's story là cautionary tale of ego, điểm 9.8/10 - pitiful tragedy. Tiếp theo: Tony Soprano's Therapy?</p>
+
+            <button class="back-btn" onclick="window.location.href='phim.html'" style="margin-top: 30px;">← Quay lại Phim</button>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kiến Thức VN. | Phim Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

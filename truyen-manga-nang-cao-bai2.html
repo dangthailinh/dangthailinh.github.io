@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sự Kinh Tởm Ichi the Killer - Phân Tích Tâm Lý Sát Nhân & Phong Cách Nghệ Thuật - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet"> <!-- Classic manga fonts -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8f8f8; color: #333; filter: grayscale(100%) contrast(1.2); } /* Manga paper B&W */
+        /* Header classic B&W */
+        header {
+            background: #fff;
+            border-bottom: 2px solid #000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Special Elite', monospace;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo-container {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .logo-img {
+            width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #000;
+        }
+        .logo-container span {
+            font-size: 24px; font-weight: 600; letter-spacing: 1px; color: #000; text-shadow: 1px 1px 1px #fff;
+        }
+        .theme-toggle {
+            background: #000; color: #fff; border: 1px solid #000; padding: 8px 12px; border-radius: 0; cursor: pointer; transition: all 0.3s; font-family: 'Special Elite', monospace; font-size: 12px; text-transform: uppercase;
+        }
+        .theme-toggle:hover { background: #fff; color: #000; box-shadow: 0 2px 5px #000; }
+
+        /* Hero Section classic B&W manga */
+        .hero-manga-detail {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(248,248,248,0.9)), url('https://images.unsplash.com/photo-1608043152269-423dbba4e7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80&filter=mono'); /* Ichi the Killer panel B&W */
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Noto Sans JP', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            filter: grayscale(100%) contrast(1.2);
+        }
+        .hero-manga-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 50%, rgba(0,0,0,0.05) 100%);
+            z-index: 1;
+        }
+        .hero-manga-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-manga-detail h1 { font-family: 'Special Elite', monospace; font-size: 32px; margin-bottom: 10px; letter-spacing: 3px; line-height: 1.2; font-weight: 400; color: #000; animation: typewriter 3s steps(30) 0s 1 normal both; white-space: nowrap; overflow: hidden; border-right: 2px solid #000; }
+        .hero-manga-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 1px; font-weight: 300; animation: fadeInUp 1s ease 3s both; font-style: italic; color: #333; }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main classic B&W manga */
+        .main { background: #fff; padding: 40px; border-radius: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.05); max-width: 1200px; margin: 0 auto; border: 1px solid #ddd; filter: grayscale(100%) contrast(1.2); }
+        .back-btn { background: #000; color: #fff; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Special Elite', monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .back-btn:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: translateY(-1px); }
+        .main h1 { color: #000; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Special Elite', monospace; letter-spacing: 3px; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); }
+        .main h2 { color: #000; font-size: 20px; margin: 30px 0 15px; font-family: 'Noto Sans JP', sans-serif; letter-spacing: 1px; border-bottom: 1px solid #000; padding-bottom: 5px; position: relative; font-weight: 500; }
+        .main h2::after { content: '📜'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; }
+        .main p { text-align: left; font-size: 16px; color: #333; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: #f8f8f8; padding: 15px; border-left: 4px solid #000; border-radius: 0 5px 5px 0; position: relative; }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
+        .main ul { color: #333; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '•'; position: absolute; left: 0; color: #000; font-size: 18px; font-weight: bold; }
+        .main img { width: 100%; height: auto; border-radius: 5px; margin: 20px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border: 1px solid #ddd; filter: grayscale(100%) contrast(1.1); }
+
+        /* Sidebar */
+        .sidebar { background: #f8f8f8; padding: 20px; border-radius: 0; box-shadow: 0 5px 20px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 100px; border: 1px solid #ddd; filter: grayscale(100%) contrast(1.2); }
+        .sidebar h3 { color: #000; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Special Elite', monospace; letter-spacing: 1px; font-weight: 500; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #fff; border-radius: 0; text-decoration: none; color: #333; transition: all 0.3s ease; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: #f0f0f0; color: #000; transform: translateX(5px); border-left-color: #000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-manga-detail { padding: 80px 15px 60px; }
+            .hero-manga-detail h1 { font-size: 28px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Kiến Thức VN</div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-manga-detail">
+        <div class="hero-manga-detail-content">
+            <h1>Ichi the Killer - Sự Kinh Tởm</h1>
+            <p>Phân Tích Tâm Lý Sát Nhân & Phong Cách Nghệ Thuật</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>SERIES LIÊN QUAN</h3>
+            <ul>
+                <li><a href="truyen-manga-bai0.html">Berserk</a></li>
+                <li><a href="truyen-manga-bai1.html">Attack on Titan Ending</a></li>
+                <li><a href="truyen-manga-bai2.html">jjk thầy cúng</a></li>
+                <li><a href="truyen-manga-nang-cao-bai0.html">Chainsaw Man Denji Journey</a></li>
+                <li><a href="truyen-manga-nang-cao-bai1.html">Homunculus</a></li>
+                
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Seinen</a></li>
+                <li><a href="#">Ichi the Killer</a></li>
+                <li><a href="#">Psycho Thriller</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='truyen-manga.html'">← Quay lại Truyện (Manga)</button>
+            
+            <h2>Giới Thiệu</h2>
+            <p>Ichi the Killer của Hideo Yamamoto là seinen extreme violence, theo chân Kakihara và Ichi - sadomasochist duo. Phân tích này khám phá tâm lý killers và art grotesque, như một volume manga cổ điển đầy máu me.</p>
+
+            <img src="https://tse3.mm.bing.net/th/id/OIP.TE7rKzwthNZP1o_iqjLi4gHaDt?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ichi Art" style="width: 100%; border-radius: 0; border: 1px solid #000; box-shadow: 0 0 10px #000; margin: 20px 0; filter: grayscale(100%) contrast(1.2);">
+
+            <h2>Tâm Lý Sát Nhân</h2>
+            <p>Kakihara's masochism drive torture, Ichi's emotionless killing from trauma. Yamamoto dùng psychology để humanize monsters, explore pain pleasure. Điểm 9/10 - disturbing but insightful.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Character depth beyond gore, sadomasochism nuanced.</li>
+                <li><strong>Điểm yếu:</strong> Violence gratuitous for some readers.</li>
+            </ul>
+
+            <h2>Phong Cách Nghệ Thuật</h2>
+            <p>B&W art stark, với dynamic panels show splatter và expressions exaggerated. Influences from Gantz, pioneer extreme seinen. Linework precise, shadows dramatic for horror.</p>
+            <img src="https://th.bing.com/th?id=OIF.fBpLHv739fCzS%2fg5i1b%2fYw&cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Grotesque Art" style="width: 100%; border-radius: 0; border: 1px solid #000; box-shadow: 0 0 10px #000; margin: 20px 0; filter: grayscale(100%) contrast(1.2);">
+
+            <h2>Ý Nghĩa Trong Seinen</h2>
+            <p>Ichi the Killer critique violence cycle, society monsters create. Influence on Junji Ito's horror, essential for extreme manga fans.</p>
+
+            <h2>Kết Luận</h2>
+            <p>Ichi the Killer là masterpiece grotesque, điểm 9.2/10 - not for faint-hearted. Tiếp theo: Berserk Eclipse?</p>
+
+            <button class="back-btn" onclick="window.location.href='truyen-manga.html'" style="margin-top: 30px;">← Quay lại Truyện (Manga)</button>
+        </main>
+    </div>
+
+    <footer style="background: #fff; color: #000; padding: 20px; text-align: center; border-top: 2px solid #000; font-family: 'Special Elite', monospace; font-size: 12px; letter-spacing: 1px; filter: grayscale(100%) contrast(1.2);">
+        <p>&copy; 2025 Kiến Thức VN | Truyện (Manga) Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

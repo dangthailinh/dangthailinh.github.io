@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nghệ Thuật - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Hero Section cho Nghệ Thuật */
+        .hero-art {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://pmcaonline.org/wp-content/uploads/2019/11/art-art-history_main_1440x800-1024x569.jpg'); /* Ảnh nghệ thuật Unsplash */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+        }
+        .hero-art::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(153,102,255,0.1) 0%, transparent 70%); /* Gradient tím cho nghệ thuật */
+            z-index: 1;
+        }
+        .hero-art-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-art h1 { font-size: 48px; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); animation: fadeInDown 1s ease; }
+        .hero-art p { font-size: 20px; opacity: 0.95; animation: fadeInUp 1s ease 0.3s both; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main */
+        .main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 1200px; margin: 0 auto; }
+        .back-btn { background: var(--primary-color); color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40,167,69,0.4); }
+        .main h1 { color: var(--primary-color); text-align: center; font-size: 36px; margin-bottom: 10px; }
+        .main p { text-align: center; font-size: 18px; color: #666; margin-bottom: 40px; }
+
+        /* Slider cho Tranh */
+        .slider-container { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin-bottom: 50px; }
+        .slider { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing */ }
+        .art-slide {
+            min-width: 100%; /* Full width slide */
+            padding: 40px;
+            text-align: center;
+            background: white;
+            position: relative;
+        }
+        .art-img {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .art-img:hover {
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .art-slide h3 { color: var(--primary-color); font-size: 28px; margin-bottom: 10px; }
+        .art-slide p { font-size: 16px; color: #666; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        .slider-nav:hover { background: white; transform: translateY(-50%) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .prev { left: 20px; }
+        .next { right: 20px; }
+        .slider-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #ddd; cursor: pointer; transition: background 0.3s; }
+        .dot.active { background: var(--primary-color); }
+
+        /* Sub-section */
+        .sub-section { margin-top: 70px; padding-top: 40px; border-top: 2px dashed #ddd; }
+        .sub-section h2 { color: var(--primary-color); text-align: center; font-size: 32px; margin-bottom: 30px; position: relative; }
+        .sub-section h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: var(--primary-color); border-radius: 2px; }
+
+        /* Pagination */
+        .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 50px; }
+        .pagination button { padding: 12px 20px; border: 2px solid var(--primary-color); background: transparent; color: var(--primary-color); cursor: pointer; border-radius: 30px; transition: all 0.3s; font-weight: 500; font-size: 16px; }
+        .pagination button:hover, .pagination button.active { background: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 5px 15px rgba(40,167,69,0.3); }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-art { background-attachment: scroll; padding: 80px 15px 60px; }
+            .hero-art h1 { font-size: 36px; }
+            .main { padding: 20px; margin: 20px; }
+            .slider-nav { width: 40px; height: 40px; font-size: 16px; }
+            .prev { left: 10px; }
+            .next { right: 10px; }
+            .art-img { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+   <header style="background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); border-bottom: 3px solid #feca57; box-shadow: 0 4px 20px rgba(254,202,87,0.4); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Bangers', cursive; position: sticky; top: 0; z-index: 100;">
+    <!-- Logo với graffiti style -->
+    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ff6b6b, #feca57); border: 2px solid #000; position: relative; border-radius: 50%; box-shadow: 0 0 15px rgba(254,202,87,0.6), inset 0 0 10px rgba(255,255,255,0.3); font-size: 20px; text-align: center; line-height: 40px; color: #000; font-weight: bold; text-shadow: 1px 1px 2px #fff;">
+            🎨
+        </div>
+        <span style="font-size: 28px; font-weight: 700; letter-spacing: 3px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(254,202,87,0.8); color: #fff; transform: skew(-5deg);">KIẾN THỨC VN</span>
+    </div>
+    
+    <nav>
+        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+            <li><a href="khoa-hoc.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">KHOA HỌC</a></li>
+            <li><a href="nghe-thuat.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">Nghệ Thuật</a></li>
+            <li><a href="phim.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">PHIM</a></li>
+            <li><a href="truyen-manga.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">TRUYỆN (MANGA)</a></li>
+            <li><a href="am-nhac.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">ÂM NHẠC</a></li>
+            <li><a href="game.html" style="text-decoration: none; color: #feca57; transition: all 0.3s; border-bottom: 2px solid #feca57; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5), 0 0 5px #feca57; transform: skew(-5deg);">GAME</a></li>
+        </ul>
+    </nav>
+    
+    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
+        <button class="theme-toggle" onclick="toggleTheme()" style="background: linear-gradient(135deg, #feca57, #ff9ff3); border: none; color: #000; padding: 8px 12px; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-family: 'Bangers', cursive; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 15px rgba(254,202,87,0.6), inset 0 0 5px rgba(255,255,255,0.5); transform: skew(-5deg);">🌙</button>
+    </div>
+</header>
+
+<style>
+/* CSS bổ sung cho header graffiti */
+.logo-container:hover { text-shadow: 2px 2px 6px rgba(0,0,0,0.5), 0 0 15px rgba(254,202,87,0.8); transform: skew(-5deg); }
+nav a:hover {
+    color: #feca57; border-bottom-color: #feca57; text-shadow: 1px 1px 4px rgba(0,0,0,0.5), 0 0 10px #feca57; transform: skew(-5deg) scale(1.05);
+}
+.theme-toggle:hover {
+    box-shadow: 0 0 20px rgba(254,202,87,0.8), inset 0 0 10px rgba(255,255,255,0.7); transform: skew(-5deg) scale(1.1);
+}
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 10px; }
+    nav ul { flex-direction: column; gap: 10px; text-align: center; }
+    .header-right { width: 100%; justify-content: center; }
+    .logo-container span { font-size: 20px; }
+}
+</style>
+
+    <!-- Hero Section -->
+    <section class="hero-art">
+        <div class="hero-art-content">
+            <h1>Nghệ Thuật</h1>
+            <p>Khám phá bộ sưu tập tranh và tác phẩm nghệ thuật tinh tế</p>
+        </div>
+    </section>
+
+    <main class="main">
+        <button class="back-btn" onclick="window.location.href='linhkun.html'">← Quay về Trang chủ</button>
+        
+        <!-- Slider chính -->
+        <div class="slider-container">
+            <button class="slider-nav prev" onclick="changeSlide(-1)">‹</button>
+            <div class="slider" id="slider">
+                <div class="art-slide">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.NcZ4WWAeY6ij-R_VmwaO0AHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tranh trừu tượng 1" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>Tranh Trừu Tượng - LA'contra</h3>
+                    <p>Khung cảnh hiền hòa ... Nói chung là bình yên nên cho vào nhặt ở đâu đó trên mạng</p>
+                </div>
+                <div class="art-slide">
+                    <img src="https://www.kiettacnghethuat.com/wp-content/uploads/Mona-Lisa.jpg" alt="Tranh phong cảnh" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>Mona Lisa</h3>
+                    <p>Cá nhân tôi thấy bức tranh này cũng ổn , đường nét mền mại khuôn mặt bà cô này khá bầu bĩnh chắc cũng thuộc dạng nhà giàu thời trung cổ.Đường nét , màu đã bị huyen ố khá nhiều nghe bảo hồi xưa đậm lắm có vẻ có khá nhiều giả thuyết xoay quanh bức tranh này </p>
+                </div>
+                <div class="art-slide">
+                    <img src="https://www.kiettacnghethuat.com/wp-content/uploads/The-Starry-Night.jpg" alt="Tranh chân dung" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>The Starry Night</h3>
+                    <p>Bức tranh trừu tượng này là ví dụ điển hình cho việc sử dụng nét bút dày một cách sáng tạo của Van Gogh. Màu xanh, vàng nổi bật của bức tranh, bầu không khí mơ màng, cuộn xoáy đã thu hút những người yêu nghệ thuật trong nhiều thập kỷ.
+Có thể bạn không biết, Van Gogh đang được điều trị bệnh tâm thần trong một trại tị nạn ở Saint-Rémy, Pháp, khi ông vẽ "Đêm đầy sao". Ông đã lấy cảm hứng từ khung cảnh cửa sổ phòng mình.</p>
+                </div>
+                 <div class="art-slide">
+                    <img src="https://www.kiettacnghethuat.com/wp-content/uploads/Guernica.jpg" alt="Tranh chân dung" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>Guernica</h3>
+                    <p>Đây là bức tranh được vẽ gần đây nhất trong danh sách này. Nó mô tả cuộc ném bom trên không của Đức vào thị trấn Guernica ở vùng Basque trong Nội chiến Tây Ban Nha.
+Bức tranh mang đậm phong cách Picasso và sự khắc họa rõ nét về sự sức tàn phá khủng khiếp của chiến tranh đã khiến nó trở thành một phần quan trọng trong văn hóa và lịch sử thế kỷ 20.
+Bạn có biết? "Guernica" đã được chuyển đến Bảo tàng Nghệ thuật Hiện đại Metropolitan ở New York trong Thế chiến II để bảo quản an toàn. Picasso yêu cầu trưng bày tranh ở bảo tàng này cho đến khi nền dân chủ trở lại Tây Ban Nha. Cuối cùng, năm 1981, nó đã quay trở lại Madrid, sáu năm sau cái chết của nhà độc tài Tây Ban Nha - Tướng Francisco Franco.</p>
+                </div>
+                 <div class="art-slide">
+                    <img src="https://www.kiettacnghethuat.com/wp-content/uploads/Girl-With-a-Pearl-Earring.jpg" alt="Tranh chân dung" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>Girl With a Pearl Earring </h3>
+                    <p>Bức tranh hấp dẫn này thường được so sánh với bà béo "Mona Lisa". Bên cạnh sự khác biệt về phong cách, về mặt kỹ thuật "Girl With a Pearl Earring" thậm chí không phải là một bức chân dung, mà là một "tronie" - một từ tiếng Hà Lan để chỉ bức tranh của một nhân vật tưởng tượng với các đặc điểm phóng đại.
+Kiệt tác sơn dầu này lấy sự đơn giản làm điểm nhấn. Cô gái - đội một chiếc khăn xếp màu xanh và vàng cùng một chiếc khuyên tai bằng ngọc trai quá khổ - là toàn bộ tâm điểm chỉ với phông nền tối phía sau.
+Bạn có biết? Trong khi bảo tàng Mauritshuis trải qua quá trình tu sửa từ năm 2012 đến năm 2014, "Girl With a Pearl Earring" đã đi lưu diễn ở Hoa Kỳ, Ý và Nhật Bản. Nó đã thu hút một lượng lớn người xem, nhờ đó củng cố vị thế của mình như một trong những tác phẩm nghệ thuật nổi tiếng nhất thế giới.</p>
+                </div>
+                 <div class="art-slide">
+                    <img src="https://www.kiettacnghethuat.com/wp-content/uploads/Creation-of-Adam.jpg" alt="Tranh chân dung" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>Creation of Adam</h3>
+                    <p>Tác phẩm nổi tiếng nhất của nghệ sĩ lừng danh Michelangelo bao phủ một phần trần Nhà nguyện Sistine. Bức tranh mô tả Chúa và Adam với cánh tay dang rộng, các ngón tay gần chạm vào nhau.
+
+Hình thể cơ bắp của Adam làm người xem liên tưởng đến một tài năng khác của Michelangelo - bức tượng "David" của ông được cho là tác phẩm điêu khắc nổi tiếng nhất thế giới. Bạn có thể nhìn thấy bức tượng bằng đá cẩm thạch cao chót vót tại Galleria dell'Accademia ở Florence.
+Bạn có biết? Trần của Nhà nguyện Sistine đã bị xỉn màu do tiếp xúc với khói nến và nhiều tác nhân khác trong nhiều thế kỷ. Sau một thời gian dài làm sạch đến năm 1989, mọi người đã bị sốc khi nhìn thấy màu sắc tươi sáng, rực rỡ mà Michelangelo sử dụng ban đầu.
+Năm bức tranh nổi tiếng khác</p>
+                </div>
+                 <div class="art-slide">
+                    <img src="https://www.kiettacnghethuat.com/wp-content/uploads/Kiet-Tac-Nghe-Thuat-The-Gioi-American-Gothic.jpg" alt="Tranh chân dung" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>American Gothic</h3>
+                    <p>Nói chung thì nhìn bức này kinh vãi loèn cho vào cho nhiều thôi hehe.</p>
+                </div>
+                 <div class="art-slide">
+                    <img src="https://www.kiettacnghethuat.com/wp-content/uploads/The-Birth-of-Venus.jpg" alt="Tranh chân dung" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>The Birth of Venus</h3>
+                    <p>Bức tranh lâu đời nhất trong top 10 và cạnh tranh với "Nụ hôn" về sự gợi cảm, "Sự ra đời của thần Vệ nữ" có lẽ được sở hữu bởi một thành viên của gia đình Medici giàu có và yêu nghệ thuật, cai trị Florence và các khu vực lân cận trong nhiều thế kỷ.
+Bạn có biết? "Venus" của Botticelli có hai điểm nổi bật hơn cả so với hầu hết các tác phẩm cùng thời của ông. Thứ nhất, ông vẽ trên vải thay vì gỗ. Thứ hai, ảnh khoả thân rất hiếm ở thời điểm này - vì vậy thật táo bạo khi “nàng Venus” để lộ hầu hết ngoại trừ mái tóc dài bồng bềnh và một bàn tay che đi phần cơ thể kín đáo nhất của cô ấy.
+
+</p>
+                </div>
+                <!-- Thêm slide bằng cách copy <div class="art-slide"> với src mới -->
+            </div>
+            <button class="slider-nav next" onclick="changeSlide(1)">›</button>
+            <div class="slider-dots" id="dots"></div>
+        </div>
+
+        <!-- Phần phụ: Grid tranh nhỏ -->
+        <div class="sub-section">
+            <h2>Bộ Sưu Tập Nâng Cao</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.NcZ4WWAeY6ij-R_VmwaO0AHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tranh 4" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>Tranh Cổ Điển</h3>
+                    <p>Tái hiện phong cách Renaissance với chi tiết tinh xảo.</p>
+                </div>
+                <div class="card">
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.LPN7mW8eryVp-agewYAD_AHaFm?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tranh 5" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>Tranh Hiện Đại</h3>
+                    <p>Sự kết hợp giữa truyền thống và đương đại.</p>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/R.b98222ca31080c14e6a61ecb245efcf2?rik=oCSFK9MQdEaMKQ&pid=ImgRaw&r=0" alt="Tranh 6" class="art-img" onclick="zoomImage(this.src)">
+                    <h3>Tranh Số</h3>
+                    <p>Nghệ thuật kỹ thuật số với hiệu ứng 3D sống động.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <button onclick="changePage(1, 'nghe-thuat')" class="active">1</button>
+            <button onclick="changePage(2, 'nghe-thuat')">2</button>
+        </div>
+    </main>
+
+    <footer style="background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); border-top: 3px solid #feca57; box-shadow: 0 4px 20px rgba(254,202,87,0.4); padding: 20px; text-align: center; font-family: 'Bangers', cursive; position: relative; overflow: hidden;">
+    <p style="color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0; font-size: 16px; transform: skew(-5deg); letter-spacing: 2px; text-transform: uppercase;">&copy; LINH OSIMI | ART!</p>
+    <div style="position: absolute; top: 10px; right: 10px; font-size: 24px; opacity: 0.3; animation: drip 2s ease-in-out infinite;">🎨</div> <!-- Paintbrush decor with drip animation -->
+</footer>
+<style>
+@keyframes drip {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(5deg) translateY(2px); }
+}
+</style>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+    <script>
+        // Slider JS (mượt mà, trượt di chuyển)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.art-slide');
+        const slider = document.getElementById('slider');
+        const dotsContainer = document.getElementById('dots');
+
+        // Tạo dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(index);
+            dotsContainer.appendChild(dot);
+        });
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            updateSlider();
+        }
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto slide (tùy chọn, comment nếu không cần)
+        setInterval(() => changeSlide(1), 5000); // Trượt tự động mỗi 5s
+
+        // Zoom tranh (modal fullscreen khi click)
+        function zoomImage(src) {
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1001; display: flex; align-items: center; justify-content: center;';
+            modal.innerHTML = `<img src="${src}" style="max-width: 90%; max-height: 90%; border-radius: 10px; transition: transform 0.3s;">`;
+            modal.onclick = () => document.body.removeChild(modal);
+            modal.querySelector('img').style.cssText = 'max-width: 90%; max-height: 90%; border-radius: 10px; transition: transform 0.3s; cursor: zoom-out;';
+            modal.querySelector('img').onclick = (e) => e.stopPropagation();
+            document.body.appendChild(modal);
+        }
+
+        // Xóa gạch dưới tất cả link
+        document.querySelectorAll('a').forEach(link => link.style.textDecoration = 'none');
+    </script>
+</body>
+</html>

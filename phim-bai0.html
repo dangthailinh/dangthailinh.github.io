@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân Tích Tâm Lý Kẻ Sát Nhân Nổi Tiếng Trong Phim - 80s Noir - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet"> <!-- Font noir: Special Elite typewriter, Cinzel cinematic -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #1a0000; color: #e0d7b0; }
+        /* Hero Section noir 80s */
+        .hero-film-detail {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); /* 80s thriller Unsplash */
+            background-size: cover;
+            background-position: center;
+            color: #e0d7b0;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Special Elite', monospace;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(220,53,69,0.3); /* Red noir glow */
+            animation: filmGrain 4s ease-in-out infinite alternate;
+        }
+        @keyframes filmGrain {
+            0%, 100% { opacity: 1; filter: sepia(0.1) contrast(1.1); }
+            50% { opacity: 0.98; filter: sepia(0.2) contrast(1.2); }
+        }
+        .hero-film-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(220,53,69,0.2) 0%, transparent 70%);
+            z-index: 1;
+            mix-blend-mode: multiply;
+        }
+        .hero-film-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-film-detail h1 { font-family: 'Special Elite', monospace; font-size: 32px; margin-bottom: 10px; letter-spacing: 2px; line-height: 1.2; font-weight: 400; color: #dc3545; animation: typewriter 3s steps(30) 0s 1 normal both; white-space: nowrap; overflow: hidden; border-right: 2px solid #dc3545; }
+        .hero-film-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 1px; font-weight: 300; animation: fadeInUp 1s ease 3s both; font-style: italic; color: #e0d7b0; }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main noir 80s style */
+        .main { background: #2d0000; padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(220,53,69,0.1); max-width: 1200px; margin: 0 auto; border: 2px solid #dc3545; position: relative; overflow: hidden; }
+        .main::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #dc3545, transparent); animation: scanLine 5s linear infinite;
+        }
+        @keyframes scanLine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .back-btn { background: #dc3545; color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Special Elite', monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px #dc3545; }
+        .back-btn:hover { box-shadow: 0 0 25px #dc3545; transform: scale(1.05); }
+        .main h1 { color: #e0d7b0; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Special Elite', monospace; letter-spacing: 3px; text-shadow: 0 0 10px #dc3545; }
+        .main h2 { color: #dc3545; font-size: 20px; margin: 30px 0 15px; font-family: 'Special Elite', monospace; letter-spacing: 1px; text-shadow: 0 0 5px #dc3545; border-bottom: 1px solid #dc3545; padding-bottom: 5px; position: relative; }
+        .main h2::after { content: '🎬'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; } /* Clapperboard noir */
+        .main p { text-align: left; font-size: 16px; color: #e0d7b0; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(220,53,69,0.1); padding: 15px; border-left: 4px solid #dc3545; border-radius: 0 5px 5px 0; position: relative; }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
+        .main ul { color: #e0d7b0; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '🔍'; position: absolute; left: 0; color: #dc3545; font-size: 14px; } /* Magnifying glass for detective */
+        .main img { width: 100%; height: auto; border-radius: 0; margin: 20px 0; box-shadow: 0 5px 20px rgba(220,53,69,0.3); border: 2px solid #dc3545; filter: sepia(0.2) contrast(1.1); } /* Film grain noir */
+
+        /* Sidebar */
+        .sidebar { background: #2d0000; padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(220,53,69,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #dc3545; }
+        .sidebar h3 { color: #dc3545; border-bottom: 2px dashed #dc3545; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Special Elite', monospace; letter-spacing: 1px; text-shadow: 0 0 5px #dc3545; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #1a0000; border-radius: 0; text-decoration: none; color: #e0d7b0; transition: all 0.3s ease; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: #dc3545; color: #fff; transform: scale(1.02); border-left-color: #fff; box-shadow: 0 0 10px #dc3545; }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-film-detail { padding: 80px 15px 60px; }
+            .hero-film-detail h1 { font-size: 28px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Kiến Thức VN</div>
+        
+        <div class="header-right">
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-film-detail">
+        <div class="hero-film-detail-content">
+            <h1>Phân Tích Tâm Lý Những Kẻ Sát Nhân Nổi Tiếng Trong Phim</h1>
+            <p>Phong Cách Trinh Thám Thập Niên 80s - Bí Mật Đen Tối</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>PHIM LIÊN QUAN</h3>
+            <ul>
+                <li><a href="phim-bai1.html">Oppenheimer: Bom Nguyên Tử</a></li>
+                <li><a href="phim-bai2.html">Barbie: Phê Phán Xã Hội</a></li>
+                <li><a href="phim-nang-cao-bai0.html">Inception: Lớp Lang Giấc Mơ</a></li>
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Thriller</a></li>
+                <li><a href="#">Serial Killer</a></li>
+                <li><a href="#">80s Noir</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='phim.html'">← Quay lại Phim</button>
+            
+            <h2>Giới Thiệu</h2>
+            <p>Thập niên 80s là thời kỳ vàng của phim trinh thám với những kẻ sát nhân tâm lý phức tạp, từ Hannibal Lecter đến Michael Myers. Phân tích này khám phá tâm lý học đằng sau, qua lăng kính noir, như một cuốn tiểu thuyết Hitchcock cổ điển.</p>
+
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Serial Killer Shadow" style="width: 100%; border-radius: 0; border: 2px solid #dc3545; box-shadow: 0 0 20px #dc3545; margin: 20px 0; filter: sepia(0.2) contrast(1.1);">
+
+            <h2>Hannibal Lecter - Silence of the Lambs (1991)</h2>
+            <p>Lecter đại diện cho psychopath trí tuệ, với cannibalism như metaphor cho control. Tâm lý học: Narcissistic personality disorder, thrill-seeking. Điểm 10/10 - Hopkins' performance iconic, ảnh hưởng true crime genre.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Psychological cat-and-mouse game với Clarice.</li>
+                <li><strong>Điểm yếu:</strong> Stereotype villain, nhưng groundbreaking.</li>
+            </ul>
+
+            <h2>Michael Myers - Halloween (1978)</h2>
+            <p>Myers là embodiment of pure evil, không motive rõ ràng, chỉ "The Shape". Tâm lý học: Dissociative identity hoặc supernatural force. Điểm 9.5/10 - Carpenter's score haunting, slasher blueprint.</p>
+            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Myers Shadow" style="width: 100%; border-radius: 0; border: 2px solid #dc3545; box-shadow: 0 0 20px #dc3545; margin: 20px 0; filter: sepia(0.2) contrast(1.1);">
+
+            <h2>Jason Voorhees - Friday the 13th (1980)</h2>
+            <p>Jason's undead revenge driven by mother's death, symbolizing guilt và retribution. Tâm lý học: Trauma-induced rage, immortal slasher archetype. Điểm 8.5/10 - Gory kills fun, but formulaic sequels.</p>
+
+            <h2>Ý Nghĩa Trong Thập Niên 80s</h2>
+            <p>80s killers reflect Reagan-era fears: urban decay, family breakdown. Films like these pioneered psychological horror, influencing TV (Criminal Minds) và true crime podcasts.</p>
+
+            <h2>Kết Luận</h2>
+            <p>Những kẻ sát nhân 80s không chỉ scare, mà còn probe human darkness. Điểm tổng 9.5/10 - timeless classics. Tiếp theo: Psychoanalysis in Se7en?</p>
+
+            <button class="back-btn" onclick="window.location.href='phim.html'" style="margin-top: 30px;">← Quay lại Phim</button>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kiến Thức VN. | Phim Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

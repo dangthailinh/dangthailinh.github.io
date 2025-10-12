@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk 2077: Phantom Liberty - Phân Tích - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; }
+        /* Hero Section với neon & 64bit */
+        .hero-detail {
+            background: linear-gradient(45deg, #000 0%, #0a0a0a 50%, #000 100%), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); /* Ảnh Cyberpunk Unsplash */
+            background-size: cover, 100px 100px;
+            background-position: center;
+            color: #00ff00;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+            animation: neonFlicker 3s ease-in-out infinite alternate;
+        }
+        @keyframes neonFlicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; }
+            50% { opacity: 0.9; text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+        }
+        .hero-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, transparent 70%);
+            z-index: 1;
+            mix-blend-mode: screen;
+        }
+        .hero-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-detail h1 { font-size: 32px; margin-bottom: 10px; letter-spacing: 4px; line-height: 1.2; }
+        .hero-detail p { font-size: 14px; opacity: 0.8; letter-spacing: 2px; font-weight: 400; animation: fadeInUp 1s ease 0.5s both; }
+
+        /* Main với 64bit style */
+        .main { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 40px; border-radius: 0; box-shadow: inset 0 0 50px rgba(0,255,0,0.05); max-width: 1200px; margin: 0 auto; border: 2px solid #00ff00; border-style: dashed; }
+        .back-btn { background: #00ff00; color: #000; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Press Start 2P', cursive; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px #00ff00; }
+        .back-btn:hover { box-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00; transform: scale(1.05); }
+        .main h1 { color: #00ff00; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Press Start 2P', cursive; letter-spacing: 3px; text-shadow: 0 0 10px #00ff00; }
+        .main h2 { color: #00ff00; font-size: 20px; margin: 30px 0 15px; font-family: 'Press Start 2P', cursive; letter-spacing: 2px; text-shadow: 0 0 5px #00ff00; }
+        .main p { text-align: left; font-size: 16px; color: #ccc; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; }
+        .main ul { color: #ccc; margin-left: 20px; }
+        .main li { margin-bottom: 10px; }
+
+        /* Sidebar */
+        .sidebar { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(0,255,0,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #00ff00; }
+        .sidebar h3 { color: #00ff00; border-bottom: 2px solid #00ff00; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Press Start 2P', cursive; letter-spacing: 1px; text-shadow: 0 0 5px #00ff00; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #0a0a0a; border-radius: 0; text-decoration: none; color: #ccc; transition: all 0.3s ease; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: #00ff00; color: #000; transform: translateX(5px); border-left-color: #000; box-shadow: 0 0 10px #00ff00; }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-detail { padding: 80px 15px 60px; }
+            .hero-detail h1 { font-size: 24px; letter-spacing: 2px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header style="background: linear-gradient(135deg, #000 0%, #0a0a0a 100%); border-bottom: 4px solid #00ff00; box-shadow: 0 0 20px rgba(0,255,0,0.5); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Press Start 2P', cursive; position: sticky; top: 0; z-index: 100;">
+    <!-- Logo với 8-bit style -->
+    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 40px; height: 40px; background: #00ff00; border: 2px solid #000; image-rendering: pixelated; position: relative; box-shadow: 0 0 10px #00ff00;">
+            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; color: #000; font-weight: bold;">8</span>
+        </div>
+        <span style="font-size: 18px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 5px #00ff00; color: #00ff00;">Linh OsiMi</span>
+    </div>
+    
+</header>
+
+<style>
+/* CSS bổ sung cho header 8-bit */
+.logo-container:hover .logo-img { transform: scale(1.1); animation: pixelShake 0.5s ease; }
+@keyframes pixelShake {
+    0%, 100% { transform: translate(0); }
+    25% { transform: translate(2px, -2px); }
+    75% { transform: translate(-2px, 2px); }
+}
+nav a:hover {
+    color: #73ff00; border-bottom-color: #00ff00; text-shadow: 0 0 5px #00ff00; transform: scale(1.05);
+}
+.header-right input::placeholder {
+    color: #666; letter-spacing: 1px;
+}
+.header-right input:focus {
+    box-shadow: 0 0 15px #00ff00; outline: none;
+}
+.theme-toggle:hover {
+    box-shadow: 0 0 15px #00ff00; transform: scale(1.1);
+}
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 10px; }
+    nav ul { flex-direction: column; gap: 10px; text-align: center; }
+    .header-right { width: 100%; justify-content: center; }
+    .header-right input { width: 100%; max-width: 200px; }
+    .logo-container span { font-size: 16px; }
+}
+</style>
+    <!-- Hero Section -->
+    <section class="hero-detail">
+        <div class="hero-detail-content">
+            <h1>CYBERPUNK 2077: PHANTOM LIBERTY</h1>
+            <p>PHÂN TÍCH SÂU - PHONG CÁCH GAME RETRO</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>GAME LIÊN QUAN</h3>
+            <ul>
+                <li><a href="game-bai0.html">Genshin Impact Update 5.0</a></li>
+                <li><a href="game-bai1.html">Elden Ring DLC Review</a></li>
+                <li><a href="game-bai3.html">Black myth</a></li>
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">RPG</a></li>
+                <li><a href="#">Cyberpunk</a></li>
+                <li><a href="#">DLC</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='game.html'">← Quay lại Game Zone</button>
+            
+            <h2>GIỚI THIỆU</h2>
+            <p>Cyberpunk 2077: Phantom Liberty là DLC đỉnh cao của CD Projekt Red, đưa Night City lên tầm cao mới với cốt truyện phức tạp, nhân vật sâu sắc và gameplay sáng tạo. Trong phân tích này, chúng ta sẽ khám phá cách DLC này cứu vãn series, từ mechanics đến lore, theo phong cách 64bit retro.</p>
+
+            <img src="https://wallpapercave.com/wp/wp11754513.jpg" alt="Cyberpunk Screenshot" style="width: 100%; border-radius: 0; border: 2px solid #00ff00; box-shadow: 0 0 20px #00ff00; margin: 20px 0;">
+
+            <h2>CỐT TRUYỆN & NHÂN VẬT</h2>
+            <p>Phantom Liberty xoay quanh Songbird và Solomon Reed, với Idris Elba lồng tiếng xuất thần. Câu chuyện về tự do, phản bội và công nghệ sinh học tạo chiều sâu, giống như một episode đỉnh cao của Deus Ex. Điểm 9/10 cho narrative - nó không chỉ kể chuyện, mà còn đặt câu hỏi về bản ngã trong thế giới cybernetic.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Twists bất ngờ, lựa chọn ảnh hưởng ending.</li>
+                <li><strong>Điểm yếu:</strong> Một số quest phụ thiếu polish.</li>
+            </ul>
+
+            <h2>GAMEPLAY & MECHANICS</h2>
+            <p>DLC giới thiệu Dogtown - khu vực mới với combat vehicular và stealth nâng cao. Relic system cho phép upgrade cyberware, tạo build độc đáo như netrunner hoặc brute force. So với base game, Phantom Liberty mượt mà hơn, fix nhiều bug và thêm vehicle combat đỉnh cao.</p>
+            <img src="https://images.unsplash.com/photo-1489599150581-9b41ad72a5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gameplay" style="width: 100%; border-radius: 0; border: 2px solid #00ff00; box-shadow: 0 0 20px #00ff00; margin: 20px 0;">
+
+            <h2>PHONG CÁCH & ÂM THANH</h2>
+            <p>Visual cyberpunk với neon lights và rain-slick streets, âm thanh synthwave hoàn hảo. Score của P.T. Adamczyk kết hợp industrial rock, tạo immersion. Trên PC, ray-tracing làm Night City sống động như phim Blade Runner.</p>
+
+            <h2>KẾT LUẬN</h2>
+            <p>Phantom Liberty biến Cyberpunk từ trò chơi hứa hẹn thành kiệt tác. Điểm 9.5/10 - phải chơi nếu yêu RPG open-world. Tiếp theo: Review Starfield DLC?</p>
+
+            <button class="back-btn" onclick="window.location.href='game.html'" style="margin-top: 30px;">← Quay lại Game Zone</button>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kiến Thức VN. | Game Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

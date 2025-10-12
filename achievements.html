@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thành Tích Game - Cosmic Achievements - INH OSIMI</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"> <!-- Cosmic font: Orbitron -->
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: #000; 
+            color: #fff; 
+            overflow-x: hidden; 
+        }
+        /* Cosmic Hero */
+        .cosmic-hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(ellipse at bottom, #1b1b33 0%, #000 70%);
+            overflow: hidden;
+        }
+        .cosmic-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="star"><stop offset="0%" stop-color="%23fff" stop-opacity="0.8"/><stop offset="100%" stop-color="%23fff" stop-opacity="0"/></radialGradient></defs><circle cx="10" cy="10" r="1" fill="url(%23star)"/><circle cx="90" cy="20" r="0.5" fill="url(%23star)"/><circle cx="30" cy="80" r="0.8" fill="url(%23star)"/><circle cx="70" cy="60" r="0.6" fill="url(%23star)"/></svg>') repeat;
+            background-size: 100px 100px;
+            animation: starsTwinkle 20s linear infinite;
+            z-index: 1;
+        }
+        @keyframes starsTwinkle {
+            0% { opacity: 0.5; transform: translateY(0) rotate(0deg); }
+            50% { opacity: 1; transform: translateY(-10px) rotate(180deg); }
+            100% { opacity: 0.5; transform: translateY(0) rotate(360deg); }
+        }
+        .sun-icon {
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100px; height: 100px;
+            background: radial-gradient(circle, #ffd700 0%, #ffed4e 50%, #ff6b35 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 50px #ffd700, 0 0 100px #ff6b35;
+            animation: sunPulse 3s ease-in-out infinite alternate;
+            z-index: 2;
+        }
+        @keyframes sunPulse {
+            0% { box-shadow: 0 0 50px #ffd700, 0 0 100px #ff6b35; transform: translate(-50%, -50%) scale(1); }
+            100% { box-shadow: 0 0 70px #ffd700, 0 0 120px #ff6b35; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        .cosmic-hero-content { position: relative; z-index: 3; max-width: 800px; padding: 0 20px; }
+        .cosmic-hero h1 { font-family: 'Orbitron', monospace; font-size: 3.5rem; margin-bottom: 10px; letter-spacing: 5px; text-shadow: 0 0 20px #fff, 0 0 40px #00ffff; animation: cosmicFloat 4s ease-in-out infinite; }
+        @keyframes cosmicFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .cosmic-hero p { font-size: 1.2rem; opacity: 0.9; letter-spacing: 2px; animation: fadeInUp 1s ease 0.5s both; }
+
+        /* Achievements List */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .achievement-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .achievement-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #00ffff, #ffd700, #ff00ff);
+            animation: cosmicLine 2s linear infinite;
+        }
+        @keyframes cosmicLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .achievement-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 40px rgba(0,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+        }
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        .achievement-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        .achievement-desc {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #c8a610, #ff6b35);
+            color: #000;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 40px auto;
+            display: block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+        }
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255,215,0,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cosmic-hero h1 { font-size: 2.5rem; }
+            .achievements-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 10px; }
+            .achievement-icon { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+   <header style="background: radial-gradient(ellipse at center, rgba(27,27,51,0.9) 0%, #000 100%); border-bottom: 2px solid rgba(0,255,255,0.3); box-shadow: 0 4px 20px rgba(0,255,255,0.2); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Orbitron', monospace; position: sticky; top: 0; z-index: 100;">
+    <!-- Logo cosmic -->
+    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 40px; height: 40px; background: radial-gradient(circle, #ffd700 0%, #00ffff 100%); border: 1px solid rgba(0,255,255,0.5); position: relative; border-radius: 50%; box-shadow: 0 0 15px #00ffff; animation: logoPulse 2s ease-in-out infinite;">
+            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; color: #000;">⭐</span>
+        </div>
+        <span style="font-size: 24px; font-weight: 700; letter-spacing: 2px; text-shadow: 0 0 10px #00ffff; color: #fff;">LinG ACHIEVEMENTS</span>
+    </div>
+  
+  
+</header>
+
+    <section class="cosmic-hero">
+        <div class="sun-icon"></div> <!-- Mặt trời trung tâm -->
+        <div class="cosmic-hero-content">
+            <h1>LING ACHIEVEMENTS</h1>
+            <p>Thành Tích xàm xí trong game ngoài đời chưa có @</p>
+        </div>
+    </section>
+
+    <div class="achievements-grid">
+        <div class="achievement-card">
+            <div class="achievement-icon">🏆</div>
+            <h3 class="achievement-title">Elden Ring - Tarnished Lord</h3>
+            <p class="achievement-desc">Hoàn thành tất cả boss và NG+3. Thời gian: 150 giờ. Vũ khí yêu thích: Moonveil Katana.</p>
+        </div>
+        <div class="achievement-card">
+            <div class="achievement-icon">⭐</div>
+            <h3 class="achievement-title">Genshin Impact - Archon Quest Master</h3>
+            <p class="achievement-desc">100% Archon Quests, 50+ nhân vật C6. Khám phá Natlan hoàn chỉnh. AR 60 từ 2021.</p>
+        </div>
+        <div class="achievement-card">
+            <div class="achievement-icon">⚔️</div>
+            <h3 class="achievement-title">God of War - Ragnarok Survivor</h3>
+            <p class="achievement-desc">True ending, tất cả collectibles, no death run trên Give Me God of War. Cuộc phiêu lưu cảm xúc!</p>
+        </div>
+        <!-- Thêm achievement khác nếu cần -->
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='linhkun.html'">← Về Trang Chủ</button>
+
+ <footer style="background: radial-gradient(ellipse at bottom, #1b1b33 0%, #000 70%); color: #fff; padding: 40px 20px; text-align: center; position: relative; overflow: hidden; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <!-- Nội dung footer -->
+    <div style="z-index: 2; position: relative;">
+        <p style="font-size: 14px; margin-bottom: 10px; opacity: 0.8; letter-spacing: 1px;">&copy; Linh so sad</p>
+        <p style="font-size: 12px; opacity: 0.7;">quá là buồn....</p>
+    </div>
+    
+    <!-- Flying stars cosmic effect -->
+    <div class="stars-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;">
+        <div class="star" style="position: absolute; top: 20%; left: -10%; width: 2px; height: 2px; background: #fff; border-radius: 50%; animation: flyStar1 10s linear infinite;"></div>
+        <div class="star" style="position: absolute; top: 40%; left: -5%; width: 1px; height: 1px; background: #fff; border-radius: 50%; animation: flyStar2 8s linear infinite;"></div>
+        <div class="star" style="position: absolute; top: 60%; left: -15%; width: 3px; height: 3px; background: #fff; border-radius: 50%; animation: flyStar3 12s linear infinite;"></div>
+        <div class="star" style="position: absolute; top: 80%; left: -8%; width: 1.5px; height: 1.5px; background: #fff; border-radius: 50%; animation: flyStar4 9s linear infinite;"></div>
+    </div>
+</footer>
+
+<style>
+/* Flying stars animation */
+.stars-container .star {
+    animation: flyStar linear infinite;
+    opacity: 0.8;
+}
+@keyframes flyStar {
+    0% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateX(110vw) translateY(100vh) rotate(360deg); opacity: 0; }
+}
+#flyStar1 { animation-duration: 10s; animation-delay: 0s; }
+#flyStar2 { animation-duration: 8s; animation-delay: 2s; }
+#flyStar3 { animation-duration: 12s; animation-delay: 4s; }
+#flyStar4 { animation-duration: 9s; animation-delay: 1s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    footer { padding: 30px 15px; min-height: 150px; }
+    .stars-container .star { width: 1px; height: 1px; }
+}
+</style>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

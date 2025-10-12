@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chainsaw Man: Denji's Journey - Phân Tích - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&family=Bangers&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; }
+        /* Hero Section manga-style red-white */
+        .hero-manga-detail {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1618005182382-a6efc2a6c4e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); /* Chainsaw Man panel Unsplash */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .hero-manga-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(220,20,60,0.2) 0%, transparent 70%); /* Crimson red gradient */
+            z-index: 1;
+        }
+        .hero-manga-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-manga-detail h1 { font-family: 'Bangers', cursive; font-size: 42px; margin-bottom: 10px; text-shadow: 3px 3px 0 #dc143c, 4px 4px 0 #000; animation: typewriter 2s steps(20) 0s 1 normal both, blink 0.75s step-end infinite; white-space: nowrap; overflow: hidden; border-right: 3px solid #dc143c; }
+        .hero-manga-detail p { font-size: 18px; opacity: 0.95; animation: fadeInUp 1s ease 2s both; font-weight: 300; color: #fff; }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes blink { from, to { border-color: transparent; } 50% { border-color: #dc143c; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main manga-blog style red-white */
+        .main { background: #1a1a1a; padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(220,20,60,0.1); max-width: 1200px; margin: 0 auto; border: 2px solid #dc143c; }
+        .back-btn { background: #dc143c; color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Bangers', cursive; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px #dc143c; transform: skew(-5deg); }
+        .back-btn:hover { box-shadow: 0 0 25px #dc143c; transform: skew(-5deg) scale(1.05); }
+        .main h1 { color: #fff; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Bangers', cursive; letter-spacing: 3px; text-shadow: 0 0 10px #dc143c; transform: skew(-2deg); }
+        .main h2 { color: #dc143c; font-size: 20px; margin: 30px 0 15px; font-family: 'Noto Sans JP', sans-serif; letter-spacing: 1px; text-shadow: 0 0 5px #dc143c; border-bottom: 2px dashed #dc143c; padding-bottom: 5px; position: relative; }
+        .main h2::after { content: '💥'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; }
+        .main p { text-align: left; font-size: 16px; color: #ddd; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(220,20,60,0.1); padding: 15px; border-left: 4px solid #dc143c; border-radius: 0 10px 10px 0; position: relative; }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
+        .main ul { color: #ddd; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '⚡'; position: absolute; left: 0; color: #dc143c; font-size: 14px; }
+        .main img { width: 100%; height: auto; border-radius: 10px; margin: 20px 0; box-shadow: 0 5px 20px rgba(220,20,60,0.3); border: 2px solid #dc143c; transform: skew(-1deg); }
+
+        /* Blood Effect Animation */
+        .blood-drip { position: relative; }
+        .blood-drip::after {
+            content: '';
+            position: absolute; top: 0; right: 0; width: 2px; height: 20px; background: #dc143c; animation: drip 2s linear infinite; opacity: 0.7;
+        }
+        @keyframes drip {
+            0% { height: 0; }
+            50% { height: 20px; }
+            100% { height: 0; transform: translateY(20px); }
+        }
+        .main h2.blood-drip::after, .main p.blood-drip::after { content: ''; animation: drip 3s linear infinite; }
+
+        /* Sidebar */
+        .sidebar { background: #2a2a2a; padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(220,20,60,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #dc143c; }
+        .sidebar h3 { color: #dc143c; border-bottom: 2px dashed #dc143c; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Bangers', cursive; letter-spacing: 1px; text-shadow: 0 0 5px #dc143c; transform: skew(-3deg); }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #1a1a1a; border-radius: 0; text-decoration: none; color: #ddd; transition: all 0.3s ease; border-left: 3px solid transparent; transform: skew(-2deg); }
+        .sidebar a:hover { background: #dc143c; color: #fff; transform: skew(-2deg) translateX(5px); border-left-color: #fff; box-shadow: 0 0 10px #dc143c; }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-manga-detail { padding: 80px 15px 60px; }
+            .hero-manga-detail h1 { font-size: 32px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Kiến Thức VN</div>
+       
+        <div class="header-right">
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-manga-detail">
+        <div class="hero-manga-detail-content">
+            <h1>Chainsaw Man: Denji's Journey - Phân Tích</h1>
+            <p>Quỷ Săn Và Hành Trình Đẫm Máu Của Denji</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>SERIES LIÊN QUAN</h3>
+             <ul>
+                <li><a href="truyen-manga-bai0.html">Berserk</a></li>
+                <li><a href="truyen-manga-bai1.html">Attack on Titan Ending</a></li>
+                <li><a href="truyen-manga-bai2.html">jjk thầy cúng</a></li>
+               
+                <li><a href="truyen-manga-nang-cao-bai1.html">My Hero Academia Dark</a></li>
+                <li><a href="truyen-manga-nang-cao-bai2.html">ichi the killer</a></li>
+            </ul
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Seinen</a></li>
+                <li><a href="#">Chainsaw Man</a></li>
+                <li><a href="#">Denji</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='truyen-manga.html'">← Quay lại Truyện (Manga)</button>
+            
+            <h2 class="blood-drip">Giới Thiệu</h2>
+            <p class="blood-drip">Chainsaw Man là kiệt tác của Tatsuki Fujimoto, theo chân Denji - chàng trai nghèo biến quỷ cưa máy. Phân tích này khám phá hành trình đẫm máu, themes poverty và humanity, như một volume manga đầy gore và heart.</p>
+
+            <img src="https://images.unsplash.com/photo-1618005182382-a6efc2a6c4e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Denji Chainsaw" style="width: 100%; border-radius: 0; border: 2px solid #dc143c; box-shadow: 0 0 20px #dc143c; margin: 20px 0; transform: skew(-1deg);">
+
+            <h2 class="blood-drip">Cao Trào Cuộc Chiến</h2>
+            <p class="blood-drip">Denji's fights với devils như Gun Devil là brutal ballet, với Fujimoto's art splash blood panels. Chainsaw transformation mechanics genius, mix humor và horror. Điểm 10/10 cho action - raw và unpredictable.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Gore effects iconic, animation potential insane.</li>
+                <li><strong>Điểm yếu:</strong> Pacing chaotic, but that's the charm.</li>
+            </ul>
+
+            <h2 class="blood-drip">Phân Tích Nhân Vật</h2>
+            <p class="blood-drip">Denji's arc từ orphan đến Public Safety Devil Hunter, Power's chaos và Makima's manipulation add layers. Themes family và desire sâu sắc, reward fans with callbacks to early chapters.</p>
+            <img src="https://images.unsplash.com/photo-1618005182382-a6efc2a6c4e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Character Art" style="width: 100%; border-radius: 0; border: 2px solid #dc143c; box-shadow: 0 0 20px #dc143c; margin: 20px 0; transform: skew(-1deg);">
+
+            <h2 class="blood-drip">Ý Nghĩa Trong Series</h2>
+            <p class="blood-drip">Arc này setup Control Devil twist, với Fujimoto's world-building devils as metaphors for fears. Art peak với speed lines and expressions, anime adaptation sẽ bloody epic.</p>
+
+            <h2 class="blood-drip">Kết Luận</h2>
+            <p class="blood-drip">Chainsaw Man là seinen masterpiece, điểm 9.9/10 - must-read for dark manga fans. Tiếp theo: Tokyo Ghoul Aogiri Arc?</p>
+
+            <button class="back-btn" onclick="window.location.href='truyen-manga.html'" style="margin-top: 30px;">← Quay lại Truyện (Manga)</button>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kiến Thức VN. | Truyện (Manga) Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

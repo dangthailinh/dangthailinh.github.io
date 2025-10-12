@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhân Vật Joker: Sự Hỗn Loạn Trong Trật Tự - Phân Tích - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Creepster&family=Nosifer&display=swap" rel="stylesheet"> <!-- Crazy fonts: Creepster/Nosifer for chaotic -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+        /* Hero Section crazy flashing */
+        .hero-film-detail {
+            background: linear-gradient(45deg, #ff0000 0%, #6b966b 25%, #2f2f4b 50%, #ffff00 75%, #ff00ff 100%), url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); /* Chaotic Unsplash */
+            background-size: 400% 400%;
+            animation: colorShift 2s linear infinite, backgroundShift 10s ease-in-out infinite;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Creepster', cursive;
+            text-shadow: 0 0 10px currentColor;
+            animation: chaosFlicker 0.5s ease-in-out infinite alternate;
+        }
+        @keyframes colorShift {
+            0% { filter: hue-rotate(0deg) saturate(1); }
+            100% { filter: hue-rotate(360deg) saturate(2); }
+        }
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes chaosFlicker {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        .hero-film-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, transparent 70%);
+            z-index: 1;
+            animation: radialChaos 3s ease-in-out infinite;
+        }
+        @keyframes radialChaos {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(360deg); opacity: 0.5; }
+        }
+        .hero-film-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-film-detail h1 { font-family: 'Nosifer', cursive; font-size: 36px; margin-bottom: 10px; letter-spacing: 4px; line-height: 1.2; font-weight: 400; color: #ff0000; animation: typewriter 3s steps(30) 0s 1 normal both, chaosBlink 0.5s step-end infinite; white-space: nowrap; overflow: hidden; border-right: 3px solid #ff0000; transform: rotate(-2deg); }
+        .hero-film-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 2px; font-weight: 300; animation: fadeInUp 1s ease 3s both; font-style: italic; color: #00ff00; transform: rotate(1deg); }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes chaosBlink { from, to { border-color: transparent; color: #ff0000; } 50% { border-color: #ff0000; color: #00ff00; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px) rotate(0deg); } to { opacity: 1; transform: translateY(0) rotate(0deg); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px) rotate(0deg); } to { opacity: 1; transform: translateY(0) rotate(0deg); } }
+
+        /* Main crazy chaotic style */
+        .main { background: linear-gradient(45deg, #ff0000 0%, #000 25%, #00ff00 50%, #000 75%, #0000ff 100%); background-size: 400% 400%; animation: chaosBG 4s linear infinite; padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(255,0,0,0.2); max-width: 1200px; margin: 0 auto; border: 2px solid #fff; position: relative; overflow: hidden; }
+        @keyframes chaosBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .main::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ff0000" opacity="0.3"/></svg>'); background-size: 10px; animation: crackle 1s linear infinite; z-index: -1;
+        }
+        @keyframes crackle { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.6; } }
+        .back-btn { background: linear-gradient(45deg, #ff0000, #00ff00); color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Nosifer', cursive; font-size: 14px; text-transform: uppercase; letter-spacing: 3px; box-shadow: 0 0 15px #ff0000; animation: buttonChaos 2s linear infinite; }
+        .back-btn:hover { box-shadow: 0 0 25px #00ff00; transform: rotate(5deg) scale(1.05); animation: none; }
+        @keyframes buttonChaos { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(2deg); } 75% { transform: rotate(-2deg); } }
+        .main h1 { color: #fff; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Nosifer', cursive; letter-spacing: 4px; text-shadow: 0 0 10px #ff0000, 0 0 20px #00ff00; animation: titleChaos 1.5s linear infinite; transform: rotate(1deg); }
+        @keyframes titleChaos { 0%, 100% { color: #ff0000; } 50% { color: #00ff00; } }
+        .main h2 { color: #fff; font-size: 20px; margin: 30px 0 15px; font-family: 'Special Elite', monospace; letter-spacing: 2px; text-shadow: 0 0 5px #fff; border-bottom: 1px solid #fff; padding-bottom: 5px; position: relative; animation: h2Shake 3s ease-in-out infinite; }
+        @keyframes h2Shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(2px); } 75% { transform: translateX(-2px); } }
+        .main h2::after { content: '🎭'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; animation: maskTwist 2s linear infinite; }
+        @keyframes maskTwist { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .main p { text-align: left; font-size: 16px; color: #ddd; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(255,255,255,0.05); padding: 15px; border-left: 4px solid #fff; border-radius: 0 5px 5px 0; position: relative; animation: textGlitch 0.5s linear infinite alternate; }
+        @keyframes textGlitch { 0% { transform: translate(0); } 100% { transform: translate(1px, 1px); } }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; animation: bubbleFloat 2s ease-in-out infinite; }
+        @keyframes bubbleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .main ul { color: #ddd; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; animation: liPulse 2s ease-in-out infinite; }
+        @keyframes liPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .main li::before { content: '🃏'; position: absolute; left: 0; color: #ff0000; font-size: 14px; animation: jokerSpin 1s linear infinite; }
+        @keyframes jokerSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .main img { width: 100%; height: auto; border-radius: 0; margin: 20px 0; box-shadow: 0 5px 20px rgba(255,0,0,0.3); border: 2px solid #fff; animation: imgShake 0.5s ease-in-out infinite alternate; filter: hue-rotate(0deg); }
+        @keyframes imgShake { 0% { transform: translateX(0); filter: hue-rotate(0deg); } 100% { transform: translateX(2px); filter: hue-rotate(90deg); } }
+
+        /* Sidebar */
+        .sidebar { background: #111; padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(255,0,0,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #fff; }
+        .sidebar h3 { color: #fff; border-bottom: 2px dashed #fff; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Nosifer', cursive; letter-spacing: 2px; text-shadow: 0 0 5px #fff; animation: sidebarFlicker 1s ease-in-out infinite alternate; }
+        @keyframes sidebarFlicker { 0%, 100% { color: #fff; } 50% { color: #ff0000; } }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #000; border-radius: 0; text-decoration: none; color: #ddd; transition: all 0.3s ease; border-left: 3px solid transparent; animation: linkGlitch 3s linear infinite; }
+        .sidebar a:hover { background: #ff0000; color: #fff; transform: rotate(2deg) scale(1.05); border-left-color: #fff; box-shadow: 0 0 15px #ff0000; animation: none; }
+        @keyframes linkGlitch { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(1px); } 75% { transform: translateX(-1px); } }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-film-detail { padding: 80px 15px 60px; }
+            .hero-film-detail h1 { font-size: 28px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Linh Osimi</div>
+      
+        <div class="header-right">
+           
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-film-detail">
+        <div class="hero-film-detail-content">
+            <h1>Nhân Vật Joker: Sự Hỗn Loạn Trong Trật Tự</h1>
+            <p>Phân Tích Điên Loạn - Chaos In Order</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>PHIM LIÊN QUAN</h3>
+            <ul>
+                <li><a href="phim-nang-cao-bai0.htm">viktor</a></li>
+                <li><a href="phim-nang-cao-bai2.html">Mr.white</a></li>
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Joker</a></li>
+                <li><a href="#">Chaos</a></li>
+                <li><a href="#">Villain Arc</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='phim.html'">← Quay lại Phim</button>
+            
+            <h2>Giới Thiệu</h2>
+            <p>Joker là biểu tượng hỗn loạn, từ comic đến phim Nolan và Phillips. Phân tích này khám phá "sự hỗn loạn trong trật tự" - chaos as catalyst for change, với phong cách điên loạn flashing colors như mind of Joker.</p>
+
+            <img src="https://www.gifcen.com/wp-content/uploads/2021/08/joker-gif-3.gif" alt="Joker Chaos" style="width: 100%; border-radius: 0; border: 2px solid #fff; box-shadow: 0 0 20px #fff; margin: 20px 0; animation: jokerShake 0.5s ease-in-out infinite alternate;">
+
+            <h2>Hỗn Loạn Trong Trật Tự</h2>
+            <p>Joker's chaos không random, mà calculated to expose society's order fragility. In Dark Knight, he's agent of anarchy testing Batman's code. Điểm 10/10 - Ledger's performance pure madness.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Philosophy of chaos, one bad day theory.</li>
+                <li><strong>Điểm yếu:</strong> Overused in sequels, loses edge.</li>
+            </ul>
+
+            <h2>Phân Tích Nhân Vật</h2>
+            <p>Joker's duality: Clown prince of crime vs tragic figure. Phillips' Joker shows societal push to madness, Nolan's as force of nature. Themes order vs anarchy timeless.</p>
+            <img src="https://th.bing.com/th/id/R.0ebeb7ba36140882cb7c48154fcc5bd6?rik=8jLZ%2f6%2fI%2fh1v7Q&riu=http%3a%2f%2fimages5.fanpop.com%2fimage%2fphotos%2f30500000%2fThe-Joker-the-joker-30590744-1000-1328.jpg&ehk=ELjZFTb8He%2fFpp2v%2bEHOcThZF%2bi484QNZ%2br1qnHlWuI%3d&risl=&pid=ImgRaw&r=0" alt="Joker Mask" style="width: 100%; border-radius: 0; border: 2px solid #fff; box-shadow: 0 0 20px #fff; margin: 20px 0; animation: maskTwist 2s linear infinite;">
+
+            <h2>Ý Nghĩa Trong Phim</h2>
+            <p>Joker critiques society, chaos as mirror to order's hypocrisy. Influences from Taxi Driver to modern villains like Homelander.</p>
+
+            <h2>Kết Luận</h2>
+            <p>Joker's chaos is art of disorder, điểm 9.8/10 - eternal icon. Tiếp theo: Riddler's Puzzles?</p>
+
+            <button class="back-btn" onclick="window.location.href='phim.html'" style="margin-top: 30px;">← Quay lại Phim</button>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kiến Thức VN. | Phim Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

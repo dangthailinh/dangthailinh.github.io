@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truyện (Manga) - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&family=Bangers&display=swap" rel="stylesheet"> <!-- Font manga-style: Noto Sans JP + Bangers cho tiêu đề comic -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Hero Section với style manga */
+        .hero-manga {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://wallpapers.com/images/featured/manga-panel-background-r325ovueaen5u590.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .hero-manga::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(220,53,69,0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+        .hero-manga-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-manga h1 { 
+            font-family: 'Bangers', cursive; /* Phông chữ manga comic-style */
+            font-size: 60px; 
+            margin-bottom: 10px; 
+            text-shadow: 3px 3px 0 #dc3545, 4px 4px 0 #000; /* Shadow kiểu vẽ tay manga */
+            animation: typewriter 2s steps(20) 0s 1 normal both, blink 0.75s step-end infinite; /* Hiệu ứng typewriter + blink cursor */
+            white-space: nowrap; 
+            overflow: hidden; 
+            border-right: 3px solid #dc3545;
+        }
+        .hero-manga p { font-size: 20px; opacity: 0.95; animation: fadeInUp 1s ease 2s both; font-weight: 300; }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #dc3545; }
+        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main */
+        .main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 1200px; margin: 0 auto; }
+        .back-btn { background: var(--primary-color); color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40,167,69,0.4); }
+        .main h1 { color: var(--primary-color); text-align: center; font-size: 36px; margin-bottom: 10px; }
+        .main p { text-align: center; font-size: 18px; color: #666; margin-bottom: 40px; }
+
+        /* Card Grid với style manga */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .card-link { text-decoration: none; color: inherit; display: block; }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+            border-top: 4px solid #dc3545;
+        }
+        .card::before {
+            content: '';
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #dc3545, rgba(220,53,69,0.5));
+        }
+        .card::after {
+            content: '💭'; /* Bubble speech decor manga-style */
+            position: absolute; top: 10px; right: 10px; font-size: 24px; opacity: 0.1; z-index: 0;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .card-img { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            filter: drop-shadow(0 0 10px rgba(220,53,69,0.3)); /* Glow manga-style */
+        }
+        .rating-stars { color: #ffc107; font-size: 18px; margin-bottom: 10px; }
+        .genre-tags { display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }
+        .genre-tag { background: #f8f9fa; padding: 4px 8px; border-radius: 12px; font-size: 12px; color: #dc3545; font-weight: 500; border: 1px solid #dc3545; }
+        .card-diagram { 
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin: 15px 0; 
+            font-size: 14px; 
+            color: #555; 
+            border-left: 4px solid #dc3545; 
+            font-family: 'Noto Sans JP', sans-serif;
+            position: relative;
+        }
+        .card-diagram::after {
+            content: '✒️'; /* Bút vẽ decor */
+            position: absolute; top: -5px; right: 10px; font-size: 16px; opacity: 0.3;
+        }
+        .card h3 { 
+            color: #dc3545; 
+            margin: 15px 0 10px; 
+            font-size: 22px; 
+            font-weight: 600; 
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.1); /* Shadow nhẹ như vẽ tay */
+        }
+        .card-meta { font-size: 14px; color: #999; margin-bottom: 0; font-style: italic; }
+
+        /* Sub-section */
+        .sub-section { margin-top: 70px; padding-top: 40px; border-top: 2px dashed #ddd; }
+        .sub-section h2 { 
+            color: var(--primary-color); 
+            text-align: center; 
+            font-size: 32px; 
+            margin-bottom: 30px; 
+            position: relative; 
+            font-family: 'Bangers', cursive; /* Phông manga cho h2 */
+            text-shadow: 2px 2px 0 #dc3545;
+        }
+        .sub-section h2::after { 
+            content: '✨'; /* Decor sao manga */
+            position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); font-size: 20px; opacity: 0.8;
+        }
+
+        /* Pagination */
+        .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 50px; }
+        .pagination button { padding: 12px 20px; border: 2px solid var(--primary-color); background: transparent; color: var(--primary-color); cursor: pointer; border-radius: 30px; transition: all 0.3s; font-weight: 500; font-size: 16px; }
+        .pagination button:hover, .pagination button.active { background: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 5px 15px rgba(40,167,69,0.3); }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-manga { background-attachment: scroll; padding: 80px 15px 60px; }
+            .hero-manga h1 { font-size: 40px; }
+            .main { padding: 20px; margin: 20px; }
+            .card-grid { grid-template-columns: 1fr; gap: 20px; }
+            .sub-section h2 { font-size: 28px; }
+            .genre-tags { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header style="background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border-bottom: 3px solid #dc3545; box-shadow: 0 4px 15px rgba(220,53,69,0.4); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Noto Sans JP', sans-serif; position: sticky; top: 0; z-index: 100;">
+    <!-- Logo với manga Nhật style -->
+    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 40px; height: 40px; background: #dc3545; border: 2px solid #fff; position: relative; border-radius: 8px; box-shadow: 0 0 15px rgba(220,53,69,0.6), inset 0 0 10px rgba(255,255,255,0.2); font-size: 20px; text-align: center; line-height: 40px; color: #fff; font-weight: bold; text-shadow: 1px 1px 2px #000;">
+            📖
+        </div>
+        <span style="font-size: 24px; font-weight: 700; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px #dc3545; color: #fff; font-family: 'Bangers', cursive;">Linh OSIMI</span>
+    </div>
+    
+    <nav>
+        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">
+            <li><a href="khoa-hoc.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">KHOA HỌC</a></li>
+            <li><a href="nghe-thuat.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Nghệ thuật</a></li>
+            <li><a href="phim.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">PHIM</a></li>
+            <li><a href="truyen-manga.html" style="text-decoration: none; color: #dc3545; transition: all 0.3s; border-bottom: 2px solid #dc3545; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5), 0 0 5px #dc3545;">TRUYỆN (MANGA)</a></li>
+            <li><a href="am-nhac.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">ÂM NHẠC</a></li>
+            <li><a href="game.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">GAME</a></li>
+        </ul>
+    </nav>
+    
+    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
+        <button class="theme-toggle" onclick="toggleTheme()" style="background: #dc3545; border: none; color: #fff; padding: 8px 12px; border-radius: 50%; cursor: pointer; transition: all 0.3s; font-size: 16px; box-shadow: 0 0 15px rgba(220,53,69,0.6); font-weight: bold;">🌙</button>
+    </div>
+</header>
+
+<style>
+/* CSS bổ sung cho header manga Nhật */
+.logo-container:hover { text-shadow: 2px 2px 6px rgba(0,0,0,0.5), 0 0 15px #dc3545; }
+nav a:hover {
+    color: #dc3545; border-bottom-color: #dc3545; text-shadow: 1px 1px 4px rgba(0,0,0,0.5), 0 0 10px #dc3545; transform: scale(1.05);
+}
+.theme-toggle:hover {
+    box-shadow: 0 0 20px #dc3545; transform: scale(1.1) rotate(180deg); /* Rotate manga-style */
+}
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 10px; }
+    nav ul { flex-direction: column; gap: 10px; text-align: center; }
+    .header-right { width: 100%; justify-content: center; }
+    .logo-container span { font-size: 20px; }
+}
+</style>
+
+    <!-- Hero Section -->
+    <section class="hero-manga">
+        <div class="hero-manga-content">
+            <h1>Truyện (Manga)</h1>
+            <p>Cập nhật chap mới, review và spoiler-free</p>
+        </div>
+    </section>
+
+    <main class="main">
+        <button class="back-btn" onclick="window.location.href='linhkun.html'">← Quay về Trang chủ</button>
+        
+        <!-- Grid card chính -->
+        <div class="card-grid">
+            <a href="truyen-manga-bai0.html" class="card-link">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/R.24dff2f067c79deb9e51951b917cd1fa?rik=9HX6om5cn83NYg&pid=ImgRaw&r=0" alt="One Piece" class="card-img">
+                   
+                    <div class="genre-tags">
+                        <span class="genre-tag">Action</span>
+                        <span class="genre-tag">Adventure</span>
+                    </div>
+                  
+                    <h3>Berserk</h3>
+                    <div class="card-meta">Griffith did nothing wrong</div>
+                </div>
+            </a>
+
+            <a href="truyen-manga-bai1.html" class="card-link">
+                <div class="card">
+                    <img src="https://preview.redd.it/attack-on-titan-art-style-v0-ywt0l8zodfzb1.jpg?width=1290&format=pjpg&auto=webp&s=e7ff10ce04c229c151593a97d83d931f517f0996" alt="Attack on Titan" class="card-img">
+                   
+                    <div class="genre-tags">
+                        <span class="genre-tag">Dark Fantasy</span>
+                        <span class="genre-tag">Action</span>
+                    </div>
+                 
+                    <h3>Bài 1 - Attack on Titan Ending: Phân tích vòng lặp</h3>
+                    <div class="card-meta">Nov 01, 2025 | Titan Slayer</div>
+                </div>
+            </a>
+
+            <a href="truyen-manga-bai2.html" class="card-link">
+                <div class="card">
+                    <img src="https://images3.alphacoders.com/134/thumbbig-1341528.webp" alt="Jujutsu Kaisen" class="card-img">
+                  
+                    <div class="genre-tags">
+                        <span class="genre-tag">Supernatural</span>
+                        <span class="genre-tag">Shonen</span>
+                    </div>
+                   
+                    <h3>Jujutsu Kaisen: Thầy cúng hack game</h3>
+                    <div class="card-meta">Nov 05, 2025 | JJK Expert</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Phần phụ -->
+        <div class="sub-section">
+            <h2>Thêm 1 số manga tôi thích nữa</h2>
+            <div class="card-grid">
+                <a href="truyen-manga-nang-cao-bai0.html" class="card-link">
+                    <div class="card">
+                        <img src="https://www.gifcen.com/wp-content/uploads/2022/11/chainsaw-man-gif-1.gif" alt="Chainsaw Man" class="card-img">
+
+                        <div class="genre-tags">
+                            <span class="genre-tag">Seinen</span>
+                            <span class="genre-tag">Horror</span>
+                        </div>
+                      
+                        <h3>Chainsaw Man: Denji's smip dudee</h3>
+                        <div class="card-meta"> Nói chung là cũng ổn..</div>
+                    </div>
+                </a>
+
+                <a href="truyen-manga-nang-cao-bai1.html" class="card-link">
+                    <div class="card">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.Rg3NuUgUgm4r61Gdx7lFzwHaKr?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="My Hero Academia" class="card-img">
+                       
+                        <div class="genre-tags">
+                            <span class="genre-tag">Dark</span>
+                            <span class="genre-tag">seinen</span>
+                        </div>
+                     
+                        <h3>Homunculus</h3>
+                        <div class="card-meta">thí nghiệm khoan sọ người</div>
+                    </div>
+                </a>
+
+                <a href="truyen-manga-nang-cao-bai2.html" class="card-link">
+                    <div class="card">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.Wkq8wMq6TREafbiad_JHcAHaKk?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Demon Slayer" class="card-img">
+                    
+                        <div class="genre-tags">
+                            <span class="genre-tag">Action</span>
+                            <span class="genre-tag">Dark</span>
+                            <span class="genre-tag">18+</span>
+                        </div>
+                       
+                        <h3>Ichi the killer</h3>
+                        <div class="card-meta">KINH ,DỊ ,TỞM và ĐEN TỐI</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <button onclick="changePage(1, 'truyen-manga')" class="active">1</button>
+            <button onclick="changePage(2, 'truyen-manga')">2</button>
+        </div>
+    </main>
+
+    <footer style="background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border-top: 3px solid #dc3545; box-shadow: 0 4px 15px rgba(220,53,69,0.4); padding: 20px; text-align: center; font-family: 'Noto Sans JP', sans-serif; position: relative; overflow: hidden;">
+    <p style="color: #fff; text-shadow: 1px 1px 2px #000, 0 0 5px #dc3545; margin: 0; font-size: 14px; transform: skew(-2deg);">&copy; 2025 Kiến Thức VN | Truyện (Manga) Focus</p>
+    <div style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%) rotate(10deg); font-size: 30px; opacity: 0.2;">💭</div> <!-- Speech bubble decor -->
+</footer>
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khoa Học - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Hero Section */
+        .hero-science {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+        }
+        .hero-science::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(40,167,69,0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+        .hero-science-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-science h1 { font-size: 48px; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); animation: fadeInDown 1s ease; }
+        .hero-science p { font-size: 20px; opacity: 0.95; animation: fadeInUp 1s ease 0.3s both; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main */
+        .main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 1200px; margin: 0 auto; }
+        .back-btn { background: var(--primary-color); color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40,167,69,0.4); }
+        .main h1 { color: var(--primary-color); text-align: center; font-size: 36px; margin-bottom: 10px; }
+        .main p { text-align: center; font-size: 18px; color: #666; margin-bottom: 40px; }
+
+        /* Card Grid */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .card-link { text-decoration: none; color: inherit; display: block; }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+            border-top: 4px solid var(--primary-color);
+        }
+        .card::before {
+            content: '';
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary-color), rgba(40,167,69,0.5));
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .card-img { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .card-diagram { 
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin: 15px 0; 
+            font-size: 14px; 
+            color: #555; 
+            border-left: 4px solid var(--primary-color); 
+            font-family: 'Courier New', monospace;
+        }
+        .card h3 { color: var(--primary-color); margin: 15px 0 10px; font-size: 22px; font-weight: 600; }
+        .card-meta { font-size: 14px; color: #999; margin-bottom: 0; font-style: italic; }
+
+        /* Sub-section */
+        .sub-section { margin-top: 70px; padding-top: 40px; border-top: 2px dashed #ddd; }
+        .sub-section h2 { color: var(--primary-color); text-align: center; font-size: 32px; margin-bottom: 30px; position: relative; }
+        .sub-section h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: var(--primary-color); border-radius: 2px; }
+
+        /* Pagination */
+        .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 50px; }
+        .pagination button { padding: 12px 20px; border: 2px solid var(--primary-color); background: transparent; color: var(--primary-color); cursor: pointer; border-radius: 30px; transition: all 0.3s; font-weight: 500; font-size: 16px; }
+        .pagination button:hover, .pagination button.active { background: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 5px 15px rgba(40,167,69,0.3); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-science { background-attachment: scroll; padding: 80px 15px 60px; }
+            .hero-science h1 { font-size: 36px; }
+            .main { padding: 20px; margin: 20px; }
+            .card-grid { grid-template-columns: 1fr; gap: 20px; }
+            .sub-section h2 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+   <header style="background: linear-gradient(135deg, #9ca2a9 0%, #425967 100%); border-bottom: 2px solid rgba(255,255,255,0.2); box-shadow: 0 4px 15px rgba(0,123,255,0.3); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; position: sticky; top: 0; z-index: 100;">
+    <!-- Logo với science style -->
+    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #fff, #e3f2fd); border: 1px solid rgba(0,123,255,0.3); position: relative; border-radius: 50%; box-shadow: 0 0 15px rgba(0,123,255,0.2);">
+            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; color: #007bff;">🔬</span> <!-- Microscope icon -->
+        </div>
+        <span style="font-size: 24px; font-weight: 600; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); color: white;">KIẾN THỨC VN</span>
+    </div>
+    
+    <nav>
+        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 14px; font-weight: 400; letter-spacing: 0.5px;">
+            <li><a href="khoa-hoc.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Khoa Học</a></li>
+            <li><a href="nghe-thuat.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Nghệ thuật</a></li>
+            <li><a href="phim.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Phim</a></li>
+            <li><a href="truyen-manga.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Truyện (Manga)</a></li>
+            <li><a href="am-nhac.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Âm Nhạc</a></li>
+            <li><a href="game.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Game</a></li>
+        </ul>
+    </nav>
+    
+    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
+        <button class="theme-toggle" onclick="toggleTheme()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 12px; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; box-shadow: 0 2px 8px rgba(0,123,255,0.1);">🌙</button>
+    </div>
+</header>
+
+<style>
+/* CSS bổ sung cho header khoa học */
+.logo-container:hover { text-shadow: 1px 1px 3px rgba(0,0,0,0.2), 0 0 10px rgba(0,123,255,0.3); }
+nav a:hover {
+    color: white; border-bottom-color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); transform: scale(1.02);
+}
+.theme-toggle:hover {
+    background: rgba(255,255,255,0.3); box-shadow: 0 2px 10px rgba(0,123,255,0.2); transform: scale(1.05);
+}
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 10px; }
+    nav ul { flex-direction: column; gap: 10px; text-align: center; }
+    .header-right { width: 100%; justify-content: center; }
+    .logo-container span { font-size: 20px; }
+}
+</style>
+
+    <!-- Hero Section -->
+    <section class="hero-science">
+        <div class="hero-science-content">
+            <h1>Khoa Học</h1>
+            <p>Khám phá vũ trụ và khoa học hiện đại</p>
+        </div>
+    </section>
+
+    <main class="main">
+        <button class="back-btn" onclick="window.location.href='linhkun.html'">← Quay về Trang chủ</button>
+        
+        <!-- Grid card chính -->
+        <div class="card-grid">
+            <a href="khoa-hoc-bai0.html" class="card-link">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Vũ trụ" class="card-img">
+                    
+                    <h3>Bài 0 - Chuẩn bị khám phá vũ trụ</h3>
+                    <div class="card-meta">Oct 10, 2025 | Khoa Học VN</div>
+                </div>
+            </a>
+
+            <a href="khoa-hoc-bai1.html" class="card-link">
+                <div class="card">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.iFj7qhi29-ZaKW4l-54kvgAAAA?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Lượng tử" class="card-img">
+
+                    <h3>Bài 1 - 1k khái niệm lượng tử</h3>
+                    <div class="card-meta">Oct 15, 2025 | Quantum Expert</div>
+                </div>
+            </a>
+
+            <a href="khoa-hoc-bai2.html" class="card-link">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/R.cfe69912f91f660692a8baaba44e7770?rik=uEOF1w%2fbErvAYw&pid=ImgRaw&r=0" alt="Hố đen" class="card-img">
+            
+                    <h3>Bài 2 - 10k bí mật hố đen</h3>
+                    <div class="card-meta">Oct 20, 2025 | Astro Guru</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Phần phụ -->
+        <div class="sub-section">
+            <h2>Nhũng sự thật xàm chuối về Khoa Học</h2>
+            <div class="card-grid">
+                <a href="khoa-hoc-nang-cao-bai0.html" class="card-link">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="AI khoa học" class="card-img">
+                     
+                        <h3>Bài 0 - AI trong Khoa Học</h3>
+                        <div class="card-meta">Nov 01, 2025 | AI Scientist</div>
+                    </div>
+                </a>
+
+                <a href="khoa-hoc-nang-cao-bai1.html" class="card-link">
+                    <div class="card">
+                        <img src="https://e.khoahoc.tv/photos/image/2023/07/31/Green-Boots.jpg" alt="Sinh học" class="card-img">
+                       
+                        <h3>Vì sao những người bỏ mạng trên đỉnh Everest sẽ phải nằm tại đó mãi mãi?</h3>
+                        <div class="card-meta">Nov 05, 2025 | Bio Expert</div>
+                    </div>
+                </a>
+
+                <a href="khoa-hoc-nang-cao-bai2.html" class="card-link">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Năng lượng xanh" class="card-img">
+                       
+                        <h3>Bài 2 - Vật Lý Xanh</h3>
+                        <div class="card-meta">Nov 10, 2025 | Green Phys</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <button onclick="changePage(1, 'khoa-hoc')" class="active">1</button>
+            <button onclick="changePage(2, 'khoa-hoc')">2</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 OSIMI. | Linh O9</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

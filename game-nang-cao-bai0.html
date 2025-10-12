@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liêm Minh Huyền Thoại (LOL) - Phân Tích - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"> <!-- Orbitron for LOL client-like -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f1419 0%, #1a202c 100%); color: #e2e8f0; } /* Dark LOL client theme */
+        /* Header LOL style */
+        header {
+            background: linear-gradient(135deg, #061c33 0%, #0a2540 100%);
+            border-bottom: 2px solid #00aaff;
+            box-shadow: 0 4px 15px rgba(0,170,255,0.3);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Orbitron', monospace;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo-container {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .logo-img {
+            width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #00aaff; box-shadow: 0 0 10px #00aaff;
+        }
+        .logo-container span {
+            font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #00aaff; text-shadow: 0 0 5px #00aaff;
+        }
+        nav ul {
+            list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+        }
+        nav a {
+            text-decoration: none; color: #e2e8f0; transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 0 0 3px #00aaff;
+        }
+        nav a:hover { color: #00aaff; border-bottom-color: #00aaff; text-shadow: 0 0 10px #00aaff; }
+        .theme-toggle {
+            background: #00aaff; color: #061c33; border: none; padding: 8px 12px; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-weight: 600; box-shadow: 0 0 10px #00aaff;
+        }
+        .theme-toggle:hover { box-shadow: 0 0 15px #00aaff; transform: scale(1.05); }
+
+        /* Hero Section LOL client */
+        .hero-lol-detail {
+            background: linear-gradient(rgba(6,28,51,0.8), rgba(10,37,64,0.9)), url('https://wallpaperaccess.com/full/217099.png'); /* LOL summoner rift Unsplash */
+            background-size: cover;
+            background-position: center;
+            color: #e2e8f0;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Orbitron', monospace;
+            text-shadow: 0 0 10px #00aaff;
+            animation: riftGlow 4s ease-in-out infinite alternate;
+        }
+        @keyframes riftGlow {
+            0%, 100% { box-shadow: inset 0 0 20px rgba(0,170,255,0.2); }
+            50% { box-shadow: inset 0 0 40px rgba(0,170,255,0.4); }
+        }
+        .hero-lol-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,170,255,0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+        .hero-lol-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-lol-detail h1 { font-family: 'Orbitron', monospace; font-size: 36px; margin-bottom: 10px; letter-spacing: 3px; line-height: 1.2; font-weight: 700; color: #00aaff; animation: typewriter 2.5s steps(25) 0s 1 normal both; white-space: nowrap; overflow: hidden; border-right: 3px solid #00aaff; }
+        .hero-lol-detail p { font-size: 18px; opacity: 0.95; letter-spacing: 1px; font-weight: 400; animation: fadeInUp 1s ease 2.5s both; color: #e2e8f0; }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main LOL client style */
+        .main { background: linear-gradient(135deg, #061c33 0%, #0a2540 100%); padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(0,170,255,0.1); max-width: 1200px; margin: 0 auto; border: 2px solid #00aaff; }
+        .back-btn { background: #00aaff; color: #061c33; padding: 12px 24px; border: none; border-radius: 20px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Orbitron', monospace; box-shadow: 0 4px 15px rgba(0,170,255,0.3); }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,170,255,0.4); }
+        .main h1 { color: #e2e8f0; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Orbitron', monospace; letter-spacing: 2px; text-shadow: 0 0 10px #00aaff; }
+        .main h2 { color: #00aaff; font-size: 20px; margin: 30px 0 15px; font-family: 'Orbitron', monospace; letter-spacing: 1px; text-shadow: 0 0 5px #00aaff; border-bottom: 1px solid #00aaff; padding-bottom: 5px; position: relative; }
+        .main h2::after { content: '⚔️'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; } /* Sword for LOL */
+        .main p { text-align: left; font-size: 16px; color: #cbd5e1; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(0,170,255,0.05); padding: 15px; border-left: 4px solid #00aaff; border-radius: 0 8px 8px 0; position: relative; }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
+        .main ul { color: #cbd5e1; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '🛡️'; position: absolute; left: 0; color: #00aaff; font-size: 14px; } /* Shield for player info */
+        .player-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stat-card { background: rgba(0,170,255,0.1); padding: 15px; border-radius: 8px; border-left: 4px solid #00aaff; text-align: center; transition: all 0.3s; }
+        .stat-card:hover { background: rgba(0,170,255,0.2); transform: translateY(-2px); }
+        .stat-value { font-size: 24px; font-weight: bold; color: #00aaff; margin-bottom: 5px; }
+        .stat-label { font-size: 12px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; }
+        .champ-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 10px; margin: 20px 0; }
+        .champ-card { background: rgba(0,170,255,0.1); padding: 10px; border-radius: 5px; text-align: center; cursor: pointer; transition: all 0.3s; border: 1px solid rgba(0,170,255,0.2); }
+        .champ-card:hover { background: rgba(0,170,255,0.2); transform: scale(1.05); box-shadow: 0 0 10px rgba(0,170,255,0.3); }
+        .champ-icon { font-size: 32px; margin-bottom: 5px; }
+        .champ-name { font-size: 10px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; }
+        .gameplay-section { margin: 30px 0; }
+        .gameplay-video { width: 100%; height: 200px; border-radius: 8px; margin: 20px 0; }
+
+        /* Sidebar */
+        .sidebar { background: linear-gradient(135deg, #0a2540 0%, #061c33 100%); padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(0,170,255,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #00aaff; }
+        .sidebar h3 { color: #00aaff; border-bottom: 2px solid #00aaff; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Orbitron', monospace; letter-spacing: 1px; text-shadow: 0 0 5px #00aaff; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: rgba(0,170,255,0.1); border-radius: 0; text-decoration: none; color: #e2e8f0; transition: all 0.3s ease; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: #00aaff; color: #061c33; transform: translateX(5px); border-left-color: #061c33; box-shadow: 0 0 10px #00aaff; }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-lol-detail { padding: 80px 15px 60px; }
+            .hero-lol-detail h1 { font-size: 28px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+            .player-stats { grid-template-columns: 1fr; }
+            .champ-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Linh Osimi</div>
+        
+      >
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-lol-detail">
+        <div class="hero-lol-detail-content">
+            <h1>Liêm Minh Huyền Thoại (LOL)</h1>
+            <p>Summoner Rift - Gác cổng rank việt</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>PLAYER INFO</h3>
+            <ul>
+                <li><a href="#">Level: 250 (Challenger)</a></li>
+                <li><a href="#">Rank: Diamond I</a></li>
+                <li><a href="#">Win Rate: 58%</a></li>
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">ADC Main</a></li>
+                <li><a href="#">Jinx One-Trick</a></li>
+                <li><a href="#">Pro Play</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='game.html'">← Quay lại Game</button>
+            
+            <h2>Cấp Độ Người Chơi</h2>
+            <p>Cấp 250 sau 5 năm grind, từ Bronze đến Challenger. Hành trình từ noob summoner đến pro analyst, với 10,000+ games played.</p>
+
+            <div class="player-stats">
+                <div class="stat-card">
+                    <div class="stat-value">250</div>
+                    <div class="stat-label">Level</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">58%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">Diamond I</div>
+                    <div class="stat-label">Rank</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">KDA 4.2</div>
+                    <div class="stat-label">Average KDA</div>
+                </div>
+            </div>
+
+            <h2>Thông Số Thao Túng (Stats)</h2>
+            <p>CS/min 8.5, vision score 1.2/game, damage to objectives 25k. Focus macro play, objective control, và teamfight positioning.</p>
+
+            <h2>Tướng Chuyên Nghiệp</h2>
+            <p>Main ADC với Jinx (95% winrate in ranked), Yasuo secondary for fun. Pro pick: Jinx in Worlds 2023 meta.</p>
+            <div class="champ-grid">
+                <div class="champ-card">
+                    <div class="champ-icon">🎯</div>
+                    <div class="champ-name">Jinx</div>
+                </div>
+                <div class="champ-card">
+                    <div class="champ-icon">⚔️</div>
+                    <div class="champ-name">Yasuo</div>
+                </div>
+                <div class="champ-card">
+                    <div class="champ-icon">🔫</div>
+                    <div class="champ-name">Caitlyn</div>
+                </div>
+                <div class="champ-card">
+                    <div class="champ-icon">🌪️</div>
+                    <div class="champ-name">Ezreal</div>
+                </div>
+            </div>
+
+            <h2>Nội Chơi (Gameplay)</h2>
+            <p>Style: Aggressive lane, kite in teamfights, objective steal. Favorite combo: Rocket Jinx + Bard ult for chaos. Video highlight: [Embed YouTube clip].</p>
+            <div class="gameplay-video">
+                <iframe width="100%" height="315" src="https://www.youtube.com/watch?v=AN1RJF55NXI&list=RDMM&index=2" frameborder="0" allowfullscreen></iframe> <!-- Replace with real LOL clip -->
+            </div>
+
+            <button class="back-btn" onclick="window.location.href='game.html'" style="margin-top: 30px;">← Quay lại Game</button>
+        </main>
+    </div>
+
+   <footer style="background: radial-gradient(ellipse at bottom, #1b1b33 0%, #000 70%); color: #fff; padding: 20px; text-align: center; position: relative; overflow: hidden; min-height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-top: 2px solid rgba(0,255,255,0.3);">
+    <div style="z-index: 2; position: relative;">
+        <p style="font-size: 14px; margin: 0; opacity: 0.9; letter-spacing: 1px; font-family: 'Orbitron', monospace;">&copy; osimi league profile</p>
+    </div>
+    
+    <!-- Flying stars -->
+    <div class="stars-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;">
+        <div class="star" style="position: absolute; top: 20%; left: -10%; width: 2px; height: 2px; background: #fff; border-radius: 50%; animation: flyStar1 10s linear infinite;"></div>
+        <div class="star" style="position: absolute; top: 40%; left: -5%; width: 1px; height: 1px; background: #fff; border-radius: 50%; animation: flyStar2 8s linear infinite;"></div>
+        <div class="star" style="position: absolute; top: 60%; left: -15%; width: 3px; height: 3px; background: #fff; border-radius: 50%; animation: flyStar3 12s linear infinite;"></div>
+        <div class="star" style="position: absolute; top: 80%; left: -8%; width: 1.5px; height: 1.5px; background: #fff; border-radius: 50%; animation: flyStar4 9s linear infinite;"></div>
+    </div>
+</footer>
+
+<style>
+.stars-container .star {
+    animation: flyStar linear infinite;
+    opacity: 0.8;
+}
+@keyframes flyStar {
+    0% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateX(110vw) translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+</style>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script>
+</body>
+</html>

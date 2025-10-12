@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1- Chuẩn bị khám phá vũ trụ - Kiến Thức VN</title>
+    <link rel="stylesheet" href="linhkun.css">
+    <style>
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; color: inherit; }
+        a:hover { color: var(--primary-color); transition: color 0.3s ease; }
+
+        /* Giữ nguyên style cũ cho detail-page */
+        .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
+        .detail-header { position: relative; padding: 20px; text-align: center; }
+        .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
+        .detail-title { font-size: 32px; color: var(--primary-color); margin: 20px 0; z-index: 2; position: relative; }
+        .detail-subtitle { font-size: 18px; color: #666; margin-bottom: 20px; }
+        .detail-meta { text-align: center; font-size: 14px; color: #666; margin: 10px 0; }
+        .back-btn-detail { background: var(--primary-color); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; text-align: center; transition: all 0.3s; }
+        .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
+        .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
+        .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
+        .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .detail-content ul { margin-left: 20px; }
+        .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
+        .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
+        .sidebar-detail ul { list-style: none; padding: 0; }
+        .sidebar-detail li { margin: 10px 0; }
+        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+
+        @media (max-width: 768px) {
+            .container-detail { flex-direction: column; }
+            .decor-image { width: 80px; top: 10px; left: 10px; }
+            .detail-title { font-size: 24px; }
+            .detail-content img { margin: 10px 0; }
+        }
+    </style>
+</head>
+<body class="detail-page">
+    <header>
+        <div class="logo">Kiến Thức VN</div>
+       
+        <div class="header-right">
+            <input type="text" id="searchInput" class="search" placeholder="Tìm kiếm...">
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
+    </header>
+
+    <div class="detail-header">
+        <!-- Hình trang trí góc trên (adapt từ dino: sao dễ thương với kính) -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="https://cdn-icons-png.flaticon.com/512/9486/9486933.png">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/> <!-- Mũi tên sao -->
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/> <!-- Sao nhỏ -->
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text> <!-- Icon kính -->
+        </svg>
+
+        <h1 class="detail-title">Lượng Tử !!!!</h1>
+        <p class="detail-subtitle">Ở đây, mọi thứ kỳ quái đến mức tở phải nói:
+
+“Ủa rồi rốt cuộc vật lý có ổn không vậy?”</p>
+        <div class="detail-meta">Ngày đăng: Oct 10, 2025 | Tác giả: Linh đb</div>
+    </div>
+
+    <div class="container-detail">
+        <main class="detail-content">
+            <p>⚛️ Vậy lượng tử là gì?</p>
+            
+            <h2>⚛️ Vẫn là lượng tử là gì?Nhưng nhấn mạnh hơn.</h2>
+            <ul>
+                <li><strong>Đơn giản mà nói:</strong> Nói ngắn gọn, “lượng tử” là mức nhỏ nhất của năng lượng hoặc vật chất — kiểu nhỏ đến mức không thể chia thêm nữa.
+Nếu vũ trụ là một cái bánh kem thì lượng tử chính là mẩu vụn nhỏ nhất mà bạn liếm dính trên ngón tay 😋.
+
+Trong thế giới bình thường, mọi thứ đều rõ ràng: hoặc có, hoặc không.
+Nhưng trong thế giới lượng tử thì... “vừa có vừa không cũng được”.
+Nó kiểu như:
+
+“Tôi vừa online, vừa offline, vừa seen, vừa chưa seen tin nhắn của bạn luôn đó.” 💀</li>
+                <li><strong>🐾 Và đây là lúc Con mèo Schrödinger xuất hiện !:</strong>Một nhà vật lý tên là Erwin Schrödinger đã nghĩ ra thí nghiệm tưởng tượng nổi tiếng để mô tả sự kỳ quái của lượng tử.
+Ổng nói kiểu này nè:
+
+“Giả sử ta bỏ một con mèo vô hộp kín, cùng với một lọ chất độc, mà lọ này chỉ vỡ nếu một hạt phóng xạ phân rã.”
+
+Giờ vấn đề là:
+
+Nếu hạt phóng xạ chưa phân rã, mèo sống.
+
+Nếu hạt phóng xạ phân rã, mèo chết.
+
+Nhưng trong thế giới lượng tử, hạt đó có thể vừa phân rã vừa chưa phân rã cùng lúc.
+=> Tức là con mèo vừa sống vừa chết cùng lúc luôn! 🐈💀
+
+Tới khi bạn mở hộp ra nhìn, hành động quan sát mới khiến trạng thái đó “chốt đơn”:
+Mèo hoặc sống, hoặc chết. </li>
+                <li><strong>Tóm lại lượng tử là sao?</strong>Tở nói thật nha:
+
+Ở vĩ mô: bạn bật/tắt công tắc điện.
+
+Ở lượng tử: công tắc vừa bật vừa tắt cùng lúc cho tới khi có ai nhìn! 😭
+
+Nó là nơi logic đi du lịch và trực giác nghỉ phép.
+Thế giới lượng tử chính là vũ trụ chơi “úp mở” với ta.
+Kiểu: “Tôi có hiện hữu đó, nhưng bạn phải nhìn mới biết chắc nhaaa~” 👀</li>
+            </ul>
+            
+            <h2>Hướng dẫn nhanh</h2>
+            <p>Bắt đầu bằng việc theo dõi các sứ mệnh của NASA. JWST đã phát hiện hàng trăm hành tinh ngoài hệ Mặt Trời, mở ra khả năng tìm kiếm sự sống.</p>
+            
+            <p>Tiếp theo trong series: Bài 1 - Khái niệm lượng tử trong vũ trụ học.</p>
+            
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'">← Quay lại Khoa Học</button>
+        </main>
+
+        <aside class="sidebar-detail">
+            <h3>Series Khoa Học Vũ Trụ</h3>
+            <ul>
+                <li><a href="khoa-hoc-bai0.html">Chuẩn bị khám phá</a></li>
+                <li><a href="khoa-hoc-bai2.html">bí mật hố đen</a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kiến Thức VN. | Bài viết thuộc series Khoa Học | Tác giả: Khoa Học VN</p>
+    </footer>
+
+    <div id="postModal" class="modal" style="display: none;"> <!-- Giữ nếu cần, nhưng ít dùng -->
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="linhkun.js"></script> <!-- Giữ cho theme/search nếu cần -->
+</body>
+</html>
