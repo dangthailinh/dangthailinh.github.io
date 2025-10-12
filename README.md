@@ -1,3 +1,0 @@
-﻿# https://dangthailinh.github.io/osimi/
-
-
