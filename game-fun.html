@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trò chơi giải đố sinh tồn</title>
+<style>
+    body {
+        font-family: 'Press Start 2P', sans-serif;
+        background-color: #111;
+        color: #fff;
+        text-align: center;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    h1 {
+        color: #ffcc00;
+        margin-top: 30px;
+        font-size: 18px;
+    }
+
+    #game-container {
+        margin-top: 20px;
+    }
+
+    #character {
+        width: 150px;
+        height: 150px;
+        margin: 20px auto;
+        background: url('character.png') center/cover no-repeat;
+        border: 2px solid #555;
+        border-radius: 10px;
+    }
+
+    #dialogue {
+        font-size: 14px;
+        color: #ff4444;
+        margin-bottom: 15px;
+    }
+
+    #health-bar-container {
+        width: 300px;
+        height: 20px;
+        background: #444;
+        border: 2px solid #222;
+        border-radius: 10px;
+        margin: 10px auto;
+    }
+
+    #health-bar {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, #00ff00, #ffcc00);
+        border-radius: 10px;
+    }
+
+    #question-box {
+        margin-top: 20px;
+        display: none;
+    }
+
+    .answer-btn {
+        display: block;
+        background: #333;
+        color: white;
+        border: 2px solid #666;
+        padding: 10px;
+        margin: 8px auto;
+        width: 60%;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: 0.3s;
+    }
+
+    .answer-btn:hover {
+        background: #555;
+    }
+
+    #timer {
+        font-size: 14px;
+        color: #00ffff;
+        margin-top: 10px;
+    }
+
+    #return-btn {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        background: #0055ff;
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #return-btn:hover {
+        background: #0077ff;
+    }
+</style>
+</head>
+<body>
+
+<h1>🎭 Trò Chơi Giải Đố Sinh Tồn 🎭</h1>
+
+<button id="return-btn" onclick="window.location.href='game.html'">🏠 Quay về trang chính</button>
+
+<div id="game-container">
+    <div id="character"></div>
+    <div id="dialogue">“Mày phải giải đố nếu không mày sẽ chết!”</div>
+    <div id="health-bar-container">
+        <div id="health-bar"></div>
+    </div>
+    <button id="start-btn" class="answer-btn" onclick="startGame()">OK</button>
+
+    <div id="question-box">
+        <div id="question"></div>
+        <div id="answers"></div>
+        <div id="timer"></div>
+    </div>
+</div>
+
+<script>
+const questions = [
+    { q: "Trái đất quay quanh gì?", a: ["Mặt trăng", "Mặt trời", "Sao Hỏa", "Sao Kim"], correct: 1 },
+    { q: "Con gì biết bay mà không có cánh?", a: ["Gió", "Cá", "Ngựa", "Rắn"], correct: 0 },
+    { q: "1+1 bằng mấy?", a: ["1", "2", "3", "4"], correct: 1 },
+    { q: "Thủ đô của Việt Nam là?", a: ["Hà Nội", "Huế", "Sài Gòn", "Đà Nẵng"], correct: 0 },
+    // Thêm câu hỏi tùy thích...
+];
+
+let current = 0;
+let health = 9;
+let timer = 30;
+let interval;
+let score = 0;
+
+function startGame() {
+    document.getElementById("dialogue").innerText = "Bắt đầu giải đố đi... nhanh lên!";
+    document.getElementById("start-btn").style.display = "none";
+    document.getElementById("question-box").style.display = "block";
+    showQuestion();
+}
+
+function showQuestion() {
+    if (current >= 30 || current >= questions.length) {
+        endGame(true);
+        return;
+    }
+
+    const q = questions[current];
+    document.getElementById("question").innerText = "❓ " + q.q;
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    q.a.forEach((ans, i) => {
+        const btn = document.createElement("button");
+        btn.classList.add("answer-btn");
+        btn.innerText = ans;
+        btn.onclick = () => checkAnswer(i);
+        answersDiv.appendChild(btn);
+    });
+
+    timer = Math.max(30 - Math.floor(current / 5) * 15, 15);
+    document.getElementById("timer").innerText = "⏰ Thời gian: " + timer + "s";
+
+    clearInterval(interval);
+    interval = setInterval(() => {
+        timer--;
+        document.getElementById("timer").innerText = "⏰ Thời gian: " + timer + "s";
+        if (timer <= 0) {
+            checkAnswer(-1);
+        }
+    }, 1000);
+}
+
+function checkAnswer(index) {
+    const q = questions[current];
+    clearInterval(interval);
+
+    if (index === q.correct) {
+        health++;
+        score++;
+        document.getElementById("dialogue").innerText = "✅ Đúng rồi! (+1 máu)";
+    } else {
+        health -= 3;
+        document.getElementById("dialogue").innerText = "❌ Sai rồi! (-3 máu)";
+    }
+
+    updateHealth();
+
+    if (health <= 0) {
+        endGame(false);
+        return;
+    }
+
+    current++;
+    setTimeout(showQuestion, 1000);
+}
+
+function updateHealth() {
+    const bar = document.getElementById("health-bar");
+    const percent = Math.max(0, (health / 9) * 100);
+    bar.style.width = percent + "%";
+    if (percent < 30) bar.style.background = "red";
+    else if (percent < 60) bar.style.background = "orange";
+    else bar.style.background = "linear-gradient(90deg, #00ff00, #ffcc00)";
+}
+
+function endGame(win) {
+    clearInterval(interval);
+    document.getElementById("question-box").style.display = "none";
+    if (win) {
+        document.getElementById("dialogue").innerText = "🎉 Mày đã sống sót! Tổng điểm: " + score;
+    } else {
+        document.getElementById("dialogue").innerText = "☠ Mày chết rồi... Game Over!";
+        document.getElementById("health-bar").style.width = "0%";
+    }
+}
+</script>
+</body>
+</html>

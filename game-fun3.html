@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pacman Pixel — Combat Edition</title>
+<style>
+  :root{
+    --bg:#000;
+    --wall:#08306b;
+    --wall-dark:#041a37;
+    --dot:#ffd700;
+    --pac:#ffd700;
+    --hp-bg:#222;
+    --hp-fill:#4ee085;
+    --ui:#a8e0ff;
+    --font: "Press Start 2P", monospace;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);color:#fff;font-family:var(--font);}
+  .container{max-width:960px;margin:18px auto;padding:8px;display:flex;flex-direction:column;gap:12px;align-items:center}
+  header{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  h1{color:var(--ui);font-size:14px;margin:0}
+  .topbar{display:flex;gap:8px;align-items:center}
+  /* HP bar */
+  .hpwrap{display:flex;gap:8px;align-items:center}
+  .hpbox{width:180px;height:16px;background:var(--hp-bg);border-radius:4px;overflow:hidden;border:2px solid #000}
+  .hpfill{height:100%;width:100%;background:linear-gradient(90deg,var(--hp-fill),#9be6c2);transition:width 150ms linear}
+  .stat{font-size:11px;color:#cfe8d8}
+  /* back button */
+  .back-btn{position:fixed;top:12px;right:12px;background:var(--ui);color:#000;padding:8px 10px;text-decoration:none;border-radius:6px;border:2px solid #000;z-index:9999;font-size:11px}
+  .back-btn:hover{transform:scale(1.02)}
+  /* grid */
+  .grid-wrap{background:#001; padding:8px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+  .grid{display:grid;grid-template-columns:repeat(15,36px);grid-template-rows:repeat(15,36px);gap:2px}
+  .cell{width:36px;height:36px;position:relative;box-sizing:border-box}
+  .wall{background:linear-gradient(180deg,var(--wall),var(--wall-dark));box-shadow:inset 0 -4px 6px rgba(0,0,0,0.6)}
+  .dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;background:var(--dot);border-radius:50%;box-shadow:0 0 6px rgba(255,215,0,0.6)}
+  /* Pacman pixel */
+  .pac{position:absolute;width:28px;height:28px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--pac);display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px rgba(255,215,0,0.6)}
+  /* Ghosts pixel */
+  .ghost{position:absolute;width:28px;height:28px;border-radius:6px 6px 0 0;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 6px rgba(0,0,0,0.6);font-size:11px}
+  .ghost:after{content:'';position:absolute;bottom:0;left:2px;right:2px;height:8px;background:inherit;border-radius:0 0 6px 6px}
+  .ghost.red{background:#ff4d4d}
+  .ghost.orange{background:#ffb84d}
+  .ghost.blue{background:#4dd2ff}
+  .ghost.green{background:#7fff7f}
+  .ghost.purple{background:#c18bff}
+  /* overlay dialog */
+  #dialog{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9998}
+  .dialog-box{background:#051428;padding:18px;border-radius:8px;border:2px solid #062a47;max-width:600px;color:#9fe6ff;text-align:center}
+  .dialog-btn{margin-top:12px;padding:8px 12px;background:var(--ui);color:#000;border:none;border-radius:6px;cursor:pointer}
+  /* center messages */
+  .center-msg{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:9999;background:rgba(0,0,0,0.85);padding:16px;border-radius:8px;border:2px solid #fff;display:none}
+  .small{font-size:11px;color:#cfe8d8}
+  /* pixel shrink/grow smooth */
+  .pac,.ghost{transition:transform 180ms linear,opacity 200ms linear}
+  /* GAME OVER */
+  .gameover{font-size:20px;color:#ff6b6b;letter-spacing:1px}
+</style>
+</head>
+<body>
+  <a class="back-btn" href="game.html">Quay về trang game</a>
+
+  <div class="container">
+    <header>
+      <h1>Pacman Pixel — Combat Edition</h1>
+      <div class="topbar">
+        <div class="hpwrap">
+          <div class="stat">HP</div>
+          <div class="hpbox"><div id="hpFill" class="hpfill"></div></div>
+        </div>
+        <div style="width:12px"></div>
+        <div class="stat">Dots: <span id="dotsCnt">0</span></div>
+        <div style="width:12px"></div>
+        <div class="stat">Score: <span id="score">0</span></div>
+      </div>
+    </header>
+
+    <div class="grid-wrap">
+      <div id="grid" class="grid"></div>
+    </div>
+
+    <div class="small">Controls: Arrow keys to move (< ^  >). Eat dots to grow. Eat ghosts when you meet their threshold. If hit while too small, you lose HP.</div>
+  </div>
+
+  <!-- dialog intro -->
+  <div id="dialog">
+    <div class="dialog-box">
+      <div style="font-size:13px;color:#fff">He lô — Tôi là PacLinh! Ăn chấm để lớn lên. Nếu lớn đủ, tôi có thể ăn ma.</div>
+      <div class="small" style="margin-top:8px">Ngưỡng ma: đỏ(20), cam(50), xanh dương(100), xanh lá(170), tím(2500). Ăn ma để nhận giá trị tương ứng.</div>
+      <button id="startBtn" class="dialog-btn">Bắt đầu!</button>
+    </div>
+  </div>
+
+  <div id="centerMsg" class="center-msg"></div>
+  
+
+<script>
+/* ---------- CONFIG ---------- */
+const GRID_SIZE = 15;            // 15x15 grid
+const CELL_PX = 36;             // cell pixel size (matches CSS)
+const WALL_PROB = 0.22;         // base probability of internal wall (tweak for maze)
+const INITIAL_DOTS = 100;       // initial dots placed
+const MAX_HP = 100;
+
+/* Ghost definitions: threshold (dots required), reward (value to add to dots/score) */
+const GHOSTS_DEF = [
+  { id: 'red',   color: 'red',    need: 20,  reward: 15 },
+  { id: 'orange',color: 'orange', need: 50,  reward: 25 },
+  { id: 'blue',  color: 'blue',   need: 100, reward: 30 },
+  { id: 'green', color: 'green',  need: 170, reward: 35 },
+  { id: 'purple',color: 'purple', need: 2500, reward: 40 },
+];
+
+/* ---------- STATE ---------- */
+let gridEl = document.getElementById('grid');
+let hpFillEl = document.getElementById('hpFill');
+let dotsCntEl = document.getElementById('dotsCnt');
+let scoreEl = document.getElementById('score');
+let dialog = document.getElementById('dialog');
+let centerMsg = document.getElementById('centerMsg');
+
+let cells = [];        // array of cell objects {r,c,wall,el,dot}
+let pac = null;        // pac object {r,c,dotCount,pxScale, hp, score}
+let ghosts = [];       // array of ghost objects
+
+let gameRunning = false;
+let moveLock = false;  // prevent too-rapid moves
+
+/* ---------- BUILD GRID (simple random-ish maze but ensuring reachable) ---------- */
+function buildGrid(){
+  gridEl.innerHTML = '';
+  cells = [];
+  // create cells
+  for(let r=0;r<GRID_SIZE;r++){
+    for(let c=0;c<GRID_SIZE;c++){
+      const div = document.createElement('div');
+      div.className = 'cell';
+      const cell = { r, c, el: div, wall:false, dot:false };
+      // edges are walls
+      if(r===0||c===0||r===GRID_SIZE-1||c===GRID_SIZE-1){
+        cell.wall = true;
+        div.classList.add('wall');
+      } else {
+        // create some symmetric-ish walls for retro feel
+        if(Math.random() < WALL_PROB && !(r===1 && c===1)){
+          cell.wall = true; div.classList.add('wall');
+        }
+      }
+      gridEl.appendChild(div);
+      cells.push(cell);
+    }
+  }
+  // carve a guaranteed path from top-left to center (simple)
+  carvePath(1,1, Math.floor(GRID_SIZE/2), Math.floor(GRID_SIZE/2));
+  // place dots on non-wall cells
+  placeDots(INITIAL_DOTS);
+}
+
+/* carve path simple BFS carve to ensure connectivity */
+function carvePath(sr,sc, tr,tc){
+  // simple straight corridor carve
+  let r=sr,c=sc;
+  while(r!==tr){
+    setCellWall(r,c,false);
+    r += (tr>r)?1:-1;
+  }
+  while(c!==tc){
+    setCellWall(r,c,false);
+    c += (tc>c)?1:-1;
+  }
+}
+
+/* set cell wall flag and class */
+function setCellWall(r,c,wall){
+  const idx = r*GRID_SIZE + c;
+  const cell = cells[idx];
+  cell.wall = wall;
+  if(wall) cell.el.classList.add('wall'); else cell.el.classList.remove('wall');
+}
+
+/* place dots on available cells up to count */
+function placeDots(count){
+  // clear existing dot elements
+  cells.forEach(cell => {
+    const existing = cell.el.querySelector('.dot');
+    if(existing) existing.remove();
+    cell.dot = false;
+  });
+  const free = cells.filter(ch=>!ch.wall);
+  // exclude pac start cell (1,1) and ghost spawn zones (center-ish)
+  const filtered = free.filter(ch=>!(ch.r===1 && ch.c===1));
+  // shuffle
+  for(let i=filtered.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [filtered[i],filtered[j]]=[filtered[j],filtered[i]];
+  }
+  const toPlace = Math.min(count, filtered.length);
+  for(let i=0;i<toPlace;i++){
+    const ch = filtered[i];
+    ch.dot = true;
+    const d = document.createElement('div'); d.className='dot';
+    ch.el.appendChild(d);
+  }
+}
+
+/* ---------- INIT PACMAN & GHOSTS ---------- */
+function initEntities(){
+  // pac start at (1,1)
+  pac = { r:1, c:1, dotCount:0, hp:MAX_HP, score:0, scale:1 };
+  renderPac();
+  updateHud();
+
+  // create 5 ghosts at various spawn positions (away from pac)
+  ghosts = [];
+  const spawnPos = [
+    {r: Math.floor(GRID_SIZE/2)-1, c: Math.floor(GRID_SIZE/2)-1},
+    {r: Math.floor(GRID_SIZE/2)-1, c: Math.floor(GRID_SIZE/2)+1},
+    {r: Math.floor(GRID_SIZE/2)+1, c: Math.floor(GRID_SIZE/2)-1},
+    {r: Math.floor(GRID_SIZE/2)+1, c: Math.floor(GRID_SIZE/2)+1},
+    {r: Math.floor(GRID_SIZE/2),   c: Math.floor(GRID_SIZE/2)}
+  ];
+  for(let i=0;i<GHOSTS_DEF.length;i++){
+    const def = GHOSTS_DEF[i];
+    const sp = spawnPos[i];
+    const gEl = document.createElement('div'); gEl.className = 'ghost ' + def.id;
+    gEl.dataset.id = def.id;
+    gEl.innerHTML = ''; // eyes could be added later
+    cells[sp.r*GRID_SIZE + sp.c].el.appendChild(gEl);
+    const ghost = {
+      id:def.id, need:def.need, reward:def.reward, r:sp.r, c:sp.c, el:gEl, alive:true, respawnTimer:0
+    };
+    ghosts.push(ghost);
+  }
+}
+
+/* ---------- RENDER PACMAN (DOM move) ---------- */
+function renderPac(){
+  // remove existing pac if any
+  document.querySelectorAll('.pac').forEach(e=>e.remove());
+  const idx = pac.r*GRID_SIZE + pac.c;
+  const el = cells[idx].el;
+  const pacEl = document.createElement('div');
+  pacEl.className = 'pac';
+  pacEl.style.transform = `translate(-50%,-50%) scale(${pac.scale})`;
+  pacEl.id = 'pacEl';
+  el.appendChild(pacEl);
+}
+
+/* ---------- HUD ---------- */
+function updateHud(){
+  hpFillEl.style.width = Math.max(0, Math.min(100, (pac.hp / MAX_HP) * 100)) + '%';
+  dotsCntEl.textContent = pac.dotCount;
+  scoreEl.textContent = pac.score;
+}
+
+/* ---------- MOVEMENT & COLLISIONS ---------- */
+function canMoveTo(r,c){
+  if(r<0||c<0||r>=GRID_SIZE||c>=GRID_SIZE) return false;
+  const cell = cells[r*GRID_SIZE + c];
+  return !cell.wall;
+}
+
+/* Pac move by direction */
+function pacMove(dr,dc){
+  if(!gameRunning || moveLock) return;
+  const nr = pac.r + dr, nc = pac.c + dc;
+  if(!canMoveTo(nr,nc)) return;
+  moveLock = true;
+  pac.r = nr; pac.c = nc;
+  // collect dot if any
+  const cell = cells[nr*GRID_SIZE + nc];
+  if(cell.dot){
+    cell.dot = false;
+    const dEl = cell.el.querySelector('.dot');
+    if(dEl) dEl.remove();
+    pac.dotCount += 1;
+    pac.score += 1;
+    // small heal and grow
+    pac.hp = Math.min(MAX_HP, pac.hp + 2);
+    pac.scale = 1 + Math.min(1.6, pac.dotCount * 0.006); // scale modestly
+  }
+  // check collision with ghosts in same cell
+  const ghost = ghosts.find(g => g.alive && g.r===pac.r && g.c===pac.c);
+  if(ghost) handlePacGhostCollision(ghost);
+  renderPac(); updateHud();
+  // unlock shortly to control movement rate
+  setTimeout(()=>moveLock=false, 120);
+}
+
+/* Pac vs Ghost collision logic */
+function handlePacGhostCollision(ghost){
+  if(!ghost.alive) return;
+  if(pac.dotCount >= ghost.need){
+    // pacman can eat ghost
+    ghost.alive = false;
+    ghost.el.style.opacity = '0';
+    ghost.el.remove(); // remove from DOM
+    pac.dotCount += ghost.reward; // according to user's request: pacman receives ghost value
+    pac.score += ghost.reward;
+    pac.scale = 1 + Math.min(2.2, pac.dotCount * 0.006);
+    showCenterMessage(`Ate ${ghost.id.toUpperCase()} ghost! +${ghost.reward} dots`, 900);
+    updateHud();
+    // respawn after delay
+    ghost.respawnTimer = 4000 + Math.floor(Math.random()*3000);
+    setTimeout(()=>respawnGhost(ghost), ghost.respawnTimer);
+  } else {
+    // pacman is too small — gets hurt and shrink
+    pac.hp -= 18;
+    pac.dotCount = Math.max(0, pac.dotCount - 6); // lose some dotCount
+    pac.scale = 1 + Math.max(0.6, pac.dotCount * 0.006);
+    showCenterMessage(`Ouch! Hit by ${ghost.id} — -18 HP`, 800);
+    updateHud();
+    if(pac.hp <= 0) handleGameOver();
+  }
+}
+
+/* respawn ghost near center */
+function respawnGhost(ghost){
+  // find center spawn
+  const sr = Math.floor(GRID_SIZE/2), sc = Math.floor(GRID_SIZE/2);
+  ghost.r = sr; ghost.c = sc;
+  ghost.alive = true;
+  // reattach DOM element
+  const cel = cells[sr*GRID_SIZE + sc].el;
+  cel.appendChild(ghost.el);
+  ghost.el.style.opacity = '1';
+}
+
+/* ---------- GHOSTS RANDOM MOVEMENT ---------- */
+function ghostTick(){
+  ghosts.forEach(g=>{
+    if(!g.alive) return;
+    // random direction occasionally
+    if(Math.random() < 0.22){
+      const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+      const d = dirs[Math.floor(Math.random()*dirs.length)];
+      const nr = g.r + d[0], nc = g.c + d[1];
+      if(canMoveTo(nr,nc)){
+        g.r = nr; g.c = nc;
+      } else {
+        // else try other directions
+        const shuffled = dirs.sort(()=>Math.random()-0.5);
+        for(const dd of shuffled){
+          if(canMoveTo(g.r+dd[0], g.c+dd[1])){
+            g.r += dd[0]; g.c += dd[1]; break;
+          }
+        }
+      }
+      // if moved into pac
+      if(g.r===pac.r && g.c===pac.c){
+        handlePacGhostCollision(g);
+      }
+      // update DOM position
+      // remove existing element, reappend to new cell
+      g.el.remove();
+      cells[g.r*GRID_SIZE + g.c].el.appendChild(g.el);
+    }
+  });
+}
+
+/* ---------- UTIL: show center msg ---------- */
+let centerTimer = null;
+function showCenterMessage(txt, ms=800){
+  centerMsg.style.display='block';
+  centerMsg.innerHTML = `<div class="gameover">${txt}</div>`;
+  if(centerTimer) clearTimeout(centerTimer);
+  centerTimer = setTimeout(()=>{ centerMsg.style.display='none'; }, ms);
+}
+
+/* ---------- GAME LOOP ---------- */
+let ghostInterval = null;
+function startGame(){
+  gameRunning = true;
+  dialog.style.display = 'none';
+  showCenterMessage('Go!', 500);
+  // ghost movement interval
+  ghostInterval = setInterval(ghostTick, 360);
+}
+function stopGame(){
+  gameRunning = false;
+  if(ghostInterval) clearInterval(ghostInterval);
+}
+
+/* ---------- GAME OVER ---------- */
+function handleGameOver(){
+  stopGame();
+  showCenterMessage('☠ GAME OVER ☠', 4000);
+}
+
+/* ---------- CHECK WIN CONDITION ---------- */
+function checkWin(){
+  // win if no dots left (except those contributed by ghost rewards) OR optionally high threshold
+  const remaining = cells.filter(ch=>ch.dot).length;
+  if(remaining===0){
+    // Pacman grows big and win message
+    pac.scale = 2.6;
+    renderPac(); updateHud();
+    showCenterMessage('🎉 YOU WIN - Pacman is HUGE 🎉', 4000);
+    stopGame();
+  }
+}
+
+/* ---------- INPUT HANDLERS ---------- */
+document.addEventListener('keydown', (e)=>{
+  if(!gameRunning) return;
+  switch(e.key){
+    case 'ArrowUp': e.preventDefault(); pacMove(-1,0); break;
+    case 'ArrowDown': e.preventDefault(); pacMove(1,0); break;
+    case 'ArrowLeft': e.preventDefault(); pacMove(0,-1); break;
+    case 'ArrowRight': e.preventDefault(); pacMove(0,1); break;
+  }
+});
+
+/* ---------- BUILD & START ---------- */
+function respawnAllGhosts(){
+  // ensure each ghost has DOM element attached at its r,c
+  ghosts.forEach(g=>{
+    if(g.el.parentElement !== cells[g.r*GRID_SIZE + g.c].el){
+      cells[g.r*GRID_SIZE + g.c].el.appendChild(g.el);
+    }
+  });
+}
+
+function initFull(){
+  buildGrid();
+  initEntities();
+  respawnAllGhosts();
+  // render ghost positions & pac
+  ghosts.forEach(g=>{
+    // in case of walls on spawn, move them to nearest free
+    if(cells[g.r*GRID_SIZE + g.c].wall){
+      for(let rr=Math.floor(GRID_SIZE/2)-1; rr<=Math.floor(GRID_SIZE/2)+1; rr++){
+        for(let cc=Math.floor(GRID_SIZE/2)-1; cc<=Math.floor(GRID_SIZE/2)+1; cc++){
+          if(!cells[rr*GRID_SIZE + cc].wall){ g.r=rr; g.c=cc; }
+        }
+      }
+    }
+    g.el.remove();
+    cells[g.r*GRID_SIZE + g.c].el.appendChild(g.el);
+  });
+  renderPac();
+  updateHud();
+
+  // small loop: check win condition periodically and update HUD
+  setInterval(()=>{ updateHud(); checkWin(); }, 500);
+}
+
+/* ---------- DIALOG START ---------- */
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  initFull();
+  startGame();
+});
+
+/* initialize UI (but don't start until pressing start) */
+initFull();
+dialog.style.display = 'flex';
+centerMsg.style.display = 'none';
+</script>
+</body>
+</html>
+

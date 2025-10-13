@@ -1,0 +1,431 @@
+v<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mini Mario — Platformer</title>
+  <style>
+    :root{
+      --bg:#0b0b0f; --panel:#071018; --accent:#ffdd57; --danger:#ff5c5c; --good:#4ee085;
+      font-family: Inter, system-ui, sans-serif;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#020206 0%, #071018 100%);color:#fff}
+    .wrap{max-width:1000px;margin:24px auto;padding:16px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    h1{font-size:18px;margin:0;color:var(--accent)}
+    .controls{display:flex;gap:8px;align-items:center}
+    button{background:var(--accent);border:none;padding:8px 10px;border-radius:6px;cursor:pointer;font-weight:600}
+    button.secondary{background:#2a2f36;color:#fff}
+    .hud{display:flex;gap:12px;align-items:center}
+    #gameCanvas{display:block;margin:16px auto;border:4px solid #111;background:#071018;image-rendering:pixelated}
+    .info{font-size:13px;color:#cfe8d8}
+    .healthbar{width:180px;height:18px;background:#111;border-radius:6px;overflow:hidden;box-shadow:inset 0 -4px 8px rgba(0,0,0,0.6)}
+    .healthbar > i{display:block;height:100%;background:linear-gradient(90deg,var(--good),#9be6c2);width:100%;transition:width 150ms linear}
+    .score{font-family:monospace}
+    .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:40}
+    .panel{background:var(--panel);padding:18px;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.7);max-width:520px}
+    .small-cta{font-size:13px;padding:6px 8px}
+    /* On-screen touch controls (mobile) */
+    .touch-controls{position:fixed;bottom:20px;left:20px;display:flex;gap:8px;z-index:30}
+    .touch-controls button{width:54px;height:54px;border-radius:10px;font-size:18px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Mini Mario — Platformer</h1>
+      <div class="controls">
+        <div class="hud">
+          <div class="healthbar" title="Health"><i id="hpFill"></i></div>
+          <div class="info score">Score: <span id="score">0</span></div>
+        </div>
+        <button id="startBtn">Start</button>
+        <button id="resetBtn" class="secondary">Reset</button>
+      </div>
+    </header>
+
+    <canvas id="gameCanvas" width="900" height="420"></canvas>
+
+    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;max-width:900px;margin:6px auto">
+      <div class="info">Controls: ← → to move, Space to jump, X to attack</div>
+      <div class="info">Enemies hurt on contact, you can attack close-range</div>
+    </div>
+
+    <div style="margin-top:12px;color:#9fb2a7;font-size:13px;max-width:900px">
+      This is a lightweight single-file demo: platforms, moving enemies, health, and simple melee attack. Works on desktop and mobile (use touch buttons).
+    </div>
+  </div>
+
+  <div class="touch-controls">
+    <button id="leftTouch">◀</button>
+    <button id="jumpTouch">▲</button>
+    <button id="rightTouch">▶</button>
+    <button id="attackTouch">✦</button>
+  </div>
+
+  <div id="overlay" class="overlay" style="display:none">
+    <div class="panel">
+      <h2 id="overlayTitle">Paused</h2>
+      <p id="overlayText">Press Start to play.</p>
+      <div style="text-align:right;margin-top:12px">
+        <button id="overlayClose" class="small-cta">Close</button>
+      </div>
+    </div>
+  </div>
+<a href="game.html" id="back-to-game"
+   style="
+      position: fixed;
+      top: 15px; right: 15px;
+      background: #00ff00;
+      color: #000;
+      padding: 10px 15px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      text-decoration: none;
+      border: 2px solid #000;
+      box-shadow: 0 0 10px #00ff00;
+      z-index: 10000;
+      transition: all 0.3s;
+   "
+   onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 0 15px #00ff00';"
+   onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 10px #00ff00';"
+>
+  Quay về trang game
+</a>
+  <script>
+  // --- Game constants & setup ---
+  window.addEventListener('load', ()=>{
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const hpFill = document.getElementById('hpFill');
+    const scoreEl = document.getElementById('score');
+    const overlay = document.getElementById('overlay');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayText = document.getElementById('overlayText');
+    const overlayClose = document.getElementById('overlayClose');
+
+    const leftTouch = document.getElementById('leftTouch');
+    const rightTouch = document.getElementById('rightTouch');
+    const jumpTouch = document.getElementById('jumpTouch');
+    const attackTouch = document.getElementById('attackTouch');
+
+    const W = canvas.width, H = canvas.height;
+
+    // world
+    const gravity = 0.9;
+
+    // player
+    const player = {
+      x:80,y:250,w:28,h:36, vx:0, vy:0, speed:2.6, onGround:false,
+      facing:1, hp:100, maxHp:100, attackCooldown:0
+    };
+
+    let platforms = [];
+    let enemies = [];
+    let bullets = []; // reserved if needed
+    let gameRunning = false;
+    let score = 0;
+    // enemy spawn controller (spams enemies over time)
+    let enemySpawnTimer = 0; // frames until next spawn
+    const enemySpawnIntervalBase = 120; // base frames between spawns (~2 seconds at 60fps)
+    const enemySpawnIntervalMin = 36; // minimum interval when score high
+    
+
+    // keyboard state
+    const keys = {left:false,right:false,jump:false,attack:false};
+
+    // --- helper functions ---
+    function spawnLevel(){
+      platforms = [];
+      // ground
+      platforms.push({x:0,y:340,w:W,h:80});
+      // floating platforms
+      platforms.push({x:220,y:280,w:120,h:16});
+      platforms.push({x:380,y:220,w:140,h:16});
+      platforms.push({x:580,y:300,w:120,h:16});
+      platforms.push({x:730,y:240,w:120,h:16});
+
+      enemies = [];
+      // initial enemies (kept small)
+      enemies.push({x:260,y:240,w:28,h:28,vx:1.2,dir:1,patrol:[220,320],hp:40,damage:12,alive:true,attackTimer:0});
+
+      // reset enemy spawner
+      enemySpawnTimer = enemySpawnIntervalBase;
+
+      player.x = 80; player.y = 250; player.vx = 0; player.vy = 0; player.hp = player.maxHp; player.onGround=false; player.attackCooldown=0;
+      score = 0;
+      updateHud();
+    }
+
+    function updateHud(){
+      const pct = Math.max(0, Math.min(1, player.hp / player.maxHp));
+      hpFill.style.width = (pct*100) + '%';
+      scoreEl.textContent = score;
+    }
+
+    // simple AABB collision
+    function aabb(a,b){
+      return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+    }
+
+    // --- input ---
+    window.addEventListener('keydown', e=>{
+      if(e.code==='ArrowLeft' || e.key==='a') keys.left = true;
+      if(e.code==='ArrowRight' || e.key==='d') keys.right = true;
+      if(e.code==='Space' || e.code==='KeyW' || e.key==='w') keyJump();
+      if(e.code==='KeyX') keys.attack = true;
+    });
+    window.addEventListener('keyup', e=>{
+      if(e.code==='ArrowLeft' || e.key==='a') keys.left = false;
+      if(e.code==='ArrowRight' || e.key==='d') keys.right = false;
+      if(e.code==='KeyX') keys.attack = false;
+    });
+
+    // touch controls
+    leftTouch.addEventListener('pointerdown', ()=>keys.left=true); leftTouch.addEventListener('pointerup', ()=>keys.left=false);
+    rightTouch.addEventListener('pointerdown', ()=>keys.right=true); rightTouch.addEventListener('pointerup', ()=>keys.right=false);
+    jumpTouch.addEventListener('pointerdown', ()=>keyJump());
+    attackTouch.addEventListener('pointerdown', ()=>keys.attack=true); attackTouch.addEventListener('pointerup', ()=>keys.attack=false);
+
+    function keyJump(){
+      if(player.onGround){ player.vy = -14; player.onGround=false; }
+    }
+
+    // --- game mechanics ---
+    function spawnEnemy(){
+      // choose a random platform (not ground) to spawn on
+      const possible = platforms.filter(p=>p.h<50 && p.y < 340);
+      const plat = possible.length ? possible[Math.floor(Math.random()*possible.length)] : platforms[0];
+      const px = plat ? (plat.x + 8 + Math.random()*(Math.max(0, plat.w-40))) : (W - 60);
+      const py = plat ? (plat.y - 28) : (340 - 28);
+      const size = 26 + Math.floor(Math.random()*12);
+      const speed = 0.9 + Math.random()*1.4;
+      const hp = 30 + Math.floor(Math.random()*50);
+      const dmg = 10 + Math.floor(Math.random()*12);
+      const patrolRange = plat ? [Math.max(0, plat.x), Math.min(W, plat.x + plat.w + 80)] : [px-60, px+60];
+      enemies.push({x:px,y:py,w:size,h:size,vx:speed,dir: Math.random()<0.5?1:-1,patrol:patrolRange,hp:hp,damage:dmg,alive:true,attackTimer:0});
+    }
+
+    function update(dt){
+      // player horizontal
+      let ax = 0;
+      if(keys.left) ax -= 1; if(keys.right) ax += 1;
+      player.vx = ax * player.speed * (1 + score*0.002);
+      if(ax!==0) player.facing = ax>0?1:-1;
+
+      // gravity
+      player.vy += gravity*0.6;
+      player.x += player.vx * dt;
+      player.y += player.vy * dt;
+
+      // platform collisions
+      player.onGround = false;
+      for(const p of platforms){
+        // only check vertical resolve
+        const pl = {x:p.x, y:p.y, w:p.w, h:p.h};
+        if(aabb(player, pl)){
+          // top collision
+          if(player.vy > 0 && player.y + player.h - player.vy*dt <= p.y){
+            player.y = p.y - player.h; player.vy = 0; player.onGround = true;
+          } else if(player.vy < 0 && player.y >= p.y + p.h - 2){
+            // head bump
+            player.vy = 0; player.y = p.y + p.h; 
+          } else {
+            // horizontal pushback
+            if(player.x < p.x) player.x = p.x - player.w; else player.x = p.x + p.w;
+            player.vx = 0;
+          }
+        }
+      }
+
+      // boundaries
+      if(player.x < 0) player.x = 0; if(player.x + player.w > W) player.x = W - player.w;
+      if(player.y > H + 200){ // fell off
+        player.hp = 0; handlePlayerDeath();
+      }
+
+      // attack handling (melee close-range)
+      if(player.attackCooldown>0) player.attackCooldown -= dt*60;
+      if(keys.attack && player.attackCooldown <= 0){
+        player.attackCooldown = 24; // frames cooldown
+        // damage nearby enemies
+        const range = {x: player.facing>0?player.x+player.w:player.x-28, y:player.y+8, w:28, h:20};
+        for(const e of enemies){
+          if(e.alive && aabb(range,e)){
+            e.hp -= 28;
+            if(e.hp <= 0){ e.alive = false; score += 50; }
+          }
+        }
+      }
+
+      // enemy spawner (spams new enemies over time)
+      // spawn rate speeds up slightly with score
+      enemySpawnTimer -= dt*60;
+      const interval = Math.max(enemySpawnIntervalMin, enemySpawnIntervalBase - Math.floor(score*0.1));
+      if(enemySpawnTimer <= 0){
+        spawnEnemy();
+        enemySpawnTimer = interval + Math.random()*60; // add small jitter
+      }
+
+      // enemies update
+      for(const e of enemies){
+        if(!e.alive) continue;
+        // patrol
+        e.x += e.vx * e.dir * dt;
+        if(e.x < e.patrol[0]) e.dir = 1; if(e.x + e.w > e.patrol[1]) e.dir = -1;
+
+        // simple gravity for enemy
+        e.vy = e.vy || 0; e.vy += gravity*0.6; e.y += e.vy * dt;
+        for(const p of platforms){ if(aabb(e,p) && e.vy > 0 && e.y + e.h - e.vy*dt <= p.y){ e.y = p.y - e.h; e.vy = 0; } }
+
+        // contact with player
+        if(aabb(player,e) && e.alive){
+          // hurt player (with a cooldown)
+          if((e.attackTimer || 0) <= 0){
+            player.hp -= e.damage; e.attackTimer = 36; // enemy wait
+            if(player.hp <= 0){ player.hp = 0; handlePlayerDeath(); }
+          }
+        }
+        e.attackTimer = Math.max(0, (e.attackTimer||0)-dt*60);
+      }
+
+      // remove dead enemies slowly
+      // increase score slowly while alive
+      score += Math.floor(dt*0.5);
+      updateHud();
+    }
+
+    function handlePlayerDeath(){
+      gameRunning = false; overlayTitle.textContent = 'Game Over'; overlayText.textContent = 'You died. Score: ' + score; overlay.style.display = 'flex';
+    }
+
+    // draw
+    function draw(){
+      // clear
+      ctx.clearRect(0,0,W,H);
+      // background grid
+      ctx.fillStyle = '#071018'; ctx.fillRect(0,0,W,H);
+
+      // parallax sky glow
+      const grad = ctx.createLinearGradient(0,0,0,H);
+      grad.addColorStop(0,'rgba(255,221,87,0.04)'); grad.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+
+      // draw platforms
+      for(const p of platforms){
+        ctx.fillStyle = '#1f2933'; ctx.fillRect(p.x,p.y,p.w,p.h);
+        // top highlight
+        ctx.fillStyle = '#2a404b'; ctx.fillRect(p.x,p.y,p.w,4);
+      }
+
+      // draw enemies
+      for(const e of enemies){
+        if(!e.alive) continue;
+        ctx.fillStyle = '#8b3a3a'; ctx.fillRect(e.x,e.y,e.w,e.h);
+        // eyes
+        ctx.fillStyle = '#111'; ctx.fillRect(e.x+6,e.y+6,6,6);
+      }
+
+      // draw player (pixel style)
+      // body
+      ctx.fillStyle = '#ff4d4d'; ctx.fillRect(player.x,player.y,player.w,player.h);
+      // face
+      ctx.fillStyle = '#fff'; ctx.fillRect(player.x+6,player.y+6,6,6);
+      // legs
+      ctx.fillStyle = '#222'; ctx.fillRect(player.x+4,player.y+player.h-6,8,6);
+      ctx.fillRect(player.x+player.w-12,player.y+player.h-6,8,6);
+
+      // draw player attack range when active (visual)
+      if(player.attackCooldown > 16){
+        ctx.globalAlpha = 0.85;
+        ctx.fillStyle = 'rgba(255,220,80,0.35)';
+        const rx = player.facing>0?player.x+player.w:player.x-28; ctx.fillRect(rx,player.y+8,28,20);
+        ctx.globalAlpha = 1;
+      }
+
+      // HUD overlays
+      // health text
+      ctx.fillStyle = '#cfe8d8'; ctx.font = '12px monospace'; ctx.fillText('HP: ' + player.hp + '/' + player.maxHp, 12, 18);
+      ctx.fillText('Score: ' + score, W - 120, 18);
+    }
+
+    // main loop
+    let last = performance.now();
+    function loop(now){
+      const dt = Math.min(1, (now - last)/16.6667); // scale to ~60fps units
+      last = now;
+      if(gameRunning) update(dt);
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    // start/stop
+    startBtn.addEventListener('click', ()=>{
+      if(!gameRunning){ spawnLevel(); gameRunning = true; overlay.style.display='none'; last = performance.now(); }
+    });
+    resetBtn.addEventListener('click', ()=>{ spawnLevel(); overlay.style.display='none'; draw(); });
+    overlayClose.addEventListener('click', ()=>{ overlay.style.display='none'; if(!gameRunning) draw(); });
+
+    // init
+    spawnLevel(); draw(); requestAnimationFrame(loop);
+
+    // expose for debugging in console
+    window._GAME = {player, enemies, platforms, spawnLevel};
+  });
+  </script>
+</body>
+<!-- Cutscene / Intro Dialogue -->
+<div id="dialogue-box" style="
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  display: flex; justify-content: center; align-items: center;
+  flex-direction: column; text-align: center; color: #00ff00;
+  font-family: 'Press Start 2P', cursive; z-index: 9999; padding: 20px;">
+  <div id="dialogue-text" style="max-width: 600px; font-size: 12px; line-height: 1.8em; text-shadow: 0 0 10px #00ff00;">
+    ...
+  </div>
+  <button id="next-btn" style="
+    margin-top: 20px; background: #00ff00; border: none; color: #000;
+    font-family: 'Press Start 2P', cursive; padding: 10px 20px;
+    cursor: pointer; font-size: 10px; box-shadow: 0 0 10px #00ff00;">Tiếp tục</button>
+</div>
+
+<script>
+const dialogueLines = [
+  "He lô, tôi là Linh!",
+  "hôm nay tôi bị lạc trong thế giới lạ đầy quái vật...",
+  "help me kill those bitch!",
+  "Chuẩn bị nào — đi thôi!"
+];
+let currentLine = 0;
+const dialogueBox = document.getElementById("dialogue-box");
+const dialogueText = document.getElementById("dialogue-text");
+const nextBtn = document.getElementById("next-btn");
+
+function showLine() {
+  let line = dialogueLines[currentLine];
+  dialogueText.textContent = "";
+  let i = 0;
+  const typing = setInterval(() => {
+    dialogueText.textContent += line[i];
+    i++;
+    if (i >= line.length) clearInterval(typing);
+  }, 50);
+}
+
+nextBtn.addEventListener("click", () => {
+  currentLine++;
+  if (currentLine < dialogueLines.length) {
+    showLine();
+  } else {
+    dialogueBox.style.display = "none";
+    startGame(); // bắt đầu game khi hội thoại xong
+  }
+});
+
+showLine();
+
+</script>
+
+</html>
