@@ -117,12 +117,13 @@
       <button class="option-btn" onclick="selectTopic('nghe-thuat')">🎨 Nghệ thuật</button>
       <button class="option-btn" onclick="selectTopic('am-nhac')">🎵 Âm nhạc</button>
       <button class="option-btn" onclick="selectTopic('tro-chuyen')">💬 Trò chuyện</button>
+      <button class="option-btn" onclick="selectTopic('to-mo')"> HỎI Thêm về anh linh</button>
       <button class="option-btn" onclick="window.location.href='index.html'">🏠 Trang chủ</button>
     </div>
   </div>
 
   <!-- Hiệu ứng âm thanh -->
-  <audio id="popSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_698831e3c9.mp3?filename=pop-94319.mp3"></audio>
+  <audio id="popSound" src="Tuturu.mp3"></audio>
 
   <script>
     const chat = document.getElementById("chat");
@@ -153,12 +154,21 @@
         if (topic === "tro-chuyen") {
           addMessage("Bạn muốn trò chuyện về điều gì nè?");
           setChatOptions([
-            { text: "Thời tiết ☀️", action: () => addMessage("Trời đẹp là tâm trạng cũng tươi 🌤") },
+            {text:"Hiện tại trang web xem phim heo nào anh Linh tâm đắc nhất?", action: () => addMessage("Ê bậy nha!....xnxx.com em nhá hehe")},
+            {text:"1+1 =2 đúng không ?", action: () => addMessage("Đúng rồi em yêu ạ")},
+            {text:"Anh Linh học giỏi hay ngu ạ", action: () => addMessage("Anh ngu vãi chưởng ra em ạ")},
             { text: "Kể chuyện 📖", action: () => addMessage("Ngày xửa ngày xưa, có coder tên Linh tạo nên vũ trụ Osimi 💫Ling đẹp trai vô địch ,từng tay không đấm chêt 10 thằng cầm dao . aura trên 150, con được giới giang hồ biết đến với biệt danh Linh chim sẻ.Nói chung đây là câu chuyên về 1 anh Linh cũng thuộc dạng anh lớn xã hội") },
-            {text:"Anh Linh ngầu vãi chưởng ra", action: () => addMessage("Ok cám ơn cục cưng của anh nhó")},
-            { text: "Khoa học 🧬", action: () => addMessage("Khoa học là phép màu được chứng minh bằng công thức 🚀") },
-            { text: "Ku em nghĩ gì về game?", action: () => addMessage("Game là cuộc sống ảo, nhưng cảm xúc thật 🎲") },
-            { text: "Phim thì sao?", action: () => addMessage("Phim là cửa sổ tâm hồn, mở ra thế giới mới 🌍") },
+            {text:"Anh Linh ngầu vãi chưởng ra", action: () => addMessage("Ok cám ơn cục cưng của anh nh")},
+            { text: "⬅️ Quay lại", action: resetMainMenu }
+          ]);
+          return;
+        }
+        if (topic === "to-mo") {
+          addMessage("Tôi là Linh-Osimi, trợ lý ảo của bạn! Tôi có thể giúp bạn khám phá nhiều chủ đề thú vị. Bạn muốn biết gì về tôi?");
+          setChatOptions([
+            { text: "Anh Linh có mấy múi bụng vậy!", action: () => addMessage("Anh Linh có 12 múi á em,10 múi trên với 2 múi dưới quần.") },
+            { text: "Anh Linh có người iu chưa", action: () => addMessage("Anh Linh chưa vì chỉ yêu mình eim thôi...") },
+            { text: "Ngoài ăn cứt ra anh Linh có ăn gì nữa không ạ?", action: () => addMessage(" ĂN lỒN!") },
             { text: "⬅️ Quay lại", action: resetMainMenu }
           ]);
           return;
@@ -193,23 +203,38 @@
     function getSubTopics(topic) {
       const map = {
         "khoa-hoc": [
-          { name: "🔹 Bài 0 - Khởi đầu", link: "khoa-hoc-bai0.html" },
-          { name: "🔹 Bài 1 - Cơ bản", link: "khoa-hoc-bai1.html" },
-          { name: "🔹 Nâng cao", link: "khoa-hoc-nang-cao-bai0.html" }
+          { name: "🔹 Khởi đầu", link: "khoa-hoc-bai0.html" },
+          { name: "🔹 Lượng tử là gì?", link: "khoa-hoc-bai1.html" },
+          { name: "🔹 Hố đen là gì?", link: "khoa-hoc-nang-cao-bai0.html" },
+          { name: "🔹 rùng mình với khoa học", link: "khoa-hoc-nang-cao-bai0.html" },
+            { name: "🔹 Khoa học Thú vị", link: "khoa-hoc-nang-cao-bai1.html" },
+            { name: "🔹 Khoa học bí ẩn", link: "khoa-hoc-nang-cao-bai2.html" },
+          
         ],
         "game": [
-          { name: "🎮 Trò chơi vui", link: "game-fun.html" },
-          { name: "🧩 Game nâng cao", link: "game-nang-cao-bai0.html" },
-          { name: "💀 Game thử thách", link: "game-bai0.html" }
+          { name: "🎮 Trò chơi giải đố", link: "game-fun.html" },
+            { name: "👾 Trò chơi nâng cao", link: "game-fun2.html" },
+            { name: "🕹️ Trò chơi thử thách", link: "game-fun3.html" },
+            { name: "Trang về GAME", link: "game.html"  }
         ],
         "phim": [
           { name: "🎬 Phim cơ bản", link: "phim-bai0.html" },
-          { name: "🍿 Phim nâng cao", link: "phim-nang-cao-bai0.html" }
+            { name: "🍿 Phim hay", link: "phim-bai1.html" },
+            { name: "🎥 Phim đặc sắc", link: "phim-bai2.html" },
+          { name: " Viktor", link: "phim-nang-cao-bai0.html" },
+          { name: " Anh hề", link: "phim-nang-cao-bai1.html" },
+          { name: " Thầy Bạch", link: "phim-nang-cao-bai2.html" },
+          
         ],
         "truyen-manga": [
-          { name: "📖 Manga bài 0", link: "truyen-manga-bai0.html" },
-          { name: "📚 Manga nâng cao", link: "truyen-manga-nang-cao-bai0.html" }
+          { name: "📖 Berserk", link: "truyen-manga-bai0.html" },
+            { name: "📚 Attack on titan", link: "truyen-manga-bai1.html" },
+            { name: "📕 JJ kaisen", link: "truyen-manga-bai2.html" },
+            { name: "📕 Chainsaw man", link: "truyen-manga-nang-cao-bai0.html" },
+            { name: "📗 Manga nâng cao bài 1", link: "truyen-manga-nang-cao-bai1.html" },
+            { name: "📘 Manga nâng cao bài 2", link: "truyen-manga-nang-cao-bai2.html" },
         ],
+       
         "nghe-thuat": [
           { name: "🎨 Nghệ thuật tổng hợp", link: "nghe-thuat.html" }
         ],
