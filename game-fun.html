@@ -3,224 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trò chơi giải đố sinh tồn</title>
+<title>Riddle Quest — Pixel Survival</title>
 <style>
-    body {
-        font-family: 'Press Start 2P', sans-serif;
-        background-color: #111;
-        color: #fff;
-        text-align: center;
-        margin: 0;
-        overflow: hidden;
-    }
+  :root {
+    --bg: #0b0b1a;
+    --ui: #44d9e6;
+    --hp-bg: #222;
+    --hp-fill: #4ee085;
+    --font: "Press Start 2P", monospace;
+  }
+  body {
+    background: var(--bg);
+    color: white;
+    font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+    justify-content: center;
+  }
+  .game-box {
+    width: 600px;
+    background: #111831;
+    border: 3px solid #007;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0,255,255,0.3);
+  }
+  h1 { color: var(--ui); font-size: 14px; margin-bottom: 10px; }
 
-    h1 {
-        color: #ffcc00;
-        margin-top: 30px;
-        font-size: 18px;
-    }
+  /* nhân vật */
+  .character {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    background-image: url('character.png'); /* đổi ảnh tại đây */
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,255,255,0.5);
+  }
 
-    #game-container {
-        margin-top: 20px;
-    }
+  /* HP BAR */
+  .hp-bar {
+    background: var(--hp-bg);
+    border-radius: 6px;
+    height: 14px;
+    width: 200px;
+    margin: 10px auto;
+    border: 2px solid #000;
+  }
+  .hp-fill {
+    background: linear-gradient(90deg, var(--hp-fill), #9be6c2);
+    height: 100%;
+    width: 100%;
+    transition: width 0.3s;
+  }
 
-    #character {
-        width: 150px;
-        height: 150px;
-        margin: 20px auto;
-        background: url('character.png') center/cover no-repeat;
-        border: 2px solid #555;
-        border-radius: 10px;
-    }
+  .question-box {
+    margin-top: 20px;
+    background: #0c1630;
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid #222;
+    font-size: 12px;
+  }
 
-    #dialogue {
-        font-size: 14px;
-        color: #ff4444;
-        margin-bottom: 15px;
-    }
+  .answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .answers button {
+    padding: 8px;
+    background: #1d2b4a;
+    border: 2px solid #007;
+    color: white;
+    border-radius: 5px;
+    font-family: var(--font);
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .answers button:hover {
+    background: #2b4e77;
+    transform: scale(1.03);
+  }
 
-    #health-bar-container {
-        width: 300px;
-        height: 20px;
-        background: #444;
-        border: 2px solid #222;
-        border-radius: 10px;
-        margin: 10px auto;
-    }
+  .dialog {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .dialog-box {
+    background: #111a2f;
+    border: 3px solid #00ffff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 400px;
+  }
+  .dialog-box p {
+    font-size: 12px;
+    color: #a8e0ff;
+  }
+  .dialog-box button {
+    background: var(--ui);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: var(--font);
+    cursor: pointer;
+  }
 
-    #health-bar {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, #00ff00, #ffcc00);
-        border-radius: 10px;
-    }
+  .timer {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #ffcc00;
+  }
 
-    #question-box {
-        margin-top: 20px;
-        display: none;
-    }
-
-    .answer-btn {
-        display: block;
-        background: #333;
-        color: white;
-        border: 2px solid #666;
-        padding: 10px;
-        margin: 8px auto;
-        width: 60%;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 13px;
-        transition: 0.3s;
-    }
-
-    .answer-btn:hover {
-        background: #555;
-    }
-
-    #timer {
-        font-size: 14px;
-        color: #00ffff;
-        margin-top: 10px;
-    }
-
-    #return-btn {
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        background: #0055ff;
-        color: white;
-        border: none;
-        padding: 10px 14px;
-        border-radius: 8px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    #return-btn:hover {
-        background: #0077ff;
-    }
+  .end-screen {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
+  .end-screen h2 { color: var(--ui); }
 </style>
 </head>
 <body>
+  <div class="game-box" id="game">
+    <h1>RIDDLE QUEST</h1>
+    <div class="character"></div>
+    <div class="hp-bar"><div id="hpFill" class="hp-fill"></div></div>
+    <div id="timer" class="timer">⏳ Thời gian: 30s</div>
 
-<h1>🎭 Trò Chơi Giải Đố Sinh Tồn 🎭</h1>
+    <div id="questionBox" class="question-box"></div>
+    <div id="answers" class="answers"></div>
+  </div>
 
-<button id="return-btn" onclick="window.location.href='game.html'">🏠 Quay về trang chính</button>
 
-<div id="game-container">
-    <div id="character"></div>
-    <div id="dialogue">“Mày phải giải đố nếu không mày sẽ chết!”</div>
-    <div id="health-bar-container">
-        <div id="health-bar"></div>
+<a href="game.html" 
+   style="
+       position: fixed;
+       top: 20px;
+       right: 20px;
+       background-color: #ff4757;
+       color: white;
+       font-family: 'Press Start 2P', cursive;
+       text-decoration: none;
+       padding: 10px 15px;
+       border-radius: 8px;
+       border: 2px solid #fff;
+       box-shadow: 0 0 10px #ff4757;
+       transition: all 0.2s ease;
+   "
+   onmouseover="this.style.backgroundColor='#ff6b81'"
+   onmouseout="this.style.backgroundColor='#ff4757'">
+   ⬅ Quay về trang chính
+</a>
+
+  <!-- Dialog mở đầu -->
+  <div id="dialog" class="dialog">
+    <div class="dialog-box">
+      <p>"Mày phải giải đố... nếu không mày sẽ CHẾT!"</p>
+      <button id="startBtn">OK</button>
     </div>
-    <button id="start-btn" class="answer-btn" onclick="startGame()">OK</button>
+  </div>
 
-    <div id="question-box">
-        <div id="question"></div>
-        <div id="answers"></div>
-        <div id="timer"></div>
-    </div>
-</div>
+  <div id="endScreen" class="end-screen" style="display:none;">
+    <h2 id="endMsg"></h2>
+    <p id="scoreMsg"></p>
+    <button onclick="location.reload()">Chơi lại</button>
+  </div>
 
 <script>
+/* ---------------- CẤU HÌNH ---------------- */
+const MAX_HP = 9;
+const TOTAL_QUESTIONS = 30;
+let hp = MAX_HP;
+let currentQ = 0;
+let timer = 30;
+let timerInterval = null;
+
+/* ---------------- CÂU HỎI MẪU ---------------- */
 const questions = [
-    { q: "Trái đất quay quanh gì?", a: ["Mặt trăng", "Mặt trời", "Sao Hỏa", "Sao Kim"], correct: 1 },
-    { q: "Con gì biết bay mà không có cánh?", a: ["Gió", "Cá", "Ngựa", "Rắn"], correct: 0 },
-    { q: "1+1 bằng mấy?", a: ["1", "2", "3", "4"], correct: 1 },
-    { q: "Thủ đô của Việt Nam là?", a: ["Hà Nội", "Huế", "Sài Gòn", "Đà Nẵng"], correct: 0 },
-    // Thêm câu hỏi tùy thích...
+  { q: "Nếu 3 con mèo bắt 3 con chuột trong 3 phút, thì 100 con mèo bắt 100 con chuột trong bao lâu?", a: ["1 phút", "3 phút", "100 phút", "300 phút"], correct: 1 },
+{ q: "Tôi có các thành phần: đầu, nhưng không có cổ; mắt, nhưng không có lông mày. Tôi là ai?", a: ["Con cá", "Cái kim", "Con ốc", "Cái đinh"], correct: 1 },
+{ q: "Có 3 công tắc ở hành lang. Một trong số đó điều khiển một bóng đèn trong phòng kín. Bạn chỉ được vào phòng **một lần duy nhất**. Làm sao xác định công tắc nào điều khiển bóng đèn?", a: ["Không thể biết", "Bật công tắc 1 – chờ 5 phút – tắt; bật công tắc 2 – vào phòng", "Bật cả 3 – vào xem", "Dùng điện thoại quay lại"], correct: 1 },
+{ q: "Một người cha nói: 'Tôi có 5 người con trai. Mỗi người con trai có 1 em gái.' Hỏi người cha có tất cả bao nhiêu người con?", a: ["6", "10", "5", "11"], correct: 0 },
+{ q: "Điều gì xảy ra **một lần trong mỗi giây**, **hai lần trong mỗi khoảnh khắc**, nhưng **không bao giờ trong một thế kỷ**?", a: ["Chữ 'O'", "Chữ 'K'", "Chữ 'M'", "Chữ 'C'"], correct: 2 },
+{ q: "Bạn đang tham gia cuộc đua. Bạn vượt người về nhì. Vậy bạn đang ở vị trí thứ mấy?", a: ["Nhất", "Nhì", "Ba", "Tư"], correct: 1 },
+{ q: "Một người bị mù, một người bị điếc, một người bị câm. Ai trong số họ có thể nhìn thấy?", a: ["Người mù", "Người điếc", "Người câm", "Không ai"], correct: 2 },
+{ q: "Có 5 chiếc máy may may 5 cái áo trong 5 phút. Hỏi 100 chiếc máy may may 100 cái áo trong bao lâu?", a: ["5 phút", "20 phút", "100 phút", "500 phút"], correct: 0 },
+{ q: "Cái gì thuộc về bạn, nhưng người khác dùng nhiều hơn bạn?", a: ["Tên của bạn", "Điện thoại", "Tiền", "Quần áo"], correct: 0 },
+{ q: "Một người đàn ông nhìn vào bức ảnh và nói: 'Tôi không có anh em trai, nhưng cha của người đàn ông trong ảnh là con trai của cha tôi.' Hỏi người trong ảnh là ai?", a: ["Cha anh ta", "Con trai anh ta", "Cháu trai", "Anh trai"], correct: 1 },
+  { q: "Trong một bức ảnh chụp một gia đình có 2 người cha và 2 người con. Hỏi trong bức ảnh có ít nhất mấy người?", a: ["3","4","7","8"], correct: 0 },
+{ q: "Cái gì luôn ở phía trước bạn nhưng bạn không bao giờ nhìn thấy?", a: ["Tương lai", "Bóng tối", "Mũi của bạn", "Cái đầu"], correct: 0 },
+{ q: "Một người đi bộ từ nhà ra công viên, quãng đường 5 km. Nhưng anh ta không đi bộ, cũng không đi xe, không bay, không bơi – vậy anh ta đi bằng cách nào?", a: ["Đi ngủ", "Đi xe lăn", "Đi bằng... tưởng tượng", "Đi bằng chân"], correct: 3 },
+{ q: "Con gì đập thì sống, không đập thì chết?", a: ["Con tim", "Con muỗi", "Con gà", "Con cóc"], correct: 0 },
+{ q: "Cái gì bạn càng chia sẻ, bạn càng có nhiều hơn?", a: ["Tiền", "Bí mật", "Tri thức", "Bánh mì"], correct: 2 },
+{ q: "Có 10 con chim đậu trên cành cây. Một người bắn chết 1 con. Hỏi còn mấy con?", a: ["9 con", "0 con", "1 con", "10 con"], correct: 1 },
+{ q: "Cái gì có thể chứa nước dù đầy lỗ?", a: ["Cái xô", "Cái chậu", "Cái rổ", "Cái bọt biển"], correct: 3 },
+{ q: "Cái gì bạn không mượn mà vẫn phải trả?", a: ["Lời hứa", "Nợ nần", "Lời chào", "Lời cảm ơn"], correct: 0 },
+{ q: "Cái gì càng lấy ra càng to?", a: ["Cái hố", "Cái bóng", "Cái túi", "Cái lỗ"], correct: 0 },
+{ q: "Một người đàn ông sống ở tầng 15 của một tòa nhà cao tầng. Mỗi sáng, ông đi thang máy xuống tầng trệt để đi làm. Tối về, nếu trời mưa hoặc có người trong thang máy, ông đi thẳng lên tầng 15. Nếu không, ông chỉ đi đến tầng 10 rồi đi bộ lên tầng 15. Vì sao?", a: ["Ông thích vận động", "Ông sợ độ cao", "Ông lùn, không với tới nút 15", "Thang máy hỏng"], correct: 2 },
+{ q: "Cái gì không ai mua mà vẫn có, không ai bán mà vẫn mất?", a: ["Thời gian", "Danh tiếng", "Tuổi tác", "Sức khỏe"], correct: 2 }
+  
+
 ];
 
-let current = 0;
-let health = 9;
-let timer = 30;
-let interval;
-let score = 0;
-
-function startGame() {
-    document.getElementById("dialogue").innerText = "Bắt đầu giải đố đi... nhanh lên!";
-    document.getElementById("start-btn").style.display = "none";
-    document.getElementById("question-box").style.display = "block";
-    showQuestion();
+/* Tạo 30 câu từ danh sách ngẫu nhiên */
+let quiz = [];
+for(let i=0;i<TOTAL_QUESTIONS;i++){
+  quiz.push(questions[i % questions.length]);
 }
 
-function showQuestion() {
-    if (current >= 30 || current >= questions.length) {
-        endGame(true);
-        return;
+/* ---------------- ELEMENT ---------------- */
+const hpFill = document.getElementById("hpFill");
+const questionBox = document.getElementById("questionBox");
+const answersDiv = document.getElementById("answers");
+const timerEl = document.getElementById("timer");
+const dialog = document.getElementById("dialog");
+const endScreen = document.getElementById("endScreen");
+const endMsg = document.getElementById("endMsg");
+const scoreMsg = document.getElementById("scoreMsg");
+
+/* ---------------- HÀM CHÍNH ---------------- */
+function startGame(){
+  dialog.style.display = "none";
+  currentQ = 0;
+  hp = MAX_HP;
+  nextQuestion();
+}
+
+/* Hiển thị câu hỏi */
+function nextQuestion(){
+  if(hp <= 0){ return endGame(false); }
+  if(currentQ >= TOTAL_QUESTIONS){ return endGame(true); }
+
+  const q = quiz[currentQ];
+  questionBox.textContent = (currentQ+1) + ". " + q.q;
+  answersDiv.innerHTML = "";
+  q.a.forEach((ans, i)=>{
+    const btn = document.createElement("button");
+    btn.textContent = ans;
+    btn.onclick = ()=>answer(i);
+    answersDiv.appendChild(btn);
+  });
+
+  updateHP();
+  resetTimer();
+}
+
+/* Khi trả lời */
+function answer(choice){
+  const q = quiz[currentQ];
+  clearInterval(timerInterval);
+  if(choice === q.correct){
+    hp = Math.min(MAX_HP, hp + 1);
+  } else {
+    hp -= 3;
+  }
+  currentQ++;
+  setTimeout(nextQuestion, 400);
+}
+
+/* Cập nhật HP */
+function updateHP(){
+  const percent = (hp / MAX_HP) * 100;
+  hpFill.style.width = percent + "%";
+  if(percent < 40) hpFill.style.background = "#ff4d4d";
+  else hpFill.style.background = "linear-gradient(90deg, var(--hp-fill), #9be6c2)";
+}
+
+/* Đồng hồ đếm ngược */
+function resetTimer(){
+  clearInterval(timerInterval);
+  let timeLeft = timer;
+  timerEl.textContent = "⏳ Thời gian: " + timeLeft + "s";
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    timerEl.textContent = "⏳ Thời gian: " + timeLeft + "s";
+    if(timeLeft <= 0){
+      clearInterval(timerInterval);
+      hp -= 3;
+      currentQ++;
+      nextQuestion();
     }
+  }, 1000);
 
-    const q = questions[current];
-    document.getElementById("question").innerText = "❓ " + q.q;
-    const answersDiv = document.getElementById("answers");
-    answersDiv.innerHTML = "";
-
-    q.a.forEach((ans, i) => {
-        const btn = document.createElement("button");
-        btn.classList.add("answer-btn");
-        btn.innerText = ans;
-        btn.onclick = () => checkAnswer(i);
-        answersDiv.appendChild(btn);
-    });
-
-    timer = Math.max(30 - Math.floor(current / 5) * 15, 15);
-    document.getElementById("timer").innerText = "⏰ Thời gian: " + timer + "s";
-
-    clearInterval(interval);
-    interval = setInterval(() => {
-        timer--;
-        document.getElementById("timer").innerText = "⏰ Thời gian: " + timer + "s";
-        if (timer <= 0) {
-            checkAnswer(-1);
-        }
-    }, 1000);
+  // giảm thời gian mỗi 5 câu
+  if((currentQ+1) % 5 === 0 && timer > 15){
+    timer -= 3;
+  }
 }
 
-function checkAnswer(index) {
-    const q = questions[current];
-    clearInterval(interval);
-
-    if (index === q.correct) {
-        health++;
-        score++;
-        document.getElementById("dialogue").innerText = "✅ Đúng rồi! (+1 máu)";
-    } else {
-        health -= 3;
-        document.getElementById("dialogue").innerText = "❌ Sai rồi! (-3 máu)";
-    }
-
-    updateHealth();
-
-    if (health <= 0) {
-        endGame(false);
-        return;
-    }
-
-    current++;
-    setTimeout(showQuestion, 1000);
+/* Kết thúc game */
+function endGame(win){
+  clearInterval(timerInterval);
+  endScreen.style.display = "flex";
+  if(win){
+    endMsg.textContent = "🎉 YOU WIN!";
+  } else {
+    endMsg.textContent = "☠ GAME OVER ☠";
+  }
+  scoreMsg.textContent = "Số câu đã trả lời đúng: " + currentQ + "/" + TOTAL_QUESTIONS;
 }
 
-function updateHealth() {
-    const bar = document.getElementById("health-bar");
-    const percent = Math.max(0, (health / 9) * 100);
-    bar.style.width = percent + "%";
-    if (percent < 30) bar.style.background = "red";
-    else if (percent < 60) bar.style.background = "orange";
-    else bar.style.background = "linear-gradient(90deg, #00ff00, #ffcc00)";
-}
-
-function endGame(win) {
-    clearInterval(interval);
-    document.getElementById("question-box").style.display = "none";
-    if (win) {
-        document.getElementById("dialogue").innerText = "🎉 Mày đã sống sót! Tổng điểm: " + score;
-    } else {
-        document.getElementById("dialogue").innerText = "☠ Mày chết rồi... Game Over!";
-        document.getElementById("health-bar").style.width = "0%";
-    }
-}
+/* ---------------- SỰ KIỆN ---------------- */
+document.getElementById("startBtn").onclick = startGame;
 </script>
 </body>
 </html>
+
