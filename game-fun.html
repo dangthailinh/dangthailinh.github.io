@@ -199,7 +199,7 @@ let currentQ = 0;
 let timer = 30;
 let timerInterval = null;
 
-/* ---------------- CÂU HỎI MẪU ---------------- */
+
 const questions = [
   { q: "Nếu 3 con mèo bắt 3 con chuột trong 3 phút, thì 100 con mèo bắt 100 con chuột trong bao lâu?", a: ["1 phút", "3 phút", "100 phút", "300 phút"], correct: 1 },
 { q: "Tôi có các thành phần: đầu, nhưng không có cổ; mắt, nhưng không có lông mày. Tôi là ai?", a: ["Con cá", "Cái kim", "Con ốc", "Cái đinh"], correct: 1 },
@@ -242,7 +242,7 @@ const endScreen = document.getElementById("endScreen");
 const endMsg = document.getElementById("endMsg");
 const scoreMsg = document.getElementById("scoreMsg");
 
-/* ---------------- HÀM CHÍNH ---------------- */
+
 function startGame(){
   dialog.style.display = "none";
   currentQ = 0;

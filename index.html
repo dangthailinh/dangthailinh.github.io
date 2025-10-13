@@ -430,6 +430,9 @@ lightbox.addEventListener('click', (e) => {
             </div>
                 
         </div>
+            <a href="assistant.html" class="chat-icon" style="position: fixed; bottom: 20px; left: 20px; z-index: 100; opacity: 0.7; transition: all 0.3s ease; font-size: 40px; text-decoration: none; color: white; background: rgba(0,0,0,0.5); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        💬
+    </a>
        
 
     </div>
@@ -441,6 +444,12 @@ lightbox.addEventListener('click', (e) => {
     opacity: 0.3;
     transform: scale(1.2) rotate(10deg);
     filter: drop-shadow(0 0 20px var(--primary-color));
+}
+.chat-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.7);
 }
 .cat-icon:hover {
     opacity: 0.6;
@@ -631,7 +640,9 @@ footer a:hover { transform: scale(1.1); }
             <p id="modalContent"></p>
         </div>
     </div>
+    
 
     <script src="linhkun.js"></script>
+    
 </body>
 </html>

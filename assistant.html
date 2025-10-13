@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trợ Lý Ảo - Linh Osimi</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #050505, #000);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .chat-box {
+      width: 420px;
+      max-width: 95%;
+      background: #111;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      overflow: hidden;
+    }
+
+    .chat-container {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      display: flex;
+      margin: 10px 0;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: url('https://cdn-icons-png.flaticon.com/512/4712/4712100.png') center/cover;
+      margin-right: 10px;
+      box-shadow: 0 0 10px cyan;
+    }
+
+    .bubble {
+      background: #0b2239;
+      border-radius: 15px 15px 15px 5px;
+      padding: 10px 15px;
+      max-width: 80%;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .user {
+      justify-content: flex-end;
+    }
+
+    .user .bubble {
+      background: #0078ff;
+      border-radius: 15px 15px 5px 15px;
+    }
+
+    .options {
+      background: #0b0b0b;
+      padding: 10px;
+      border-top: 1px solid #222;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .option-btn {
+      background: linear-gradient(135deg, #0ff, #0077ff);
+      border: none;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .option-btn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, #00eaff, #0057ff);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-box">
+    <div class="chat-container" id="chat">
+      <div class="message fade-in">
+        <div class="avatar"></div>
+        <div class="bubble">Xin chào, tôi là Linh-Osimi 💠<br>Bạn muốn khám phá chủ đề nào hôm nay?</div>
+      </div>
+    </div>
+    <div class="options" id="options">
+      <button class="option-btn" onclick="selectTopic('khoa-hoc')">🧪 Khoa học</button>
+      <button class="option-btn" onclick="selectTopic('game')">🎮 Game</button>
+      <button class="option-btn" onclick="selectTopic('phim')">🎬 Phim</button>
+      <button class="option-btn" onclick="selectTopic('truyen-manga')">📖 Manga</button>
+      <button class="option-btn" onclick="selectTopic('nghe-thuat')">🎨 Nghệ thuật</button>
+      <button class="option-btn" onclick="selectTopic('am-nhac')">🎵 Âm nhạc</button>
+      <button class="option-btn" onclick="selectTopic('tro-chuyen')">💬 Trò chuyện</button>
+      <button class="option-btn" onclick="window.location.href='index.html'">🏠 Trang chủ</button>
+    </div>
+  </div>
+
+  <!-- Hiệu ứng âm thanh -->
+  <audio id="popSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_698831e3c9.mp3?filename=pop-94319.mp3"></audio>
+
+  <script>
+    const chat = document.getElementById("chat");
+    const options = document.getElementById("options");
+    const sound = document.getElementById("popSound");
+
+    function playSound() {
+      sound.currentTime = 0;
+      sound.play();
+    }
+
+    function addMessage(text, sender = "bot") {
+      const msg = document.createElement("div");
+      msg.className = `message ${sender === "user" ? "user" : ""} fade-in`;
+      msg.innerHTML = sender === "bot"
+        ? `<div class="avatar"></div><div class="bubble">${text}</div>`
+        : `<div class="bubble">${text}</div>`;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+      playSound();
+    }
+
+    function selectTopic(topic) {
+      chat.innerHTML += `<div class="message user fade-in"><div class="bubble">${topicToName(topic)}</div></div>`;
+      playSound();
+
+      setTimeout(() => {
+        if (topic === "tro-chuyen") {
+          addMessage("Bạn muốn trò chuyện về điều gì nè?");
+          setChatOptions([
+            { text: "Thời tiết ☀️", action: () => addMessage("Trời đẹp là tâm trạng cũng tươi 🌤") },
+            { text: "Kể chuyện 📖", action: () => addMessage("Ngày xửa ngày xưa, có coder tên Linh tạo nên vũ trụ Osimi 💫Ling đẹp trai vô địch ,từng tay không đấm chêt 10 thằng cầm dao . aura trên 150, con được giới giang hồ biết đến với biệt danh Linh chim sẻ.Nói chung đây là câu chuyên về 1 anh Linh cũng thuộc dạng anh lớn xã hội") },
+            {text:"Anh Linh ngầu vãi chưởng ra", action: () => addMessage("Ok cám ơn cục cưng của anh nhó")},
+            { text: "Khoa học 🧬", action: () => addMessage("Khoa học là phép màu được chứng minh bằng công thức 🚀") },
+            { text: "Ku em nghĩ gì về game?", action: () => addMessage("Game là cuộc sống ảo, nhưng cảm xúc thật 🎲") },
+            { text: "Phim thì sao?", action: () => addMessage("Phim là cửa sổ tâm hồn, mở ra thế giới mới 🌍") },
+            { text: "⬅️ Quay lại", action: resetMainMenu }
+          ]);
+          return;
+        }
+
+        addMessage(`Bạn chọn ${topicToName(topic)} nè! Dưới đây là các danh mục:`);
+
+        const subTopics = getSubTopics(topic);
+        const subOptions = subTopics.map(sub => ({
+          text: sub.name,
+          action: () => window.location.href = sub.link
+        }));
+
+        subOptions.push({ text: "⬅️ Quay lại", action: resetMainMenu });
+        setChatOptions(subOptions);
+      }, 600);
+    }
+
+    function topicToName(topic) {
+      switch (topic) {
+        case "khoa-hoc": return "Khoa học";
+        case "game": return "Game";
+        case "phim": return "Phim";
+        case "truyen-manga": return "Manga";
+        case "nghe-thuat": return "Nghệ thuật";
+        case "am-nhac": return "Âm nhạc";
+        case "tro-chuyen": return "Trò chuyện";
+        default: return topic;
+      }
+    }
+
+    function getSubTopics(topic) {
+      const map = {
+        "khoa-hoc": [
+          { name: "🔹 Bài 0 - Khởi đầu", link: "khoa-hoc-bai0.html" },
+          { name: "🔹 Bài 1 - Cơ bản", link: "khoa-hoc-bai1.html" },
+          { name: "🔹 Nâng cao", link: "khoa-hoc-nang-cao-bai0.html" }
+        ],
+        "game": [
+          { name: "🎮 Trò chơi vui", link: "game-fun.html" },
+          { name: "🧩 Game nâng cao", link: "game-nang-cao-bai0.html" },
+          { name: "💀 Game thử thách", link: "game-bai0.html" }
+        ],
+        "phim": [
+          { name: "🎬 Phim cơ bản", link: "phim-bai0.html" },
+          { name: "🍿 Phim nâng cao", link: "phim-nang-cao-bai0.html" }
+        ],
+        "truyen-manga": [
+          { name: "📖 Manga bài 0", link: "truyen-manga-bai0.html" },
+          { name: "📚 Manga nâng cao", link: "truyen-manga-nang-cao-bai0.html" }
+        ],
+        "nghe-thuat": [
+          { name: "🎨 Nghệ thuật tổng hợp", link: "nghe-thuat.html" }
+        ],
+        "am-nhac": [
+          { name: "🎵 Album & Playlist", link: "am-nhac.html" }
+        ]
+      };
+      return map[topic] || [];
+    }
+
+    function setChatOptions(list) {
+      options.innerHTML = "";
+      list.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerText = opt.text;
+        btn.onclick = () => { playSound(); opt.action(); };
+        options.appendChild(btn);
+      });
+    }
+
+    function resetMainMenu() {
+      addMessage("Quay lại menu chính nhé 💠");
+      setTimeout(() => location.reload(), 600);
+    }
+  </script>
+</body>
+</html>
