@@ -215,14 +215,186 @@
         </div>
 
         <!-- Phần chia sẻ ảnh -->
-        <div class="share-section" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; max-width: 100%; overflow: hidden;">
-            <img src="vip.jpg" alt="Chia sẻ ảnh 1" class="share-img" style="width: 120px; height: 120px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease; flex-shrink: 0;"> <!-- Thay src bằng ảnh thật -->
-            <img src="polar.jpg" alt="Chia sẻ ảnh 2" class="share-img" style="width: 120px; height: 120px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease; flex-shrink: 0;">
-            <img src="lawliet.jpg" alt="Chia sẻ ảnh 3" class="share-img" style="width: 120px; height: 120px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease; flex-shrink: 0;">
-            <img src="https://media.giphy.com/media/6DNtXFxz7RHxK/giphy.gif" alt="Chia sẻ ảnh 4" class="share-img" style="width: 120px; height: 120px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease; flex-shrink: 0;">
-            <img src="chad.jpg" alt="Chia sẻ ảnh 5" class="share-img" style="width: 120px; height: 120px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease; flex-shrink: 0;">
-            <img src="https://www.gifcen.com/wp-content/uploads/2021/11/anime-gif-20.gif" alt="Chia sẻ ảnh 6" class="share-img" style="width: 120px; height: 120px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease; flex-shrink: 0;">
-        </div>
+     <div class="share-slider-container">
+    <button class="slide-btn left">&#10094;</button>
+
+    <div class="share-track">
+        <img src="vip.jpg" alt="Ảnh 1" class="share-img">
+        <img src="polar.jpg" alt="Ảnh 2" class="share-img">
+        <img src="lawliet.jpg" alt="Ảnh 3" class="share-img">
+        <img src="https://media.giphy.com/media/6DNtXFxz7RHxK/giphy.gif" alt="Ảnh 4" class="share-img">
+        <img src="chad.jpg" alt="Ảnh 5" class="share-img">
+        <img src="https://www.gifcen.com/wp-content/uploads/2021/11/anime-gif-20.gif" alt="Ảnh 6" class="share-img">
+        <img src="polar.jpg" alt="Ảnh 7" class="share-img">
+        <img src="vip.jpg" alt="Ảnh 8" class="share-img">
+        <img src="joker.jpg" alt="Ảnh 2" class="share-img">
+        <img src="lc.jpg" alt="Ảnh 2" class="share-img">
+        <img src="zeke.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/ca/d8/96/cad896cd7d46971543cd0ddc468a89e9.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/00/2f/5c/002f5cd1f568d8252b2ca8a3ab24ff55.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/91/94/b0/9194b0ba903d0e0c7f113f06c268c1ff.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/57/ed/10/57ed10178667bab8f5cca8ec105f3a2c.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/1200x/43/6f/db/436fdb9f8ffd458cdace146ac60af6e4.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/59/43/42/59434262f81cc9f906c97cc25afbd889.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/40/72/79/4072790f75c8049a19c47cc30fbd77cc.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/1200x/1e/58/40/1e5840958893d2fc325c6b8d5af93ab8.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/a0/8c/e4/a08ce440364e1e6c356112615b5afa0b.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/8f/65/13/8f65131ff792e8e2fb76577370149aab.jpg" alt="Ảnh 2" class="share-img">
+        <img src="https://i.pinimg.com/736x/5f/c2/c5/5fc2c51a9b5889f4ae2bbc2aec87d86a.jpg" alt="Ảnh 2" class="share-img">
+    </div>
+
+    <button class="slide-btn right">&#10095;</button>
+</div>
+
+<!-- --- Lightbox hiển thị khi phóng to --- -->
+<div class="lightbox" id="lightbox">
+    <span class="close-btn">&times;</span>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="Zoom ảnh">
+</div>
+
+<style>
+/* --- Tổng thể --- */
+.share-slider-container {
+    position: relative;
+    width: 90%;
+    margin: 30px auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Thanh chứa ảnh --- */
+.share-track {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #ab6005 #111;
+}
+.share-track::-webkit-scrollbar {
+    height: 8px;
+}
+.share-track::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #00f2ff, #ff00f7);
+    border-radius: 10px;
+}
+.share-track::-webkit-scrollbar-track {
+    background: #111;
+}
+
+/* --- Ảnh --- */
+.share-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.share-img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00f2ff80;
+}
+
+/* --- Nút điều hướng --- */
+.slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 50%;
+    transition: background 0.3s;
+    z-index: 10;
+}
+.slide-btn:hover {
+    background: rgba(0,0,0,0.8);
+}
+.slide-btn.left { left: 0; }
+.slide-btn.right { right: 0; }
+
+/* --- Lightbox phóng to --- */
+.lightbox {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+.lightbox-img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 25px #00f2ff80;
+    animation: zoomIn 0.3s ease;
+}
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.close-btn:hover {
+    color: #00f2ff;
+}
+</style>
+
+<script>
+const track = document.querySelector('.share-track');
+document.querySelector('.slide-btn.left').addEventListener('click', () => {
+    track.scrollBy({ left: -300, behavior: 'smooth' });
+});
+document.querySelector('.slide-btn.right').addEventListener('click', () => {
+    track.scrollBy({ left: 300, behavior: 'smooth' });
+});
+
+// --- Phóng to ảnh khi click ---
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close-btn');
+
+document.querySelectorAll('.share-img').forEach(img => {
+    img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});
+
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+    }
+});
+</script>
+
+
+
 
         <!-- Topics Grid -->
         <div class="topics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 100%; overflow: hidden;">
