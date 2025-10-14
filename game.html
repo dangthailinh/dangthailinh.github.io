@@ -122,60 +122,177 @@
     </style>
 </head>
 <body>
-   <header style="background: linear-gradient(135deg, #000 0%, #0a0a0a 100%); border-bottom: 4px solid #00ff00; box-shadow: 0 0 20px rgba(0,255,0,0.5); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Press Start 2P', cursive; position: sticky; top: 0; z-index: 100;">
-    <!-- Logo với 8-bit style -->
-    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-        <div style="width: 40px; height: 40px; background: #00ff00; border: 2px solid #000; image-rendering: pixelated; position: relative; box-shadow: 0 0 10px #00ff00;">
-            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; color: #000; font-weight: bold;">8</span>
-        </div>
-        <span style="font-size: 18px; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 5px #00ff00; color: #00ff00;">LiNH OsiGame</span>
+  <header class="header-8bit">
+  <!-- Logo -->
+  <div class="logo-container">
+    <div class="pixel-logo">
+      <span>8</span>
     </div>
-    
-    <nav>
-        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">
-            <li><a href="khoa-hoc.html" style="text-decoration: none; color: #ccc; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px;">KHOA HỌC</a></li>
-            <li><a href="nghe-thuat.html" style="text-decoration: none; color: #ccc; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px;">Nghệ thuật</a></li>
-            <li><a href="phim.html" style="text-decoration: none; color: #ccc; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px;">PHIM</a></li>
-            <li><a href="truyen-manga.html" style="text-decoration: none; color: #ccc; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px;">TRUYỆN (MANGA)</a></li>
-            <li><a href="am-nhac.html" style="text-decoration: none; color: #ccc; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px;">ÂM NHẠC</a></li>
-            <li><a href="game.html" style="text-decoration: none; color: #00ff00; transition: all 0.3s; border-bottom: 2px solid #00ff00; padding-bottom: 5px; text-shadow: 0 0 5px #00ff00;">GAME</a></li>
-        </ul>
-    </nav>
-    
-    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        
-        <button class="theme-toggle" onclick="toggleTheme()" style="background: #00ff00; border: none; color: #000; padding: 8px 12px; border-radius: 0; cursor: pointer; transition: all 0.3s; font-family: 'Press Start 2P', cursive; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px #00ff00;">🌙</button>
-    </div>
+    <span class="logo-text">LiNH OsiGame</span>
+  </div>
+
+  <!-- Nút menu (hiện trên mobile) -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- Thanh điều hướng -->
+  <nav id="mainNav">
+    <ul>
+      <li><a href="khoa-hoc.html">Khoa học</a></li>
+      <li><a href="nghe-thuat.html">Nghệ thuật</a></li>
+      <li><a href="phim.html">Phim</a></li>
+      <li><a href="truyen-manga.html">Truyện (Manga)</a></li>
+      <li><a href="am-nhac.html">Âm nhạc</a></li>
+      <li><a href="game.html" class="active">Game</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </div>
 </header>
 
 <style>
-/* CSS bổ sung cho header 8-bit */
-.logo-container:hover .logo-img { transform: scale(1.1); animation: pixelShake 0.5s ease; }
-@keyframes pixelShake {
-    0%, 100% { transform: translate(0); }
-    25% { transform: translate(2px, -2px); }
-    75% { transform: translate(-2px, 2px); }
+/* ====== HEADER CHÍNH ====== */
+.header-8bit {
+  background: linear-gradient(135deg, #000 0%, #0a0a0a 100%);
+  border-bottom: 4px solid #00ff00;
+  box-shadow: 0 0 20px rgba(0,255,0,0.5);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-nav a:hover {
-    color: #00ff00; border-bottom-color: #00ff00; text-shadow: 0 0 5px #00ff00; transform: scale(1.05);
+
+/* ====== LOGO ====== */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.header-right input::placeholder {
-    color: #666; letter-spacing: 1px;
+.pixel-logo {
+  width: 40px;
+  height: 40px;
+  background: #00ff00;
+  border: 2px solid #000;
+  image-rendering: pixelated;
+  position: relative;
+  box-shadow: 0 0 10px #00ff00;
 }
-.header-right input:focus {
-    box-shadow: 0 0 15px #00ff00; outline: none;
+.pixel-logo span {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+}
+.logo-text {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px #00ff00;
+  color: #00ff00;
+}
+
+/* ====== NAV MENU ====== */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #ccc;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 5px;
+}
+nav ul li a:hover,
+nav ul li a.active {
+  color: #00ff00;
+  border-bottom-color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+  transform: scale(1.05);
+}
+
+/* ====== NÚT GIAO DIỆN ====== */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.theme-toggle {
+  background: #00ff00;
+  border: none;
+  color: #000;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px #00ff00;
 }
 .theme-toggle:hover {
-    box-shadow: 0 0 15px #00ff00; transform: scale(1.1);
+  box-shadow: 0 0 15px #00ff00;
+  transform: scale(1.1);
 }
+
+/* ====== NÚT MENU (CHỈ HIỆN TRÊN MOBILE) ====== */
+.menu-toggle {
+  display: none;
+  font-size: 20px;
+  color: #00ff00;
+  cursor: pointer;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+/* ====== RESPONSIVE CHO MOBILE ====== */
 @media (max-width: 768px) {
-    header { flex-direction: column; gap: 10px; }
-    nav ul { flex-direction: column; gap: 10px; text-align: center; }
-    .header-right { width: 100%; justify-content: center; }
-    .header-right input { width: 100%; max-width: 200px; }
-    .logo-container span { font-size: 16px; }
+  .header-8bit {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .menu-toggle {
+    display: block;
+    align-self: flex-end;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+    display: none;
+  }
+  nav ul.show {
+    display: flex;
+  }
+  .header-right {
+    width: 100%;
+    justify-content: center;
+  }
+  .logo-text {
+    font-size: 16px;
+  }
 }
 </style>
+
+<script>
+function toggleMenu() {
+  const navList = document.querySelector("nav ul");
+  navList.classList.toggle("show");
+}
+</script>
+
 
     <!-- Hero Section -->
     <section class="hero-game">

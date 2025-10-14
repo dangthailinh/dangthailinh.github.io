@@ -112,47 +112,194 @@
     </style>
 </head>
 <body>
-   <header style="background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); border-bottom: 3px solid #feca57; box-shadow: 0 4px 20px rgba(254,202,87,0.4); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Bangers', cursive; position: sticky; top: 0; z-index: 100;">
-    <!-- Logo với graffiti style -->
-    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ff6b6b, #feca57); border: 2px solid #000; position: relative; border-radius: 50%; box-shadow: 0 0 15px rgba(254,202,87,0.6), inset 0 0 10px rgba(255,255,255,0.3); font-size: 20px; text-align: center; line-height: 40px; color: #000; font-weight: bold; text-shadow: 1px 1px 2px #fff;">
-            🎨
-        </div>
-        <span style="font-size: 28px; font-weight: 700; letter-spacing: 3px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(254,202,87,0.8); color: #fff; transform: skew(-5deg);">KIẾN THỨC VN</span>
-    </div>
-    
-    <nav>
-        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
-            <li><a href="khoa-hoc.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">KHOA HỌC</a></li>
-            <li><a href="nghe-thuat.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">Nghệ Thuật</a></li>
-            <li><a href="phim.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">PHIM</a></li>
-            <li><a href="truyen-manga.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">TRUYỆN (MANGA)</a></li>
-            <li><a href="am-nhac.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: skew(-5deg);">ÂM NHẠC</a></li>
-            <li><a href="game.html" style="text-decoration: none; color: #feca57; transition: all 0.3s; border-bottom: 2px solid #feca57; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5), 0 0 5px #feca57; transform: skew(-5deg);">GAME</a></li>
-        </ul>
-    </nav>
-    
-    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        <button class="theme-toggle" onclick="toggleTheme()" style="background: linear-gradient(135deg, #feca57, #ff9ff3); border: none; color: #000; padding: 8px 12px; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-family: 'Bangers', cursive; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 15px rgba(254,202,87,0.6), inset 0 0 5px rgba(255,255,255,0.5); transform: skew(-5deg);">🌙</button>
-    </div>
+  <header class="osimi-header">
+  <div class="logo-container">
+    <div class="logo-circle">🎨</div>
+    <span class="logo-text">KIẾN THỨC VN</span>
+  </div>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <nav id="mainNav" class="nav-show">
+    <ul>
+      <li><a href="khoa-hoc.html">KHOA HỌC</a></li>
+      <li><a href="nghe-thuat.html">NGHỆ THUẬT</a></li>
+      <li><a href="phim.html">PHIM</a></li>
+      <li><a href="truyen-manga.html">TRUYỆN (MANGA)</a></li>
+      <li><a href="am-nhac.html">ÂM NHẠC</a></li>
+      <li><a href="game.html" class="active">GAME</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </div>
 </header>
 
 <style>
-/* CSS bổ sung cho header graffiti */
-.logo-container:hover { text-shadow: 2px 2px 6px rgba(0,0,0,0.5), 0 0 15px rgba(254,202,87,0.8); transform: skew(-5deg); }
-nav a:hover {
-    color: #feca57; border-bottom-color: #feca57; text-shadow: 1px 1px 4px rgba(0,0,0,0.5), 0 0 10px #feca57; transform: skew(-5deg) scale(1.05);
+/* ==== PHONG CÁCH LINH OSIMI - Graffiti năng động ==== */
+.osimi-header {
+  background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
+  border-bottom: 3px solid #feca57;
+  box-shadow: 0 4px 20px rgba(254,202,87,0.4);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Bangers', cursive;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: top 0.4s ease;
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: skew(-5deg);
+}
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ff6b6b, #feca57);
+  border: 2px solid #000;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(254,202,87,0.6), inset 0 0 10px rgba(255,255,255,0.3);
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+}
+.logo-text {
+  font-size: 28px;
+  letter-spacing: 3px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(254,202,87,0.8);
+}
+
+/* Nav */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  transform: skew(-5deg);
+}
+nav ul li a:hover {
+  color: #feca57;
+  border-bottom-color: #feca57;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5), 0 0 10px #feca57;
+  transform: skew(-5deg) scale(1.05);
+}
+nav ul li a.active {
+  color: #feca57;
+  border-bottom-color: #feca57;
+}
+
+/* Theme button */
+.theme-toggle {
+  background: linear-gradient(135deg, #feca57, #ff9ff3);
+  border: none;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Bangers', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px rgba(254,202,87,0.6), inset 0 0 5px rgba(255,255,255,0.5);
+  transform: skew(-5deg);
+  transition: all 0.3s ease;
 }
 .theme-toggle:hover {
-    box-shadow: 0 0 20px rgba(254,202,87,0.8), inset 0 0 10px rgba(255,255,255,0.7); transform: skew(-5deg) scale(1.1);
+  box-shadow: 0 0 20px rgba(254,202,87,0.8), inset 0 0 10px rgba(255,255,255,0.7);
+  transform: skew(-5deg) scale(1.1);
 }
+
+/* Menu icon (mobile) */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
-    header { flex-direction: column; gap: 10px; }
-    nav ul { flex-direction: column; gap: 10px; text-align: center; }
-    .header-right { width: 100%; justify-content: center; }
-    .logo-container span { font-size: 20px; }
+  .osimi-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .menu-toggle {
+    display: block;
+    align-self: flex-end;
+  }
+
+  nav {
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+  nav.nav-show {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  nav ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+/* Khi cuộn xuống thì header ẩn mượt */
+.hide-header {
+  top: -100px;
 }
 </style>
+
+<script>
+let lastScroll = 0;
+window.addEventListener("scroll", () => {
+  const header = document.querySelector(".osimi-header");
+  const currentScroll = window.pageYOffset;
+  if (currentScroll > lastScroll) header.classList.add("hide-header");
+  else header.classList.remove("hide-header");
+  lastScroll = currentScroll;
+});
+
+function toggleMenu() {
+  const nav = document.getElementById("mainNav");
+  nav.classList.toggle("nav-show");
+}
+</script>
+
 
     <!-- Hero Section -->
     <section class="hero-art">

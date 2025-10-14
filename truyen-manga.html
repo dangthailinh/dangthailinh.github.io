@@ -153,47 +153,198 @@
     </style>
 </head>
 <body>
-    <header style="background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border-bottom: 3px solid #dc3545; box-shadow: 0 4px 15px rgba(220,53,69,0.4); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Noto Sans JP', sans-serif; position: sticky; top: 0; z-index: 100;">
-    <!-- Logo với manga Nhật style -->
-    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-        <div style="width: 40px; height: 40px; background: #dc3545; border: 2px solid #fff; position: relative; border-radius: 8px; box-shadow: 0 0 15px rgba(220,53,69,0.6), inset 0 0 10px rgba(255,255,255,0.2); font-size: 20px; text-align: center; line-height: 40px; color: #fff; font-weight: bold; text-shadow: 1px 1px 2px #000;">
-            📖
-        </div>
-        <span style="font-size: 24px; font-weight: 700; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px #dc3545; color: #fff; font-family: 'Bangers', cursive;">Linh OSIMI</span>
-    </div>
-    
-    <nav>
-        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">
-            <li><a href="khoa-hoc.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">KHOA HỌC</a></li>
-            <li><a href="nghe-thuat.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Nghệ thuật</a></li>
-            <li><a href="phim.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">PHIM</a></li>
-            <li><a href="truyen-manga.html" style="text-decoration: none; color: #dc3545; transition: all 0.3s; border-bottom: 2px solid #dc3545; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5), 0 0 5px #dc3545;">TRUYỆN (MANGA)</a></li>
-            <li><a href="am-nhac.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">ÂM NHẠC</a></li>
-            <li><a href="game.html" style="text-decoration: none; color: #fff; transition: all 0.3s; border-bottom: 2px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">GAME</a></li>
-        </ul>
-    </nav>
-    
-    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        <button class="theme-toggle" onclick="toggleTheme()" style="background: #dc3545; border: none; color: #fff; padding: 8px 12px; border-radius: 50%; cursor: pointer; transition: all 0.3s; font-size: 16px; box-shadow: 0 0 15px rgba(220,53,69,0.6); font-weight: bold;">🌙</button>
-    </div>
+   <header class="manga-header">
+  <!-- Logo -->
+  <div class="logo-container">
+    <div class="logo-box">📖</div>
+    <span class="logo-text">Linh OSIMI</span>
+  </div>
+
+  <!-- Nút menu cho mobile -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- Thanh điều hướng -->
+  <nav id="mainNav">
+    <ul>
+      <li><a href="khoa-hoc.html">KHOA HỌC</a></li>
+      <li><a href="nghe-thuat.html">NGHỆ THUẬT</a></li>
+      <li><a href="phim.html">PHIM</a></li>
+      <li><a href="truyen-manga.html" class="active">TRUYỆN (MANGA)</a></li>
+      <li><a href="am-nhac.html">ÂM NHẠC</a></li>
+      <li><a href="game.html">GAME</a></li>
+    </ul>
+  </nav>
+
+  <!-- Góc phải -->
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </div>
 </header>
 
+
 <style>
-/* CSS bổ sung cho header manga Nhật */
-.logo-container:hover { text-shadow: 2px 2px 6px rgba(0,0,0,0.5), 0 0 15px #dc3545; }
+/* ===== Tổng thể header manga ===== */
+.manga-header {
+  background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+  border-bottom: 3px solid #dc3545;
+  box-shadow: 0 4px 15px rgba(220,53,69,0.4);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Noto Sans JP', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ===== Logo ===== */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-box {
+  width: 40px;
+  height: 40px;
+  background: #dc3545;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(220,53,69,0.6), inset 0 0 10px rgba(255,255,255,0.2);
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  text-shadow: 1px 1px 2px #000;
+}
+.logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  font-family: 'Bangers', cursive;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px #dc3545;
+}
+
+/* ===== Navigation ===== */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+nav a {
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
 nav a:hover {
-    color: #dc3545; border-bottom-color: #dc3545; text-shadow: 1px 1px 4px rgba(0,0,0,0.5), 0 0 10px #dc3545; transform: scale(1.05);
+  color: #dc3545;
+  border-bottom-color: #dc3545;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5), 0 0 10px #dc3545;
+  transform: scale(1.05);
+}
+nav a.active {
+  color: #dc3545;
+  border-bottom: 2px solid #dc3545;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5), 0 0 5px #dc3545;
+}
+
+/* ===== Nút theme ===== */
+.theme-toggle {
+  background: #dc3545;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+  box-shadow: 0 0 15px rgba(220,53,69,0.6);
+  font-weight: bold;
 }
 .theme-toggle:hover {
-    box-shadow: 0 0 20px #dc3545; transform: scale(1.1) rotate(180deg); /* Rotate manga-style */
+  box-shadow: 0 0 20px #dc3545;
+  transform: scale(1.1) rotate(180deg);
 }
+
+/* ===== Nút menu (mobile) ===== */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.menu-toggle:hover {
+  color: #dc3545;
+  transform: scale(1.2);
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-    header { flex-direction: column; gap: 10px; }
-    nav ul { flex-direction: column; gap: 10px; text-align: center; }
-    .header-right { width: 100%; justify-content: center; }
-    .logo-container span { font-size: 20px; }
+  .manga-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+  }
+
+  .menu-toggle {
+    display: block;
+    align-self: flex-end;
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+  }
+
+  nav.active {
+    display: block;
+    width: 100%;
+    animation: menuSlide 0.4s ease;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .header-right {
+    align-self: center;
+    margin-top: 10px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
 }
+
+/* Hiệu ứng menu mở */
+@keyframes menuSlide {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 </style>
+<script>
+function toggleMenu() {
+  document.getElementById("mainNav").classList.toggle("active");
+}
+</script>
+
 
     <!-- Hero Section -->
     <section class="hero-manga">

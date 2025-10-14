@@ -108,47 +108,192 @@
     </style>
 </head>
 <body>
-    <header style="background: linear-gradient(135deg, #1a0000 0%, #2d0000 100%); border-bottom: 3px solid #dc3545; box-shadow: 0 4px 20px rgba(220,53,69,0.4); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; position: sticky; top: 0; z-index: 100;">
-    <!-- Logo với cinematic style -->
-    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #dc3545, #721c24); border: 1px solid rgba(255,255,255,0.2); position: relative; border-radius: 50%; box-shadow: 0 0 15px rgba(220,53,69,0.4);">
-            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; color: white;">🎬</span> <!-- Clapperboard icon -->
-        </div>
-        <span style="font-size: 24px; font-weight: 600; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); color: #fff;">KIẾN THỨC VN</span>
+  <header class="linh-header">
+  <div class="logo-container">
+    <div class="logo-circle">
+      <span>🎬</span>
     </div>
-    
-    <nav>
-        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 14px; font-weight: 400; letter-spacing: 0.5px;">
-            <li><a href="khoa-hoc.html" style="text-decoration: none; color: rgba(255,255,255,0.8); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Khoa Học</a></li>
-            <li><a href="nghe-thuat.html" style="text-decoration: none; color: rgba(255,255,255,0.8); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Nghệ Thuật</a></li>
-            <li><a href="phim.html" style="text-decoration: none; color: white; transition: all 0.3s; border-bottom: 1px solid white; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Phim</a></li>
-            <li><a href="truyen-manga.html" style="text-decoration: none; color: rgba(255,255,255,0.8); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Truyện (Manga)</a></li>
-            <li><a href="am-nhac.html" style="text-decoration: none; color: rgba(255,255,255,0.8); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Âm Nhạc</a></li>
-            <li><a href="game.html" style="text-decoration: none; color: rgba(255,255,255,0.8); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Game</a></li>
-        </ul>
-    </nav>
-    
-    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        <button class="theme-toggle" onclick="toggleTheme()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 12px; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; box-shadow: 0 2px 8px rgba(220,53,69,0.2);">🌙</button>
-    </div>
+    <span class="logo-text">LINH OSIMI</span>
+  </div>
+
+  <!-- Nút menu khi ở mobile -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav id="mainNav" class="nav-hidden">
+    <ul>
+      <li><a href="khoa-hoc.html">Khoa Học</a></li>
+      <li><a href="nghe-thuat.html">Nghệ Thuật</a></li>
+      <li><a href="phim.html" class="active">Phim</a></li>
+      <li><a href="truyen-manga.html">Truyện (Manga)</a></li>
+      <li><a href="am-nhac.html">Âm Nhạc</a></li>
+      <li><a href="game.html">Game</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </div>
 </header>
 
 <style>
-/* CSS bổ sung cho header phim ảnh */
-.logo-container:hover { text-shadow: 1px 1px 3px rgba(0,0,0,0.3), 0 0 10px rgba(220,53,69,0.4); }
-nav a:hover {
-    color: white; border-bottom-color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transform: scale(1.02);
+/* ==== PHONG CÁCH CHÍNH ==== */
+.linh-header {
+  background: linear-gradient(135deg, #1a0000 0%, #2d0000 100%);
+  border-bottom: 3px solid #dc3545;
+  box-shadow: 0 4px 20px rgba(220,53,69,0.4);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+@media (min-width: 769px) {
+  #mainNav {
+    max-height: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #dc3545, #721c24);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(220,53,69,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-circle span {
+  font-size: 18px;
+  color: white;
+}
+.logo-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Navigation */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+nav a {
+  text-decoration: none;
+  color: rgba(255,255,255,0.8);
+  transition: all 0.3s;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 5px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+nav a:hover, nav a.active {
+  color: white;
+  border-bottom-color: white;
+  transform: scale(1.05);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Theme button */
+.theme-toggle {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(220,53,69,0.2);
 }
 .theme-toggle:hover {
-    background: rgba(255,255,255,0.2); box-shadow: 0 2px 10px rgba(220,53,69,0.3); transform: scale(1.05);
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 2px 10px rgba(220,53,69,0.3);
+  transform: scale(1.05);
 }
+
+/* Nút menu (chỉ hiện ở mobile) */
+.menu-toggle {
+  display: none;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  font-size: 22px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.menu-toggle:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Hiệu ứng ẩn hiện nav */
+#mainNav {
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.3s ease;
+}
+.nav-hidden {
+  max-height: 0;
+  opacity: 0;
+}
+.nav-show {
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* ==== GIAO DIỆN MOBILE ==== */
 @media (max-width: 768px) {
-    header { flex-direction: column; gap: 10px; }
-    nav ul { flex-direction: column; gap: 10px; text-align: center; }
-    .header-right { width: 100%; justify-content: center; }
-    .logo-container span { font-size: 20px; }
+  .linh-header {
+    flex-wrap: wrap;
+    padding: 10px 15px;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+  }
+  .header-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+  }
+  .logo-text { font-size: 20px; }
 }
 </style>
+
+<script>
+function toggleMenu() {
+  const nav = document.getElementById("mainNav");
+  nav.classList.toggle("nav-show");
+  nav.classList.toggle("nav-hidden");
+}
+</script>
+
 
     <!-- Hero Section -->
     <section class="hero-film">

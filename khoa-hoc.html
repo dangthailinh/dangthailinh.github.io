@@ -101,83 +101,99 @@
     </style>
 </head>
 <body>
-  <header style="
-  background: linear-gradient(135deg, #0b0c25 0%, #1a2a3a 50%, #050513 100%);
-  border-bottom: 2px solid rgba(0, 255, 255, 0.2);
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Orbitron', sans-serif;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  overflow: hidden;
-">
- 
+  <header id="main-header" class="astro-header">
   <div class="header-glow"></div>
 
-
-  <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-      <div style="
-        width: 45px; height: 45px;
-        background: radial-gradient(circle at center, #00d4ff, #001a33);
-        border: 1px solid rgba(0, 255, 255, 0.3);
-        border-radius: 50%;
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
-        position: relative;
-        animation: rotateGlow 6s linear infinite;
-      ">
-          <span style="
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px; color: #00ffff;
-            text-shadow: 0 0 10px #00eaff;
-          ">⚛️</span>
-      </div>
-      <span style="
-        font-size: 26px; font-weight: 600;
-        letter-spacing: 1.5px;
-        color: #07256b;
-        text-shadow: 0 0 8px #00d0ff, 0 0 15px #0077ff;
-      ">Linh OSIMI</span>
+  <div class="logo-container">
+    <div class="logo-orb">
+      <span>⚛️</span>
+    </div>
+    <span class="logo-text">Linh OSIMI</span>
   </div>
 
-  
-  <nav>
-      <ul style="
-        list-style: none; display: flex; gap: 30px;
-        margin: 0; padding: 0;
-        font-size: 15px; font-weight: 500;
-      ">
-          <li><a href='khoa-hoc.html' class='nav-link'>Khoa Học</a></li>
-          <li><a href='nghe-thuat.html' class='nav-link'>Nghệ thuật</a></li>
-          <li><a href='phim.html' class='nav-link'>Phim</a></li>
-          <li><a href='truyen-manga.html' class='nav-link'>Truyện (Manga)</a></li>
-          <li><a href='am-nhac.html' class='nav-link'>Âm Nhạc</a></li>
-          <li><a href='game.html' class='nav-link'>Game</a></li>
-      </ul>
+  <!-- Nút menu mobile -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav id="nav-menu">
+    <ul>
+      <li><a href="khoa-hoc.html" class="nav-link">Khoa Học</a></li>
+      <li><a href="nghe-thuat.html" class="nav-link">Nghệ Thuật</a></li>
+      <li><a href="phim.html" class="nav-link">Phim</a></li>
+      <li><a href="truyen-manga.html" class="nav-link">Truyện (Manga)</a></li>
+      <li><a href="am-nhac.html" class="nav-link">Âm Nhạc</a></li>
+      <li><a href="game.html" class="nav-link">Game</a></li>
+    </ul>
   </nav>
 
-  
-  <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-      <button class="theme-toggle" onclick="toggleTheme()" style="
-        background: rgba(255,255,255,0.1);
-        border: 1px solid rgba(0,255,255,0.3);
-        color: #aef6ff;
-        padding: 8px 14px;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-size: 15px;
-        font-weight: 600;
-        box-shadow: 0 0 12px rgba(0,255,255,0.2);
-      ">🌙</button>
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
   </div>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    .astro-header {
+      background: linear-gradient(135deg, #0b0c25 0%, #1a2a3a 50%, #050513 100%);
+      border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Orbitron', sans-serif;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      transition: top 0.4s ease;
+      overflow: hidden;
+      flex-wrap: wrap;
+    }
+
+    /* Logo */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-orb {
+      width: 45px; height: 45px;
+      background: radial-gradient(circle at center, #00d4ff, #001a33);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+      position: relative;
+      animation: rotateGlow 6s linear infinite;
+      flex-shrink: 0;
+    }
+
+    .logo-orb span {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px; color: #00ffff;
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: 600;
+      color: #00d0ff;
+      text-shadow: 0 0 8px #00d0ff, 0 0 15px #0077ff;
+    }
+
+    /* Menu */
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      font-size: 15px;
+      font-weight: 500;
+    }
 
     .nav-link {
       text-decoration: none;
@@ -194,21 +210,27 @@
       text-shadow: 0 0 12px #00eaff, 0 0 25px #0077ff;
     }
 
+    .theme-toggle {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(0,255,255,0.3);
+      color: #aef6ff;
+      padding: 8px 14px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: 0 0 12px rgba(0,255,255,0.2);
+    }
+
     .theme-toggle:hover {
       background: rgba(0,255,255,0.15);
       box-shadow: 0 0 15px rgba(0,255,255,0.4);
       transform: scale(1.05);
     }
 
-    @keyframes rotateGlow {
-      0% { box-shadow: 0 0 15px #00ffff; }
-      50% { box-shadow: 0 0 30px #00ccff, 0 0 50px #729ad6; }
-      100% { box-shadow: 0 0 15px #00ffff; }
-    }
-
-   
+    /* Hiệu ứng ánh sáng chạy */
     .header-glow {
-      content: "";
       position: absolute;
       top: 0; left: -50%;
       width: 200%;
@@ -221,8 +243,78 @@
       0% { left: -50%; }
       100% { left: 50%; }
     }
+
+    @keyframes rotateGlow {
+      0% { box-shadow: 0 0 15px #00ffff; }
+      50% { box-shadow: 0 0 30px #00ccff, 0 0 50px #729ad6; }
+      100% { box-shadow: 0 0 15px #00ffff; }
+    }
+
+    /* Nút menu ☰ */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #00ffff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .logo-text {
+        font-size: 18px;
+      }
+
+      nav {
+        display: none;
+        width: 100%;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+        background: rgba(0, 20, 40, 0.9);
+        padding: 10px 20px;
+        border-radius: 10px;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav.active {
+        display: block;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
   </style>
 </header>
+
+<script>
+  // Ẩn header khi cuộn xuống – hiện lại khi cuộn lên
+  let lastScrollY = window.scrollY;
+  const header = document.getElementById("main-header");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+      header.style.top = "-100px"; // Ẩn
+    } else {
+      header.style.top = "0"; // Hiện
+    }
+    lastScrollY = window.scrollY;
+  });
+
+  // Bật/tắt menu mobile
+  function toggleMenu() {
+    const menu = document.getElementById("nav-menu");
+    menu.classList.toggle("active");
+  }
+</script>
+
 
 
 <style>
