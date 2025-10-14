@@ -101,30 +101,129 @@
     </style>
 </head>
 <body>
-   <header style="background: linear-gradient(135deg, #9ca2a9 0%, #425967 100%); border-bottom: 2px solid rgba(255,255,255,0.2); box-shadow: 0 4px 15px rgba(0,123,255,0.3); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; position: sticky; top: 0; z-index: 100;">
-    <!-- Logo với science style -->
-    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #fff, #e3f2fd); border: 1px solid rgba(0,123,255,0.3); position: relative; border-radius: 50%; box-shadow: 0 0 15px rgba(0,123,255,0.2);">
-            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; color: #007bff;">🔬</span> <!-- Microscope icon -->
-        </div>
-        <span style="font-size: 24px; font-weight: 600; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); color: white;">Linh osimi</span>
-    </div>
-    
-    <nav>
-        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 14px; font-weight: 400; letter-spacing: 0.5px;">
-            <li><a href="khoa-hoc.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Khoa Học</a></li>
-            <li><a href="nghe-thuat.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Nghệ thuật</a></li>
-            <li><a href="phim.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Phim</a></li>
-            <li><a href="truyen-manga.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Truyện (Manga)</a></li>
-            <li><a href="am-nhac.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Âm Nhạc</a></li>
-            <li><a href="game.html" style="text-decoration: none; color: rgba(255,255,255,0.9); transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">Game</a></li>
-        </ul>
-    </nav>
-    
-    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        <button class="theme-toggle" onclick="toggleTheme()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 12px; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; box-shadow: 0 2px 8px rgba(0,123,255,0.1);">🌙</button>
-    </div>
+  <header style="
+  background: linear-gradient(135deg, #0b0c25 0%, #1a2a3a 50%, #050513 100%);
+  border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow: hidden;
+">
+  <!-- Hiệu ứng ánh sáng chạy ngang -->
+  <div class="header-glow"></div>
+
+  <!-- Logo kiểu khoa học -->
+  <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+      <div style="
+        width: 45px; height: 45px;
+        background: radial-gradient(circle at center, #00d4ff, #001a33);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 50%;
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+        position: relative;
+        animation: rotateGlow 6s linear infinite;
+      ">
+          <span style="
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px; color: #00ffff;
+            text-shadow: 0 0 10px #00eaff;
+          ">⚛️</span>
+      </div>
+      <span style="
+        font-size: 26px; font-weight: 600;
+        letter-spacing: 1.5px;
+        color: #e0f7ff;
+        text-shadow: 0 0 8px #00d0ff, 0 0 15px #0077ff;
+      ">Linh OSIMI</span>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+      <ul style="
+        list-style: none; display: flex; gap: 30px;
+        margin: 0; padding: 0;
+        font-size: 15px; font-weight: 500;
+      ">
+          <li><a href='khoa-hoc.html' class='nav-link'>Khoa Học</a></li>
+          <li><a href='nghe-thuat.html' class='nav-link'>Nghệ thuật</a></li>
+          <li><a href='phim.html' class='nav-link'>Phim</a></li>
+          <li><a href='truyen-manga.html' class='nav-link'>Truyện (Manga)</a></li>
+          <li><a href='am-nhac.html' class='nav-link'>Âm Nhạc</a></li>
+          <li><a href='game.html' class='nav-link'>Game</a></li>
+      </ul>
+  </nav>
+
+  <!-- Nút đổi theme -->
+  <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
+      <button class="theme-toggle" onclick="toggleTheme()" style="
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(0,255,255,0.3);
+        color: #aef6ff;
+        padding: 8px 14px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 15px;
+        font-weight: 600;
+        box-shadow: 0 0 12px rgba(0,255,255,0.2);
+      ">🌙</button>
+  </div>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    .nav-link {
+      text-decoration: none;
+      color: rgba(200, 255, 255, 0.9);
+      transition: all 0.3s;
+      padding-bottom: 5px;
+      border-bottom: 2px solid transparent;
+      text-shadow: 0 0 5px rgba(0,255,255,0.3);
+    }
+
+    .nav-link:hover {
+      color: #00ffff;
+      border-bottom: 2px solid #00ffff;
+      text-shadow: 0 0 12px #00eaff, 0 0 25px #0077ff;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(0,255,255,0.15);
+      box-shadow: 0 0 15px rgba(0,255,255,0.4);
+      transform: scale(1.05);
+    }
+
+    @keyframes rotateGlow {
+      0% { box-shadow: 0 0 15px #00ffff; }
+      50% { box-shadow: 0 0 30px #00ccff, 0 0 50px #0066ff; }
+      100% { box-shadow: 0 0 15px #00ffff; }
+    }
+
+    /* Hiệu ứng ánh sáng trôi */
+    .header-glow {
+      content: "";
+      position: absolute;
+      top: 0; left: -50%;
+      width: 200%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00ffff, transparent);
+      animation: moveLight 6s linear infinite;
+    }
+
+    @keyframes moveLight {
+      0% { left: -50%; }
+      100% { left: 50%; }
+    }
+  </style>
 </header>
+
 
 <style>
 /* CSS bổ sung cho header khoa học */
@@ -224,7 +323,7 @@ nav a:hover {
    <div class="sub-section">
             <h2>Mô phỏng khoa học 3D</h2>
             <div class="card-grid">
-                <a href="solarsystem.html" class="card-link">
+                <a href="dist/Solarsysc.html" class="card-link">
                     <div class="card">
                         <img src="https://media.giphy.com/media/Ks1SE2JXbPibm/giphy.gif" alt="khoa học" class="card-img">
                      
@@ -232,12 +331,18 @@ nav a:hover {
                         <div class="card-meta">Nov 01, 2025 |  science</div>
                     </div>
                 </a>
-            <h2>black-hole</h2>
-            <div class="card-grid">
+                <a href="coler-test.html" class="card-link">
+                    <div class="card">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.y_oL8ia54UFIfc1HeyVFWAHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="khoa học" class="card-img">
+                        <h3>mô phỏng Pha màu</h3>
+                        <div class="card-meta">july 01, 2025 | Color</div>
+                    </div>
+
+            
+            
                 <a href="blackhole.html" class="card-link">
                     <div class="card">
                         <img src="https://i.pinimg.com/originals/c3/16/27/c3162775635d404d6462187ea4b5941f.gif" alt="khoa học" class="card-img">
-                     
                         <h3>mô phỏng hố đen 3d</h3>
                         <div class="card-meta">Nov 01, 2025 |  black hole</div>
                     </div>
@@ -246,9 +351,74 @@ nav a:hover {
     </main>
 
 
-    <footer>
-        <p>&copy; 2025 OSIMI. | Linh O9</p>
-    </footer>
+    <footer style="
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal">
         <div class="modal-content">

@@ -1,0 +1,157 @@
+<!doctype html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+	<head>	
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="author" content="Martin Vézina, La Grange">
+		<title>Linh-Osimi - Trình mô phỏng Hệ Mặt Trời bằng Javascript</title>
+		<style>
+			body {
+				opacity: 0;
+			}
+		</style>
+		<meta property="og:title" content="Linh-Osimi - Trình mô phỏng Hệ Mặt Trời" /> 
+		<meta property="og:image" content="https://mgvez.github.io/jsorrery/img/jsorrery_likefb.jpg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:description" content="Khám phá Hệ Mặt Trời ngay trên trình duyệt của bạn cùng Linh-Osimi, mô phỏng quỹ đạo vật lý bằng Javascript / WebGL." />
+		<meta property="og:url" content="https://mgvez.github.io/jsorrery/" />
+		<meta name="twitter:creator" content="@m_vezina" />
+		<meta property="fb:app_id" content="400609246982045" />
+		<link rel="canonical" href="https://mgvez.github.io/jsorrery/" />
+		<link href='http://fonts.googleapis.com/css?family=Quattrocento' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+	</head>
+	<body id="jsorrery">
+		<nav id="gui">
+			
+			<div id="status">
+				<div id="startCont" class="inputContainer"></div>
+				<div id="dateDisplay"></div>
+			</div>
+			<label id="scenarioLabel">
+				<div>Kịch bản <span class="help fa fa-question-circle" data-for="helpScenario">&nbsp;</span></div>
+				<div id="scenarioCont" class="inputContainer"></div>
+			</label>
+			<label id="dateLabel">
+				<div>Ngày tháng <span class="help fa fa-question-circle" data-for="helpDate">&nbsp;</span></div>
+				<div id="dateCont" class="inputContainer"></div>
+			</label>
+			<label id="lookFromLabel">
+				<div>Góc nhìn <span class="help fa fa-question-circle" data-for="helpLookFrom">&nbsp;</span></div>
+				<div id="lookFromCont" class="inputContainer"></div>
+			</label>
+
+			<label id="geolocLabel">
+				<div>Vĩ độ / Kinh độ</div>
+				<div id="geolocCont" class="inputContainer"></div>
+			</label>
+			
+			<label id="lookAtLabel">
+				<div>Nhìn vào <span class="help fa fa-question-circle" data-for="helpLookAt">&nbsp;</span></div>
+				<div id="lookAtCont" class="inputContainer"></div>
+			</label>
+			<label id="planetScaleLabel">
+				<div>Tỷ lệ hành tinh <span class="valDisplay"></span>x <span class="help fa fa-question-circle" data-for="helpScale">&nbsp;</span></div>
+				<div id="planetScaleCont" class="inputContainer"></div>
+			</label>
+			<label id="deltaTLabel">
+				<div>Tốc độ mô phỏng <span class="help fa fa-question-circle" data-for="helpDeltaT">&nbsp;</span></div>
+				<div id="deltaTCont" class="inputContainer"></div>
+			</label>
+
+			<label id="shareLabel">
+				<div id="shareCont" class="inputContainer"></div>
+			</label>
+			
+			<div id="shareWidget">
+				Đường dẫn chia sẻ trực tiếp
+				<input type="text" id="shareUrl">
+				<div id="social">
+					<div id="twitterShare" data-via="lagrange_mtl"></div>
+				</div>
+			</div>
+
+			<div id="navCollapse" class="fa fa-angle-double-up"></div>
+		</nav>
+		
+
+		<div class="helpContent" id="helpScenario">
+			<a class="close fa fa-close">&nbsp;</a>
+			<h2>Kịch bản</h2>
+			<p>Các kịch bản được cung cấp thực chất là tập hợp các thông số mô tả vị trí và đặc điểm của các thiên thể. Phần lớn dữ liệu này đến từ các trang web của NASA và có độ chính xác rất cao — đủ cho mục đích mô phỏng này. Hình ảnh bạn thấy vào bất kỳ ngày nào đều thể hiện Hệ Mặt Trời thực tế tại thời điểm đó.</p>
+		</div>
+
+		<div class="helpContent" id="helpDate">
+			<a class="close fa fa-close">&nbsp;</a>
+			<h2>Ngày tháng</h2>
+			<p><a href="http://en.wikipedia.org/wiki/Orbital_elements" target="_blank">Các yếu tố quỹ đạo</a> của các hành tinh được dùng để tính toán vị trí gốc khi chọn một ngày cụ thể. Những phép tính này cho kết quả mô phỏng rất sát với thực tế — bạn có thể đối chiếu các vì sao và chòm sao hiển thị với các nguồn khác, miễn là góc nhìn được đặt từ Trái Đất.</p>
+			<p>Một số kịch bản mô phỏng chuyển động dựa trên yếu tố quỹ đạo, trong khi vài trường hợp khác tính vận tốc hành tinh dựa trên lực hấp dẫn giữa các thiên thể. Các phép tính này chỉ là xấp xỉ, sử dụng phương pháp tích phân bậc hai, và độ chính xác giảm dần theo thời gian.</p>
+			<p>Bạn có thể tìm kiếm các sự kiện thiên văn như nhật thực hay nguyệt thực và xem thử chúng trong mô phỏng này.</p>
+			<p>Lưu ý: tôi dùng lịch Gregory cho mọi ngày tháng, trong khi NASA dùng lịch Julius cho các mốc trước cải cách (trước 15/10/1582).</p>
+			<p>Vị trí Mặt Trăng được tính theo lý thuyết ELP2000-85, nên có thể hơi khác so với các mô hình NASA dùng để tính các hiện tượng thiên văn cổ xưa.</p> 
+		</div>
+
+		<div class="helpContent" id="helpLookFrom">
+			<a class="close fa fa-close">&nbsp;</a>
+			<h2>Góc nhìn</h2>
+			<p>Tùy chọn này cho phép bạn đặt góc nhìn từ bất kỳ hành tinh nào. Từ đó, bạn có thể quan sát các hành tinh khác từ góc nhìn của hành tinh đã chọn. Bạn có thể zoom bằng con lăn chuột.</p>
+			<p>Chế độ “Camera tự do” cho phép di chuyển góc nhìn trong không gian, xoay quanh một điểm nhất định được chọn trong phần “Nhìn vào”.</p>
+		</div>
+
+		<div class="helpContent" id="helpLookAt">
+			<a class="close fa fa-close">&nbsp;</a>
+			<h2>Nhìn vào</h2>
+			<p>Bạn có thể khiến camera luôn hướng vào một hành tinh cụ thể để nó luôn nằm ở giữa khung hình.</p>
+			<p>Nếu bạn đặt camera ở hành tinh này và nhìn vào hành tinh khác, quỹ đạo của hành tinh kia sẽ hiển thị tương đối so với vị trí của hành tinh gốc. Cách này giúp quan sát <a href="http://en.wikipedia.org/wiki/Apparent_retrograde_motion" target="_blank">chuyển động nghịch hành biểu kiến</a> của các hành tinh so với Trái Đất.</p>
+		</div>
+
+		<div class="helpContent" id="helpScale">
+			<a class="close fa fa-close">&nbsp;</a>
+			<h2>Tỷ lệ hành tinh</h2>
+			<p>Khi tỷ lệ ở mức 1x, kích thước hành tinh được mô phỏng đúng tỷ lệ với quỹ đạo và vũ trụ. Tuy nhiên, do khoảng cách trong Hệ Mặt Trời quá lớn nên gần như không thể nhìn thấy hành tinh ở tỷ lệ thật, vì vậy tôi thêm tùy chọn phóng to để dễ quan sát hơn. Dù vậy, việc nhìn ở tỷ lệ thật lại giúp bạn cảm nhận rõ hơn về độ rộng lớn của không gian.</p>
+		</div>
+
+		<div class="helpContent" id="helpDeltaT">
+			<a class="close fa fa-close">&nbsp;</a>
+			<h2>Tốc độ</h2>
+			<p>Kéo thanh trượt để thay đổi tốc độ mô phỏng. Lưu ý rằng độ chính xác có thể giảm khi tăng tốc độ.</p>
+		</div>
+
+		<div class="helpContent" id="helpCredits">
+			<a class="close fa fa-close">&nbsp;</a>
+			<h2>Ghi nhận & Cảm ơn</h2>
+			<p><a href="http://la-grange.ca"><img src="img/logo-la-grange.png"></a></p>
+			<p>Lập trình: <a href="http://lab.la-grange.ca/en/martin-vezina">Martin Vézina</a>, <a href="http://la-grange.ca">La Grange</a>, 2013–2017.</p>
+			<p><a href="https://twitter.com/m_vezina" class="twitter-follow-button" data-show-count="false">Theo dõi @m_vezina</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+			<p>Xem dự án trên Github: <a href="">https://github.com/mgvez/jsorrery</a></p>
+
+			<h3>Đặc biệt cảm ơn</h3>
+			<ul>
+				<li>Dữ liệu quỹ đạo từ <a href="http://ssd.jpl.nasa.gov/?planet_pos">Phòng thí nghiệm Sức đẩy Phản lực NASA (JPL)</a>.</li>
+				<li>Kiến thức về yếu tố quỹ đạo từ các bài viết của <a href="http://www.stargazing.net/kepler/ellipse.html">Keith Burnett</a>, <a href="http://www.stjarnhimlen.se/comp/tutorial.html">Paul Schlyter</a> và <a href="http://ssd.jpl.nasa.gov/txt/aprx_pos_planets.pdf">E. M. Standish (JPL)</a>.</li>
+				<li>Ảnh bề mặt hành tinh được cung cấp bởi <a href="http://planetpixelemporium.com/planets.html">James Hastings-Trew</a>.</li>
+				
+		</div>
+			
+		<div class="preload">
+			<div class="orbit"><div class="planet"></div></div>
+			<div class="title">
+				<h1>Linh-Osimi</h1>
+				<h2>Hệ Mặt Trời</h2>
+			</div>
+		</div>
+
+		<div id="credits" class="help fa fa-question-circle" data-for="helpCredits">Ghi nhận</div>
+
+		<script src="assets/data/elp.js"></script>
+		<script src="assets/data/vsop-earth.js"></script>
+		
+		<script>
+			window.onJsOrreryLoaded = function(JSOrrery){
+				const jsOrrery = new JSOrrery('jsorrery');
+				jsOrrery.loadDefaultScenario();
+			}
+		</script>
+	</body>
+</html>
