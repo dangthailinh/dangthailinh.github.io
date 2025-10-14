@@ -118,6 +118,7 @@
       <button class="option-btn" onclick="selectTopic('am-nhac')">🎵 Âm nhạc</button>
       <button class="option-btn" onclick="selectTopic('tro-chuyen')">💬 Trò chuyện</button>
       <button class="option-btn" onclick="selectTopic('to-mo')"> HỎI Thêm về anh linh</button>
+
       <button class="option-btn" onclick="window.location.href='index.html'">🏠 Trang chủ</button>
     </div>
   </div>
@@ -169,6 +170,7 @@
             { text: "Anh Linh có mấy múi bụng vậy!", action: () => addMessage("Anh Linh có 12 múi á em,10 múi trên với 2 múi dưới quần.") },
             { text: "Anh Linh có người iu chưa", action: () => addMessage("Anh Linh chưa vì chỉ yêu mình eim thôi...") },
             { text: "Ngoài ăn cứt ra anh Linh có ăn gì nữa không ạ?", action: () => addMessage(" ĂN lỒN!") },
+            { text: "Sao web nhạc ít nhạc vây?", action: () => addMessage("Chỉ lưu mấy bài nhạc tôi ưa thích thôi bạn còn lại bạn có thể nghe trên youtube or stofy!")},
             { text: "⬅️ Quay lại", action: resetMainMenu }
           ]);
           return;
@@ -196,6 +198,7 @@
         case "nghe-thuat": return "Nghệ thuật";
         case "am-nhac": return "Âm nhạc";
         case "tro-chuyen": return "Trò chuyện";
+        case "to-mo": return "Hỏi thêm về anh Linh";
         default: return topic;
       }
     }
@@ -209,21 +212,26 @@
           { name: "🔹 rùng mình với khoa học", link: "khoa-hoc-nang-cao-bai0.html" },
             { name: "🔹 Khoa học Thú vị", link: "khoa-hoc-nang-cao-bai1.html" },
             { name: "🔹 Khoa học bí ẩn", link: "khoa-hoc-nang-cao-bai2.html" },
+            { name: "🔹 Hệ Mặt trời 3d", link: "dist/Solarsysc.html" },
+            { name: " Phối màu", link: "coler-test.html"},
+            { name: " hố đen 3d", link: "blackhole.html" },
+            
           
         ],
         "game": [
           { name: "🎮 Trò chơi giải đố", link: "game-fun.html" },
             { name: "👾 Trò chơi nâng cao", link: "game-fun2.html" },
             { name: "🕹️ Trò chơi thử thách", link: "game-fun3.html" },
-            { name: "Trang về GAME", link: "game.html"  }
+            { name: "Trang về GAME", link: "game.html"  },
+            { name: "Bắn tàu", link: "https://mk48.io/" },
+            { name: "Tiny Human", link: "https://tinyhumans.vercel.app/" }
         ],
         "phim": [
-          { name: "🎬 Phim cơ bản", link: "phim-bai0.html" },
-            { name: "🍿 Phim hay", link: "phim-bai1.html" },
-            { name: "🎥 Phim đặc sắc", link: "phim-bai2.html" },
+          { name: "🎬 Blog về Phim", link: "phim.html" },
           { name: " Viktor", link: "phim-nang-cao-bai0.html" },
           { name: " Anh hề", link: "phim-nang-cao-bai1.html" },
           { name: " Thầy Bạch", link: "phim-nang-cao-bai2.html" },
+          { name: "🍿 Trang Web xem phim", link: "https://www.rophim.mx/phimhay"}
           
         ],
         "truyen-manga": [
@@ -239,7 +247,8 @@
           { name: "🎨 Nghệ thuật tổng hợp", link: "nghe-thuat.html" }
         ],
         "am-nhac": [
-          { name: "🎵 Album & Playlist", link: "am-nhac.html" }
+          { name: "🎵 Album & Playlist", link: "am-nhac.html" } ,
+          
         ]
       };
       return map[topic] || [];

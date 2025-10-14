@@ -115,10 +115,10 @@
   z-index: 100;
   overflow: hidden;
 ">
-  <!-- Hiệu ứng ánh sáng chạy ngang -->
+ 
   <div class="header-glow"></div>
 
-  <!-- Logo kiểu khoa học -->
+
   <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
       <div style="
         width: 45px; height: 45px;
@@ -144,7 +144,7 @@
       ">Linh OSIMI</span>
   </div>
 
-  <!-- Navigation -->
+  
   <nav>
       <ul style="
         list-style: none; display: flex; gap: 30px;
@@ -160,7 +160,7 @@
       </ul>
   </nav>
 
-  <!-- Nút đổi theme -->
+  
   <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
       <button class="theme-toggle" onclick="toggleTheme()" style="
         background: rgba(255,255,255,0.1);
@@ -202,11 +202,11 @@
 
     @keyframes rotateGlow {
       0% { box-shadow: 0 0 15px #00ffff; }
-      50% { box-shadow: 0 0 30px #00ccff, 0 0 50px #0066ff; }
+      50% { box-shadow: 0 0 30px #00ccff, 0 0 50px #729ad6; }
       100% { box-shadow: 0 0 15px #00ffff; }
     }
 
-    /* Hiệu ứng ánh sáng trôi */
+   
     .header-glow {
       content: "";
       position: absolute;
@@ -226,7 +226,7 @@
 
 
 <style>
-/* CSS bổ sung cho header khoa học */
+
 .logo-container:hover { text-shadow: 1px 1px 3px rgba(0,0,0,0.2), 0 0 10px rgba(0,123,255,0.3); }
 nav a:hover {
     color: white; border-bottom-color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); transform: scale(1.02);
