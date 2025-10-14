@@ -51,12 +51,12 @@
         .hero-film-detail h1 { font-family: 'Nosifer', cursive; font-size: 36px; margin-bottom: 10px; letter-spacing: 4px; line-height: 1.2; font-weight: 400; color: #ff0000; animation: typewriter 3s steps(30) 0s 1 normal both, chaosBlink 0.5s step-end infinite; white-space: nowrap; overflow: hidden; border-right: 3px solid #ff0000; transform: rotate(-2deg); }
         .hero-film-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 2px; font-weight: 300; animation: fadeInUp 1s ease 3s both; font-style: italic; color: #00ff00; transform: rotate(1deg); }
         @keyframes typewriter { from { width: 0; } to { width: 100%; } }
-        @keyframes chaosBlink { from, to { border-color: transparent; color: #ff0000; } 50% { border-color: #ff0000; color: #00ff00; } }
+        @keyframes chaosBlink { from, to { border-color: transparent; color: #ff0000; } 50% { border-color: #ff0000; color: #044c04; } }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px) rotate(0deg); } to { opacity: 1; transform: translateY(0) rotate(0deg); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px) rotate(0deg); } to { opacity: 1; transform: translateY(0) rotate(0deg); } }
 
         /* Main crazy chaotic style */
-        .main { background: linear-gradient(45deg, #ff0000 0%, #000 25%, #00ff00 50%, #000 75%, #0000ff 100%); background-size: 400% 400%; animation: chaosBG 4s linear infinite; padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(255,0,0,0.2); max-width: 1200px; margin: 0 auto; border: 2px solid #fff; position: relative; overflow: hidden; }
+        .main { background: linear-gradient(45deg, #ff0000 0%, #000 25%, #026902 50%, #000 75%, #0000ff 100%); background-size: 400% 400%; animation: chaosBG 4s linear infinite; padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(255,0,0,0.2); max-width: 1200px; margin: 0 auto; border: 2px solid #fff; position: relative; overflow: hidden; }
         @keyframes chaosBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -67,11 +67,11 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ff0000" opacity="0.3"/></svg>'); background-size: 10px; animation: crackle 1s linear infinite; z-index: -1;
         }
         @keyframes crackle { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.6; } }
-        .back-btn { background: linear-gradient(45deg, #ff0000, #00ff00); color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Nosifer', cursive; font-size: 14px; text-transform: uppercase; letter-spacing: 3px; box-shadow: 0 0 15px #ff0000; animation: buttonChaos 2s linear infinite; }
-        .back-btn:hover { box-shadow: 0 0 25px #00ff00; transform: rotate(5deg) scale(1.05); animation: none; }
+        .back-btn { background: linear-gradient(45deg, #ff0000, #022502); color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Nosifer', cursive; font-size: 14px; text-transform: uppercase; letter-spacing: 3px; box-shadow: 0 0 15px #ff0000; animation: buttonChaos 2s linear infinite; }
+        .back-btn:hover { box-shadow: 0 0 25px #010301; transform: rotate(5deg) scale(1.05); animation: none; }
         @keyframes buttonChaos { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(2deg); } 75% { transform: rotate(-2deg); } }
         .main h1 { color: #fff; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Nosifer', cursive; letter-spacing: 4px; text-shadow: 0 0 10px #ff0000, 0 0 20px #00ff00; animation: titleChaos 1.5s linear infinite; transform: rotate(1deg); }
-        @keyframes titleChaos { 0%, 100% { color: #ff0000; } 50% { color: #00ff00; } }
+        @keyframes titleChaos { 0%, 100% { color: #ff0000; } 50% { color: #042f04; } }
         .main h2 { color: #fff; font-size: 20px; margin: 30px 0 15px; font-family: 'Special Elite', monospace; letter-spacing: 2px; text-shadow: 0 0 5px #fff; border-bottom: 1px solid #fff; padding-bottom: 5px; position: relative; animation: h2Shake 3s ease-in-out infinite; }
         @keyframes h2Shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(2px); } 75% { transform: translateX(-2px); } }
         .main h2::after { content: '🎭'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; animation: maskTwist 2s linear infinite; }
@@ -111,19 +111,13 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Linh Osimi</div>
-      
-        <div class="header-right">
-           
-        </div>
-    </header>
+ 
 
     <!-- Hero Section -->
     <section class="hero-film-detail">
         <div class="hero-film-detail-content">
-            <h1>Nhân Vật Joker: Sự Hỗn Loạn Trong Trật Tự</h1>
-            <p>Phân Tích Điên Loạn - Chaos In Order</p>
+            <h1>Nhân Vật Joker </h1>
+            <p>bản chất độc ác của gã hề tội phạm</p>
         </div>
     </section>
 
@@ -146,35 +140,37 @@
             <button class="back-btn" onclick="window.location.href='phim.html'">← Quay lại Phim</button>
             
             <h2>Giới Thiệu</h2>
-            <p>Joker là biểu tượng hỗn loạn, từ comic đến phim Nolan và Phillips. Phân tích này khám phá "sự hỗn loạn trong trật tự" - chaos as catalyst for change, với phong cách điên loạn flashing colors như mind of Joker.</p>
+            <p>Có thể nói Joker từ lâu được xem là kẻ thù truyền kiếp của Batman cũng như có độ nổi tiếng  không hề kém cạnh so với Kỵ Sĩ Bóng Đêm bởi sự quái dị, điên cuồng nhưng cực kỳ thông minh, nguy hiểm và khó lường trước . Đã bao lần gây trở ngại lớn cho Batman ( kể cả các siêu anh hùng khác) mặc dù hắn không hề có năng lực ghê gớm gì hoặc vũ khí tối tân nào, nhưng tạo nên khác biệt lớn so với những ác nhân khác có siêu sức mạnh. Đặc điểm nhận diện nổi bật của gã hề này là nụ cười man rợ và hay thốt lên những câu nói khó hiểu đầy sự châm biếm, mĩa mai nhưng lại chân thật đến “trần trụi“ về thực trạng con người và xã hội, khiến nhân vật của Joker gây lôi cuốn cho đọc giả.
+Nhiều người cảm thấy Joker thú vị vì hắn không giống những tội phạm bình thường khác có mục đích rõ ràng vì tiền hay tranh giành địa vị, những biểu hiện hành động của gã bộc phát một cách rất bản năng khiến chúng ta đã nhầm tưởng là do hắn bị điên nên không có cảm giác hay nhận thức được hành vi tội ác đã gây ra. Một nghịch lý là dù nhận định Joker điên loạn nhưng mọi người vẫn hay muốn "phân tích tâm lý" đằng sau những hành động của gã, thật chất hắn vẫn có sự nham hiểm, đầy mưu tính trong suy nghĩ. Bản chất trong hắn tồn tại những tính cách độc ác rất “con người” của một kẻ phản diện đích thực. </p>
 
             <img src="https://www.gifcen.com/wp-content/uploads/2021/08/joker-gif-3.gif" alt="Joker Chaos" style="width: 100%; border-radius: 0; border: 2px solid #fff; box-shadow: 0 0 20px #fff; margin: 20px 0; animation: jokerShake 0.5s ease-in-out infinite alternate;">
 
-            <h2>Hỗn Loạn Trong Trật Tự</h2>
-            <p>Joker's chaos không random, mà calculated to expose society's order fragility. In Dark Knight, he's agent of anarchy testing Batman's code. Điểm 10/10 - Ledger's performance pure madness.</p>
+            <h2>Tính cách của kẻ độc tài tàn ác</h2>
+            <p>Không đơn giản chỉ là kẻ sát nhân tâm thần, sự thật Joker rất thích thao túng và muốn người khác phục tùng mình, hai điều này luôn song hành trong tính cách độc tài của hắn. Bằng chứng là việc Joker luôn cầm đầu băng nhóm riêng trong những vụ phạm tội, sai khiến đàn em làm theo kế hoạch của mình, ngược lại thì rất ghét phải nghe theo lệnh hay làm việc “dưới màu” kẻ khác. Như trong Under Red Hood, khi Black Mask kéo đàn em đến nhà tù, yêu cầu Joker đi xử RedHood (Robin Jason Todd), vậy là gã cầm súng giết hết những tay đàn em, còn hăm dọa ngược lại Black Mask phải nghe theo sự sắp đặt của mình, hay như trong phim The Dark Knight, Joker cũng đã có cách thủ tiêu hết “đồng bọn làm chung” trong vụ cướp ngân hàng, trong lần để ép các băng nhóm xã hội đen trong thành phố phải nghe theo ý mình , gã liền “dằn mặt” 1 tên mafia dám có ý chống đối. Hầu như trong các tác phẩm từ trước đến nay những bọn tội phạm hay ác nhân đều không ưa gì Joker nhưng tất cả phải “ngán” gã hề này vì chỉ cần không chịu hợp tác hoặc dám “bật” lại, đều sẽ nhận ngay kết cục bi thảm (bị giết hoặc bị tra tấn dã man). Là kẻ giết người không gớm tay, không chỉ để thỏa mãn thú vui điên loạn mà còn vì mục đích muốn mọi người chịu khuất phục trước "hoàng tử hề tội phạm". Hắn tỏ ra là 1 "tay anh chị" thực thụ chứ không hề có vẻ gì là 1 tên tâm thần mất kiểm soát cả.</p>
+            <img src="https://images.spiderum.com/sp-images/381b5340657411ed9c2bdfb05da82874.png" alt="Joker Laugh" style="width: 100%; border-radius: 0; border: 2px solid #fff; box-shadow: 0 0 20px #fff; margin: 20px 0; animation: jokerLaugh 1s ease-in-out infinite alternate;">
+            <p>Ngược lại hắn còn có biết cách để "kiểm soát" kẻ khác, chiêu trò lợi hại nhất của Joker phải nói đến chính là đòn thao túng, khiến họ gục ngã mà bị tha hóa, sau đó nghe theo lời hắn. Như trường hợp công tố viên Harvey Dent luôn có tinh thần bảo vệ chính nghĩa nhưng rồi cũng bị Joker hại trở nên biến chất thành phản diện độc ác Two Face (vẫn là "dưới cơ" gã hề này). Hay đơn cử là nhân vật Harley Quinn, dù ban đầu là bác sĩ tâm lý điều trị cho Joker nhưng đến cuối cùng vẫn bị hắn áp đảo , dụ dỗ bằng lời lẽ ngon ngọt giúp hắn trốn ngục, sau đó bị chính gã hủy hoại trở nên điên loạn, biến chất giống gã để rồi phải đi theo phục tùng. Nhưng khi thấy không còn giá trị lợi dụng, Joker thường lên cơn đánh đập cô ta để trút giận, đúng chất 1 tên "asshold" chính hiệu. Bạn nghĩ xem 1 kẻ tâm thần nào lại có được thủ đoạn mưu mô như vậy?</p>
+
             <ul>
                 <li><strong>Điểm mạnh:</strong> Philosophy of chaos, one bad day theory.</li>
                 <li><strong>Điểm yếu:</strong> Overused in sequels, loses edge.</li>
             </ul>
 
-            <h2>Phân Tích Nhân Vật</h2>
-            <p>Joker's duality: Clown prince of crime vs tragic figure. Phillips' Joker shows societal push to madness, Nolan's as force of nature. Themes order vs anarchy timeless.</p>
-            <img src="https://th.bing.com/th/id/R.0ebeb7ba36140882cb7c48154fcc5bd6?rik=8jLZ%2f6%2fI%2fh1v7Q&riu=http%3a%2f%2fimages5.fanpop.com%2fimage%2fphotos%2f30500000%2fThe-Joker-the-joker-30590744-1000-1328.jpg&ehk=ELjZFTb8He%2fFpp2v%2bEHOcThZF%2bi484QNZ%2br1qnHlWuI%3d&risl=&pid=ImgRaw&r=0" alt="Joker Mask" style="width: 100%; border-radius: 0; border: 2px solid #fff; box-shadow: 0 0 20px #fff; margin: 20px 0; animation: maskTwist 2s linear infinite;">
-
+            <h2>Tính cách đố kị</h2>
+            <p>Không chỉ có bọn ác nhân, mà ngay cả các siêu anh hùng ít nhiều cũng từng là nạn nhân bị gã hề này chi phối, động cơ của hắn hoàn toàn là do sự đố kị đối với Batman. Joker luôn có tính hơn thua, hay xem thường đối thủ, nhưng chưa lần nào hắn thật sự đánh bại được Đấng chứ đừng nói đến việc chi phối tâm lý anh ta. Không "chơi lại" Người Dơi, Joker quay sang nhắm đến những cộng sự của Đấng. Cũng trong Under Red Hood, gã bắt cóc Jason Todd (Robin thứ 2) buôn lời sỉ nhục, sau đó đánh đập cậu đến chết, thể hiện cho tính cách tàn bạo thích thao túng của hắn, nếu không phục tùng thì hắn thẳng tay sát hại , để rồi sau đó Jason hồi sinh, bị tha hóa thành Red Hood đã hoàn toàn buôn bỏ lý tưởng ban đầu, sẵn sàng giết người để trả thù, thậm chí đối đầu với Batman đều do một tay Joker gây nên. Còn có Batgirl, Jim Gordon (Batman: The Killing Joke) cũng đều bị hắn hại, gián tiếp khiến nội bộ trong Bat family lục đục, mọi người xung quanh đều quay lưng chỉ trích Batman vì anh chẳng chịu ra tay "diệt trừ" Joker. Những điều đó vô tình lại đúng với mưu tính từ trước của tên hề này. Là một người hùng của Gotham nhưng lại không thể bảo vệ được chính gia đình mình, hắn đã hả hê vì đã đánh 1 đòn tâm lý nặng nề vào Batman từ bên trong.</p>
+            <img src="https://images.spiderum.com/sp-images/4d326cd0657611ed9c2bdfb05da82874.png" alt="Joker Mask" style="width: 100%; border-radius: 0; border: 2px solid #fff; box-shadow: 0 0 20px #fff; margin: 20px 0; animation: maskTwist 2s linear infinite;">
+            <p>Mâu thuẫn đó càng đẩy lên cao trào trong tập truyện Injustice, Joker đã khiến cho người đàn ông mạnh nhất hành tinh, niềm hy vọng của nhân loại - Superman phải ra tay giết gã vì dám hại tới vợ anh là Lois Lane, dù anh có nguyên tắc không bao giờ giết người, điều này làm Superman cũng bị tha hóa do đã tự phá vỡ nguyên tắt của mình, dẫn đến nội chiến trong Justice League, đạp đổ mọi thứ mà Batman gầy dựng bấy lâu. Một lần nữa, tất cả bắt nguồn từ sự đố kị của gã hề khi hắn thừa nhận do luôn thua cuộc trước Batman, nên phải đòi một lần chiến thắng. Trong đó có tội ác cho nổ bơm cả thành phố Metropolis, cướp đi sinh mạng hàng triệu người cũng chỉ vì lòng ganh đua ích kỷ của bản thân. Điều đáng nói là chẳng ai quan tâm vì sao Joker vẫn luôn có thể trốn ngục giết người là chuyện kinh khủng như thế nào, tác giả chỉ muốn chú trọng vào việc Superman sa ngã và những sự kiện sau đó. Dường như đã "xem nhẹ" tội ác mà Joker gây ra, coi việc gã giết người là chuyện quá đỗi bình thường, quan trọng người hắn giết là ai, và người bị hại có đủ “bản lĩnh” để vượt qua được “cú sốc” sau khi tên hề này ra làm hay không.</p>
+            <p>Đối với những ai bề ngoài càng thể hiện ý chí, niềm tin công lý mạnh mẽ hay những đạo đức, nguyên tắc kiên định "tưởng chừng không bị phá vỡ" thì gã hề này càng có ham muốn hủy hoại, bóp méo những điều đó hơn, để cho kẻ ấy phải gục ngã rồi trở nên tha hóa giống hắn, cả 2 phe chính - tà đều dè chừng khi đối mặt với tên tâm thần này. Nhưng chỉ duy nhất Batman là không dễ dàng để Joker hạ gục dù anh ta thường cố chấp với những nguyên tắc cứng nhắc do mình đặt ra (như không dùng súng , không giết người,…) để rồi vì vậy mà nhiều lần đẩy đồng đội vào vòng nguy hiểm của Joker. Nhưng Batman vẫn không một lần chịu phá bỏ nguyên tắc để kết liễu gã hề một lần và mãi mãi, điều này có ý nghĩa gì ?</p>
             <h2>Ý Nghĩa Trong Phim</h2>
-            <p>Joker critiques society, chaos as mirror to order's hypocrisy. Influences from Taxi Driver to modern villains like Homelander.</p>
+            <p></p>
 
-            <h2>Kết Luận</h2>
-            <p>Joker's chaos is art of disorder, điểm 9.8/10 - eternal icon. Tiếp theo: Riddler's Puzzles?</p>
+            <h2>Về mặt xã hội</h2>
+            <p>Joker là đại diện cho thân phận những con người bị chà đạp, sau đó vùng dậy thành kẻ ác. Nhiều người cảm thấy đồng cảm với nhân vật này. Người bị tổn thương lại đi làm tổn thương người khác, rõ ràng là sai. Nhưng ở thế giới này,  ngày càng nhiều trường hợp như vậy. Đó là một phần tất yếu. Giá như có 1 bộ phim nào đó, Joker tìm được cái tốt trong trái tim hắn trỗi dậy, thì nhân vật này sẽ nhân văn hơn.</p>
 
             <button class="back-btn" onclick="window.location.href='phim.html'" style="margin-top: 30px;">← Quay lại Phim</button>
         </main>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Kiến Thức VN. | Phim Focus</p>
-    </footer>
-
+   
     <div id="postModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
