@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+   
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="linhkun.css">
@@ -176,29 +177,152 @@
     </style>
 </head>
 <body>
- <header style="background: linear-gradient(135deg, var(--primary-color), #793802); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,123,255,0.2);">
-    
-    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-        <img src="l.jpg" alt="INH OMSIMI" class="logo-img" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: transform 0.3s ease;">
-        <span style="font-size: 32px; font-weight: bold; letter-spacing: 2px; opacity: 0.9; text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-color); font-family: 'Bangers', cursive;">INH OSIMI</span>
-    </div>
-    
-    <nav>
-        <ul style="list-style: none; display: flex; gap: 25px; margin: 0; padding: 0;">
-            <li><a href="khoa-hoc.html" style="text-decoration: none; color: white; transition: all 0.3s ease; font-weight: 700; font-size: 18px; opacity: 0.85; text-shadow: 0 0 8px #fff, 0 0 15px var(--primary-color); font-family: 'Bangers', cursive; position: relative; overflow: hidden;">Khoa Học</a></li>
-            <li><a href="nghe-thuat.html" style="text-decoration: none; color: white; transition: all 0.3s ease; font-weight: 700; font-size: 18px; opacity: 0.85; text-shadow: 0 0 8px #fff, 0 0 15px var(--primary-color); font-family: 'Bangers', cursive; position: relative; overflow: hidden;">Nghệ thuật</a></li>
-            <li><a href="phim.html" style="text-decoration: none; color: white; transition: all 0.3s ease; font-weight: 700; font-size: 18px; opacity: 0.85; text-shadow: 0 0 8px #fff, 0 0 15px var(--primary-color); font-family: 'Bangers', cursive; position: relative; overflow: hidden;">Phim</a></li>
-            <li><a href="truyen-manga.html" style="text-decoration: none; color: white; transition: all 0.3s ease; font-weight: 700; font-size: 18px; opacity: 0.85; text-shadow: 0 0 8px #fff, 0 0 15px var(--primary-color); font-family: 'Bangers', cursive; position: relative; overflow: hidden;">Truyện (Manga)</a></li>
-            <li><a href="am-nhac.html" style="text-decoration: none; color: white; transition: all 0.3s ease; font-weight: 700; font-size: 18px; opacity: 0.85; text-shadow: 0 0 8px #fff, 0 0 15px var(--primary-color); font-family: 'Bangers', cursive; position: relative; overflow: hidden;">Âm Nhạc</a></li>
-            <li><a href="game.html" style="text-decoration: none; color: white; transition: all 0.3s ease; font-weight: 700; font-size: 18px; opacity: 0.85; text-shadow: 0 0 8px #fff, 0 0 15px var(--primary-color); font-family: 'Bangers', cursive; position: relative; overflow: hidden;">Game</a></li>
-        </ul>
-    </nav>
-    
-    <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        
-        <button class="theme-toggle" onclick="toggleTheme()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; opacity: 0.9; text-shadow: 0 0 5px #fff;">🌙</button>
-    </div>
+ <header class="main-header">
+  <div class="logo-container">
+    <img src="l.jpg" alt="INH OSIMI" class="logo-img">
+    <span>INH OSIMI</span>
+  </div>
+
+  <!-- Nút menu hiện trên mobile -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav id="nav-menu">
+    <ul>
+      <li><a href="khoa-hoc.html">Khoa Học</a></li>
+      <li><a href="nghe-thuat.html">Nghệ Thuật</a></li>
+      <li><a href="phim.html">Phim</a></li>
+      <li><a href="truyen-manga.html">Truyện (Manga)</a></li>
+      <li><a href="am-nhac.html">Âm Nhạc</a></li>
+      <li><a href="game.html">Game</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </div>
 </header>
+
+<style>
+
+.main-header {
+  background: linear-gradient(135deg, var(--primary-color), #793802);
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,123,255,0.2);
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-container img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.logo-container span {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-color);
+  font-family: 'Bangers', cursive;
+}
+
+/* --- Menu --- */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  text-shadow: 0 0 8px #fff, 0 0 15px var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+/* --- Nút menu mobile --- */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .logo-container span {
+    font-size: 22px;
+  }
+
+  /* Ẩn menu mặc định */
+  nav {
+    display: none;
+    width: 100%;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+  }
+
+  nav ul li {
+    width: 100%;
+    padding: 8px 20px;
+  }
+
+  /* Hiện nút ☰ */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Khi menu bật */
+  nav.active {
+    display: block;
+  }
+}
+</style>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("nav-menu");
+  menu.classList.toggle("active");
+}
+</script>
+
 
 <section class="hero" style="position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
     <div class="hero-content" style="max-width: 1200px; width: 100%; padding: 0 20px; display: flex; flex-direction: column; align-items: center; gap: 40px; position: relative; z-index: 2;">
