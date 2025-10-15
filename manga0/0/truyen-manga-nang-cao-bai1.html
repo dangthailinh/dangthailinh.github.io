@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linh-Osimi</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet"> <!-- Classic fonts: Noto Sans JP + Special Elite typewriter -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8f8f8; color: #333; } /* Light gray for classic manga paper */
+        /* Header black/white classic */
+        header {
+            background: #fff;
+            border-bottom: 2px solid #000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Special Elite', monospace;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo-container {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .logo-img {
+            width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #000;
+        }
+        .logo-container span {
+            font-size: 24px; font-weight: 600; letter-spacing: 1px; color: #000; text-shadow: 1px 1px 1px #fff;
+        }
+        .theme-toggle {
+            background: #000; color: #fff; border: 1px solid #000; padding: 8px 12px; border-radius: 0; cursor: pointer; transition: all 0.3s; font-family: 'Special Elite', monospace; font-size: 12px; text-transform: uppercase;
+        }
+        .theme-toggle:hover { background: #fff; color: #000; box-shadow: 0 2px 5px #000; }
+
+        /* Hero Section classic B&W manga */
+        .hero-manga-detail {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(248,248,248,0.9)), url('https://tse1.mm.bing.net/th/id/OIP.d8aD1WZnnOLmiIgiJNJNKAHaFV?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3'); /* B&W manga Unsplash */
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Noto Sans JP', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            filter: grayscale(100%) contrast(1.2); /* B&W classic filter */
+        }
+        .hero-manga-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 50%, rgba(0,0,0,0.05) 100%);
+            z-index: 1;
+        }
+        .hero-manga-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-manga-detail h1 { font-family: 'Special Elite', monospace; font-size: 32px; margin-bottom: 10px; letter-spacing: 3px; line-height: 1.2; font-weight: 400; color: #000; animation: typewriter 3s steps(30) 0s 1 normal both; white-space: nowrap; overflow: hidden; border-right: 2px solid #000; }
+        .hero-manga-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 1px; font-weight: 300; animation: fadeInUp 1s ease 3s both; font-style: italic; color: #333; }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main classic B&W manga */
+        .main { background: #fff; padding: 40px; border-radius: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.05); max-width: 1200px; margin: 0 auto; border: 1px solid #ddd; }
+        .back-btn { background: #000; color: #fff; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Special Elite', monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .back-btn:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: translateY(-1px); }
+        .main h1 { color: #000; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Special Elite', monospace; letter-spacing: 3px; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); }
+        .main h2 { color: #000; font-size: 20px; margin: 30px 0 15px; font-family: 'Noto Sans JP', sans-serif; letter-spacing: 1px; border-bottom: 1px solid #000; padding-bottom: 5px; position: relative; font-weight: 500; }
+        .main h2::after { content: '📜'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; } /* Scroll icon for classic manga */
+        .main p { text-align: left; font-size: 16px; color: #333; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: #f8f8f8; padding: 15px; border-left: 4px solid #000; border-radius: 0 5px 5px 0; position: relative; }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
+        .main ul { color: #333; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '•'; position: absolute; left: 0; color: #000; font-size: 18px; font-weight: bold; }
+        .main img { width: 100%; height: auto; border-radius: 5px; margin: 20px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border: 1px solid #ddd; filter: grayscale(100%) contrast(1.1); } /* B&W classic manga filter */
+
+        /* Sidebar */
+        .sidebar { background: #f8f8f8; padding: 20px; border-radius: 0; box-shadow: 0 5px 20px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 100px; border: 1px solid #ddd; }
+        .sidebar h3 { color: #000; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Special Elite', monospace; letter-spacing: 1px; font-weight: 500; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #fff; border-radius: 0; text-decoration: none; color: #333; transition: all 0.3s ease; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: #f0f0f0; color: #000; transform: translateX(5px); border-left-color: #000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-manga-detail { padding: 80px 15px 60px; }
+            .hero-manga-detail h1 { font-size: 28px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Linh osimi</div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-manga-detail">
+        <div class="hero-manga-detail-content">
+            <h1>Homunculus - Phân Tích</h1>
+            <p>Homunculus – Khi bạn "mở mắt" mà... mất luôn cả thế giới 🌀</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>SERIES LIÊN QUAN</h3>
+             <ul>
+                <li><a href="truyen-manga-bai0.html">Berserk</a></li>
+                <li><a href="truyen-manga-bai1.html">Attack on Titan Ending</a></li>
+                <li><a href="truyen-manga-bai2.html">jjk thầy cúng</a></li>
+                <li><a href="truyen-manga-nang-cao-bai0.html">Chainsaw Man Denji Journey</a></li>
+                
+                <li><a href="truyen-manga-nang-cao-bai2.html">IChi the killer</a></li>
+            </ul
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Seinen</a></li>
+                <li><a href="#">Homunculus</a></li>
+                <li><a href="#">Psychological</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='truyen-manga.html'">← Quay lại Truyện (Manga)</button>
+            
+            <h2>Tôi đục lỗ vào đầu để thấy ma... và hóa ra, ma là chính tôi..</h2>
+            <p>Homunculus xoay quanh Suzuki Susumu – một gã vô gia cư sống dưới ga Shinjuku, nghèo rớt mồng tơi, không bạn bè, không tương lai. Một ngày nọ, anh ta tình cờ gặp giáo sư Nakoshi – một nhà khoa học điên (kiểu điên có bằng tiến sĩ) đang nghiên cứu "trepanation" (khoan lỗ vào sọ để... giải phóng áp lực não, tăng nhận thức).
+
+Suzuki đồng ý làm "chuột bạch", và sau khi bị khoan một lỗ trên đầu, anh bắt đầu nhìn thấy "ảo ảnh" – nhưng không phải ảo giác ngẫu nhiên, mà là những hình nhân (homunculus) đại diện cho vô thức, ký ức bị chôn vùi, và bản ngã bị phân mảnh của con người xung quanh.
+
+Từ đây, Homunculus không còn là câu chuyện về một gã vô gia cư nữa – mà là hành trình đi sâu vào mê cung tâm trí, nơi mỗi con người đều mang trong mình một con quái vật... hoặc một vị thánh... hoặc cả hai.</p>
+
+            <img src="https://i.pinimg.com/originals/ec/03/67/ec036772c284352b813ef02ce554d451.jpg" alt="Homunculus Eye" style="width: 100%; border-radius: 0; border: 1px solid #000; box-shadow: 0 0 10px #000; margin: 20px 0; filter: grayscale(100%) contrast(1.2);">
+
+            <h2> Tâm lý học & Triết học: Jung, Lacan, và... mấy con ma trong đầu bạn</h2>
+            <p>🔸 Homunculus = Bản ngã bị che khuất
+Trong tâm lý học, "homunculus" (người tí hon) từng là khái niệm lỗi thời trong sinh học – nhưng ở đây, Yamamoto biến nó thành biểu tượng của "cái tôi vô thức".
+
+Mỗi hình nhân Suzuki thấy không phải ảo giác, mà là phản chiếu trung thực nhất về bản chất thật của người đó – thứ mà chính họ còn không dám thừa nhận.
+
+Ví dụ:
+
+Một ông giám đốc thành đạt nhìn thấy con quỷ háu đói → vì ông ta thèm khát quyền lực đến mức đánh mất nhân tính.
+Một cô gái dịu dàng thấy con búp bê vỡ đầu → vì cô bị tổn thương từ nhỏ, phải đeo mặt nạ "tốt bụng" để sống.
+👉 Đây chính là "bóng tối của cái tôi" (Shadow Self) theo Carl Jung: phần bị kìm nén, chối bỏ, nhưng lại chi phối hành vi sâu sắc nhất.
+
+🔸 "Tôi thấy người, người thấy ma... nhưng ai là người thật?"
+Một trong những câu hỏi lớn nhất Homunculus đặt ra:
+
+"Nếu thế giới bạn thấy chỉ là sản phẩm của não bộ – thì thực tại có thật không?" 
+
+Khi Suzuki mất khả năng phân biệt ảo – thực, anh rơi vào trạng thái hoài nghi hiện sinh (existential doubt). Điều này rất gần với triết học Descartes ("Tôi nghĩ, nên tôi tồn tại") – nhưng Yamamoto lật ngược:
+
+"Nếu tôi thấy ảo ảnh... thì tôi có còn 'tôi' không?" 
+
+🔸 Trepanation – Liệu 'mở đầu' có giúp 'mở mắt'?
+Việc khoan lỗ vào sọ không phải chi tiết giật gân – mà là ẩn dụ cho việc "mở cánh cửa vô thức".
+
+Nhiều người nghĩ: "Nếu tôi hiểu sâu hơn về tâm trí, tôi sẽ tự do."
+Nhưng Homunculus nói: "Hiểu sâu hơn... có thể khiến bạn phát điên."
+
+Vì sự thật không phải lúc nào cũng cứu rỗi – đôi khi nó hủy diệt.</p>
+                <li><strong>Điểm mạnh:</strong> Visual metaphors genius, plot twists layered.</li>
+                <li><strong>Điểm yếu:</strong> Pacing slow in middle volumes.</li>
+            </ul>
+
+            <h2>Phân Tích tâm lý nhân vật</h2>
+            <p>Trong Homunculus, Hideo Yamamoto không xây dựng nhân vật theo lối tuyến tính hay chức năng cốt truyện thông thường, mà tiếp cận họ như những hiện tượng tâm lý học lâm sàng được phóng đại thành biểu tượng nghệ thuật. Nhân vật trung tâm – Suzuki Susumu – đại diện cho khái niệm “cái tôi trống rỗng” (empty self) trong tâm lý học hiện sinh và phân tâm học. Là một vô gia cư bị tước đoạt danh tính xã hội, Suzuki tồn tại ở rìa của cấu trúc biểu tượng (symbolic order – theo Lacan), nơi không có vai trò, không có kỳ vọng, và do đó, cũng không có sự tha hóa bởi mặt nạ xã hội (social persona – theo Jung). Chính trạng thái “vô ngã” này khiến anh trở thành một tấm gương thuần khiết, có khả năng phản chiếu bản ngã vô thức (shadow self) của những người xung quanh dưới dạng các hình nhân (homunculi). Điều này không đơn thuần là ảo giác sinh lý do tổn thương sọ não, mà là một ẩn dụ thị giác hóa cho cơ chế thấu thị tâm lý (psychological insight) – khi một chủ thể không còn bị chi phối bởi cái tôi (ego), họ có thể nhìn thấu lớp vỏ phòng vệ (defense mechanisms) của người khác.</p>
+            <img src="https://i.pinimg.com/originals/23/6f/47/236f4703254b4171c3da2893e2ec4178.jpg" alt="Character Sketch" style="width: 100%; border-radius: 0; border: 1px solid #000; box-shadow: 0 0 10px #000; margin: 20px 0; filter: grayscale(100%) contrast(1.2);">
+             <p>Ngược lại, giáo sư Nakoshi lại là hiện thân của ảo tưởng toàn năng tri thức (intellectual omnipotence) – niềm tin rằng lý trí và khoa học có thể kiểm soát, giải mã và thậm chí “chữa lành” bản chất con người. Tuy nhiên, homunculus của ông – một con rối không dây – phơi bày nghịch lý tồn tại sâu sắc: dù tự nhận là người điều khiển, ông thực chất là nạn nhân của chính khát vọng kiểm soát. Điều này phản ánh rõ ràng khái niệm “sự tha hóa của lý trí” trong triết học hiện sinh (từ Nietzsche đến Heidegger), khi con người dùng tri thức để che giấu nỗi lo âu nền tảng về sự vô nghĩa (existential anxiety). Các nhân vật phụ – từ người phụ nữ với búp bê vỡ đầu đến doanh nhân với con quỷ háu đói – đều là những ca lâm sàng sống động của sự phân liệt giữa bản ngã lý tưởng (ideal ego) và cái tôi thật (real self). Homunculus của họ không phải sản phẩm của bệnh lý tâm thần, mà là biểu hiện trực quan của những phức cảm (complexes) bị dồn nén, những chấn thương chưa được biểu đạt, và những mâu thuẫn nội tâm không thể hòa giải.</p>
+            <h2>Ý Nghĩa Trong Seinen</h2>
+            <p> Homunculus không chỉ là một tác phẩm hư cấu, mà là một thí nghiệm tư tưởng (thought experiment) về bản chất của nhận thức, danh tính và thực tại. Yamamoto đặt ra một giả định triết học táo bạo: nếu con người có thể nhìn thấy vô thức của nhau, liệu họ có còn khả năng chung sống? Câu trả lời ngầm ẩn trong toàn bộ hành trình của Suzuki chính là: sự thật tuyệt đối không giải phóng con người – nó cô lập họ. Bởi khi không còn ảo tưởng, không còn mặt nạ, con người đối diện không chỉ với bóng tối của người khác, mà trước hết – với sự trống rỗng nguyên thủy của chính mình.  </p>
+
+            <h2>Cảm nhân của tôi.</h2>
+            <p>Theo tôi bộ manga này mang lại cho tôi cảm giác rất khó tả sự trống rỗng + thêm lạc lõng của con người trong thế giới này.Con người khoác nên mình bao nhiêu bộ quan áo hay trang sức ra sức tô điểm cho bản thân nhưng sâu bên trong khi nhìn thẳng vào họ cũng không khác những con quái vật xấu xí là bao bất định và vô dạng</p>
+
+            <button class="back-btn" onclick="window.location.href='truyen-manga.html'" style="margin-top: 30px;">← Quay lại Truyện (Manga)</button>
+        </main>
+    </div>
+
+    <footer style="background: #fff; color: #000; padding: 20px; text-align: center; border-top: 2px solid #000; font-family: 'Special Elite', monospace; font-size: 12px; letter-spacing: 1px;">
+        <p>&copy; Linh Osimi | Truyện (Manga) Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="/linhkun.js"></script>
+</body>
+</html>

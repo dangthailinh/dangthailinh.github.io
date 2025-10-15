@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linh-Osimi</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Creepster&family=Nosifer&display=swap" rel="stylesheet"> <!-- Creepy fonts for horror -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #000; color: #e0e0e0; overflow-x: hidden; }
+        /* Hero Section creepy horror */
+        .hero-science-detail {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(139,0,0,0.3)), url('https://tse4.mm.bing.net/th/id/OIP.nixGOLmk1yt_-_X5HDW9TQHaD4?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3'); /* Quantum horror Unsplash */
+            background-size: cover;
+            background-position: center;
+            color: #e0e0e0;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Creepster', cursive;
+            text-shadow: 0 0 10px #8b0000, 0 0 20px #8b0000; /* Blood red glow */
+            animation: horrorFlicker 3s ease-in-out infinite alternate;
+        }
+        @keyframes horrorFlicker {
+            0%, 100% { opacity: 1; filter: brightness(1) contrast(1.1); }
+            50% { opacity: 0.7; filter: brightness(0.8) contrast(1.3); }
+        }
+        .hero-science-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(139,0,0,0.3) 0%, transparent 70%);
+            z-index: 1;
+            animation: bloodDrip 5s linear infinite;
+        }
+        @keyframes bloodDrip {
+            0% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+            50% { clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%); }
+            100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        }
+        .hero-science-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-science-detail h1 { font-family: 'Nosifer', cursive; font-size: 36px; margin-bottom: 10px; letter-spacing: 3px; line-height: 1.2; font-weight: 400; color: #8b0000; animation: typewriter 3s steps(30) 0s 1 normal both, bloodBlink 0.75s step-end infinite; white-space: nowrap; overflow: hidden; border-right: 3px solid #8b0000; }
+        .hero-science-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 1px; font-weight: 300; animation: fadeInUp 1s ease 3s both; font-style: italic; color: #e0e0e0; }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes bloodBlink { from, to { border-color: transparent; color: #8b0000; } 50% { border-color: #8b0000; color: #fff; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main creepy science style */
+        .main { background: #1a0000; padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(139,0,0,0.1); max-width: 1200px; margin: 0 auto; border: 2px solid #8b0000; position: relative; overflow: hidden; }
+        .main::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #8b0000, transparent); animation: ghostScan 6s linear infinite;
+        }
+        @keyframes ghostScan { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .back-btn { background: #8b0000; color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Creepster', cursive; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px #8b0000; }
+        .back-btn:hover { box-shadow: 0 0 25px #8b0000; transform: scale(1.05); }
+        .main h1 { color: #e0e0e0; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Creepster', cursive; letter-spacing: 3px; text-shadow: 0 0 10px #8b0000; animation: ghostFloat 4s ease-in-out infinite; }
+        @keyframes ghostFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .main h2 { color: #8b0000; font-size: 20px; margin: 30px 0 15px; font-family: 'Nosifer', cursive; letter-spacing: 1px; text-shadow: 0 0 5px #8b0000; border-bottom: 1px solid #8b0000; padding-bottom: 5px; position: relative; animation: bloodDripTitle 3s linear infinite; }
+        @keyframes bloodDripTitle { 0% { box-shadow: 0 0 5px #8b0000; } 50% { box-shadow: 0 0 15px #8b0000; } 100% { box-shadow: 0 0 5px #8b0000; } }
+        .main h2::after { content: '👻'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; animation: ghostFloat 2s ease-in-out infinite reverse; }
+        .main p { text-align: left; font-size: 16px; color: #ddd; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(139,0,0,0.1); padding: 15px; border-left: 4px solid #8b0000; border-radius: 0 5px 5px 0; position: relative; animation: textHaunt 2s ease-in-out infinite alternate; }
+        @keyframes textHaunt { 0% { opacity: 1; } 100% { opacity: 0.8; } }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; animation: ghostFloat 3s ease-in-out infinite; }
+        .main ul { color: #ddd; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; animation: liGhost 2.5s ease-in-out infinite; }
+        @keyframes liGhost { 0%, 100% { opacity: 1; transform: translateX(0); } 50% { opacity: 0.6; transform: translateX(3px); } }
+        .main li::before { content: '🧪'; position: absolute; left: 0; color: #8b0000; font-size: 14px; animation: bubbleFloat 2s ease-in-out infinite; }
+        @keyframes bubbleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        .main img { width: 100%; height: auto; border-radius: 0; margin: 20px 0; box-shadow: 0 5px 20px rgba(139,0,0,0.3); border: 2px solid #8b0000; animation: imgHaunt 3s ease-in-out infinite alternate; filter: sepia(0.3) brightness(0.9); }
+        @keyframes imgHaunt { 0% { opacity: 1; } 100% { opacity: 0.85; } }
+
+        /* Sidebar */
+        .sidebar { background: #1a0000; padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(139,0,0,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #8b0000; }
+        .sidebar h3 { color: #8b0000; border-bottom: 2px dashed #8b0000; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Creepster', cursive; letter-spacing: 1px; text-shadow: 0 0 5px #8b0000; animation: sidebarHaunt 2s ease-in-out infinite alternate; }
+        @keyframes sidebarHaunt { 0% { opacity: 1; } 100% { opacity: 0.9; } }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #0a0000; border-radius: 0; text-decoration: none; color: #ddd; transition: all 0.3s ease; border-left: 3px solid transparent; animation: linkGhost 3s ease-in-out infinite; }
+        .sidebar a:hover { background: #8b0000; color: #fff; transform: scale(1.02); border-left-color: #fff; box-shadow: 0 0 10px #8b0000; animation: none; }
+        @keyframes linkGhost { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-science-detail { padding: 80px 15px 60px; }
+            .hero-science-detail h1 { font-size: 28px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+   
+    <!-- Hero Section -->
+    <section class="hero-science-detail">
+        <div class="hero-science-detail-content">
+            <h1>Các Sự Thật Kinh Dị Về Những Bí Ẩn Khoa Học</h1>
+            <p>Horror of the Unknown </p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>KHOA HỌC LIÊN QUAN</h3>
+            <ul>
+                <li><a href="khoa-hoc-nang-cao-bai1.html">Sự thật kỳ lạ về khoa học</a></li>
+                <li><a href="khoa-hoc-nang-cao-bai2.html">Những bí ẩn khoa học</a></li>
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Horror Science</a></li>
+                <li><a href="#">Dark place</a></li>
+                <li><a href="#">Cosmic Terror</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='khoa-hoc.html'">← Quay lại Khoa Học</button>
+            
+            <h2>Giới Thiệu</h2>
+            <p>Khung cảnh ma quái đến rùng rợn cùng với bầu không khí âm u đến lạnh người của các địa điểm sau đây chắc chắn sẽ khiến bạn dựng tóc gáy nếu lỡ bước đến đó.</p>
+
+            <img src="https://images.unsplash.com/photo-1559670159-2f6a470a19d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
+
+            <h2>Chủ yếu tập chung địa điểm kinh dị</h2>
+            <p></p>
+            <ul>
+                <li><strong>Horror Fact:</strong> Could enable instant communication, breaking causality.</li>
+                <li><strong>Implication:</strong> Shit place to visit</li>
+            </ul>
+
+            <h2>1. Đầm lầy Manchac</h2>
+            <p>Không khí u ám, những ngôi mộ tập thể, cá sấu châu Mỹ hung tợn cũng như những thân cây có hình dáng ma quái là đặc trưng khiến đầm lầy Manchac ở Louisiana được mệnh danh một trong số những nơi rùng rợn nhất thế giới.Đầm lầy Manchac còn được biết đến với cái tên đầm lầy ma. Nó gắn liền với truyền thuyết về một lời nguyền thần bí từ những năm 1920. Có tới 3 ngôi làng cùng nhiều người dân sống trong vùng của đầm lầy ma đã biến mất một cách bí ẩn sau một cơn bão.</p>
+            <img src="https://e.khoahoc.tv/photos/image/112012/22/Manchac.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+            <h2>2. Nhà thương điên bị bỏ hoang ở Anh</h2>
+            <p>Đồi Cane (Cane Hill) là một nhà thương điên bị bỏ hoang từ lâu ở Croydon, London. Mở cửa lần đầu tiên vào năm 1882, nhà thương điên Đồi Cane lúc đỉnh điểm là nơi điều trị cho 2.000 bệnh nhân tâm thần. Mãi cho đến năm từ 1991 khi các bệnh nhân giảm dần, nhà thương điên này bị bỏ hoang. Trong khi toàn bộ bệnh nhân cũng như nhân viên của nhà thương điên đã rời đến nơi khác thì nhiều giường bệnh lẫn các trang thiết bị y tế bị bỏ lại, nằm lăn lóc, rải rác khắp nơi và bị hủy hoại theo năm tháng. Lịch sử và sự hoang phế của nơi này biến nó trở thành một nơi ma quái đến rợn người.</p>
+            <img src="https://e.khoahoc.tv/photos/image/112012/22/canehill.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+            <h2>3. Thị trấn ma Bhangarh</h2>
+            <p>Bhangarh là một thị trấn bị bỏ hoang ở Rajasthan, Ấn Độ và được mệnh danh là nơi ma quái, đáng sợ nhất ở quốc gia Nam Á này. Tương truyền ban đầu, Bhangarh được dựng lên để tưởng niệm một hoàng tử trong lịch sử Ấn Độ vào năm 1573. Tuy nhiên, do vướng phải một lời nguyền độc ác mà cuối cùng, vào năm 1783 nơi này bị bỏ hoang. Sự hoang phế của thị trấn qua năm tháng khiến người dân ở các vùng lân cận không dám bén mảng tới đây, đặc biệt là vào lúc hoàng hôn và trời tối.</p>
+            <img src="https://e.khoahoc.tv/photos/image/112012/22/bhangarh.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+             <h2>4. Thị trấn ma Centralia</h2>
+            <p>Vào năm 1962, một nhóm lính cứu hỏa đã đốt rác tại một mỏ hoang với mục đích dọn dẹp thị trấn. Trớ trêu là, ngọn lửa bùng cháy dữ dội, lan sâu vào mọi ngóc ngách của mỏ hoang. Đồng thời, ngọn lửa cũng lan rộng, thiêu đốt trong lòng đất, bên dưới các con phố của thị trấn. Kết quả là, người dân trong thị trấn lũ lượt bỏ xứ mà đi. Ngày nay, nguy hiểm rình rập khắp nơi xung quanh thị trấn Centralia bao gồm các loại khí độc hại, đường phố nứt toác, sụp đổ…</p>
+            <img src="https://e.khoahoc.tv/photos/image/2016/05/11/noi-dang-so-nhat-4.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+            <h2>5. Cổng địa ngục</h2>
+            <p>Đây là một hố gas tự nhiên có đường kính khoảng 99m, bốc cháy dữ dội suốt 40 năm qua. Năm 1971, trong một lần thăm dò địa chất tại sa mạc Karakum, Turkmenistan, các nhà địa chất Liên Xô đã khoan trúng một hang ngầm chứa khí gas tự nhiên. Lo ngại khí độc có thể bị giải phóng từ đây, các nhà địa chất quyết định châm lửa đốt hố và cho rằng, ngọn lửa sẽ tắt trong vài ngày. Tuy nhiên, trái với kỳ vọng của họ, do lượng khí gas quá nhiều nên hố vẫn bùng cháy cho đến ngày nay.</p>
+            <img src="https://e.khoahoc.tv/photos/image/2016/05/11/noi-dang-so-nhat-5.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+            <h2>6. Điện thờ Địa ngục (Sanctuary of Tophet)</h2>
+            <p>Được phát hiện ở Tunisia, Điện thờ Địa ngục chứa đựng hàng nghìn ngôi mộ trẻ em. Theo phỏng đoán của nhiều nhà khoa học, chúng có thể là nạn nhân của một cuộc thảm sát tàn khốc. Thậm chí, những đứa trẻ có thể đã bị giết và bị ăn thịt.</p>
+            <img src="https://e.khoahoc.tv/photos/image/112012/22/SanctuaryofTophet.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+            <h2>7. Thị trấn ma Pripyat</h2>
+            <p>Một trong những nơi rùng rợn, ma quái bậc nhất trên thế giới là thị trấn ma Pripyat của Ukrainie. Thảm họa hạt nhân năm 1986 đã khiến Nhà máy điện hạt nhân Chernobyl phải đóng cửa và tất cả cư dân ở các vùng lân cận phải sơ tán đi nơi khác, bỏ lại đằng sau một vùng hoang tàn và chết chóc khi các chất bức xạ phóng xạ vẫn còn tồn tại ở đây.</p>
+            <img src="https://e.khoahoc.tv/photos/image/2016/05/11/noi-dang-so-nhat-6.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+             <h2>8. Hang Actun Tunichil Muknal</h2>
+            <p>Hang động này ở Belize còn có tên là hang của những chiếc đầu lâu thủy tinh. Khắp hang Actun Tunichil Muknal ở Belize rải rác nhiều bộ xương người mà các nhà khảo cổ cho rằng, họ là nạn nhân của tục tế thần của người Maya cổ đại. Có 14 bộ hài cốt đã được phát hiện trong hang này, trong đó, nổi tiếng nhất là bộ hài cốt được gọi là Crystal Maiden của một trinh nữ trẻ, bị giết hại khi trở thành vật phẩm tế thần trong các nghi lễ tôn giáo.</p>
+            <img src="https://e.khoahoc.tv/photos/image/112012/22/ActunTunichilMuknal.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+            <h2>9. Rừng tự tử Aokigahara, Nhật Bản</h2>
+            <p>Aokigahara có nghĩa là Biển cây nhưng còn được tên gọi bằng một tên khác là là Jukai - “Khu rừng tự tử” bởi đây là địa điểm quyên sinh của nhiều người Nhật. Từ lâu đã bị đồn là bị quỷ ám, toàn bộ khu rừng luôn bị bao trùm trong bầu không khí rất tĩnh lặng, u ám và tối tăm. Hàng năm có hàng chục trường hợp đến đây tự tử. Do đó, các nhân viên tìm kiếm thường được phái vào rừng để tìm xác người quá cố.Lý do chính xác mà nhiều người chọn khu rừng này làm nơi kết thúc cuộc đời mình vẫn là một điều bí ẩn, nhưng người ta vẫn truyền tai nhau một câu chuyện về người đầu tiên chọn khu rừng để chết là do ảnh hưởng từ một cuốn tiểu thuyết.</p>
+            <img src="https://e.khoahoc.tv/photos/image/2016/05/11/noi-dang-so-nhat-8.jpg" alt="kd" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: voidSwirl 3s linear infinite;">
+
+
+            <h2>10. Nghĩa trang Chauchilla, Peru</h2>
+            <p>Nằm chôn vùi trong sa mạc hoang vu, cách thành phố Nazca ở Peru 30km, nghĩa trang Chauchilla khiến nhiều người lạnh gáy với các truyền thuyết ma quái được truyền tụng rộng rãi bởi người dân địa phương xung quanh các bộ hài cốt khô khốc, trắng hếu. Những bộ hài cốt này được đặt trong các hố và ở tư thế ngồi dựa lưng. Ra đời vào khoảng thế kỷ thứ 9, nhưng nghĩa trang Chauchilla chỉ được phát hiện vào năm 1920.</p>
+            <h2>Kết Luận</h2>
+            <p>Những nơi này kinh dị vãi đái ...Nhưng thật ra chỉ để hù thôi nơi kinh dị nhất là nơi con người mất đi nhân tính</p>
+
+            <button class="back-btn" onclick="window.location.href='khoa-hoc.html'" style="margin-top: 30px;">← Quay lại Khoa Học</button>
+        </main>
+    </div>
+
+    <footer style="
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="/linhkun.js"></script>
+</body>
+</html>

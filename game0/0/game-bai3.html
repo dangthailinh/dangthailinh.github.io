@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linh-Osimi</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"> <!-- Font Trung Hoa: Noto Serif SC -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1a0000 0%, #2d0000 100%); color: #ffd700; } /* Dark red for Chinese myth */
+        /* Hero Section với thần thoại Trung Hoa */
+        .hero-detail {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1720000000000-123456789abc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); /* Ảnh Wukong/Chinese myth placeholder - thay bằng ảnh thật */
+            background-size: cover;
+            background-position: center;
+            color: #ffd700;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Noto Serif SC', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 15px rgba(255,215,0,0.5); /* Gold glow for imperial */
+            animation: mythGlow 4s ease-in-out infinite alternate;
+        }
+        @keyframes mythGlow {
+            0%, 100% { opacity: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 15px rgba(255,215,0,0.5); }
+            50% { opacity: 0.95; text-shadow: 1px 1px 2px rgba(0,0,0,0.8), 0 0 10px rgba(255,215,0,0.3); }
+        }
+        .hero-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            z-index: 1;
+            mix-blend-mode: screen;
+        }
+        .hero-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-detail h1 { font-size: 32px; margin-bottom: 10px; letter-spacing: 2px; line-height: 1.2; font-weight: 700; color: #d32f2f; } /* Red for Chinese */
+        .hero-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 1px; font-weight: 400; animation: fadeInUp 1s ease 0.5s both; font-style: italic; color: #ffd700; }
+
+        /* Main với thần thoại style */
+        .main { background: linear-gradient(135deg, #2d0000 0%, #4d0000 100%); padding: 40px; border-radius: 0; box-shadow: inset 0 0 50px rgba(255,215,0,0.05); max-width: 1200px; margin: 0 auto; border: 2px solid #ffd700; border-style: double; }
+        .back-btn { background: #d32f2f; color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Noto Serif SC', serif; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px #d32f2f; border: 1px solid #ffd700; }
+        .back-btn:hover { box-shadow: 0 0 30px #d32f2f, 0 0 40px #ffd700; transform: scale(1.05); }
+        .main h1 { color: #ffd700; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Noto Serif SC', serif; letter-spacing: 3px; text-shadow: 0 0 10px #ffd700; }
+        .main h2 { color: #d32f2f; font-size: 20px; margin: 30px 0 15px; font-family: 'Noto Serif SC', serif; letter-spacing: 2px; text-shadow: 0 0 5px #ffd700; border-bottom: 1px solid #ffd700; padding-bottom: 5px; }
+        .main p { text-align: left; font-size: 16px; color: #ffd700; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(255,215,0,0.05); padding: 15px; border-left: 3px solid #d32f2f; border-radius: 0 5px 5px 0; }
+        .main ul { color: #ffd700; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '🐒'; position: absolute; left: 0; } /* Monkey icon for Wukong */
+        .main img { width: 100%; height: auto; border-radius: 0; border: 2px solid #ffd700; box-shadow: 0 0 20px rgba(255,215,0,0.3); margin: 20px 0; filter: sepia(0.2); } /* Sepia for ancient myth feel */
+
+        /* Sidebar */
+        .sidebar { background: linear-gradient(135deg, #4d0000 0%, #6d0000 100%); padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(255,215,0,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #ffd700; }
+        .sidebar h3 { color: #ffd700; border-bottom: 2px solid #ffd700; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Noto Serif SC', serif; letter-spacing: 1px; text-shadow: 0 0 5px #ffd700; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #2d0000; border-radius: 0; text-decoration: none; color: #ffd700; transition: all 0.3s ease; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: #d32f2f; color: #ffd700; transform: translateX(5px); border-left-color: #ffd700; box-shadow: 0 0 10px #ffd700; }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-detail { padding: 80px 15px 60px; }
+            .hero-detail h1 { font-size: 24px; letter-spacing: 1px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+<header style="background: linear-gradient(135deg, #1a0f0f 0%, #2d1b14 100%); border-bottom: 4px solid #b5380b; box-shadow: 0 0 20px rgba(255,215,0,0.3), inset 0 0 20px rgba(0,0,0,0.5); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Cinzel', serif; position: sticky; top: 0; z-index: 100;">
+    <!-- Logo với medieval style -->
+    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 40px; height: 40px; background: #ffd700; border: 2px solid #8b4513; position: relative; font-family: 'Cinzel', serif; text-align: center; line-height: 40px; font-size: 20px; font-weight: bold; color: #1a0f0f; text-shadow: 1px 1px 2px #000; box-shadow: 0 0 10px #ffd700;">
+            ⚔
+        </div>
+        <span style="font-size: 24px; font-weight: 700; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); color: #ffd700;">Linh OsiMi</span>
+    </div>
+    
+ 
+    
+    
+</header>
+
+<style>
+/* CSS bổ sung cho header trung cổ */
+.logo-container:hover { text-shadow: 2px 2px 6px rgba(0,0,0,0.8), 0 0 10px #ffd700; }
+nav a:hover {
+    color: #ffd700; border-bottom-color: #ffd700; text-shadow: 1px 1px 4px #000, 0 0 5px #ffd700; transform: scale(1.05);
+}
+.header-right input::placeholder {
+    color: #8b4513; letter-spacing: 1px;
+}
+.header-right input:focus {
+    box-shadow: 0 0 15px #ffd700; outline: none;
+}
+.theme-toggle:hover {
+    box-shadow: 0 0 15px #ffd700; transform: scale(1.1);
+}
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 10px; }
+    nav ul { flex-direction: column; gap: 10px; text-align: center; }
+    .header-right { width: 100%; justify-content: center; }
+    .header-right input { width: 100%; max-width: 200px; }
+    .logo-container span { font-size: 20px; }
+}
+</style>
+
+    <!-- Hero Section -->
+    <section class="hero-detail">
+        <div class="hero-detail-content">
+            <h1>BLACK MYTH: WUKONG</h1>
+            <p>PHÂN TÍCH THẦN THOẠI TRUNG HOA - HÀNH TRÌNH TÔN NGÔ KHÔNG</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>GAME LIÊN QUAN</h3>
+            <ul>
+                <li><a href="game-bai0.html">Genshin Impact Natlan</a></li>
+                <li><a href="game-bai1.html">Elden Ring Shadow</a></li>
+                <li><a href="game-bai2.html">CP 2077</a></li>
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Action RPG</a></li>
+                <li><a href="#">Chinese Myth</a></li>
+                <li><a href="#">Soulslike</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='game.html'">← Quay lại Game Zone</button>
+            
+            <h2>Giới Thiệu</h2>
+            <p>Black Myth: Wukong là hành trình thần thoại dựa trên Tây Du Ký, nơi bạn hóa thân Tôn Ngô Không chiến đấu yêu quái. Với phong cách Trung Hoa cổ điển, phân tích này khám phá cách Game Science tái hiện Journey to the West, từ combat acrobatic đến lore sâu sắc, như một cuốn sử thi sống động.</p>
+
+            <img src="https://images.unsplash.com/photo-1720000000000-123456789abc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wukong Battle" style="width: 100%; border-radius: 0; border: 2px solid #ffd700; box-shadow: 0 0 20px #ffd700; margin: 20px 0;">
+
+            <h2>Cốt Truyện & Lore</h2>
+            <p>DLC lấy cảm hứng từ 81 kiếp nạn của Ngộ Không, với narrative phi tuyến tính qua chapters. Lore phong phú qua scrolls và dialogues, kết nối Phật giáo - Đạo giáo. Điểm 9.5/10 - không chỉ hành động, mà còn triết lý về tự do và sức mạnh.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Twists dựa trên kinh điển, voice acting Trung Quốc authentic.</li>
+                <li><strong>Điểm yếu:</strong> Một số boss lore thiếu depth so với souls games.</li>
+            </ul>
+
+            <h2>Gameplay & Boss</h2>
+            <p>Combat souls-like với staff transformations và spells (cloud somersault, 72 changes). Boss như White Bone Demon đòi hỏi pattern recognition, gợi nhớ Sekiro nhưng fantasy Trung. Exploration qua mountains và temples, với secrets ẩn trong folklore.</p>
+            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Boss Fight" style="width: 100%; border-radius: 0; border: 2px solid #ffd700; box-shadow: 0 0 20px #ffd700; margin: 20px 0;">
+
+            <h2>Phong Cách & Âm Thanh</h2>
+            <p>Visual ink-painting inspired, với cel-shaded models và dynamic lighting. Âm nhạc guzheng và erhu tạo cảm giác cổ xưa, mix modern orchestra cho epic battles. Trên PC, 60FPS smooth như một bộ phim hoạt hình thần thoại.</p>
+
+            <h2>Kết Luận</h2>
+            <p>Black Myth: Wukong là kiệt tác thần thoại Trung Hoa, điểm 9.7/10 - phải chơi nếu yêu action fantasy. Tiếp theo: Nioh 3?</p>
+
+            <button class="back-btn" onclick="window.location.href='game.html'" style="margin-top: 30px;">← Quay lại Game Zone</button>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kiến Thức VN. | Game Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="/linhkun.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linh-Osimi | Hành Trình Khoa Học Vũ Trụ</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <style>
+        a { text-decoration: none !important; color: inherit; }
+        a:hover { color: var(--primary-color); transition: color 0.3s ease; }
+
+        .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
+        .detail-header { position: relative; padding: 20px; text-align: center; }
+        .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
+        .detail-title { font-size: 32px; color: var(--primary-color); margin: 20px 0; z-index: 2; position: relative; font-weight: 700; }
+        .detail-subtitle { font-size: 18px; color: #666; margin-bottom: 20px; font-style: italic; }
+        .detail-meta { text-align: center; font-size: 14px; color: #666; margin: 10px 0; }
+        .back-btn-detail { background: var(--primary-color); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; text-align: center; transition: all 0.3s; }
+        .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
+        .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
+        .detail-content { flex: 1; line-height: 1.8; font-size: 17px; color: #222; text-align: justify; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; font-weight: 600; }
+        .detail-content ul { margin-left: 25px; list-style-type: disc; }
+        .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
+        .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
+        .sidebar-detail ul { list-style: none; padding: 0; }
+        .sidebar-detail li { margin: 10px 0; }
+        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+
+        @media (max-width: 768px) {
+            .container-detail { flex-direction: column; }
+            .decor-image { width: 80px; top: 10px; left: 10px; }
+            .detail-title { font-size: 24px; }
+            .detail-content img { margin: 10px 0; }
+        }
+    </style>
+</head>
+<body class="detail-page">
+    <header>
+        <div class="logo">🧬 Linh Osimi Research</div>
+        <div class="header-right">
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
+    </header>
+
+    <div class="detail-header">
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+        </svg>
+        <h1 class="detail-title">Năng Lượng Tối: Bí Ẩn Lớn Nhất Trong Vũ Trụ</h1>
+        <p class="detail-subtitle">Một góc nhìn khoa học hiện đại về lực vô hình đang chi phối sự giãn nở của vũ trụ</p>
+        <div class="detail-meta">Ngày đăng: 15/10/2025 | Tác giả: Linh Osimi</div>
+    </div>
+
+    <div class="container-detail">
+        <main class="detail-content">
+            <p>
+                Trong hơn một thế kỷ qua, các nhà khoa học đã dần khám phá được cấu trúc và bản chất của vũ trụ — từ sự hình thành của các thiên hà cho đến hằng số vũ trụ bí ẩn. Tuy nhiên, chỉ đến cuối thế kỷ XX, một phát hiện chấn động đã thay đổi hoàn toàn cách con người nhìn về không gian: **vũ trụ không chỉ giãn nở, mà còn giãn nở với tốc độ ngày càng tăng**.
+            </p>
+
+            <img src="https://cdn.mos.cms.futurecdn.net/5K7Qk3yKcJgNXYhzWcyGfN.jpg" alt="Mô phỏng năng lượng tối chi phối vũ trụ">
+
+            <h2>Khái niệm về Năng lượng Tối</h2>
+            <p>
+                Năng lượng tối (Dark Energy) là dạng năng lượng giả định chiếm khoảng 68% tổng năng lượng trong vũ trụ. Nó không phát sáng, không hấp thụ ánh sáng, và chỉ được phát hiện thông qua **ảnh hưởng hấp dẫn** của nó lên sự giãn nở vũ trụ. 
+            </p>
+
+            <ul>
+                <li><strong>Phát hiện đầu tiên:</strong> năm 1998, hai nhóm nghiên cứu độc lập phát hiện các siêu tân tinh loại Ia đang di chuyển xa hơn dự đoán.</li>
+                <li><strong>Ảnh hưởng vũ trụ học:</strong> năng lượng tối khiến không gian giãn nở nhanh hơn theo thời gian.</li>
+                <li><strong>Giả thuyết:</strong> nó có thể là một dạng của hằng số vũ trụ Λ, hoặc một trường năng lượng động gọi là "quintessence".</li>
+            </ul>
+
+            <h2>Thách thức trong Nghiên cứu</h2>
+            <p>
+                Mặc dù là yếu tố chiếm ưu thế trong vũ trụ, năng lượng tối vẫn là một **ẩn số gần như tuyệt đối**. Các nhà khoa học đang sử dụng dữ liệu từ kính viễn vọng James Webb, sứ mệnh Euclid của ESA, và các dự án đo nền vi sóng vũ trụ (CMB) để tìm manh mối.
+            </p>
+
+            <img src="https://cdn.mos.cms.futurecdn.net/DkVShEzb4pqKhJ8yQwbyiC.jpg" alt="Biểu đồ giãn nở vũ trụ theo thời gian">
+
+            <h2>Tương Lai của Vũ Trụ</h2>
+            <p>
+                Nếu năng lượng tối tiếp tục chi phối, vũ trụ có thể sẽ tiến đến kịch bản “<em>Big Rip</em>” – nơi mọi cấu trúc vật chất, từ thiên hà đến nguyên tử, bị xé toạc bởi sự giãn nở không ngừng. Tuy nhiên, đây vẫn chỉ là một trong nhiều giả thuyết, bởi bản chất thật của năng lượng tối vẫn còn nằm ngoài tầm hiểu biết hiện tại.
+            </p>
+
+            <button class="back-btn-detail" onclick="window.location.href='/khoa-hoc0/1/khoa-hoc2.html'">← Quay lại chuyên mục Khoa Học</button>
+        </main>
+
+        <aside class="sidebar-detail">
+            <h3>Bài viết liên quan</h3>
+            <ul>
+                <li><a href="#">Sóng hấp dẫn và tương lai của vật lý vũ trụ</a></li>
+                <li><a href="#">Kính James Webb và hành trình truy tìm hành tinh có sự sống</a></li>
+                <li><a href="#">Vật chất tối – Mặt khuất của vũ trụ</a></li>
+            </ul>
+
+            <h3>Chuyên mục nổi bật</h3>
+            <ul>
+                <li><a href="#">Thiên văn học hiện đại</a></li>
+                <li><a href="#">Công nghệ không gian</a></li>
+                <li><a href="#">Vật lý lượng tử ứng dụng</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer style="
+      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+      color: #cce0ff;
+      text-align: center;
+      padding: 30px 20px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1.5px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+    ">
+      <p style="
+        margin: 0;
+        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+        animation: glow 3s ease-in-out infinite alternate;
+      ">
+        &copy; 2025 <span style="color:#00e0ff;">OSIMI Science</span> | <span style="color:#ff69b4;">Linh Osimi Research</span>
+      </p>
+
+      <div class="stars"></div>
+
+      <style>
+        @keyframes glow {
+          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+        }
+        .stars {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: transparent;
+          overflow: hidden;
+        }
+        .stars::before, .stars::after {
+          content: "";
+          position: absolute;
+          top: -10px;
+          width: 2px;
+          height: 2px;
+          background: white;
+          border-radius: 50%;
+          animation: twinkle 5s infinite ease-in-out;
+          box-shadow:
+            20px 30px white,
+            80px 120px white,
+            160px 90px white,
+            240px 50px white,
+            300px 200px white,
+            400px 150px white,
+            500px 80px white,
+            600px 180px white,
+            700px 40px white;
+        }
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.3); }
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+      </style>
+    </footer>
+
+    <div id="postModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="/linhkun.js"></script>
+</body>
+</html>

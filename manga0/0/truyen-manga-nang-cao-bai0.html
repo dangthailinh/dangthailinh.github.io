@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linh-Osimi</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&family=Bangers&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; }
+        /* Hero Section manga-style red-white */
+        .hero-manga-detail {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1618005182382-a6efc2a6c4e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); /* Chainsaw Man panel Unsplash */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .hero-manga-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(220,20,60,0.2) 0%, transparent 70%); /* Crimson red gradient */
+            z-index: 1;
+        }
+        .hero-manga-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-manga-detail h1 { font-family: 'Bangers', cursive; font-size: 42px; margin-bottom: 10px; text-shadow: 3px 3px 0 #dc143c, 4px 4px 0 #000; animation: typewriter 2s steps(20) 0s 1 normal both, blink 0.75s step-end infinite; white-space: nowrap; overflow: hidden; border-right: 3px solid #dc143c; }
+        .hero-manga-detail p { font-size: 18px; opacity: 0.95; animation: fadeInUp 1s ease 2s both; font-weight: 300; color: #fff; }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes blink { from, to { border-color: transparent; } 50% { border-color: #dc143c; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main manga-blog style red-white */
+        .main { background: #1a1a1a; padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(220,20,60,0.1); max-width: 1200px; margin: 0 auto; border: 2px solid #dc143c; }
+        .back-btn { background: #dc143c; color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Bangers', cursive; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 15px #dc143c; transform: skew(-5deg); }
+        .back-btn:hover { box-shadow: 0 0 25px #dc143c; transform: skew(-5deg) scale(1.05); }
+        .main h1 { color: #fff; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Bangers', cursive; letter-spacing: 3px; text-shadow: 0 0 10px #dc143c; transform: skew(-2deg); }
+        .main h2 { color: #dc143c; font-size: 20px; margin: 30px 0 15px; font-family: 'Noto Sans JP', sans-serif; letter-spacing: 1px; text-shadow: 0 0 5px #dc143c; border-bottom: 2px dashed #dc143c; padding-bottom: 5px; position: relative; }
+        .main h2::after { content: '💥'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; }
+        .main p { text-align: left; font-size: 16px; color: #ddd; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(220,20,60,0.1); padding: 15px; border-left: 4px solid #dc143c; border-radius: 0 10px 10px 0; position: relative; }
+        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
+        .main ul { color: #ddd; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '⚡'; position: absolute; left: 0; color: #dc143c; font-size: 14px; }
+        .main img { width: 100%; height: auto; border-radius: 10px; margin: 20px 0; box-shadow: 0 5px 20px rgba(220,20,60,0.3); border: 2px solid #dc143c; transform: skew(-1deg); }
+
+        /* Blood Effect Animation */
+        .blood-drip { position: relative; }
+        .blood-drip::after {
+            content: '';
+            position: absolute; top: 0; right: 0; width: 2px; height: 20px; background: #dc143c; animation: drip 2s linear infinite; opacity: 0.7;
+        }
+        @keyframes drip {
+            0% { height: 0; }
+            50% { height: 20px; }
+            100% { height: 0; transform: translateY(20px); }
+        }
+        .main h2.blood-drip::after, .main p.blood-drip::after { content: ''; animation: drip 3s linear infinite; }
+
+        /* Sidebar */
+        .sidebar { background: #2a2a2a; padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(220,20,60,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #dc143c; }
+        .sidebar h3 { color: #dc143c; border-bottom: 2px dashed #dc143c; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Bangers', cursive; letter-spacing: 1px; text-shadow: 0 0 5px #dc143c; transform: skew(-3deg); }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: #1a1a1a; border-radius: 0; text-decoration: none; color: #ddd; transition: all 0.3s ease; border-left: 3px solid transparent; transform: skew(-2deg); }
+        .sidebar a:hover { background: #dc143c; color: #fff; transform: skew(-2deg) translateX(5px); border-left-color: #fff; box-shadow: 0 0 10px #dc143c; }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-manga-detail { padding: 80px 15px 60px; }
+            .hero-manga-detail h1 { font-size: 32px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header style="background: #300e0e; border-bottom: 2px solid #000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Special Elite', monospace; position: sticky; top: 0; z-index: 100;">
+        <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+            <img src="l.jpg" alt="INH OMSIMI" class="logo-img" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #000;">
+            <span style="font-size: 24px; font-weight: 600; letter-spacing: 1px; color: #000; text-shadow: 1px 1px 1px #fff;">INH OSIMI</span>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" style="background: #000; color: #fff; border: 1px solid #000; padding: 8px 12px; border-radius: 0; cursor: pointer; transition: all 0.3s; font-family: 'Special Elite', monospace; font-size: 12px; text-transform: uppercase;">🌙</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-manga-detail">
+        <div class="hero-manga-detail-content">
+            <h1>Chainsaw Man</h1>
+            <p>Hành trình của denji</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>SERIES LIÊN QUAN</h3>
+             <ul>
+                <li><a href="truyen-manga-bai0.html">Berserk</a></li>
+                <li><a href="truyen-manga-bai1.html">Attack on Titan Ending</a></li>
+                <li><a href="truyen-manga-bai2.html">jjk thầy cúng</a></li>
+               
+                <li><a href="truyen-manga-nang-cao-bai1.html">My Hero Academia Dark</a></li>
+                <li><a href="truyen-manga-nang-cao-bai2.html">ichi the killer</a></li>
+            </ul
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Seinen</a></li>
+                <li><a href="#">Chainsaw Man</a></li>
+                <li><a href="#">Denji</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='truyen-manga.html'">← Quay lại Truyện (Manga)</button>
+            
+            <h2 class="blood-drip">Tổng quan về bộ Manga này:</h2>
+            <p class="blood-drip">Chainsaw Man là một hiện tượng manga shonen đương đại không chỉ bởi nhịp độ hành động điên cuồng hay hình ảnh bạo lực táo bạo, mà còn bởi sự pha trộn tinh tế giữa chủ nghĩa hiện sinh, hài hước đen tối và lòng trắc ẩn ẩn sâu dưới lớp vỏ hỗn loạn. Tác phẩm xoay quanh Denji – một cậu thiếu niên nghèo khổ, sống như một con chó săn quỷ (Devil Hunter) để trả nợ, cho đến khi hợp nhất với Pochita – con quỷ cưa máy trung thành, trở thành Chainsaw Man, sinh vật sở hữu sức mạnh hủy diệt nhưng khao khát những điều giản dị nhất: một bữa ăn ngon, một cái ôm, hay được yêu thương như một con người. Phong cách kể chuyện của Tatsuki Fujimoto mang đậm dấu ấn phi tuyến tính, đứt gãy có chủ đích, kết hợp ngôn ngữ hình ảnh bạo lực, kỳ dị với những khoảnh khắc cảm xúc chân thật đến nghẹn lòng. Ông không xây dựng thế giới quỷ dữ theo lối thiện – ác nhị nguyên, mà mô tả chúng như phản chiếu của nỗi sợ hãi tập thể (Quỷ Vũ khí nguyên tử, Quỷ Internet, Quỷ Tình dục…), từ đó đặt ra câu hỏi: liệu con người có đang tự nuôi dưỡng quỷ dữ bằng chính nỗi sợ và ham muốn của mình?</p>  
+
+
+            <img src="https://tse3.mm.bing.net/th/id/OIP.DNdXMnhHJ2wWp5jV1XwJOwHaFo?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Denji Chainsaw" style="width: 100%; border-radius: 0; border: 2px solid #dc143c; box-shadow: 0 0 20px #dc143c; margin: 20px 0; transform: skew(-1deg);">
+
+            <h2 class="blood-drip">Về nhân vật;</h2>
+            <p class="blood-drip">Các nhân vật trong Chainsaw Man đều mang nét méo mó tâm lý đặc trưng của thế hệ hậu hiện đại: Denji – ngây thơ đến mức ngu ngơ, nhưng lại là hiện thân của khát vọng sống nguyên thủy; Makima – lạnh lùng, đầy toan tính, đại diện cho sự tha hóa của quyền lực và kiểm soát; Aki và Power – những linh hồn tổn thương tìm kiếm gia đình trong thế giới vô cảm. Chính sự phi lý trong hành vi, mâu thuẫn trong động cơ và sự dễ tổn thương của họ khiến người đọc vừa thấy hoang mang, vừa đồng cảm sâu sắc. Về nội dung, Chainsaw Man không chỉ là hành trình săn quỷ, mà là bản trường ca về sự cô đơn, nỗi khao khát được kết nối và bi kịch của những con người bị tước đoạt quyền làm người. Ý nghĩa cốt lõi của tác phẩm nằm ở sự đối lập giữa sự tàn bạo của thế giới và sự thuần khiết của những ước mơ nhỏ bé – và thông điệp ngầm được gửi gắm là: dù sống trong địa ngục, con người vẫn có quyền mơ về thiên đường, dù chỉ là một lát bánh mì kẹp thịt. Với lối kể chuyện táo bạo, nhân vật đa chiều và chiều sâu triết lý ẩn dưới lớp hài hước thô ráp, Chainsaw Man không chỉ là manga giải trí, mà là một tấm gương phản chiếu xã hội đương đại – nơi con người vừa săn quỷ, vừa nuôi quỷ trong tim mình.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Gore effects iconic, animation potential insane.</li>
+                <li><strong>Điểm yếu:</strong> Pacing chaotic, but that's the charm.</li>
+            </ul>
+
+            <h2 class="blood-drip">Về cu em nhân vật chính:</h2>
+            <p class="blood-drip">Từ con chó săn quỷ đến... con người khao khát được yêuDenji là hiện thân hoàn hảo của tháp nhu cầu Maslow bị sập từ tầng 2.
+
+Tầng 1 (sinh lý): Ăn no, ngủ kỹ, không nợ nần → Mơ ước lớn nhất của Denji là “được ăn xúc xích” và “có bạn gái”.
+Tầng 2 (an toàn): Không có. Bị xã hội ruồng bỏ, sống dưới đáy, làm việc như nô lệ.
+Tầng 3 (yêu thương & kết nối): Khao khát tột cùng, nhưng liên tục bị phản bội, lợi dụng, tổn thương.
+Denji không ngu – cậu chỉ chưa bao giờ được dạy cách làm người. Cậu lớn lên trong nghèo đói, bạo lực và cô đơn, nên cảm xúc của cậu thô ráp, trực diện, và đầy vụng về. Cậu không biết cách bày tỏ tình cảm – nên ôm chặt, khóc òa, hoặc đòi sờ ngực thành “ngôn ngữ tình yêu” duy nhất cậu biết.
+
+Nhưng chính sự ngây thơ nguyên thủy ấy lại là điểm sáng nhất trong thế giới u ám của Chainsaw Man. Trong khi Makima thao túng bằng tình cảm, Aki giấu nỗi đau sau lý tưởng, Power sống ích kỷ để tự bảo vệ – thì Denji yêu thương một cách ngu ngốc, trung thực và không toan tính. Cậu sẵn sàng hy sinh mạng sống chỉ để một người bạn không phải khóc.</p>
+            <img src="https://tse1.mm.bing.net/th/id/OIP.Y0dbBNJYSNjiMAQ5Sq3sjAHaDz?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Character Art" style="width: 100%; border-radius: 0; border: 2px solid #dc143c; box-shadow: 0 0 20px #dc143c; margin: 20px 0; transform: skew(-1deg);">
+
+            <h2 class="blood-drip"> Bi kịch của Denji: Càng cố làm người, càng bị đối xử như quái vật</h2>
+            <p class="blood-drip">Khi Denji biến thành Chainsaw Man, xã hội sùng bái sức mạnh của cậu, nhưng ghê tởm con người thật của cậu. Họ gọi cậu là “vũ khí”, “công cụ”, “con quỷ” – chưa bao giờ là “Denji”.
+
+Ngay cả khi cậu cứu cả thế giới, không ai hỏi cậu có mệt không, có buồn không, có muốn được ôm không.
+→ Đây là lời phê phán sắc bén về cách xã hội lợi dụng những kẻ yếu thế, rồi vứt bỏ họ khi hết giá trị.</p>
+
+            <h2 class="blood-drip">Bộ Manga tự thẩm theo tôi</h2>
+            <p class="blood-drip">Nói chung mới đọc hay xem , thì nó hao hao main cùng dàn harem của anh ấy nhưng sau khi đọc qua các diễn biến thì thấy cũng ổn act MAKIMI là act hay nhất còn lại chưa đọc nên ko rõ.</p>
+
+            <button class="back-btn" onclick="window.location.href='truyen-manga.html'" style="margin-top: 30px;">← Quay lại Truyện (Manga)</button>
+        </main>
+    </div>
+
+   
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="/linhkun.js"></script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linh-Osimi</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"> <!-- Font 8-bit retro -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; }
+        /* Hero Section với neon & 64bit */
+        .hero-game {
+            background: linear-gradient(45deg, #000 0%, #0a0a0a 50%, #000 100%), url('https://wallpaperaccess.com/full/2638146.png'); /* Background grid pixel-like */
+            background-size: cover, 100px 100px;
+            background-position: center;
+            color: #00ff00; /* Neon green */
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; /* Neon glow */
+            animation: neonFlicker 3s ease-in-out infinite alternate;
+        }
+        @keyframes neonFlicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; }
+            50% { opacity: 0.9; text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+        }
+        .hero-game::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, transparent 70%);
+            z-index: 1;
+            mix-blend-mode: screen; /* Blend mode cho neon effect */
+        }
+        .hero-game-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-game h1 { font-size: 36px; margin-bottom: 10px; letter-spacing: 4px; line-height: 1.2; }
+        .hero-game p { font-size: 16px; opacity: 0.8; letter-spacing: 2px; font-weight: 400; animation: fadeInUp 1s ease 0.5s both; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main với 64bit style */
+        .main { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 40px; border-radius: 0; box-shadow: inset 0 0 50px rgba(0,255,0,0.05); max-width: 1200px; margin: 0 auto; border: 2px solid #00ff00; border-style: dashed; }
+        .back-btn { background: #00ff00; color: #000; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Press Start 2P', cursive; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px #00ff00; }
+        .back-btn:hover { box-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00; transform: scale(1.05); }
+        .main h1 { color: #00ff00; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Press Start 2P', cursive; letter-spacing: 3px; text-shadow: 0 0 10px #00ff00; }
+        .main p { text-align: center; font-size: 14px; color: #ccc; margin-bottom: 40px; letter-spacing: 1px; }
+
+        /* Card Grid với neon & pixel */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .card-link { text-decoration: none; color: inherit; display: block; }
+        .card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); /* Dark pixel-like */
+            border: 2px solid #00ff00; /* Neon border */
+            border-radius: 0; /* Sharp corners 64bit */
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,255,0,0.3), inset 0 0 10px rgba(0,255,0,0.1); /* Neon glow inside/out */
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+            font-family: 'Press Start 2P', cursive; /* Pixel font */
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: linear-gradient(45deg, #00ff00, #ff00ff, #00ff00, #ff00ff); background-size: 400% 400%; animation: neonBorder 2s linear infinite; z-index: -1; border-radius: 0; }
+        @keyframes neonBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 0 40px rgba(0,255,0,0.5), inset 0 0 20px rgba(0,255,0,0.2);
+        }
+        .card-img { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            border-radius: 0; 
+            margin-bottom: 20px; 
+            border: 1px solid #00ff00; /* Neon frame */
+            image-rendering: pixelated; /* 64bit pixel art effect */
+            box-shadow: 0 0 15px rgba(0,255,0,0.3);
+        }
+        .playtime { font-size: 12px; color: #00ff00; margin-bottom: 10px; font-family: 'Press Start 2P', cursive; letter-spacing: 1px; }
+        .genre-tags { display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }
+        .genre-tag { background: rgba(0,255,0,0.2); padding: 4px 8px; border-radius: 0; font-size: 10px; color: #00ff00; font-weight: 700; border: 1px solid #00ff00; text-transform: uppercase; }
+        .card-diagram { 
+            background: rgba(0,255,0,0.05); 
+            padding: 15px; 
+            border-radius: 0; 
+            margin: 15px 0; 
+            font-size: 12px; 
+            color: #ccc; 
+            border-left: 4px solid #00ff00; 
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 3px #00ff00;
+        }
+        .card h3 { color: #00ff00; margin: 15px 0 10px; font-size: 18px; font-weight: 700; text-shadow: 0 0 5px #00ff00; letter-spacing: 2px; }
+        .card-meta { font-size: 12px; color: #888; margin-bottom: 0; font-style: italic; letter-spacing: 1px; }
+
+        /* Sub-section */
+        .sub-section { margin-top: 70px; padding-top: 40px; border-top: 2px dashed #00ff00; }
+        .sub-section h2 { color: #00ff00; text-align: center; font-size: 28px; margin-bottom: 30px; position: relative; font-family: 'Press Start 2P', cursive; letter-spacing: 3px; text-shadow: 0 0 10px #00ff00; }
+        .sub-section h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: #00ff00; box-shadow: 0 0 10px #00ff00; }
+
+        /* Pagination */
+        .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 50px; }
+        .pagination button { padding: 12px 20px; border: 2px solid #00ff00; background: transparent; color: #00ff00; cursor: pointer; border-radius: 0; transition: all 0.3s; font-weight: 700; font-size: 14px; font-family: 'Press Start 2P', cursive; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0,255,0,0.3); }
+        .pagination button:hover, .pagination button.active { background: #00ff00; color: #000; transform: scale(1.05); box-shadow: 0 0 20px #00ff00; }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-game { background-attachment: scroll; padding: 80px 15px 60px; }
+            .hero-game h1 { font-size: 24px; letter-spacing: 2px; }
+            .main { padding: 20px; margin: 20px; }
+            .card-grid { grid-template-columns: 1fr; gap: 20px; }
+            .sub-section h2 { font-size: 20px; letter-spacing: 1px; }
+        }
+    </style>
+</head>
+<body>
+  <header class="header-8bit">
+  <!-- Logo -->
+  <div class="logo-container">
+    <div class="pixel-logo">
+      <span>8</span>
+    </div>
+    <span class="logo-text">LiNH OsiGame</span>
+  </div>
+
+  <!-- Nút menu (hiện trên mobile) -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- Thanh điều hướng -->
+  <nav id="mainNav">
+    <ul>
+      <li><a href="/khoa-hoc0/0/khoa-hoc.html">Khoa học</a></li>
+      <li><a href="nghe-thuat.html">Nghệ thuật</a></li>
+      <li><a href="/phim0/0/phim.html">Phim</a></li>
+      <li><a href="/manga0/0/truyen-manga.html">Truyện (Manga)</a></li>
+      <li><a href="am-nhac.html">Âm nhạc</a></li>
+      <li><a href="game.html" class="active">Game</a></li>
+    </ul>
+  </nav>
+<div class="header-right">
+    
+  </div>
+
+</header>
+
+<style>
+/* ====== HEADER CHÍNH ====== */
+.header-8bit {
+  background: linear-gradient(135deg, #000 0%, #0a0a0a 100%);
+  border-bottom: 4px solid #00ff00;
+  box-shadow: 0 0 20px rgba(0,255,0,0.5);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ====== LOGO ====== */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pixel-logo {
+  width: 40px;
+  height: 40px;
+  background: #00ff00;
+  border: 2px solid #000;
+  image-rendering: pixelated;
+  position: relative;
+  box-shadow: 0 0 10px #00ff00;
+}
+.pixel-logo span {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+}
+.logo-text {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px #00ff00;
+  color: #00ff00;
+}
+
+/* ====== NAV MENU ====== */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #ccc;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 5px;
+}
+nav ul li a:hover,
+nav ul li a.active {
+  color: #00ff00;
+  border-bottom-color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+  transform: scale(1.05);
+}
+
+/* ====== NÚT GIAO DIỆN ====== */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.theme-toggle {
+  background: #00ff00;
+  border: none;
+  color: #000;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px #00ff00;
+}
+.theme-toggle:hover {
+  box-shadow: 0 0 15px #00ff00;
+  transform: scale(1.1);
+}
+
+/* ====== NÚT MENU (CHỈ HIỆN TRÊN MOBILE) ====== */
+.menu-toggle {
+  display: none;
+  font-size: 20px;
+  color: #00ff00;
+  cursor: pointer;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+/* ====== RESPONSIVE CHO MOBILE ====== */
+@media (max-width: 768px) {
+  .header-8bit {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .menu-toggle {
+    display: block;
+    align-self: flex-end;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+    display: none;
+  }
+  nav ul.show {
+    display: flex;
+  }
+  .header-right {
+    width: 100%;
+    justify-content: center;
+  }
+  .logo-text {
+    font-size: 16px;
+  }
+}
+</style>
+
+<script>
+function toggleMenu() {
+  const navList = document.querySelector("nav ul");
+  navList.classList.toggle("show");
+}
+</script>
+
+
+    <!-- Hero Section -->
+    <section class="hero-game">
+        <div class="hero-game-content">
+            <h1>GAME ZONE</h1>
+            <p>Blog về game , + 1 số mini game xàm.</p>
+        </div>
+    </section>
+
+    <main class="main">
+        <button class="back-btn" onclick="window.location.href='/index.html'">← Quay về Trang chủ</button>
+        
+        <!-- Grid card chính -->
+        <div class="card-grid">
+            <a href="game-bai0.html" class="card-link">
+                <div class="card">
+                    <img src="https://cdn.mos.cms.futurecdn.net/JarKa4TVZxSCuN8x8WNPSN.jpg" alt="Genshin Impact" class="card-img">
+                    <div class="playtime">⏱️ 150+ giờ chơi</div>
+                   
+                    <h3>Genshin Impact </h3>
+                    <div class="card-meta">Nov 05, 2024 | Game Pro</div>
+                </div>
+            </a>
+
+            <a href="game-bai1.html" class="card-link">
+                <div class="card">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.DopH7jg6FW3_XmKeDqY0ogHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Elden Ring" class="card-img">
+                    <div class="playtime">⏱️ 80+ giờ chơi</div>
+                    
+                    <h3>Elden Ring DLC: Shadow of the Erdtree Review</h3>
+                    <div class="card-meta">Dec 05, 2025 | Soulsborne Fan</div>
+                </div>
+            </a>
+
+            <a href="game-bai2.html" class="card-link">
+                <div class="card">
+                    <img src="https://www.icegif.com/wp-content/uploads/2022/03/icegif-83.gif" alt="Cyberpunk" class="card-img">
+                    <div class="playtime">⏱️ 60+ giờ chơi</div>
+                    
+                    <h3>Cyberpunk 2077: Phantom Liberty</h3>
+                    <div class="card-meta">Dec 10, 2025 | RPG Expert</div>
+                </div>
+            </a>
+             <a href="game-bai3.html" class="card-link">
+                <div class="card">
+                    <img src="https://cdn.wccftech.com/wp-content/uploads/2023/12/black-myth-wukong-HD-scaled.jpg" alt="Cyberpunk" class="card-img">
+                    <div class="playtime">⏱️ 30+ giờ chơi</div>
+                    <h3>Black Myth Wukong</h3>
+                    <div class="card-meta">Dec 12, 2024 | RPG Expert</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Phần phụ -->
+        <div class="sub-section">
+            <h2>1 số game khác mà tôi cũng thích</h2>
+            <div class="card-grid">
+                <a href="game-nang-cao-bai0.html" class="card-link">
+                    <div class="card">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.qvNi4V_TEllqDGqqvFtdtAHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Zelda" class="card-img">
+                        <div class="playtime">⏱️ 50+ giờ chơi</div>
+                        
+                        <h3>LOL -Liêm Minh </h3>
+                        <div class="card-meta"> 5vs5 MOBA game</div>
+                    </div>
+                </a>
+
+                <a href="game-nang-cao-bai1.html" class="card-link">
+                    <div class="card">
+                        <img src="https://wstatic-prod.pubg.com/web/live/static/og/img-og-pubg.jpg" alt="Fortnite" class="card-img">
+                        <div class="playtime">⏱️ 40+ giờ chơi</div>
+                        
+                        <h3>P.U.B.G</h3>
+                        <div class="card-meta">Sinh tồn 1vs100 cũng </div>
+                    </div>
+                </a>
+
+                <a href="game-nang-cao-bai2.html" class="card-link">
+                    <div class="card">
+                        <img src="https://th.bing.com/th/id/R.ca93966732181e51dc7d7b6045e1ab39?rik=azQaCIe9Zb8yUA&pid=ImgRaw&r=0" alt="Valorant" class="card-img">
+                        <div class="playtime">⏱️ 100+ giờ chơi</div>
+                       
+                        <h3>TFT</h3>
+                        <div class="card-meta">Cờ nhân phẩm như con cặc</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+<div class="sub-section">
+            <h2>Mini game</h2>
+            <div class="card-grid">
+                <a href="game-fun.html" class="card-link">
+                    <div class="card">
+                        <img src="https://th.bing.com/th/id/R.6811cec806703382acee210cd37d9198?rik=rC2d7I0I0zQ%2fBw&riu=http%3a%2f%2fwww.quickmeme.com%2fimg%2fe8%2fe8f3b6a2c6ccff2d82e58bc8fa445a4241e819a11486760adba9035c797b8b15.jpg&ehk=CcCGKz55uLtJ%2bz%2fhR7v3rjudpmEWRklPIzdv3t%2fAJOo%3d&risl=&pid=ImgRaw&r=0" alt="Zelda" class="card-img">
+                        <div class="playtime">Mây câu hỏi xàm chuối</div>
+                        
+                        <h3>Hỏi ngu</h3>
+                        <div class="card-meta"> ask -question -anwer-okay?</div>
+                    </div>
+                </a>
+
+                <a href="game-fun2.html" class="card-link">
+                    <div class="card">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.1YRyFX_qsEjE44crksYkiwHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Fortnite" class="card-img">
+                        <div class="playtime">Jump and fight game</div>
+                        
+                        <h3>Ling vs boss</h3>
+                        <div class="card-meta">get ready</div>
+                    </div>
+                </a>
+
+                <a href="game-fun3.html" class="card-link">
+                    <div class="card">
+                        <img src="https://media.giphy.com/media/7Cn8slG5iAGVG/source.gif" alt="Valorant" class="card-img">
+                        <div class="playtime">Pacman ăn ma</div>
+                       
+                        <h3>PACMAN</h3>
+                        <div class="card-meta">Ăn hết mấy con ma để to hơn càng to càng khỏe</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+      
+    </main>
+<footer style="background: linear-gradient(135deg, #000 0%, #0a0a0a 100%); border-top: 4px solid #00ff00; box-shadow: 0 0 20px rgba(0,255,0,0.5); padding: 20px; text-align: center; font-family: 'Press Start 2P', cursive; font-size: 10px; letter-spacing: 1px; position: relative; overflow: hidden;">
+    <p style="color: #00ff00; text-shadow: 0 0 5px #00ff00; margin: 0; text-transform: uppercase;">&copy; LINH OSIMI | GAME </p>
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 10 10%22%3E%3Cpath d=%22M0 0h10v10H0z%22 fill=%22none%22 stroke=%22%2300ff00%22 stroke-width=%220.2%22 opacity=%220.1%22/%3E%3C/svg%3E'); background-size: 10px 10px;"></div>
+</footer>
+
+<div id="postModal" class="modal"> 
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalContent"></p>
+    </div>
+</div>
+
+<script src="/linhkun.js"></script>
+</body>
+</html>

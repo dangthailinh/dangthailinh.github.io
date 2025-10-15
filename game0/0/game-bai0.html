@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linh-Osimi</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"> <!-- Font fantasy: Playfair cho elegant, Inter cho body -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%); color: #4a5568; } /* Light fantasy pastel blue */
+        /* Hero Section với fantasy nhẹ nhàng */
+        .hero-detail {
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.6)), url('https://th.bing.com/th/id/R.fecfe1ad9fe202029b6cf8d73ea0c21b?rik=tVOdl9yn1X7ghQ&pid=ImgRaw&r=0'); /* Ảnh Genshin fantasy Unsplash */
+            background-size: cover;
+            background-position: center;
+            color: #2d3748;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            animation: softGlow 4s ease-in-out infinite alternate;
+        }
+        @keyframes softGlow {
+            0%, 100% { box-shadow: inset 0 0 20px rgba(59,130,246,0.2); }
+            50% { box-shadow: inset 0 0 40px rgba(59,130,246,0.4); }
+        }
+        .hero-detail::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+        .hero-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-detail h1 { font-size: 32px; margin-bottom: 10px; letter-spacing: 2px; line-height: 1.2; font-weight: 700; color: #7895b0; }
+        .hero-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 1px; font-weight: 400; animation: fadeInUp 1s ease 0.5s both; font-style: italic; color: #4a5568; }
+
+        /* Main với fantasy nhẹ */
+        .main { background: rgba(255,255,255,0.9); padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(59,130,246,0.1); max-width: 1200px; margin: 0 auto; border: 1px solid rgba(59,130,246,0.2); }
+        .back-btn { background: #3182ce; color: white; padding: 12px 24px; border: none; border-radius: 25px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Playfair Display', serif; box-shadow: 0 4px 15px rgba(59,130,246,0.3); }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
+        .main h1 { color: #2b6cb0; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Playfair Display', serif; letter-spacing: 1px; }
+        .main h2 { color: #3182ce; font-size: 22px; margin: 30px 0 15px; font-family: 'Playfair Display', serif; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); border-bottom: 1px solid rgba(59,130,246,0.3); padding-bottom: 5px; }
+        .main p { text-align: left; font-size: 16px; color: #4a5568; margin-bottom: 20px; line-height: 1.7; letter-spacing: 0.3px; background: rgba(59,130,246,0.05); padding: 15px; border-left: 3px solid #3182ce; border-radius: 0 8px 8px 0; }
+        .main ul { color: #4a5568; margin-left: 20px; }
+        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
+        .main li::before { content: '✨'; position: absolute; left: 0; color: #3182ce; } /* Magic sparkle for fantasy */
+        .main img { width: 100%; height: auto; border-radius: 10px; margin: 20px 0; box-shadow: 0 5px 20px rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.2); }
+
+        /* Sidebar */
+        .sidebar { background: rgba(255,255,255,0.8); padding: 20px; border-radius: 10px; box-shadow: 0 5px 20px rgba(59,130,246,0.1); height: fit-content; position: sticky; top: 100px; border: 1px solid rgba(59,130,246,0.2); }
+        .sidebar h3 { color: #3182ce; border-bottom: 2px solid #3182ce; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Playfair Display', serif; letter-spacing: 1px; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin: 10px 0; }
+        .sidebar a { display: block; padding: 12px; background: rgba(59,130,246,0.1); border-radius: 8px; text-decoration: none; color: #4a5568; transition: all 0.3s ease; border-left: 3px solid transparent; }
+        .sidebar a:hover { background: #3182ce; color: white; transform: translateX(5px); border-left-color: white; box-shadow: 0 0 10px rgba(59,130,246,0.3); }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-detail { padding: 80px 15px 60px; }
+            .hero-detail h1 { font-size: 24px; letter-spacing: 1px; }
+            .main { padding: 20px; margin: 20px; }
+            .sidebar { position: static; }
+        }
+        
+    </style>
+</head>
+<body>
+    <header style="background: linear-gradient(135deg, rgba(240,248,255,0.9) 0%, rgba(230,243,255,0.9) 100%); border-bottom: 2px solid rgba(59,130,246,0.3); box-shadow: 0 4px 15px rgba(59,130,246,0.1); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Playfair Display', serif; position: sticky; top: 0; z-index: 100;">
+    <!-- Logo với fantasy nhẹ nhàng -->
+    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #bee3f8, #90cdf4); border: 1px solid rgba(59,130,246,0.3); position: relative; border-radius: 50%; box-shadow: 0 0 15px rgba(59,130,246,0.2);">
+            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; color: #3182ce;">🌪️</span> <!-- Anemo icon for Genshin fantasy -->
+        </div>
+        <span style="font-size: 24px; font-weight: 600; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); color: #2b6cb0;">Linh OsiMi</span>
+    </div>
+    
+   
+    
+    
+</header>
+
+<style>
+/* CSS bổ sung cho header fantasy nhẹ nhàng */
+.logo-container:hover { text-shadow: 1px 1px 3px rgba(255,255,255,0.8), 0 0 10px rgba(59,130,246,0.3); }
+nav a:hover {
+    color: #3182ce; border-bottom-color: #3182ce; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); transform: scale(1.02);
+}
+.header-right input::placeholder {
+    color: #a0aec0; letter-spacing: 0.5px;
+}
+.header-right input:focus {
+    box-shadow: 0 0 10px rgba(59,130,246,0.3); outline: none; border-color: #3182ce;
+}
+.theme-toggle:hover {
+    background: rgba(59,130,246,0.3); box-shadow: 0 2px 10px rgba(59,130,246,0.2); transform: scale(1.05);
+}
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 10px; }
+    nav ul { flex-direction: column; gap: 10px; text-align: center; }
+    .header-right { width: 100%; justify-content: center; }
+    .header-right input { width: 100%; max-width: 200px; }
+    .logo-container span { font-size: 20px; }
+}
+</style>
+
+    <!-- Hero Section -->
+    <section class="hero-detail">
+        <div class="hero-detail-content">
+            <h1>Genshin Impact Update 5.0: Natlan</h1>
+            <p>PHÂN TÍCH FANTASY NHẸ NHÀNG - HÀNH TRÌNH PYRO</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>GAME LIÊN QUAN</h3>
+            <ul>
+                <li><a href="game-bai1.html">Elden Ring DLC Review</a></li>
+                <li><a href="game-bai2.html">Cyberpunk Phantom Liberty</a></li>
+                <li><a href="game-bai3.html">Khỉ đen</a></li>
+            </ul>
+            <h3>TAGS</h3>
+            <ul>
+                <li><a href="#">Genshin</a></li>
+                <li><a href="#">Natlan</a></li>
+                <li><a href="#">Open World</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <button class="back-btn" onclick="window.location.href='game.html'">← Quay lại Game Zone</button>
+            
+            <h2>Giới Thiệu</h2>
+            <p>Update 5.0 của Genshin Impact đưa người chơi đến Natlan - vùng đất Pyro với chủ đề chiến binh, rồng và lễ hội. Với phong cách fantasy nhẹ nhàng, phân tích này khám phá cách miHoYo mở rộng Teyvat, từ exploration đến character designs, như một bức tranh thủy mặc huyền ảo.</p>
+
+            <img src="https://images.unsplash.com/photo-1611606069312-2a5a4e320f99?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Natlan Landscape" style="width: 100%; border-radius: 10px; margin: 20px 0; box-shadow: 0 5px 20px rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.2);">
+
+            <h2>Khám Phá Natlan</h2>
+            <p>Natlan là vùng đất núi lửa và sa mạc, với biomes đa dạng từ hot springs đến ancient ruins. Exploration tự do với glider và climbing, gợi cảm giác phiêu lưu nhẹ nhàng. Archon Quest tập trung vào War Archons, thêm lore về Celestia mà không quá dark.</p>
+            <ul>
+                <li><strong>Điểm mạnh:</strong> Visual breathtaking với pyro effects và dynamic weather.</li>
+                <li><strong>Điểm yếu:</strong> Một số puzzle quá dễ, thiếu challenge.</li>
+            </ul>
+
+            <h2>Nhân Vật & Banner</h2>
+            <p>New characters như Mavuika (Pyro Archon) và Citlali mang designs fantasy thanh lịch, với kits combat fluid. Banner 5.0 giới thiệu weapons signature, khuyến khích build elemental reactions. Voice acting đa ngôn ngữ tăng immersion.</p>
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Character Design" style="width: 100%; border-radius: 10px; margin: 20px 0; box-shadow: 0 5px 20px rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.2);">
+
+            <h2>Gameplay & Events</h2>
+            <p>Update thêm combat trials và co-op events, với Natlan's trials test team synergy. Spiral Abyss floor 12 nâng cấp với new enemies, giữ balance nhẹ nhàng cho casual players. Âm nhạc orchestral fantasy của HOYO-MiX tạo cảm giác huyền bí.</p>
+
+            <h2>Kết Luận</h2>
+            <p>Update 5.0 Natlan là đỉnh cao fantasy nhẹ nhàng của Genshin, điểm 9.2/10 - lý tưởng cho exploration lovers. Tiếp theo: Honkai Star Rail 2.5?</p>
+
+            <button class="back-btn" onclick="window.location.href='game.html'" style="margin-top: 30px;">← Quay lại Game Zone</button>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kiến Thức VN. | Game Focus</p>
+    </footer>
+
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="/linhkun.js"></script>
+</body>
+</html>
