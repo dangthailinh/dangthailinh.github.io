@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,173 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Dự đoán trước được tương lai - Sự thật hay hoang đường?</h1>
+        <p class="detail-subtitle">Liệu có thể dự đoán trước được tương lai?</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+       <p>Từ khi bắt đầu có nhận thức, loài người luôn luôn khát vọng có khả năng dự đoán được tương lai, những nhà tiên tri, bói toán, những câu chuyện về đoán định trước được tương lai luôn tồn tại như một giấc mơ trong mọi thời đại, thậm chí gần đây, trên các trang mạng đang tràn ngập thông tin về một số nhà tiên tri và tôn giáo đã đoán trước được ngày diệt vong của nhân loại sẽ xảy ra vào 21/12/2012 (?!)</p>
+     <h3>Vậy tương lai là gì? Bắt nguồn từ đâu? Có thể đoán trước được tương lại?</h3>
+   <p>Tương lai là một định đề được bắt nguồn từ khái niệm về thời gian, theo quan niệm hiện tại của con người, thời gian chỉ có một chiều, từ quá khứ, qua hiện tại và đến tương lai, như vậy tương lai là những điều chưa và sẽ xảy đến đối với một điểm quan sát ở hiện tại.
+
+Tò mò hơn một chút, ta thử suy ngẫm một chút về “cha đẻ" của khái niệm tương lai, đó là Thời Gian.
+
+Thời gian, xét theo góc độ duy tâm, thì cũng là một khái niệm của con người, dùng để phân biệt trình tự xảy ra của các sự việc, sự việc nào xảy ra trước thời điểm quan sát sẽ được coi là quá khứ, các sự kiện xảy ra sau thời điểm đó được coi là tương lai.</p>
+  
+<P>Một nhà triết học Ấn Độ đã từng nói: “Người ta không thể tắm 2 lần trên cùng một dòng sông...”, quả là như vậy, dòng sông luôn biến động không ngừng, nhìn qua thì ta tưởng vẫn là nó, nhưng thực sự thì nó biến đổi từng giây phút, lúc trước ta tắm thì con đò kia chưa xuất hiện, nhưng giờ thì đã khác, làn nước ta đang tắm cũng không còn là làn nước trước đó nữa, mọi vật đều biến đổi không ngừng.
+
+Con người, trong cuộc đời của mình cũng giống như đứng trước một dòng sông, các sự việc cứ nối tiếp nhau diễn ra theo trình tự thời gian, từ những việc đã qua, đến những việc đang xảy ra trong hiện tại, rồi đến những việc sẽ xảy đến trong tương lai…</P>
+      
+<img src="https://tse1.mm.bing.net/th/id/OIP.T9SXLUH4SOuf0ng_zT_4eAHaEU?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+<p>Như vậy cũng không khó khăn lắm để chúng ta nhận ra được là khái niệm thời gian chỉ tồn tại trong sự vận động, nếu không có sự vận động thì sẽ không tồn tại khái niệm về thời gian, và thậm chí, thế giới khi đó có khi cũng không còn tồn tại, vì bản chất của mọi sự vật và hiện tượng là thay đổi, vận động trong không gian và theo thời gian, chẳng có gì là tồn tại mà không hề có sự biến đổi nào trong sự vô tận của thời gian, nếu không có sự vận động thì ta không sinh ra, mà cũng chẳng chết đi, không có ngày, đêm... suy rộng ra là không có gì tồn tại cả, theo cái nhân biết hiện tại của chúng ta, mà ta coi đó là 1 tiên đề...</p>
+
+<p>Như vậy chỉ để ta suy ra một hệ quả là: Tương lai là kết quả của những sự vận động trong thời gian và không gian, vậy có thể đoán định được tương lai?
+
+Ở một góc độ nhất định, có thể coi tương lai là một hàm số theo thời gian, phụ thuộc vào những biến số khác nhau, những biến số này có thể ít và đơn giản, nhưng cũng có thể rất nhiều và phức tạp, ta có thể xem xét một hàm số đơn giản nhất theo thời gian, đó là Y(t) = sin(x) của một góc quay với vận tốc góc xác lập, với hàm số này, ta hoàn toàn có thể đoán biết trước được giá trị của Sin(x) trong tương lai ở thời điểm hiện tại.
+
+Với cách nhìn của triết học thì đó là mối quan hệ nhân – quả, tương lai chính là kết quả được tạo thành từ những nguyên nhân trong quá khứ và hiện tại.
+
+Một ví dụ là nếu ta có một hạt giống tốt, được gieo trồng trên mảnh đất tốt, với độ ẩm, nhiệt độ và các điều kiện thích hợp ở hiện tại thì tương lai sẽ là một cây xanh mọc lên, cái cây đó là kết quả của các nguyên nhân là hạt giống, độ ẩm, ánh sáng, nhiệt độ ...v.v
+
+Vậy ta đã có thể rút ra được một kết luận đầu tiên và quan trọng là: Tương lai phụ thuộc vào những yếu tố gây ra nó, tồn tại trong quá khứ và trong hiện tại.
+
+</p>
+<p>Vậy tương lai có thể đoán định trước được không? Ta trở lại với khái niệm tương lai là một hàm số (Y) , phụ thuộc nhũng biến số (x1, x2, x3...) , với một hàm số có quy luật đơn giản như Y=sin(x) thì ta có thể dễ dàng biết được những gì chưa xảy ra, nhưng thực tế thì một kết quả có thể được tạo bởi rất nhiều nguyên nhân, những nguyên nhân (biến số) đó tới lượt nó lại trở thành hàm số phụ thuộc vào các biến số con khác, ta có một hàm phức theo những quy luật khác nhau và có thể rất phức tạp, phức tạp đến mức khả năng hiện tại của con người cộng với các máy móc tinh vi ngày nay cũng không thể giải được.
+
+Có thể xét một ví dụ ngộ nghĩnh nữa như thế này: Kết quả của việc cái lọ hoa trên nóc tủ bị vỡ là do con mèo nhảy và làm đổ, nhưng con mèo nhảy cũng có khi không làm đổ cái lọ hoa? Rồi nếu con chuột không chạy trên nóc tủ thì con mèo cũng không không nhảy lên đó? và rồi nếu cái cửa sổ không bị mở ra thì con mèo cũng chảng thể vào nhà được?</p>
+
+
+<p>Những quan sát đó có thể đưa ta đến một kết luận thứ 2: Ở trên đời không tồn tại sự ngẫu nhiên, những cái ta tưởng là ngẫu nhiên thực ra được xảy ra trong một mói quan hệ khăng khít với những tiền tố của nó, người ta lầm tưởng một sự việc là ngẫu nhiên xảy ra chỉ là do khả năng nhận biết hạn hẹp, không thể thấy được, và không thể tính được các quy luật phức tạp của những tiền tố đó.
+
+Ta sẽ có kết luận thứ 3: Tương lai là thứ có thể đoán định được dựa trên quá khứ và hiện tại</p>
+<h3>Vậy làm thế nào để biết trước được tương lai?</h3>
+<p>Thứ nhất là, căn cứ vào các quy luật, các tiền tố, về lí thuyết thì ta sẽ tính ra được kết quả sẽ xảy đến trong tương lai, tuy nhiên, khả năng hiện tại của chúng ta chỉ cho phép tính được kết quả cho những sự kiện đơn giản, ví dụ như: Lúc nào thì nước sẽ sôi nếu ta đun một ấm nước 3 lít, trong điều kiện tiêu chuẩn, với một ấm đun điện công suất 2KW… Với các sự kiện phức tạp, hiện nay ta chưa giải được, nhưng biết đâu, có thể đến một lúc nào đó, với các máy tính siêu mạnh, giấc mơ giải đoán tương lai của con người sẽ thành hiện thực?</p>
+
+<p>Thứ 2 là: Phát triển những khả năng tiềm ẩn của con người, cơ chế hoạt động về mặt thông tin của con người quả là rất phức tạp, càng ngày người ta càng tìm ra nhiều điều tưởng chừng như không thể lí giải được, bộ não, trước đây vẫn được coi là cơ sở vật chất tuyệt đối của tất cả các hoạt động ý thức, thì nay đã và đang được xem xét lại, và có thể một ngày nào đó người ta sẽ chứng minh được rằng bộ não của con người cũng chỉ có cơ chế hoạt động giống như cái bảng điều khiển của chiếc máy bay, nó chỉ có tác dụng nhận lệnh điều khiển từ người phi công để kiểm soát hoạt động của các máy móc mà thôi.</p>
+<p>Vậy thì cái gì mới thực sự điều khiển các hành vi và ý thức của chúng ta? Hy vọng rằng vào một ngày đẹp trời nào đó, câu hỏi này sẽ được trả lời và chúng ta sẽ tìm ra cách phát huy những khả năng tiềm ẩn của mình, trong đó có việc giải mã tương lai.
+
+Trên thực tế, cũng đã có một số người phát huy được khả năng đó một cách bí ẩn, nhiều trường hợp các nhà tiên tri đã trở nên khá nổi tiếng với những tiên đoán chính xác của mình như Edgar Cayce (Mỹ), Vanga (Bungari), Nostradamous (Pháp) và cả Trạng trình Nguyễn Bỉnh Khiêm của Việt Nam chúng ta nữa.</p>
+            
+<p>Ngoài ra, còn có những phương pháp mang đậm tính huyền bí, khó tin, chẳng hạn như việc sử dụng Kinh Dịch, thực chất là một loại bản đồ thông tin để tiên đoán, được phá triển từ hàng trăm năm trước Công nguyên tại Trung Hoa, dựa trên cơ sở của thuyết Nhị Nguyên, với công cuộc sinh sôi của các con số, từ Thái cực sinh Lưỡng Nghi (2) Lưỡng Nghi sinh Tứ Tượng (4), Tứ tượng sinh Bát quái (8) rồi phát triển thành 64 quẻ, mỗi quẻ có 6 hào với rất nhiều cách kết hợp phức tạp để tạo nên vô vàn những quy luật, dựa vào bản độ thông tin này, lịch sử cho thấy người Trung Hoa từ xa xưa đã có thể đoán biết chính xác được nhiều sự kiện, thậm chí ở hiện tại, người ta đã ứng dụng để dự báo thời tiết với độ chính xác tương đương, đôi khi còn chính xác hơn cả các bản dự báo chính thống trên truyền hình và Radio (Theo Thiệu Vĩ Hoa – Chu dịch và dự đoán học – Nhà xuất bản Văn Hóa 1995)</p>
+
+
+
+
+<p>Với khả năng tìm tòi và khám phá không ngừng, ngày càng chinh phục những tầm hiểu biết rộng lớn hơn, trong tương lai, nhiều giấc mơ hiện nay là không thể tin nổi của con người sẽ trở thành hiện hiện thực, chúng ta hãy chờ xem.</p>
+
+
+
+
+
+
+<button class="back-btn-detail" onclick="window.location.href='khoa-hoc4.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+            <ul>
+                <li><a href="1.html"> Câu trả lời cho "Tại sao 1 + 1 = 2?</a></li>
+                <li><a href="2.html"> Hố đen có bao giờ tiêu tan?</a></li>
+                <li><a href="3.html"> Suy ngẫm thể xác lINH HỒN</a></li>
+                <li><a href="4.html">Định luật Acsimet liệu có đúng? </a></li>
+             
+                <li><a href="6.html">Tương lai của máy tính </a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

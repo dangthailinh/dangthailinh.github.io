@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linh-Osimi | Hành Trình Khoa Học Vũ Trụ</title>
+    <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
-        .detail-title { font-size: 32px; color: var(--primary-color); margin: 20px 0; z-index: 2; position: relative; font-weight: 700; }
-        .detail-subtitle { font-size: 18px; color: #666; margin-bottom: 20px; font-style: italic; }
+        .detail-title { font-size: 32px; color: var(--primary-color); margin: 20px 0; z-index: 2; position: relative; }
+        .detail-subtitle { font-size: 18px; color: #666; margin-bottom: 20px; }
         .detail-meta { text-align: center; font-size: 14px; color: #666; margin: 10px 0; }
         .back-btn-detail { background: var(--primary-color); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; text-align: center; transition: all 0.3s; }
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
-        .detail-content { flex: 1; line-height: 1.8; font-size: 17px; color: #222; text-align: justify; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
-        .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; font-weight: 600; }
-        .detail-content ul { margin-left: 25px; list-style-type: disc; }
+        .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
+        .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,135 +41,160 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo">🧬 Linh Osimi Research</div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
+        <!-- Hình trang trí góc trên -->
         <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
         </svg>
-        <h1 class="detail-title">Năng Lượng Tối: Bí Ẩn Lớn Nhất Trong Vũ Trụ</h1>
-        <p class="detail-subtitle">Một góc nhìn khoa học hiện đại về lực vô hình đang chi phối sự giãn nở của vũ trụ</p>
-        <div class="detail-meta">Ngày đăng: 15/10/2025 | Tác giả: Linh Osimi</div>
+
+        <h1 class="detail-title">Những điều bạn chưa biết về thiên thạch</h1>
+        <p class="detail-subtitle">Thiên thạch là gì? Một câu hỏi nghe rất quen thuộc, tưởng chừng dễ ấy thế mà nó đã và đang đánh đố không ít người.</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <p>
-                Trong hơn một thế kỷ qua, các nhà khoa học đã dần khám phá được cấu trúc và bản chất của vũ trụ — từ sự hình thành của các thiên hà cho đến hằng số vũ trụ bí ẩn. Tuy nhiên, chỉ đến cuối thế kỷ XX, một phát hiện chấn động đã thay đổi hoàn toàn cách con người nhìn về không gian: **vũ trụ không chỉ giãn nở, mà còn giãn nở với tốc độ ngày càng tăng**.
-            </p>
+            <h2>Thiên thạch là gì?</h2>
+            <p>Theo Wiki, thiên thạch, theo nghĩa chữ Hán Việt là "đá trời", hiện nay trong tiếng Việt được dùng không thống nhất, để chỉ nhiều loại thiên thể với các bản chất hoàn toàn khác nhau.
 
-            <img src="https://cdn.mos.cms.futurecdn.net/5K7Qk3yKcJgNXYhzWcyGfN.jpg" alt="Mô phỏng năng lượng tối chi phối vũ trụ">
+Thiên thạch (meteoroid) là một vật thể tự nhiên từ ngoài không gian và tác động đến bề mặt Trái Đất. Khi còn ở trong vũ trụ thì nó được gọi là vân thạch. Khi thiên thạch từ ngoài không gian rơi vào bầu khí quyển của Trái Đất thì áp suất nén làm thiên thạch nóng lên và phát ra ánh sáng, có thể có sự đốt cháy lớp ngoài. Nó tạo ra hiện tượng "sao băng" dạng điểm sáng và thường có cái đuôi hướng từ phía Trái Đất đi ra. Một số thiên thạch có kích thước đủ lớn và nhân khó bốc hơi, thì có thể rơi đến bề mặt Trái đất, để lại viên hay khối rắn và khối này vẫn được gọi là "thiên thạch" (meteorite).</p>
+            <!-- Placeholder chèn ảnh 1: Ảnh JWST -->
+            <img src="https://e.khoahoc.tv/photos/image/2017/06/30/thien-thach-1.jpg" alt="Kính viễn vọng James Webb trong không gian" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+           <p>Ngoài ra, thiên thạch dạng đá chưa bị thay đổi do sự tan chảy hoặc biến đổi của nguồn thiên thạch mẹ, được gọi là chondrit.
 
-            <h2>Khái niệm về Năng lượng Tối</h2>
-            <p>
-                Năng lượng tối (Dark Energy) là dạng năng lượng giả định chiếm khoảng 68% tổng năng lượng trong vũ trụ. Nó không phát sáng, không hấp thụ ánh sáng, và chỉ được phát hiện thông qua **ảnh hưởng hấp dẫn** của nó lên sự giãn nở vũ trụ. 
-            </p>
+</p>
+        <p>Thường thì khi thiên thạch di chuyển với vấn tốc nhanh và khi va vào bề mặt của một hành tinh hay tiểu hành tinh thì nó để lại trên bề mặt của hành tinh đó những mảnh vỡ hay những dấu vết về sự va chạm. Chúng ta có thể thấy rõ những ảnh chụp từ trongkhông gian của NASA về những vết rỗ trên Mặt Trăng vì ở đây không có gió hay trên Hỏa tinh (Sao Hỏa).
 
-            <ul>
-                <li><strong>Phát hiện đầu tiên:</strong> năm 1998, hai nhóm nghiên cứu độc lập phát hiện các siêu tân tinh loại Ia đang di chuyển xa hơn dự đoán.</li>
-                <li><strong>Ảnh hưởng vũ trụ học:</strong> năng lượng tối khiến không gian giãn nở nhanh hơn theo thời gian.</li>
-                <li><strong>Giả thuyết:</strong> nó có thể là một dạng của hằng số vũ trụ Λ, hoặc một trường năng lượng động gọi là "quintessence".</li>
-            </ul>
+Trên thế giới đã tìm thấy rất nhiều những nơi mà dấu vế về vụ va chạm thiên thạch để lại. Tính đến giữa năm 2006, trên thế giới đã có khoảng 1050 mẫu thiên thạch từ những vụ va chạm và có khoảng 31.000 tài liệu ghi chép về thiên thạch.</p>
+            <h2>Cách nhận biết thiên thạch
+</h2>
+          <p>Theo ông Nguyễn Đức Phường, Hội thiên văn vũ trụ Việt Nam cho biết, thiên thạch có đặc điểm riêng có thể phân biệt bằng mắt thường. "Bề mặt thiên thạch thường đen nhẵn và bóng. Cũng có thiên thạch trên bề mặt có những vết lõm tròn nhẵn, hoặc các đường sẻ nứt do quá trình bào mòn và cháy nổ trong không khí", ông Phường nói.</p>
+             <img src="https://e.khoahoc.tv/photos/image/2017/06/30/thien-thach.jpg" alt="Hình minh họa Big Bang" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">            
+            Bên cạnh đó, bên ngoài mặt cắt của thiên thạch sẽ thấy nhiều hạt trong nhỏ, đường kính 1-3 mm.
 
-            <h2>Thách thức trong Nghiên cứu</h2>
-            <p>
-                Mặc dù là yếu tố chiếm ưu thế trong vũ trụ, năng lượng tối vẫn là một **ẩn số gần như tuyệt đối**. Các nhà khoa học đang sử dụng dữ liệu từ kính viễn vọng James Webb, sứ mệnh Euclid của ESA, và các dự án đo nền vi sóng vũ trụ (CMB) để tìm manh mối.
-            </p>
+Về khối lượng, với cùng một kích cỡ thì thiên thạch thường nặng hơn và cứng chắc hơn đá thường. Thiên thạch thường chứa lượng sắt nhất định, có từ tính, dùng nam châm thử để nhận biết.
+Về màu sắc, thiên thạch thường có màu đen, hoặc ngả màu đen vàng do bị oxy hóa.
+Theo bộ sách 10 vạn câu hỏi vì sao, thành phần chủ yếu của thiên thạch là sắt và niken, trong đó sắt chiếm khoảng 90%, niken 4-8%. Lượng niken trong sắt tự nhiên trên trái đất không nhiều như vậy. Nếu mài nhẵn mặt cắt của thiên thạch sắt rồi dùng axit nitric bôi vào, sẽ xuất hiện những vết rỗ rất đặc biệt, giống như các ô hoa. Đó là vì thành phần các chất trong thiên thạch sắt phân bố không đều, chỗ nhiều chỗ ít niken. Chỗ chứa nhiều niken khó bị axit ăn mòn và ngược lại, tạo nên các đường vân. Đây cũng là một cách để nhận biết thiên thạch.
 
-            <img src="https://cdn.mos.cms.futurecdn.net/DkVShEzb4pqKhJ8yQwbyiC.jpg" alt="Biểu đồ giãn nở vũ trụ theo thời gian">
+Nhưng, theo ông Phường, khi ai đó có trong tay một thiên thạch, tốt nhất nên nhờ chuyên gia thẩm định để có kết luận chính xác.
+           
+            <h2>Sức tàn phá của thiên thạch</h2>
+            <p>Trong lịch sử tồn tại của mình, Trái đất đã chịu đựng nhiều sự tàn phá khủng khiếp và để lại những dấu vết kinh hoàng. Theo thời gian, các dấu hiện của va chạm thiên thạch với Trái đất cụ thể:</p>
+            <p>Vụ tàn phá Trái đất bởi thiên thạch xảy ra cách đây khoảng 2 tỷ năm, ở vùng Vredefort Dome, phía tây nam Johannesburg, Nam Phi. Đây được xem là vụ va chạm thiên thạch lớn nhất từng có được phát hiện. Đó là kết quả của sự va chạm của một khối đá ước tính có kích thước 10 km và vận tốc bay khoảng 36.000km/giờ, để lại một miệng hố rộng khoảng 300 km, gọi là Hố thiên thạch Vredefort Dome. Theo các nhà khoa học, sự kiện này xảy ra khi con người và phần lớn động thực vật chưa xuất hiện. Sinh vật sống duy nhất bấy giờ là một loại tảo tương tự loài rêu màu xanh lá cây ở các con đập bây giờ.</p>
+             <p>Vụ nổ lớn nhất trên Trái đất từng được biết đến và để lại đầy đủ bằng chứng địa sinh học được gọi là Sự kiện tuyệt chủng ở Kỷ Phấn Trắng. Sự kiện xảy ra khoảng 65 triệu năm trước đây do một thiên thạch va chạm với Trái đất, tạo ra miệng hố Chicxulub ở ngoài khơi bán đảo Yucatan (tiếng Tây Ban Nha là Península de Yucatán), nằm ở phía đông nam nước Mexico. Sức công phá của vụ nổ ước tính tương đương với 96 nghìn tỷ tấn TNT (96 Teratons), hay khoảng 1,7 triệu quả bom Sa hoàng, tức quả bom khinh khí do Liên xô (cũ) thử ngày 30/10/1961 với sức nổ tương đương 57 triệu tấn TNT. Vụ va chạm hủy diệt này tạo nên một hố lõm sâu khoảng 110 dặm gọi là hố Chicxulub và hàng tấn bụi đất bay khắp khí quyển, gây động đất, sóng thần, hỏa hoạn, mưa acid, biến hầu hết các vùng đất trên Trái đất trở nên khô cằn, hầu như đã hủy diệt sự sống trên Trái đất. Đặc biệt, loài khủng long, vốn thống trị Trái đất khi đó, đã bị hủy diệt hoàn toàn.</p>
+            <img src="https://e.khoahoc.tv/photos/image/2023/10/11/ho-thien-thach-Vredefort-Dome.jpg" alt="Hình minh họa Big Bang" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
 
-            <h2>Tương Lai của Vũ Trụ</h2>
-            <p>
-                Nếu năng lượng tối tiếp tục chi phối, vũ trụ có thể sẽ tiến đến kịch bản “<em>Big Rip</em>” – nơi mọi cấu trúc vật chất, từ thiên hà đến nguyên tử, bị xé toạc bởi sự giãn nở không ngừng. Tuy nhiên, đây vẫn chỉ là một trong nhiều giả thuyết, bởi bản chất thật của năng lượng tối vẫn còn nằm ngoài tầm hiểu biết hiện tại.
-            </p>
+            <h2>Thiên thạch Hoba</h2>
+            <p>Tảng thiên thạch nặng nhất trong số các thiên thạch có tên là Hoba đã được tìm thấy trên Trái đất nằm ở một nông trại thuộc Namibia, Phi Châu, được cho là đáp xuống Trái đất từ hơn 80.000 năm trước. Tảng thiên thạch này chiếm diện tích hơn 6,5m2 có trọng lượng ước tính đến những 66 tấn, gồm khoảng 84% sắt và 16% niken. Nó hiện vẫn được coi là tảng sắt tự nhiên lớn nhất của Trái đất. Trái với kích thước khổng lồ, tảng thiên thạch Hoba không hề để lại một vệt lõm nào, theo giải thích của nhiều nhà khoa học, Hoba sau khi đã vượt qua một hành trình dài đã đâm xuyên qua bầu khí quyển của Trái đất với một góc rất nhỏ. Năm 1955, chính quyền Namibia đã quyết định công nhận tảng thiên thạch này như một di tích lịch sử quốc gia, và giờ đây nó đã trở thành một điểm thu hút khách du lịch nổi tiếng.</p>
+            <h2>Hố thiên thạch Barringer</h2>
+            <p>Một hố sâu khoảng 170 mét và đường kính khoảng 1,6km, gọi là Hố thiên thạch Barringer được cho là tạo ra từ 50.000 năm trước. Thiên thạch này có đường kính ước tính gần 50m, bay với vận tốc khoảng 46.000km/giờ đâm xuống vùng sa mạc Arizona, nước Mỹ, gây ra sức công phá ước tính có sức công phá tương đương 150 lần quả bom nguyên tử của Mỹ ném xuống Hiroshima, đã hủy diệt mọi sinh vật trên diện tích rộng vài trăm cây số vuông.
 
-            <button class="back-btn-detail" onclick="window.location.href='/khoa-hoc0/1/khoa-hoc2.html'">← Quay lại chuyên mục Khoa Học</button>
+</p>
+          
+            <img src="https://e.khoahoc.tv/photos/image/2023/10/11/ho-thien-thach-Barringer.jpg" alt="Hành tinh ngoài hệ Mặt Trời qua JWST" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+        <h2>Thiên thạch Tunguska</h2>    
+       <p>Vụ tàn phá lớn của thiên thạch trên Trái đất được ghi nhận xảy năm 1908 tại vùng Tunguska (Nga). Sự kiện này vẫn là đề tài làm nóng các cuộc tranh luận khi mà nó không hề để lại bất kỳ vết tích nào của một vụ va chạm thiên thạch. Chính điều này đã khiến các nhà khoa học gặp nhiều khó khăn trong việc tìm ra nguồn gốc đích thực của mảnh thiên thạch. Vụ nổ đã tàn phá khoảng 80 triệu cây trên diện tích 2.150km2, thiêu rụi toàn bộ nhà cửa, gia súc trong bán kính 13 dặm. Các nhà khoa học vẫn tiếp tục nghiên cứu về vùng đất nằm trong phạm vi vụ nổ, nhưng không hề có một mảnh thiên thạch hay bất kỳ vết lõm nào được phát hiện.
+
+</p>
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc2.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3>Bài viết liên quan</h3>
+            <h3>Series Khoa Học Vũ Trụ</h3>
             <ul>
-                <li><a href="#">Sóng hấp dẫn và tương lai của vật lý vũ trụ</a></li>
-                <li><a href="#">Kính James Webb và hành trình truy tìm hành tinh có sự sống</a></li>
-                <li><a href="#">Vật chất tối – Mặt khuất của vũ trụ</a></li>
+           
+                <li><a href="2.html">hiện tượng tuyệt đẹp của bầu trời </a></li>
+                <li><a href="3.html"> Bản chất của thời gian</a></li>
+                <li><a href="4.html">BỨC XẠ: NHỮNG VIÊN ĐẠN VÔ HÌNH </a></li>
+                <li><a href="5.html">Khám phá những bí ẩn của thế giới không gian đa chiều </a></li>
+                <li><a href="6.html">Thứ nhỏ nhất vũ trụ? </a></li>
             </ul>
-
-            <h3>Chuyên mục nổi bật</h3>
+            <h3>Liên quan</h3>
             <ul>
-                <li><a href="#">Thiên văn học hiện đại</a></li>
-                <li><a href="#">Công nghệ không gian</a></li>
-                <li><a href="#">Vật lý lượng tử ứng dụng</a></li>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
             </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      ">
-        &copy; 2025 <span style="color:#00e0ff;">OSIMI Science</span> | <span style="color:#ff69b4;">Linh Osimi Research</span>
-      </p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">
@@ -177,6 +204,6 @@
         </div>
     </div>
 
-    <script src="/linhkun.js"></script>
+    <script src="\linhkun.js"></script>
 </body>
 </html>

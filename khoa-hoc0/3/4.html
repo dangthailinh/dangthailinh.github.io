@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,217 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Định luật Acsimet liệu có đúng?</h1>
+        <p class="detail-subtitle">Chỉ là giả thuyết thôi nhá!</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+<h3>- Định luật Acsimet cho rằng: “Một vật nhúng vào chất lỏng bị chất lỏng đẩy thẳng đứng từ dưới lên với lực có độ lớn bằng trọng lượng của phần chất lỏng mà vật chiếm chỗ. Lực này gọi là lực đẩy Ác-si-mét".</h3>
+
+      <p>Định luật Acsimet là cơ sở, nền móng của lý thuyết về vật nổi được giảng dạy từ rất lâu, cho nhiều thế hệ. Định luật được xây dựng cách nay đã 2300 năm. Những hiện tượng, những thí nghiệm trao đổi trong bài viết dưới đây cho thấy, nội dung những ý sau của định luật cần tìm hiểu thêm:</p>
+      <p>1 - Chỉ có hai lực: P là trọng lực vật và Fa là lực chất lỏng đặt lên vật.</p>     
+      <p>2 - Hai lực này “đẩy” nhau.
+
+3 - Vì “đẩy” nhau nên khi chưa cân bằng sẽ là “Ngẫu lực”.
+
+4 - Vật nổi khi Fa > P.
+
+V…..V</p>
+
+<h2>Thứ 1: Không chỉ có hai lực đặt lên vật</h2>
+
+<img src="https://e.khoahoc.tv/photos/image/2014/01/24/dinh-luat-acsimet.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+<p>Có nhiều lực đặt lên vật thả trong chất lỏng, chưa được đề cập đến như trường hợp sau: Hình 1 và 2 mô tả hai vật nổi cấu tạo từ hai chi tiết: A có dạng đĩa rỗng (hình 3 là hình chiếu của A) và B có dạng ống. Nhưng khi lắp ghép B vào A. Chi tiết A ở hai tư thế khác nhau tạo nên hai vật nổi 1 và 2 khác nhau nhưng có lượng choán nước như nhau:</p>
+
+<p>Vật nổi 1 (hình 1) có tư thế mặt đĩa A nằm vuông góc với bề mặt chất lỏng.
+
+Vật nổi 2 (hình 2) co tư thế mặt đĩa A nằm song song với bề mặt chất lỏng.
+
+Ống B thông với A để điều chỉnh vật chìm đến độ sâu ấn định trên ống B.
+
+Khi dùng ngoại lực tác dụng, cùng ấn (hoặc nâng) hai vật nổi đến độ sâu như nhau. Nhìn vào hình vẽ cũng đã thấy, khi ngoại lực thôi tác dụng. Hai vật nổi lên với các tốc độ khác nhau, có sự sai khác nhau về thời gian. Gọi sai khác này là “độ trễ”. Vậy lực nào tạo nên “độ trễ”? Điều đó cho thấy không chỉ có hai lực đặt lên vật thả trong chất lỏng.</p>
+
+<p>Đặt tên vật nổi theo phương thức này là “nổi VN-A”, hoặc “nổi ống”, “nổi treo”.
+
+Gọi lực cản trở Fa là Fv làm vật nổi chậm.
+
+Gọi lực càn trở P là Ft làm chậm tốc độ chìm, hay rơi của vật nổi
+
+Các lực Fv, Ft tạo nên sai khác về thời gian nổi , tạo nên “độ trễ”.</p>
+
+<P>Đặc điểm có “độ trễ” vô cùng quan trọng khi vật “nổi VN-A” ở trong môi trường có sóng (thủy động), môi trường biển. Đó là tạo ra khả năng triệt tiêu dao động của vật nổi trong sóng gió. Tạo ra một vật “nổi tĩnh” trong sóng gió nhưng vẫn nổi lên xuống theo thủy triều, đó là kiểu nổi, chủng loại vật nổi đang rất cần trong đời sống.</P>
+
+<h2>Thứ 2: Không phải "lực đẩy" tác dụng lên vật</h2>
+<P>Định luật khẳng định hai “lực đẩy” nhau, có nghĩa hai lực P và Fa trái chiều dẫn đến:
+
+- Khi hai lực trùng nhau trên một đường thẳng chúng đẩy nhau.
+
+- Khi hai lực chưa trùng nhau chúng sẽ tạo nên một “ngẫu lực”. Đây là kết luận được giảng dạy ở chương trình đại học đối với một vật nổi (tầu thuyền) khi lực đẩy Fa chưa thẳng hàng với trọng lực P của vật nổi.
+
+Điều đó cho thấy việc xác định nếu không phải “lực đẩy” mà là loại lực khác có nghĩa không phải là “ngẫu lực” sẽ trở thành cần thiết.
+
+Thí nghiệm mô tả trong sách giáo khoa lớp 8 chứng minh độ lớn lực “ĐẨY” trong định luật như sau:
+
+1 – (hình 10.3a) Dưới lực kế treo một bình A, tiếp theo vật nặng P, lực kế chỉ giá trị P1.
+
+2 – (hình 10.3b) Nhúng vật nặng vào bình tràn B đựng đầy nước, nước từ bình tràn ra, lực kế chỉ giá trị P2.</P>
+<p>3 – (hình 10.3c) Nước tràn đổ trở bình A, lực kế chỉ trở lại giá trị P1.
+
+Từ thí nghiệm thả một vật vào trong chất lỏng, vật bị mất đi một phần trọng lượng mà đã cho rằng, trọng lượng (lực) bị mất là bị “đẩy”, là chưa đủ cơ sở bởi lẽ, thể tích nước tràn mới chỉ cho biết:
+
+1 - Thể tích vật.
+
+2 - Trọng lượng thể tích nước tràn luôn phải bằng trọng lượng vật bị mất.
+
+Còn phương, chiều của lực phụ thuộc, lực “đẩy” từ đâu ra? Ở đây vật và nước đều đang bị trọng lực tác động nên hai trọng lực cùng phương, chiều không thể đẩy lên nhau. “Một vật nhúng vào chất lỏng bị chất lỏng đẩy thẳng đứng…”. Nếu là thế, đây sẽ là một nghịch lý, trong khi có thể có những khả năng khác thuận lý hơn đó là:</p>
+      <img src="https://e.khoahoc.tv/photos/image/2014/01/24/dinh-luat-acsimet1.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<P>Có thể là vật “đè”, “nén” lên chất lỏng, (cũng như hai vật rắn đè lên nhau) và vì chất lỏng không đủ “cứng vững” nên vật bị “lún” vào chất lỏng đến khi nào trọng lượng của nó bằng trọng lượng chất lỏng mà nó chiếm chỗ, nếu lớn hơn nó sẽ chìm xuống đáy để chất lỏng “đè” lên nó…</P>
+
+<p>Cũng có thể nó bị “treo” trong chất lỏng và nếu trọng lượng của nó lớn hơn trọng lượng chất lỏng mà nó chiếm chỗ thì “dây treo” sẽ đứt, nó sẽ rơi xuống đáy chất lỏng. Nếu nhỏ hơn nó bị treo trên mặt chất lỏng và khi bằng thì có thể treo nó ở bất kỳ vị trí nào trong lòng chất lỏng và đó là lơ lửng.
+
+Nếu là thế thì sẽ thuận lý thuyết về hợp lực và phân tích lực, không còn là “nghịch lý” nữa. Cho nên để chứng minh lực do chất lỏng đặt lên vật nổi có phải là “lực đẩy” hay không bằng cách, xác định hai lực có phải là “ngẫu lực” hay không? Nếu không phải là “ngẫu lực” thì không phải là “lực đẩy”.
+
+Có một điều dễ nhận thấy rằng, mọi vật thả trong nước, trọng lượng vật là P luôn nằm trong thể tích chất lỏng bị choán chỗ là Fa nên tâm ngẫu lực T cũng nằm trong Fa.</p>
+
+<p>Vì vậy, nếu nghi vấn không phải là “ĐẨY” thì cần phải “nhìn thấy” hai lực có phải là “ngẫu lực” hay không bằng cách đưa T ra ngoài Fa, đủ xa đến mức nếu là ngẫu lực, Fa cũng phải quay quanh T như P và ngược chiều nhau.
+
+Nhìn vào hình vẽ 4, 5, 6 và nhất là hình 7 khi cho Fa trong hình 6 quay quanh T theo mô hình ngẫu lực ta có thể thấy không thể xẩy ra quay tại tâm T. Với mô hình này, có thể dễ dàng thí nghiệm để kiểm tra các kết luận sau:
+
+1 - Tương tác giữa hai lực P, Fa không phải là “ngẫu lực” mà là “mô men” trong đó P là lực tác dụng, Fa là điểm đặt, khoảng cách P, Fa là độ dài tay đòn mô men.
+
+2 - P, Fa là mô men nên:</p>
+<h3>“Một vật thả trong chất lỏng, trọng lượng (P) của nó bị treo trong, trên hoặc dưới thể tích chất lỏng (V1) bị nó choán chỗ”</h3>
+<p>Khi nhìn vào một vật nổi (trên mặt chất lỏng) và gọi thể tích chất lỏng bị choán chỗ là V1 thì thể tích còn lại của vật nổi, phần thể tích trên mặt nổi là V2. Như vậy có nghĩa là ta đã nhìn vật nổi theo thể tích.</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2014/01/24/dinh-luat-acsimet2.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<p>Từ góc nhìn này cho thấy rõ một điều, đó là trong một vật nổi luôn tồn tại hai thể tích có hai trạng thái nổi khác nhau. Từ đây ta thấy rằng:
+
+Khi V2 > 0 vật nổi.
+
+Khi V2 = 0 vật lơ lửng.
+
+Khi V2 < 0 vật chìm.</p>
+
+<p>Khi nhìn vật nổi theo thể tích sẽ thấy, nguyên lý nổi cổ truyền hình thành từ cách nổi ngẫu nhiên, cho nên hai thể tích như một cặp song sinh dính liền không thể tách rời buộc thể tích V1 bị treo liền dưới V2 nên phải nằm ở môi trường dao động dữ dội nhất cùng V2. Trong khi chỉ cần tách rời hai trạng thái, đặt chúng đến đúng vị trí thuận lợi vốn có của chúng, để hạn chế tác hại của sóng gió, khai thác hiệu quả các ưu thế của từng trạng thái mà tạo hóa đã tạo ra?
+
+Có thể tạo một vật nổi tĩnh không bị dao động bởi sóng gió trong môi trường thủy động, môi trường đại dương theo hướng tách rời hai thể tích?
+
+Có thể tách rời hai thể tích, sửa chữa, cải tạo lại phương thức nổi?
+
+Nguyên lý nổi VN-A đã trả lời, đã chỉ dẫn cách tạo nên vật nổi tĩnh bằng việc tách rời hai thể tích, tạo nên một kiểu nổi khác biệt với kiểu nổi cổ truyền từ cổ xưa đến nay, hoặc cũng có thể đã biết kiểu nổi này nhưng chưa khai thác được các tính năng ưu việt của nó, đồng thời từ kiểu nổi này cho thấy lý thuyết nổi chưa đề cập đến những lực khác mà chỉ chú trọng đến hai lực đặt lên một vật nổi là chưa đủ!</p>
+
+
+
+<button class="back-btn-detail" onclick="window.location.href='khoa-hoc4.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+            <ul>
+                <li><a href="1.html"> Câu trả lời cho "Tại sao 1 + 1 = 2?</a></li>
+                <li><a href="2.html"> Hố đen có bao giờ tiêu tan?</a></li>
+                <li><a href="3.html"> Suy ngẫm thể xác lINH HỒN</a></li>
+            
+                <li><a href="5.html">Dự đoán trước được tương lai - Sự thật hay hoang đường? </a></li>
+                <li><a href="6.html">Tương lai của máy tính </a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

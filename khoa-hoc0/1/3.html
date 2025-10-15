@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,166 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Bản chất của thời gian là tuyến tính hay theo chu kỳ?</h1>
+        <p class="detail-subtitle">Các nhà thiên văn học, khảo cổ học và thần học, cùng rất nhiều chuyên gia khác, từ lâu đã bàn luận về bản chất và ý nghĩa của "thời gian".</p>
+        <div class="detail-meta">Ngày đăng: june 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+      <h2>Giải mã bản chất của thời gian</h2>
+       <p>Chúng ta đều nghĩ mình biết thời gian là gì, cho đến khi ai đó đề nghị chúng ta đưa ra định nghĩa cho nó. Đó là lúc chúng ta nhận ra bản thân chẳng biết dùng từ ngữ gì để miêu tả về thời gian. Tệ hơn nữa, càng suy nghĩ về thời gian, chủ đề này càng trở nên phức tạp hơn, đặc biệt nếu chúng ta vô tình liên tưởng đến những thứ huyền bí vốn xuất hiện dày đặc trong các tác phẩm khoa học viễn tưởng.</p>
+        <p>Mày có bao giờ tự hỏi về bản chất của thời gian hay chưa? Liệu thời gian là tuyến tính, có nghĩa nó chỉ di chuyển theo một hướng, hay thời gian theo chu kỳ, di chuyển theo những vòng tròn, như các mùa trong năm? Dù nhiều người trong thời đại ngày nay dường như đồng ý rằng thời gian là tuyến tính, nhưng khi nhìn lại lịch sử tồn tại của loài người, chúng ta sẽ thấy thời gian có tính chu kỳ và thay đổi theo nhịp điệu.
+
+Dưới đây là 3 lý do tại sao thời gian là tuyến tính, và 3 lý do khác giải thích tính chu kỳ của thời gian.</p>
+        <h2> lý do thời gian là tuyến tính</h2>
+        <h3>1. Thời gian không thể đảo ngược</h3>
+        <img src="https://e.khoahoc.tv/photos/image/2020/12/12/thoi-gian.jpg" alt="Kính viễn vọng James Webb trong không gian" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+         <p>Đừng tin vào những bộ phim như Back to the Future, The Flash, hay những tiểu thuyết khoa học viễn tưởng của H.G. Wells, du hành ngược thời gian đơn giản là điều bất khả thi. Là những thực thể sống, chúng ta được sinh ra, lớn lên, và chết đi, theo đúng trình tự đó. Chúng ta biết về quá khứ, nhưng không thể biết về tương lai. Đó là bởi thời gian chỉ đi theo một hướng duy nhất - không phải về mặt nhận thức đâu, mà là một hiện thực theo khoa học tự nhiên.</p>
+       <h3>2. Mọi thứ đều sẽ sụp đổ</h3>
+       <P>Định luật thứ hai của nhiệt động lực học chỉ ra rằng thời gian là tuyến tính và đơn hướng bởi mọi thứ trong vũ trụ của chúng ta đều đi từ trạng thái có trật tự sang trạng thái ngày càng hỗn độn. Một tách trà nóng sẽ trở nên lạnh đi chứ không nóng lên nữa. Một xác chết sẽ thối rữa chứ không tái sinh. Xe hơi sẽ mục nát. Và người thì già đi. Bạn có thể phủ nhận rằng những thứ đó đã, đang và sẽ diễn ra, nhưng một ngày nào đó, bạn sẽ chẳng còn trên đời để phủ nhận chúng nữa.</P>
+       <h3>3. Thời gian có tính tích luỹ</h3>
+       <p>Thời gian là tuyến tính bởi chúng ta có nhiều cách khác nhau để ghi lại và đo đạc nó, và việc ghi lại cũng như đo đạc có thể diễn ra theo kiểu tích luỹ. Ứng dụng đồng hồ bấm giây trên smartphone của chúng ta có thể đo đạc thời gian tính theo mili-giây. Nhưng sẽ thật ngớ ngẩn khi đo đạc những hoạt động thường ngày chính xác đến mức đó, trừ khi một vận động viên muốn theo dõi và bứt phá những giới hạn về tốc độ của bản thân. Chúng ta cũng có thể đo đạc thời gian bằng cách đếm số lần Trái đất quay quanh Mặt trời, giống như việc loài người đã làm từ hàng ngàn năm qua. Nếu đếm như vậy, bạn sẽ thấy thời gian là một tiến trình tuyến tính từ một điểm khởi đầu hướng mãi về phía trước. Hoặc chúng ta có thể đo sự rung động của các nguyên tử cesium-133 - đó là cách các nhà khoa học thực hiện để đặt Thời gian nguyên tử quốc tế (IAT). Chuẩn toàn cầu đó chính xác đến mức phải mất 1,4 triệu năm mới bị lệch đúng 1 giây. Những hiện tượng tự nhiên này có thể được ghi lại theo những chuỗi dài, tích luỹ, và tuyến tính.</p>
+       <h2>3 lý do thời gian có tính chu kỳ</h2>
+       <h3>1. Trái đất, Mặt trăng, và Mặt trời di chuyển theo những quỹ đạo eclip lặp đi lặp lại</h3>
+   <img src="https://e.khoahoc.tv/photos/image/2020/12/12/chay-xe.jpg" alt="Kính viễn vọng James Webb trong không gian" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+       <p>Tất cả các hệ thống đo đạc thời gian phổ biến nhất mà chúng ta sử dụng trong cuộc sống thường ngày đều có tính chu kỳ: cứ 60 giây được tính là 1 phút, 60 phút thành 1 giờ, 24 giờ thành 1 ngày, 7 ngày thành 1 tuần, 4 tuần thành 1 tháng, 3 tháng thành 1 mùa, và 4 mùa thành 1 năm. Như vậy, chẳng phải cảm giác dẹa vu mà chúng ta thường gặp phải, và câu chuyện lịch sử lặp lại, chính là những bằng chứng cho thấy thời gian có tính chu kỳ? Nếu thời gian thực sự có bản chất tuyến tính, tại sao chúng ta không sử dụng những phương thức đo đạc tham số, tuyến tính, bắt đầu từ một điểm khởi đầu duy nhất rồi hướng về phía trước cho đến vô cực, như đo khoảng cách vậy?</p>
+       <h3>2. Con người không thực sự cần những phương pháp tuyến tính, có trật tự, để đo đạc thời gian
+</h3>
+<p>Cho đến ngày nay, đời sống của người làm nông nghiệp, dân du mục, và kể cả người thành thị, đều bị chi phối bởi một vòng tuần hoàn theo mùa lặp đi lặp lại đến vô tận. Các loại lịch, vốn diễn tả thời gian dưới dạng tuyến tính, là một hiện tượng tương đối mới mẻ khi so sánh với sự tồn tại từ rất lâu của giống loài chúng ta. Lịch sớm nhất được tạo ra là vào 10.000 năm trước; những hệ thống lịch được ghi chép lại kỹ càng cũng mới chỉ phổ biến trong vòng 5.000 năm trở lại đây. Giống loài chúng ta thì đã 200.000 tuổi; tức trong ít nhất 95% thời gian tồn tại của loài người, thời gian là một thứ gì đó có tính chu kỳ và được tính theo ngày mà thôi.
+
+Trước khi đại dịch virus corona bùng phát, một lời than vãn khá phổ biến là chúng ta "không bao giờ có đủ thời gian", do đó chúng ta không bao giờ "tranh thủ thời gian" để dừng lại và ngửi mùi hương của một bông hồng ven đường. Ngày nay, khi bị buộc phải ở nhà trong bối cảnh giãn cách xã hội, chúng ta đều phải sống chậm lại. Tổ tiên loài người của chúng ta không chỉ được ngửi hoa hồng, họ còn nhìn ngắm chúng nảy mầm, phát triển, sinh trưởng, và héo úa, năm này sang năm nọ, mà không hề có ý nghĩ đang lãng phí một tài nguyên quý giá và có hạn khi làm điều đó.</p>       
+       <h3>3. Lịch là những công trình văn hoá, nhân tạo</h3>
+       <p>Bạn có để ý thấy năm theo lịch - hay khung thời gian tuyến tính - được đếm như những đơn vị tích luỹ từ một điểm khởi đầu cụ thể? Đó là bởi lịch năm được sử dụng bởi những thế lực chính trị và tôn giáo để đánh dấu những sự kiện mà họ cho là quan trọng, như ngày sinh của chúa Jesus, chứ không phải những sự kiện hay tiến trình tự nhiên hoặc khoa học, như khởi nguồn của sự sống trên Trái đất.
+
+Sự khác biệt giữa lịch Do Thái, Trung Hoa, Gregory (Công lịch, Tây lịch, hay Dương lịch), và Maya là gì? Không nhiều, xét từ mọi khái niệm và từ quan điểm của thời gian. Những loại lịch đó có nguồn gốc, điểm khởi đầu, hệ thống đếm, và các ngày lễ khác nhau, và chỉ liên quan đến con người, không liên quan đến động vật, cây cỏ, hay hành tinh. Suy cho cùng, mỗi loại lịch không gì hơn là một công trình văn hoá được xây dựng dựa trên các hệ thống chính trị, tôn giáo, khoa học và kinh tế của một khu vực, vốn do con người tạo nên.</p>
+       <h2>Tổng hợp nè:</h2>
+       <p>Loài người có một mối quan hệ phức tạp với thời gian. Đời sống hiện đại của chúng ta hầu như được cấu trúc một cách nực cười từ thời gian tuyến tính và sự đo đạc chính xác thời gian. Tuy nhiên, tổ tiên loài người của chúng ta, và một số họ hàng của chúng ta ngày nay, đã sống với một cách hiểu khác về thời gian - một cách hiểu mang tính chu kỳ, theo ngày, và có nhịp điệu. Có lẽ cách hiểu này cũng có phần khôn ngoan mà chúng ta ngày nay đã quên mất chăng?</p>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       <button class="back-btn-detail" onclick="window.location.href='khoa-hoc2.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+            <ul>
+                <li><a href="1.html">Thiên thạch và những sự thật thú vị</a></li>
+                <li><a href="2.html">hiện tượng tuyệt đẹp của bầu trời </a></li>
+              
+                <li><a href="4.html">BỨC XẠ: NHỮNG VIÊN ĐẠN VÔ HÌNH </a></li>
+                <li><a href="5.html">Khám phá những bí ẩn của thế giới không gian đa chiều </a></li>
+                <li><a href="6.html">Thứ nhỏ nhất vũ trụ? </a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

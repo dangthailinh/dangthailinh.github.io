@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,140 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Vì sao kền kền không bị ngộ độc khi ăn xác thối?</h1>
+        <p class="detail-subtitle">giải thích tại sao mấy con ml này ăn xác thối giòi bọ không bị ngộ độc.</p>
+        <div class="detail-meta">Ngày đăng: Oct 2 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+          <h2>Nguyên nhân là:</h2>
+          <p>Tại những vùng hoang mạc châu Phi, một con linh dương trút hơi thở cuối cùng vì bệnh lao. Nằm chết gần một hồ nước nhỏ, xác chết của con vật đe dọa gây ô nhiễm nguồn nước. Nhưng không sao vì đội vệ sinh sẽ đến nhanh thôi, đó chính là loài kền kền. Chỉ trong vài giờ, cái xác được "dọn" sạch sẽ, trước khi thịt thối làm nhiễm khuẩn nguồn nước. Đến bệnh lao cũng không thể đánh gục đám kền kền.</p>
+         <img src="https://e.khoahoc.tv/photos/image/2018/05/09/ken-ken.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+           <p>Kền kền là loài chim ăn xác chết, chúng có thể ăn thịt động vật đã thối rữa. Mọi chất khi phân hủy đều chứa nhiều vi khuẩn độc hại, có thể gây bệnh hoặc ngộ độc nếu động vật hoặc con người ăn phải.
+
+Tuy nhiên, trong dạ dày kền kền chứa axit rất mạnh (có độ PH gần bằng 0), giúp bảo vệ chúng khỏi vi khuẩn độc hại.
+
+Nhưng dạ dày của chúng ta cũng chứa axit? Đúng là vậy, nhưng axit trong dạ dày kền kền mạnh hơn rất nhiều so với axit trong dạ dày người. Nó mạnh đến nỗi có thể ăn mòn một số kim loại.
+
+Vì vậy, khi kền kền ăn xác thối, axit trong dạ dày của chúng sẽ tiêu diệt hầu hết vi khuẩn gây ngộ độc thực phẩm và các vấn đề về sức khỏe khác, giúp chúng an toàn sau bữa ăn. Dạ dày kền kền có khả năng loại bỏ rất nhiều mầm bệnh truyền nhiễm nguy hiểm như bệnh tả, bệnh than và bệnh dại khỏi hệ sinh thái châu Phi.</p>
+        <h2>Một số loài kền kền tiêu biểu</h2>
+        <p>Với trọng lượng 10kg và sải cánh gần ba mét, loài kền kền Nubia được mệnh danh là vua xác thối. Cái mỏ khỏe và cái cổ dài của chúng dễ dàng xẻ xuyên lớp da dày và các thớ cơ, tạo cơ hội cho những loài kền kền yếu hơn đến kiếm ăn.</p>
+        <p>Kền kền Ai Cập nhỏ bé với sải cánh chỉ có 180cm. Tuy nhỏ bé nhưng bù lại khá thông minh, chúng sẽ tìm trứng chim đà điểu và dùng đá đập vỡ để ăn lót dạ rồi sau đó bay đến chỗ xác linh dương khi những con chim to đã rời đi.</p>
+        <p>Tít trên không trung là loài kền kền Ruppell’s Griffon, lượn lờ ở tầm trên 11.000 mét và là loài chim bay cao nhất trên Trái Đất. Ở độ cao này, chúng không thể nhìn thấy các xác chết, nhưng bóng của đám kền kền bay thấp hơn sẽ dẫn chúng đến bữa ăn. Cái đầu trọc sẽ giúp chúng cân bằng nhiệt độ khi hạ độ cao và không bị vấy bẩn khi bươi xác con linh dương.</p>   
+        <p>Trên thực tế, có vài loài kền kền như kền kền râu sống trên vùng núi châu Âu, châu Phi, Ấn Độ,... với dịch vị tiêu hóa có tính axit mạnh giúp tiêu hóa hầu hết các loại xương chỉ trong 24 giờ.</p>
+       
+       <h2>Những cu em này đang bị đe dọa</h2>
+       <p>Dù kền kền có thể dễ dàng tiêu hóa chất thải tự nhiên nhưng chất hóa học nhân tạo lại là một vấn đề đối với chúng. Diclofenac, một loại thuốc thú y phổ biến cho gia súc ở Ấn Độ nhưng cực kì nguy hiểm cho kền kền. Vì tín ngưỡng địa phương cấm ăn thịt bò, nên kền kền sẽ ăn xác những con bò. Kể từ thập niên 1990, loại thuốc thú y này, cùng mối họa từ điện cao thế và suy giảm môi trường sống, đã làm giảm đến 95% số lượng kền kền tại khu vực này.</p>
+       <p>Ở châu Phi, những kẻ săn trộm cố tình tẩm độc xác thú để ngăn kền kền xuất hiện nhằm tránh làm lộ chỗ ẩn náu. Một xác thú tẩm độc có thể giết hơn 500 con kền kền. Hiện tại, hơn một nửa số loài kền kền đang gặp nguy hiểm.
+
+</p>
+<p>Ở những vùng kền kền tuyệt chủng, xác thú phải mất gấp ba lần thời gian để phân hủy. Khi đó cái xác sẽ gây ô nhiễm nguồn nước uống và các loài chó và chuột hoang sẽ truyền bệnh cho con người. Sự giảm số lượng kền kền đáng kể ở châu Á và châu Phi đã dẫn đến dịch bệnh dại ở Ấn Độ, khiến khoảng 20.000 người tử vong mỗi năm.
+
+May thay, một số nơi đã nhận ra tầm quan trọng của kền kền. Các nhà bảo tồn đã vận động thành công để cấm các loại thuốc như Diclofenac, trong khi các nhà nghiên cứu đang tìm cách khôi phục số lượng kền kền qua các chương trình gây giống. Nhờ những động thái này, kền kền sẽ có thể tiếp tục vai trò góp phần bảo vệ hành tinh chúng ta.</p>
+        <button class="back-btn-detail" onclick="window.location.href='khoa-hoc3.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+       
+                <li><a href="2.html"> 10 loài vật khổng lồ nhất</a></li>
+             
+                <li><a href="4.html"> Tại sao trăn không chết ngạt khi siết mồi?</a></li>
+                <li><a href="5.html"> Khám Phá Gấu Nước</a></li>
+                <li><a href="6.html"> Tìm hiểu về cá voi xanh</a></li>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

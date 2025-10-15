@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,141 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Loài Rắn Trong Thần Thoại</h1>
+        <p class="detail-subtitle">Biểu Tượng Của Quyền Năng Và Huyền Bí</p>
+        <div class="detail-meta">Ngày đăng: june 23 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+       <h3>Từ thuở hồng hoang, rắn đã hiện diện trong tâm thức con người như một sinh vật vừa đáng sợ vừa linh thiêng. Dù mang nhiều hình dạng và ý nghĩa khác nhau trong từng nền văn hóa, loài rắn luôn là biểu tượng của sự tái sinh, tri thức, cám dỗ, và sức mạnh siêu nhiên.</h3>
+        <h2>1. Rắn trong thần thoại phương Tây – Tội lỗi và tri thức cấm</h2>
+      <img src="https://www.heroesbibletrivia.org/wp-content/uploads/2023/03/serpent-tempting-Eve-1536x864.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+      <p>Trong Kinh Thánh, hình tượng rắn xuất hiện ngay từ vườn địa đàng Eden. Chính con rắn đã dụ dỗ Eva ăn trái cấm – biểu tượng của tri thức và ý thức về thiện ác. Hành động ấy khiến loài người bị đuổi khỏi thiên đường, mở ra một kỷ nguyên đầy đau khổ nhưng cũng đánh dấu bước ngoặt tiến hóa về nhận thức.
+Ở đây, rắn không chỉ đại diện cho cám dỗ và tội lỗi, mà còn là nguồn gốc của sự khai sáng, khiến con người thoát khỏi sự ngây thơ để hiểu về thế giới.</p>
+       <p>Trong thần thoại Hy Lạp, rắn gắn liền với thần y Asclepius – người cầm cây gậy có rắn quấn quanh, biểu tượng vẫn còn tồn tại đến ngày nay trong ngành y học. Rắn trong hình tượng này tượng trưng cho sức mạnh chữa lành, sự tái sinh và tuần hoàn sinh mệnh, bởi khả năng lột da của nó gợi liên tưởng đến sự đổi mới và hồi sinh.</p>
+
+      <h2>2. Rắn trong văn hóa phương Đông – Linh thú và sự cân bằng vũ trụ</h2>
+      <p>Ở phương Đông, rắn thường được tôn kính như linh vật có sức mạnh thần thánh. Trong văn hóa Trung Hoa, rắn là một trong mười hai con giáp, đại diện cho trí tuệ, mưu lược và trực giác sâu sắc. Người sinh năm Tỵ được cho là có đầu óc tinh tế, biết nhìn xa trông rộng.</p>
+
+       <img src="https://vannghedanang.org.vn/app/upload/post/2025-02-07/nghien-cuu-trao-doi-12319.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+       <p>Ở Việt Nam, hình tượng rắn hòa quyện với rồng – loài linh thú tượng trưng cho trời đất và nước. Truyền thuyết kể rằng rồng chính là rắn hóa thành, một biểu tượng cho sự thăng hoa từ thấp đến cao, từ vật chất đến tinh thần. Trong nhiều tín ngưỡng dân gian, rắn còn là vật canh giữ kho báu, linh hồn của đất, hay vị thần cai quản sông suối.</p>
+        
+       <h2>Rắn trong Ấn Độ giáo – Quyền năng và sự giác ngộ</h2>
+       <img src="https://tse3.mm.bing.net/th/id/OIP.60ieR-HgC_gODX7QBm5ougHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+       <p>Trong Ấn Độ giáo, rắn hay Nāga là sinh vật nửa người nửa rắn sống ở thế giới dưới nước, vừa đáng sợ vừa thiêng liêng. Nāga được xem là người bảo vệ các vị thần, và là nguồn năng lượng Kundalini – sức mạnh tâm linh ngủ sâu trong mỗi con người, tượng trưng bằng hình ảnh rắn cuộn dưới đáy cột sống.
+Khi năng lượng ấy được đánh thức qua thiền định, nó trườn lên xuyên qua các luân xa, mang lại trí tuệ tối thượng và sự giác ngộ.</p>
+            
+     <h2>Kết luận</h2>
+     <p>Điều khiến rắn trở thành sinh vật đặc biệt trong thần thoại là tính hai mặt của nó. Rắn có thể hủy diệt bằng nọc độc, nhưng cũng chữa lành bằng dược tính. Nó ẩn mình trong bóng tối nhưng cũng đại diện cho ánh sáng tri thức.
+Từ phương Tây đến phương Đông, từ cổ đại đến hiện đại, rắn luôn là biểu tượng của chu kỳ – cái chết, tái sinh và bất tử, phản ánh niềm tin sâu sắc của con người vào sự chuyển hóa vô tận của tự nhiên.</p>
+<button class="back-btn-detail" onclick="window.location.href='khoa-hoc3.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+           <ul>
+                
+                <li><a href="1.html"> Top 10 loài vật lớn nhất</a></li>
+                <li><a href="2.html"> Kền kền không bị ngộ độc</a></li>
+                <li><a href="3.html">Tại sao chăn không bị ngạt </a></li>
+                <li><a href="4.html"> Khám phá gấu nước</a></li>
+                <li><a href="5.html"> Khám Phá Cá voi xanh</a></li>
+                
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

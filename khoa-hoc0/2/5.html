@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,244 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Tìm hiểu về cá voi xanh </h1>
+        <p class="detail-subtitle">Mập địt chuppy bí ẩn của đại dương</p>
+        <div class="detail-meta">Ngày đăng: Oct 5 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+            <h2>Tổng quan về cá voi xanh</h2>
+            <p>Tên chi Balaenoptera có nguồn gốc từ tiếng Latinh, có nghĩa là “cá voi có cánh”, trong khi tên loài musculus có thể được hiểu là “cơ” hoặc là dạng thu nhỏ của từ “chuột”, có thể là một sự tinh tế từ Carl Linnaeus khi ông đặt tên cho loài này trong Systema Naturae. </p>
+      <p>Một trong những mô tả đầu tiên về cá voi xanh được công bố trong Phalainologia Nova của Robert Sibbald, sau khi ông phát hiện một con cá voi mắc cạn ở cửa sông Firth of Forth, Scotland, vào năm 1692.</p>
+      <p>Thuật ngữ “cá voi xanh” bắt nguồn từ tiếng Na Uy “blåhval”, được Svend Foyn đặt ra ngay sau khi ông hoàn thiện súng lao móc. Nhà khoa học Na Uy GO Sars chọn thuật ngữ này để làm tên gọi thông thường từ năm 1874.
+
+Cá voi xanh cũng được biết đến với tên “Rorqual của Sibbald”, theo tên của Robert Sibbald, người đầu tiên mô tả loài này. Trong tiểu thuyết Moby Dick của Herman Melville, chúng được mô tả như là “đáy lưu huỳnh” do màu sắc nhạt nhẽo trên phần dưới cơ thể, được hình thành từ sự tích tụ của tảo và cát.
+
+</p>     
+<img src="" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+  <p>Cá voi xanh, một thành viên trong họ Balaenopteridae, có một hành trình lịch sử phát triển đầy thú vị. Năm 2018, một nghiên cứu phân tích cho thấy họ Balaenopteridae đã chia rẽ khỏi các họ khác khoảng từ 10,48 đến 4,98 triệu năm trước, vào cuối kỷ Miocene. 
+
+Điều này cho thấy chúng đã có mặt từ rất lâu trước trong thế giới biển cả, khi mà các loài cá voi khác cũng đang dần hình thành và phát triển. Hóa thạch đầu tiên của cá voi xanh hiện đại được phát hiện là một phần hộp sọ tại miền nam nước Ý, có niên đại vào đầu kỷ Pleistocene, khoảng từ 1,5 đến 1,25 triệu năm trước. </p>
+      
+ <p>Đây là những dấu vết quan trọng cho thấy sự tiến hóa và thích nghi của loài này qua hàng triệu năm qua trên hành trình vượt qua thời gian và không gian. Cá voi xanh lùn ở Úc đã chia tách trong Kỷ băng hà cuối cùng, một thời điểm đầy khắc nghiệt trong lịch sử hành tinh. 
+
+Sự chia tách này gần đây hơn đã góp phần giảm sự đa dạng di truyền của phân loài này, với cá voi xanh New Zealand thậm chí có sự đa dạng di truyền thấp hơn nữa. Từ các nghiên cứu trình tự gen, chúng ta biết rằng cá voi xanh có mối quan hệ họ hàng gần nhất với cá voi sei, trong khi cá voi xám được xem là nhóm chị em. </p>     
+      
+      <p>Nghiên cứu này cũng chỉ ra một dòng gen đáng kể giữa cá voi minke và tổ tiên của cá voi xanh và cá voi sei, đó là những phát hiện quan trọng trong việc hiểu sâu hơn về quá trình tiến hóa và sự phát triển của các loài cá voi trên trái đất chúng ta.</p>
+ <h2>Đặc điểm của cá voi xanh</h2>     
+<p>Cá voi xanh được biết đến với hình dạng thân hình mảnh khảnh, với đầu hình chữ U rộng; vây mỏng, dài; và vây lưng hình lưỡi liềm nhỏ dài (khoảng 33cm 13in), nằm gần đuôi và gốc đuôi lớn ở gốc của các vây lưng rộng và mỏng. 
+
+Đặc điểm nổi bật của chúng là hàm trên được lót bằng 70–395 tấm sừng hàm đen, và vùng họng có 60–88 rãnh cho phép da giãn ra trong quá trình ăn. Hai lỗ phun nước của cá voi xanh có thể phun nước lên cao từ 9,1 đến 12,2 mét (30–40ft) khi chúng nổi lên mặt nước.
+
+Da của cá voi xanh có màu xám xanh loang lổ, xuất hiện xanh dưới nước. Mỗi cá thể có các hoa văn loang lổ gần vây lưng khác nhau, làm cho từng con cá voi có mẫu vẽ riêng biệt và đặc trưng. Phần bụng của chúng thường có sắc tố nhạt hơn và có thể có màu vàng nhờ vào sự tích tụ của tảo cát trong môi trường nước, điều này đã góp phần vào biệt danh “đáy lưu huỳnh” được lưu truyền qua lịch sử.</p>
+      
+   <img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-006.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+ <p>Đặc biệt, cá voi xanh đực sở hữu dương vật lớn nhất trong vương quốc động vật, dài khoảng 3 m (9,8 ft) và rộng 12 in (30 cm). Điều này là một trong những đặc điểm sinh lý đáng chú ý nhất của loài và cũng là một điểm đáng kinh ngạc trong thế giới động vật biển.
+
+Cá voi xanh là loài động vật biển lớn nhất từng được biết đến, với trọng lượng có thể lên đến khoảng 180 tấn (180 tấn Anh; 200 tấn ngắn). Đây là một trong những con số ấn tượng cho thấy sức mạnh và kích thước khổng lồ của chúng trong thế giới động vật biển. 
+
+So sánh về kích thước, một số nghiên cứu đã đưa ra những ước tính rằng một số loài ichthyosaur thuộc họ shastasaurus và loài cá voi cổ đại Peru Cetus có thể sánh ngang với cá voi xanh, trong đó Peru Cetus được cho là còn nặng hơn với trọng lượng trung bình khoảng 180 tấn.
+
+Tuy nhiên, những ước tính này thường dựa trên các di vật còn sót lại, và kích thước của các loài này sau đó đã gặp nhiều tranh cãi và sự bất đồng ý kiến. Ví dụ, các nghiên cứu khác cũng đưa ra ước tính rằng trên cạn, các loài sauropod lớn như Bruhathkayosaurus (trọng lượng trung bình từ 110 đến 170 tấn).
+
+Những ước tính này cũng chịu sự tranh cãi lớn và phụ thuộc vào các mẫu vật và dữ liệu nghiên cứu cụ thể được sử dụng. Sự khám phá và nghiên cứu liên tục về các loài khổng lồ này là rất cần thiết để hiểu rõ hơn về sự phát triển và tiến hóa của các sinh vật lớn trên trái đất chúng ta.</p>  
+    <h2>Tập tính của cá voi xanh</h2>      
+      <p>Cá voi xanh, một trong những sinh vật lớn nhất và mạnh mẽ nhất trên hành tinh, thường sống một mình nhưng cũng có thể hình thành thành các nhóm nhỏ hoặc đàn đông đến hơn 50 cá thể khi đi săn mồi hoặc di cư. </p>
+      <h3>Giao tiếp và hành vi</h3>
+      <p>Cá voi xanh là một trong những loài động vật có giọng nói trầm nhất và mạnh mẽ nhất trong thế giới đại dương. Chúng phát ra những âm thanh ở tần số thấp, thường từ 10 đến 40 Hz, với một số âm thanh còn thấp hơn chỉ khoảng 7 Hz, và cường độ lên tới 200 decibel. 
+
+Những âm thanh này có thể lan tỏa hàng nghìn dặm trong đại dương sâu thẳm, vượt qua các rào cản tự nhiên như dãy núi dưới nước và có thể đi được xa hơn cả âm thanh được nghe thấy từ máy bay phản lực trên không.
+
+Sự mạnh mẽ của âm thanh này không chỉ là để thu hút sự chú ý mà còn để giao tiếp với những con cá voi khác. Cá voi xanh sử dụng âm thanh để liên lạc với nhau trong đàn, để tìm kiếm bạn đồng hành, để gọi gào trong các hoạt động săn mồi, và có thể để thể hiện tình cảm và sự nhận biết lẫn nhau.</p>
+
+
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-004.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<p>Hơn nữa, xung tần số thấp của những âm thanh này có thể được cá voi xanh sử dụng để định hướng. Chúng tạo ra một hình ảnh âm thanh chi tiết của môi trường đại dương xung quanh, giúp chúng tìm kiếm thức ăn và điều hướng trong những môi trường mà thị giác của chúng bị hạn chế. 
+
+Cá voi xanh có thể sử dụng âm thanh để phát hiện và đánh bắt mồi, nhờ vào khả năng phản xạ âm thanh từ các con mồi nhỏ như cá mực và sứa, đến những con mồi lớn hơn như cá voi và cá mập.
+
+Mặc dù chúng ta đã thu thập được nhiều thông tin về cách mà cá voi xanh sử dụng âm thanh để giao tiếp và sinh hoạt hàng ngày, nhưng vẫn còn rất nhiều điều chúng ta chưa biết. 
+
+Sự nhạy bén của thính giác của chúng cho phép chúng cảm nhận và phản ứng với những biến động âm thanh trong môi trường sống của mình, từ những âm thanh nhỏ nhất đến những âm thanh mạnh mẽ và xa xôi nhất trong đại dương.</p>
+<p>Chúng có thể di chuyển hàng ngày để tìm kiếm các khu vực ăn uống phù hợp, di chuyển từ bãi kiếm ăn mùa hè ở các vùng cực đến bãi sinh sản mùa đông ở vùng nước xích đạo hơn. Mặc dù không có hệ thống định vị GPS, các nghiên cứu cho thấy cá voi xanh có khả năng sử dụng trí nhớ để nhớ và xác định các vị trí kiếm ăn tối ưu. 
+
+Chúng có thể áp dụng nhiều chiến lược di chuyển, từ cư trú quanh năm đến di cư theo mùa (chỉ một số cá thể di cư), hoặc theo độ tuổi và giới tính. Một số loài cá voi xanh đã được ghi nhận dùng kỹ thuật kiếm ăn tại các bãi sinh sản.
+
+Tốc độ di chuyển của cá voi xanh dao động từ 5 đến 30 km/giờ (3,1 đến 18,6 dặm/giờ), mặc dù kích thước khổng lồ của chúng giới hạn khả năng nhảy lên khỏi mặt nước. Cá voi xanh có khả năng lặn sâu nhất được ghi nhận là 506 mét (1.660 ft), với giới hạn lặn hiếu khí lý thuyết ước tính là 31,2 phút, mặc dù thời gian lặn dài nhất thực tế đo được chỉ là 15,2 phút. 
+
+Nhịp tim của cá voi xanh có thể giảm xuống còn 2 nhịp mỗi phút khi ở độ sâu lớn, nhưng khi chúng nổi lên mặt nước, nhịp tim có thể tăng lên đến 37 nhịp mỗi phút, gần với nhịp tim đỉnh điểm của chúng. Điều này cho thấy sự thích nghi và điều chỉnh của chúng với môi trường sống biển cả khắc nghiệt.</p>
+
+<h2>Tập tính săn mồi</h2>
+<p>Cá voi xanh, nhờ kích thước vô cùng lớn của chúng, hiếm khi gặp phải kẻ thù tự nhiên nào. Với trọng lượng có thể lên đến hàng chục tấn và chiều dài khoảng 25 mét, chúng là loài động vật lớn nhất trên hành tinh. 
+
+Tuy nhiên, vào thế kỷ 20, cá voi xanh đã phải đối mặt với một cuộc săn bắt quy mô rộng lớn từ con người, dẫn đến tình trạng suy giảm nghiêm trọng số lượng cá thể và gần như đẩy chúng vào bờ vực tuyệt chủng.</p>
+<p>Cá voi xanh con, mặc dù vẫn có kích thước lớn so với hầu hết các loài động vật khác, vẫn không thể tránh khỏi các mối đe dọa từ cá voi sát thủ (Orca) và cá mập lớn. Những con cá voi sát thủ, dù không phải kích thước lớn bằng cá voi xanh, nhưng chúng có khả năng săn mồi thông minh và có thể tấn công nhóm để đánh bại một con cá voi xanh lớn hơn. 
+
+Các cá mập lớn như cá mập trắng cũng có thể nhắm đến cá voi xanh con, đặc biệt là khi chúng cảm thấy yếu đuối hoặc bị cô lập. Do đó, mặc dù có kích thước vô cùng lớn và sức mạnh to lớn, cá voi xanh vẫn phải đối mặt với những mối đe dọa tự nhiên trong môi trường sống của chúng.
+
+Cá voi xanh là một chuyên gia trong việc săn mồi, và chế độ ăn của chúng chủ yếu bao gồm các loài krill. Chúng tấn công krill bằng cách lao mình vào mớ mồi này với tốc độ nhanh chóng, mở miệng rộng lên đến 80°. </p>
+
+<p>Một con cá voi xanh có thể nuốt vào lúc đó lên đến 220 tấn (240 tấn ngắn) nước cùng một lúc, ép nước qua các tấm sừng hàm bằng áp lực từ túi họng và lưỡi, và sau đó nuốt phần còn lại của krill. Cá voi xanh thường lăn ngang 180° trong khi lao vào để có thể tìm kiếm một cách hiệu quả trong những cánh đồng mồi dày đặc nhất. 
+
+Khi săn bắt krill, chúng tối ưu hóa lượng calo tiêu thụ bằng cách tăng số lượng các đợt lao vào, chọn những mảng mồi dày đặc nhất có thể. Điều này giúp chúng tích lũy đủ năng lượng cho các hoạt động hàng ngày và chuẩn bị cho quá trình di cư và sinh sản.
+
+Để duy trì chi phí cho việc ăn một lượng lớn krill, cá voi xanh phải tiêu thụ mật độ mồi lớn hơn 100 krill trên mỗi mét khối nước. Chúng có khả năng tiêu thụ từ 34.776 đến 1.912.680 kilojoule (8.312 đến 457.141 kcal) từ một miếng krill, cung cấp năng lượng nhiều hơn tới 240 lần so với năng lượng tiêu thụ trong một lần lao vào..
+
+Cá voi xanh có xu hướng tránh cạnh tranh trực tiếp với các loài cá voi tấm sừng khác bằng cách lựa chọn không gian và thời gian ăn khác nhau, cũng như chọn các loài mồi khác nhau.  </p>
+
+<h2>Tập tính sinh sản</h2>
+
+<p>Cá voi xanh đạt đến độ tuổi sinh dục vào khoảng 8-10 tuổi. Ở Bắc bán cầu, chiều dài khi chúng đạt tuổi sinh dục dao động từ 21 đến 23 mét (69-75 ft) đối với con cái và từ 20 đến 21 mét (66-69 ft) đối với con đực.
+
+Cá voi xanh lùn đực trưởng thành về mặt sinh dục thường có chiều dài trung bình khoảng 18,7 mét (61,4 ft). Con cá voi xanh lùn cái khi trưởng thành về mặt sinh dục có chiều dài từ 21,0 đến 21,7 mét (68,9-71,2 ft) và thường đạt tuổi sinh dục vào khoảng 10 tuổi.
+
+Thông tin về hành vi giao phối và khu vực sinh sản của cá voi xanh vẫn còn rất ít. Tuy nhiên, chúng dường như là loài đa thê, với các con đực cạnh tranh với nhau để có được quyền giao phối với các con cái. 
+
+Một con cá voi xanh đực thường sẽ bám theo một con cái và đánh bại những đối thủ tiềm năng. Các hoạt động giao phối diễn ra từ mùa thu đến mùa đông. Khi mang thai, con cái cá voi xanh ăn khoảng 4% trọng lượng cơ thể của chúng mỗi ngày, trong đó có khoảng 60% tổng trọng lượng cơ thể vào mùa kiếm ăn mùa hè. </p>
+
+
+
+
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-002.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      
+<p>Thời kỳ mang thai của chúng có thể kéo dài từ 10 đến 12 tháng, với bê con có chiều dài khoảng 6-7 mét (20-23 ft) và nặng từ 2 đến 3 tấn khi sinh ra. Các con cá voi xanh sản xuất khoảng 220 kg (490 lb) sữa mỗi ngày, với nhu cầu cao nhất vào giai đoạn này.
+
+ 
+
+Các bê con thường được cai sữa khi chúng đạt từ 6 đến 8 tháng tuổi, khi đã có chiều dài khoảng 16 mét (53 ft). Chúng có thể tăng trọng lượng lên đến 17.000 kg (37.500 lb) trong thời kỳ cai sữa này. 
+
+Cá voi xanh là loài động vật săn mồi lớn duy nhất có thể bị cá voi sát thủ tấn công, mặc dù tần suất các vụ tấn công này và tỷ lệ tử vong chưa được chính xác xác định. Nghiên cứu dựa trên nhận diện qua ảnh cho thấy rằng một số lượng đáng kể cá voi xanh ở Vịnh California mang những vết cào, cho thấy chúng đã gặp phải cá voi sát thủ. </p>
+<p>Ngoài khơi Đông Nam Úc, 3,7% cá voi xanh được chụp ảnh có vết thương do cá voi sát thủ, trong khi 42,1% ở vùng ngoài khơi Tây Úc cũng có những vết cào tương tự. Sự kiện cá voi sát thủ săn mồi được ghi nhận là rất hiếm. 
+
+Lần đầu tiên quan sát được một con cá voi xanh mẹ và con bị cá voi sát thủ đuổi theo nhanh chóng ngoài khơi Đông Nam Úc. Vụ tấn công đầu tiên được ghi nhận vào năm 1977 ngoài khơi Tây Nam Baja California, Mexico, mặc dù con cá voi bị thương đã may mắn trốn thoát sau năm giờ. 
+
+Thêm vào đó, từ năm 1982 đến 2003, đã có bốn con cá voi xanh khác bị một nhóm cá voi sát thủ đuổi theo. Sự kiện săn mồi đầu tiên của cá voi sát thủ được ghi nhận vào tháng 9 năm 2003, khi một nhóm cá voi sát thủ ở vùng nhiệt đới phía Đông Thái Bình Dương bị phát hiện đang săn một con cá voi xanh con mới bị giết. </p>
+<p>Vào tháng 3 năm 2014, một sự cố khác được ghi nhận tại Vịnh Monterey, khi một nhóm cá voi sát thủ quấy rối một con cá voi xanh thương mại, nhưng con cá voi đã phản công bằng cách vỗ đuôi. Sự việc tương tự xảy ra vào tháng 5 năm 2017, được ghi nhận bởi một máy bay không người lái tại Vịnh Monterey.
+
+Các quan sát trực tiếp đầu tiên về việc cá voi sát thủ săn mồi xảy ra ngoài khơi bờ biển phía nam của Tây Úc, với hai sự kiện vào năm 2019 và một lần nữa vào năm 2021. Nạn nhân đầu tiên được ước tính dài khoảng từ 18 đến 22 mét (59 đến 72 feet).</p>
+<h2>Các mối đe dọa</h2>
+<p>Cá voi xanh ban đầu rất khó bị săn bắt do kích thước to lớn và tốc độ nhanh của chúng. Tuy nhiên, vào giữa thế kỷ 19, sự phát triển của công nghệ lao móc có thể bắn như đạn đã làm thay đổi hoàn toàn cảnh săn bắt cá voi xanh. Hoạt động săn bắt này đạt đỉnh điểm vào khoảng năm 1930 và 1931 với khoảng 30.000 con cá voi xanh bị giết.
+
+Khu vực Nam Cực đã chịu tác động nặng nề, với khoảng 350.000–360.000 con cá voi bị bắt trong nửa đầu của thế kỷ 20. Ngoài ra, khoảng 11.000 con cá voi Bắc Đại Tây Dương (chủ yếu xung quanh Iceland) và 9.500 con cá voi Bắc Thái Bình Dương cũng đã phải chịu cảnh giết mổ trong cùng thời kỳ.
+
+Sự tàn phá của ngành săn bắt này đã khiến cá voi xanh gần như bị đe dọa tuyệt chủng. Đáp ứng với tình trạng này, Ủy ban săn bắt cá voi quốc tế đã đưa ra lệnh cấm tất cả các hoạt động săn bắt cá voi xanh vào năm 1966, bảo vệ chúng trên toàn thế giới. Tuy nhiên, Liên Xô tiếp tục săn bắt cá voi xanh và các loài khác một cách bất hợp pháp cho đến những năm 1970.</p>
+<h2>Một số hình ảnh cá voi xanh</h2>
+
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-019.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-021.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-020.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-018.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-017-scaled.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-016-scaled.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-015-scaled.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<img src="https://dongvat.edu.vn/upload/2024/07/ca-voi-xanh-013.webp" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      
+      <button class="back-btn-detail" onclick="window.location.href='khoa-hoc3.html'">← Quay lại Khoa Học</button>
+
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+                  <ul>
+                
+                <li><a href="1.html"> Top 10 loài vật lớn nhất</a></li>
+                <li><a href="2.html"> Kền kền không bị ngộ độc</a></li>
+                <li><a href="3.html">Tại sao chăn không bị ngạt </a></li>
+                <li><a href="4.html"> Khám phá gấu nước</a></li>
+           
+                <li><a href="6.html"> Rắn trong thần thoại</a></li>
+            </ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

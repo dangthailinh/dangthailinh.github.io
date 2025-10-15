@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,148 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Tương lai của máy tính</h1>
+        <p class="detail-subtitle">bạn có tò mò về việc máy tính sẽ như nào trong tương lai không?</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+       <h3>Ngày nay khi thời đại của máy tính điện tử phát triển và tạo ra cuộc cách mạng bùng nổ thông tin trên toàn cầu, thành tựu mà nó đạt được quả thật là điều không tưởng trước đây, vậy có khi nào bạn tự hỏi tương lai của những cỗ máy tính sẽ ra sao trong tương lai?</h3>
+  <p>Máy tính điện tử là phương tiện làm việc tuyệt vời và hiệu quả nhất, giúp con người hiểu sâu vào thế giới tự nhiên và giúp con người liên lạc với nhau một cách dễ dàng. Song nó vẫn có những sự hạn chế riêng như: tốc độ tính toán có giới hạn, kết quả tính toán vẫn chưa đạt các yêu cầu chuyên sâu, việc dùng năng lượng cho máy tính còn yêu cầu khá lớn.</p>
+  
+<img src="https://e.khoahoc.tv/photos/image/032012/19/electroniccomputer.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<h3>Vậy tương lai máy tính như nào?</h3>
+<p>Hướng thứ nhất: Máy tính lượng tử (quantum  computer). Loại máy tính này có nguyên lý làm việc khác khá xa so với máy tính điện tử ngày nay. Với máy tính điện tử ngày nay, thì dùng các bit để làm nền tảng cho các xử lý bên trong của mình, mặc dù có thành tựu rất lớn về mặt tính toán song ở các bài toán phức tạp về yêu cầu chuyên sâu trong các ngành khoa học như thiên văn, dự báo thời tiết, y học, sinh vật, toán học v.v... thì ngay cả các siêu máy tính tính toán với tốc độ mạnh nhất hiện nay, tiềm năng cũng không thể bằng máy tính lượng tử, vì các máy tính chúng ta có ở thời điểm hiện tại chỉ cho ra kết quả là khá hạn chế về các yêu cầu ngành này, các kết quả cho ra có sai số khá cao trong khi cùng lượng thông tin đầu vào như vậy. Máy tính lượng tử dùng nguyên lý Quabit để xử lý thông tin, với các hạt e xử lý thông tin thì khả năng tốc độ xử lý thông tin sẽ trao đổi rất nhanh, không ngừng sẽ tạo ra nhiều hướng kết quả, qua đó con người sẽ có thể thu nhận được nhiều kết quả chính xác hơn, cho các giả thuyết và tính toán của mình, từ đó hiếu sâu thế giới tự nhiên như trong nghiên cứu vũ trụ nghiên cứu sinh học v.v...</p>
+  <p>Theo nhiều nhà khoa học hàng đầu, khả năng ấn tượng về tính toán của loại máy tính này cho kết quả trong thời gian cực ngắn, mà nếu dùng siêu máy tính mạnh nhất ở thời điểm hiện tại cũng phải đợi hàng triệu năm mới có kết quả tương tự.</p>    
+            
+  <h2>Máy tính lượng tử</h2>
+  <h3>Hướng thứ 2: Máy tính sẽ đạt cấp độ xử lý thông tin ở cấp độ phân tử nguyên tử. </h3>
+  <p> Ngày nay, khi thế hệ vật liệu để làm nên phần cứng xử lý thông tin đã có kích thước cực nhỏ, song vì mật độ thì ngày càng có giới hạn về mặt kích thước và yêu cầu tiêu tốn một lượng lớn năng lượng và các vấn đề còn hạn chế về mặt kĩ thuật đi kèm: yêu cầu phần mềm, các vấn đề vật lý như: nhiệt độ môi trường, nhiệt độ mà vật liệu chạy v.v... thì với máy tính sử dụng các loại vật liệu xử lý thông tin trong tương lai, có thể được kì vọng là sẽ giải quyết phần lớn các vấn đề mà máy tính điện tử hiện tại đang tồn tại như: xử lý thông tin nhanh hơn với cùng kích thước và năng lượng, tiêu ngốn ít hơn trong quá trình xử lý thông tin.</p>
+  <h3>Hướng thứ 3 : Máy tính sinh học.</h3>
+  <p>Đây là hướng máy tính hoàn toàn mới, nguyên lý loại máy tính này là dựa vào các thông tin của các phân tử hữu cơ có khả năng xử lý thông tin, kết hợp với các phân tử có khả năng “hiểu” và nhập các thông tin đầu vào, với khả năng kết hợp này thì sẽ tạo ra loại máy tính có khả năng học hỏi như con người là hoàn toàn có thể. Có thể phá vỡ việc con người sẽ phải lập trình cho máy tính, lúc này máy tính có khả năng xử lý thông tin và tự đưa ra kết quả dựa vào các kết quả tính toán các “kinh nghiệm” mà loại máy tính này xử lý. Mới đây nhất, các nhà khoa học máy tính này đã tạo ra thế hệ đầu tiên của loại máy tính này ở châu âu.</p>
+  
+
+
+
+
+  <h2>Tiềm năng phát triển của 3 hướng trên và các xu hướng sử dụng.</h2>
+
+
+
+
+
+
+  <p>Theo tôi tiềm năng phát triển của máy tính trong tương lai sẽ chủ yếu theo hai hướng đầu tiên trong thời gian đầu, bằng chứng là nếu theo hướng thứ 1, thì con người sẽ dùng máy tính tính toán nghiên cứu chuyên sâu, để tìm hiểu các phép toán các bí ẩn của khoa học còn đang cần làm rõ và phát triển những cái mới, hướng thứ 2, con người sẽ kế thừa các thành tựu khoa học đã có với máy tính điện tử để làm việc với máy tính điện tử tương lai, vì các nguyên lý hoạt động của máy tính dạng này giống với máy tính ngày nay với tốc độ xử lý thông tin ở cấp độ cao, trên cùng một đơn vị diện tích sẽ tạo bước phát triển mới, vì chúng ta đã có nền tảng kế thừa vững chắc trong phần cứng và phần mềm điều này khá thuận lợi. Hướng thứ 3, có thể được phát triển ở giai đoạn sau, lúc này khi các thành tựu khoa học đạt bước tiến mới thì máy tính dạng này sẽ giúp con người thám hiểm các hành tinh.</p>
+  
+  
+  <P>Chẳng hạn, thay vì dùng chính bản thân chúng ta thám hiểm hay phát hiện ra các phân tử gây bệnh có trong tế bào mà không cần các kết quả xét nghiệm, bằng các phản ứng hóa học phức tạp, từ đó đưa ra quyết định để ngăn cho các phần tử gây bệnh phát triển, hay xử lý các nghiên cứu ở mức không chuyên sâu để đưa ra các quyết định nhanh chóng v.v... và có thể tồn tại xu hướng lai tạo nghĩa là: máy tính sinh học và máy tính lượng tử có thể kết hợp làm một! Ngoài các xu hướng trên, có thể tồn tại các xu hướng tạo máy tính mới hoàn toàn khác xa với các phát triển của máy tính trong tương lai tôi đã đề cập! Cùng với sự tiến bộ về các phương thức truyền thông tin giữa các máy tính, khả năng việc sử dụng các máy tính điện tử sẽ ngày một ít thay vào đó là các máy tính mới với nguyên lý khác, sẽ tạo ra bước tiến không tưởng của con người trong tương lai!</P>
+  
+  <button class="back-btn-detail" onclick="window.location.href='khoa-hoc4.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+           <ul>
+                <li><a href="1.html"> Câu trả lời cho "Tại sao 1 + 1 = 2?</a></li>
+                <li><a href="2.html"> Hố đen có bao giờ tiêu tan?</a></li>
+                <li><a href="3.html"> Suy ngẫm thể xác lINH HỒN</a></li>
+                <li><a href="4.html">Định luật Acsimet liệu có đúng? </a></li>
+                <li><a href="5.html">Dự đoán trước được tương lai - Sự thật hay hoang đường? </a></li>
+          
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

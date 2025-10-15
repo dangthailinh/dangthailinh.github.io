@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,135 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Tại sao trăn không chết ngạt khi siết mồi?</h1>
+        <p class="detail-subtitle">giải thích sao chăn méo chết ngạt</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+       
+      <p>Các nhà nghiên cứu phát hiện việc dịch chuyển xương sườn giúp trăn siết mồi không tự giết chết chính chúng trong lúc làm con mồi ngạt thở tới chết.
+
+Trăn siết mồi là loài trăn không có nọc độc chuyên giết chết con mồi bằng cách khiến chúng ngạt thở. Với những cơ cực khỏe, loài trăn này thường cuộn tròn quanh con mồi và siết chúng tới chết. Một con trăn lớn có thể giết các động vật như thằn lằn, cầy mangut và thú có túi theo cách như vậy. Tuy nhiên, hành động đó sẽ kiềm chế phổi của chính con trăn. Trước đây, giới nghiên cứu chưa rõ trăn siết mồi tránh ngạt thở bằng cách nào khi giết và ăn con mồi. Nghiên cứu mới công bố trên tạp chí Experimental Biology phát hiện chúng dựa hoàn toàn vào chuyển động của xương sườn.
+
+</p>
+ <img src="https://e.khoahoc.tv/photos/image/2022/03/28/tran-siet-moi.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+<p>Để theo dõi cách thở của trăn, nhà khoa học John Capano và Elizabeth Brainerd ở Đại học Brown gắn máy đo huyết áp quanh xương sườn của chúng. Hai máy đeo quanh hai xương sườn ở mỗi con trăn. Trăn có hai phổi nằm dọc chiều dài cơ thể chúng. Sau khi gắn máy đo, nhóm nghiên cứu tăng dần áp suất ở mỗi máy.</p>
+  <P>Khi áp suất tăng lên, trăn thở bằng cách đẩy xương sườn về phía sau. Tuy nhiên, khi áp suất ép về phía lưng, trăn thở bằng cách đẩy xương sườn lên bên trên. Theo kết quả nghiên cứu, xương sườn gần đáy phổi chỉ dịch chuyển khi xương sườn ở phía trước bị siết chặt. Các nhà nghiên cứu nhận thấy phổi của trăn gần như hoạt động giống ống bễ, đẩy khí qua mặt trước khi trăn không thể thở được và ngược lại.
+
+Theo Capano, phát hiện chỉ ra ít nhất trăn siết mồi và nhiều khả năng mọi loại trăn có thể điều khiển từng phần lồng ngực. Về mặt tiến hóa, xương sườn chắc chắn tham gia vào nhiều hoạt động. Xương sườn cũng góp phần vào các dạng chuyển động khác ở trăn như leo trèo, đào hang và bò trường. Khả năng điều khiển xương sườn có thể là đặc điểm quan trọng khiến trăn khác với các động vật thuôn dài không chân khác.</P>
+<p>Đặc điểm trên chắc chắn liên quan tới tổ tiên xa xưa của trăn. Tổ tiên của mọi động vật có màng ối bao gồm trăn rắn, thằn lằn, động vật có vú, chim, cá sấu và rùa dựa hoàn toàn vào xương sườn để thở. Chúng sẽ chịu áp lực trục, có nghĩa khả năng hít thở của chúng giảm đi khi chạy. Đó là lý do thằn lằn mệt rất nhanh nếu bị đuổi gấp.
+
+Thông qua phát hiện, các nhà khoa học cho rằng trăn có thể dịch chuyển vị trí thông khí ở phổi trong lúc trườn, chuyển khu vực chúng dùng để thở tới nơi không bị ảnh hưởng bởi chuyển động.</p>
+
+
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc3.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ< /h3>
+           <ul>
+                
+                <li><a href="1.html"> Top 10 loài vật lớn nhất</a></li>
+                <li><a href="2.html"> Kền kền không bị ngộ độc</a></li>
+                
+                <li><a href="4.html"> Khám phá gấu nước</a></li>
+                <li><a href="5.html"> Khám Phá Cá voi xanh</a></li>
+                <li><a href="6.html"> Rắn trong thần thoại</a></li>
+            </ul>
+            <h3>Liên quan</h3>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

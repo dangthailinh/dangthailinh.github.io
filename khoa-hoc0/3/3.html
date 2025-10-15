@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,129 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Suy ngẫm thể xác lINH HỒN</h1>
+        <p class="detail-subtitle">Dưới góc nhìn triết học duy tâm</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+<h3>Theo triết học duy tâm, ý thức quyết định vật chất. Dưới góc nhìn đó, chúng ta sẽ tìm hiểu rõ hơn về thể xác và linh hồn.</h3>
+<p>
+Thể xác con người là vật chất và linh hồn thật sự là ý thức của con người. Mỗi con người, đều có 2 phần là thể xác và linh hồn. Theo triết học duy tâm, linh hồn sẽ quyết định thể xác. Thể xác chỉ là cái áo không hơn không kém, chỉ khác rằng nếu cái áo bình thường thì con người có thể thay ra mặc lại, còn cái áo cao cấp này thì không thay đổi cho đến cuối đời. Như vậy, so với linh hồn, thể xác rất thấp bé, không giá trị. Thể xác chỉ tồn tại trong một khoảng thời gian, nhưng linh hồn sẽ tồn tại vĩnh cửu. Nhiều nhà triết học cũng đã nhấn mạnh linh hồn vĩnh cửu, ví dụ như Decater có nói “tôi tư duy là tôi tồn tại”. Sự tồn tại của con người thực chất là sự tồn tại linh hồn chứ không phải tồn tại về thể xác. Thật vậy, một người có thể chết đi theo quan niệm “cái chết” thông thường nhưng có thể họ sẽ sống mãi trong lòng của mọi người, đối với mọi người họ không bao giờ chết. Đó là sự tồn tại vĩnh cửu linh hồn họ trong ý thức của người khác. Ngoài Decater, nhà triết học Platon cũng đã đề cao linh hồn, ông cho rằng tri thức đích thực không thể nhận biết được nếu không dùng tư duy con người (linh hồn nhận thức tri thức). Ông coi thường những giác quan của con người (được tạo ra từ thể xác). Đối với ông tri thức đích thực sẽ không nhận thức được bằng giác quan thông thường. Giống như người viết bài này, việc nhận thức “thể xác và linh hồn” cũng dựa vào tư duy chứ không dựa vào cảm giác</p>
+
+<p>Dưới góc nhìn triết học duy tâm, phần nào con người đã không được sống thật với chính bản thân, với chính linh hồn vì đã bị cái thể xác rang buộc. Chẳng hạn, vì thể xác, con người ta phải cần cái ăn, cái mặc, nếu không ăn thì thể xác không tồn tại, nếu không mặc thì thể xác trở nên xấu xí. Từ đó dẫn đến người ta đòi hỏi ăn ngon mặc đẹp…Dẫn đến sự tranh đua, sự ham muốn, … Điều đó phải chăng đã góp phần giết chết linh hồn? Và tất cả những điều đó phải chăng chỉ để bồi dưỡng cho thể xác tầm thường? Con người chung sống với nhau trên trái đất, có mối liên hệ với nhau. Nhưng trong cuộc sống đó, mối liên hệ đại đa số là mối liên hệ về thể xác. Ví dụ: 2 anh em trong cùng một gia đình sống chung với nhau từ nhỏ đến lớn, chỉ vì một miếng đất tranh giành nhau làm cho tình cảm anh em bị mất. Ở đây vật chất tầm thường (là miếng đất) đã tạo ra tấm màn che phủ linh hồn của 2 người làm cho sự ham muốn của thể xác đấu tranh lẫn nhau, sự ham muốn nào cao thì thể xác đó sẽ giành chiến thắng. Đó là sự sống giả tạo, sự sống không ý nghĩa. Trong phạm vi hạn hẹp của bài viết chỉ đưa ra một ví dụ, tuy nhiên trong thực tế có rất nhiều ví dụ khác nữa.
+</p>
+<p>Tất cả mọi người đều có cái áo là thể xác, đều bị thể xác ràng buộc. Nhưng sự ràng buộc ở người này ít hơn sự ràng buộc ở người khác, vì ở một số người linh hồn đã chiến thắng được thể xác, họ sống bằng chính linh hồn. Ví dụ: người biết xúc động trước một hoàn cảnh khó khăn, người chăm sóc cho những người bệnh HIV, một người tật nguyền đã vượt qua số phận để sống, một người sẵn sàng hi sinh bản thân vì người khác…</p>
+
+<p> Trong thế giới thực tại, thực sự chỉ tồn tại vật chất – ý thức – hiện tượng, trong đó hiện tượng là sự ràng buộc giữa vật chất – vật chất, vật chất – ý thức, ý thức – ý thức. Trong đó sự ràng buộc giữa ý thức – ý thức có thể cũng do vật chất tạo nên, do đó sự sống của con người là một sự sống hư vô, ảo tưởng. Theo góc nhìn duy tâm, vì ý thức quyết định vật chất nên sẽ không có một công cụ, máy móc nào đo được, kiểm tra được ý thức (hay linh hồn) của con người vì tất cả các công cụ đo đều được làm từ vật chất, ý thức – linh hồn của mỗi người chỉ do mỗi người tự kiểm tra, cảm nhận và tự làm chủ. Cùng với triết học, khoa học tâm linh sẽ đi tìm câu trả lời linh hồn của con người sẽ đi về đâu khi linh hồn thoát khỏi cái áo giả tạo? Liệu có một thế giới mà không bị sự ràng buộc bởi vật chất? Và trong thế giới đó liệu rằng có hờn ghen, yêu thương, giận dữ? Con người làm sao để có thể làm chủ chính bản thân, làm sao để sống thực, sống bằng linh hồn không để thể xác ràng buộc?...</p>
+
+      <p>Cuộc sống chúng ta chỉ có ý nghĩa khi chúng ta sống bằng chính linh hồn. Mọi người phải biết thương yêu, che chở, giúp đỡ lẫn nhau, không ganh ghét, không đua đòi, không kì thị lẫn nhau. Chính mỗi người trong chúng ta phải góp phần làm cho xã hội này tốt đẹp hơn. Xin kết thúc bài viết bằng câu sau để cho mỗi người có những cảm nhận riêng:</p>
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc4.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+            <ul>
+                <li><a href="1.html"> Câu trả lời cho "Tại sao 1 + 1 = 2?</a></li>
+                <li><a href="2.html"> Hố đen có bao giờ tiêu tan?</a></li>
+             
+                <li><a href="4.html">Định luật Acsimet liệu có đúng? </a></li>
+                <li><a href="5.html">Dự đoán trước được tương lai - Sự thật hay hoang đường? </a></li>
+                <li><a href="6.html">Tương lai của máy tính </a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

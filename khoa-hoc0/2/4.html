@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,155 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Khám Phá Gấu Nước</h1>
+        <p class="detail-subtitle">Nhà Vô Địch Sinh Tồn Của Thế Giới Vi Sinh Vật</p>
+        <div class="detail-meta">Ngày đăng: aug 19 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+          <h2>giới thiệu về cu em này:</h2>
+          <p>Gấu nước, hay còn được gọi là tardigrade, là một trong những sinh vật nhỏ bé nhất nhưng cũng là một trong những sinh vật kiên cường nhất trên Trái Đất. Chúng được phát hiện lần đầu tiên vào năm 1773 và từ đó đã thu hút sự chú ý của nhiều nhà khoa học và những người yêu thích sinh vật học. Với khả năng sống sót trong những điều kiện khắc nghiệt nhất, gấu nước đã chứng minh rằng sự sống có thể tồn tại ngay cả trong những môi trường mà nhiều sinh vật khác không thể.</p>
+          <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcirbeGv0IQ-tTH59i9W7SeBlSs_GHraIhGmMV-pkwlyXLT2tVR31qqPuIJqkfPxJLSw_aiWvmhV2JkYysqg4AtShWcwhcqP4RtbfjNaGYg-nA9atBTaTlnPv-QHmZrsdwYMVTDywOQctDmYZizBDnBcOc?key=aEEp2xhXzfeyd1ArXwuj6w" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+        <h3>Hình dáng và kích thước</h3>
+<p>Gấu nước là những sinh vật có kích thước rất nhỏ, thường dài từ 0,3 mm đến 1,5 mm. Chúng có hình dạng như một con gấu nhỏ với bốn cặp chân và có thể di chuyển chậm rãi. Mặc dù kích thước của chúng rất nhỏ, nhưng cơ thể gấu nước được cấu tạo rất đặc biệt với các phần cơ thể khác nhau, bao gồm đầu, thân và chân</p>
+
+<h3>Nơi sống</h3>
+<p>Gấu nước có thể tìm thấy ở hầu hết mọi nơi trên Trái Đất, từ các đỉnh núi cao cho đến các vùng biển sâu. Chúng thường sống trong môi trường ẩm ướt, chẳng hạn như lớp đất, rêu, nấm và cả trong các đại dương sâu. Nhờ khả năng sống sót trong điều kiện khắc nghiệt, gấu nước có thể tồn tại trong những môi trường mà nhiều sinh vật khác không thể.</p>
+<h3>Chế độ ăn uống</h3>
+<p>Gấu nước là động vật ăn thực vật và động vật, chủ yếu tiêu thụ các vi sinh vật, tảo và các sinh vật nhỏ khác. Chúng sử dụng các cơ quan miệng đặc biệt để hút các chất dinh dưỡng từ các tế bào của thực vật hoặc vi sinh vật.
+</p>
+ <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcYjxaZ0_8MZQvP2uWjfeBuP_qrwI7zz4YrAyRLL8JsHktw5xl-_6t3HxsQ3RmXiH3hg8dsLZapf6j8UGhZD-GHB0qQXEGDd5asfyGi4NbxJnzCW5BZOJUFKCpFXqnEYD_dr5nOsGQyi9nM5vPM1xMnxQbx?key=aEEp2xhXzfeyd1ArXwuj6w" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<h2>Khả năng sống sót của gấu nước</h2>
+<h3>Khả năng chịu đựng điều kiện khắc nghiệt</h3>
+<p>Gấu nước nổi tiếng với khả năng sống sót trong những điều kiện khắc nghiệt mà nhiều sinh vật khác không thể chịu đựng được. Chúng có thể tồn tại ở:
+
+Nhiệt độ cực cao và thấp: Gấu nước có thể sống sót trong nhiệt độ từ gần -273°C (0 K) đến khoảng 150°C. Điều này có nghĩa là chúng có thể sống trong những môi trường cực lạnh của các vùng cực và cũng có thể chịu đựng nhiệt độ cao trong các suối nước nóng.
+Áp suất cực lớn: Gấu nước có thể sống sót dưới áp suất cao, như ở đáy đại dương, nơi có áp suất lên tới 6000 lần áp suất khí quyển. Chúng có khả năng chịu đựng áp lực cực lớn mà không bị tổn thương.
+Thiếu nước: Gấu nước có khả năng sống trong trạng thái khô hạn bằng cách chuyển sang một trạng thái gọi là "anh nhũ hóa" (anh nhũ hóa là trạng thái tồn tại tạm thời, khi gấu nước mất nước và co lại thành một khối nhỏ). Trong trạng thái này, chúng có thể tồn tại mà không cần nước trong nhiều năm. Khi gặp lại nước, chúng sẽ trở lại trạng thái bình thường.</p>
+ <h3>Khả năng kháng lại bức xạ và hóa chất</h3>
+ <p>Gấu nước không chỉ có khả năng chịu đựng nhiệt độ và áp suất mà còn có thể sống sót trong môi trường có mức bức xạ cao. Chúng có thể chịu đựng được mức bức xạ gấp 1000 lần so với mức bức xạ mà con người có thể sống sót. Điều này cho phép gấu nước sống trong các môi trường có độ phóng xạ cao, như những khu vực bị ô nhiễm hoặc các khu vực hạt nhân.
+
+Ngoài ra, gấu nước cũng có khả năng chịu đựng các hóa chất độc hại. Chúng có thể sống sót trong các dung dịch hóa chất mạnh mà nhiều sinh vật khác sẽ không thể tồn tại.</p>
+<h3>Cơ chế sống sót</h3>
+<p>Gấu nước sử dụng nhiều cơ chế khác nhau để tồn tại trong những điều kiện khắc nghiệt. Một trong những cơ chế quan trọng nhất là quá trình "anh nhũ hóa". Khi gặp phải tình huống khô hạn, gấu nước sẽ mất nước và co lại, hình thành một lớp vỏ bảo vệ bên ngoài cơ thể. Trong trạng thái này, chúng có thể tồn tại mà không cần thức ăn hay nước trong thời gian dài.</p>
+<h2>Nghiên cứu và ứng dụng gấu nước</h2>
+<img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcxw9Q5Hd1sdVx1g7XCnbJSdaKyDxnzEp2O41tXG-vRUJ8i7h14ASyugwL3mfvnrp2lz1p0-4k1jg2BvzzjSXZPVnIlIDbSh2_PgWDJ1DQmqgv66gVEV-IuEwjGRWbTHS5X05FBVHA_qMNNW5_gemYbJwqe?key=aEEp2xhXzfeyd1ArXwuj6w" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+<h3>Nghiên cứu khoa học</h3>
+<p>Gấu nước đã trở thành đối tượng nghiên cứu của nhiều nhà khoa học trên toàn thế giới. Các nhà nghiên cứu đang tìm hiểu cách mà gấu nước có khả năng chịu đựng những điều kiện khắc nghiệt như vậy và áp dụng những phát hiện này vào các lĩnh vực khác nhau, từ sinh học đến công nghệ.</p>
+<h3>Ứng dụng trong y học và công nghệ</h3>
+
+<p>Khả năng sống sót của gấu nước trong điều kiện khắc nghiệt đã gợi ý nhiều ứng dụng tiềm năng trong y học và công nghệ. Một số nghiên cứu đã chỉ ra rằng các protein và enzyme trong gấu nước có thể được ứng dụng trong việc bảo vệ tế bào khỏi tổn thương, giúp phát triển các phương pháp điều trị mới cho bệnh tật và cải thiện khả năng chịu đựng của tế bào.
+
+Ngoài ra, các nhà khoa học cũng đang nghiên cứu cách mà gấu nước có thể truyền tải những bí quyết sinh tồn của chúng vào các vật liệu mới có khả năng chống lại điều kiện khắc nghiệt, từ đó phát triển các sản phẩm bền hơn trong các ngành công nghiệp.</p>
+           <button class="back-btn-detail" onclick="window.location.href='khoa-hoc3.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+            <ul>
+                
+                <li><a href="1.html"> Top 10 loài vật lớn nhất</a></li>
+                <li><a href="2.html"> Kền kền không bị ngộ độc</a></li>
+                <li><a href="3.html">Tại sao chăn không bị ngạt </a></li>
+                
+                <li><a href="5.html"> Khám Phá Cá voi xanh</a></li>
+                <li><a href="6.html"> Rắn trong thần thoại</a></li>
+            </ul>
+            <h3>Liên quan</h3>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,190 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Vẻ đẹp ngoạn mục của các tuyệt tác trong vũ trụ</h1>
+        <p class="detail-subtitle">Tổng hợp ảnh về vũ trụ tỵt đẹp</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+      
+<h3>Dưới đây là những hình ảnh ấn tượng về các tinh vân – những tuyệt tác trong vụ trụ khắc họa vẻ đẹp cái chết của một ngôi sao.</h3>
+     
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-xoan-oc.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<p>Tinh vân Xoắn ốc (Helix Nebula): Bức ảnh Tinh vân Xoắn ốc, hay Tinh vân Mắt của Chúa, được Kính thiên văn Hubble ghi lại, là một trong những bức ảnh nổi tiếng nhất trong lịch sử thiên văn học. Tinh vân Xoắn ốc là một trong những tinh vân gần Trái Đất nhất có thể nhìn bằng mắt thường nằm ở chòm sao Bảo Bình.</p>
+
+
+
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-loi-tao.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Tinh vân Lõi táo (Apple Core Nebula): Còn được gọi là Tinh vân Quả tạ, đây là tinh vân hành tinh đầu tiên được phát hiện. Tinh vân Lõi táo nằm trong chòm sao Hồ Ly, ở khoảng cách khoảng 1.360 năm ánh sáng, được phát hiện bởi Charles Messier vào năm 1764.</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-mat-he.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Tinh vân Mặt hề (Clown Faced Nebula): Tinh vân này còn có tên gọi là Tinh vân Sư tử vì trông giống bờm của một con sư tử. Nó nằm trong chòm sao Song Tử với những dải khí trải dài hơn 1 năm ánh sáng.</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-hinh-non.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+<p>Tinh vân Hình nón (Cone Nebula): Đây là tinh vân được nhà thiên văn học người Anh William Herschel phát hiện năm 1785 nằm trong chòm sao Kỳ Lân với một nhóm những ngôi sao mờ và ở xa nằm trên xích đạo thiên cầu.</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-dam-pha.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Tinh vân Đầm phá (Lagoon Nebula): Nằm trong chòm sao Nhân Mã, tinh vân này là một đám mây khí và bụi sao khổng lồ cách Trái Đất 6.000 năm ánh sáng. Kích cỡ và độ sáng khiến nó trở thành một trong số ít các tinh vân có thể nhìn thấy bằng mắt thường mặc dù trông khá mờ và chỉ quan sát được ở một số địa điểm trên Trái Đất.</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-lat-chanh.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Tinh vân Lát chanh (Lemon Slice Nebula): Nằm trong chòm sao Lộc Báo, Tinh vân Lát chanh là một tinh vân tương đối trẻ và nhỏ.</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-tieu-quy.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+<p>Tinh vân Tiểu quỷ (Little Ghost Nebula): Tinh vân NGC 6369 ma quái xuất hiện mờ nhạt trên bầu trời đêm và được mọi người biết đến với tên gọi Tinh vân Tiểu Quỷ hay Tinh vân Chú ma nhỏ (Little Ghost Nebula). Nó được phát hiện vào thế kỷ 18 bởi nhà thiên văn học William Herschel qua kính thiên văn trong lúc ông đang khám phá chòm sao Xà Phu.</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-spaghetti.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Tinh vân Spaghetti (Spaghetti Nebula): Tinh vân Spaghetti nằm giữa chòm sao Kim Ngưu và Ngự Phu. Nó là những gì còn sót lại có thể nhìn thấy của một vụ nổ siêu tân tinh xa xưa.
+
+</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-con-sua.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Tinh vân Con sứa (Jellyfish Nebula): Tinh vân Con sứa nằm trong chòm sao Song Tử, cách Trái Đất khoảng 5.000 năm ánh sáng. Vụ nổ siêu tân tinh này được cho là xảy ra cách đây 30.000 năm.</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-jewel-bug.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Tinh vân Jewel Bug: Đây là tinh vân được nghiên cứu nhiều nhất trong vũ trụ cho tới nay. Nó không chỉ là một trong những tinh vân trẻ nhất từng được phát hiện, ước tính khoảng 600 năm, mà còn có kích cỡ nhỏ và đặc đến khó tin, cũng như có thành phần cấu tạo phức tạp.</p>
+<img src="https://e.khoahoc.tv/photos/image/2022/07/20/tinh-van-ngc-2022.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>NGC-2022: Tinh vân hành tinh chưa được đặt tên này nằm trong chòm sao Lạp Hộ, gần xích đạo thiên cầu. NGC-2022 là một tinh vân xa xôi cách Trái Đất 9.000 năm ánh sáng.</p>
+
+
+
+
+
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc5.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+            <ul>
+                <li><a href="1.html"> Những vòng tròn bí ẩn trên cánh đồng</a></li>
+                <li><a href="2.html"> Hình ảnh những cơn mưa sao băng đẹp nhất 15 năm qua</a></li>
+                <li><a href="3.html"> Loạt ảnh hé lộ những điều diệu kì của thế giới</a></li>
+                <li><a href="4.html"> Chiêm ngưỡng những hình ảnh ngoạn mục của vũ trụ qua kính viễn vọng James Webb</a></li>
+               
+                <li><a href="6.html"> ảo ảnh quang học khiến bạn dễ điên đầu</a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

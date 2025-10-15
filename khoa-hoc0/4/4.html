@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,187 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Chiêm ngưỡng những hình ảnh ngoạn mục của vũ trụ qua kính viễn vọng James Webb</h1>
+        <p class="detail-subtitle">Tổng hợp những bức ảnh qua ống kính viễn vọng!</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+<h3>Dưới đây là những hình ảnh từ kính viễn vọng James Webb với những quan sát chưa từng có, hé lộ các chu kỳ của hành tinh, vì sao và thiên hà cũng như giải đáp những bí ẩn về vũ trụ.</h3>
+
+
+   
+   <img src="https://e.khoahoc.tv/photos/image/2023/03/27/chom-pandora.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<p>Kính viễn vọng James Webb đã thu 50.000 nguồn ánh sáng cận hồng ngoại trong bức ảnh mới về Chòm Pandora - một siêu cụm thiên hà. Cụm thiên hà này giống như một tấm kính phóng đại cho phép các nhà thiên văn học quan sát nhiều thiên hà ở xa hơn phía sau nó</p>
+
+
+
+
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/dam-may-phan-tu-Chamaeleon-I.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Những ngôi sao tỏa sáng trong đám mây phân tử bụi và tối Chamaeleon I nằm cách Trái đất 630 năm ánh sáng</p>
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/NGC-346.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Kính viễn vọng James Webb phát hiện ra NGC 346, một trong những khu vực ươm sao hoạt động mạnh nhất gần Dải Ngân hà, nằm ở một thiên hà lùn có tên là Đám mây Magellan nhỏ</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/thien-ha-II-ZW96.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+<p>Hai thiên hà được biết tới là II ZW96 quấn lấy nhau trong quá trình sáp nhập ở chòm sao Delphinus (Hải Đồn)</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/khu-vuc-hinh-thanh-sao.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Kính viễn vọng James Webb tiết lộ đặc điểm của một khu vực hình thành tiền sao (protostar) mới</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/tru-cot-sang-tao.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Kính viễn vọng James Webb ghi lại một góc nhìn mới của các Trụ cột Sáng tạo (Pillars of Creation) dưới ánh sáng trung hồng ngoại. Bụi trong khu vực hình thành sao chứ không phải bản thân các vì sao được làm nổi bật và trông giống như những bóng ma</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/he-sao-nhi-phan-WR140.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+<p>Hai ngôi sao thuộc hệ sao nhị phân WR140 đang tạo ra những vòng bụi 8 năm một lần</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/cap-thien-ha-vv191.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Kính viễn vọng James Webb và Kính viễn vọng Hubble ghi lại hình ảnh cặp thiên hà VV 191</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/tihen-ha-ic-5332.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Kính viễn vọng James Webb ghi lại hình ảnh thiên hà xoắn IC 5332, nằm cách đây 29 triệu năm ánh sáng</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/vanh-dai-cua-sao-hai-vuong.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Kính viễn vọng James Webb đã ghi lại hình ảnh rõ ràng nhất vành đai của sao Hải vương trong 30 năm qua</p>
+<img src="https://e.khoahoc.tv/photos/image/2023/03/27/tinh-van-orion.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>Khu vực bên trong của Tinh vân Orion (Lạp Hộ). Hình ảnh này tiết lộ chi tiết về các vì sao và các hệ hành tinh được hình thành như thế nào</p>
+
+
+
+
+      
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc5.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+             <ul>
+                <li><a href="1.html"> Những vòng tròn bí ẩn trên cánh đồng</a></li>
+                <li><a href="2.html"> Hình ảnh những cơn mưa sao băng đẹp nhất 15 năm qua</a></li>
+                <li><a href="3.html"> Loạt ảnh hé lộ những điều diệu kì của thế giới</a></li>
+           
+                <li><a href="5.html"> Vẻ đẹp ngoạn mục của các tuyệt tác trong vũ trụ</a></li>
+                <li><a href="6.html"> ảo ảnh quang học khiến bạn dễ điên đầu</a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

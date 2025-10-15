@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,150 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">7 hiện tượng tuyệt đẹp của bầu trời</h1>
+        <p class="detail-subtitle">Không gian bầu trời rộng lớn với vô số những hiện tượng thú vị cùng quang cảnh tuyệt đẹp, mà người quan sát có thể xem bằng mắt thường hay kính thiên văn..</p>
+        <div class="detail-meta">Ngày đăng: Oct 1 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+            <h2>Dải sáng của Milky Way </h2>
+             <p>Milky Way là tập hợp khổng lồ của khoảng 200 tỷ ngôi sao mà mặt trời là một trong số đó. Người Việt Nam từ xưa gọi dải sáng là Ngân Hà. Chúng ta nằm gần rìa của thiên hà này nên dễ dàng nhìn về phía phần trung tâm của đĩa chính thiên hà các đêm hè. Nếu có một chiếc ống nhòm hay kính thiên văn nhỏ, người xem hãy sử dụng để quan sát dải sáng sẽ thấy rõ nó là tập hợp các đốm sáng mà mỗi đốm sáng là một ngôi sao và sẽ đẹp hơn rất nhiều khi chỉ nhìn bằng mắt thường. (Ảnh: Wikipedia)</p> 
+            <img src="https://e.khoahoc.tv/photos/image/112012/26/nganha.jpg" alt="Kính viễn vọng James Webb trong không gian" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+       <h2>Mưa sao băng</h2>
+       <p>Hiện tượng xảy ra khi trái đất đi tới vùng quỹ đạo có nhiều thiên thạch nhỏ, thường là hậu quả để lại khi một sao chổi đi qua quỹ đạo trái đất. Lực hấp dẫn của hành tinh khiến nhiều thiên thạch trong số này lao vào khí quyển trái đất, chúng cọ sát với khí quyển và bốc cháy tạo thành những vệt sáng gọi là sao băng. Nhiều vệt sáng liên tiếp nhau như vậy tạo nên hiện tượng mưa sao băng (meteor shower). Mưa sao băng khá phổ biến và diễn ra định kỳ hàng năm, mỗi năm có hơn 10 trận mưa sao băng có quy mô lớn nhỏ khác nhau. Khi trời không mưa, ít mây điều kiện quan sát dễ dàng hơn, nhất là với người ở xa ánh đèn thành phố. (Ảnh: NASA)</p>
+      <img src="https://e.khoahoc.tv/photos/image/112012/26/muasaobang.jpg" alt="Kính viễn vọng James Webb trong không gian" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+            <h2>Nhật thực/nguyệt thực</h2>
+            <img src="https://e.khoahoc.tv/photos/image/112012/26/nhatthuc.jpg" alt="Hành tinh ngoài hệ Mặt Trời qua JWST" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+          <p>Trái đất chuyển động quanh mặt trời, còn mặt trăng lại chuyển động quanh trái đất, điều này dẫn tới đôi khi trái đất che khuất ánh sáng từ mặt trời chiếu tới mặt trăng và làm cho nó tối lại (nguyệt thực) và đôi khi mặt trăng chen vào giữa che khuất mặt trời nên khi người xem nhìn lên mặt trời chỉ thấy màu đen (nhật thực). Đây là hai hiện tượng thiên văn khá phổ biến, gần như năm nào người yêu thiên văn cũng có dịp quan sát. (Ảnh: Space)</p>
+        <h2>Quan sát sao Mộc và sao Thổ qua kính thiên văn</h2> 
+        <p>Sao Mộc và sao Thổ là hai hành tinh đáng quan sát nhất qua kính thiên văn. Không cần những chiếc kính thiên văn quá hiện đại và đắt tiền mà chỉ cần những kính nghiệp dư loại trung bình, hay thậm chí những chiếc kính tự chế (kính phản xạ có chất lượng và độ phóng đại tương đối cao) người quan sát có thể nhìn thấy hình ảnh của hai hành tinh đó. Người xem hãy cố gắng quan sát và xác định bốn chấm sáng gần sao Mộc, đó là 4 vệ tinh Galilei của nó. Trong hình là vệ tinh Europa (nhỏ hơn) và sao Mộc. (Ảnh: free-review.net)</p>
+  
+        <img src="https://e.khoahoc.tv/photos/image/112012/26/saomoc.jpg" alt="Hành tinh ngoài hệ Mặt Trời qua JWST" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+        <h2>Tận mắt quan sát sao chổi.</h2>    
+     <p>Các sao chổi chuyển động quanh mặt trời theo chu kỳ dài, vì vậy những sao chổi đủ sáng để nhìn rõ bằng mắt thường rất ít xuất hiện. Tuy vậy, trongđờ cuộc i của mỗi người, việc ít nhất một lần được quan sát chúng không phải là quá khó. Nếu có cơ hội, người xem hãy quan sát một sao chổi sáng qua kính thiên văn, nó chắc chắn là một điều thú vị của vũ trụ mà chúng ta không nên bỏ qua. (Ảnh: astronet.ru)</p>
+       <img src="https://e.khoahoc.tv/photos/image/112012/26/saochoi.jpg" alt="Hành tTinh ngoài hệ Mặt Trời qua JWS" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      
+       <h2>Ngắm cực quang</h2>
+       <img src="https://e.khoahoc.tv/photos/image/112012/26/cucquang.jpg" alt="Hành tinh ngoài hệ Mặt Trời qua JWST" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+       <p>Hiện tượng cực quang (aurora) xảy ra do trái đất là một hành tinh có từ trường mạnh, khi các dòng hạt mang điện trong gió mặt trời va chạm với từ trường của trái đất, chúng đi theo các đường sức từ lao vào khí quyển của trái đất ở địa cực, gây ra cảnh tượng những dải sáng nhiều màu sắc (thường là màu xanh) rất đẹp.
+
+Đây là hiện tượng thiên văn hấp dẫn. Mặc dù vậy người xem chỉ có thể quan sát nó khi đứng tại vùng cực của hành tinh chúng ta. (Ảnh:National Geographic)</p>
+     <h2>Mặt trời xanh (hay chớp xanh)</h2>
+     <img scr="https://tse3.mm.bing.net/th/id/OIP.sLO4isNoz02IfNyj_xCQaQHaEJ?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hành tinh ngoài hệ Mặt Trời qua JWST" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+     <p> Hiện tượng đặc biệt này có tên tiếng Anh là "Green Flash". Nó xảy ra khi mặt trời nằm rất thấp, chỉ có một phần nhỏ nhô lên khỏi đường chân trời, một phần rất nhỏ ở mép trên của mặt trời xuất hiện màu xanh trong 1 tới 2 giây, rất khác so với màu sắc thông thường.
+
+Nguyên nhân của hiện tượng trên là do sự tán sắc ánh sáng trong khí quyển khi ánh sáng từ mặt trời đi qua lớp không khí dày, các tia sáng có bước sóng khác nhau (ứng với các màu khác nhau) bị khúc xạ với các góc khác nhau. Khi mặt trời ở vị trí thấp, sát chân trời sẽ có một phần tia sáng đỏ (và các màu cận đỏ) không tới được mắt người quan sát trong khi phần ánh sáng màu xanh lại khúc xạ nhiều hơn nên tới với người quan sát.
+
+Hiện tượng "Mặt trời xanh" dễ bắt gặp hơn ở bờ biển phía tây, khi mặt trời lặn. Việt Nam có bờ biển phía đông nên khả năng bắt gặp hiện tượng là rất khó. (Ảnh: Wikipedia)</p>
+
+
+<button class="back-btn-detail" onclick="window.location.href='khoa-hoc2.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+               <ul>
+                <li><a href="1.html">Thiên thạch và những sự thật thú vị</a></li>
+            
+                <li><a href="3.html"> Bản chất của thời gian</a></li>
+                <li><a href="4.html">BỨC XẠ: NHỮNG VIÊN ĐẠN VÔ HÌNH </a></li>
+                <li><a href="5.html">Khám phá những bí ẩn của thế giới không gian đa chiều </a></li>
+                <li><a href="6.html">Thứ nhỏ nhất vũ trụ? </a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

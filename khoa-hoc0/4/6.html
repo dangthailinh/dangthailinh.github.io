@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,192 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title"> ảo ảnh quang học khiến bạn dễ điên đầu</h1>
+        <p class="detail-subtitle">Tổng hợp các ảnh ảo ảnh quang học</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+            <p>Trong lúc câu chuyện về chiếc váy gây xôn xao trên Internet trong thời gian vừa qua vẫn đang là một vấn đề còn tranh cãi. Những ảo ảnh quang học được giới thiệu trong bài viết dưới đây sẽ lại một lần nữa cho thấy sự kỳ diệu của nhiều hiện tượng vật lý mà chúng ta chưa thể biết hết được.
+
+1. Ảo ảnh đổ bóng: ô vuông A và B cùng màu?</p>
+      
+
+     
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh1.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+<p>2. Ô tròn màu neon: Những đường kẻ màu neo xuất hiện giống như có một vòng tròn màu xanh dương ở trong hình nhưng thực chất là nền là màu trắng.</p>
+
+
+
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh2.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>3. Hiệu ứng Troxler: Nếu như bạn nhìn đủ lâu vào trong chấm màu đỏ, vòng tròn màu xanh sẽ biến mất</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh3.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>4. Ảo ảnh màu trắng: những thanh màu xám dưới hai chữ A và B đều cùng một màu?</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh4.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+<p>5. Ảo ảnh chuyển động: Sự tương phản về màu sắc và hình dạng làm cho các ô tròn như có vẻ đang chuyển động. Tuy nhiên, thực sự tất cả mọi hình vẫn đều bất động.</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh5.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>6. Đây là thỏ hay vịt?</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh6.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>7. Lưới kỳ ảo: Khi bạn lướt mắt qua lưới đặc biệt này, bạn sẽ thấy những chấm đen ẩn hiện liên tục tại các nút giao nhưng thực tế tất cả những chấm đó đều màu trắng.</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh7.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+<p>8. Ảo ảnh màu nước: Những đường kẻ màu nhẹ ở phía bên trong của hình làm chúng trông giống như màu da cam được pha trộn với màu trắng. Nhưng thực tế đó chỉ là một ảo giác.</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh8.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>9. Bức tường ảo ảnh: Các đường kẻ thực tế đều thẳng và song song với nhau nhưng mắt chúng ta đang đánh lừa rằng có những con dốc</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh9.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>10. Vòng tròn cây sơn mai: Khi bạn tập trung nhìn vào dấu gạch đen, những vòng tròn màu tím sẽ dần biến mất.</p>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh10.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+<p>11. Ảo ảnh nhận thức: bạn thấy trong hình là hai khuôn mặt người hay là một bình hoa?
+
+</p>
+<img src="https://e.khoahoc.tv/photos/image/2015/03/02/ao_anh11.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc5.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+           <ul>
+                <li><a href="1.html"> Những vòng tròn bí ẩn trên cánh đồng</a></li>
+                <li><a href="2.html"> Hình ảnh những cơn mưa sao băng đẹp nhất 15 năm qua</a></li>
+                <li><a href="3.html"> Loạt ảnh hé lộ những điều diệu kì của thế giới</a></li>
+                <li><a href="4.html"> Chiêm ngưỡng những hình ảnh ngoạn mục của vũ trụ qua kính viễn vọng James Webb</a></li>
+                <li><a href="5.html"> Vẻ đẹp ngoạn mục của các tuyệt tác trong vũ trụ</a></li>
+           
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

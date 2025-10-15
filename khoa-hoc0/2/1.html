@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,179 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">10 loài vật khổng lồ nhất </h1>
+        <p class="detail-subtitle">Tổng hợp những loài súc động vật lớn nhất dựa theo chủng loại</p>
+        <div class="detail-meta">Ngày đăng: Oct 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+<h3>Cá voi xanh, hươu cao cổ, hải tượng… nằm trong danh sách là những loài động vật lớn nhất trên thế giới. Mỗi loài vật đều có những đặc điểm riêng của mình để tạo nên một thế giới tự nhiên sinh động và đầy kỳ thú. Mời các bạn tham khảo những loài động vật lớn nhất trên thế giới hiện nay qua bài viết dưới đây nhé.</h3>
+<h2>Những loài động vật lớn nhất trên thế giới</h2>
+<h3>1.Loài cá lớn nhât!</h3>
+ <p>Cá voi xanh là loài động vật có vú sống ở biển thuộc phân bộ của cá voi tấm sừng. Với chiều dài khoảng 25 - 27 m (con cá voi xanh dài nhất được biết đến hiện nay dài 33,5m) và trọng lượng khoảng 210 tấn hoặc có thể hơn. Lưỡi của cá voi xanh nặng khoảng 2,7 tấn, tương đương kích thước trung bình của một con voi châu Á và trái tim của nó nặng khoảng 600 kg, lớn nhất trong các loài động vật được biết đến. Không những quả tim có kích cỡ tương tự như một chiếc xe mini cooper mà trọng lượng cũng vậy.
+
+Cá voi xanh hầu như chỉ ăn những sinh vật nhỏ giống tôm, tép… gọi chung là loài nhuyễn thể. Trong suốt mùa hè, cá voi xanh ăn rất nhiều, số lượng thức ăn được tiêu thụ mỗi ngày đáng kinh ngạc, 3,6 tấn (7,900 pao) hoặc hơn. Số calo cần có hàng ngày của một con cá voi xanh trưởng thành trong khoảng 1,5 triệu.</p>
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_10.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<h3>2. Động vật đất nặng nhất trên thế giới</h3>
+<p>Voi châu Phi là động vật sống trên mặt đất lớn nhất thế giới, voi đực dài 6 – 7,5 m, chiều cao từ vai là 3,3 m, và nặng 6 tấn. Voi cái khá nhỏ, khoảng 5,4 – 6,9 m chiều dài, 2,7 m chiều cao từ vai, và nặng 3 tấn. Voi châu Phi trưởng thành nói chung không có kẻ thù tự nhiên do kích thước lớn của nó, nhưng những chú voi con dễ bị sư tử và cá sấu tấn công, và thỉnh thoảng cũng bị báo và linh cẩu tấn công.</p>
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_11.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+<h3>3. Loài vật cao nhất </h3>
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_12.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<p>Hươu cao cổ là động vật móng guốc có vú ở châu Phi và là động vật sống trên cạn cao nhất trên thế giới. Nó đứng cao 5 – 6 m và có trọng lượng trung bình 1.600 kg đối với con đực và 830 kg đối với con cái. Hươu cao cổ có một chiếc cổ cực kỳ dài, có thể hơn 2 m, chiếm gần một nửa chiều cao của con vật.</p>
+<h3>4.Loài động vật biển ăn thịt bự nhất</h3>
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_13.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<p>Hải cẩu voi phương nam là động vật biển ăn thịt lớn nhất hiện nay. Trong khi những con cái nặng trung bình 400 – 900 kg và dài 2,6 – 3 m, thì các con đực nặng trung bình từ 2.200 đến 4.000 kg và dài 4,5 – 5,8 m. Con đực có kích thước kỷ lục ghi nhận ở vịnh Possession, Nam Georgia, vào ngày 28/2/1913, đo được 6,85 m và ước tính trọng lượng là 5.000 kg.</p>
+<h3>Động vật ăn thịt trên cạn lớn nhất</h3>
+
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_14.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<P>Các động vật ăn thịt sống trên mặt đất lớn nhất là gấu trắng Bắc cực, gấu Kodiak – một phân loài của gấu nâu. Vì chúng có kích thước cơ thể tương tự, không xác định được rõ ràng loài nào lớn hơn. Trong cả hai loài, chiều cao vai được đo là hơn 1,6 m và tổng chiều dài là 3,05 m. Trọng lượng gấu bắc cực và nâu nặng nhất được ghi nhận lần lượt là 1.003 kg và 1.135 kg.</P>
+<h3>6. Loài bò sát lớn nhất trên thế giới</h3>
+<P>Cá sấu nước mặn là loài bò sát lớn nhất. Nó được tìm thấy trong môi trường sống từ miền Bắc Australia thông qua khu vực đông nam Châu Á đến bờ biển phía đông của Ấn Độ. Trọng lượng một con cá sấu nước mặn đực trưởng thành là 409 đến 1.000 kg và chiều dài bình thường là 4,1 – 5,5 m. Cá sấu nước mặn là một động vật ăn thịt, có khả năng tấn công gần bất kỳ động vật nào đi vào lãnh thổ của nó, hoặc trong mặt nước hoặc trên đất liền.</P>
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_15.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<h3>7. Động vật lưỡng cư lớn nhất</h3>
+<P>Kỳ nhông khổng lồ Trung Quốc là kỳ nhông lớn nhất thế giới, đạt đến chiều dài 180 cm. Loài vật này sống trong các dòng suối trên núi đá và hồ ở Trung Quốc, và đang cực kỳ nguy cấp do mất môi trường sống vì ô nhiễm. Nó được coi như một món ăn ngon và được sử dụng trong y học cổ truyền Trung Quốc.</P>
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_16.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+<h3>8. Loài thỏ khổng lồ</h3>
+<p>Flemish Giant là giống thỏ thuần dưỡng, có nguồn gốc từ vùng Flemish. Nó được nuôi sớm nhất là vào thế kỷ 16 xung quanh thành phố Ghent, Bỉ. Loài thỏ này có thể nặng tới 12,7 kg.</p>
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_17.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+<h3>9. Loài dơi lớn nháta</h3>
+<p>Loài dơi lớn nhất là dơi cáo bay khổng lồ, một con dơi ăn quả có nguy cơ tuyệt chủng đến từ rừng nhiệt đới của Philippines là một phần của bộ dơi. Kích thước tối đa gần 1,5 kg, dài 55 cm và sải cánh có thể được gần 1,8m.</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_18.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+<h3>10. Loài thằn lằn/rắn lớn nhất</h3>
+<p>Thành viên sống lớn nhất của loài bò sát khổng lồ này là loài trăn xanh ở đường sông Trung Mỹ. Kích thước xác nhận tối đa là 7,5 m và nặng 250 kg. Loài trăn khoang của Đông Nam Á mảnh mai nhưng dài hơn, và đã được báo cáo đo lường có chiều dài là 9,7 m.</p>
+
+<img src="https://e.khoahoc.tv/photos/image/2015/03/24/dong_vat_21.jpg" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc3.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+           <ul>
+                
+                
+                <li><a href="2.html"> Kền kền không bị ngộ độc</a></li>
+                <li><a href="3.html">Tại sao chăn không bị ngạt </a></li>
+                <li><a href="4.html"> Khám phá gấu nước</a></li>
+                <li><a href="5.html"> Khám Phá Cá voi xanh</a></li>
+                <li><a href="6.html"> Rắn trong thần thoại</a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

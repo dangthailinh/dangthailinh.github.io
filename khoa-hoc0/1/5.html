@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,202 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Khám phá những bí ẩn của thế giới không gian đa chiều</h1>
+        <p class="detail-subtitle">Tổng quan về các chiều không gian và khái niệm của nó nói chung là vậy</p>
+        <div class="detail-meta">Ngày đăng: may 19 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+             <h3>Trên thế giới, đã có khá nhiều người kể lại, họ đã được nhìn thấy đĩa bay, đã gặp gỡ với người hành tinh khác, cũng có trường hợp một số người bị mất tích một cách bí ẩn và được gán cho là đã bị người hành tinh khác bắt cóc. Cũng không ít người cho rằng, họ đã "linh cảm" một điều gì đó sẽ xẩy ra trong tương lai, và điều đó đã xẩy ra đúng như họ đã "linh cảm" trước.
+
+Khoa học đã nhìn nhận và giải thích các vấn đề này như thế nào? Trong khuôn khổ bài báo này, chúng tôi giới thiệu các lí giải của một số nhà khoa học trên thế giới để bạn đọc tham khảo.</h3>
+      <h2>Không gian 4 chiều</h2>
+      <p>Như đã biết, không gian chúng ta đang sống là không gian ba chiều. Nhưng để giải thích các vấn đề trên, các nhà khoa học cho rằng không gian có thể có nhiều hơn ba chiều (bốn chiều, năm chiều...). Những người đã gặp được người hành tinh khác có liên quan đến một năng lực đặc biệt, giúp họ đi vào thế giới không gian bốn chiều bí ẩn, vì thế họ đã nhìn thấy những hình ảnh mà người khác không nhìn thấy được.</p>
+        <img src="https://e.khoahoc.tv/photos/image/032011/04/dachieu.jpg" alt="Hành tinh ngoài hệ Mặt Trời qua JWST" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+       <p>Theo các nhà khoa học, bộ não của con người bình thường không thể tưởng tượng được không gian bốn chiều. Điều này có thể được giải thích như sau: Chúng ta hãy giả thiết là có các sinh vật sống ở không gian hai chiều (sống trên một mặt phẳng). Ở trên mặt phẳng đó, chúng không hề biết gì về sự hiện hữu của không gian ba chiều. Vì vậy, mọi chuyển động của chúng sẽ bị giới hạn trên mặt phẳng ấy và không thể tiến vào chiều không gian thứ ba như chúng ta. Giả sử có một quả cầu lọt vào thế giới đó, các sinh vật ở không gian hai chiều mới đầu sẽ nhìn thấy một điểm sáng, rồi đến các hình tròn to dần lên, đến mức cực đại, rồi các hình tròn nhỏ dần, thu lại thành một điểm, rồi biến mất. Kết quả là chúng chỉ nhìn thấy những đường tròn mà không hiểu toàn bộ câu chuyện về quả cầu như thế nào cả.</p>
+      <p>Nhưng, những điều thần bí đôi khi cũng đến với các sinh vật ở không gian hai chiều. Ví dụ, thời gian cần thiết để chúng vượt qua khoảng cách từ A đến B trên mặt phẳng (không gian hai chiều) khoảng chục năm. Nhưng vì một biến cố nào đó, mặt phẳng kia bị cong lại trong không gian ba chiều, khiến điểm A và điểm B gần nhau hơn, thậm chí trùng lên nhau. Khi đó điều kì diệu đã đến với chúng: Thời gian hàng chục năm để đi từ A đến B đạt được chỉ trong giây lát.</p>
+    
+    <p>Trở lại vấn đề trên, các nhà khoa học giải thích: Không gian ba chiều nằm trong cái nôi của không gian bốn chiều (như không gian hai chiều nằm trong không gian ba chiều). Những ai có khả năng xâm nhập vào chiều không gian thứ tư, thì đối với họ khoảng cách hàng vạn km, thậm chí hàng vạn năm ánh sáng không còn ý nghĩa gì. Họ vượt qua trong phút chốc bằng cách đi qua “ khe hở” của chiều thứ tư này. "Khe hở" đó là biên giới ngăn cách hai thế giới: Thế giới của không gian ba chiều và thế giới của không gian bốn chiều. Đó chính là cơ hội để những sinh vật cấp thấp xâm nhập vào chiều thứ tư, như những người trên trái đất đã gặp người hành tinh khác.</p>
+    <p>Để chứng minh sự tồn tại của chiều không gian thứ tư, các nhà khoa học Mỹ dự định chế tạo một máy đo siêu nhỏ, nhằm chỉ ra các hiệu ứng khác lạ, dẫn tới kết luận về sự hiện hữu của các chiều không gian khác. Nguyên lí của thí nghiệm này như sau: Theo thuyết string (Thuyết hình sợi), ở các khoảng không gian cực hẹp (cấp độ nano mét (nm); 1nm = 10-7cm), không gian sẽ bị cuộn lại trong các chiều khác (chiều thứ tư, thứ năm...). Điều này sẽ làm thay đổi lực hấp dẫn giữa các vật thể trong không gian đó. Vì thế, nếu xây dựng được một thí nghiệm để chỉ ra sự thay đổi này của lực hấp dẫn, thì người ta có thể kết luận rằng có chiều không gian thứ tư.</p>
+    <p>Các nhà khoa học dự định sẽ đo lực hấp dẫn giữa hai lá kim loại siêu mỏng, đặt cách nhau một khoảng cỡ nano mét. Để đo được chính xác lực hấp dẫn này, người ta cần loại trừ một đại lượng gọi là hiệu ứng Casimir.
+
+Theo cơ học lượng tử, hiệu ứng này được sinh ra bởi các photon ảo, thường bất ngờ xuất hiện trong chân không rồi lại tự động biến mất. Bình thường, trong không gian tồn tại các photon với các bước sóng khác nhau và rất đa dạng. Tuy nhiên, giữa hai tấm kim loại cực hẹp thì điều đó không thể có. Ở đây chỉ có các photon có bước sóng nhỏ hơn hoặc bằng khoảng cách giữa 2 lá kim loại. Hệ quả là giữa hai tấm kim loại sẽ có ít photon hơn bên ngoài. Sự chênh lệch về số photon trong và ngoài hai lá kim loại sẽ tạo ra một áp suất nhỏ, ép chúng lại với nhau. Lực đó được gọi là hiệu ứng Casimir.</p>
+    <P>Để loại trừ hiệu ứng trên, các nhà khoa học sẽ phải làm thí nghiệm với các lá kim loại giống hệt nhau, nhưng với các đồng vị khác nhau. Ở giữa chúng hiệu ứng Casimir sẽ giống nhau, nhưng lực hấp dẫn lại khác nhau (lá kim loại có đồng vị nặng hơn sẽ tạo ra lực hấp dẫn lớn hơn). So sánh hai lực hấp dẫn này người ta loại bỏ được hiệu ứng Casimir ra khỏi phép đo.
+
+Các nhà khoa học hi vọng trong tương lai gần, các thí nghiệm này sẽ được thực hiện. Nếu thí nghiệm thành công, thì đây là một sự kiện chấn động vì nó sẽ khẳng định sự tồn tại của chiều không gian thứ tư, điều mà theo Stephen Hawking là không thể tưởng tượng được với bộ não con người bình thường.</P>
+    <h2>Vũ trụ trong hệ toạ độ 11 chiều của Stephen Hawking:</h2>
+    <p>Nhà vật lí người Anh Stephen Hawking mới phát triển ra một mô hình vũ trụ từ những công thức toán học tỉ mỉ. Những phát kiến mới này của Hawking dường như làm đảo lộn quan điểm khoa học truyền thống và được trình bày bằng thuyết M - M đồng nghĩa với magical (thần diệu), mystical (thần bí), mother (mẹ, gốc) - Thuyết này được coi là tổng hợp của thuyết lượng tử và thuyết tương đối. Trong khi thuyết tương đối giải thích thế giới ở dạng vĩ mô, có liên hệ với lực hấp dẫn, thì trong mô hình của thuyết lượng tử (miêu tả thế giới vi mô), không có tương tác này. Vì thế, thuyết M của Hawking được gọi là "thuyết lượng tử hấp dẫn". Theo Hawking thuyết này cung cấp và lí giải chính xác về bản chất của vũ trụ.</p>
+    <p>Khi phát triển thuyết M, Hawking tin rằng đã đạt được những thành tựu có tính bước ngoặt, dựa trên nền tảng của một lí thuyết rất nổi tiếng trong những năm gần đây: Thuyết String. Thuyết này cho rằng, những thành tố nhỏ nhất tạo nên vũ trụ là những dạng thức hình sợi (string), chứ không phải dạng hạt. Nhưng ở xung quanh các sợi này, theo Hawking có hiện hữu một trường hấp dẫn và người ta có thể xác định được độ lớn của trường hấp dẫn ấy (thí nghiệm mà các nhà khoa học Mỹ dự định tiến hành như đã trình bày ở trên)</p>
+    <p>Dựa trên "thuyết lượng tử hấp dẫn" của mình, Hawking đã tính ra vũ trụ của chúng ta được hình thành từ 11 chiều. Nhưng chỉ có ba chiều không gian và một chiều thời gian đã mở, còn bảy chiều kia bị cuộn lại từ sau vụ nổ lớn.
+
+Nhận xét về thuyết mới của Hawking, tạp chí khoa học P. M của Đức đã viết:" Khi bạn đọc những dòng này, thì cùng lúc, hàng trăm con người trong bạn đang đọc nó - những kẻ đồng hành với bạn - tất cả đều đang nhún vai như bạn, đều lắc đầu, nghi hoặc..."</p>
+    <p>Lí thuyết trên của Hawking đang gây ra nhiều tranh cãi lớn, vì nhà vật lí này cho rằng, có thể giải thích được hiện tượng "linh cảm" một cách khoa học bằng thuyết M: Trong mô hình vũ trụ này, cùng lúc tồn tại vô số những con người khác nhau trong một con người. Và cùng lúc, tất cả thông tin về vũ trụ ở mọi thời đại đều hiện hữu. Vì thế, hiện tượng "linh cảm" có thể giải thích bằng việc một con người nào đó trong bạn đã trải nghiệm điều mà bạn sẽ trải qua, và mách bảo cho bạn biết trước điều đó.</p>
+    <h2>Ảnh không gian 4 chiều đẹp mắt:</h2>
+    <p>Những bức ảnh bình thường chỉ chụp lại những khoảnh khắc ngắn ngủi. Tuy nhiên kỹ thuật phơi sáng lại cho phép chúng ta “ghi lại thời gian” để tạo ra những hình ảnh vô cùng sống động.</p>
+    <figure style="text-align: center; margin: 20px auto; max-width: 600px;">
+  <img src="https://e.khoahoc.tv/photos/image/2018/11/22/anh-khong-gian-4-chieu.jpg" 
+       alt="Hành tinh ngoài hệ Mặt Trời qua JWST" 
+       style="width: 100%; border-radius: 8px;">
+  <figcaption style="font-size: 14px; color: #666; margin-top: 5px;">
+    Hình 1: Đoàn tàu như được tạo ra từ hàng ngàn tia sáng.
+  </figcaption>
+</figure>
+
+<figure style="text-align: center; margin: 20px auto; max-width: 600px;">
+  <img src="https://e.khoahoc.tv/photos/image/2018/11/22/anh-khong-gian-4-chieu-1.jpg" 
+       alt="Hành tinh ngoài hệ Mặt Trời qua JWST" 
+       style="width: 100%; border-radius: 8px;">
+  <figcaption style="font-size: 14px; color: #666; margin-top: 5px;">
+   Hình 2:Ánh đèn đường đa sắc màu như đến từ hành tinh khác.
+
+
+  </figcaption>
+</figure>
+
+<figure style="text-align: center; margin: 20px auto; max-width: 600px;">
+  <img src="https://e.khoahoc.tv/photos/image/2018/11/22/anh-khong-gian-4-chieu-2.jpg" 
+       alt="Hành tinh ngoài hệ Mặt Trời qua JWST" 
+       style="width: 100%; border-radius: 8px;">
+  <figcaption style="font-size: 14px; color: #666; margin-top: 5px;">
+    Hình 3: Ảnh phơi sáng của dải ngân hà.
+  </figcaption>
+</figure>
+<figure style="text-align: center; margin: 20px auto; max-width: 600px;">
+  <img src="https://e.khoahoc.tv/photos/image/2018/11/22/anh-khong-gian-4-chieu-3.jpg" 
+       alt="Hành tinh ngoài hệ Mặt Trời qua JWST" 
+       style="width: 100%; border-radius: 8px;">
+  <figcaption style="font-size: 14px; color: #666; margin-top: 5px;">
+    Hình 4: Dải sáng được tạo ra bởi một máy bay cất cánh.
+  </figcaption>
+</figure>
+<figure style="text-align: center; margin: 20px auto; max-width: 600px;">
+  <img src="https://e.khoahoc.tv/photos/image/2018/11/22/anh-khong-gian-4-chieu-4.jpg" 
+       alt="" 
+       style="width: 100%; border-radius: 8px;">
+  <figcaption style="font-size: 14px; color: #666; margin-top: 5px;">
+    Hình 5: Chuyển động của những người chèo thuyền trên sông, hệ thống đèn LED được lắp đặt để tạo ra bức ảnh này.
+  </figcaption>
+</figure>
+
+<button class="back-btn-detail" onclick="window.location.href='khoa-hoc2.html'" 
+        style="display: block; margin: 40px auto; padding: 10px 20px; background: #2b6cb0; color: white; border: none; border-radius: 6px; cursor: pointer;">
+  ← Quay lại Khoa Học
+</button>
+
         </main>
+    
+
+
+
+
+
+
+
+
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+              <ul>
+                <li><a href="1.html">Thiên thạch và những sự thật thú vị</a></li>
+                <li><a href="2.html">hiện tượng tuyệt đẹp của bầu trời </a></li>
+                <li><a href="3.html"> Bản chất của thời gian</a></li>
+                <li><a href="4.html">BỨC XẠ: NHỮNG VIÊN ĐẠN VÔ HÌNH </a></li>
+             
+                <li><a href="6.html">Thứ nhỏ nhất vũ trụ? </a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

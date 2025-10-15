@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,161 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">Thứ nhỏ nhất vũ trụ?</h1>
+        <p class="detail-subtitle">Thử đặt câu hỏi liệu vũ trụ có thứ nhỏ nhất không?</p>
+        <div class="detail-meta">Ngày đăng: jan 25 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+      <h2> Mở đầu nào ? có thẻ bé như nào?</h2>
+      <img src="https://th.bing.com/th/id/R.114832a5e16e0fdce460b3c3ba26f81a?rik=hFFoaEZJDObvHg&riu=http%3a%2f%2fwww.periodni.com%2fgallery%2fatom.png&ehk=Jr3cUn2Ub%2bRlAHRZ9%2brrD44RJaGVruYISxDxy0colBU%3d&risl=&pid=ImgRaw&r=0" alt="Hành tinh ngoài hệ Mặt Trời qua JWST" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      <p>Con người đã tìm kiếm câu trả lời cho câu hỏi này trong một thời gian dài. Trước đây, họ tưởng rẳng hạt cát là viên gạch cấu thành nên tất cả những gì xung quanh chúng ta. Để rồi sau đó nguyên tử được khám phá, và họ cũng lầm tưởng rằng những hạt này không thể chia nhỏ ra được nữa cho đến khi proton, neutron và electron được tìm thấy trong nó. Những hạt này cũng được tưởng chừng như là những hạt cơ bản nhât rồi thì các nhà khoa học tìm ra rằng mỗi proton và neutron được hình thành từ 3 quarks.
+
+Nhà vật lý Andy Parker hoài nghi  “Lần này chúng ta chưa thể tìm được bằng chứng về những thứ bên trong quark. Như vậy có nghĩa là chúng ta đã chạm đến mức cơ bản nhất của vật chất chưa?”
+
+Và thậm chí nếu quark và electron có thể chia ra được, các nhà khoa học cũng không nói rằng chúng là những phần nhỏ nhât của vật chất, hoặc liệu vũ trụ còn chứa những thứ nhỏ hơn nữa.</p>
+      <h2>Dây hay là Hạt ?</h2>    
+      <P>Theo thí nghiệm cho thấy, các hạt vô cùng bé như quark và electron biểu hiện y hệt như một chất điểm mà không có phân bố không gian. Nhưng chất điểm làm cho các lý thuyết vật lý rối rắm hơn nhiều bởi vì một vật có thể tiến gần vô hạn đến một chất điểm và các nhà khoa học rất ghét
+
+Có một ý tưởng gọi là lý thuyết Siêu Dây có thể giải quyết vấn đề này. Lý thuyết này tiên đoán rằng, tất cả các hạt thay vì giống như chất điểm, thực chất là một vòng dây nhỏ.</P>
+      <p>Không có thứ gì có thể tiến gần vô hạn tới vòng dây bởi vì nó sẽ luôn gần hơn một phần của vòng dây hơn các phần khác. Ý tưởng này khá lôi cuốn các nhà vât lý vì các “vòng” đó có thể giải quyết được vấn đề về vô hạn. Tuy nhiên, các nhà khoa học vẫn chưa có bằng chứng thực nghiệm nào chứng thưc được lý thuyết dây.
+
+Một cách khác để giải quyết vấn đề này đó là nói rằng bản chất không gian không liên tục mà nó cấu thành từ các hạt rời rác, ý tưởng này thường được ví như là “bọt không thời gian”. Trong trường hợp đó, 2 hạt không thể nào lại gần vô hạn bởi vì ít nhất thì chúng luôn bị tách biệt một khoảng bằng kích thước của “hạt không gian”</p> 
+    <img src="https://tse3.mm.bing.net/th/id/OIP.KNlw6doxdyloV3X2QXiOKgHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hành" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      <p>Nhưng ý tưởng này cũng chưa được chứng minh. Các nhà khoa học vẫn chưa thể tìm ra bằng chứng nào cho thấy không gian là rời rạc. Họ cũng không chắc chắn liệu ý tưởng này có thể giải quyết được vấn đề vô hạn hay không.  
+<h2>Điểm kì dị</h2>
+<p>Một ứng cử viên sáng giá cho danh hiệu nhỏ nhất trong vũ trụ là điểm kì dị tại trung tâm của lỗ đen. Lỗ đen được hình thành khi vật chất được nén lại nhỏ đến mức mà lực hấp dẫn chiếm ưu thế và kéo vất chất vào trong để rồi cuối cùng nén lại thành 1 điểm có khối lượng riêng vô hạn.  
+
+Nhưng hầu hết các chuyên gia không nghĩ rằng lỗ đen có khôi lượng riêng vô hạn. Họ cho rằng vô hạn là sự mâu thuẫn giữa 2 lý thuyết thống trị hiện nay- thuyết tương đối rộng và cơ học lượng tử- và chỉ khi một lý thuyết lượng tử hấp dẫn được hình thành thì ta mới biết được bản chất thực sự của lỗ đen.
+
+“Tôi nghĩ rằng chúng nhỏ hơn nhiều so với quark nhưng tôi không tin chúng có mật độ vô hạn” Parker cho hay.
+
+</p>
+<h2>Độ dài Planck.</h2>
+<p>Siêu dây, điểm kì dị và thậm chí hạt vũ trụ đều có thể nhỏ đến độ dài Planck (1.6 x 10^-35 mét, một con số vô cùng nhỏ)
+
+Độ dài planck nhỏ hơn rất nhiều so với khả năng đo của bất kì một máy móc nào hiện nay. Theo lý thuyết, nó là giới hạn của độ dài bé nhất. Theo nguyên lý bất định, không một thiết bị nào có thể đo được nhưng thứ nào nhỏ hơn bởi vì trong khoảng đó, vũ trụ hoàn toàn ngẫu nhiên và vô định.
+
+Đây cũng là ranh giới giữa cơ học lượng tử và thuyết tương đối rộng.
+
+Parker nói “Nó tương ứng với khoảng cách mà tại đó trường hấp dẫn mạnh đến mức mà  nó có thể làm những điều điên rồ như tạo ra hố đen từ năng lượng của trường hấp dẫn. Tại độ dài Planck,  chúng tôi tin rằng thuyết lượng tử về hấp dẫn sẽ kiểm soát”
+
+Có lẽ rằng tất cả những thứ nhỏ nhất của vũ trụ sẽ gần như nhỏ bằng độ dài Planck.</p>
+
+
+
+
+
+
+
+
+
+<button class="back-btn-detail" onclick="window.location.href='khoa-hoc2.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+             <ul>
+                <li><a href="1.html">Thiên thạch và những sự thật thú vị</a></li>
+                <li><a href="2.html">hiện tượng tuyệt đẹp của bầu trời </a></li>
+                <li><a href="3.html"> Bản chất của thời gian</a></li>
+                <li><a href="4.html">BỨC XẠ: NHỮNG VIÊN ĐẠN VÔ HÌNH </a></li>
+                <li><a href="5.html">Khám phá những bí ẩn của thế giới không gian đa chiều </a></li>
+               
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">

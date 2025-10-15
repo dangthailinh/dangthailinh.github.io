@@ -6,9 +6,11 @@
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="/linhkun.css">
     <style>
+        /* Xóa gạch dưới tất cả link */
         a { text-decoration: none !important; color: inherit; }
         a:hover { color: var(--primary-color); transition: color 0.3s ease; }
 
+        /* Giữ nguyên style cũ cho detail-page */
         .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
         .detail-header { position: relative; padding: 20px; text-align: center; }
         .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
@@ -19,15 +21,15 @@
         .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
         .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
         .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
         .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .detail-content ul { margin-left: 20px; }
         .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
         .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
         .sidebar-detail ul { list-style: none; padding: 0; }
         .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
 
         @media (max-width: 768px) {
             .container-detail { flex-direction: column; }
@@ -39,94 +41,142 @@
 </head>
 <body class="detail-page">
     <header>
-        <div class="logo"></div>
+        <div class="logo">Linh Osimi</div>
+     
         <div class="header-right">
+            
             <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
     <div class="detail-header">
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
-        <h1 class="detail-title"></h1>
-        <p class="detail-subtitle"></p>
-        <div class="detail-meta"></div>
+        <!-- Hình trang trí góc trên -->
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
+        </svg>
+
+        <h1 class="detail-title">BỨC XẠ: NHỮNG VIÊN ĐẠN VÔ HÌNH</h1>
+        <p class="detail-subtitle">Tổng quan về bức xạ và tác hại của nó!</p>
+        <div class="detail-meta">Ngày đăng: jan 9 2025 | Tác giả: Linh Ossimi</div>
     </div>
 
     <div class="container-detail">
         <main class="detail-content">
-            <!-- Nội dung chính ở đây -->
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'"></button>
+       <h2>Bức xạ là gì?</h2>
+       <p>Bức xạ không phải là thứ gì xa lạ hay chỉ tồn tại trong các phòng thí nghiệm hạt nhân — nó hiện diện mọi nơi, mọi lúc, quanh ta. Từ ánh sáng mặt trời ấm áp đến những tia vũ trụ đến từ sâu thẳm không gian, tất cả đều mang theo năng lượng bức xạ. Khi bạn bay trên một chuyến bay thương mại hay đứng trên đỉnh núi cao, lượng bức xạ mà cơ thể tiếp nhận còn cao hơn so với người đang thư giãn trên bãi biển.</p>
+       <p>Ngay cả ngôi nhà bạn đang ở cũng không hoàn toàn “sạch” bức xạ. Các vật liệu xây dựng như đá granite hay gạch men có thể chứa nguyên tố phóng xạ tự nhiên – ví dụ như urani hay thorium – và phát ra một lượng nhỏ bức xạ ion hóa. Thậm chí, bản thân cơ thể bạn cũng là một nguồn bức xạ: kali-40, một đồng vị phóng xạ tự nhiên, tồn tại trong chuối, rau củ… và cả trong tế bào con người. Đáng chú ý, nam giới thường có mức phóng xạ cao hơn nữ giới, đơn giản vì họ chứa nhiều kali hơn trong cơ thể.</p>
+       <img src="https://tse1.mm.bing.net/th/id/OIP.LO-t9SY03aAF0kcwzCKgSQAAAA?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Bức xạ là gì?" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+       <p>Bức xạ vô hình, không mùi, không vị, và không có ngưỡng an toàn tuyệt đối. Tuy nhiên, mối nguy hiểm chỉ thực sự xuất hiện khi năng lượng bức xạ đủ mạnh để phá vỡ cấu trúc nguyên tử trong các mô sống — quá trình này gọi là ion hóa. Chính vì thế, loại bức xạ nguy hiểm nhất được gọi là bức xạ ion hóa.</p>
+      <h2>Ba “Kẻ Thù Vô Hình” Trong Thế Giới Bức Xạ</h2>
+      <p>Bức xạ ion hóa tồn tại dưới ba dạng chính: hạt alpha, hạt beta và tia gamma — mỗi loại có đặc tính và mức độ nguy hiểm riêng.</p>
+    <img src="https://mvtek.vn/media/news/3110_Buc-xa-la-gi.jpg" alt="Ba loại bức xạ ion hóa chính" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+    
+      <p>Hạt alpha lớn, nặng và di chuyển chậm. Chúng không thể xuyên qua da, thậm chí một tờ giấy mỏng cũng đủ để chặn lại. Tuy nhiên, nếu chúng xâm nhập vào cơ thể — qua đường hô hấp, tiêu hóa hoặc vết thương hở — chúng có thể gây tổn thương nghiêm trọng đến ADN, dẫn đến đột biến gen hoặc tử vong.</p>
+    <p>Hạt beta nhỏ hơn, nhanh hơn và xuyên sâu hơn vào mô sống. Chúng có thể gây bỏng da, tổn thương tế bào, và để lại di chứng di truyền lâu dài. Một tấm lá nhôm mỏng hoặc khoảng cách 3 mét từ nguồn phát thường đủ để bảo vệ. Nhưng một lần nữa, nếu nuốt hoặc hít phải, hạt beta trở thành mối đe dọa chết người.</p>
+       <p>Tia gamma là dạng bức xạ mạnh nhất và nguy hiểm nhất. Chúng là sóng điện từ năng lượng cao, di chuyển với tốc độ ánh sáng, có khả năng xuyên thủng hầu hết mọi vật chất — kể cả bê tông dày hay chì đặc. Khi đi qua cơ thể người, tia gamma không dừng lại, mà xuyên thẳng qua từng tế bào, như hàng triệu viên đạn siêu nhỏ bắn xuyên qua cơ thể mà không để lại dấu vết bên ngoài — nhưng gây tổn thương sâu bên trong.</p>
+<h2>Tác hại kinh khủng tởm của nó</h2>
+<img src="https://scontent.fhan3-3.fna.fbcdn.net/v/t39.30808-6/473248564_1114026027069973_2464394733408280472_n.jpg?stp=dst-jpg_p180x540_tt6&_nc_cat=101&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=0nvXXUsE3ToQ7kNvwG1sCIo&_nc_oc=AdnW3_Ca45o9JgppUIMTvZNslzvBzuCqAfFO9QHloQ-_oeLT1Rr1EWFvgruKUv2PmqQ&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&_nc_gid=9XKBEWf5JUeknItZpoewXw&oh=00_AfdfJJ8fjzYph9OWuNuCuh01UwHxXttqHbJajU6PUqGdlg&oe=68F5396C" alt="Tác hại của bức xạ lên cơ thể con người" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+<p>Tác động sinh học của bức xạ lên con người được đo bằng đơn vị rem (roentgen equivalent man), phụ thuộc vào loại bức xạ, thời gian phơi nhiễm, liều lượng, vị trí tiếp xúc, và độ nhạy cảm của từng cơ quan. Ví dụ, tủy xương, da và niêm mạc ruột — những nơi tế bào phân chia nhanh — dễ bị tổn thương nhất.
+
+Trong thảm họa Chernobyl năm 1986, những người lính cứu hỏa dũng cảm làm nhiệm vụ trên mái lò phản ứng đã tiếp xúc với liều bức xạ lên tới 1.600 rem — tương đương với 160.000 lần chụp X-quang ngực. Liều lượng này gấp hàng trăm lần mức gây tử vong.
+
+Hậu quả là hội chứng nhiễm xạ cấp tính (ARS) — một cơn ác mộng sinh học. Chỉ trong vài giờ, nạn nhân bắt đầu nôn mửa, chóng mặt, xuất huyết dưới da. Sau đó, tóc rụng hàng loạt, tủy xương suy kiệt, hệ miễn dịch sụp đổ. Các cơ quan nội tạng lần lượt tan rã từ bên trong, bắt đầu từ ruột và tủy xương, lan đến gan, tim, và cuối cùng là não. Với liều như vậy, cái chết là điều không thể tránh khỏi — thường chỉ sau vài ngày đến vài tuần.
+
+</p>
+<h2>Tóm Lại</h2>
+<p>Bức xạ là một phần không thể tránh khỏi của vũ trụ, từ ánh sáng mặt trời đến các hạt vũ trụ. Tuy nhiên, khi năng lượng bức xạ đủ mạnh để ion hóa mô sống, nó trở thành một kẻ thù vô hình, nguy hiểm. Hạt alpha, beta và tia gamma — mỗi loại mang theo mức độ nguy hiểm riêng, từ bỏng da đến tổn thương ADN sâu bên trong.
+      
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc2.html'">← Quay lại Khoa Học</button>
         </main>
 
         <aside class="sidebar-detail">
-            <h3></h3>
-            <ul></ul>
-            <h3></h3>
-            <ul></ul>
+            <h3>Series Khoa Học Vũ Trụ</h3>
+            <ul>
+                <li><a href="1.html">Thiên thạch và những sự thật thú vị</a></li>
+                <li><a href="2.html">hiện tượng tuyệt đẹp của bầu trời </a></li>
+                <li><a href="3.html"> Bản chất của thời gian</a></li>
+             
+                <li><a href="5.html">Khám phá những bí ẩn của thế giới không gian đa chiều </a></li>
+                <li><a href="6.html">Thứ nhỏ nhất vũ trụ? </a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
+            </ul>
         </aside>
     </div>
 
     <footer style="
-      background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-      color: #cce0ff;
-      text-align: center;
-      padding: 30px 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      position: relative;
+  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
+  color: #cce0ff;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
+">
+  <p style="
+    margin: 0;
+    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+    animation: glow 3s ease-in-out infinite alternate;
+  ">
+    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+  </p>
+
+  <!-- Hiệu ứng sao băng -->
+  <div class="stars"></div>
+
+  <style>
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
+      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
       overflow: hidden;
-      box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-    ">
-      <p style="
-        margin: 0;
-        text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-        animation: glow 3s ease-in-out infinite alternate;
-      "></p>
+    }
 
-      <div class="stars"></div>
+    .stars::before, .stars::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 5s infinite ease-in-out;
+      box-shadow:
+        20px 30px white,
+        80px 120px white,
+        160px 90px white,
+        240px 50px white,
+        300px 200px white,
+        400px 150px white,
+        500px 80px white,
+        600px 180px white,
+        700px 40px white;
+    }
 
-      <style>
-        @keyframes glow {
-          from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-          to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
-        }
-        .stars {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: transparent;
-          overflow: hidden;
-        }
-        .stars::before, .stars::after {
-          content: "";
-          position: absolute;
-          top: -10px;
-          width: 2px;
-          height: 2px;
-          background: white;
-          border-radius: 50%;
-          animation: twinkle 5s infinite ease-in-out;
-          box-shadow:
-            20px 30px white,
-            80px 120px white,
-            160px 90px white,
-            240px 50px white,
-            300px 200px white,
-            400px 150px white,
-            500px 80px white,
-            600px 180px white,
-            700px 40px white;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.3); }
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-      </style>
-    </footer>
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+  </style>
+</footer>
 
     <div id="postModal" class="modal" style="display: none;">
         <div class="modal-content">
