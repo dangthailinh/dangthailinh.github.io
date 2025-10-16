@@ -183,6 +183,84 @@
     <img src="l.jpg" alt="INH OSIMI" class="logo-img">
     <span>INH OSIMI</span>
   </div>
+<!-- Nút phát âm thanh -->
+<button id="soundBtn" title="Phát âm thanh" style="
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  color: white;
+  font-size: 22px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 9999;
+  opacity: 0.6;
+">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24">
+  <path d="M11 5L6 9H2v6h4l5 4V5zm8.5 7a4.5 4.5 0 0 0-3-4.24v8.48a4.5 4.5 0 0 0 3-4.24zM16 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>
+</svg>
+
+</button>
+
+<script>
+  // Danh sách file MP3
+  const sounds = [
+    "giude.mp3",  
+  "tuturu.mp3",
+    "Cver.mp3",
+    "yamate.mp3",
+    "kimochi.mp3",
+    "Augg.mp3",
+    
+  ];
+
+  let currentIndex = 0;
+  const btn = document.getElementById("soundBtn");
+  let currentAudio = null; // Giữ tham chiếu đến âm thanh hiện tại
+
+  btn.addEventListener("click", () => {
+    if (sounds.length === 0) {
+      alert("Chưa có file âm thanh nào!");
+      return;
+    }
+
+    // Dừng và reset file đang phát (nếu có)
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+
+    // Tạo âm thanh mới và phát
+    currentAudio = new Audio(sounds[currentIndex]);
+    currentAudio.play();
+
+    // Hiệu ứng click
+    btn.style.transform = "scale(0.9)";
+    setTimeout(() => (btn.style.transform = "scale(1)"), 150);
+
+    // Chuyển sang file kế tiếp
+    currentIndex = (currentIndex + 1) % sounds.length;
+  });
+
+  // Hiệu ứng hover
+  btn.addEventListener("mouseenter", () => {
+    btn.style.opacity = "1";
+    btn.style.background = "rgba(255, 255, 255, 0.25)";
+  });
+
+  btn.addEventListener("mouseleave", () => {
+    btn.style.opacity = "0.6";
+    btn.style.background = "rgba(255, 255, 255, 0.15)";
+  });
+</script>
+
+
 
   
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -216,6 +294,7 @@
   position: relative;
   flex-wrap: wrap;
 }
+
 
 .logo-container {
   display: flex;
@@ -388,6 +467,9 @@ function toggleMenu() {
     align-items: center;
     justify-content: center;
 }
+
+
+
 
 /* --- Thanh chứa ảnh --- */
 .share-track {
@@ -607,11 +689,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
 /* Ngăn tràn: Hero full viewport, content scrollable nếu cần */
 .hero {
-    min-height: 1000vh;
-    max-height: 1000vh;
-    overflow-y: auto; /* Cho phép scroll nội dung nếu dài */
-    scroll-behavior: smooth;
+    min-height: 100vh; /* chiếm toàn bộ chiều cao màn hình */
+    width: 100%; /* chiếm toàn bộ chiều ngang */
+    display: flex; /* (tuỳ chọn) căn giữa nội dung bên trong */
+    justify-content: center; /* căn giữa ngang */
+    align-items: center; /* căn giữa dọc */
+    overflow: hidden; /* tránh tràn */
 }
+
 .hero-content {
     flex: 1;
     display: flex;
