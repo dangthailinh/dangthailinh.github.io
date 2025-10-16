@@ -424,7 +424,10 @@ nav a:hover {
             </div>
           </a>
         </div>
-        <div class="pagination-container">
+         <!-- Phần phụ -->
+      
+
+       <div class="pagination-container">
         <div class="pagination" role="navigation" aria-label="Pagination">
         <a href="#" id="prevBtn" class="page-btn" aria-label="Previous page">◀</a>
         <a href="/khoa-hoc0/0/khoa-hoc.html" id="page1" class="page-btn">1</a>
@@ -683,6 +686,47 @@ nav a:hover {
         if (e.key === 'Enter') goBtn.click();
         });
       </script>
+
+      </div>
+      <div class="sub-section">
+        <h2>Mô phỏng khoa học 3D</h2>
+        <div class="card-grid">
+          <a href="/dist/Solarsysc.html" class="card-link">
+            <div class="card">
+              <img src="https://media.giphy.com/media/Ks1SE2JXbPibm/giphy.gif" alt="khoa học" class="card-img">
+             
+              <h3>3d Hệ Mặt trời + thông số các hành tinh</h3>
+              <div class="card-meta">Nov 01, 2025 |  science</div>
+            </div>
+          </a>
+          <a href="/coler-test.html" class="card-link">
+            <div class="card">
+              <img src="https://tse4.mm.bing.net/th/id/OIP.y_oL8ia54UFIfc1HeyVFWAHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="khoa học" class="card-img">
+              <h3>mô phỏng Pha màu</h3>
+              <div class="card-meta">july 01, 2025 | Color</div>
+            </div>
+
+        
+          
+          <a href="/blackhole.html" class="card-link">
+            <div class="card">
+              <img src="https://i.pinimg.com/originals/c3/16/27/c3162775635d404d6462187ea4b5941f.gif" alt="khoa học" class="card-img">
+              <h3>mô phỏng hố đen 3d</h3>
+              <div class="card-meta">Nov 01, 2025 |  black hole</div>
+            </div>
+          </a>
+     
+
+
+  <script>
+  function changePage(pageNumber, baseName) {
+    if (pageNumber === 1) {
+    window.location.href = `${baseName}.html`;
+    } else {
+    window.location.href = `${baseName}${pageNumber}.html`;
+    }
+  }
+  </script>
 
         
     </main>

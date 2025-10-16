@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My First Album</title>
+<style>
+body {
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+h1 {
+    text-align: center;
+    margin: 40px 0;
+    font-size: 2.5em;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+}
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+.back-btn:hover { background-color: #f0f0f0; }
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+}
+.modal.active { display: flex; align-items: center; justify-content: center; }
+.modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.modal img.show { opacity: 1; }
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+.close:hover { color: #bbb; }
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 16px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    user-select: none;
+    border-radius: 0 3px 3px 0;
+    transform: translateY(-50%);
+    transition: background-color 0.3s ease;
+}
+.next { right: 0; border-radius: 3px 0 0 3px; }
+.prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
+
+/* Dots */
+.dots {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    z-index: 1001;
+}
+.dot {
+    cursor: pointer;
+    height: 14px;
+    width: 14px;
+    margin: 0 4px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+.active-dot, .dot:hover { background-color: #fff; }
+.modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%; /* luôn giữa theo chiều dọc */
+    transform: translateY(-50%);
+    padding: 16px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: rgba(0,0,0,0.4);
+    border: none;
+    border-radius: 50%;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+
+.prev { left: calc(50% - 470px); } /* 50% - nửa chiều rộng ảnh (≈400px) - khoảng cách 20px */
+.next { right: calc(50% - 470px); }
+
+.prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
+
+
+</style>
+</head>
+<body>
+
+<a href="gaixinh.html" class="back-btn">Quay lại</a>
+<h1>My First Album</h1>
+
+<div class="gallery">
+    <img src="https://i.pinimg.com/736x/06/fe/3b/06fe3baab272d62df6d1f9cafc5fe0a3.jpg" alt="Cloudy Landscape" onclick="openModal(0)">
+    <img src="https://i.pinimg.com/736x/67/13/fe/6713fe51432004dea6403b0bdfbe1514.jpg" alt="Misty Forest" onclick="openModal(1)">
+    <img src="https://i.pinimg.com/736x/04/a7/19/04a7192d4edfea4f9f8773c175fae40a.jpg" alt="Forest Waterfall" onclick="openModal(2)">
+    <img src="https://i.pinimg.com/736x/07/d5/65/07d5653329260e277b8441e205fcd151.jpg" alt="Bokeh Grass Sunset" onclick="openModal(3)">
+    <img src="https://i.pinimg.com/736x/d9/ab/c3/d9abc30b3bc4a230a3a4eb6077442a52.jpg" alt="Bokeh Grass Sunset" onclick="openModal(4)">
+    <img src="https://i.pinimg.com/736x/9f/9b/7c/9f9b7c739608f12dcd7cf7e52a264765.jpg" alt="Bokeh Grass Sunset" onclick="openModal(5)">
+    <img src="https://i.pinimg.com/736x/c0/71/a9/c071a9c3063f071f242fc55bd5de95e5.jpg" alt="Bokeh Grass Sunset" onclick="openModal(6)">
+    <img src="https://i.pinimg.com/736x/eb/92/54/eb9254d93d40d5e59d3736b4552e9aa8.jpg" alt="Bokeh Grass Sunset" onclick="openModal(7)">
+    <img src="https://i.pinimg.com/736x/ea/a1/e6/eaa1e6bcbcf4087cea5cb75e9ca9f913.jpg" alt="Bokeh Grass Sunset" onclick="openModal(8)">
+    <img src="https://i.pinimg.com/1200x/40/90/9e/40909eabdc8781592d2034c0a53c4362.jpg" alt="Bokeh Grass Sunset" onclick="openModal(9)">
+</div>
+
+
+
+<div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="prev" onclick="changeImage(-1)">&#10094;</div>
+    <div class="next" onclick="changeImage(1)">&#10095;</div>
+    <img id="modalImg" src="">
+    <div class="dots" id="dots"></div>
+</div>
+
+<script>
+let slideIndex = 0;
+const images = [
+    "https://i.pinimg.com/736x/06/fe/3b/06fe3baab272d62df6d1f9cafc5fe0a3.jpg",
+    "https://i.pinimg.com/736x/67/13/fe/6713fe51432004dea6403b0bdfbe1514.jpg",
+    "https://i.pinimg.com/736x/04/a7/19/04a7192d4edfea4f9f8773c175fae40a.jpg",
+    "https://i.pinimg.com/736x/07/d5/65/07d5653329260e277b8441e205fcd151.jpg",
+    "https://i.pinimg.com/736x/d9/ab/c3/d9abc30b3bc4a230a3a4eb6077442a52.jpg",
+    "https://i.pinimg.com/736x/9f/9b/7c/9f9b7c739608f12dcd7cf7e52a264765.jpg",
+    "https://i.pinimg.com/736x/c0/71/a9/c071a9c3063f071f242fc55bd5de95e5.jpg",
+    "https://i.pinimg.com/736x/eb/92/54/eb9254d93d40d5e59d3736b4552e9aa8.jpg",
+    "https://i.pinimg.com/736x/ea/a1/e6/eaa1e6bcbcf4087cea5cb75e9ca9f913.jpg",
+    "https://i.pinimg.com/1200x/40/90/9e/40909eabdc8781592d2034c0a53c4362.jpg"
+];
+
+
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const dotsContainer = document.getElementById('dots');
+
+function openModal(index) {
+    slideIndex = index;
+    modal.classList.add('active');
+    showImage(slideIndex);
+}
+
+function closeModal() { modal.classList.remove('active'); }
+
+function showImage(n) {
+    if (n >= images.length) slideIndex = 0;
+    if (n < 0) slideIndex = images.length - 1;
+    
+    modalImg.classList.remove('show');
+    setTimeout(() => {
+        modalImg.src = images[slideIndex];
+        modalImg.classList.add('show');
+    }, 100);
+
+    updateDots();
+}
+
+function changeImage(n) {
+    slideIndex += n;
+    showImage(slideIndex);
+}
+
+function updateDots() {
+    dotsContainer.innerHTML = '';
+    images.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === slideIndex) dot.classList.add('active-dot');
+        dot.onclick = () => { slideIndex = i; showImage(slideIndex); };
+        dotsContainer.appendChild(dot);
+    });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+    if (modal.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+    }
+});
+
+// Swipe support
+let startX = 0;
+modal.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+modal.addEventListener('touchmove', e => {
+    if (!startX) return;
+    const diffX = startX - e.touches[0].clientX;
+    if (Math.abs(diffX) > 50) {
+        changeImage(diffX > 0 ? 1 : -1);
+        startX = 0;
+    }
+});
+modal.addEventListener('touchend', () => startX = 0);
+
+// Click outside to close
+window.onclick = e => { if (e.target === modal) closeModal(); };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bộ Sưu Tập Gái Xinh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== CSS GỘP ===== */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #111;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+    .navbar .logo {
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .navbar nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .navbar nav a:hover {
+      color: rgb(227, 233, 233);
+    }
+    .search {
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      height: 90vh;
+      background: url('https://i.pinimg.com/736x/0c/fb/c2/0cfbc222f908c8c6e2523f3225532491.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+    }
+    .hero-content h1 {
+      font-size: 5em;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 4px;
+    }
+    .hero-content p {
+      font-size: 1.2em;
+      font-weight: 300;
+      color: #ccc;
+    }
+
+    /* Albums Section */
+    .albums-section {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 0 20px;
+    }
+    .albums-section h2 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #555;
+      display: inline-block;
+    }
+    .albums-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .album {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .album img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.4s ease;
+    }
+    .album-title {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 15px;
+      background: rgba(0,0,0,0.6);
+      text-align: center;
+      font-weight: 500;
+    }
+    .album:hover img {
+      transform: scale(1.1);
+      filter: brightness(0.8);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .lightbox-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1000px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .lightbox-content img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .lightbox-content img:hover {
+      transform: scale(1.05);
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .back-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    color: #fff;
+    background-color: #000;
+    text-decoration: none;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    color: #000;
+    background-color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+}
+
+  </style>
+</head>
+<body>
+
+
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="logo">Osimi</div>
+  
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>ALBUMS</h1>
+      <p>Tổng hợp gái xinh cực phê!</p>
+    </div>
+  </section>
+<a href="/index.html" class="back-btn">Về Trang Chủ</a>
+  <!-- MAIN GALLERY -->
+<main class="albums-section">
+  <h2>Lựa chọn đi </h2>
+
+
+
+  <div class="albums-grid">
+    <a href="1.html" class="album">
+      <img src="https://i.pinimg.com/736x/68/1b/14/681b1486958f67a8b28c5108fe516104.jpg" alt="Album 1">
+      <div class="album-title">Gái Nhật siêu ngon.</div>
+    </a>
+
+    <a href="2.html" class="album">
+      <img src="https://i.pinimg.com/736x/c0/65/b8/c065b8fa3ff6e7f3093508cdfab1e1bd.jpg" alt="Album 2">
+      <div class="album-title">Gái Trung Cũng ngon.</div>
+    </a>
+
+    <a href="3.html" class="album">
+      <img src="https://i.pinimg.com/1200x/07/b0/6c/07b06c9c9df80ea639c74df51b702dae.jpg" alt="Album 3">
+      <div class="album-title">Các em gái tây...</div>
+    </a>
+  </div>
+</main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <div class="lightbox-content" id="lightbox-gallery">
+      <!-- ảnh load bằng JS -->
+    </div>
+  </div>
+
+  <script>
+    // ===== JS GỘP =====
+    const albums = {
+      1: [
+        "https://i.pinimg.com/736x/a0/21/51/a0215169cfe5b3209ed2f882b22fd607.jpg",
+        "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+      ],
+      2: [
+        "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c",
+        "https://images.unsplash.com/photo-1487412912498-0447578fcca8",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+      ],
+      3: [
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e",
+        "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c"
+      ]
+    };
+
+    const albumsEl = document.querySelectorAll('.album');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxGallery = document.getElementById('lightbox-gallery');
+    const closeBtn = document.querySelector('.close');
+
+    // Mở lightbox
+    albumsEl.forEach(album => {
+      album.addEventListener('click', () => {
+        const id = album.getAttribute('data-album');
+        const imgs = albums[id];
+        lightboxGallery.innerHTML = imgs.map(src => `<img src="${src}" alt="">`).join('');
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    // Đóng lightbox
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

@@ -236,3 +236,36 @@ window.onclick = function(event) {
         closeModal();
     }
 };
+// Lấy các phần tử
+const items = document.querySelectorAll('.item');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxVideo = document.getElementById('lightbox-video');
+const closeBtn = document.querySelector('.close');
+
+// Khi click vào ảnh hoặc video
+items.forEach(item => {
+    item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const video = item.querySelector('video');
+
+        if (img) {
+            lightboxImg.src = img.src;
+            lightboxImg.style.display = 'block';
+            lightboxVideo.style.display = 'none';
+        } else if (video) {
+            lightboxVideo.src = video.src;
+            lightboxVideo.style.display = 'block';
+            lightboxImg.style.display = 'none';
+        }
+
+        lightbox.style.display = 'flex';
+    });
+});
+
+// Đóng lightbox
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+    lightboxVideo.src = '';
+});
