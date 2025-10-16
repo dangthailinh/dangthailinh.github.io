@@ -301,107 +301,266 @@ img { max-width: 100%; height: auto; display: block; }
 
 </head>
 <body>
- <header class="main-header">
-  <div class="logo-container">
-    <img src="l.jpg" alt="INH OSIMI" class="logo-img">
-    <span>INH OSIMI</span>
-  </div>
-<!-- Nút phát âm thanh -->
-<button id="soundBtn" title="Phát âm thanh" style="
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(6px);
+<style>
+/* Header base (desktop unchanged) */
+.main-header {
+  --header-h: 72px;
+  background: linear-gradient(135deg, var(--primary-color), #793802);
   color: white;
-  font-size: 22px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,123,255,0.2);
+  position: relative;
+  z-index: 9990;
+  box-sizing: border-box;
+}
+
+/* center content and constrain width so header doesn't shift horizontally */
+.main-header .header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-container img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+.logo-container span {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-color);
+  font-family: 'Bangers', cursive;
+  white-space: nowrap;
+}
+
+/* nav */
+nav {
+  display: block;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  text-shadow: 0 0 8px #fff, 0 0 15px var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+/* controls */
+.theme-toggle {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  z-index: 9999;
-  opacity: 0.6;
-">
-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24">
-  <path d="M11 5L6 9H2v6h4l5 4V5zm8.5 7a4.5 4.5 0 0 0-3-4.24v8.48a4.5 4.5 0 0 0 3-4.24zM16 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>
-</svg>
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
 
-</button>
+/* Mobile adjustments */
+@media (max-width: 768px) {
 
-<script>
-  // Danh sách file MP3
-  const sounds = [
-    "giude.mp3",  
-  "tuturu.mp3",
-    "Cver.mp3",
-    "yamate.mp3",
-    "kimochi.mp3",
-    "Augg.mp3",
-    
-  ];
+  /* make header compact and sticky but keep rest of page from shifting:
+     header-inner is constrained; nav opens as overlay so content height doesn't reflow */
+  .main-header {
+    padding: 8px 14px;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(6px);
+  }
+  .main-header .header-inner {
+    gap: 8px;
+  }
 
-  let currentIndex = 0;
-  const btn = document.getElementById("soundBtn");
-  let currentAudio = null; // Giữ tham chiếu đến âm thanh hiện tại
+  .logo-container img { width: 36px; height: 36px; }
+  .logo-container span { font-size: 18px; letter-spacing: 1px; }
 
-  btn.addEventListener("click", () => {
-    if (sounds.length === 0) {
-      alert("Chưa có file âm thanh nào!");
-      return;
-    }
+  /* hide desktop nav and show toggle */
+  nav { display: none; }
+  .menu-toggle { display: block; }
 
-    // Dừng và reset file đang phát (nếu có)
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
-    }
+  /* when mobile menu is active, show an absolute overlay under header without pushing content */
+  nav.active {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: rgba(0,0,0,0.75);
+    padding: 10px 0;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    z-index: 9991;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+  nav ul li {
+    width: 100%;
+  }
+  nav a {
+    display: block;
+    padding: 12px 18px;
+    font-size: 15px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
 
-    // Tạo âm thanh mới và phát
-    currentAudio = new Audio(sounds[currentIndex]);
-    currentAudio.play();
+  /* theme button smaller */
+  .theme-toggle { font-size: 16px; padding: 6px 8px; }
 
-    // Hiệu ứng click
-    btn.style.transform = "scale(0.9)";
-    setTimeout(() => (btn.style.transform = "scale(1)"), 150);
+  /* ensure header stays within viewport and no horizontal scroll */
+  .main-header, .main-header .header-inner, nav.active {
+    left: 0;
+    right: 0;
+    max-width: 100%;
+  }
+  html, body { overflow-x: hidden; }
+}
+</style>
 
-    // Chuyển sang file kế tiếp
-    currentIndex = (currentIndex + 1) % sounds.length;
-  });
+<header class="main-header" role="banner" aria-label="Main header">
+  <div class="header-inner">
+    <div class="logo-container" aria-hidden="false">
+      <img src="l.jpg" alt="LINH OSIMI" class="logo-img">
+      <span>INH OSIMI</span>
+    </div>
 
-  // Hiệu ứng hover
-  btn.addEventListener("mouseenter", () => {
-    btn.style.opacity = "1";
-    btn.style.background = "rgba(255, 255, 255, 0.25)";
-  });
+    <!-- desktop nav / mobile toggler -->
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">☰</button>
 
-  btn.addEventListener("mouseleave", () => {
-    btn.style.opacity = "0.6";
-    btn.style.background = "rgba(255, 255, 255, 0.15)";
-  });
-</script>
+    <nav id="nav-menu" aria-label="Primary navigation">
+      <ul>
+        <li><a href="khoa-hoc0/0/khoa-hoc.html">Khoa Học</a></li>
+        <li><a href="nghe-thuat.html">Nghệ Thuật</a></li>
+        <li><a href="phim0/0/phim.html">Phim</a></li>
+        <li><a href="manga0/0/truyen-manga.html">Truyện (Manga)</a></li>
+        <li><a href="am-nhac.html">Âm Nhạc</a></li>
+        <li><a href="game0/0/game.html">Game</a></li>
+      </ul>
+    </nav>
 
-
-
-  
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-  <nav id="nav-menu">
-    <ul>
-      <li><a href="khoa-hoc0/0/khoa-hoc.html">Khoa Học</a></li>
-      <li><a href="nghe-thuat.html">Nghệ Thuật</a></li>
-      <li><a href="phim0/0/phim.html">Phim</a></li>
-      <li><a href="manga0/0/truyen-manga.html">Truyện (Manga)</a></li>
-      <li><a href="am-nhac.html">Âm Nhạc</a></li>
-      <li><a href="game0/0/game.html">Game</a></li>
-    </ul>
-  </nav>
-
-  <div class="header-right">
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <div class="header-right" style="display:flex; align-items:center; gap:10px;">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    </div>
   </div>
+
+  <!-- Nút phát âm thanh (giữ nguyên vị trí fixed bottom) -->
+  <button id="soundBtn" title="Phát âm thanh" style="
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+    color: white;
+    font-size: 22px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    z-index: 9999;
+    opacity: 0.6;
+  ">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M11 5L6 9H2v6h4l5 4V5zm8.5 7a4.5 4.5 0 0 0-3-4.24v8.48a4.5 4.5 0 0 0 3-4.24zM16 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>
+    </svg>
+  </button>
+
+  <script>
+    // Danh sách file MP3
+    const sounds = [
+      "giude.mp3",
+      "tuturu.mp3",
+      "Cver.mp3",
+      "yamate.mp3",
+      "kimochi.mp3",
+      "Augg.mp3",
+    ];
+
+    let currentIndex = 0;
+    const btn = document.getElementById("soundBtn");
+    let currentAudio = null;
+
+    btn.addEventListener("click", () => {
+      if (sounds.length === 0) {
+        alert("Chưa có file âm thanh nào!");
+        return;
+      }
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+      currentAudio = new Audio(sounds[currentIndex]);
+      currentAudio.play().catch(()=>{ /* ignore play errors on mobile autoplay */ });
+
+      btn.style.transform = "scale(0.95)";
+      setTimeout(() => (btn.style.transform = "scale(1)"), 150);
+      currentIndex = (currentIndex + 1) % sounds.length;
+    });
+
+    btn.addEventListener("mouseenter", () => {
+      btn.style.opacity = "1";
+      btn.style.background = "rgba(255, 255, 255, 0.25)";
+    });
+    btn.addEventListener("mouseleave", () => {
+      btn.style.opacity = "0.6";
+      btn.style.background = "rgba(255, 255, 255, 0.15)";
+    });
+
+    // ensure mobile menu toggling uses absolute overlay (no layout shift)
+    function toggleMenu() {
+      const menu = document.getElementById("nav-menu");
+      menu.classList.toggle("active");
+    }
+
+    // close mobile menu when clicking outside (optional)
+    document.addEventListener('click', (e) => {
+      const menu = document.getElementById('nav-menu');
+      const toggle = document.querySelector('.menu-toggle');
+      const header = document.querySelector('.main-header');
+      if (!menu || !menu.classList.contains('active')) return;
+      if (!header.contains(e.target)) {
+        menu.classList.remove('active');
+      }
+    }, {passive:true});
+  </script>
 </header>
 
 <style>
@@ -724,41 +883,195 @@ lightbox.addEventListener('click', (e) => {
 </script>
 
 
+<!-- Topics (responsive: desktop unchanged, mobile shows shrinked vertical list with up/down buttons) -->
+<style>
+/* Desktop: keep original grid look */
+.topics-wrapper { width: 100%; max-width: 100%; margin: 0 auto; position: relative; }
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
 
+/* Compact up/down buttons design */
+.topics-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
 
-        <!-- Topics Grid -->
-        <div class="topics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 100%; overflow: hidden;">
-            <div class="topic-card" style="padding: 20px; border-radius: 10px; transition: transform 0.3s ease;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Khoa Học</h3>
-                <p>Vũ trụ, vật lý và khám phá mới.</p>
-                <a href="khoa-hoc0/0/khoa-hoc.html" class="topic-link" style="display: inline-block; padding: 8px 15px; background: var(--primary-color); color: white; border-radius: 20px; text-decoration: none; transition: all 0.3s ease;">Khám phá</a>
-            </div>
-            <div class="topic-card" style="padding: 20px; border-radius: 10px; transition: transform 0.3s ease;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Nghệ Thuật</h3>
-                <p>Mấy bức tranh nghệ của ló.</p>
-                <a href="nghe-thuat.html" class="topic-link" style="display: inline-block; padding: 8px 15px; background: var(--primary-color); color: white; border-radius: 20px; text-decoration: none; transition: all 0.3s ease;">Khám phá</a>
-            </div>
-            <div class="topic-card" style="padding: 20px; border-radius: 10px; transition: transform 0.3s ease;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Phim</h3>
-                <p>Review phim hay và phân tích sâu.</p>
-                <a href="phim0/0/phim.html" class="topic-link" style="display: inline-block; padding: 8px 15px; background: var(--primary-color); color: white; border-radius: 20px; text-decoration: none; transition: all 0.3s ease;">Khám phá</a>
-            </div>
-            <div class="topic-card" style="padding: 20px; border-radius: 10px; transition: transform 0.3s ease;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Truyện (Manga)</h3>
-                <p>Cập nhật chap mới và spoiler-free.</p>
-                <a href="/manga0/0/truyen-manga.html" class="topic-link" style="display: inline-block; padding: 8px 15px; background: var(--primary-color); color: white; border-radius: 20px; text-decoration: none; transition: all 0.3s ease;">Khám phá</a>
-            </div>
-            <div class="topic-card" style="padding: 20px; border-radius: 10px; transition: transform 0.3s ease;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Âm Nhạc</h3>
-                <p>Album hot, playlist và phân tích.</p>
-                <a href="am-nhac.html" class="topic-link" style="display: inline-block; padding: 8px 15px; background: var(--primary-color); color: white; border-radius: 20px; text-decoration: none; transition: all 0.3s ease;">Khám phá</a>
-            </div>
-            <div class="topic-card" style="padding: 20px; border-radius: 10px; transition: transform 0.3s ease;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Game</h3>
-                <p>Guide, update và review game.</p>
-                <a href="game0/0/game.html" class="topic-link" style="display: inline-block; padding: 8px 15px; background: var(--primary-color); color: white; border-radius: 20px; text-decoration: none; transition: all 0.3s ease;">Khám phá</a>
-            </div>
-                
+/* Small circular buttons, icon-only, touch-friendly */
+.topics-controls button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 16px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: transform 0.12s ease, background 0.12s ease, opacity 0.12s ease;
+}
+.topics-controls button:active { transform: translateY(1px) scale(0.99); }
+.topics-controls button:disabled { opacity: 0.45; cursor: default; }
+
+/* visually-hidden for accessible text */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* Mobile: convert grid into a vertical scrollable strip with controls and smaller cards */
+@media (max-width: 768px) {
+  .topics-wrapper { padding: 8px 6px; }
+  /* show controls on mobile (JS also toggles) */
+  .topics-controls { display: flex; }
+
+  /* hide original grid layout and show a vertical stacked appearance inside a scroll container */
+  .topics-scroll {
+    max-height: 360px; /* visible area */
+    overflow: hidden;  /* we'll control scroll with buttons */
+    scroll-behavior: smooth;
+    position: relative;
+  }
+  .topics-grid {
+    display: block; /* stack cards vertically */
+  }
+  .topic-card {
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    display: block;
+  }
+  .topic-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+  .topic-card p { font-size: 0.95rem; margin-bottom: 8px; }
+  .topic-link { padding: 7px 12px; font-size: 0.95rem; border-radius: 14px; }
+}
+
+/* Ensure controls hidden on larger screens */
+@media (min-width: 769px) {
+  .topics-controls { display: none; }
+}
+</style>
+
+<div class="topics-wrapper" aria-label="Topics">
+  <!-- Controls (visible on mobile via media query) -->
+  <div class="topics-controls" aria-hidden="false" style="display:none;">
+    <button id="topics-up" aria-label="Lên" title="Lên">
+      ▲
+      <span class="sr-only">Lên</span>
+    </button>
+    <button id="topics-down" aria-label="Xuống" title="Xuống">
+      ▼
+      <span class="sr-only">Xuống</span>
+    </button>
+  </div>
+
+  <!-- Scroll container used on mobile; on desktop it behaves like normal wrapper -->
+  <div class="topics-scroll" id="topicsScroll">
+    <div class="topics-grid" role="list">
+      <div class="topic-card" role="listitem">
+        <h3>Khoa Học</h3>
+        <p>Vũ trụ, vật lý và khám phá mới.</p>
+        <a href="khoa-hoc0/0/khoa-hoc.html" class="topic-link">Khám phá</a>
+      </div>
+
+      <div class="topic-card" role="listitem">
+        <h3>Nghệ Thuật</h3>
+        <p>Mấy bức tranh nghệ của ló.</p>
+        <a href="nghe-thuat.html" class="topic-link">Khám phá</a>
+      </div>
+
+      <div class="topic-card" role="listitem">
+        <h3>Phim</h3>
+        <p>Review phim hay và phân tích sâu.</p>
+        <a href="phim0/0/phim.html" class="topic-link">Khám phá</a>
+      </div>
+
+      <div class="topic-card" role="listitem">
+        <h3>Truyện (Manga)</h3>
+        <p>Cập nhật chap mới và spoiler-free.</p>
+        <a href="/manga0/0/truyen-manga.html" class="topic-link">Khám phá</a>
+      </div>
+
+      <div class="topic-card" role="listitem">
+        <h3>Âm Nhạc</h3>
+        <p>Album hot, playlist và phân tích.</p>
+        <a href="am-nhac.html" class="topic-link">Khám phá</a>
+      </div>
+
+      <div class="topic-card" role="listitem">
+        <h3>Game</h3>
+        <p>Guide, update và review game.</p>
+        <a href="game0/0/game.html" class="topic-link">Khám phá</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const upBtn = document.getElementById('topics-up');
+  const downBtn = document.getElementById('topics-down');
+  const controls = document.querySelector('.topics-controls');
+  const scrollEl = document.getElementById('topicsScroll');
+
+  // Only show controls on small screens
+  function updateControlsVisibility() {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      controls.style.display = 'flex';
+      // ensure scroll container traps pointer scroll, but we'll scroll by buttons
+      scrollEl.style.overflow = 'hidden';
+    } else {
+      controls.style.display = 'none';
+      scrollEl.style.overflow = ''; // default (desktop)
+    }
+    updateButtonState();
+  }
+  updateControlsVisibility();
+  window.addEventListener('resize', updateControlsVisibility, {passive:true});
+
+  // compute sensible scroll amount (one card height or a fraction of container)
+  function scrollAmount() {
+    const firstCard = scrollEl.querySelector('.topic-card');
+    if (firstCard) return Math.round(firstCard.getBoundingClientRect().height + 12); // include gap
+    return Math.round(scrollEl.clientHeight / 2);
+  }
+
+  function updateButtonState() {
+    if (!upBtn || !downBtn) return;
+    upBtn.disabled = scrollEl.scrollTop <= 5;
+    downBtn.disabled = (scrollEl.scrollTop + scrollEl.clientHeight) >= (scrollEl.scrollHeight - 5);
+  }
+
+  if (upBtn && downBtn) {
+    upBtn.addEventListener('click', () => {
+      scrollEl.scrollBy({ top: -scrollAmount(), behavior: 'smooth' });
+      setTimeout(updateButtonState, 300);
+    });
+    downBtn.addEventListener('click', () => {
+      scrollEl.scrollBy({ top: scrollAmount(), behavior: 'smooth' });
+      setTimeout(updateButtonState, 300);
+    });
+    // update disabled states when user scrolls (touch/drag)
+    scrollEl.addEventListener('scroll', updateButtonState, {passive:true});
+    window.addEventListener('load', updateButtonState);
+    window.addEventListener('resize', updateButtonState, {passive:true});
+  }
+})();
+</script>
         </div>
             <a href="assistant.html" class="chat-icon" style="position: fixed; bottom: 20px; left: 20px; z-index: 100; opacity: 0.7; transition: all 0.3s ease; font-size: 40px; text-decoration: none; color: white; background: rgba(0,0,0,0.5); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
         💬
