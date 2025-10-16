@@ -100,6 +100,10 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+
+
+
+
 </head>
 <body>
   <div class="chat-box">
@@ -120,6 +124,137 @@
       <button class="option-btn" onclick="selectTopic('to-mo')"> HỎI Thêm về anh linh</button>
 
       <button class="option-btn" onclick="window.location.href='index.html'">🏠 Trang chủ</button>
+
+
+
+
+ <div class="search-container" id="searchContainer" style="position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:420px;max-width:95%;z-index:9999;background:#070707;border-top:1px solid #222;padding:12px;display:flex;flex-direction:column;gap:8px;align-items:stretch;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.7);"></div>
+    <div style="display:flex;gap:8px;">
+      <input id="siteSearch" type="search" placeholder="Tìm kiếm nội dung trên trang và các page khác..." aria-label="Tìm kiếm" style="flex:1;padding:10px 12px;border-radius:20px;border:1px solid #222;background:#0b0b0b;color:#fff;outline:none;font-size:14px;">
+      <button id="clearSearch" title="Xóa" class="option-btn" style="padding:8px 12px;border-radius:20px;">✖</button>
+    </div>
+    <div id="searchResults" style="max-height:220px;overflow:auto;border-radius:10px;padding:6px;display:none;background:linear-gradient(180deg,#080808,#060616);border:1px solid rgba(255,255,255,0.03);"></div>
+      <!-- results injected here -->
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const input = document.getElementById('siteSearch');
+    const resultsEl = document.getElementById('searchResults');
+    const clearBtn = document.getElementById('clearSearch');
+    const container = document.getElementById('searchContainer');
+    let index = [];
+
+    // Build a searchable index after full load (so other functions/definitions are available)
+    window.addEventListener('load', () => {
+      index = [];
+
+      // 1) Collect existing anchors on the page
+      document.querySelectorAll('a[href]').forEach(a => {
+        index.push({ title: (a.textContent || a.href).trim(), href: a.getAttribute('href') });
+      });
+
+      // 2) Collect option buttons: try to detect navigation or topic calls from onclick
+      document.querySelectorAll('#options .option-btn').forEach(btn => {
+        const txt = (btn.textContent || '').trim();
+        const onclick = btn.getAttribute('onclick') || '';
+        // detect direct navigation like window.location.href='index.html'
+        const navMatch = onclick.match(/location\.href\s*=\s*['"]([^'"]+)['"]/);
+        if (navMatch) index.push({ title: txt || navMatch[1], href: navMatch[1] });
+        // detect selectTopic('topic-key')
+        const topicMatch = onclick.match(/selectTopic\(\s*['"]([^'"]+)['"]\s*\)/);
+        if (topicMatch) index.push({ title: txt || topicMatch[1], topic: topicMatch[1] });
+      });
+
+      // 3) If a global getSubTopics function exists, expand index with its entries for known topics
+      if (typeof window.getSubTopics === 'function') {
+        // determine candidate topics from indexed items above
+        const topics = new Set(index.filter(i => i.topic).map(i => i.topic));
+        topics.forEach(t => {
+          try {
+            const subs = window.getSubTopics(t) || [];
+            subs.forEach(s => index.push({ title: s.name, href: s.link, topic: t }));
+          } catch (e) { /* ignore */ }
+        });
+      }
+    });
+
+    function renderResults(list) {
+      resultsEl.innerHTML = '';
+      if (!list.length) {
+        resultsEl.style.display = 'none';
+        return;
+      }
+      resultsEl.style.display = 'block';
+      list.slice(0, 12).forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.style.display = 'block';
+        btn.style.width = '100%';
+        btn.style.textAlign = 'left';
+        btn.style.padding = '8px 10px';
+        btn.style.marginBottom = '6px';
+        btn.textContent = item.title;
+        btn.onclick = () => {
+          // If entry has a href, navigate there
+          if (item.href) {
+            window.location.href = item.href;
+            return;
+          }
+          // If entry represents a topic, call selectTopic if available
+          if (item.topic && typeof window.selectTopic === 'function') {
+            window.selectTopic(item.topic);
+            return;
+          }
+        };
+        resultsEl.appendChild(btn);
+      });
+    }
+
+    function search(q) {
+      if (!q) { renderResults([]); return; }
+      const s = q.trim().toLowerCase();
+      const filtered = index.filter(it => {
+        return (it.title && it.title.toLowerCase().includes(s)) ||
+               (it.href && it.href.toLowerCase().includes(s)) ||
+               (it.topic && it.topic.toLowerCase().includes(s));
+      });
+      renderResults(filtered);
+    }
+
+    input.addEventListener('input', (e) => {
+      search(e.target.value);
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        input.value = '';
+        renderResults([]);
+        input.blur();
+      }
+      if (e.key === 'Enter') {
+        const first = resultsEl.querySelector('.option-btn');
+        if (first) first.click();
+      }
+    });
+
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      renderResults([]);
+      input.focus();
+    });
+
+    // Close results when clicking outside the search container
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target)) {
+        resultsEl.style.display = 'none';
+      }
+    });
+  })();
+  </script>
+
+
     </div>
   </div>
 
@@ -270,6 +405,11 @@
       addMessage("Quay lại menu chính nhé 💠");
       setTimeout(() => location.reload(), 600);
     }
+
+
+
+
+    
   </script>
 </body>
 </html>

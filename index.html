@@ -772,9 +772,9 @@ window.addEventListener('load', function() {
 
 
 
-<footer style="background: linear-gradient(135deg, #333 0%, #222 100%); color: #fff; padding: 40px 20px 20px; text-align: center; border-top: 4px solid var(--primary-color); font-family: 'Noto Sans', sans-serif;">
+<footer style="width: 100vw; position: relative; left: 0; background: linear-gradient(135deg, #333 0%, #222 100%); color: #fff; padding: 40px 20px 20px; text-align: center; border-top: 4px solid var(--primary-color); font-family: 'Noto Sans', sans-serif; overflow-x: hidden;">
   <div class="footer-grid" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; align-items: start;">
-
+    
     <!-- Cột 1 -->
     <div>
       <p style="font-size: 16px; margin-bottom: 10px; font-weight: bold;">&copy; 2025 Linh OSIMI-09</p>
@@ -799,21 +799,11 @@ window.addEventListener('load', function() {
     <div>
       <h4 style="font-size: 16px; margin-bottom: 15px; color: var(--primary-color);">Contact me !</h4>
       <div class="social-links" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-        <a href="https://github.com/dangthailinh" class="social-link" title="GitHub" style="color: #6e5494; font-size: 24px;">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/linh-%C4%91%E1%BA%B7ng-890604295/" class="social-link" title="LinkedIn" style="color: #0077b5; font-size: 24px;">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://www.facebook.com/dangthailinh.927" class="social-link" title="Facebook" style="color: #1877f2; font-size: 24px;">
-          <i class="fab fa-facebook"></i>
-        </a>
-        <a href="https://www.instagram.com/maihong9796/" class="social-link" title="Instagram" style="color: #e4405f; font-size: 24px;">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://discord.com/invite/AAyTqNqFwX" class="social-link" title="Discord" style="color: #5865f2; font-size: 24px;">
-          <i class="fab fa-discord"></i>
-        </a>
+        <a href="https://github.com/dangthailinh" class="social-link" title="GitHub" style="color: #6e5494; font-size: 24px;"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/linh-%C4%91%E1%BA%B7ng-890604295/" class="social-link" title="LinkedIn" style="color: #0077b5; font-size: 24px;"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/dangthailinh.927" class="social-link" title="Facebook" style="color: #1877f2; font-size: 24px;"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/maihong9796/" class="social-link" title="Instagram" style="color: #e4405f; font-size: 24px;"><i class="fab fa-instagram"></i></a>
+        <a href="https://discord.com/invite/AAyTqNqFwX" class="social-link" title="Discord" style="color: #5865f2; font-size: 24px;"><i class="fab fa-discord"></i></a>
       </div>
     </div>
   </div>
@@ -824,43 +814,20 @@ window.addEventListener('load', function() {
 </footer>
 
 <style>
-/* --- Hiệu ứng link & icon --- */
-footer a {
-  transition: all 0.3s ease;
-}
-footer a:hover {
-  transform: scale(1.1);
-  color: var(--primary-color);
-}
-.social-link:hover {
-  transform: rotate(10deg);
-}
+footer a { transition: all 0.3s ease; }
+footer a:hover { transform: scale(1.1); color: var(--primary-color); }
+.social-link:hover { transform: rotate(10deg); }
 
-/* --- Responsive Mobile --- */
 @media (max-width: 768px) {
-  footer {
-    padding: 25px 15px 15px;
-    text-align: center;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
-  }
-  .social-links {
-    justify-content: center;
-    gap: 10px;
-  }
-  .social-link {
-    font-size: 22px !important;
-  }
-  footer h4 {
-    font-size: 15px;
-  }
-  footer p, footer li {
-    font-size: 13px;
-  }
+  footer { padding: 25px 15px 15px; text-align: center; }
+  .footer-grid { grid-template-columns: 1fr; gap: 25px; }
+  .social-links { justify-content: center; gap: 10px; }
+  .social-link { font-size: 22px !important; }
+  footer h4 { font-size: 15px; }
+  footer p, footer li { font-size: 13px; }
 }
 </style>
+
 
 
     <div id="postModal" class="modal">
