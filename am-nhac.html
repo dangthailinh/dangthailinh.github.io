@@ -281,7 +281,7 @@ function toggleMenu() {
     <section class="hero-music">
         <div class="hero-music-content">
             <h1>Âm Nhạc</h1>
-            <p>Phát nhạc và playlist yêu thích ngay trên web</p>
+            <p>Bộ sưu tập những bài nhạc ưa thích của tui</p>
         </div>
     </section>
 
@@ -290,109 +290,330 @@ function toggleMenu() {
             <button class="back-btn" onclick="window.location.href='index.html'">← Quay về Trang chủ</button>
             
             <!-- Music Grid - Chữ nhật ngắn chồng nhau -->
+            <style>
+                /* Custom music controls */
+                .music-grid { display: flex; flex-direction: column; gap: 18px; margin-bottom: 50px; }
+                .music-card { padding: 16px; gap: 14px; height: auto; }
+                .controls { display:flex; align-items:center; gap:12px; width:100%; }
+                .control-btn {
+                    width:44px; height:44px; border-radius:12px;
+                    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+                    backdrop-filter: blur(6px); color: white; font-size:18px;
+                    display:flex; align-items:center; justify-content:center; cursor:pointer;
+                    transition: transform .14s ease, background .14s ease, box-shadow .14s ease;
+                    box-shadow: 0 4px 18px rgba(7,12,20,0.25) inset;
+                }
+                .control-btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.09); box-shadow: 0 6px 24px rgba(0,0,0,0.18); }
+                .control-btn.playing { background: linear-gradient(90deg,#28a74566,#28a74522); border-color: rgba(40,167,69,0.25); }
+
+                .seek { -webkit-appearance:none; appearance:none; height:8px; border-radius:999px; background: linear-gradient(90deg,#4f8cff, #00d4ff33); outline: none; width:100%; }
+                .seek::-webkit-slider-thumb { -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background: white; box-shadow: 0 6px 18px rgba(79,140,255,0.25); border: 3px solid rgba(255,255,255,0.85); cursor:pointer; }
+                .time { font-size:12px; color:#888; min-width:64px; text-align:center; }
+
+                .volume { width:110px; }
+                .volume::-webkit-slider-thumb { width:12px; height:12px; border-radius:50%; background: #fff; box-shadow: none; border:2px solid rgba(0,0,0,0.12); }
+
+                /* Equalizer visualizer */
+                .eq { display:flex; gap:6px; width:90px; justify-content:center; align-items:end; }
+                .eq .bar { width:10px; height:8px; background: linear-gradient(180deg,#00d4ff,#4f8cff); border-radius:4px; opacity:0.95; transition:height 0.08s linear; }
+
+                /* Card content layout */
+                .music-card { background: rgba(255,255,255,0.03); border-radius:12px; border-left:4px solid #007bff; display:flex; align-items:center; gap:14px; box-shadow: 0 10px 30px rgba(6,10,20,0.25); overflow:hidden; }
+                .music-img { width:64px; height:64px; border-radius:10px; object-fit:cover; flex-shrink:0; }
+                .music-info { flex:1; min-width:0; }
+                .music-title { color:#dbe9ff; font-size:15px; margin:0 0 6px 0; }
+                .music-meta { color:#9fb3d6; font-size:12px; }
+
+                @media (max-width:768px) {
+                    .controls { flex-direction:column; align-items:stretch; gap:8px; }
+                    .eq { width:70px; }
+                }
+            </style>
+
             <div class="music-grid">
-                <div class="music-card">
+                <div class="music-card" data-src="stay-at-ya.mp3">
                     <img src="https://tse3.mm.bing.net/th/id/OIP.RtXSFHuBcFOvPMmYV0t6rAHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Taylor Swift" class="music-img">
                     <div class="music-info">
                         <h3 class="music-title">I really want to stayed at your house</h3>
-                        <div class="music-meta">2022-11-2 |fucking sad</div>
+                        <div class="music-meta">2022-11-2 | fucking sad</div>
+
+                        <div class="controls" style="margin-top:10px;">
+                            <button class="control-btn play-toggle" aria-label="Play">▶️</button>
+
+                            <input class="seek" type="range" min="0" max="100" value="0" step="0.1" />
+
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div class="time current">0:00</div>
+                                <div class="eq">
+                                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                </div>
+                                <div class="time duration">0:00</div>
+                            </div>
+
+                            <input class="volume" type="range" min="0" max="1" step="0.01" value="0.9" title="Volume" />
+                        </div>
                     </div>
-                    <div class="music-player">
-                        <audio controls>
-                            <source src="stay-at-ya.mp3" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <div class="music-controls">
-                        <button class="music-btn playing" onclick="togglePlay(this)">⏸️</button>
-                    </div>
+
+                    <audio preload="metadata">
+                        <source src="stay-at-ya.mp3" type="audio/mpeg">
+                    </audio>
                 </div>
 
-                <div class="music-card">
+                <div class="music-card" data-src="major.mp3">
                     <img src="https://tse4.mm.bing.net/th/id/OIP.0zrgSZF1zlEhTPr5dub8qQHaFj?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Rock Classic" class="music-img">
                     <div class="music-info">
                         <h3 class="music-title">Major Crime</h3>
-                        <div class="music-meta"> 2023 | Dammit</div>
+                        <div class="music-meta">2023-8-9 | Dammit</div>
+
+                        <div class="controls" style="margin-top:10px;">
+                            <button class="control-btn play-toggle" aria-label="Play">▶️</button>
+                            <input class="seek" type="range" min="0" max="100" value="0" step="0.1" />
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div class="time current">0:00</div>
+                                <div class="eq">
+                                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                </div>
+                                <div class="time duration">0:00</div>
+                            </div>
+                            <input class="volume" type="range" min="0" max="1" step="0.01" value="0.9" title="Volume" />
+                        </div>
                     </div>
-                    <div class="music-player">
-                        <audio controls>
-                            <source src="major.mp3" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <div class="music-controls">
-                        <button class="music-btn" onclick="togglePlay(this)">▶️</button>
-                    </div>
+
+                    <audio preload="metadata">
+                        <source src="major.mp3" type="audio/mpeg">
+                    </audio>
                 </div>
 
-                <div class="music-card">
+                <div class="music-card" data-src="never.mp3.mp3">
                     <img src="https://tse4.mm.bing.net/th/id/OIP.r8MfDUwVzqHpNNI2NmWxEQHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="EDM Festival" class="music-img">
                     <div class="music-info">
                         <h3 class="music-title">never Fade AWAY</h3>
                         <div class="music-meta">A thing of beauty I know...</div>
+
+                        <div class="controls" style="margin-top:10px;">
+                            <button class="control-btn play-toggle" aria-label="Play">▶️</button>
+                            <input class="seek" type="range" min="0" max="100" value="0" step="0.1" />
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div class="time current">0:00</div>
+                                <div class="eq">
+                                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                </div>
+                                <div class="time duration">0:00</div>
+                            </div>
+                            <input class="volume" type="range" min="0" max="1" step="0.01" value="0.9" title="Volume" />
+                        </div>
                     </div>
-                    <div class="music-player">
-                        <audio controls>
-                            <source src="never.mp3.mp3" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    <div class="music-controls">
-                        <button class="music-btn" onclick="togglePlay(this)">▶️</button>
-                    </div>
+
+                    <audio preload="metadata">
+                        <source src="never.mp3.mp3" type="audio/mpeg">
+                    </audio>
                 </div>
             </div>
 
-            <!-- Phần phụ: Playlist -->
+            <!-- Sub-section: Playlist -->
             <div class="sub-section">
                 <h2>Vẫn là nhạc :()</h2>
                 <div class="music-grid">
-                    <div class="music-card">
+                    <div class="music-card" data-src="wasted.mp3">
                         <img src="https://images-na.ssl-images-amazon.com/images/I/51DkOzrsUHL.png" alt="Jazz" class="music-img">
                         <div class="music-info">
                             <h3 class="music-title">wasted</h3>
-                            <div class="music-meta">Cool ass, </div>
+                            <div class="music-meta">Cool ass</div>
+
+                            <div class="controls" style="margin-top:10px;">
+                                <button class="control-btn play-toggle" aria-label="Play">▶️</button>
+                                <input class="seek" type="range" min="0" max="100" value="0" step="0.1" />
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <div class="time current">0:00</div>
+                                    <div class="eq">
+                                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                    </div>
+                                    <div class="time duration">0:00</div>
+                                </div>
+                                <input class="volume" type="range" min="0" max="1" step="0.01" value="0.9" title="Volume" />
+                            </div>
                         </div>
-                        <div class="music-player">
-                            <audio controls>
-                                <source src="wasted.mp3" type="audio/mpeg">
-                            </audio>
-                        </div>
-                        <div class="music-controls">
-                            <button class="music-btn playing" onclick="togglePlay(this)">⏸️</button>
-                        </div>
+                        <audio preload="metadata"><source src="wasted.mp3" type="audio/mpeg"></audio>
                     </div>
 
-                    <div class="music-card">
+                    <div class="music-card" data-src="ppshit.mp3">
                         <img src="https://th.bing.com/th/id/OIP.NrKzANglJGf00dj3h1QtDAHaEK?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Pop Hits" class="music-img">
                         <div class="music-info">
                             <h3 class="music-title">Pon Pon SHIT</h3>
                             <div class="music-meta">jAPAN STUPID SONG</div>
+
+                            <div class="controls" style="margin-top:10px;">
+                                <button class="control-btn play-toggle" aria-label="Play">▶️</button>
+                                <input class="seek" type="range" min="0" max="100" value="0" step="0.1" />
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <div class="time current">0:00</div>
+                                    <div class="eq">
+                                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                    </div>
+                                    <div class="time duration">0:00</div>
+                                </div>
+                                <input class="volume" type="range" min="0" max="1" step="0.01" value="0.9" title="Volume" />
+                            </div>
                         </div>
-                        <div class="music-player">
-                            <audio controls>
-                                <source src="ppshit.mp3" type="audio/mpeg">
-                            </audio>
-                        </div>
-                        <div class="music-controls">
-                            <button class="music-btn" onclick="togglePlay(this)">▶️</button>
-                        </div>
+                        <audio preload="metadata"><source src="ppshit.mp3" type="audio/mpeg"></audio>
                     </div>
 
-                    <div class="music-card">
+                    <div class="music-card" data-src="lovebitch.mp3">
                         <img src="https://tse1.explicit.bing.net/th/id/OIP.bqSbmBygyKR7myzC_I4L-QHaD2?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Rock" class="music-img">
                         <div class="music-info">
                             <h3 class="music-title">lOVE+BITCH</h3>
                             <div class="music-meta">I Love My bitch</div>
+
+                            <div class="controls" style="margin-top:10px;">
+                                <button class="control-btn play-toggle" aria-label="Play">▶️</button>
+                                <input class="seek" type="range" min="0" max="100" value="0" step="0.1" />
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <div class="time current">0:00</div>
+                                    <div class="eq">
+                                        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                                    </div>
+                                    <div class="time duration">0:00</div>
+                                </div>
+                                <input class="volume" type="range" min="0" max="1" step="0.01" value="0.9" title="Volume" />
+                            </div>
                         </div>
-                        <div class="music-player">
-                            <audio controls>
-                                <source src="lovebitch.mp3" type="audio/mpeg">
-                            </audio>
-                        </div>
-                        <div class="music-controls">
-                            <button class="music-btn" onclick="togglePlay(this)">▶️</button>
-                        </div>
+                        <audio preload="metadata"><source src="lovebitch.mp3" type="audio/mpeg"></audio>
                     </div>
                 </div>
             </div>
+
+            <script>
+                // Enhanced player: single active audio, seek, volume, and visualizer per card.
+                (function(){
+                    const cards = Array.from(document.querySelectorAll('.music-card'));
+                    let active = null;
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+
+                    cards.forEach(card => {
+                        const audio = card.querySelector('audio');
+                        const playBtn = card.querySelector('.play-toggle');
+                        const seek = card.querySelector('.seek');
+                        const vol = card.querySelector('.volume');
+                        const curTime = card.querySelector('.time.current');
+                        const durTime = card.querySelector('.time.duration');
+                        const bars = Array.from(card.querySelectorAll('.eq .bar'));
+
+                        audio.volume = parseFloat(vol.value);
+
+                        // update duration when metadata loaded
+                        audio.addEventListener('loadedmetadata', ()=> {
+                            durTime.textContent = formatTime(audio.duration);
+                            seek.max = audio.duration;
+                        });
+
+                        // play/pause via button
+                        playBtn.addEventListener('click', ()=> togglePlay(card));
+
+                        // seek drag
+                        seek.addEventListener('input', ()=> {
+                            audio.currentTime = seek.value;
+                            curTime.textContent = formatTime(audio.currentTime);
+                        });
+
+                        // volume
+                        vol.addEventListener('input', ()=> audio.volume = parseFloat(vol.value));
+
+                        // update UI while playing
+                        let rafId = null;
+                        let analyser = null;
+                        let source = null;
+                        let ctx = null;
+                        function startVisualizer() {
+                            if (!AudioCtx) return;
+                            if (!ctx) ctx = new AudioCtx();
+                            if (!analyser) {
+                                source = ctx.createMediaElementSource(audio);
+                                analyser = ctx.createAnalyser();
+                                analyser.fftSize = 64;
+                                source.connect(analyser);
+                                analyser.connect(ctx.destination);
+                            }
+                            const freq = new Uint8Array(analyser.frequencyBinCount);
+                            (function draw(){
+                                analyser.getByteFrequencyData(freq);
+                                // map to bars
+                                for (let i=0;i<bars.length;i++){
+                                    const v = freq[i + Math.floor((freq.length - bars.length)/2)] || 0;
+                                    const h = Math.max(6, Math.round((v / 255) * 70));
+                                    bars[i].style.height = h + 'px';
+                                }
+                                // update seek/time
+                                seek.value = audio.currentTime;
+                                curTime.textContent = formatTime(audio.currentTime);
+                                rafId = requestAnimationFrame(draw);
+                            })();
+                        }
+                        function stopVisualizer() {
+                            if (rafId) cancelAnimationFrame(rafId);
+                            rafId = null;
+                            if (bars) bars.forEach(b => b.style.height = '6px');
+                        }
+
+                        // cleanup on pause/end
+                        audio.addEventListener('pause', ()=> {
+                            playBtn.textContent = '▶️';
+                            playBtn.classList.remove('playing');
+                            card.classList.remove('vibrating');
+                            stopVisualizer();
+                        });
+                        audio.addEventListener('play', ()=> {
+                            playBtn.textContent = '⏸️';
+                            playBtn.classList.add('playing');
+                            card.classList.add('vibrating');
+                            // resume context if suspended (required on some browsers)
+                            if (AudioCtx && ctx && ctx.state === 'suspended') ctx.resume();
+                            startVisualizer();
+                        });
+                        audio.addEventListener('ended', ()=> {
+                            playBtn.textContent = '▶️';
+                            playBtn.classList.remove('playing');
+                            card.classList.remove('vibrating');
+                            stopVisualizer();
+                            audio.currentTime = 0;
+                            seek.value = 0;
+                        });
+                    });
+
+                    function togglePlay(card) {
+                        const audio = card.querySelector('audio');
+                        // pause currently active other audio
+                        if (active && active !== card) {
+                            const a = active.querySelector('audio');
+                            a.pause();
+                        }
+                        if (audio.paused) {
+                            // play
+                            // ensure one resume user gesture for AudioContext if needed
+                            audio.play().catch(()=>{ /* ignore autoplay restrictions if not allowed */ });
+                            active = card;
+                        } else {
+                            audio.pause();
+                        }
+                    }
+
+                    function formatTime(t){
+                        if (!isFinite(t)) return '0:00';
+                        const m = Math.floor(t/60);
+                        const s = Math.floor(t%60).toString().padStart(2,'0');
+                        return m + ':' + s;
+                    }
+
+                    // Ensure metadata loaded if already available
+                    cards.forEach(c=>{
+                        const audio = c.querySelector('audio');
+                        if (audio.readyState >= 1) {
+                            const durTime = c.querySelector('.time.duration');
+                            durTime.textContent = formatTime(audio.duration);
+                            c.querySelector('.seek').max = audio.duration;
+                        }
+                    });
+                })();
+            </script>
 
             <div class="pagination">
                 <button onclick="changePage(1, 'am-nhac')" class="active">1</button>

@@ -42,6 +42,10 @@
       animation: fadeIn 0.4s ease;
     }
 
+    .message.selected .bubble {
+      outline: 2px solid rgba(0, 255, 255, 0.2);
+    }
+
     .avatar {
       width: 45px;
       height: 45px;
@@ -58,6 +62,7 @@
       max-width: 80%;
       font-size: 15px;
       line-height: 1.5;
+      white-space: pre-wrap;
     }
 
     .user {
@@ -100,10 +105,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
-
-
-
-
 </head>
 <body>
   <div class="chat-box">
@@ -123,18 +124,17 @@
       <button class="option-btn" onclick="selectTopic('tro-chuyen')">💬 Trò chuyện</button>
       <button class="option-btn" onclick="selectTopic('to-mo')"> HỎI Thêm về anh linh</button>
 
+      <!-- Free chat mode -->
+      <button class="option-btn" onclick="selectTopic('free-chat')">🗨️ Trò chuyện tự do</button>
+
       <button class="option-btn" onclick="window.location.href='index.html'">🏠 Trang chủ</button>
 
-
-
-
- <div class="search-container" id="searchContainer" style="position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:420px;max-width:95%;z-index:9999;background:#070707;border-top:1px solid #222;padding:12px;display:flex;flex-direction:column;gap:8px;align-items:stretch;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.7);"></div>
-    <div style="display:flex;gap:8px;">
-      <input id="siteSearch" type="search" placeholder="Tìm kiếm nội dung trên trang và các page khác..." aria-label="Tìm kiếm" style="flex:1;padding:10px 12px;border-radius:20px;border:1px solid #222;background:#0b0b0b;color:#fff;outline:none;font-size:14px;">
-      <button id="clearSearch" title="Xóa" class="option-btn" style="padding:8px 12px;border-radius:20px;">✖</button>
-    </div>
-    <div id="searchResults" style="max-height:220px;overflow:auto;border-radius:10px;padding:6px;display:none;background:linear-gradient(180deg,#080808,#060616);border:1px solid rgba(255,255,255,0.03);"></div>
-      <!-- results injected here -->
+      <div class="search-container" id="searchContainer" style="position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:420px;max-width:95%;z-index:9999;background:#070707;border-top:1px solid #222;padding:12px;display:flex;flex-direction:column;gap:8px;align-items:stretch;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.7);"></div>
+      <div style="display:flex;gap:8px;"></div>
+        <input id="siteSearch" type="search" placeholder="Tìm kiếm nội dung trên trang và các page khác..." aria-label="Tìm kiếm" style="flex:1;padding:10px 12px;border-radius:20px;border:1px solid #222;background:#0b0b0b;color:#fff;outline:none;font-size:14px;">
+        <button id="clearSearch" title="Xóa" class="option-btn" style="padding:8px 12px;border-radius:20px;">✖</button>
+      </div>
+      <div id="searchResults" style="max-height:220px;overflow:auto;border-radius:10px;padding:6px;display:none;background:linear-gradient(180deg,#080808,#060616);border:1px solid rgba(255,255,255,0.03);"></div>
     </div>
   </div>
 
@@ -146,30 +146,22 @@
     const container = document.getElementById('searchContainer');
     let index = [];
 
-    // Build a searchable index after full load (so other functions/definitions are available)
     window.addEventListener('load', () => {
       index = [];
-
-      // 1) Collect existing anchors on the page
       document.querySelectorAll('a[href]').forEach(a => {
         index.push({ title: (a.textContent || a.href).trim(), href: a.getAttribute('href') });
       });
 
-      // 2) Collect option buttons: try to detect navigation or topic calls from onclick
       document.querySelectorAll('#options .option-btn').forEach(btn => {
         const txt = (btn.textContent || '').trim();
         const onclick = btn.getAttribute('onclick') || '';
-        // detect direct navigation like window.location.href='index.html'
         const navMatch = onclick.match(/location\.href\s*=\s*['"]([^'"]+)['"]/);
         if (navMatch) index.push({ title: txt || navMatch[1], href: navMatch[1] });
-        // detect selectTopic('topic-key')
         const topicMatch = onclick.match(/selectTopic\(\s*['"]([^'"]+)['"]\s*\)/);
         if (topicMatch) index.push({ title: txt || topicMatch[1], topic: topicMatch[1] });
       });
 
-      // 3) If a global getSubTopics function exists, expand index with its entries for known topics
       if (typeof window.getSubTopics === 'function') {
-        // determine candidate topics from indexed items above
         const topics = new Set(index.filter(i => i.topic).map(i => i.topic));
         topics.forEach(t => {
           try {
@@ -197,12 +189,10 @@
         btn.style.marginBottom = '6px';
         btn.textContent = item.title;
         btn.onclick = () => {
-          // If entry has a href, navigate there
           if (item.href) {
             window.location.href = item.href;
             return;
           }
-          // If entry represents a topic, call selectTopic if available
           if (item.topic && typeof window.selectTopic === 'function') {
             window.selectTopic(item.topic);
             return;
@@ -245,7 +235,6 @@
       input.focus();
     });
 
-    // Close results when clicking outside the search container
     document.addEventListener('click', (e) => {
       if (!container.contains(e.target)) {
         resultsEl.style.display = 'none';
@@ -253,10 +242,6 @@
     });
   })();
   </script>
-
-
-    </div>
-  </div>
 
   <!-- Hiệu ứng âm thanh -->
   <audio id="popSound" src="Tuturu.mp3"></audio>
@@ -267,19 +252,27 @@
     const sound = document.getElementById("popSound");
 
     function playSound() {
-      sound.currentTime = 0;
-      sound.play();
+      try { sound.currentTime = 0; sound.play(); } catch(e) {}
     }
 
     function addMessage(text, sender = "bot") {
       const msg = document.createElement("div");
       msg.className = `message ${sender === "user" ? "user" : ""} fade-in`;
       msg.innerHTML = sender === "bot"
-        ? `<div class="avatar"></div><div class="bubble">${text}</div>`
-        : `<div class="bubble">${text}</div>`;
+        ? `<div class="avatar"></div><div class="bubble">${escapeHtml(text)}</div>`
+        : `<div class="bubble">${escapeHtml(text)}</div>`;
       chat.appendChild(msg);
       chat.scrollTop = chat.scrollHeight;
       playSound();
+    }
+
+    // Basic escaping to preserve text
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\n/g, "<br>");
     }
 
     function selectTopic(topic) {
@@ -290,12 +283,12 @@
         if (topic === "tro-chuyen") {
           addMessage("Bạn muốn trò chuyện về điều gì nè?");
           setChatOptions([
-            {text:"Hiện tại trang web xem phim heo nào anh Linh tâm đắc nhất?", action: () => addMessage("Ê bậy nha!....xnxx.com em nhá hehe")},
-            {text:"1+1 =2 đúng không ?", action: () => addMessage("Đúng rồi em yêu ạ")},
-            {text:"Anh Linh học giỏi hay ngu ạ", action: () => addMessage("Anh ngu vãi chưởng ra em ạ")},
-            { text: "Kể chuyện 📖", action: () => addMessage("Ngày xửa ngày xưa, có coder tên Linh tạo nên vũ trụ Osimi 💫Ling đẹp trai vô địch ,từng tay không đấm chêt 10 thằng cầm dao . aura trên 150, con được giới giang hồ biết đến với biệt danh Linh chim sẻ.Nói chung đây là câu chuyên về 1 anh Linh cũng thuộc dạng anh lớn xã hội") },
-            {text:"Anh Linh ngầu vãi chưởng ra", action: () => addMessage("Ok cám ơn cục cưng của anh nhaaaaaaaaaaaaaaaaaa x3.141592653589793238")},
-            { text: "Trang web này sẽ được update thường xuyên hả", action: () => addMessage("Tôi sẽ cố gắng update thường xuyên nhất có thể để mang đến trải nghiệm tốt nhất cho bạn!")},
+            {text:"Hiện tại trang web xem phim heo nào anh Linh tâm đắc nhất?", action: () => addMessage("Trang web nào cũng tâm đắc !")},
+            {text:"1+1 =2 đúng không ?", action: () => addMessage("Đúng rồi.")},
+            {text:"Anh Linh học giỏi hay ngu ạ", action: () => addMessage("Học ngu được chưa.")},
+            { text: "Kể chuyện 📖", action: () => addMessage("Ngày xửa ngày xưa, có coder tên Linh tạo nên vũ trụ Osimi 💫") },
+            {text:"Anh Linh ngầu", action: () => addMessage("Cám ơn bạn nhé!") },
+            { text: "Trang web này sẽ được update thường xuyên hả", action: () => addMessage("Tôi sẽ cố gắng update thường xuyên nhất có thể để mang đến trải nghiệm tốt nhất cho bạn!") },
             { text: "⬅️ Quay lại", action: resetMainMenu }
           ]);
           return;
@@ -303,12 +296,88 @@
         if (topic === "to-mo") {
           addMessage("Tôi là Linh-Osimi, trợ lý ảo của bạn! Tôi có thể giúp bạn khám phá nhiều chủ đề thú vị. Bạn muốn biết gì về tôi?");
           setChatOptions([
-            { text: "Anh Linh có mấy múi bụng vậy!", action: () => addMessage("Anh Linh có 12 múi á em,10 múi trên với 2 múi dưới quần.") },
-            { text: "Anh Linh có người iu chưa", action: () => addMessage("Anh Linh chưa vì chỉ yêu mình eim thôi...") },
-            { text: "Ngoài ăn cứt ra anh Linh có ăn gì nữa không ạ?", action: () => addMessage(" ĂN lỒN!") },
-            { text: "Sao web nhạc ít nhạc vây?", action: () => addMessage("Chỉ lưu mấy bài nhạc tôi ưa thích thôi bạn còn lại bạn có thể nghe trên youtube or stofy!")},
+            { text: "Anh Linh có mấy múi bụng vậy!", action: () => addMessage("Anh có 8 múi dồn 1 em ạ , đùa tí hôi gầy vl") },
+            { text: "Anh Linh có người iu chưa", action: () => addMessage("Có rồi, nhưng không muốn chia sẻ nhiều về chuyện cá nhân!") },
+            { text: "Anh Linh làm web này trong bao lâu?", action: () => addMessage("Khoảng 2-3 tháng để hoàn thiện phiên bản đầu tiên, và vẫn đang tiếp tục cập nhật thêm tính năng mới.") },
+            { text: "Sao web nhạc ít nhạc vậy?", action: () => addMessage("Trang web chỉ lưu trữ một số bài hát yêu thích. Bạn có thể khám phá thêm nhiều bài hát trên Spotify, YouTube Music hoặc SoundCloud nhé!")},
+            { text: "Web này có gì hay?", action: () => addMessage("Web tập trung vào chia sẻ kiến thức khoa học, giải trí và tương tác với người dùng. Bạn có thể khám phá nhiều chủ đề thú vị từ khoa học, game, phim ảnh đến manga!")},
             { text: "⬅️ Quay lại", action: resetMainMenu }
-          ]);
+            ]);
+            return;
+          }
+
+          if (topic === "free-chat") {
+            addMessage("Chào mừng bạn đến với chế độ Trò chuyện tự do! 💭\nBạn có thể nhập tin nhắn hoặc chọn một gợi ý có sẵn để trò chuyện. Hãy giữ phép lịch sự nhé!");
+            options.innerHTML = `
+            <div style="display:flex;gap:8px;padding:10px;width:100%;flex-direction:column;">
+              <div style="display:flex;gap:8px;">
+              <input id="freeChatInput" type="text" placeholder="Nhập tin nhắn của bạn..." aria-label="Trò chuyện tự do" style="flex:1;padding:10px;border-radius:20px;border:1px solid #222;background:#0b0b0b;color:#fff;outline:none;font-size:14px;">
+              <button class="option-btn" id="freeChatSend">Gửi</button>
+              <button class="option-btn" id="freeChatBack">⬅️ Quay lại</button>
+              </div>
+              <div id="freeSuggestions" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;"></div>
+            </div>
+            `;
+            const sendBtn = document.getElementById('freeChatSend');
+            const inputEl = document.getElementById('freeChatInput');
+            const backBtn = document.getElementById('freeChatBack');
+            const suggEl = document.getElementById('freeSuggestions');
+
+          
+
+          const defaultSuggestions = [
+            "Xin chào!",
+            "Cho tôi gợi ý phim hay",
+            "Một mẹo lập trình nhanh",
+            "Gợi ý hoạt động giải trí",
+            "Bạn có thể giúp tôi học không?",
+            "Mày ngu vl",
+            "Mày có phải chat bot không"
+          ];
+
+
+
+
+
+          
+
+          function renderSuggestions(list) {
+            suggEl.innerHTML = '';
+            list.forEach(text => {
+              const b = document.createElement('button');
+              b.className = 'option-btn';
+              b.style.padding = '6px 10px';
+              b.style.borderRadius = '16px';
+              b.textContent = text;
+              b.onclick = () => {
+                inputEl.value = text;
+                inputEl.focus();
+                // optional: send immediately
+                // sendFreeChat();
+              };
+              suggEl.appendChild(b);
+            });
+          }
+
+          renderSuggestions(defaultSuggestions);
+
+          function filterAndRenderSuggestions(q) {
+            if (!q) return renderSuggestions(defaultSuggestions);
+            const s = q.toLowerCase();
+            const filtered = defaultSuggestions.filter(x => x.toLowerCase().includes(s));
+            renderSuggestions(filtered.length ? filtered : defaultSuggestions);
+          }
+
+          inputEl.addEventListener('input', () => filterAndRenderSuggestions(inputEl.value));
+          sendBtn.onclick = sendFreeChat;
+          backBtn.onclick = () => {
+            removeChatClickHandler();
+            resetMainMenu();
+          };
+          inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendFreeChat(); });
+
+          // clicking on messages will prefill input to reply
+          chat.addEventListener('click', chatClickHandler);
           return;
         }
 
@@ -335,56 +404,52 @@
         case "am-nhac": return "Âm nhạc";
         case "tro-chuyen": return "Trò chuyện";
         case "to-mo": return "Hỏi thêm về anh Linh";
+        case "free-chat": return "Trò chuyện tự do";
         default: return topic;
       }
     }
 
-   function getSubTopics(topic) {
-  const map = {
-    "khoa-hoc": [
-      { name: "🔹 Khởi đầu", link: "khoa-hoc0/0/khoa-hoc-bai0.html" },
-      { name: "🔹 Lượng tử là gì?", link: "khoa-hoc0/0/khoa-hoc-bai1.html" },
-      { name: "🔹 Hố đen là gì?", link: "khoa-hoc0/0/khoa-hoc-bai2.html" },
-      { name: "🔹 Rùng mình với khoa học", link: "khoa-hoc0/0/khoa-hoc-nang-cao-bai0.html" },
-      { name: "🔹 Khoa học thú vị", link: "khoa-hoc0/0/khoa-hoc-nang-cao-bai1.html" },
-      { name: "🔹 Khoa học bí ẩn", link: "khoa-hoc0/0/khoa-hoc-nang-cao-bai2.html" },
-      { name: "🔹 Hệ Mặt Trời 3D", link: "dist/Solarsysc.html" },
-      { name: "🔹 Phối màu", link: "coler-test.html" },
-      { name: "🔹 Hố đen 3D", link: "blackhole.html" },
-    ],
-  
+    function getSubTopics(topic) {
+      const map = {
+        "khoa-hoc": [
+          { name: "🔹 Khởi đầu", link: "khoa-hoc0/0/khoa-hoc-bai0.html" },
+          { name: "🔹 Lượng tử là gì?", link: "khoa-hoc0/0/khoa-hoc-bai1.html" },
+          { name: "🔹 Hố đen là gì?", link: "khoa-hoc0/0/khoa-hoc-bai2.html" },
+          { name: "🔹 Rùng mình với khoa học", link: "khoa-hoc0/0/khoa-hoc-nang-cao-bai0.html" },
+          { name: "🔹 Khoa học thú vị", link: "khoa-hoc0/0/khoa-hoc-nang-cao-bai1.html" },
+          { name: "🔹 Khoa học bí ẩn", link: "khoa-hoc0/0/khoa-hoc-nang-cao-bai2.html" },
+          { name: "🔹 Hệ Mặt Trời 3D", link: "dist/Solarsysc.html" },
+          { name: "🔹 Phối màu", link: "coler-test.html" },
+          { name: "🔹 Hố đen 3D", link: "blackhole.html" },
+        ],
         "game": [
-  { name: "🎮 Trò chơi giải đố", link: "game0/0/game-fun.html" },
-  { name: "👾 Trò chơi nâng cao", link: "game0/0/game-fun2.html" },
-  { name: "🕹️ Trò chơi thử thách", link: "game0/0/game-fun3.html" },
-  { name: "📜 Trang về GAME", link: "game0/game.html" },
-  { name: "🚀 Bắn tàu", link: "https://mk48.io/" },
-  { name: "🧍 Tiny Human", link: "https://tinyhumans.vercel.app/" }
-],
-
+          { name: "🎮 Trò chơi giải đố", link: "game0/0/game-fun.html" },
+          { name: "👾 Trò chơi nâng cao", link: "game0/0/game-fun2.html" },
+          { name: "🕹️ Trò chơi thử thách", link: "game0/0/game-fun3.html" },
+          { name: "📜 Trang về GAME", link: "game0/game.html" },
+          { name: "🚀 Bắn tàu", link: "https://mk48.io/" },
+          { name: "🧍 Tiny Human", link: "https://tinyhumans.vercel.app/" }
+        ],
         "phim": [
           { name: "🎬 Blog về Phim", link: "phim0/0/phim.html" },
           { name: " Viktor", link: "phim0/0/phim-nang-cao-bai0.html" },
           { name: " Anh hề", link: "phim0/0/phim-nang-cao-bai1.html" },
           { name: " Thầy Bạch", link: "phim0/0/phim-nang-cao-bai2.html" },
           { name: "🍿 Trang Web xem phim", link: "https://www.rophim.mx/phimhay"}
-          
         ],
         "truyen-manga": [
           { name: "📖 Berserk", link: "manga0/0/truyen-manga-bai0.html" },
-            { name: "📚 Attack on titan", link: "manga0/0/truyen-manga-bai1.html" },
-            { name: "📕 JJ kaisen", link: "manga0/0/truyen-manga-bai2.html" },
-            { name: "📕 Chainsaw man", link: "manga0/0/truyen-manga-nang-cao-bai0.html" },
-            { name: "📗 Homunculus", link: "manga0/0/truyen-manga-nang-cao-bai1.html" },
-            { name: "📘 Ichi the killer", link: "manga0/0/truyen-manga-nang-cao-bai2.html" },
+          { name: "📚 Attack on titan", link: "manga0/0/truyen-manga-bai1.html" },
+          { name: "📕 JJ kaisen", link: "manga0/0/truyen-manga-bai2.html" },
+          { name: "📕 Chainsaw man", link: "manga0/0/truyen-manga-nang-cao-bai0.html" },
+          { name: "📗 Homunculus", link: "manga0/0/truyen-manga-nang-cao-bai1.html" },
+          { name: "📘 Ichi the killer", link: "manga0/0/truyen-manga-nang-cao-bai2.html" },
         ],
-       
         "nghe-thuat": [
           { name: "🎨 Nghệ thuật tổng hợp", link: "nghe-thuat.html" }
         ],
         "am-nhac": [
-          { name: "🎵 Album & Playlist", link: "am-nhac.html" } ,
-          
+          { name: "🎵 Album & Playlist", link: "am-nhac.html" }
         ]
       };
       return map[topic] || [];
@@ -406,10 +471,64 @@
       setTimeout(() => location.reload(), 600);
     }
 
+    // ---------- Free chat helpers ----------
+    function sendFreeChat() {
+      const inputEl = document.getElementById('freeChatInput');
+      if (!inputEl) return;
+      const text = inputEl.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      inputEl.value = '';
+      // simulate assistant reply
+      setTimeout(() => {
+        const reply = generateReply(text);
+        addMessage(reply, 'bot');
+      }, 700);
+    }
 
-
-
+    function generateReply(text) {
+      const s = (text || '').toLowerCase();
+      // sanitized polite replies
+      if (s.includes('yêu')) return "Cảm ơn, mình trân trọng tình cảm của bạn.";
+      if (s.includes('xin chào') || s.includes('hello') || s.includes('hi')) return "Xin chào! Mình có thể giúp gì cho bạn hôm nay?";
+      if (s.includes('phim') && s.includes('phim')) return "Bạn thích thể loại gì? Mình có thể gợi ý vài phim.";
+      if (s.includes('mẹo') && s.includes('lập trình')) return "Hãy thử chia nhỏ vấn đề, debug từng bước và viết test nhỏ.";
+         if (s.includes('ngu') && s.includes('ngu')) return "Ngu con cặc!Đã biết mặc tã chưa mà chửi thầy?";
+         if (s.includes('chat bot') && s.includes('ngu')) return "Không tôi là bot trả lời theo lập trình không phải chat gpt";
     
+      if (s.includes('?')) return "Câu hỏi hay — bạn có thể nói rõ hơn để mình trả lời chi tiết hơn không?";
+      return "Chưa có câu trả lời cho câu hỏi của bé cưng nha :" + text;
+    }
+
+    // allow clicking a message to prefill the free-chat input (reply selection)
+    function chatClickHandler(e) {
+      const msgEl = e.target.closest('.message');
+      if (!msgEl) return;
+      // highlight selection briefly
+      chat.querySelectorAll('.message').forEach(m => m.classList.remove('selected'));
+      msgEl.classList.add('selected');
+      setTimeout(() => msgEl.classList.remove('selected'), 1800);
+
+      const bubble = msgEl.querySelector('.bubble');
+      if (!bubble) return;
+      const inputEl = document.getElementById('freeChatInput');
+      if (inputEl) {
+        // Prefill with quoted text for reply
+        inputEl.value = `${bubble.textContent.trim()}`;
+        inputEl.focus();
+        // move cursor to end
+        inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
+      }
+    }
+
+    // remove chatClickHandler when returning to main menu
+    function removeChatClickHandler() {
+      try { chat.removeEventListener('click', chatClickHandler); } catch(e) {}
+    }
+
+    // Ensure we remove handler on page unload or reset
+    window.addEventListener('beforeunload', removeChatClickHandler);
+
   </script>
 </body>
 </html>

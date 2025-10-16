@@ -7,109 +7,283 @@
     <link rel="stylesheet" href="linhkun.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Hero Section cho Nghệ Thuật */
-        .hero-art {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://pmcaonline.org/wp-content/uploads/2019/11/art-art-history_main_1440x800-1024x569.jpg'); /* Ảnh nghệ thuật Unsplash */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            text-align: center;
-            padding: 120px 20px 80px;
-            position: relative;
-        }
-        .hero-art::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(153,102,255,0.1) 0%, transparent 70%); /* Gradient tím cho nghệ thuật */
-            z-index: 1;
-        }
-        .hero-art-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
-        .hero-art h1 { font-size: 48px; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); animation: fadeInDown 1s ease; }
-        .hero-art p { font-size: 20px; opacity: 0.95; animation: fadeInUp 1s ease 0.3s both; }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      :root{
+      --primary-color: #4ecdc4;     /* mặc định */
+      --accent-color: #ff6b6b;
+      --muted-color: #666;
+      --card-bg: #fff;
 
-        /* Main */
-        .main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 1200px; margin: 0 auto; }
-        .back-btn { background: var(--primary-color); color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
-        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40,167,69,0.4); }
-        .main h1 { color: var(--primary-color); text-align: center; font-size: 36px; margin-bottom: 10px; }
-        .main p { text-align: center; font-size: 18px; color: #666; margin-bottom: 40px; }
+      /* Background / hero overlay variables (để JS thay đổi) */
+      --hero-overlay: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+      --body-bg: linear-gradient(135deg, rgba(78,205,196,0.06) 0%, rgba(255,107,107,0.04) 100%);
+      }
 
-        /* Slider cho Tranh */
-        .slider-container { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin-bottom: 50px; }
-        .slider { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing */ }
-        .art-slide {
-            min-width: 100%; /* Full width slide */
-            padding: 40px;
-            text-align: center;
-            background: white;
-            position: relative;
-        }
-        .art-img {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-        .art-img:hover {
-            transform: scale(1.05); /* Phóng to nhẹ khi hover */
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        }
-        .art-slide h3 { color: var(--primary-color); font-size: 28px; margin-bottom: 10px; }
-        .art-slide p { font-size: 16px; color: #666; line-height: 1.6; max-width: 600px; margin: 0 auto; }
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 20px;
-            transition: all 0.3s ease;
-            z-index: 2;
-        }
-        .slider-nav:hover { background: white; transform: translateY(-50%) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .prev { left: 20px; }
-        .next { right: 20px; }
-        .slider-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; background: #ddd; cursor: pointer; transition: background 0.3s; }
-        .dot.active { background: var(--primary-color); }
+      html, body {
+      height: 100%;
+      }
 
-        /* Sub-section */
-        .sub-section { margin-top: 70px; padding-top: 40px; border-top: 2px dashed #ddd; }
-        .sub-section h2 { color: var(--primary-color); text-align: center; font-size: 32px; margin-bottom: 30px; position: relative; }
-        .sub-section h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: var(--primary-color); border-radius: 2px; }
+      body {
+      font-family: 'Inter', sans-serif;
+      background: var(--body-bg);
+      transition: background 600ms ease;
+      }
 
-        /* Pagination */
-        .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 50px; }
-        .pagination button { padding: 12px 20px; border: 2px solid var(--primary-color); background: transparent; color: var(--primary-color); cursor: pointer; border-radius: 30px; transition: all 0.3s; font-weight: 500; font-size: 16px; }
-        .pagination button:hover, .pagination button.active { background: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 5px 15px rgba(40,167,69,0.3); }
+      /* Hero Section cho Nghệ Thuật */
+      .hero-art {
+      background: var(--hero-overlay), url('https://pmcaonline.org/wp-content/uploads/2019/11/art-art-history_main_1440x800-1024x569.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+      padding: 120px 20px 80px;
+      position: relative;
+      transition: background 600ms ease;
+      }
+      .hero-art::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle, rgba(153,102,255,0.06) 0%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+      }
+      .hero-art-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+      .hero-art h1 { font-size: 48px; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); animation: fadeInDown 1s ease; color: var(--primary-color); }
+      .hero-art p { font-size: 20px; opacity: 0.95; animation: fadeInUp 1s ease 0.3s both; }
 
-        /* Xóa gạch dưới tất cả link */
-        a { text-decoration: none !important; }
+      @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-art { background-attachment: scroll; padding: 80px 15px 60px; }
-            .hero-art h1 { font-size: 36px; }
-            .main { padding: 20px; margin: 20px; }
-            .slider-nav { width: 40px; height: 40px; font-size: 16px; }
-            .prev { left: 10px; }
-            .next { right: 10px; }
-            .art-img { height: 250px; }
-        }
+      /* Palette UI (xu hướng màu nghệ thuật) */
+      .palette-container {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 22px;
+      flex-wrap: wrap;
+      }
+      .palette-card {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 8px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+      min-width: 160px;
+      }
+      .palette-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+      .palette-swatch {
+      display: inline-block;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      }
+      .palette-swatch.small { width: 18px; height: 18px; border-radius: 4px; border-width:1px; }
+      .palette-info {
+      color: #fff;
+      font-size: 13px;
+      text-align: left;
+      line-height: 1.1;
+      }
+      .palette-info .name { font-weight: 700; letter-spacing: .6px; color: #fff; display:block; }
+      .palette-info .desc { font-weight: 400; color: rgba(255,255,255,0.85); font-size: 11px; margin-top: 2px; }
+
+      /* Main */
+      .main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); max-width: 1200px; margin: 0 auto; transition: background 400ms ease, color 400ms ease; }
+      .back-btn { background: var(--primary-color); color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+      .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+      .main h1 { color: var(--primary-color); text-align: center; font-size: 36px; margin-bottom: 10px; }
+      .main p { text-align: center; font-size: 18px; color: var(--muted-color); margin-bottom: 40px; }
+
+      /* Slider cho Tranh */
+      .slider-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+      margin-bottom: 50px;
+      display: block;
+      }
+      .slider {
+      display: flex;
+      transition: transform 1.6s cubic-bezier(0.22, 0.8, 0.28, 1); /* trượt chậm, mượt hơn */
+      will-change: transform;
+      align-items: center; /* giữ ảnh luôn ở giữa theo chiều dọc */
+      }
+      .art-slide {
+      min-width: 100%;
+      flex: 0 0 100%;
+      box-sizing: border-box;
+      padding: 40px 60px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(250,250,250,0.98) 100%);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden; /* tránh ảnh tràn sang slide khác */
+      gap: 12px;
+      }
+      .art-img {
+      width: 100%;
+      max-width: 700px;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      display: block;
+      margin-left: auto;
+      margin-right: auto; /* đảm bảo ảnh luôn ở giữa */
+      }
+      .art-img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.14);
+      }
+      .art-slide h3 { color: var(--primary-color); font-size: 28px; margin-bottom: 10px; }
+      .art-slide p { font-size: 16px; color: var(--muted-color); line-height: 1.6; max-width: 800px; margin: 0 auto; }
+
+      .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.95);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .slider-nav:hover { background: white; transform: translateY(-50%) scale(1.08); box-shadow: 0 5px 15px rgba(0,0,0,0.12); }
+      .prev { left: 20px; }
+      .next { right: 20px; }
+      .slider-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+      .dot { width: 12px; height: 12px; border-radius: 50%; background: #ddd; cursor: pointer; transition: background 0.3s; }
+      .dot.active { background: var(--primary-color); }
+
+      /* Sub-section */
+      .sub-section { margin-top: 70px; padding-top: 40px; border-top: 2px dashed #eee; }
+      .sub-section h2 { color: var(--primary-color); text-align: center; font-size: 32px; margin-bottom: 30px; position: relative; }
+      .sub-section h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: var(--primary-color); border-radius: 2px; }
+
+      /* Pagination */
+      .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 50px; }
+      .pagination button { padding: 12px 20px; border: 2px solid var(--primary-color); background: transparent; color: var(--primary-color); cursor: pointer; border-radius: 30px; transition: all 0.3s; font-weight: 500; font-size: 16px; }
+      .pagination button:hover, .pagination button.active { background: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+
+      /* Xóa gạch dưới tất cả link */
+      a { text-decoration: none !important; }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+      .hero-art { background-attachment: scroll; padding: 80px 15px 60px; }
+      .hero-art h1 { font-size: 36px; }
+      .main { padding: 20px; margin: 20px; }
+      .slider-nav { width: 40px; height: 40px; font-size: 16px; }
+      .prev { left: 10px; }
+      .next { right: 10px; }
+      .art-img { height: 250px; max-width: 100%; }
+      .art-slide { padding: 20px; }
+      .palette-card { min-width: 140px; padding: 6px 10px; }
+      }
     </style>
+
+    <script>
+      // Thêm UI palette động vào hero để hiển thị "màu sắc xu hướng nghệ thuật"
+      document.addEventListener('DOMContentLoaded', () => {
+      const palettes = [
+      { name: 'Neon Pop', desc: 'Tươi sáng, năng động', colors: ['#ff6b6b','#ffd66b','#4ecdc4'] },
+      { name: 'Pastel Calm', desc: 'Nhẹ nhàng, cổ điển', colors: ['#f7c6d5','#c6e2ff','#f9f1c6'] },
+      { name: 'Muted Earth', desc: 'Ấm, tự nhiên', colors: ['#7a5c58','#c1a57b','#e6dccb'] },
+      { name: 'Vintage Contrast', desc: 'Cổ điển, tương phản', colors: ['#2b2d42','#ef233c','#ffd166'] }
+      ];
+
+      const hero = document.querySelector('.hero-art-content');
+      if (!hero) return;
+
+      const container = document.createElement('div');
+      container.className = 'palette-container';
+      palettes.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'palette-card';
+      card.title = 'Nhấp để áp dụng màu: ' + p.name;
+
+      // swatches group
+      const swatchGroup = document.createElement('div');
+      swatchGroup.style.display = 'flex';
+      swatchGroup.style.gap = '6px';
+      p.colors.forEach((c, i) => {
+      const s = document.createElement('span');
+      s.className = 'palette-swatch' + (p.colors.length > 3 && i > 1 ? ' small' : '');
+      s.style.background = c;
+      swatchGroup.appendChild(s);
+      });
+
+      const info = document.createElement('div');
+      info.className = 'palette-info';
+      info.innerHTML = `<span class="name">${p.name}</span><span class="desc">${p.desc}</span>`;
+
+      card.appendChild(swatchGroup);
+      card.appendChild(info);
+
+      card.addEventListener('click', () => {
+      // Áp dụng palette: đặt biến CSS để thay đổi giao diện chính + background hero
+      const root = document.documentElement;
+      root.style.setProperty('--primary-color', p.colors[0]);
+      root.style.setProperty('--accent-color', p.colors[1] || p.colors[0]);
+
+      // helper: chuyển hex thành rgba
+      function hexToRgba(hex, alpha){
+        let h = hex.replace('#','');
+        if (h.length === 3) h = h.split('').map(ch => ch+ch).join('');
+        const bigint = parseInt(h, 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      }
+
+      const c1 = p.colors[0];
+      const c2 = p.colors[1] || p.colors[0];
+      const c3 = p.colors[2] || p.colors[1] || p.colors[0];
+
+      // đặt hero overlay gradient mềm mại dựa trên 2 màu đầu
+      const overlay = `linear-gradient(${hexToRgba(c1,0.18)}, ${hexToRgba(c2,0.34)})`;
+      root.style.setProperty('--hero-overlay', overlay);
+
+      // đặt body background gradient
+      const bodyBg = `linear-gradient(135deg, ${c1} 0%, ${c2} 50%, ${c3} 100%)`;
+      root.style.setProperty('--body-bg', bodyBg);
+
+      // nhẹ nhàng thay đổi nền của các card (tông sáng/nhạt)
+      root.style.setProperty('--card-bg', `linear-gradient(180deg, ${hexToRgba(c3,0.06)}, ${hexToRgba(c1,0.03)})`);
+
+      // thêm hiệu ứng ngắn thông báo bằng thay đổi box-shadow tạm thời
+      card.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.03)' }, { transform: 'scale(1)' }], { duration: 300 });
+      });
+
+      container.appendChild(card);
+      });
+
+      hero.appendChild(container);
+      });
+    </script>
 </head>
 <body>
   <header class="osimi-header">

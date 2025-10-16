@@ -411,169 +411,256 @@ nav a:hover {
                 </a>
             </div>
 
-         <div class="pagination-container">
- <div class="pagination-container">
-  <div class="pagination">
-    <a href="#" id="prevBtn">◀ Prev</a>
-    <a href="/khoa-hoc0/0/khoa-hoc.html" id="page1">1</a>
-    <a href="/khoa-hoc0/1/khoa-hoc2.html" id="page2">2</a>
-    <a href="/khoa-hoc0/2/khoa-hoc3.html" id="page3">3</a>
-    <a href="/khoa-hoc0/3/khoa-hoc4.html" id="page4">4</a>
-    <!-- ✅ phải có id="pageDots" -->
-    <span id="pageDots" style="cursor:pointer;">...</span>
-    <a href="/khoa-hoc0/4/khoa-hoc5.html" id="page5">5</a>
-    <a href="#" id="nextBtn">Next ▶</a>
-  </div>
+       <div class="pagination-container">
+              <div class="pagination" role="navigation" aria-label="Pagination">
+                <a href="#" id="prevBtn" class="page-btn">◀ Prev</a>
+                <a href="/khoa-hoc0/0/khoa-hoc.html" id="page1" class="page-btn">1</a>
+                <a href="/khoa-hoc0/1/khoa-hoc2.html" id="page2" class="page-btn">2</a>
+                <a href="/khoa-hoc0/2/khoa-hoc3.html" id="page3" class="page-btn">3</a>
+                <a href="/khoa-hoc0/3/khoa-hoc4.html" id="page4" class="page-btn">4</a>
+                <!-- ✅ phải có id="pageDots" -->
+                <span id="pageDots" class="page-dots" title="Chọn trang">…</span>
+                <a href="/khoa-hoc0/4/khoa-hoc5.html" id="page5" class="page-btn">5</a>
+                <a href="#" id="nextBtn" class="page-btn">Next ▶</a>
+              </div>
 
-  <!-- 🔸 Dropdown chọn trang -->
-  <div class="page-dropdown" id="pageDropdown">
-    <label for="pageInput">Nhập số trang:</label>
-    <input type="number" id="pageInput" min="1" max="5" placeholder="VD: 2,3...">
-    <button id="goBtn">Đi</button>
-  </div>
-</div>
+              <!-- 🔸 Dropdown chọn trang -->
+              <div class="page-dropdown" id="pageDropdown" aria-hidden="true">
+                <label for="pageInput">Nhập số trang:</label>
+                <input type="number" id="pageInput" min="1" max="5" placeholder="VD: 2,3...">
+                <button id="goBtn" class="go-btn">Đi</button>
+              </div>
+            </div>
 
-<style>
-  .pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 25px 0;
-  }
+            <style>
+              :root {
+                --pag-bg: rgba(255,255,255,0.06);
+                --accent: #2e92a4;
+                --accent-2: #1b909d;
+                --muted: #dbeafe;
+                --pill-shadow: 0 6px 18px rgba(11, 83, 37, 0.12);
+              }
 
-  .pagination {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: #e5e5e5;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-family: Arial, sans-serif;
-  }
+              .pagination-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                padding: 28px 0;
+                font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+              }
 
-  .pagination a, .pagination span {
-    display: inline-block;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    background: white;
-    color: #003366;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    font-size: 14px;
-  }
+              .pagination {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+                padding: 10px;
+                border-radius: 12px;
+                box-shadow: 0 4px 18px rgba(3,10,27,0.08);
+                backdrop-filter: blur(6px);
+              }
 
-  .pagination a:hover, .pagination span:hover {
-    background-color: #f0f6ff;
-    border-color: #007bff;
-  }
+              /* Base style for buttons/links: remove underline and make pill */
+              .pagination a, .pagination span {
+                text-decoration: none; /* remove underline */
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 44px;
+                height: 44px;
+                padding: 0 14px;
+                border-radius: 10px;
+                font-size: 14px;
+                color: #073642;
+                background: linear-gradient(180deg,#ffffff,#f7fbff);
+                border: 1px solid rgba(14,61,95,0.06);
+                box-shadow: var(--pill-shadow);
+                transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+                cursor: pointer;
+                user-select: none;
+              }
 
-  .pagination a.active {
-    border-color: orange;
-    background-color: #fff0e0;
-    color: #d35400;
-    font-weight: bold;
-  }
+              .pagination a:hover, .pagination span:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 30px rgba(3,10,27,0.14);
+                background: linear-gradient(180deg,#ffffff,#ecf8ff);
+              }
 
-  .pagination .disabled {
-    color: #aaa;
-    pointer-events: none;
-  }
+              /* Active page */
+              .pagination a.active {
+                background: linear-gradient(90deg, var(--accent), var(--accent-2));
+                color: white;
+                border: 1px solid rgba(0,0,0,0.06);
+                box-shadow: 0 8px 26px rgba(46,164,79,0.18);
+                font-weight: 600;
+                transform: translateY(-2px);
+              }
 
-  /* ✅ Dropdown chọn trang */
-  .page-dropdown {
-    display: none;
-    position: absolute;
-    top: 55px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    z-index: 9999; /* đảm bảo hiện trên cùng */
-    left: 50%;
-    transform: translateX(-50%);
-  }
+              /* Prev/Next styling */
+              .pagination .page-btn {
+                min-width: 68px;
+                padding: 0 12px;
+                font-weight: 600;
+                color: #0b4a2f;
+                background: linear-gradient(180deg,#fbfffe,#f1fff4);
+              }
 
-  .page-dropdown input {
-    width: 80px;
-    padding: 5px;
-    margin-right: 5px;
-    text-align: center;
-  }
+              /* Dots control look */
+              .pagination .page-dots {
+                min-width: 44px;
+                height: 44px;
+                font-size: 20px;
+                line-height: 0;
+                background: linear-gradient(180deg,#f8f9fb,#eef6ff);
+                color: #1f2937;
+                border-radius: 10px;
+                padding-top: 2px;
+              }
 
-  .page-dropdown button {
-    padding: 5px 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+              /* Disabled state */
+              .pagination a.disabled {
+                pointer-events: none;
+                opacity: 0.45;
+                transform: none;
+                box-shadow: none;
+                background: linear-gradient(180deg,#f5f7f9,#f1f5f8);
+                color: #97a0aa;
+              }
 
-  .page-dropdown button:hover {
-    background: #0056b3;
-  }
-</style>
+              /* Page dropdown */
+              .page-dropdown {
+                display: none;
+                position: absolute;
+                top: 64px;
+                background: white;
+                border: 1px solid rgba(3,10,27,0.06);
+                border-radius: 10px;
+                padding: 12px;
+                box-shadow: 0 8px 30px rgba(3,10,27,0.08);
+                text-align: center;
+                z-index: 9999;
+                left: 50%;
+                transform: translateX(-50%);
+                min-width: 220px;
+              }
 
-<script>
-  // 🔹 Danh sách các trang
-  const pages = [
-    "/khoa-hoc0/0/khoa-hoc.html",
-    "/khoa-hoc0/1/khoa-hoc2.html",
-    "/khoa-hoc0/2/khoa-hoc3.html",
-    "/khoa-hoc0/3/khoa-hoc4.html",
-    "/khoa-hoc0/4/khoa-hoc5.html"
-  ];
+              .page-dropdown label {
+                display: block;
+                margin-bottom: 6px;
+                color: #243447;
+                font-size: 13px;
+              }
 
-  const currentPath = window.location.pathname;
-  let pageNum = pages.findIndex(p => currentPath.includes(p.split('/').pop())) + 1;
-  if (pageNum < 1) pageNum = 1;
+              .page-dropdown input {
+                width: 84px;
+                padding: 8px;
+                margin-right: 8px;
+                border: 1px solid rgba(3,10,27,0.06);
+                border-radius: 8px;
+                text-align: center;
+                font-size: 14px;
+              }
 
-  const activePage = document.getElementById(`page${pageNum}`);
-  if (activePage) activePage.classList.add('active');
+              .go-btn {
+                padding: 8px 12px;
+                background: linear-gradient(90deg,var(--accent),var(--accent-2));
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                box-shadow: 0 6px 18px rgba(27,157,106,0.18);
+              }
 
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
+              .go-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 26px rgba(27,157,106,0.2);
+              }
 
-  if (pageNum > 1) prevBtn.href = pages[pageNum - 2];
-  else prevBtn.classList.add('disabled');
+              /* Responsive: stack a bit on small screens */
+              @media (max-width: 420px) {
+                .pagination { gap: 6px; padding: 8px; }
+                .pagination a, .pagination span { min-width: 40px; height: 40px; padding: 0 10px; font-size: 13px; }
+                .pagination .page-btn { min-width: 56px; }
+                .page-dropdown { top: 60px; left: 50%; transform: translateX(-50%); }
+              }
+            </style>
 
-  if (pageNum < pages.length) nextBtn.href = pages[pageNum];
-  else nextBtn.classList.add('disabled');
+            <script>
+              // 🔹 Danh sách các trang
+              const pages = [
+                "/khoa-hoc0/0/khoa-hoc.html",
+                "/khoa-hoc0/1/khoa-hoc2.html",
+                "/khoa-hoc0/2/khoa-hoc3.html",
+                "/khoa-hoc0/3/khoa-hoc4.html",
+                "/khoa-hoc0/4/khoa-hoc5.html"
+              ];
 
-  // ✅ Dropdown điều khiển
-  const dots = document.getElementById('pageDots');
-  const dropdown = document.getElementById('pageDropdown');
-  const goBtn = document.getElementById('goBtn');
-  const input = document.getElementById('pageInput');
+              const currentPath = window.location.pathname;
+              let pageNum = pages.findIndex(p => currentPath.includes(p.split('/').pop())) + 1;
+              if (pageNum < 1) pageNum = 1;
 
-  // Khi bấm "..." hiện dropdown
-  dots.addEventListener('click', (e) => {
-    e.stopPropagation(); // tránh bị đóng ngay lập tức
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-  });
+              const activePage = document.getElementById(`page${pageNum}`);
+              if (activePage) activePage.classList.add('active');
 
-  // Khi bấm "Đi"
-  goBtn.addEventListener('click', () => {
-    const page = parseInt(input.value);
-    if (page >= 1 && page <= pages.length) {
-      window.location.href = pages[page - 1];
-    } else {
-      alert('Số trang không hợp lệ!');
-    }
-  });
+              const prevBtn = document.getElementById('prevBtn');
+              const nextBtn = document.getElementById('nextBtn');
 
-  // Bấm ra ngoài thì đóng dropdown
-  document.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target) && e.target !== dots) {
-      dropdown.style.display = 'none';
-    }
-  });
-</script>
+              if (pageNum > 1) {
+                prevBtn.href = pages[pageNum - 2];
+                prevBtn.classList.remove('disabled');
+              } else {
+                prevBtn.classList.add('disabled');
+                prevBtn.removeAttribute('href');
+              }
 
+              if (pageNum < pages.length) {
+                nextBtn.href = pages[pageNum];
+                nextBtn.classList.remove('disabled');
+              } else {
+                nextBtn.classList.add('disabled');
+                nextBtn.removeAttribute('href');
+              }
+
+              // ✅ Dropdown điều khiển
+              const dots = document.getElementById('pageDots');
+              const dropdown = document.getElementById('pageDropdown');
+              const goBtn = document.getElementById('goBtn');
+              const input = document.getElementById('pageInput');
+
+              // Khi bấm "..." hiện dropdown
+              dots.addEventListener('click', (e) => {
+                e.stopPropagation(); // tránh bị đóng ngay lập tức
+                const shown = dropdown.style.display === 'block';
+                dropdown.style.display = shown ? 'none' : 'block';
+                dropdown.setAttribute('aria-hidden', shown ? 'true' : 'false');
+                if (!shown) input.focus();
+              });
+
+              // Khi bấm "Đi"
+              goBtn.addEventListener('click', () => {
+                const page = parseInt(input.value);
+                if (page >= 1 && page <= pages.length) {
+                  window.location.href = pages[page - 1];
+                } else {
+                  alert('Số trang không hợp lệ!');
+                }
+              });
+
+              // Bấm ra ngoài thì đóng dropdown
+              document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target) && e.target !== dots) {
+                  dropdown.style.display = 'none';
+                  dropdown.setAttribute('aria-hidden', 'true');
+                }
+              });
+
+              // Accessibility: Enter key on input triggers go
+              input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') goBtn.click();
+              });
+            </script>
 
 
 
