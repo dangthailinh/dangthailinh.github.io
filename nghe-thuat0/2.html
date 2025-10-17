@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triển lãm Nghệ Thuật Hiện Đại</title>
+<style>
+body {
+    background-color: #fafafa;
+    color: #222;
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+}
+h1 {
+    text-align: center;
+    margin: 40px 0 30px;
+    font-size: 2.3em;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #333;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.gallery img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #eee;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+}
+.gallery img:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 2px;
+    font-weight: 500;
+    z-index: 10;
+    transition: background-color 0.2s ease;
+    font-size: 0.95em;
+}
+.back-btn:hover { background-color: #333; }
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.97);
+}
+.modal.active { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column;
+}
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal img {
+    max-width: 100%;
+    max-height: 70vh;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border: none;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+}
+.modal img.show { opacity: 1; }
+
+/* Mô tả tranh – hiện đại */
+.modal-description {
+    margin-top: 24px;
+    padding: 0 20px;
+    max-width: 800px;
+    text-align: center;
+    color: #444;
+    font-size: 1.15em;
+    line-height: 1.6;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #000;
+    font-size: 36px;
+    font-weight: normal;
+    cursor: pointer;
+    z-index: 1001;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.close:hover { opacity: 1; }
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 14px;
+    color: #000;
+    font-weight: bold;
+    font-size: 24px;
+    background-color: rgba(255,255,255,0.7);
+    border: 1px solid #ddd;
+    user-select: none;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.2s, color 0.2s;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.next { right: calc(50% - 470px); }
+.prev { left: calc(50% - 470px); }
+.prev:hover, .next:hover { 
+    background-color: #000; 
+    color: #fff;
+}
+
+/* Dots */
+.dots {
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+    text-align: center;
+    z-index: 1001;
+}
+.dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+.active-dot, .dot:hover { background-color: #000; }
+</style>
+</head>
+<body>
+
+<a href="nghe-thuat.html" class="back-btn">Quay lại</a>
+<h1>Nghệ Thuật Hiện Đại</h1>
+
+<div class="gallery">
+    <img src="https://i.pinimg.com/736x/1a/a8/fe/1aa8fe540a5211457d4721242658d97f.jpg" alt="Trừu tượng hình học" onclick="openModal(0)">
+    <img src="https://i.pinimg.com/1200x/d7/a9/10/d7a9104db78da942defe1e86ceaf9b6f.jpg" alt="Màu sắc bùng nổ" onclick="openModal(1)">
+    <img src="https://i.pinimg.com/1200x/04/17/7b/04177ba61369cfa29cb2f6b7be7ee620.jpg" alt="Minimalism" onclick="openModal(2)">
+    <img src="https://i.pinimg.com/736x/ba/8a/58/ba8a5897fc8a3fdab33ba314ef52c7a1.jpg" alt="Pop Art" onclick="openModal(3)">
+    <img src="https://i.pinimg.com/1200x/93/57/31/93573102a53bde4974e0c0bcec7d12c9.jpg" alt="Biểu hiện trừu tượng" onclick="openModal(4)">
+    <img src="https://i.pinimg.com/1200x/e8/a6/12/e8a61222eb4067cd07c165e86d65dd91.jpg" alt="Nghệ thuật đường phố" onclick="openModal(5)">
+    <img src="https://i.pinimg.com/1200x/9f/05/09/9f0509fd9bc6c5fb09f04c9413e5a7ef.jpg" alt="Digital Fusion" onclick="openModal(6)">
+    <img src="https://i.pinimg.com/1200x/be/b3/76/beb376c0c827a05cb5c97ad87125e743.jpg" alt="Conceptual Art" onclick="openModal(7)">
+    <img src="https://i.pinimg.com/736x/3c/37/99/3c37998fd3d9b31fae0c1c1ff40c3106.jpg" alt="Neo-Expressionism" onclick="openModal(8)">
+    <img src="https://i.pinimg.com/736x/9f/f9/64/9ff96447d5d22b19b78d8d4c5a282844.jpg" alt="Installation View" onclick="openModal(9)">
+</div>
+
+<div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="prev" onclick="changeImage(-1)">&#10094;</div>
+    <div class="next" onclick="changeImage(1)">&#10095;</div>
+    
+    <div class="modal-content">
+        <img id="modalImg" src="">
+        <div id="modalDesc" class="modal-description"></div>
+    </div>
+    
+    <div class="dots" id="dots"></div>
+</div>
+
+<script>
+let slideIndex = 0;
+const artworks = [
+    { src: "https://i.pinimg.com/736x/1a/a8/fe/1aa8fe540a5211457d4721242658d97f.jpg", desc: "Tác phẩm trừu tượng hình học, sử dụng đối xứng và màu nguyên bản – phong cách Bauhaus." },
+    { src: "https://i.pinimg.com/1200x/d7/a9/10/d7a9104db78da942defe1e86ceaf9b6f.jpg", desc: "Sự bùng nổ của màu sắc và chuyển động, lấy cảm hứng từ nghệ thuật biểu hiện." },
+    { src: "https://i.pinimg.com/1200x/04/17/7b/04177ba61369cfa29cb2f6b7be7ee620.jpg", desc: "Tối giản đến từng chi tiết – chỉ còn đường nét và khoảng trống." },
+    { src: "https://i.pinimg.com/736x/ba/8a/58/ba8a5897fc8a3fdab33ba314ef52c7a1.jpg", desc: "Pop Art đương đại, pha trộn văn hóa đại chúng và biểu tượng tiêu dùng." },
+    { src: "https://i.pinimg.com/1200x/93/57/31/93573102a53bde4974e0c0bcec7d12c9.jpg", desc: "Biểu hiện trừu tượng: cảm xúc được giải phóng qua cọ vẽ và chất liệu." },
+    { src: "https://i.pinimg.com/1200x/e8/a6/12/e8a61222eb4067cd07c165e86d65dd91.jpg", desc: "Nghệ thuật đường phố tái hiện trên canvas – giữa ranh giới hợp pháp và nổi loạn." },
+    { src: "https://i.pinimg.com/736x/7f/f5/83/7ff583d410f14ae093af048d6e299ee3.jpg", desc: "Giao thoa giữa kỹ thuật số và truyền thống, tạo nên không gian đa chiều." },
+    { src: "https://i.pinimg.com/1200x/be/b3/76/beb376c0c827a05cb5c97ad87125e743.jpg", desc: "Nghệ thuật khái niệm: ý tưởng quan trọng hơn hình thức." },
+    { src: "https://i.pinimg.com/736x/3c/37/99/3c37998fd3d9b31fae0c1c1ff40c3106.jpg", desc: "Neo-Expressionism: cảm xúc mãnh liệt, màu sắc rực rỡ, nét vẽ thô." },
+    { src: "https://i.pinimg.com/736x/9f/f9/64/9ff96447d5d22b19b78d8d4c5a282844.jpg", desc: "Góc nhìn từ triển lãm sắp đặt – nghệ thuật trong không gian sống." }
+];
+
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const modalDesc = document.getElementById('modalDesc');
+const dotsContainer = document.getElementById('dots');
+
+function openModal(index) {
+    slideIndex = index;
+    modal.classList.add('active');
+    showImage(slideIndex);
+}
+
+function closeModal() { 
+    modal.classList.remove('active'); 
+}
+
+function showImage(n) {
+    if (n >= artworks.length) slideIndex = 0;
+    if (n < 0) slideIndex = artworks.length - 1;
+    
+    modalImg.classList.remove('show');
+    setTimeout(() => {
+        modalImg.src = artworks[slideIndex].src;
+        modalDesc.textContent = artworks[slideIndex].desc;
+        modalImg.classList.add('show');
+    }, 100);
+
+    updateDots();
+}
+
+function changeImage(n) {
+    slideIndex += n;
+    showImage(slideIndex);
+}
+
+function updateDots() {
+    dotsContainer.innerHTML = '';
+    artworks.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === slideIndex) dot.classList.add('active-dot');
+        dot.onclick = () => { slideIndex = i; showImage(slideIndex); };
+        dotsContainer.appendChild(dot);
+    });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+    if (modal.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+    }
+});
+
+// Swipe support
+let startX = 0;
+modal.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+modal.addEventListener('touchmove', e => {
+    if (!startX) return;
+    const diffX = startX - e.touches[0].clientX;
+    if (Math.abs(diffX) > 50) {
+        changeImage(diffX > 0 ? 1 : -1);
+        startX = 0;
+    }
+});
+modal.addEventListener('touchend', () => startX = 0);
+
+// Click outside to close
+window.onclick = e => { if (e.target === modal) closeModal(); };
+</script>
+
+</body>
+</html>

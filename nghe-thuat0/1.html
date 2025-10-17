@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triển lãm Tranh Cổ Điển</title>
+<style>
+body {
+    background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'), #d7c9b1;
+    color: #3e2723;
+    margin: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow-x: hidden;
+}
+h1 {
+    text-align: center;
+    margin: 40px 0 30px;
+    font-size: 2.2em;
+    color: #5d4037;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.gallery img {
+    width: 100%;
+    height: auto;
+    border: 12px solid #f5f1e6;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border-radius: 4px;
+}
+.gallery img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #e0d3c5;
+    color: #5d4037;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+    border: 1px solid #bca997;
+}
+.back-btn:hover { background-color: #d7c9b1; }
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(23, 19, 15, 0.92);
+}
+.modal.active { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column;
+}
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal img {
+    max-width: 100%;
+    max-height: 70vh;
+    border: 16px solid #f8f4ed;
+    border-radius: 6px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.modal img.show { opacity: 1; }
+
+/* Mô tả tranh */
+.modal-description {
+    margin-top: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+    text-align: center;
+    color: #f0e6d2;
+    font-size: 1.1em;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f0e6d2;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+.close:hover { color: #fff; }
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 16px;
+    color: #f0e6d2;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: rgba(30, 25, 20, 0.6);
+    border: none;
+    user-select: none;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.3s ease;
+}
+.next { right: calc(50% - 470px); }
+.prev { left: calc(50% - 470px); }
+.prev:hover, .next:hover { background-color: rgba(10, 8, 6, 0.8); }
+
+/* Dots */
+.dots {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    z-index: 1001;
+}
+.dot {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 4px;
+    background-color: #aaa;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+.active-dot, .dot:hover { background-color: #f0e6d2; }
+</style>
+</head>
+<body>
+
+<a href="nghe-thuat.html" class="back-btn">Quay lại</a>
+<h1>Tranh Cổ Điển(trung cổ)</h1>
+
+<div class="gallery">
+    <img src="https://i.pinimg.com/1200x/8c/68/4f/8c684fc31ac46ed5a5810ea38640b3a5.jpg" alt="Tranh phong cảnh cổ điển" onclick="openModal(0)">
+    <img src="https://i.pinimg.com/736x/ce/ca/48/ceca487a09424acb405a740eb457925f.jpg" alt="Chân dung thế kỷ 18" onclick="openModal(1)">
+    <img src="https://i.pinimg.com/1200x/e5/04/ea/e504ea65ad1db536a5f55487f56c2169.jpg" alt="Tĩnh vật hoa quả" onclick="openModal(2)">
+    <img src="https://i.pinimg.com/1200x/b1/be/b8/b1beb89c9dc1ef14a1169fea0f06d20e.jpg" alt="Phong cảnh đồng quê" onclick="openModal(3)">
+    <img src="https://i.pinimg.com/736x/2e/65/9f/2e659fba17fb2b088e41921edf7403f0.jpg" alt="Chân dung quý tộc" onclick="openModal(4)">
+    <img src="https://i.pinimg.com/736x/54/f7/5a/54f75a2c70c449e9bd44056e2d024ad7.jpg" alt="Biển cả hoàng hôn" onclick="openModal(5)">
+    <img src="https://i.pinimg.com/736x/6b/66/c2/6b66c2507c367ab2c8156a87a99f3a9f.jpg" alt="Nội thất cung điện" onclick="openModal(6)">
+    <img src="https://i.pinimg.com/1200x/c8/b7/06/c8b7065693be388f19107a99f53a1942.jpg" alt="Thần thoại Hy Lạp" onclick="openModal(7)">
+    <img src="https://i.pinimg.com/1200x/d9/e6/b8/d9e6b8939114a96066f737277d96eac6.jpg" alt="Chợ quê châu Âu" onclick="openModal(8)">
+    <img src="https://i.pinimg.com/1200x/dc/a4/34/dca434054bfdf6c8c3d1856c4ad73601.jpg" alt="Nhà thờ cổ" onclick="openModal(9)">
+</div>
+
+<div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="prev" onclick="changeImage(-1)">&#10094;</div>
+    <div class="next" onclick="changeImage(1)">&#10095;</div>
+    
+    <div class="modal-content">
+        <img id="modalImg" src="">
+        <div id="modalDesc" class="modal-description"></div>
+    </div>
+    
+    <div class="dots" id="dots"></div>
+</div>
+
+<script>
+let slideIndex = 0;
+const artworks = [
+    { src: "https://i.pinimg.com/1200x/8c/68/4f/8c684fc31ac46ed5a5810ea38640b3a5.jpg", desc: " Huyền thoại về tượng thần mặt trời Apollon" },
+    { src: "https://i.pinimg.com/736x/ce/ca/48/ceca487a09424acb405a740eb457925f.jpg", desc: "Lucifer thiên thần xa ngã." },
+    { src: "https://i.pinimg.com/1200x/e5/04/ea/e504ea65ad1db536a5f55487f56c2169.jpg", desc: "Thiên đường của gã khờ" },
+    { src: "https://i.pinimg.com/1200x/b1/be/b8/b1beb89c9dc1ef14a1169fea0f06d20e.jpg", desc: "Walking with the devil" },
+    { src: "https://i.pinimg.com/736x/2e/65/9f/2e659fba17fb2b088e41921edf7403f0.jpg", desc: "Sad devil :()" },
+    { src: "https://i.pinimg.com/736x/54/f7/5a/54f75a2c70c449e9bd44056e2d024ad7.jpg", desc: "Ivan and his son , bạo chúa ivan và con giai của lão." },
+    { src: "https://i.pinimg.com/736x/6b/66/c2/6b66c2507c367ab2c8156a87a99f3a9f.jpg", desc: "Không rõ tên lắm nhưng là bầy cừu achelis và bohimia lũ sói tàn độc" },
+    { src: "https://i.pinimg.com/1200x/c8/b7/06/c8b7065693be388f19107a99f53a1942.jpg", desc: "Thiên thần xa đọa và mima" },
+    { src: "https://i.pinimg.com/1200x/d9/e6/b8/d9e6b8939114a96066f737277d96eac6.jpg", desc: "Địa ngục của latonsia" },
+    { src: "https://i.pinimg.com/1200x/dc/a4/34/dca434054bfdf6c8c3d1856c4ad73601.jpg", desc: "Đứa con thứ 7" }
+];
+
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+const modalDesc = document.getElementById('modalDesc');
+const dotsContainer = document.getElementById('dots');
+
+function openModal(index) {
+    slideIndex = index;
+    modal.classList.add('active');
+    showImage(slideIndex);
+}
+
+function closeModal() { 
+    modal.classList.remove('active'); 
+}
+
+function showImage(n) {
+    if (n >= artworks.length) slideIndex = 0;
+    if (n < 0) slideIndex = artworks.length - 1;
+    
+    modalImg.classList.remove('show');
+    setTimeout(() => {
+        modalImg.src = artworks[slideIndex].src;
+        modalDesc.textContent = artworks[slideIndex].desc;
+        modalImg.classList.add('show');
+    }, 100);
+
+    updateDots();
+}
+
+function changeImage(n) {
+    slideIndex += n;
+    showImage(slideIndex);
+}
+
+function updateDots() {
+    dotsContainer.innerHTML = '';
+    artworks.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === slideIndex) dot.classList.add('active-dot');
+        dot.onclick = () => { slideIndex = i; showImage(slideIndex); };
+        dotsContainer.appendChild(dot);
+    });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+    if (modal.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+    }
+});
+
+// Swipe support
+let startX = 0;
+modal.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+modal.addEventListener('touchmove', e => {
+    if (!startX) return;
+    const diffX = startX - e.touches[0].clientX;
+    if (Math.abs(diffX) > 50) {
+        changeImage(diffX > 0 ? 1 : -1);
+        startX = 0;
+    }
+});
+modal.addEventListener('touchend', () => startX = 0);
+
+// Click outside to close
+window.onclick = e => { if (e.target === modal) closeModal(); };
+</script>
+
+</body>
+</html>

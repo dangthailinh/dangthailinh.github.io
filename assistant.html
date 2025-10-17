@@ -300,8 +300,8 @@
           addMessage("Tôi là Linh-Osimi, trợ lý ảo của bạn! Tôi có thể giúp bạn khám phá nhiều chủ đề thú vị. Bạn muốn biết gì về tôi?");
           setChatOptions([
             { text: "Anh Linh có mấy múi bụng vậy!", action: () => addMessage("Anh có 8 múi dồn 1 em ạ , đùa tí hôi gầy vl") },
-            { text: "Anh Linh có người iu chưa", action: () => addMessage("Có rồi, nhưng không muốn chia sẻ nhiều về chuyện cá nhân!") },
-            { text: "Anh Linh làm web này trong bao lâu?", action: () => addMessage("Khoảng 2-3 tháng để hoàn thiện phiên bản đầu tiên, và vẫn đang tiếp tục cập nhật thêm tính năng mới.") },
+            { text: "Anh Linh có người iu chưa", action: () => addMessage("Có rồi, chính là em đó hehe") },
+            { text: "Anh Linh làm web này trong bao lâu?", action: () => addMessage("Khoảng 9382### để hoàn thiện phiên bản đầu tiên, và vẫn đang tiếp tục cập nhật thêm tính năng mới.") },
             { text: "Sao web nhạc ít nhạc vậy?", action: () => addMessage("Trang web chỉ lưu trữ một số bài hát yêu thích. Bạn có thể khám phá thêm nhiều bài hát trên Spotify, YouTube Music hoặc SoundCloud nhé!")},
             { text: "Web này có gì hay?", action: () => addMessage("Web tập trung vào chia sẻ kiến thức khoa học, giải trí và tương tác với người dùng. Bạn có thể khám phá nhiều chủ đề thú vị từ khoa học, game, phim ảnh đến manga!")},
             { text: "⬅️ Quay lại", action: resetMainMenu }
@@ -310,7 +310,7 @@
           }
 
           if (topic === "free-chat") {
-            addMessage("Chào mừng bạn đến với chế độ Trò chuyện tự do! 💭\nBạn có thể nhập tin nhắn hoặc chọn một gợi ý có sẵn để trò chuyện. Hãy giữ phép lịch sự nhé!");
+            addMessage("Chào mừng bạn đến với chế độ Trò chuyện tự do! 💭\nBạn có thể nhập tin nhắn hoặc chọn một gợi ý có sẵn để trò chuyện.Hãy cute bạn nhé");
             options.innerHTML = `
             <div style="display:flex;gap:8px;padding:10px;width:100%;flex-direction:column;">
               <div style="display:flex;gap:8px;">
@@ -458,7 +458,11 @@
           { name: "📘 Ichi the killer", link: "manga0/0/truyen-manga-nang-cao-bai2.html" },
         ],
         "nghe-thuat": [
-          { name: "🎨 Nghệ thuật tổng hợp", link: "nghe-thuat.html" }
+          { name: "🎨 Nghệ thuật tổng hợp", link: "nghe-thuat0/nghe-thuat.html" },
+          { name: "🎨 Nghệ thuật cổ điển", link: "nghe-thuat0/1.html" },
+          { name: "🎨 Nghệ thuật hiện đại", link: "nghe-thuat0/2.html" },
+          { name: "🎨 Nghệ thuật số", link: "nghe-thuat0/3.html" }
+
         ],
         "am-nhac": [
           { name: "🎵 Album & Playlist", link: "am-nhac.html" }
@@ -501,11 +505,15 @@
     function generateReply(text) {
       const s = (text || '').toLowerCase();
       // sanitized polite replies
-      if (s.includes('yêu')) return "Cảm ơn, mình trân trọng tình cảm của bạn.";
+      if (s.includes('yêu')) return "Cảm ơn, iu bạn nhìu";
       if (s.includes('xin chào') || s.includes('hello') || s.includes('hi')) return "Xin chào! Mình có thể giúp gì cho bạn hôm nay?";
       if (s.includes('phim') && s.includes('phim')) return "Bạn thích thể loại gì? Mình có thể gợi ý vài phim.";
       if (s.includes('mẹo') && s.includes('lập trình')) return "Hãy thử chia nhỏ vấn đề, debug từng bước và viết test nhỏ.";
          if (s.includes('ngu') && s.includes('ngu')) return "Ngu con cặc!Đã biết mặc tã chưa mà chửi thầy?";
+          if (s.includes('địt') && s.includes('địt')) return "địt mẹ mày!";
+           if (s.includes('là ') && s.includes('cái gì')) return "nghĩa là cái gì?";
+
+
          if (s.includes('chat bot') && s.includes('ngu')) return "Không tôi là bot trả lời theo lập trình không phải chat gpt";
     
       if (s.includes('?')) return "Câu hỏi hay — bạn có thể nói rõ hơn để mình trả lời chi tiết hơn không?";

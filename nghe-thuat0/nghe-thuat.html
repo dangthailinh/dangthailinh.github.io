@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linh-Osimi</title>
-    <link rel="stylesheet" href="linhkun.css">
+    <link rel="stylesheet" href="/linhkun.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
       :root{
@@ -550,24 +550,36 @@ Bạn có biết? "Venus" của Botticelli có hai điểm nổi bật hơn cả
 
         <!-- Phần phụ: Grid tranh nhỏ -->
         <div class="sub-section">
-            <h2>Bộ Sưu Tập Nâng Cao</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <img src="https://tse2.mm.bing.net/th/id/OIP.NcZ4WWAeY6ij-R_VmwaO0AHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tranh 4" class="art-img" onclick="zoomImage(this.src)">
-                    <h3>Tranh Cổ Điển</h3>
-                    <p>Tái hiện phong cách Renaissance với chi tiết tinh xảo.</p>
-                </div>
-                <div class="card">
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.LPN7mW8eryVp-agewYAD_AHaFm?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tranh 5" class="art-img" onclick="zoomImage(this.src)">
-                    <h3>Tranh Hiện Đại</h3>
-                    <p>Sự kết hợp giữa truyền thống và đương đại.</p>
-                </div>
-                <div class="card">
-                    <img src="https://th.bing.com/th/id/R.b98222ca31080c14e6a61ecb245efcf2?rik=oCSFK9MQdEaMKQ&pid=ImgRaw&r=0" alt="Tranh 6" class="art-img" onclick="zoomImage(this.src)">
-                    <h3>Tranh Số</h3>
-                    <p>Nghệ thuật kỹ thuật số với hiệu ứng 3D sống động.</p>
-                </div>
+    <h2>Bộ Sưu Tập Nâng Cao</h2>
+    <div class="card-grid">
+        <!-- Card 1: Tranh Cổ Điển → 1.html -->
+        <a href="1.html" class="card-link">
+            <div class="card">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.NcZ4WWAeY6ij-R_VmwaO0AHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tranh 4" class="art-img" onclick="zoomImage(this.src)">
+                <h3>Tranh Cổ Điển</h3>
+                <p>Tái hiện phong cách Renaissance với chi tiết tinh xảo.</p>
             </div>
+        </a>
+
+        <!-- Card 2: Tranh Hiện Đại → 2.html -->
+        <a href="2.html" class="card-link">
+            <div class="card">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.LPN7mW8eryVp-agewYAD_AHaFm?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Tranh 5" class="art-img" onclick="zoomImage(this.src)">
+                <h3>Tranh Hiện Đại</h3>
+                <p>Sự kết hợp giữa truyền thống và đương đại.</p>
+            </div>
+        </a>
+
+        <!-- Card 3: Tranh Số → 3.html -->
+        <a href="3.html" class="card-link">
+            <div class="card">
+                <img src="https://th.bing.com/th/id/R.b98222ca31080c14e6a61ecb245efcf2?rik=oCSFK9MQdEaMKQ&pid=ImgRaw&r=0" alt="Tranh 6" class="art-img" onclick="zoomImage(this.src)">
+                <h3>Tranh Số</h3>
+                <p>Nghệ thuật kỹ thuật số với hiệu ứng 3D sống động.</p>
+            </div>
+        </a>
+    </div>
+</div>
         </div>
 
         <div class="pagination">
@@ -595,7 +607,7 @@ Bạn có biết? "Venus" của Botticelli có hai điểm nổi bật hơn cả
         </div>
     </div>
 
-    <script src="linhkun.js"></script>
+    <script src="/linhkun.js"></script>
     <script>
         // Slider JS (mượt mà, trượt di chuyển)
         let currentSlide = 0;
