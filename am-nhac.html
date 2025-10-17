@@ -123,17 +123,21 @@
 
   <!-- Góc phải -->
   <div class="header-right">
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    
+  </div>
+
+  <!-- Hiệu ứng thanh nhạc (audio visualizer) -->
+  <div class="music-visualizer">
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
   </div>
 </header>
-
 
 <style>
 /* ===== Header tổng thể ===== */
 .osimi-header {
-  background: linear-gradient(135deg, #2a2b2c 0%, #c0d0eb 50%, #52555c 100%);
-  border-bottom: 2px solid rgba(255,255,255,0.2);
-  box-shadow: 0 4px 15px rgba(59,130,246,0.3);
+  background: linear-gradient(135deg, #1a1a2e, #16213e); /* ĐÃ ĐỔI GIỐNG FOOTER */
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
@@ -142,6 +146,9 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: white;
 }
 
 /* ===== Logo ===== */
@@ -149,15 +156,15 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: white;
+  z-index: 2;
 }
 .logo-icon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #2f3540, #99a2b9);
-  border: 1px solid rgba(255,255,255,0.3);
+  background: linear-gradient(135deg, #2f3540, #4cc9f0);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 50%;
-  box-shadow: 0 0 15px rgba(59,130,246,0.4);
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,7 +174,7 @@
   font-size: 24px;
   font-weight: 600;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 /* ===== Navigation ===== */
@@ -177,10 +184,11 @@ nav ul {
   gap: 25px;
   margin: 0;
   padding: 0;
+  z-index: 2;
 }
 nav a {
   text-decoration: none;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.85);
   transition: all 0.3s;
   border-bottom: 1px solid transparent;
   padding-bottom: 5px;
@@ -192,7 +200,7 @@ nav a:hover {
 }
 nav a.active {
   color: white;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #4cc9f0;
 }
 
 /* ===== Góc phải ===== */
@@ -200,10 +208,11 @@ nav a.active {
   display: flex;
   align-items: center;
   gap: 15px;
+  z-index: 2;
 }
 .theme-toggle {
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
   color: white;
   padding: 8px 12px;
   border-radius: 20px;
@@ -211,7 +220,7 @@ nav a.active {
   transition: all 0.3s;
 }
 .theme-toggle:hover {
-  background: rgba(255,255,255,0.3);
+  background: rgba(76, 201, 240, 0.2);
   transform: scale(1.05);
 }
 
@@ -222,13 +231,52 @@ nav a.active {
   color: white;
   cursor: pointer;
   transition: transform 0.3s ease;
+  z-index: 3;
 }
 .menu-toggle:hover {
   transform: scale(1.2);
 }
 
+/* ===== Hiệu ứng thanh nhạc (Visualizer) - GIỐNG FOOTER ===== */
+.music-visualizer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+.music-visualizer div {
+  width: 6px;
+  border-radius: 3px;
+  animation: musicBar 1.2s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.music-visualizer div:nth-child(1) { background: #4cc9f0; animation-delay: 0.0s; }
+.music-visualizer div:nth-child(2) { background: #4361ee; animation-delay: 0.1s; }
+.music-visualizer div:nth-child(3) { background: #3a0ca3; animation-delay: 0.2s; }
+.music-visualizer div:nth-child(4) { background: #f72585; animation-delay: 0.3s; }
+.music-visualizer div:nth-child(5) { background: #b5179e; animation-delay: 0.4s; }
+.music-visualizer div:nth-child(6) { background: #7209b7; animation-delay: 0.5s; }
+.music-visualizer div:nth-child(7) { background: #560bad; animation-delay: 0.6s; }
+
+@keyframes musicBar {
+  0%, 100% { height: 4px; opacity: 0.7; }
+  50% { height: 24px; opacity: 1; }
+}
+
 /* ===== Responsive cho mobile ===== */
 @media (max-width: 768px) {
+  .music-visualizer {
+    display: none;
+  }
+
   .osimi-header {
     flex-direction: column;
     align-items: flex-start;
@@ -263,19 +311,21 @@ nav a.active {
   }
 }
 
-/* Hiệu ứng fade */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 </style>
+
 <script>
 function toggleMenu() {
   document.getElementById("mainNav").classList.toggle("active");
 }
+function toggleTheme() {
+  // Bạn có thể mở rộng chức năng đổi theme ở đây
+  console.log("Đổi theme");
+}
 </script>
-
 
     <!-- Hero Section -->
     <section class="hero-music">
@@ -622,87 +672,89 @@ function toggleMenu() {
         </main>
     </div>
 
-   <footer style="background: linear-gradient(135deg, #94a0c1 0%, #424c5b 100%); color: white; padding: 40px 20px 20px; text-align: center; position: relative; overflow: hidden; min-height: 150px;">
-    <p style="font-size: 14px; margin-bottom: 10px; z-index: 2; position: relative; opacity: 0.9; letter-spacing: 0.5px;">&copy; Linh Osimi music</p>
-    
-    <!-- Falling notes effect -->
-    <div class="notes-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;">
-        <div class="note" style="position: absolute; left: 10%; animation: fallNote1 8s linear infinite;">♪</div>
-        <div class="note" style="position: absolute; left: 20%; animation: fallNote2 10s linear infinite 1s;">♫</div>
-        <div class="note" style="position: absolute; left: 40%; animation: fallNote3 7s linear infinite 2s;">♪</div>
-        <div class="note" style="position: absolute; left: 60%; animation: fallNote4 9s linear infinite 0.5s;">♬</div>
-        <div class="note" style="position: absolute; left: 80%; animation: fallNote5 11s linear infinite 3s;">♫</div>
-        <div class="note" style="position: absolute; left: 90%; animation: fallNote6 6s linear infinite 1.5s;">♪</div>
-    </div>
+ <footer style="
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #fff;
+  padding: 40px 20px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+">
+  <!-- Hiệu ứng thanh nhạc -->
+  <div style="
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 4px;
+    height: 30px;
+    margin: 0 auto 20px;
+    width: 120px;
+  ">
+    <div style="
+      width: 6px;
+      background: #4cc9f0;
+      border-radius: 3px;
+      animation: musicBar 1.2s ease-in-out infinite;
+      animation-delay: 0s;
+    "></div>
+    <div style="
+      width: 6px;
+      background: #4361ee;
+      border-radius: 3px;
+      animation: musicBar 1.2s ease-in-out infinite;
+      animation-delay: 0.1s;
+    "></div>
+    <div style="
+      width: 6px;
+      background: #3a0ca3;
+      border-radius: 3px;
+      animation: musicBar 1.2s ease-in-out infinite;
+      animation-delay: 0.2s;
+    "></div>
+    <div style="
+      width: 6px;
+      background: #f72585;
+      border-radius: 3px;
+      animation: musicBar 1.2s ease-in-out infinite;
+      animation-delay: 0.3s;
+    "></div>
+    <div style="
+      width: 6px;
+      background: #b5179e;
+      border-radius: 3px;
+      animation: musicBar 1.2s ease-in-out infinite;
+      animation-delay: 0.4s;
+    "></div>
+    <div style="
+      width: 6px;
+      background: #7209b7;
+      border-radius: 3px;
+      animation: musicBar 1.2s ease-in-out infinite;
+      animation-delay: 0.5s;
+    "></div>
+    <div style="
+      width: 6px;
+      background: #560bad;
+      border-radius: 3px;
+      animation: musicBar 1.2s ease-in-out infinite;
+      animation-delay: 0.6s;
+    "></div>
+  </div>
+
+  <!-- Nội dung footer -->
+  <p style="margin: 0; font-size: 14px; opacity: 0.8;">
+    Linh osimi music
+  </p>
+
+  <!-- CSS animation (inline) -->
+  <style>
+    @keyframes musicBar {
+      0%, 100% { height: 4px; }
+      50% { height: 24px; }
+    }
+  </style>
 </footer>
 
-<style>
-/* Falling notes animation */
-.notes-container .note {
-    font-size: 24px;
-    color: rgba(255,255,255,0.6);
-    opacity: 0.7;
-    animation: fallNote linear infinite;
-}
-@keyframes fallNote {
-    0% { 
-        top: -10%; 
-        transform: translateX(0) rotate(0deg); 
-        opacity: 0.7; 
-    }
-    50% { 
-        opacity: 1; 
-        transform: translateX(20px) rotate(180deg); 
-    }
-    100% { 
-        top: 110%; 
-        transform: translateX(-20px) rotate(360deg); 
-        opacity: 0; 
-    }
-}
-#fallNote1 { animation-duration: 8s; }
-#fallNote2 { animation-duration: 10s; animation-delay: 1s; }
-#fallNote3 { animation-duration: 7s; animation-delay: 2s; }
-#fallNote4 { animation-duration: 9s; animation-delay: 0.5s; }
-#fallNote5 { animation-duration: 11s; animation-delay: 3s; }
-#fallNote6 { animation-duration: 6s; animation-delay: 1.5s; }
-
-/* Responsive */
-@media (max-width: 768px) {
-    footer { padding: 30px 15px; min-height: 120px; }
-    .notes-container .note { font-size: 20px; }
-}
-</style>
-
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalContent"></p>
-        </div>
-    </div>
-
-    <script src="linhkun.js"></script>
-    <script>
-        // Toggle play/pause và rung card
-        function togglePlay(btn) {
-            const card = btn.closest('.music-card');
-            const player = card.querySelector('.music-player audio');
-            if (player.paused) {
-                player.play();
-                btn.textContent = '⏸️';
-                btn.classList.add('playing');
-                card.classList.add('vibrating'); // Thêm rung khi phát
-            } else {
-                player.pause();
-                btn.textContent = '▶️';
-                btn.classList.remove('playing');
-                card.classList.remove('vibrating'); // Dừng rung khi pause
-            }
-        }
-
-        // Xóa gạch dưới tất cả link
-        document.querySelectorAll('a').forEach(link => link.style.textDecoration = 'none');
-    </script>
 </body>
 </html>
