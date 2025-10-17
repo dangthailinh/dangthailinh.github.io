@@ -965,7 +965,341 @@ lightbox.addEventListener('click', (e) => {
   .topics-controls { display: none; }
 }
 </style>
+<div class="horizontal-container">
 
+ <!-- 🔹 Vietnam Real-Time Clock (Analog + Digital) -->
+<div class="vn-clock-card">
+  <div class="vn-clock-face">
+    <div class="hand hour" id="hour-hand"></div>
+    <div class="hand minute" id="minute-hand"></div>
+    <div class="hand second" id="second-hand"></div>
+  </div>
+  <div class="vn-date" id="vn-date"></div>
+  <div class="vn-time" id="vn-time"></div>
+  <div class="vn-timezone">same time / UTC +7:00</div>
+</div>
+
+<style>
+  .vn-clock-card {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 25px 45px;
+    text-align: center;
+    color: #000;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 15px auto;
+  }
+
+  /* Mặt đồng hồ tròn */
+  .vn-clock-face {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: 6px solid #d8eaff;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f8fbff 60%, #d8eaff);
+    margin-bottom: 15px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+  }
+
+  /* Kim đồng hồ */
+  .hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(0deg);
+    border-radius: 2px;
+  }
+
+  .hand.hour {
+    width: 5px;
+    height: 30px;
+    background: #3bf648;
+  }
+
+  .hand.minute {
+    width: 3px;
+    height: 45px;
+    background: #2563eb;
+  }
+
+  .hand.second {
+    width: 2px;
+    height: 50px;
+    background: #ef4444;
+  }
+
+  /* Số giờ */
+  .vn-time {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 6px 0;
+  }
+
+  .vn-date {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .vn-timezone {
+    font-size: 14px;
+    color: #333;
+    opacity: 0.8;
+  }
+</style>
+
+<script>
+  function updateVietnamClock() {
+    const now = new Date();
+    const options = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false };
+    
+    // Cập nhật đồng hồ số
+    const timeStr = now.toLocaleTimeString('en-GB', options);
+    const dateStr = now.toLocaleDateString('en-GB', options).split('/').reverse().join('/');
+    document.getElementById('vn-date').textContent = dateStr + " ICT";
+    document.getElementById('vn-time').textContent = timeStr;
+
+    // Cập nhật đồng hồ kim
+    const h = now.getHours();
+    const m = now.getMinutes();
+    const s = now.getSeconds();
+
+    const hourDeg = (h % 12) * 30 + m * 0.5;
+    const minuteDeg = m * 6 + s * 0.1;
+    const secondDeg = s * 6;
+
+    document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+    document.getElementById('minute-hand').style.transform = `translateX(-50%) rotate(${minuteDeg}deg)`;
+    document.getElementById('second-hand').style.transform = `translateX(-50%) rotate(${secondDeg}deg)`;
+  }
+
+  updateVietnamClock();
+  setInterval(updateVietnamClock, 1000);
+</script>
+
+<!-- 🔹 Crypto Market Info (Vietnam Style Glass Card) -->
+<div class="vn-crypto-card">
+  <div class="vn-crypto-icon">💰</div>
+  <div class="vn-crypto-title">Crypto Market</div>
+  <div class="vn-crypto-list" id="vn-crypto-list">
+    <div class="crypto-item">
+      <span class="crypto-name">BTC</span>
+      <span class="crypto-price" id="btc-price">Loading...</span>
+    </div>
+    <div class="crypto-item">
+      <span class="crypto-name">ETH</span>
+      <span class="crypto-price" id="eth-price">Loading...</span>
+    </div>
+    <div class="crypto-item">
+      <span class="crypto-name">BNB</span>
+      <span class="crypto-price" id="bnb-price">Loading...</span>
+    </div>
+  </div>
+  <div class="vn-update-time" id="vn-update-time"></div>
+</div>
+
+<style>
+  .vn-crypto-card {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 25px 45px;
+    text-align: center;
+    color: #000;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 15px auto;
+  }
+
+  .vn-crypto-icon {
+    background: #d8eaff;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: #3b82f6;
+    margin-bottom: 10px;
+  }
+
+  .vn-crypto-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .vn-crypto-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .crypto-item {
+    display: flex;
+    justify-content: space-between;
+    width: 180px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .crypto-name {
+    color: #2563eb;
+  }
+
+  .crypto-price {
+    font-weight: bold;
+    color: #000;
+  }
+
+  .vn-update-time {
+    font-size: 13px;
+    color: #333;
+    opacity: 0.8;
+    margin-top: 10px;
+  }
+</style>
+
+<script>
+  async function fetchCryptoPrices() {
+    try {
+      const res = await fetch(
+        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin&vs_currencies=usd'
+      );
+      const data = await res.json();
+
+      document.getElementById('btc-price').textContent = '$' + data.bitcoin.usd.toLocaleString();
+      document.getElementById('eth-price').textContent = '$' + data.ethereum.usd.toLocaleString();
+      document.getElementById('bnb-price').textContent = '$' + data.binancecoin.usd.toLocaleString();
+
+      const now = new Date();
+      const options = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false };
+      const timeStr = now.toLocaleTimeString('en-GB', options);
+      document.getElementById('vn-update-time').textContent = 'Updated at ' + timeStr + ' ICT';
+    } catch (error) {
+      console.error('Error fetching crypto data:', error);
+    }
+  }
+
+  fetchCryptoPrices();
+  setInterval(fetchCryptoPrices, 60000); // cập nhật mỗi phút
+</script>
+
+<!-- 🔹 Vietnam Weather Info (Animated & Random Render) -->
+<div class="vn-weather-card">
+  <div class="vn-weather-icon" id="weather-icon">🌤️</div>
+  <div class="vn-weather-title">Vietnam Weather</div>
+  <div class="vn-weather-info">
+    <div><strong>Temperature:</strong> <span id="temp">--</span>°C</div>
+    <div><strong>Humidity:</strong> <span id="humidity">--</span>%</div>
+    <div><strong>Condition:</strong> <span id="condition">--</span></div>
+    <div><strong>Wind:</strong> <span id="wind">--</span> km/h</div>
+  </div>
+  <div class="vn-update-time" id="weather-update-time"></div>
+</div>
+
+<style>
+  .vn-weather-card {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 25px 45px;
+    text-align: center;
+    color: #000;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 15px auto;
+  }
+
+  .vn-weather-icon {
+    background: #d8eaff;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin-bottom: 10px;
+    animation: floatIcon 3s ease-in-out infinite;
+  }
+
+  @keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .vn-weather-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .vn-weather-info {
+    font-size: 18px;
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  .vn-update-time {
+    font-size: 13px;
+    color: #333;
+    opacity: 0.8;
+    margin-top: 10px;
+  }
+</style>
+
+<script>
+  const weatherStates = [
+    { icon: "☀️", condition: "Sunny", tempRange: [30, 36], humidity: [30, 50], wind: [5, 15] },
+    { icon: "🌤️", condition: "Partly Cloudy", tempRange: [27, 33], humidity: [40, 60], wind: [5, 18] },
+    { icon: "⛅", condition: "Cloudy", tempRange: [25, 30], humidity: [50, 70], wind: [10, 20] },
+    { icon: "🌧️", condition: "Rainy", tempRange: [22, 28], humidity: [70, 95], wind: [10, 25] },
+    { icon: "⛈️", condition: "Thunderstorm", tempRange: [23, 29], humidity: [80, 100], wind: [20, 35] },
+    { icon: "🌫️", condition: "Foggy", tempRange: [20, 25], humidity: [80, 95], wind: [2, 8] }
+  ];
+
+  function getRandomInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function renderWeather() {
+    const randomWeather = weatherStates[Math.floor(Math.random() * weatherStates.length)];
+    const temp = getRandomInRange(randomWeather.tempRange[0], randomWeather.tempRange[1]);
+    const humidity = getRandomInRange(randomWeather.humidity[0], randomWeather.humidity[1]);
+    const wind = getRandomInRange(randomWeather.wind[0], randomWeather.wind[1]);
+
+    document.getElementById("weather-icon").textContent = randomWeather.icon;
+    document.getElementById("condition").textContent = randomWeather.condition;
+    document.getElementById("temp").textContent = temp;
+    document.getElementById("humidity").textContent = humidity;
+    document.getElementById("wind").textContent = wind;
+
+    const now = new Date();
+    const options = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false };
+    const timeStr = now.toLocaleTimeString('en-GB', options);
+    document.getElementById("weather-update-time").textContent = "Updated at " + timeStr + " ICT";
+  }
+
+  renderWeather();
+  setInterval(renderWeather, 60000); // Thay đổi ngẫu nhiên mỗi phút
+</script>
+
+</div>
 <div class="topics-wrapper" aria-label="Topics">
   <!-- Controls (visible on mobile via media query) -->
   <div class="topics-controls" aria-hidden="false" style="display:none;">
@@ -1079,6 +1413,16 @@ lightbox.addEventListener('click', (e) => {
        
 
     </div>
+
+
+
+
+
+
+
+
+
+    
 </section>
 
 <style>

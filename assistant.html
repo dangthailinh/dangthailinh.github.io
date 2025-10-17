@@ -123,6 +123,7 @@
       <button class="option-btn" onclick="selectTopic('am-nhac')">🎵 Âm nhạc</button>
       <button class="option-btn" onclick="selectTopic('tro-chuyen')">💬 Trò chuyện</button>
       <button class="option-btn" onclick="selectTopic('to-mo')"> HỎI Thêm về anh linh</button>
+      <button class="option-btn" onclick="selectTopic('gai-xinh')"> muốn ngắm gái xinh!</button>
 
       <!-- Free chat mode -->
       <button class="option-btn" onclick="selectTopic('free-chat')">🗨️ Trò chuyện tự do</button>
@@ -244,7 +245,7 @@
   </script>
 
   <!-- Hiệu ứng âm thanh -->
-  <audio id="popSound" src="Tuturu.mp3"></audio>
+  <audio id="popSound" src="muv/Tuturu.mp3"></audio>
 
   <script>
     const chat = document.getElementById("chat");
@@ -289,7 +290,9 @@
             { text: "Kể chuyện 📖", action: () => addMessage("Ngày xửa ngày xưa, có coder tên Linh tạo nên vũ trụ Osimi 💫") },
             {text:"Anh Linh ngầu", action: () => addMessage("Cám ơn bạn nhé!") },
             { text: "Trang web này sẽ được update thường xuyên hả", action: () => addMessage("Tôi sẽ cố gắng update thường xuyên nhất có thể để mang đến trải nghiệm tốt nhất cho bạn!") },
+            
             { text: "⬅️ Quay lại", action: resetMainMenu }
+            
           ]);
           return;
         }
@@ -405,6 +408,7 @@
         case "tro-chuyen": return "Trò chuyện";
         case "to-mo": return "Hỏi thêm về anh Linh";
         case "free-chat": return "Trò chuyện tự do";
+        case "gai-xinh": return "tổng hợp gái xinh";
         default: return topic;
       }
     }
@@ -422,6 +426,14 @@
           { name: "🔹 Phối màu", link: "coler-test.html" },
           { name: "🔹 Hố đen 3D", link: "blackhole.html" },
         ],
+          "gai-xinh": [
+          { name: "gái xinh nhật bổn", link: "gai-xinh/1.html" },
+          {name :"gái xinh trung quốc", link:"gai-xinh/2.html"},
+          {name :"gái tây", link:"gai-xinh/3.html"},
+          
+        ],
+        
+        
         "game": [
           { name: "🎮 Trò chơi giải đố", link: "game0/0/game-fun.html" },
           { name: "👾 Trò chơi nâng cao", link: "game0/0/game-fun2.html" },
