@@ -475,7 +475,7 @@ nav a {
     </nav>
 
     <div class="header-right" style="display:flex; align-items:center; gap:10px;">
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    
     </div>
   </div>
 
@@ -699,7 +699,122 @@ function toggleMenu() {
                 <p id="p3">Đây là trang web viết blog , xạo que ,của em các anh ạ @!</p>
             </div>
         </div>
+
+      
+<div id="hacker-container">
+   <img id="hacker-image" src="https://th.bing.com/th/id/R.2bd985f36962435ab9be0291e2cab9db?rik=GjB%2fY5VH3Kityw&pid=ImgRaw&r=0" alt="Hacker Icon">
+  <div id="hacker-typing-box">
+    <div id="hacker-content"></div>
+  </div>
+
+  
+  
+</div>
+
+<style>
+  /* Container chính: hiển thị 2 phần tử ngang hàng */
+  #hacker-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa ô text và hình */
+    padding: 15px;
+    max-width: 600px;
+     margin: 10px 0 20px 0px;
+  }
+
+
+  #hacker-typing-box {
+    width: 320px;
+    height: 120px;
+    background-color: #a0875f;
+    border: 1px solid rgb(0, 0, 0);
+    font-family: 'Courier New', monospace;
+    color: rgb(238, 245, 238);
+    font-size: 14px;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    position: relative;
+  }
+
+  /* Con trỏ nhấp nháy */
+  #hacker-typing-box::after {
+    content: '|';
+    position: absolute;
+    right: 5px;
+    bottom: 2px;
+    animation: blink 1s infinite;
+    color: rgb(251, 251, 251);
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  
+  #hacker-image {
+    width: 100px;       /* Điều chỉnh kích thước */
+    height: auto;
+    border-radius: 8px; /* Bo góc nhẹ (tuỳ chọn) */
  
+  }
+
+
+</style>
+
+<script>
+  const box = document.getElementById('hacker-content');
+  const messages = [
+    
+    "Tôi chỉ muốn nói là...",
+    "JUST FUCKING WANTED TO SAY!!!!",
+    "Q=091ld92010102-1291-0dJAH0ldm",
+    "Chúc các bạn có 1 ngày tốt này...",
+    "Và luôn luôn đẹp trai ...",
+    "Cảm thấy hạnh phúc với cuộc sống",
+    "Để mọi u sầu bị tôi ăn hết..",
+    "Thật ra là tôi đéo giỏi làm thơ.",
+    "Và đây cũng méo phải thơ.",
+    "Đây là lời chia buồn tới 92931mdciw@!...",
+    "Mã hóa rồi nhé hehe..",
+    "CHEER UP !!!!"
+
+  ];
+
+  let messageIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typeSpeed = 50;
+  const deleteSpeed = 30;
+  const pauseDelay = 2000;
+
+  function type() {
+    const currentMsg = messages[messageIndex % messages.length];
+    
+    if (!isDeleting) {
+      box.textContent = currentMsg.substring(0, ++charIndex);
+      if (charIndex === currentMsg.length) {
+        isDeleting = true;
+        setTimeout(type, pauseDelay);
+        return;
+      }
+    } else {
+      box.textContent = currentMsg.substring(0, --charIndex);
+      if (charIndex === 0) {
+        isDeleting = false;
+        messageIndex++;
+      }
+    }
+
+    const speed = isDeleting ? deleteSpeed : typeSpeed;
+    setTimeout(type, speed);
+  }
+
+  setTimeout(type, 500);
+</script>
         <!-- Phần chia sẻ ảnh -->
      <div class="share-slider-container">
     <button class="slide-btn left">&#10094;</button>
