@@ -1280,9 +1280,11 @@ lightbox.addEventListener('click', (e) => {
 
 <div class="horizontal-container">
 
- <!-- 🔹 Vietnam Real-Time Clock (Analog + Digital) -->
+<!-- 🔹 Vietnam Real-Time Clock (Analog + Digital) -->
 <div class="vn-clock-card">
   <div class="vn-clock-face">
+    <div class="clock-number number-12">12</div>
+    <div class="clock-number number-3">3</div>
     <div class="hand hour" id="hour-hand"></div>
     <div class="hand minute" id="minute-hand"></div>
     <div class="hand second" id="second-hand"></div>
@@ -1313,11 +1315,35 @@ lightbox.addEventListener('click', (e) => {
     position: relative;
     width: 120px;
     height: 120px;
-    border: 6px solid #d8eaff;
+    border: 3px solid #e0e0e0;
     border-radius: 50%;
-    background: radial-gradient(circle, #f8fbff 60%, #d8eaff);
+    background: #fff;
     margin-bottom: 15px;
-    box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Số giờ trên mặt đồng hồ */
+  .clock-number {
+    position: absolute;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    pointer-events: none;
+  }
+
+  .number-12 {
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .number-3 {
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   /* Kim đồng hồ */
@@ -1327,28 +1353,32 @@ lightbox.addEventListener('click', (e) => {
     left: 50%;
     transform-origin: bottom center;
     transform: translateX(-50%) rotate(0deg);
-    border-radius: 2px;
+    border-radius: 10px;
+    transition: transform 0.1s ease-in-out;
   }
 
   .hand.hour {
-    width: 5px;
-    height: 30px;
-    background: #3bf648;
+    width: 6px;
+    height: 32px;
+    background: #6b5b4b;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
   }
 
   .hand.minute {
-    width: 3px;
-    height: 45px;
-    background: #2563eb;
+    width: 4px;
+    height: 46px;
+    background: #6b5b4b;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
   }
 
   .hand.second {
     width: 2px;
     height: 50px;
-    background: #ef4444;
+    background: #ff6b6b;
+    box-shadow: 0 0 4px rgba(255,107,107,0.5);
   }
 
-  /* Số giờ */
+  /* Số thời gian */
   .vn-time {
     font-size: 40px;
     font-weight: bold;
@@ -1936,19 +1966,23 @@ document.addEventListener('DOMContentLoaded', function() {
 </style>
 
 <script>
-/* JS kích hoạt animation, stagger chữ cái h1 ngộ nghĩnh */
+
 window.addEventListener('load', function() {
     const title = document.getElementById('hero-title');
     const letters = title.innerHTML.split('').map(letter => `<span style="animation-delay: ${Math.random() * 0.5 + 0.2}s;">${letter}</span>`).join('');
     title.innerHTML = letters;
     title.classList.add('bounce-in');
     
-    // Stagger cho profile elements
+
     document.getElementById('profile-section').classList.add('bounce-in');
     document.getElementById('profile-img').classList.add('bounce-in');
     document.querySelectorAll('#about-me p').forEach(p => p.classList.add('bounce-in'));
 });
 </script>
+
+
+
+
 
 <head>
   <meta charset="utf-8">
@@ -1957,12 +1991,12 @@ window.addEventListener('load', function() {
     html, body {
       margin: 0;
       padding: 0;
-      background: white; /* Đảm bảo nền body cũng trắng */
+      background: white; 
     }
 
     canvas {
       display: block;
-      height: 40vh; /* Giảm chiều cao xuống 60% viewport height */
+      height: 40vh; 
       width: 100vw;
     }
   </style>
@@ -2160,7 +2194,7 @@ window.addEventListener('load', function() {
       </ul>
     </div>
 
-    <!-- Cột 3 -->
+ 
     <div>
       <h4 style="font-size: 16px; margin-bottom: 15px; color: var(--primary-color);">Contact me !</h4>
       <div class="social-links" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
