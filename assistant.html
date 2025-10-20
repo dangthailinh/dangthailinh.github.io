@@ -330,7 +330,7 @@
 
           const defaultSuggestions = [
             "Xin chào!",
-            "Cho tôi gợi ý phim hay",
+            "Cho tôi 1 chút gợi ý phim ",
             "Một mẹo lập trình nhanh",
             "Gợi ý hoạt động giải trí",
             "Bạn có thể giúp tôi học không?",
@@ -520,7 +520,6 @@
       return "Chưa có câu trả lời cho câu hỏi của bé cưng nha :" + text;
     }
 
-    // allow clicking a message to prefill the free-chat input (reply selection)
     function chatClickHandler(e) {
       const msgEl = e.target.closest('.message');
       if (!msgEl) return;
@@ -541,12 +540,12 @@
       }
     }
 
-    // remove chatClickHandler when returning to main menu
+   
     function removeChatClickHandler() {
       try { chat.removeEventListener('click', chatClickHandler); } catch(e) {}
     }
 
-    // Ensure we remove handler on page unload or reset
+
     window.addEventListener('beforeunload', removeChatClickHandler);
 
   </script>
