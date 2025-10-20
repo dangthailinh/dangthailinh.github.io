@@ -269,3 +269,5 @@ closeBtn.addEventListener('click', () => {
     lightboxImg.src = '';
     lightboxVideo.src = '';
 });
+
+

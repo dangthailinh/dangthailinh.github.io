@@ -795,6 +795,10 @@ function toggleMenu() {
 </script>
 
 
+
+
+
+
 <section class="hero" style="position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
     <div class="hero-content" style="max-width: 1200px; width: 100%; padding: 0 20px; display: flex; flex-direction: column; align-items: center; gap: 40px; position: relative; z-index: 2;">
         <h1 id="hero-title" style="margin: 0; font-size: 3rem; text-align: center;">LINH OsiMi Wellcome to my page!</h1>
@@ -869,6 +873,84 @@ function toggleMenu() {
     height: auto;
     border-radius: 8px; /* Bo góc nhẹ (tuỳ chọn) */
  
+  }
+
+   #hacker-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Tăng nhẹ khoảng cách */
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Khung text với hiệu ứng 3D và bo tròn */
+  #hacker-typing-box {
+    width: 320px;
+    height: 120px;
+    background: linear-gradient(145deg, #5a4a3a, #3a2f23);
+    border: 2px solid #00ff41; /* Viền xanh neon kiểu hacker */
+    border-radius: 16px; /* Bo tròn */
+    font-family: 'Courier New', monospace;
+    color: #00ff41; /* Màu chữ neon xanh */
+    font-size: 14px;
+    padding: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    position: relative;
+    box-shadow:
+      inset 0 0 10px rgba(0, 255, 65, 0.3),
+      0 6px 12px rgba(0, 0, 0, 0.6),
+      0 0 0 4px rgba(0, 255, 65, 0.1); /* Hiệu ứng viền sáng ngoài */
+    text-shadow: 0 0 8px rgba(136, 116, 64, 0.7); /* Chữ phát sáng */
+    transition: transform 0.2s ease;
+  }
+
+  /* Hiệu ứng nhấn nhẹ khi hover (tùy chọn) */
+  #hacker-typing-box:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 0 12px rgba(129, 134, 58, 0.5),
+      0 8px 16px rgba(0, 0, 0, 0.7),
+      0 0 0 4px rgba(0, 255, 65, 0.2);
+  }
+
+  /* Con trỏ nhấp nháy */
+  #hacker-typing-box::after {
+    content: '|';
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    animation: blink 1s infinite;
+    color: #a59033;
+    text-shadow: 0 0 6px rgba(184, 176, 66, 0.8);
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Ảnh cũng bo tròn + hiệu ứng 3D nhẹ */
+  #hacker-image {
+    width: 100px;
+    height: auto;
+    border-radius: 16px; /* Bo tròn đồng bộ */
+    border: 2px solid #00ff41;
+    box-shadow:
+      0 6px 12px rgba(0, 0, 0, 0.6),
+      inset 0 0 8px rgba(0, 255, 65, 0.2);
+    transition: transform 0.3s ease;
+  }
+
+  #hacker-image:hover {
+    transform: scale(1.03) rotate(2deg);
   }
 
 
@@ -1190,6 +1272,12 @@ lightbox.addEventListener('click', (e) => {
   .topics-controls { display: none; }
 }
 </style>
+
+
+
+
+
+
 <div class="horizontal-container">
 
  <!-- 🔹 Vietnam Real-Time Clock (Analog + Digital) -->

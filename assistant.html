@@ -124,6 +124,7 @@
       <button class="option-btn" onclick="selectTopic('tro-chuyen')">💬 Trò chuyện</button>
       <button class="option-btn" onclick="selectTopic('to-mo')"> HỎI Thêm về anh linh</button>
       <button class="option-btn" onclick="selectTopic('gai-xinh')"> muốn ngắm gái xinh!</button>
+        <button class="option-btn" onclick="selectTopic('3d')"> Xem các dự án 3d</button>
 
       <!-- Free chat mode -->
       <button class="option-btn" onclick="selectTopic('free-chat')">🗨️ Trò chuyện tự do</button>
@@ -409,6 +410,7 @@
         case "to-mo": return "Hỏi thêm về anh Linh";
         case "free-chat": return "Trò chuyện tự do";
         case "gai-xinh": return "tổng hợp gái xinh";
+             case "3d": return "các dự án 3d";
         default: return topic;
       }
     }
@@ -429,16 +431,20 @@
           "gai-xinh": [
           { name: "gái xinh nhật bổn", link: "gai-xinh/1.html" },
           {name :"gái xinh trung quốc", link:"gai-xinh/2.html"},
-          {name :"gái tây", link:"gai-xinh/3.html"},
+          {name :"Tổng hợp dự án 3d ", link:"gai-xinh/3.html"},
           
         ],
+         "3d": [
+          { name: "room", link: "3d/room/room.html" },
+          {name :"helmet", link:"3d/cube/1.html"},
         
+        ],
         
         "game": [
           { name: "🎮 Trò chơi giải đố", link: "game0/0/game-fun.html" },
           { name: "👾 Trò chơi nâng cao", link: "game0/0/game-fun2.html" },
           { name: "🕹️ Trò chơi thử thách", link: "game0/0/game-fun3.html" },
-          { name: "📜 Trang về GAME", link: "game0/game.html" },
+          { name: "📜 Trang về GAME", link: "/game0/0/game.html" },
           { name: "🚀 Bắn tàu", link: "https://mk48.io/" },
           { name: "🧍 Tiny Human", link: "https://tinyhumans.vercel.app/" }
         ],
@@ -466,6 +472,7 @@
         ],
         "am-nhac": [
           { name: "🎵 Album & Playlist", link: "am-nhac.html" }
+          
         ]
       };
       return map[topic] || [];
