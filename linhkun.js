@@ -263,11 +263,14 @@ items.forEach(item => {
     });
 });
 
+
+
 // Đóng lightbox
 closeBtn.addEventListener('click', () => {
     lightbox.style.display = 'none';
     lightboxImg.src = '';
     lightboxVideo.src = '';
 });
+
 
 
