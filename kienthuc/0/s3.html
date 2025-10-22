@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon S3: Hệ thống lưu trữ đối tượng nền tảng trong AWS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://media.licdn.com/dms/image/D5612AQGH0lpu3SQ4Uw/article-cover_image-shrink_600_2000/0/1719425969338?e=2147483647&v=beta&t=6d-Ec-U-AExJRO4dK7-ThcWQNybHRky3dmzkG7HKcSs" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 2, 2025 • 1:00 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>Amazon S3: Hệ thống lưu trữ đối tượng nền tảng trong AWS</h1>
+        <p style="font-style: italic; color: #555;">Phân tích kiến trúc, mô hình dữ liệu, tính năng nâng cao và nguyên tắc bảo mật — kèm minh họa trực quan</p>
+
+        <h2 id="gioi-thieu">1. Giới thiệu</h2>
+        <p>Amazon S3 (Simple Storage Service) là dịch vụ lưu trữ đối tượng (object storage) được ra mắt từ năm 2006 — cũng là một trong những dịch vụ đầu tiên của AWS. Ngày nay, S3 không chỉ dùng để lưu file, mà còn là nền tảng cho data lake, backup, phân phối nội dung (CDN), và event-driven architecture.</p>
+        <p>Khác với lưu trữ khối (block storage như EBS) hay lưu trữ tệp (file storage như EFS), S3 lưu dữ liệu dưới dạng **đối tượng (object)** — mỗi đối tượng bao gồm: dữ liệu, metadata và định danh duy nhất (key).</p>
+
+        <figure>
+          <img 
+            src="https://d1.awsstatic.com/s3-pdp-redesign/product-page-diagram_Amazon-S3_HIW.cf4c2bd7aa02f1fe77be8aa120393993e08ac86d.png" 
+            width="800"
+            height="400"
+            alt="Mô hình lưu trữ đối tượng trong S3">
+          <figcaption>
+            Hình 1: So sánh block, file và object storage. S3 thuộc loại object storage — tối ưu cho dữ liệu phi cấu trúc.
+          </figcaption>
+        </figure>
+
+        <h2 id="kien-truc-va-mo-hinh-du-lieu">2. Kiến trúc và mô hình dữ liệu</h2>
+
+        <h3>2.1. Bucket và Object</h3>
+        <p>- **Bucket**: Tương đương “thư mục gốc”, là container chứa các object. Tên bucket **toàn cầu duy nhất** trên AWS (ví dụ: <code>my-company-logs-2025</code>).<br>
+        - **Object**: Đơn vị lưu trữ cơ bản. Mỗi object có:<br>
+          &nbsp;&nbsp;• Key (đường dẫn ảo, ví dụ: <code>photos/2025/summer.jpg</code>)<br>
+          &nbsp;&nbsp;• Value (dữ liệu, tối đa 5 TB)<br>
+          &nbsp;&nbsp;• Metadata (mô tả: content-type, custom tag…)<br>
+          &nbsp;&nbsp;• Version ID (nếu bật versioning)</p>
+
+        <figure>
+          <img 
+            src="https://awstrainingwithjagan.com/wp-content/uploads/2024/02/aws_s3bucket_object.png" 
+            width="800"
+            height="350"
+            alt="Cấu trúc bucket và object trong S3">
+          <figcaption>
+            Hình 2: Cấu trúc logic của bucket và object trong S3.
+          </figcaption>
+        </figure>
+
+        <h3>2.2. Không gian tên (Namespace) và vùng (Region)</h3>
+        <p>- Tên bucket **phải toàn cầu duy nhất** vì S3 sử dụng DNS-based endpoint: <code>https://bucket-name.s3.region.amazonaws.com</code>.<br>
+        - Mỗi bucket được tạo trong **một region cụ thể** — dữ liệu không tự động sao chép sang region khác.<br>
+        - Sau khi tạo, **không thể đổi region** của bucket.</p>
+
+        <h2 id="cac-tinh-nang-cot-loi">3. Các tính năng cốt lõi</h2>
+
+        <h3>3.1. Storage Classes (Lớp lưu trữ)</h3>
+        <p>S3 cung cấp nhiều lớp lưu trữ để tối ưu chi phí theo tần suất truy cập:</p>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse; margin: 16px 0;">
+          <thead>
+            <tr style="background-color: #f5f5f5;">
+              <th>Lớp lưu trữ</th>
+              <th>Mức độ truy cập</th>
+              <th>Độ trễ</th>
+              <th>Phù hợp cho</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>S3 Standard</strong></td><td>Thường xuyên</td><td>Thấp</td><td>Ứng dụng web, phân tích dữ liệu</td></tr>
+            <tr><td><strong>S3 Intelligent-Tiering</strong></td><td>Tự động điều chỉnh</td><td>Thấp</td><td>Dữ liệu có mẫu truy cập không rõ ràng</td></tr>
+            <tr><td><strong>S3 Standard-IA</strong></td><td>Ít truy cập</td><td>Thấp</td><td>Backup, dữ liệu dài hạn</td></tr>
+            <tr><td><strong>S3 Glacier Instant Retrieval</strong></td><td>Rất ít</td><td>1–5 ms</td><td>Lưu trữ archive cần truy xuất nhanh</td></tr>
+            <tr><td><strong>S3 Glacier Flexible/Deep Archive</strong></td><td>Hiếm</td><td>Phút đến giờ</td><td>Lưu trữ pháp lý, archive 7–10 năm</td></tr>
+          </tbody>
+        </table>
+
+        <h3>3.2. Versioning</h3>
+        <p>Khi bật versioning, mọi lần ghi đè hoặc xóa object đều tạo **phiên bản mới** — giúp khôi phục dữ liệu do vô tình ghi đè hoặc xóa.</p>
+        <p>Lưu ý: Versioning **làm tăng chi phí lưu trữ** nếu không quản lý đúng.</p>
+
+        <h3>3.3. Lifecycle Policy</h3>
+        <p>Tự động chuyển object giữa các lớp lưu trữ hoặc xóa sau N ngày.</p>
+        <p>Ví dụ:  
+        - Ngày 0–30: S3 Standard  
+        - Ngày 31–90: Chuyển sang S3 Standard-IA  
+        - Ngày 91+: Chuyển sang Glacier Deep Archive  
+        - Ngày 365: Xóa vĩnh viễn</p>
+
+        <figure>
+          <img 
+            src="https://tse1.explicit.bing.net/th/id/OIP.MJ3AJ7bHR-rlvHKM2aACfAHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="300"
+            alt="Lifecycle policy trong S3">
+          <figcaption>
+            Hình 3: Minh họa chính sách lifecycle tự động tối ưu chi phí lưu trữ.
+          </figcaption>
+        </figure>
+
+        <h2 id="bao-mat-va-quyen-truy-cap">4. Bảo mật và quyền truy cập</h2>
+        <p>S3 có **hai lớp bảo mật chính**:</p>
+
+        <h3>4.1. Identity-Based Policies (IAM)</h3>
+        <p>Gán quyền cho user/role thông qua IAM policy. Ví dụ: cho phép user đọc bucket <code>my-data</code>:</p>
+        <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::my-data/*"
+  }]
+}</code></pre>
+
+        <h3>4.2. Resource-Based Policies (Bucket Policy)</h3>
+        <p>Gắn trực tiếp vào bucket. Dùng để cho phép:</p>
+        <ul>
+          <li>Truy cập công khai (không khuyến khích)</li>
+          <li>Truy cập từ tài khoản AWS khác</li>
+          <li>Truy cập từ dịch vụ như CloudFront</li>
+        </ul>
+
+        <p>Ví dụ bucket policy cho phép CloudFront truy cập:</p>
+        <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": { "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity XYZ" },
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::my-website/*"
+  }]
+}</code></pre>
+
+        <h3>4.3. ACL (Access Control List) — nên tránh</h3>
+        <p>ACL là cơ chế cũ, kém linh hoạt. AWS khuyến nghị dùng **bucket policy + IAM** thay thế.</p>
+
+        <h3>4.4. Block Public Access</h3>
+        <p>Tính năng **bắt buộc bật** trong production. Ngăn bucket bị public do cấu hình sai.</p>
+        <p>Có 4 mức chặn:
+          <ul>
+            <li>Block public ACLs</li>
+            <li>Ignore public ACLs</li>
+            <li>Block public policies</li>
+            <li>Restrict public buckets</li>
+          </ul>
+        </p>
+
+        <figure>
+          <img 
+            src="https://tse4.mm.bing.net/th/id/OIP.FVU-DvfX38ztHhZsww_B3wHaD1?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="350"
+            alt="Block Public Access trong S3">
+          <figcaption>
+            Hình 4: Tính năng Block Public Access — lá chắn an toàn mặc định cho mọi bucket.
+          </figcaption>
+        </figure>
+
+        <h2 id="tich-hop-va-su-dung-thuc-te">5. Tích hợp và ứng dụng thực tế</h2>
+        <ul>
+          <li><strong>Static Website Hosting</strong>: Lưu HTML/CSS/JS → bật tính năng “Static website hosting”.</li>
+          <li><strong>Data Lake</strong>: Lưu dữ liệu thô (JSON, CSV, Parquet) → phân tích bằng Athena, Redshift.</li>
+          <li><strong>Event-Driven Processing</strong>: Khi upload file → kích hoạt Lambda để xử lý (resize ảnh, parse log…).</li>
+          <li><strong>Backup & Disaster Recovery</strong>: Dùng lifecycle + cross-region replication để sao lưu.</li>
+        </ul>
+
+        <h2 id="ket-luan">6. Kết luận</h2>
+        <p>Amazon S3 không chỉ là “ổ đĩa đám mây” — mà là **nền tảng dữ liệu hiện đại** với độ bền 99.999999999% (11 số 9), khả năng mở rộng vô hạn và hệ sinh thái tích hợp sâu.</p>
+        <p>Tuy nhiên, sức mạnh đi kèm trách nhiệm: hàng nghìn bucket bị rò rỉ dữ liệu mỗi năm do **cấu hình public sai**. Vì vậy, hãy luôn:</p>
+        <ol>
+          <li>Bật <strong>Block Public Access</strong> mặc định.</li>
+          <li>Dùng <strong>IAM + bucket policy</strong> thay vì ACL.</li>
+          <li>Áp dụng <strong>least privilege</strong> và <strong>encryption</strong> (SSE-S3, SSE-KMS).</li>
+          <li>Giám sát bằng <strong>AWS CloudTrail + S3 Access Logs</strong>.</li>
+        </ol>
+        <p>Khi được sử dụng đúng cách, S3 sẽ là “kho báu” — chứ không phải “lỗ hổng” — trong hệ thống của bạn.</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">1. Giới thiệu</a></li>
+        <li><a href="#kien-truc-va-mo-hinh-du-lieu">2. Kiến trúc & mô hình dữ liệu</a></li>
+        <li><a href="#cac-tinh-nang-cot-loi">3. Tính năng cốt lõi</a></li>
+        <li><a href="#bao-mat-va-quyen-truy-cap">4. Bảo mật & quyền truy cập</a></li>
+        <li><a href="#tich-hop-va-su-dung-thuc-te">5. Ứng dụng thực tế</a></li>
+        <li><a href="#ket-luan">6. Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

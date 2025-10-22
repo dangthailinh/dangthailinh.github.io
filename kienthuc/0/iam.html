@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS IAM: Quản lý quyền truy cập an toàn trong hệ thống của bạn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://tse1.mm.bing.net/th/id/OIP.LfrcFHv8AFYj0_x7aCLgzwHaDt?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 22, 2025 • 9:45 PM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>AWS IAM: Quản lý quyền truy cập an toàn trong hệ thống của bạn</h1>
+
+        <h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>AWS IAM (Identity and Access Management) là dịch vụ miễn phí giúp bạn **kiểm soát ai có thể làm gì trong tài khoản AWS** của bạn. Dù bạn là cá nhân hay doanh nghiệp, IAM là nền tảng đầu tiên bạn nên cấu hình — trước khi tạo EC2, S3 hay bất kỳ tài nguyên nào.</p>
+        <p>Không có IAM, mọi người trong tổ chức sẽ phải dùng chung tài khoản root — điều cực kỳ nguy hiểm. Với IAM, bạn có thể:</p>
+        <ul>
+          <li>Tạo người dùng (user), nhóm (group), vai trò (role) riêng biệt.</li>
+          <li>Gán quyền chính xác — chỉ đủ để làm việc (nguyên tắc least privilege).</li>
+          <li>Cho phép ứng dụng trên EC2 truy cập AWS mà không cần lưu key.</li>
+          <li>Kích hoạt xác thực hai lớp (MFA) để tăng bảo mật.</li>
+        </ul>
+
+        <figure>
+          <img 
+            src="https://tse3.mm.bing.net/th/id/OIP.DZKDp7Uot22869KFGY99DgHaDv?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="400"
+            alt="AWS IAM console">
+          <figcaption>
+            Giao diện quản lý người dùng và quyền trong AWS IAM.
+          </figcaption>
+        </figure>
+
+        <h2 id="cac-khai-niem-co-ban">Các khái niệm cơ bản trong IAM</h2>
+
+        <h3>1. User (Người dùng)</h3>
+        <p>Là danh tính cho một con người hoặc ứng dụng cần truy cập AWS. Mỗi user có:</p>
+        <ul>
+          <li>Tên đăng nhập (console) hoặc access key (API/CLI).</li>
+          <li>Quyền được gán qua policy hoặc group.</li>
+        </ul>
+        <p>Ví dụ: user <code>dev-linh</code>, <code>ci-cd-bot</code>.</p>
+
+        <h3>2. Group (Nhóm)</h3>
+        <p>Nhóm chứa nhiều user. Thay vì gán quyền cho từng user, bạn gán quyền cho group — dễ quản lý hơn.</p>
+        <p>Ví dụ: group <code>Developers</code> có quyền truy cập EC2 và S3; group <code>Admins</code> có quyền full.</p>
+
+        <h3>3. Role (Vai trò)</h3>
+        <p>Role không gắn với người cụ thể. Nó được “giả lập” (assume) bởi:</p>
+        <ul>
+          <li>Người dùng từ tài khoản AWS khác.</li>
+          <li>Dịch vụ AWS (ví dụ: EC2, Lambda) để truy cập tài nguyên khác.</li>
+          <li>Người dùng đăng nhập qua SSO (Google, Microsoft, v.v.).</li>
+        </ul>
+        <p>Ví dụ: Gán role cho EC2 instance để nó có thể ghi log vào S3 — **không cần lưu access key trên máy**.</p>
+
+        <h3>4. Policy (Chính sách quyền)</h3>
+        <p>Là tài liệu JSON định nghĩa **cho phép hoặc từ chối** hành động nào trên tài nguyên nào.</p>
+        <p>Có hai loại:</p>
+        <ul>
+          <li><strong>Managed Policy**: Do AWS cung cấp (ví dụ: <code>AmazonS3ReadOnlyAccess</code>) hoặc bạn tự tạo.</li>
+          <li><strong>Inline Policy**: Gắn trực tiếp vào user/group/role — ít linh hoạt, nên tránh.</li>
+        </ul>
+
+        <p>Ví dụ policy đơn giản cho phép đọc S3:</p>
+        <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::my-bucket/*"
+    }
+  ]
+}</code></pre>
+
+        <h2 id="thuc-hanh-tao-user">Thực hành: Tạo người dùng IAM và gán quyền</h2>
+        <p>Giả sử bạn muốn tạo user cho một developer chỉ được xem EC2 và khởi động lại instance.</p>
+
+        <ol>
+          <li>Vào AWS Console → tìm **IAM**.</li>
+          <li>Chọn **Users** → **Create user**.</li>
+          <li>Nhập tên: <code>dev-trung</code>.</li>
+          <li>Tích chọn **AWS Management Console access** → đặt mật khẩu.</li>
+          <li>Bỏ qua phần "Access key" (nếu chỉ dùng console).</li>
+          <li>Ở bước **Permissions**, chọn **Add user to group** → tạo group mới tên <code>EC2-Operators</code>.</li>
+          <li>Gán policy cho group:
+            <ul>
+              <li>Chọn **Attach policies**.</li>
+              <li>Tìm và chọn <code>AmazonEC2ReadOnlyAccess</code>.</li>
+              <li>Tạo policy tùy chỉnh để cho phép <code>ec2:RebootInstances</code> (xem ví dụ dưới).</li>
+            </ul>
+          </li>
+          <li>Hoàn tất → gửi thông tin đăng nhập cho developer.</li>
+        </ol>
+
+        <p>Policy tùy chỉnh cho phép reboot EC2:</p>
+        <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ec2:RebootInstances",
+      "Resource": "*"
+    }
+  ]
+}</code></pre>
+
+        <h2 id="iam-role-cho-ec2">IAM Role cho EC2 — cách an toàn để ứng dụng truy cập AWS</h2>
+        <p>Khi ứng dụng trên EC2 cần truy cập S3, DynamoDB, v.v., **đừng dùng access key**. Thay vào đó:</p>
+        <ol>
+          <li>Tạo IAM Role với quyền cần thiết (ví dụ: <code>s3:PutObject</code>).</li>
+          <li>Gán role đó vào EC2 instance khi tạo (hoặc attach sau).</li>
+          <li>Trong code, dùng AWS SDK — SDK sẽ tự lấy temporary credentials từ metadata service của EC2.</li>
+        </ol>
+        <p>Ưu điểm:</p>
+        <ul>
+          <li>Không lưu secret trên máy → giảm rủi ro rò rỉ.</li>
+          <li>Credentials tự động luân chuyển (rotate) — không cần quản lý.</li>
+        </ul>
+
+        <h2 id="best-practices">Best practices bảo mật với IAM</h2>
+        <ul>
+          <li><strong>Không bao giờ dùng tài khoản root để làm việc hàng ngày</strong>. Dùng root chỉ để tạo IAM admin đầu tiên.</li>
+          <li><strong>Áp dụng nguyên tắc least privilege</strong>: chỉ cấp quyền tối thiểu cần thiết.</li>
+          <li><strong>Luôn bật MFA cho user quan trọng</strong> (đặc biệt là admin).</li>
+          <li><strong>Định kỳ xem lại quyền</strong>: dùng IAM Credentials Report hoặc AWS Access Analyzer.</li>
+          <li><strong>Không dùng inline policy</strong> — dùng managed policy để tái sử dụng và quản lý tập trung.</li>
+          <li><strong>Xóa user/role không dùng** — tránh “rác quyền” tích tụ theo thời gian.</li>
+        </ul>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>IAM là “cánh cửa” đầu tiên và quan trọng nhất trong hệ sinh thái AWS. Cấu hình đúng từ đầu sẽ giúp bạn tránh được 90% rủi ro bảo mật: rò rỉ dữ liệu, xóa nhầm tài nguyên, hoặc bị tấn công do quyền quá rộng.</p>
+        <p>Hãy bắt đầu bằng cách:</p>
+        <ol>
+          <li>Tạo user IAM cho chính bạn (thay vì dùng root).</li>
+          <li>Gán quyền chỉ đủ để làm việc.</li>
+          <li>Dùng role thay vì access key cho ứng dụng.</li>
+        </ol>
+        <p>Khi IAM được quản lý tốt, bạn có thể yên tâm mở rộng hệ thống — vì biết rằng “ai làm gì” luôn được kiểm soát.</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#cac-khai-niem-co-ban">Khái niệm cơ bản</a></li>
+        <li><a href="#thuc-hanh-tao-user">Thực hành: Tạo user</a></li>
+        <li><a href="#iam-role-cho-ec2">IAM Role cho EC2</a></li>
+        <li><a href="#best-practices">Best practices</a></li>
+        <li><a href="#ket-luan">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

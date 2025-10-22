@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Làm thế nào để trở thành DevOps Engineer?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://docs.docker.com/images/thumbnail.webp" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">July 19, 2023 • 7:25 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+    <section id="gioi-thieu">
+  <h2>Giới thiệu về Docker</h2>
+  <p>
+    Docker là một nền tảng mã nguồn mở giúp tự động hóa việc triển khai, đóng gói và chạy ứng dụng trong các <strong>container</strong> nhẹ, độc lập và di động. 
+    Nhờ Docker, các nhà phát triển có thể đảm bảo rằng ứng dụng chạy nhất quán trên mọi môi trường — từ máy phát triển cá nhân đến máy chủ production.
+  </p>
+  <p>
+    Container hóa với Docker đã trở thành tiêu chuẩn trong phát triển phần mềm hiện đại, đặc biệt trong các hệ thống kiến trúc microservices và DevOps.
+  </p>
+  <figure>
+    <img 
+      src="https://tse1.mm.bing.net/th/id/OIP.ly5np4LEn3ID__C-y9Ok7QHaCe?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+      alt="Minh họa kiến trúc Docker: ứng dụng chạy trong container trên Docker Engine"
+      width="800"
+      height="400">
+    <figcaption>
+      <em>Hình minh họa: Ứng dụng được đóng gói trong container và chạy trên Docker Engine (Nguồn: Docker Docs)</em>
+    </figcaption>
+  </figure>
+
+<section id="docker-la-gi">
+  <h2>Docker là gì?</h2>
+  <p>
+    Docker là một nền tảng phần mềm cho phép bạn xây dựng, kiểm thử, triển khai và chạy ứng dụng trong các <strong>container</strong> — những đơn vị phần mềm nhẹ, độc lập và có thể di chuyển dễ dàng giữa các môi trường khác nhau.
+  </p>
+  <p>
+    Khác với máy ảo (VM) truyền thống, container của Docker không cần hệ điều hành riêng. Thay vào đó, chúng chia sẻ nhân (kernel) của hệ điều hành máy chủ, giúp tiết kiệm tài nguyên và khởi động trong vài giây.
+  </p>
+  <figure>
+    <img 
+      src="https://tse4.mm.bing.net/th/id/OIP.dzU3iku717eMWLTnKp9qNgHaDW?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+      alt="So sánh ứng dụng truyền thống, máy ảo và container Docker"
+      width="800"
+      height="450">
+    <figcaption>
+      <em>Hình minh họa: So sánh cách triển khai ứng dụng truyền thống, trên máy ảo và bằng Docker container (Nguồn: docker.com)</em>
+    </figcaption>
+  </figure>
+  <p>
+    Docker giúp giải quyết vấn đề “<em>Chạy được trên máy tôi!</em>” bằng cách đóng gói toàn bộ phần phụ thuộc (mã, thư viện, cấu hình) vào một container nhất quán — hoạt động như nhau trên laptop, server, cloud hay bất kỳ đâu.
+  </p>
+
+
+  <h3>Cơ chế hoạt động</h3>
+  <p>
+    Docker sử dụng các tính năng cốt lõi của nhân Linux như <strong>namespaces</strong> (cô lập tiến trình, mạng, người dùng, v.v.) và <strong>cgroups</strong> (giới hạn tài nguyên CPU, RAM, I/O) để tạo ra các container nhẹ, an toàn và hiệu quả. Khác với máy ảo (VM) — vốn phải chạy toàn bộ hệ điều hành khách — container Docker chia sẻ kernel của hệ điều hành máy chủ, giúp giảm thiểu chi phí tài nguyên và tăng tốc độ khởi động (thường chỉ mất vài trăm mili giây).
+  </p>
+
+
+  <h3>Docker không chỉ là công cụ — mà là một hệ sinh thái</h3>
+  <p>
+    Ngoài khả năng chạy container, Docker còn cung cấp một bộ công cụ toàn diện:
+  </p>
+  <ul>
+    <li><strong>Docker Engine</strong>: runtime nền tảng để tạo và quản lý container.</li>
+    <li><strong>Dockerfile</strong>: tệp văn bản chứa các lệnh để tự động xây dựng image.</li>
+    <li><strong>Docker Hub</strong>: kho lưu trữ công cộng (và riêng tư) cho các image, tương tự như GitHub cho mã nguồn.</li>
+    <li><strong>Docker Compose</strong>: công cụ để định nghĩa và chạy ứng dụng đa container bằng một tệp YAML.</li>
+    <li><strong>Docker Desktop</strong>: ứng dụng GUI hỗ trợ phát triển trên Windows và macOS.</li>
+  </ul>
+
+  <h3>Ứng dụng thực tế</h3>
+  <p>
+    Docker được sử dụng rộng rãi trong:
+  </p>
+  <ul>
+    <li><strong>Phát triển phần mềm</strong>: tạo môi trường dev đồng nhất cho toàn đội.</li>
+    <li><strong>CI/CD pipeline</strong>: build, test và deploy ứng dụng trong container.</li>
+    <li><strong>Microservices</strong>: mỗi service chạy trong container riêng, dễ mở rộng và bảo trì.</li>
+    <li><strong>Cloud-native applications</strong>: nền tảng cho Kubernetes, OpenShift và các hệ thống orchestration hiện đại.</li>
+  </ul>
+
+  <p>
+    Tóm lại, Docker không chỉ đơn thuần là một công nghệ container — nó là <strong>cầu nối giữa phát triển và vận hành</strong>, thúc đẩy văn hóa DevOps và chuyển đổi số trong doanh nghiệp hiện đại.
+  </p>
+</section>
+
+<section id="ky-nang">
+  <h2>Các kỹ năng cần thiết khi làm việc với Docker</h2>
+
+  <p>
+    Làm chủ Docker không chỉ dừng lại ở việc chạy lệnh <code>docker run</code>. Để sử dụng hiệu quả trong môi trường phát triển và vận hành thực tế, người dùng cần phát triển một bộ kỹ năng toàn diện — từ cơ bản đến nâng cao — bao gồm hiểu biết nền tảng, thực hành tốt và tích hợp hệ sinh thái DevOps.
+  </p>
+
+  <h3>1. Hiểu biết nền tảng về hệ điều hành Linux</h3>
+  <p>
+    Docker trên Linux tận dụng trực tiếp các tính năng nhân hệ thống như <strong>namespaces</strong> (cô lập tiến trình, mạng, filesystem) và <strong>cgroups</strong> (quản lý tài nguyên). Do đó, kiến thức cơ bản về Linux — bao gồm quản lý tiến trình, hệ thống tệp, quyền truy cập (permissions), mạng và dòng lệnh — là nền tảng thiết yếu để gỡ lỗi và tối ưu container.
+  </p>
+
+  <h3>2. Viết và tối ưu Dockerfile</h3>
+  <p>
+    Dockerfile là trái tim của quá trình xây dựng image. Kỹ năng viết Dockerfile hiệu quả bao gồm:
+  </p>
+  <ul>
+    <li>Sử dụng base image phù hợp (ưu tiên image chính thức, nhẹ như <code>alpine</code> hoặc <code>distroless</code>).</li>
+    <li>Áp dụng multi-stage build để giảm kích thước image.</li>
+    <li>Tránh lưu trữ thông tin nhạy cảm (secret, password) trong image.</li>
+    <li>Tuân thủ nguyên tắc một container — một tiến trình chính (single responsibility).</li>
+  </ul>
+
+  <h3>3. Quản lý vòng đời container và image</h3>
+  <p>
+    Người dùng cần thành thạo các thao tác:
+  </p>
+  <ul>
+    <li>Liệt kê, dừng, xóa container và image.</li>
+    <li>Dọn dẹp tài nguyên không dùng (dangling images, stopped containers) bằng <code>docker system prune</code>.</li>
+    <li>Hiểu sự khác biệt giữa image (chỉ đọc) và container (có thể ghi).</li>
+  </ul>
+
+  <h3>4. Làm việc với volume và bind mounts</h3>
+  <p>
+    Dữ liệu trong container là <em>tạm thời</em> — sẽ mất khi container bị xóa. Để lưu trữ dữ liệu bền vững (persistent data), cần sử dụng <strong>volumes</strong> (quản lý bởi Docker) hoặc <strong>bind mounts</strong> (gắn thư mục từ máy chủ). Kỹ năng này đặc biệt quan trọng khi triển khai cơ sở dữ liệu (như PostgreSQL, MySQL) trong container.
+  </p>
+
+  <h3>5. Cấu hình mạng container</h3>
+  <p>
+    Hiểu cách Docker tạo mạng ảo (<code>bridge</code>, <code>host</code>, <code>none</code>, mạng tùy chỉnh), cách các container giao tiếp với nhau và với thế giới bên ngoài thông qua port mapping (<code>-p</code>) là yếu tố then chốt để xây dựng ứng dụng đa container.
+  </p>
+
+  <figure>
+    <img 
+      src="https://xuanthulab.net/images/post/sm/mang-network-bridge-trong-docker-ket-noi-cac-container-voi-nhau-1477.jpg" 
+      alt="Tổng quan về mạng Docker: container, bridge network, và host"
+      width="800"
+      height="400">
+    <figcaption>
+      <em>Hình minh họa: Kiến trúc mạng Docker cơ bản với bridge network và port mapping (Nguồn: Docker Docs)</em>
+    </figcaption>
+  </figure>
+
+  <h3>6. Sử dụng Docker Compose cho ứng dụng đa container</h3>
+  <p>
+    Trong thực tế, ứng dụng thường gồm nhiều dịch vụ (web, database, cache). Docker Compose cho phép định nghĩa toàn bộ hệ thống trong một tệp <code>docker-compose.yml</code>, giúp triển khai nhất quán và tái tạo dễ dàng.
+  </p>
+
+  <h3>7. Bảo mật và best practices</h3>
+  <p>
+    Kỹ năng bảo mật bao gồm:
+  </p>
+  <ul>
+    <li>Không chạy container với quyền <code>root</code> mặc định.</li>
+    <li>Quét lỗ hổng bảo mật trong image bằng công cụ như <code>Trivy</code> hoặc <code>Docker Scout</code>.</li>
+    <li>Cập nhật base image thường xuyên để vá lỗ hổng.</li>
+  </ul>
+
+  <h3>8. Tích hợp vào quy trình DevOps</h3>
+  <p>
+    Docker thường được nhúng vào pipeline CI/CD (GitHub Actions, GitLab CI, Jenkins). Kỹ năng viết script tự động build, test và push image là yêu cầu phổ biến trong môi trường chuyên nghiệp.
+  </p>
+
+  <p>
+    Tóm lại, năng lực với Docker không chỉ nằm ở thao tác lệnh, mà ở khả năng <strong>thiết kế hệ thống container hóa một cách an toàn, hiệu quả và có thể mở rộng</strong> — yếu tố then chốt trong hành trình DevOps và cloud-native hiện đại.
+  </p>
+</section>
+
+<section id="cau-truc-docker">
+  <h2>Kiến trúc và thành phần cốt lõi của Docker</h2>
+
+  <p>
+    Docker tuân theo mô hình kiến trúc <strong>client-server</strong>, trong đó các thành phần giao tiếp với nhau thông qua API REST hoặc giao diện dòng lệnh (CLI). Kiến thức về kiến trúc này giúp người dùng hiểu rõ cách Docker vận hành, từ đó tối ưu, gỡ lỗi và mở rộng hệ thống một cách hiệu quả.
+  </p>
+
+  <h3>1. Docker Engine: Trái tim của hệ sinh thái</h3>
+  <p>
+    <strong>Docker Engine</strong> là thành phần nền tảng chịu trách nhiệm tạo và quản lý container. Nó bao gồm ba phần chính:
+  </p>
+  <ul>
+    <li><strong>Docker Daemon (<code>dockerd</code>)</strong>: tiến trình nền chạy trên máy chủ, quản lý các đối tượng Docker như images, containers, networks và volumes. Nó lắng nghe yêu cầu từ Docker API.</li>
+    <li><strong>Docker CLI (<code>docker</code>)</strong>: công cụ dòng lệnh cho phép người dùng tương tác với Docker Daemon thông qua các lệnh như <code>docker run</code>, <code>docker build</code>, v.v.</li>
+    <li><strong>Docker REST API</strong>: giao diện lập trình ứng dụng cho phép các công cụ bên thứ ba (hoặc script tự động) giao tiếp với Docker Daemon.</li>
+  </ul>
+
+  <figure>
+    <img 
+      src="https://docs.docker.com/images/engine-components-flow.png" 
+      alt="Sơ đồ kiến trúc Docker Engine: CLI, API và Daemon"
+      width="800"
+      height="400">
+    <figcaption>
+      <em>Hình minh họa: Kiến trúc Docker Engine — CLI gửi lệnh đến Daemon thông qua REST API (Nguồn: Docker Docs)</em>
+    </figcaption>
+  </figure>
+
+  <h3>2. Images và Containers</h3>
+  <p>
+    <strong>Image</strong> là một bản sao chỉ đọc (read-only template) chứa hệ thống tệp và metadata cần thiết để chạy một ứng dụng. Image được xây dựng từ Dockerfile và lưu trữ theo lớp (layers) — giúp tiết kiệm dung lượng và tăng tốc build nhờ cơ chế chia sẻ lớp.
+  </p>
+  <p>
+    <strong>Container</strong> là một instance thực thi được tạo từ image. Mỗi container có filesystem riêng (dựa trên image), tiến trình cô lập và tài nguyên được giới hạn. Khi container dừng, các thay đổi trong filesystem (nếu không dùng volume) sẽ bị mất — đảm bảo tính bất biến (immutability).
+  </p>
+
+  <h3>3. Docker Registry</h3>
+  <p>
+    Registry là nơi lưu trữ và phân phối Docker images. Có hai loại chính:
+  </p>
+  <ul>
+    <li><strong>Docker Hub</strong>: registry công cộng do Docker Inc. vận hành, chứa hàng triệu image chính thức và cộng đồng.</li>
+    <li><strong>Private Registry</strong>: registry riêng do doanh nghiệp tự triển khai (dùng <code>registry:2</code> image) để đảm bảo bảo mật và kiểm soát phiên bản.</li>
+  </ul>
+  <p>
+    Khi chạy <code>docker pull nginx</code>, CLI sẽ tải image từ Docker Hub (mặc định). Bạn có thể cấu hình để pull/push từ registry nội bộ.
+  </p>
+
+  <h3>4. Docker Networks</h3>
+  <p>
+    Docker cung cấp nhiều driver mạng để hỗ trợ các kịch bản triển khai:
+  </p>
+  <ul>
+    <li><strong>bridge</strong>: mạng mặc định cho các container trên cùng máy chủ (tương đương NAT).</li>
+    <li><strong>host</strong>: container chia sẻ namespace mạng với máy chủ — hiệu năng cao, ít cô lập.</li>
+    <li><strong>overlay</strong>: cho phép container trên các máy chủ khác nhau giao tiếp (dùng trong Docker Swarm hoặc Kubernetes).</li>
+    <li><strong>macvlan</strong>: gán địa chỉ MAC riêng cho container, giúp nó xuất hiện như thiết bị vật lý trên mạng.</li>
+  </ul>
+
+  <h3>5. Docker Volumes</h3>
+  <p>
+    Volume là cơ chế lưu trữ dữ liệu bền vững, được quản lý hoàn toàn bởi Docker. Khác với bind mounts (gắn thư mục máy chủ), volume:
+  </p>
+  <ul>
+    <li>Được lưu ở thư mục riêng của Docker (<code>/var/lib/docker/volumes/</code> trên Linux).</li>
+    <li>Có thể sao lưu, di chuyển và chia sẻ giữa các container.</li>
+    <li>Hỗ trợ driver volume bên thứ ba (ví dụ: NFS, AWS EBS, Azure Disk).</li>
+  </ul>
+
+  <h3>6. Mô hình hoạt động tổng thể</h3>
+  <p>
+    Khi bạn chạy lệnh <code>docker run -d -p 8080:80 nginx</code>, luồng xử lý như sau:
+  </p>
+  <ol>
+    <li>Docker CLI gửi yêu cầu đến Docker Daemon qua API.</li>
+    <li>Daemon kiểm tra xem image <code>nginx</code> đã tồn tại chưa. Nếu chưa, nó pull từ registry.</li>
+    <li>Daemon tạo container từ image, thiết lập mạng (bridge + port mapping), khởi động tiến trình <code>nginx</code>.</li>
+    <li>Container chạy như một tiến trình cô lập trên hệ thống.</li>
+  </ol>
+
+  <p>
+    Hiểu rõ kiến trúc này không chỉ giúp bạn sử dụng Docker hiệu quả hơn, mà còn là nền tảng để học các công nghệ orchestration như <strong>Kubernetes</strong> — nơi các khái niệm về image, network và volume được mở rộng ở quy mô lớn.
+  </p>
+</section>
+
+<section id="dockerfile">
+  <h2>Viết Dockerfile cơ bản</h2>
+
+  <p>
+    <strong>Dockerfile</strong> là một tệp văn bản chứa các lệnh hướng dẫn Docker cách xây dựng một image. Đây là nền tảng của mọi ứng dụng container hóa — từ ứng dụng web đơn giản đến hệ thống microservices phức tạp. Việc viết Dockerfile đúng cách không chỉ đảm bảo tính nhất quán mà còn ảnh hưởng trực tiếp đến hiệu suất, bảo mật và khả năng bảo trì.
+  </p>
+
+  <h3>Cấu trúc cơ bản của một Dockerfile</h3>
+  <p>
+    Mỗi dòng trong Dockerfile là một <strong>instruction</strong> (hướng dẫn), theo cú pháp:
+  </p>
+  <pre><code>INSTRUCTION arguments</code></pre>
+  <p>
+    Các instruction phổ biến bao gồm: <code>FROM</code>, <code>RUN</code>, <code>COPY</code>, <code>ADD</code>, <code>WORKDIR</code>, <code>EXPOSE</code>, <code>ENV</code>, <code>CMD</code>, <code>ENTRYPOINT</code>.
+  </p>
+
+  <h3>Ví dụ: Dockerfile cho ứng dụng Node.js đơn giản</h3>
+  <p>
+    Giả sử bạn có một ứng dụng Express.js với cấu trúc thư mục như sau:
+  </p>
+  <pre><code>my-app/
+├── package.json
+├── app.js
+└── Dockerfile</code></pre>
+
+  <p>Dưới đây là nội dung Dockerfile tiêu chuẩn:</p>
+
+  <pre><code># 1. Sử dụng base image chính thức từ Docker Hub
+FROM node:18-alpine
+
+# 2. Thiết lập thư mục làm việc trong container
+WORKDIR /app
+
+# 3. Sao chép package.json trước để tận dụng cache layer
+COPY package.json .
+
+# 4. Cài đặt dependencies
+RUN npm install
+
+# 5. Sao chép toàn bộ mã nguồn vào container
+COPY . .
+
+# 6. Khai báo cổng ứng dụng sẽ lắng nghe
+EXPOSE 3000
+
+# 7. Lệnh mặc định khi container khởi động
+CMD ["node", "app.js"]</code></pre>
+
+  <h3>Giải thích từng bước</h3>
+  <ul>
+    <li>
+      <strong><code>FROM node:18-alpine</code></strong>: Khởi tạo image từ base image <code>node:18-alpine</code> — nhẹ (dựa trên Alpine Linux) và đủ để chạy ứng dụng Node.js.
+    </li>
+    <li>
+      <strong><code>WORKDIR /app</code></strong>: Tạo và chuyển vào thư mục <code>/app</code> — mọi lệnh sau sẽ thực thi trong thư mục này.
+    </li>
+    <li>
+      <strong><code>COPY package.json .</code></strong>: Chỉ sao chép <code>package.json</code> trước. Nhờ cơ chế layer caching của Docker, nếu <code>package.json</code> không thay đổi, bước <code>npm install</code> sẽ được dùng lại từ cache — tiết kiệm thời gian build.
+    </li>
+    <li>
+      <strong><code>RUN npm install</code></strong>: Cài đặt các thư viện phụ thuộc.
+    </li>
+    <li>
+      <strong><code>COPY . .</code></strong>: Sao chép toàn bộ mã nguồn vào container.
+    </li>
+    <li>
+      <strong><code>EXPOSE 3000</code></strong>: Ghi chú rằng ứng dụng lắng nghe trên cổng 3000 (không mở cổng thực tế — cần dùng <code>-p</code> khi chạy container).
+    </li>
+    <li>
+      <strong><code>CMD ["node", "app.js"]</code></strong>: Lệnh mặc định khi container khởi động. Dùng dạng <em>exec form</em> (mảng JSON) để tránh shell trung gian.
+    </li>
+  </ul>
+
+  <figure>
+    <img 
+      src="https://tse4.mm.bing.net/th/id/OIP.yDKIl4FUEJmU9YA5T7QhAwHaEp?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+      alt="Quy trình build Docker image từ Dockerfile"
+      width="800"
+      height="400">
+    <figcaption>
+      <em>Hình minh họa: Quá trình Docker build image theo từng layer từ Dockerfile (Nguồn: Docker Docs)</em>
+    </figcaption>
+  </figure>
+
+  <h3>Best practices khi viết Dockerfile</h3>
+  <ul>
+    <li><strong>Ưu tiên base image nhẹ</strong>: Dùng <code>alpine</code>, <code>distroless</code> thay vì image đầy đủ (như <code>ubuntu</code>) nếu không cần công cụ hệ thống.</li>
+    <li><strong>Tận dụng layer caching</strong>: Đặt các bước ít thay đổi (như cài dependency) lên trước.</li>
+    <li><strong>Tránh lưu secret trong image</strong>: Không dùng <code>RUN</code> để hardcode mật khẩu hoặc token.</li>
+    <li><strong>Sử dụng <code>.dockerignore</code></strong>: Loại bỏ file không cần thiết (như <code>node_modules</code>, <code>.git</code>) khi <code>COPY</code>.</li>
+    <li><strong>Không chạy ứng dụng với quyền root</strong>: Dùng <code>USER</code> để chuyển sang user thường sau khi cài đặt.</li>
+  </ul>
+
+  <h3>Xây dựng và chạy image</h3>
+  <p>Sau khi tạo Dockerfile, bạn có thể build và chạy ứng dụng như sau:</p>
+  <pre><code># Build image
+docker build -t my-node-app .
+
+# Chạy container
+docker run -d -p 3000:3000 my-node-app</code></pre>
+  <p>
+    Ứng dụng sẽ khả dụng tại <code>http://localhost:3000</code>.
+  </p>
+
+  <p>
+    Viết Dockerfile không chỉ là kỹ năng kỹ thuật — đó là nghệ thuật cân bằng giữa hiệu quả, bảo mật và khả năng tái sử dụng. Một Dockerfile tốt là nền tảng cho mọi pipeline CI/CD hiện đại.
+  </p>
+</section>
+
+<section id="cong-cu">
+  <h2>Các công cụ liên quan đến Docker nên học</h2>
+
+  <p>
+    Docker không tồn tại trong chân không. Trong hệ sinh thái DevOps và cloud-native hiện đại, nó thường được kết hợp với nhiều công cụ khác để tạo thành quy trình phát triển, triển khai và giám sát hoàn chỉnh. Việc làm quen với các công cụ này không chỉ mở rộng năng lực kỹ thuật mà còn giúp bạn làm việc hiệu quả trong môi trường chuyên nghiệp.
+  </p>
+
+  <h3>1. Docker Desktop</h3>
+  <p>
+    <strong>Docker Desktop</strong> là ứng dụng GUI chính thức cho Windows và macOS, tích hợp Docker Engine, CLI, Compose, Kubernetes (tùy chọn) và công cụ quản lý tài nguyên. Đây là điểm khởi đầu lý tưởng cho người mới, giúp:
+  </p>
+  <ul>
+    <li>Chạy container mà không cần cài Linux.</li>
+    <li>Quản lý image, container, volume qua giao diện trực quan.</li>
+    <li>Debug dễ dàng với log và terminal tích hợp.</li>
+  </ul>
+
+  <h3>2. Docker Compose</h3>
+  <p>
+    Như đã trình bày ở mục trước, <strong>Docker Compose</strong> là công cụ thiết yếu để định nghĩa và chạy ứng dụng đa container trên môi trường đơn máy. Đây là bước đệm quan trọng trước khi tiếp cận hệ thống orchestration quy mô lớn.
+  </p>
+
+  <h3>3. BuildKit</h3>
+  <p>
+    <strong>BuildKit</strong> là backend build hiện đại thay thế trình build mặc định của Docker. Nó mang lại:
+  </p>
+  <ul>
+    <li>Tốc độ build nhanh hơn nhờ song song hóa các bước.</li>
+    <li>Hỗ trợ secret an toàn trong quá trình build (không lưu vào layer).</li>
+    <li>Cache hiệu quả hơn với cú pháp <code># syntax=docker/dockerfile:1</code>.</li>
+  </ul>
+  <p>
+    Kích hoạt bằng: <code>DOCKER_BUILDKIT=1 docker build ...</code>
+  </p>
+
+  <h3>4. Podman</h3>
+  <p>
+    <strong>Podman</strong> là công cụ thay thế Docker không cần daemon, hỗ trợ chạy container với quyền người dùng thường (rootless) — tăng tính bảo mật. Nó tương thích gần như hoàn toàn với lệnh Docker (<code>alias docker=podman</code>), và được Red Hat tích hợp sâu trong hệ sinh thái RHEL/Fedora.
+  </p>
+
+  <h3>5. Trivy</h3>
+  <p>
+    <strong>Trivy</strong> (bởi Aqua Security) là công cụ mã nguồn mở để quét lỗ hổng bảo mật trong Docker image, thư viện phụ thuộc và cấu hình IaC. Ví dụ:
+  </p>
+  <pre><code>trivy image nginx:latest</code></pre>
+  <p>
+    Rất phù hợp để tích hợp vào CI pipeline nhằm ngăn image có lỗ hổng được deploy.
+  </p>
+
+  <h3>6. Dive</h3>
+  <p>
+    <strong>Dive</strong> là công cụ phân tích layer của Docker image, giúp bạn:
+  </p>
+  <ul>
+    <li>Xem kích thước từng layer.</li>
+    <li>Phát hiện file rác, thư viện thừa.</li>
+    <li>Tối ưu image để giảm dung lượng.</li>
+  </ul>
+  <pre><code>dive your-image-name</code></pre>
+
+  
+
+  <h3>7. Portainer</h3>
+  <p>
+    <strong>Portainer</strong> là giao diện quản trị web cho Docker (và Kubernetes), cho phép bạn:
+  </p>
+  <ul>
+    <li>Quản lý container, image, network, volume qua UI.</li>
+    <li>Truy cập terminal trong container.</li>
+    <li>Giám sát tài nguyên (CPU, RAM).</li>
+  </ul>
+  <p>
+    Rất hữu ích cho team không muốn dùng CLI thường xuyên.
+  </p>
+
+  <h3>8. Registries: Docker Hub, Harbor, AWS ECR</h3>
+  <p>
+    Ngoài Docker Hub, bạn nên làm quen với:
+  </p>
+  <ul>
+    <li><strong>Harbor</strong>: registry mã nguồn mở, hỗ trợ RBAC, quét lỗ hổng, signing image.</li>
+    <li><strong>AWS ECR / Azure Container Registry / Google Artifact Registry</strong>: registry managed trong cloud — tích hợp IAM, bảo mật cao.</li>
+  </ul>
+
+  <h3>9. Công cụ Orchestration: Kubernetes (K8s)</h3>
+  <p>
+    Khi hệ thống mở rộng ra nhiều máy chủ, Docker đơn lẻ không đủ. <strong>Kubernetes</strong> là nền tảng orchestration tiêu chuẩn để:
+  </p>
+  <ul>
+    <li>Quản lý hàng trăm container.</li>
+    <li>Tự động scale, self-healing, load balancing.</li>
+    <li>Triển khai blue/green, canary.</li>
+  </ul>
+  <p>
+    Docker là nền tảng — Kubernetes là tương lai. Hiểu Docker là bước đầu tiên để chinh phục K8s.
+  </p>
+
+  <h3>10. CI/CD Platforms: GitHub Actions, GitLab CI</h3>
+  <p>
+    Docker thường được tích hợp sâu vào pipeline CI/CD. Ví dụ, trong GitHub Actions:
+  </p>
+  <pre><code>- name: Build and push Docker image
+  run: |
+    docker build -t my-app .
+    docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+    docker push my-app</code></pre>
+  <p>
+    Việc hiểu cách build, test và deploy image trong pipeline là kỹ năng bắt buộc trong DevOps hiện đại.
+  </p>
+
+  <p>
+    Tóm lại, hành trình làm chủ Docker không dừng lại ở lệnh <code>docker run</code>. Bằng cách kết hợp với các công cụ trên, bạn sẽ xây dựng được hệ thống phần mềm hiện đại — <strong>nhanh chóng, an toàn, có thể mở rộng và dễ bảo trì</strong>.
+  </p>
+</section>
+
+<section id="lo-trinh">
+  <h2>Lộ trình học Docker gợi ý</h2>
+
+  <p>
+    Docker là một trong những công nghệ nền tảng của DevOps và phát triển phần mềm hiện đại. Để làm chủ Docker một cách bài bản — từ người mới bắt đầu đến chuyên gia — bạn nên theo đuổi một lộ trình học có cấu trúc, kết hợp lý thuyết, thực hành và tích hợp hệ sinh thái. Dưới đây là lộ trình 4 giai đoạn được thiết kế dành cho lập trình viên, DevOps engineer và người đam mê công nghệ.
+  </p>
+
+  <h3>Giai đoạn 1: Nền tảng cơ bản (1–2 tuần)</h3>
+  <ul>
+    <li>Hiểu khái niệm <strong>containerization</strong> và sự khác biệt giữa container và máy ảo (VM).</li>
+    <li>Cài đặt Docker (Docker Engine trên Linux hoặc Docker Desktop trên Windows/macOS).</li>
+    <li>Thực hành các lệnh cơ bản:
+      <ul>
+        <li><code>docker run</code>, <code>docker ps</code>, <code>docker logs</code></li>
+        <li><code>docker build</code>, <code>docker images</code>, <code>docker rmi</code></li>
+        <li><code>docker exec</code>, <code>docker stop</code>, <code>docker rm</code></li>
+      </ul>
+    </li>
+    <li>Chạy các image có sẵn từ Docker Hub (nginx, redis, postgres).</li>
+  </ul>
+
+  <h3>Giai đoạn 2: Viết và tối ưu Dockerfile (1–2 tuần)</h3>
+  <ul>
+    <li>Học cú pháp Dockerfile: <code>FROM</code>, <code>COPY</code>, <code>RUN</code>, <code>WORKDIR</code>, <code>CMD</code>, <code>EXPOSE</code>, <code>ENV</code>.</li>
+    <li>Thực hành container hóa ứng dụng thực tế (Node.js, Python Flask, Java Spring Boot).</li>
+    <li>Áp dụng best practices:
+      <ul>
+        <li>Multi-stage build</li>
+        <li>Sử dụng base image nhẹ (alpine, distroless)</li>
+        <li>Tận dụng layer caching</li>
+        <li>Tạo file <code>.dockerignore</code></li>
+      </ul>
+    </li>
+    <li>Quét lỗ hổng bảo mật bằng <strong>Trivy</strong> hoặc <strong>Docker Scout</strong>.</li>
+  </ul>
+
+  <h3>Giai đoạn 3: Ứng dụng đa container với Docker Compose (1 tuần)</h3>
+  <ul>
+    <li>Hiểu cấu trúc tệp <code>docker-compose.yml</code>.</li>
+    <li>Triển khai hệ thống gồm web + database + cache (ví dụ: Node.js + MongoDB + Redis).</li>
+    <li>Thiết lập volume, network, biến môi trường và phụ thuộc giữa dịch vụ.</li>
+    <li>Sử dụng Compose để chạy môi trường local giống production.</li>
+  </ul>
+
+  <h3>Giai đoạn 4: Tích hợp và mở rộng (2–4 tuần trở lên)</h3>
+  <ul>
+    <li><strong>CI/CD Integration</strong>: Tự động build và push image trong GitHub Actions / GitLab CI.</li>
+    <li><strong>Private Registry</strong>: Triển khai và sử dụng Harbor hoặc AWS ECR.</li>
+    <li><strong>Orchestration cơ bản</strong>: Làm quen với Kubernetes (Minikube, Kind) — hiểu Pod, Deployment, Service.</li>
+    <li><strong>Giám sát & quản trị</strong>: Dùng Portainer, cAdvisor, Prometheus để theo dõi container.</li>
+    <li><strong>Bảo mật nâng cao</strong>: Rootless container, user namespace, image signing.</li>
+  </ul>
+
+  <figure>
+    <img 
+      src="https://roadmap.sh/og/roadmap/docker" 
+      alt="Lộ trình học Docker từ cơ bản đến nâng cao"
+      width="800"
+      height="500">
+    <figcaption>
+      <em>Hình minh họa: Lộ trình học Docker — từ container cơ bản đến tích hợp cloud-native (Nguồn: docker.com)</em>
+    </figcaption>
+  </figure>
+
+  <h3>Tài nguyên học tập đề xuất</h3>
+  <ul>
+    <li><strong>Tài liệu chính thức</strong>: <a href="https://docs.docker.com/" target="_blank">Docker Docs</a> — luôn cập nhật và đầy đủ.</li>
+    <li><strong>Khóa học miễn phí</strong>: 
+      <ul>
+        <li><a href="https://www.docker.com/playground/" target="_blank">Play with Docker</a> — môi trường lab trực tuyến.</li>
+        <li><a href="https://kodekloud.com/courses/docker-for-the-absolute-beginner/" target="_blank">Docker for the Absolute Beginner (KodeKloud)</a></li>
+      </ul>
+    </li>
+    <li><strong>Thực hành</strong>: Tự container hóa dự án cá nhân hoặc đóng góp vào mã nguồn mở sử dụng Docker.</li>
+  </ul>
+
+  <p>
+    Lộ trình này linh hoạt — bạn có thể điều chỉnh tốc độ tùy theo mục tiêu (phát triển ứng dụng, vận hành hệ thống hay trở thành DevOps engineer). Điều quan trọng nhất là <strong>học đi đôi với hành</strong>: mỗi khái niệm nên được củng cố bằng ít nhất một bài thực hành nhỏ.
+  </p>
+  <p>
+    Khi bạn có thể tự tin container hóa một ứng dụng full-stack, triển khai nó qua CI/CD và giám sát trên môi trường local — bạn đã sẵn sàng để làm việc với Docker trong môi trường chuyên nghiệp.
+  </p>
+</section>
+
+
+<section id="tai-nguyen">
+  <h2>Tài nguyên học tập miễn phí</h2>
+
+  <p>
+    Docker là một nền tảng mã nguồn mở với cộng đồng lớn và hệ sinh thái phong phú. Nhờ đó, có rất nhiều tài nguyên chất lượng cao — hoàn toàn miễn phí — giúp bạn học từ cơ bản đến nâng cao. Dưới đây là danh sách được chọn lọc theo tiêu chí: <strong>chính thống, cập nhật, thực hành được và phù hợp với người Việt</strong>.
+  </p>
+
+  <h3>1. Tài liệu chính thức</h3>
+  <ul>
+    <li>
+      <strong><a href="https://docs.docker.com/" target="_blank">Docker Documentation</a></strong>  
+      <br>Tài liệu đầy đủ nhất, luôn cập nhật theo phiên bản mới nhất. Bao gồm hướng dẫn cài đặt, tham chiếu lệnh, best practices và kiến trúc.
+    </li>
+    <li>
+      <strong><a href="https://docs.docker.com/get-started/" target="_blank">Docker Get Started</a></strong>  
+      <br>Khóa học tương tác 5 phần do chính Docker Inc. cung cấp — lý tưởng cho người mới.
+    </li>
+  </ul>
+
+  <h3>2. Môi trường thực hành trực tuyến (không cần cài đặt)</h3>
+  <ul>
+    <li>
+      <strong><a href="https://www.docker.com/playground/" target="_blank">Play with Docker (PWD)</a></strong>  
+      <br>Môi trường lab miễn phí trong trình duyệt, cung cấp máy ảo Linux đã cài sẵn Docker. Bạn có thể tạo cụm nhiều node, thử Docker Swarm — hoàn toàn miễn phí.
+    </li>
+    <li>
+      <strong><a href="https://killercoda.com/" target="_blank">Killer Coda</a></strong>  
+      <br>Nền tảng học tương tác với các kịch bản Docker, Compose và Kubernetes. Mỗi bài có terminal thực và hướng dẫn từng bước.
+    </li>
+  </ul>
+
+  <h3>3. Khóa học video miễn phí</h3>
+  <ul>
+    <li>
+      <strong><a href="https://www.youtube.com/playlist?list=PLy7NrYWoggjzfAH3IqU6c01Zy6yB6c7K" target="_blank">Docker Tutorial for Beginners (TechWorld with Nana)</a></strong>  
+      <br>Chuỗi video rõ ràng, có ví dụ thực tế, giải thích sâu về image, container, volume, network và Compose.
+    </li>
+    <li>
+      <strong><a href="https://www.youtube.com/watch?v=3c-iBn73dDE" target="_blank">Docker in 100 Seconds (Fireship)</a></strong>  
+      <br>Giới thiệu nhanh nhưng súc tích — phù hợp để ôn tập hoặc chia sẻ cho đồng đội.
+    </li>
+  </ul>
+
+  <h3>4. Khóa học có cấu trúc (miễn phí)</h3>
+  <ul>
+    <li>
+      <strong><a href="https://kodekloud.com/courses/docker-for-the-absolute-beginner/" target="_blank">Docker for the Absolute Beginner (KodeKloud)</a></strong>  
+      <br>Khóa học miễn phí với video + lab thực hành trực tiếp trong trình duyệt. Có bài kiểm tra và chứng chỉ hoàn thành.
+    </li>
+    <li>
+      <strong><a href="https://university.docker.com/" target="_blank">Docker University</a></strong>  
+      <br>Nền tảng học chính thức từ Docker — cung cấp các khóa học ngắn, miễn phí, có chứng chỉ số (digital badge).
+    </li>
+  </ul>
+
+  <h3>5. Cộng đồng & diễn đàn hỗ trợ</h3>
+  <ul>
+    <li>
+      <strong><a href="https://stackoverflow.com/questions/tagged/docker" target="_blank">Stack Overflow (tag: docker)</a></strong>  
+      <br>Nơi giải đáp mọi thắc mắc kỹ thuật — gần như mọi lỗi bạn gặp đã có người hỏi trước đó.
+    </li>
+    <li>
+      <strong><a href="https://github.com/docker/awesome-compose" target="_blank">Awesome Compose (GitHub)</a></strong>  
+      <br>Bộ sưu tập hàng trăm tệp <code>docker-compose.yml</code> mẫu cho các stack phổ biến: WordPress, ELK, Prometheus, v.v.
+    </li>
+    <li>
+      <strong><a href="https://discord.gg/docker" target="_blank">Docker Community Discord</a></strong>  
+      <br>Giao lưu, hỏi đáp trực tiếp với chuyên gia và người dùng toàn cầu.
+    </li>
+  </ul>
+
+  <h3>6. Sách & ebook miễn phí</h3>
+  <ul>
+    <li>
+      <strong><a href="https://www.docker.com/resources/" target="_blank">Docker Resources Hub</a></strong>  
+      <br>Cung cấp whitepaper, ebook và case study từ Docker Inc. (ví dụ: “Docker for DevOps”, “Container Security”).
+    </li>
+  </ul>
+
+  <figure>
+    <img 
+      src="https://www.docker.com/wp-content/uploads/2022/03/docker-university-banner.png" 
+      alt="Giao diện Docker University - nền tảng học tập chính thức"
+      width="800"
+      height="400">
+    <figcaption>
+      <em>Hình minh họa: Docker University — nền tảng học tập chính thức với khóa học miễn phí và chứng chỉ số (Nguồn: docker.com)</em>
+    </figcaption>
+  </figure>
+
+  <p>
+    Lời khuyên: Đừng chỉ đọc — hãy <strong>gõ lệnh, sửa lỗi, thử nghiệm</strong>. Mỗi tài nguyên trên đều có phần thực hành. Hãy bắt đầu từ <em>Play with Docker</em> ngay hôm nay, ngay cả khi bạn chưa cài Docker trên máy!
+  </p>
+</section>
+
+
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+ <ul>
+  <li><a href="#gioi-thieu">Giới thiệu về Docker</a></li>
+  <li><a href="#docker-la-gi">Docker là gì?</a></li>
+  
+  <li><a href="#ky-nang">Các kỹ năng cần thiết khi làm việc với Docker</a></li>
+  <li><a href="#cau-truc-docker">Kiến trúc và thành phần cốt lõi của Docker</a></li>
+  <li><a href="#dockerfile">Viết Dockerfile cơ bản</a></li>
+  
+  <li><a href="#cong-cu">Các công cụ liên quan đến Docker nên học</a></li>
+
+  <li><a href="#lo-trinh">Lộ trình học Docker gợi ý</a></li>
+  <li><a href="#tai-nguyen">Tài nguyên học tập miễn phí</a></li>
+</ul>
+    </aside>
+  </div>
+<section class="related-posts">
+  <h2>Những bài viết liên quan:</h2>
+  <div class="related-grid">
+
+    <a href="linux.html" class="related-card">
+      <img src="https://d3mxt5v3yxgcsr.cloudfront.net/courses/5988/course_5988_image.jpg" alt="Linux">
+      <div class="related-content">
+        <h3>Giới thiệu về Linux</h3>
+        <p>Tổng quan về Linux và những câu lệnh cơ bản.</p>
+      </div>
+    </a>
+
+
+
+    <a href="cloud.html" class="related-card">
+      <img src="https://cdn.axalize.vn/media/content/images/cloud-computing.jpg" alt="Cloud">
+      <div class="related-content">
+        <h3>Cloud Computing</h3>
+        <p>Hiểu rõ về Cloud và ứng dụng trong thực tế.</p>
+      </div>
+    </a>
+
+    <a href="network.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.j7ey9UDQrNyUSKpakne90AHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Networking">
+      <div class="related-content">
+        <h3>Networking</h3>
+        <p>Các khái niệm networking căn bản cần nắm rõ.</p>
+      </div>
+    </a>
+
+    <a href="terra.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.1gAEVon2RF5oko4iWCfftgHaHO?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Terraform">
+      <div class="related-content">
+        <h3>Tổng quan về Terraform</h3>
+        <p>Hiểu cơ bản và các lệnh căn bản của Terraform.</p>
+      </div>
+    </a>
+
+    <a href="nginx.html" class="related-card">
+      <img src="https://miro.medium.com/max/1200/1*qTJWhzlBH_zNVYSj5BJxrw.jpeg" alt="Nginx">
+      <div class="related-content">
+        <h3>Tổng quan về Nginx</h3>
+        <p>Cơ chế hoạt động, khái niệm về Nginx căn bản.</p>
+      </div>
+    </a>
+
+    <a href="ci-cd.html" class="related-card">
+      <img src="https://th.bing.com/th/id/R.385f93c510b66c9133840663a44f2dfb?rik=SgSCz4ByZ1W%2f5A&pid=ImgRaw&r=0" alt="CI/CD">
+      <div class="related-content">
+        <h3>CI/CD</h3>
+        <p>Căn bản về CI/CD, các nền tảng triển khai v.v.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

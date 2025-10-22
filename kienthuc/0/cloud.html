@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Làm thế nào để trở thành DevOps Engineer?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/fc7dd3f8-b709-44de-ab1f-14e9da0fa882/00/w=1920,quality=90,fit=scale-down" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Dec 19, 2022 • 7:25 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1> Khái niệm Cloud Computing: Cloud là gì?</h1>
+
+
+
+        <h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>Chào các bạn tới về Series tìm hiểu về Cloud Computing. Trong Series này chúng ta không tìm hiểu về cách sử dụng một Cloud cụ thể nào hết, mà ta sẽ tìm hiểu về công nghệ bên dưới Cloud.</p>
+       <p>Series này mình tham khảo từ cuốn Cloud Computing For Dummies.</p>
+
+<figure>
+    <img 
+      src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/fc7dd3f8-b709-44de-ab1f-14e9da0fa882/00/w=1920,quality=90,fit=scale-down" 
+     
+      width="800"
+      height="400">
+    <figcaption>
+<p>Cloud là một thuật ngữ mà các bạn đã nghe rất nhiều trong những năm gần đây, nó đã thay đổi hoàn toàn cách các doanh nghiệp vận hành và triển khai phần mềm. Vậy Cloud là gì? Trước khi hiểu được Cloud là gì, ta cần hiểu về khái niệm Cloud Computing.</p>
+
+
+        <h2 id="devops-la-gi">Điện toán đám mây (Cloud Computing)</h2>
+        <p>Cloud Computing là một phương pháp cung cấp tài nguyên máy tính tới người dùng một cách dễ dàng nhất, bao gồm ứng dụng, phầm mềm, phần cứng, ổ lưu trữ, kết nối mạng, …
+
+Với Cloud Computing thì mọi thứ từ hạ tầng tới ứng dụng đều có thể được cung cấp tới người dùng dưới dạng dịch vụ thông qua Internet.</p>
+
+       <h3>Cloud</h3>
+
+<p>Cloud là tập họp của nhiều tài nguyên máy tính từ phần cứng, mạng, ổ lưu trữ, ứng dụng phần mềm nằm tại các máy chủ phân bổ ở khắp nơi trên thế giới, và các máy chủ này đều sử dụng công nghệ Cloud Computing để người dùng chỉ cần có kết nối Internet thì họ có thể dễ dàng truy cập bất cứ tài nguyên nào.
+
+Và Cloud sẽ được triển khai với các mô hình khác nhau.</p>
+
+
+
+
+        <h2 id="ky-nang">Các loại mô hình của Cloud</h2>
+      <p>Cloud có hai loại mô hình chính: Public Cloud và Private Cloud.</p>
+
+
+<figure>
+    <img 
+      src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/5a279143-1ef6-48b1-985b-26d379d578ce/Untitled/w=1920,quality=90,fit=scale-down" 
+     
+      width="800"
+      height="400">
+    <figcaption>
+
+<p>Và từ hai mô hình này ta sẽ có hai mô hình phụ nữa là: Hybrid Cloud và Multi-cloud.
+
+Hybrid Cloud là một môi trường kết hợp giữa Public Cloud và Private Cloud cộng với Data Centers.
+
+Multi-cloud là môi trường kết hợp giữa nhiều Public Cloud.</p>
+
+<h3>Public Cloud</h3>
+<p>Public Cloud là mô hình Cloud mà tài nguyên của nó có thể được sử dụng bởi bất kì ai. Public Cloud là mô hình phổ biến nhất hiện này vì bên cạnh việc cung cấp tài nguyên máy tính thì Public Cloud còn cung cấp rất nhiều các dịch vụ và ứng dụng đi kèm, giúp việc triển khai phần mềm của các doanh nghiệp càng ngày càng nhanh hơn.
+
+Một ví dụ của Public Cloud là AWS, với AWS thì việc triển khai ứng dụng của ta rất nhanh chóng, trường hợp cụ thể là khi ta cần ứng dụng Redis thì ta không cần phải cài gì cả, AWS cung cấp cho ta dịch vụ Elasticache và chỉ cần một vài thao tác đơn giản là ta có Redis để sử dụng.
+
+Hầu hết các nhà phát triển Public Cloud đều cung cấp cho người dùng công cụ Web Console và API để người dùng có thể dễ dàng truy cập được tài nguyên của Cloud.</p>
+
+<h3>Private Cloud</h3>
+
+<p>Private Cloud là mô hình Cloud mà tài nguyên của nó chỉ được cấp riêng cho các doanh nghiệp hoặc các nhân viên và đối tác của doanh nghiệp. Private Cloud là môi trường yêu cầu tính bảo mật cao nên thường được đặt trong tường lửa và không phải ai cũng có thể truy cập được. Private Cloud thường được phát triển và quản lý trực tiếp bởi doanh nghiệp sử dụng nó.
+
+Ta có thể hiểu đơn giản Private Cloud là một Data Center riêng của doanh nghiệp mà có sử dụng công nghệ Cloud Computing.
+
+Một ví dụ của Private Cloud là FPT Cloud, FPT phát triển Cloud để riêng cho bản thân doanh nghiệp và nhân viên sử dụng.
+
+Việc doanh nghiệp tự phát triển riêng cho mình một môi trường Cloud không hề dễ dàng, tuy nhiên hiện nay thì vấn đề đó đã được giải quyết phần nào.</p>
+
+
+
+
+
+
+
+
+        <h2 id="cong-cu">Sử dụng Public Cloud ở trên Data Center</h2>
+        <p>Ngày nay, các nhà phát triển Public Cloud đóng gói các dịch vụ Cloud của họ lại thành các ứng dụng mà có thể cài được trên môi trường Data Center (On-premises) của doanh nghiệp.</p>
+
+
+
+<figure>
+    <img 
+      src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/7e55324b-e8d8-4f46-b6ce-87c485b805f9/Untitled/w=1920,quality=90,fit=scale-down" 
+     
+      width="800"
+      height="400">
+    <figcaption>
+
+<p>Với điều này thì các doanh nghiệp có thể sử dụng dịch vụ Public Cloud một cách dễ dàng mà vẫn đảm bảo được bảo mật, vì dữ liệu và ứng dụng đều được chạy trên Data Center của họ.</p>
+
+
+
+
+
+
+
+
+
+
+
+        <h2 id="lo-trinh">Kết luận</h2>
+       <p>Vậy là ta đã tìm hiểu xong về khái niệm Cloud Computing và Cloud. Cloud sẽ là tương lai của ngành công nghệ và chúng ta nên học để không bị lạc hậu, mình gợi ý các bạn học AWS vì đây là Cloud phổ biến nhất hiện tại. Bài tiếp theo chúng ta sẽ tìm hiểu về khái niệm Resource Pools và Cloud Models.</p>
+    
+    </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#devops-la-gi">Điện toán đám mây (Cloud Computing)</a></li>
+        <li><a href="#ky-nang">Các loại mô hình của Cloud</a></li>
+        <li><a href="#cong-cu">Sử dụng Public Cloud ở trên Data Center</a></li>
+        <li><a href="#lo-trinh">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+<section class="related-posts">
+  <h2>Bài viết liên quan</h2>
+  <div class="related-grid">
+    <a href="aws-database.html" class="related-card">
+      <img src="images/aws-db.jpg" alt="Cơ sở dữ liệu trên AWS">
+      <div class="related-content">
+        <h3>Các loại cơ sở dữ liệu trên AWS</h3>
+        <p>Tìm hiểu sự khác nhau giữa RDS, DynamoDB và nhiều loại database khác.</p>
+      </div>
+    </a>
+
+    <a href="aws-credit.html" class="related-card">
+      <img src="images/aws-credit.jpg" alt="AWS credit">
+      <div class="related-content">
+        <h3>Cách xin khoảng $5k credit từ AWS cho doanh nghiệp</h3>
+        <p>Hướng dẫn chi tiết để nhận ưu đãi AWS cho startup và dự án nhỏ.</p>
+      </div>
+    </a>
+
+    <a href="aws-cloudfront.html" class="related-card">
+      <img src="images/aws-cloudfront.jpg" alt="CloudFront">
+      <div class="related-content">
+        <h3>Improve Network Performance with CloudFront</h3>
+        <p>Tối ưu tốc độ website của bạn bằng AWS CloudFront.</p>
+      </div>
+    </a>
+
+    <a href="aws-cicd.html" class="related-card">
+      <img src="images/aws-cicd.jpg" alt="CI/CD AWS">
+      <div class="related-content">
+        <h3>Lỗi bảo mật khi làm CI/CD trên AWS mà các bạn không để ý</h3>
+        <p>Những lỗi cấu hình phổ biến và cách khắc phục an toàn.</p>
+      </div>
+    </a>
+
+    <a href="aws-localstack.html" class="related-card">
+      <img src="images/aws-localstack.jpg" alt="LocalStack">
+      <div class="related-content">
+        <h3>Thực hành AWS mà không cần tạo tài khoản</h3>
+        <p>Chạy thử môi trường AWS trên máy cá nhân bằng LocalStack.</p>
+      </div>
+    </a>
+
+    <a href="aws-s3.html" class="related-card">
+      <img src="images/aws-s3.jpg" alt="AWS S3">
+      <div class="related-content">
+        <h3>Tại sao lại sử dụng AWS S3?</h3>
+        <p>Lý do khiến S3 là lựa chọn hàng đầu cho lưu trữ dữ liệu.</p>
+      </div>
+    </a>
+  </div>
+</section>
+<section class="related-posts">
+  <h2>DevOps — Những điều cần học</h2>
+  <div class="related-grid">
+
+    <a href="linux.html" class="related-card">
+      <img src="https://d3mxt5v3yxgcsr.cloudfront.net/courses/5988/course_5988_image.jpg" alt="Linux">
+      <div class="related-content">
+        <h3>Giới thiệu về Linux</h3>
+        <p>Tổng quan về Linux và những câu lệnh cơ bản.</p>
+      </div>
+    </a>
+
+    <a href="docker.html" class="related-card">
+      <img src="https://storage.googleapis.com/static.ianlewis.org/prod/img/docker/large_v-trans.png" alt="Docker">
+      <div class="related-content">
+        <h3>Tổng quan về Docker</h3>
+        <p>Tìm hiểu về Docker, cách vận hành và chức năng chính.</p>
+      </div>
+    </a>
+
+    <a href="cloud.html" class="related-card">
+      <img src="https://cdn.axalize.vn/media/content/images/cloud-computing.jpg" alt="Cloud">
+      <div class="related-content">
+        <h3>Cloud Computing</h3>
+        <p>Hiểu rõ về Cloud và ứng dụng trong thực tế.</p>
+      </div>
+    </a>
+
+    <a href="network.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.j7ey9UDQrNyUSKpakne90AHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Networking">
+      <div class="related-content">
+        <h3>Networking</h3>
+        <p>Các khái niệm networking căn bản cần nắm rõ.</p>
+      </div>
+    </a>
+
+    <a href="terra.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.1gAEVon2RF5oko4iWCfftgHaHO?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Terraform">
+      <div class="related-content">
+        <h3>Tổng quan về Terraform</h3>
+        <p>Hiểu cơ bản và các lệnh căn bản của Terraform.</p>
+      </div>
+    </a>
+
+    <a href="nginx.html" class="related-card">
+      <img src="https://miro.medium.com/max/1200/1*qTJWhzlBH_zNVYSj5BJxrw.jpeg" alt="Nginx">
+      <div class="related-content">
+        <h3>Tổng quan về Nginx</h3>
+        <p>Cơ chế hoạt động, khái niệm về Nginx căn bản.</p>
+      </div>
+    </a>
+
+    <a href="ci-cd.html" class="related-card">
+      <img src="https://th.bing.com/th/id/R.385f93c510b66c9133840663a44f2dfb?rik=SgSCz4ByZ1W%2f5A&pid=ImgRaw&r=0" alt="CI/CD">
+      <div class="related-content">
+        <h3>CI/CD</h3>
+        <p>Căn bản về CI/CD, các nền tảng triển khai v.v.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

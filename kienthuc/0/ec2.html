@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS EC2: Máy chủ ảo đầu tiên của bạn trên đám mây</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://digitalcloud.training/wp-content/uploads/2022/01/Amazon-EC2.jpg" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 22, 2025 • 8:15 PM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>AWS EC2: Máy chủ ảo đầu tiên của bạn trên đám mây</h1>
+
+        <h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>Amazon EC2 (Elastic Compute Cloud) là một trong những dịch vụ cơ bản và quan trọng nhất của AWS. Nó cho phép bạn tạo và quản lý các máy chủ ảo (gọi là <strong>instance</strong>) trên đám mây — thay vì mua máy vật lý và đặt trong data center.</p>
+        <p>Với EC2, bạn có thể:</p>
+        <ul>
+          <li>Chạy website, ứng dụng backend, database, hoặc bất kỳ phần mềm nào cần máy chủ.</li>
+          <li>Tăng/giảm số lượng máy theo nhu cầu (elastic scaling).</li>
+          <li>Chỉ trả tiền cho thời gian sử dụng — tính theo giây hoặc giờ.</li>
+        </ul>
+        <p>Bài viết này sẽ hướng dẫn bạn hiểu rõ EC2, cách tạo instance, và những điều cần lưu ý khi sử dụng.</p>
+
+        <figure>
+          <img 
+            src="https://th.bing.com/th/id/R.106a3db24943b70ebe0a41830f4808c1?rik=nc%2bltTUyvfV7XQ&pid=ImgRaw&r=0" 
+            width="800"
+            height="400"
+            alt="AWS EC2 dashboard">
+          <figcaption>
+            Giao diện quản lý EC2 trong AWS Console.
+          </figcaption>
+        </figure>
+
+        <h2 id="cac-khai-niem-co-ban">Các khái niệm cơ bản của EC2</h2>
+        <p>Trước khi tạo máy, bạn cần hiểu một số thuật ngữ:</p>
+
+        <h3>1. Instance</h3>
+        <p>Là một máy chủ ảo đang chạy trên AWS. Mỗi instance có CPU, RAM, ổ đĩa, hệ điều hành (Linux, Windows, v.v.).</p>
+
+        <h3>2. AMI (Amazon Machine Image)</h3>
+        <p>Là “bản mẫu” hệ điều hành để tạo instance. Ví dụ:</p>
+        <ul>
+          <li>Amazon Linux 2</li>
+          <li>Ubuntu Server</li>
+          <li>Windows Server</li>
+        </ul>
+        <p>Bạn có thể dùng AMI do AWS cung cấp hoặc tự tạo từ máy hiện có.</p>
+
+        <h3>3. Instance Type</h3>
+        <p>Xác định cấu hình phần cứng của máy. Tên dạng <code>t3.micro</code>, <code>m5.large</code>, <code>c5.xlarge</code>, v.v.</p>
+        <p>Một số loại phổ biến:</p>
+        <ul>
+          <li><strong>t-series (t3.micro, t3.small)</strong>: Dành cho dev, test, tải nhẹ — có “burst” CPU.</li>
+          <li><strong>m-series (m5.large)</strong>: Cân bằng CPU/RAM — phù hợp ứng dụng tổng quát.</li>
+          <li><strong>c-series</strong>: Tập trung vào CPU — dành cho tính toán nặng.</li>
+          <li><strong>r-series</strong>: Nhiều RAM — dành cho database, cache.</li>
+        </ul>
+        <p>Lưu ý: <code>t3.micro</code> nằm trong <strong>Free Tier</strong> — miễn phí 750 giờ/tháng trong 12 tháng đầu.</p>
+
+        <h3>4. Key Pair</h3>
+        <p>Là cặp khóa (public/private key) dùng để đăng nhập vào instance Linux qua SSH. Bạn <strong>phải tải file .pem</strong> khi tạo — nếu mất, bạn không thể đăng nhập lại.</p>
+
+        <h3>5. Security Group</h3>
+        <p>Là “tường lửa” cho instance. Bạn định nghĩa:</p>
+        <ul>
+          <li>Port nào được mở (22 cho SSH, 80 cho HTTP, 443 cho HTTPS…)</li>
+          <li>IP nào được phép kết nối (0.0.0.0/0 = mọi nơi, hoặc giới hạn theo IP cụ thể).</li>
+        </ul>
+        <p>Mặc định, tất cả port đều bị chặn — bạn phải mở thủ công.</p>
+
+        <h3>6. EBS (Elastic Block Store)</h3>
+        <p>Là ổ đĩa ảo gắn vào instance. Dữ liệu trên EBS <strong>không mất</strong> khi tắt máy (trừ khi bạn xóa volume).</p>
+
+        <h2 id="tao-instance">Hướng dẫn tạo EC2 instance</h2>
+        <p>Bước-by-bước trên AWS Console:</p>
+
+        <ol>
+          <li>Đăng nhập AWS Console → tìm “EC2” → chọn <strong>Launch Instance</strong>.</li>
+          <li><strong>Name:</strong> Đặt tên (ví dụ: web-server-dev).</li>
+          <li><strong>Application and OS Images:</strong> Chọn AMI — ví dụ “Ubuntu Server 22.04 LTS”.</li>
+          <li><strong>Instance type:</strong> Chọn <code>t3.micro</code> (miễn phí trong Free Tier).</li>
+          <li><strong>Key pair:</strong> Tạo mới hoặc chọn sẵn. Nhớ <strong>tải file .pem</strong> về máy.</li>
+          <li><strong>Network settings:</strong>
+            <ul>
+              <li>Chọn VPC mặc định.</li>
+              <li>Tích “Allow SSH traffic from” → chọn “My IP” (an toàn hơn “Anywhere”).</li>
+              <li>Nếu cần web, tích thêm “Allow HTTP/HTTPS traffic from internet”.</li>
+            </ul>
+          </li>
+          <li><strong>Configure storage:</strong> Để mặc định 8GB (EBS gp2) — đủ cho thử nghiệm.</li>
+          <li>Nhấn <strong>Launch instance</strong>.</li>
+        </ol>
+
+        <p>Sau vài giây, instance sẽ ở trạng thái <strong>running</strong>. Bạn có thể thấy:</p>
+        <ul>
+          <li><strong>Public IPv4 DNS:</strong> Dùng để kết nối từ internet.</li>
+          <li><strong>Instance ID:</strong> Định danh duy nhất.</li>
+        </ul>
+
+        <h2 id="ket-noi-ssh">Kết nối vào instance qua SSH</h2>
+        <p>Với máy Linux/macOS, mở terminal và chạy:</p>
+        <pre><code># Đặt quyền cho file key (chỉ đọc bởi bạn)
+chmod 400 ~/Downloads/my-key.pem
+
+# Kết nối (thay bằng public DNS của bạn)
+ssh -i ~/Downloads/my-key.pem ubuntu@ec2-xx-xx-xx-xx.ap-southeast-1.compute.amazonaws.com</code></pre>
+
+        <p>Lưu ý:</p>
+        <ul>
+          <li>Username tùy AMI: <code>ubuntu</code> (Ubuntu), <code>ec2-user</code> (Amazon Linux), <code>Administrator</code> (Windows).</li>
+          <li>Nếu bị lỗi “Permission denied”, kiểm tra lại security group và quyền file .pem.</li>
+        </ul>
+
+        <h2 id="so-sanh">So sánh EC2 với các dịch vụ khác</h2>
+        <p>Nhiều người mới thường nhầm lẫn EC2 với các dịch vụ khác của AWS. Dưới đây là bảng so sánh ngắn:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Dịch vụ</th>
+              <th>Mục đích</th>
+              <th>Mức quản lý</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>EC2</strong></td>
+              <td>Tự quản lý máy chủ, linh hoạt cao</td>
+              <td>Người dùng quản lý toàn bộ OS</td>
+            </tr>
+            <tr>
+              <td><strong>Lambda</strong></td>
+              <td>Chạy code không cần server (serverless)</td>
+              <td>AWS tự quản lý hạ tầng</td>
+            </tr>
+            <tr>
+              <td><strong>Elastic Beanstalk</strong></td>
+              <td>Triển khai web/app nhanh, tự động hóa</td>
+              <td>Quản lý bán tự động</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="tinh-huong">Tình huống thực tế</h2>
+        <p>Giả sử bạn muốn thử triển khai một website Flask trên Ubuntu:</p>
+        <ol>
+          <li>Tạo EC2 instance loại <code>t3.micro</code>.</li>
+          <li>Kết nối SSH và cài đặt Python + Flask.</li>
+          <li>Chạy thử server với <code>flask run --host=0.0.0.0</code>.</li>
+          <li>Mở port 5000 trong Security Group.</li>
+        </ol>
+        <p>Và chỉ vài phút sau, website của bạn đã online toàn cầu — ngay trên máy EC2!</p>
+
+        <h2 id="luu-y-quan-trong">Những lưu ý quan trọng</h2>
+        <ul>
+          <li><strong>Stop ≠ Terminate:</strong> 
+            <ul>
+              <li><code>Stop</code>: Tạm dừng — giữ nguyên ổ đĩa, không tính phí compute (vẫn tính phí EBS).</li>
+              <li><code>Terminate</code>: Xóa vĩnh viễn — mất hết dữ liệu!</li>
+            </ul>
+          </li>
+          <li><strong>Public IP thay đổi khi stop/start:</strong> Nếu cần IP cố định, dùng <strong>Elastic IP</strong>.</li>
+          <li><strong>Không lưu dữ liệu quan trọng trực tiếp trên instance:</strong> Dùng EBS, S3, hoặc database riêng.</li>
+          <li><strong>Luôn giới hạn SSH:</strong> Tránh mở port 22 cho 0.0.0.0/0 — rất nguy hiểm.</li>
+          <li><strong>Theo dõi chi phí:</strong> Dù dùng Free Tier, nếu tạo instance không phải t3.micro, bạn vẫn bị tính tiền.</li>
+        </ul>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>EC2 là nền tảng để bạn bắt đầu hành trình với AWS. Hiểu cách tạo, kết nối và quản lý instance sẽ giúp bạn triển khai ứng dụng, học DevOps, hoặc xây dựng hệ thống trên đám mây một cách an toàn.</p>
+        <p>Hãy bắt đầu với một instance <code>t3.micro</code>, thử cài Nginx, chạy một script Python nhỏ — và quan trọng nhất: <strong>nhớ stop hoặc terminate khi không dùng nữa</strong> để tránh hóa đơn bất ngờ!</p>
+        <p>Bài tiếp theo, chúng ta sẽ tìm hiểu về VPC, Security Group nâng cao, và cách kết nối nhiều dịch vụ AWS với nhau.</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#cac-khai-niem-co-ban">Khái niệm cơ bản</a></li>
+        <li><a href="#tao-instance">Tạo EC2 instance</a></li>
+        <li><a href="#ket-noi-ssh">Kết nối qua SSH</a></li>
+        <li><a href="#so-sanh">So sánh EC2 với dịch vụ khác</a></li>
+        <li><a href="#tinh-huong">Tình huống thực tế</a></li>
+        <li><a href="#luu-y-quan-trong">Lưu ý quan trọng</a></li>
+        <li><a href="#ket-luan">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

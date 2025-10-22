@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang chủ — Series Bài Viết</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ======= Tổng thể ======= */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+      color: #222;
+      overflow-x: hidden;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ======= Header ======= */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding: 14px 36px;
+      background: rgba(250, 250, 250, 0.95);
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    header.shrink {
+      padding: 8px 28px;
+      background: rgba(245, 245, 245, 0.96);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    header img.logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+
+    header img.logo:hover {
+      transform: scale(1.1);
+    }
+
+    /* ======= Navigation ======= */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 26px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #555;
+      font-size: 15.5px;
+      font-weight: 500;
+      padding-bottom: 4px;
+      transition: color 0.25s ease, border-bottom 0.25s ease;
+    }
+
+    nav a:hover {
+      color: #000;
+      border-bottom: 2px solid #000;
+    }
+
+    nav a.active {
+      color: #000;
+      border-bottom: 2px solid #000;
+      font-weight: 600;
+    }
+
+    /* ======= Hero Section ======= */
+    .hero {
+      position: relative;
+      height: 340px;
+      background: linear-gradient(rgba(7,6,6,0.35), rgba(0,0,0,0.35)),
+        url('https://tse4.mm.bing.net/th/id/OIP.UbFoaELDyjCbQbCuf0KR-wHaFj?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    .hero-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      font-weight: 400;
+      margin: 0;
+      color: #eee;
+    }
+
+    /* ======= Main nội dung ======= */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2.section-title {
+      margin: 40px 0 20px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #111;
+    }
+
+    /* ======= Grid bài viết ======= */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+
+    .card-content {
+      padding: 14px 16px;
+    }
+
+    .card-content h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .card-content p {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ======= Footer ======= */
+    footer {
+      background: #fafafa;
+      border-top: 1px solid #eee;
+      text-align: center;
+      padding: 12px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* ======= Responsive ======= */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 18px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      nav {
+        gap: 16px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+    }
+
+    header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Căn giữa tất cả nội dung trong header */
+  padding: 10px 0;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 20px;
+}
+
+nav .nav-links {
+  display: flex;
+  justify-content: center; /* Căn giữa các mục trong thanh nav */
+  gap: 30px; /* Khoảng cách giữa các mục */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #000;
+}
+
+  </style>
+</head>
+<body>
+
+   <header id="main-header">
+    <a href="/index.html"><img src="/img/l.jpg" alt="Logo" class="logo"></a>
+    <nav>
+      <a href="/khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+      <a href="/nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+      <a href="/phim0/0/phim.html">Phim</a>
+       <a href="/manga0/0/truyen-manga.html">manga</a>
+      <a href="/am-nhac.html">Âm nhac</a>
+      <a href="/game0/0/game.html" >Game</a>
+      <a href="/kienthuc/0/kienthuc.html" class="active">Kiến thức</a>
+      
+    </nav>
+  </header>
+
+  <!-- ======= Hero Section ======= -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Series Bài Viết chia sẻ kiến thức.</h1>
+      <p>Tổng hợp các kiến thức từ mọi nguồn do Linh osimi tổng hợp hehe.</p>
+    </div>
+  </section>
+
+  <main>
+    <section>
+      <h2 class="section-title">DevOps — Những điều cần học</h2>
+      <div class="card-grid">
+        <a href="linux.html" class="card">
+          <img src="https://d3mxt5v3yxgcsr.cloudfront.net/courses/5988/course_5988_image.jpg" alt="Bài 0">
+          <div class="card-content">
+            <h3>Giới thiệu về Linux</h3>
+            <p>Tổng quan về Linux và những câu lệnh cơ bản.</p>
+          </div>
+        </a>
+        <a href="docker.html" class="card">
+          <img src="https://storage.googleapis.com/static.ianlewis.org/prod/img/docker/large_v-trans.png" alt="Bài 1">
+          <div class="card-content">
+            <h3>Tổng quan về Docker</h3>
+            <p>Tìm hiểu về Docker, cách vận hành và chức năng chính.</p>
+          </div>
+        </a>
+        <a href="cloud.html" class="card">
+          <img src="https://cdn.axalize.vn/media/content/images/cloud-computing.jpg" alt="Bài 2">
+          <div class="card-content">
+            <h3>Cloud Computing</h3>
+            <p>Hiểu rõ về Cloud và ứng dụng trong thực tế.</p>
+          </div>
+        </a>
+   
+        <a href="network.html" class="card">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.j7ey9UDQrNyUSKpakne90AHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Bài 2">
+          <div class="card-content">
+            <h3>Networking</h3>
+            <p>Các khái niệm networking căn bản cần lắm rõ.</p>
+          </div>
+        </a>
+           <a href="terra.html" class="card">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.1gAEVon2RF5oko4iWCfftgHaHO?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Bài 2">
+          <div class="card-content">
+            <h3>Tổng quan về terraform</h3>
+            <p>Hiêu cơ bản và các lệnh căn bản của terraform.</p>
+          </div>
+        </a> 
+       <a href="nginx.html" class="card">
+          <img src="https://miro.medium.com/max/1200/1*qTJWhzlBH_zNVYSj5BJxrw.jpeg" alt="Bài 2">
+          <div class="card-content">
+            <h3>Tổng quan về nginx</h3>
+            <p>Cơ chế hoạt động , khái niệm về nginx căn bản.</p>
+          </div>
+        </a> 
+     <a href="ci-cd.html" class="card">
+          <img src="https://th.bing.com/th/id/R.385f93c510b66c9133840663a44f2dfb?rik=SgSCz4ByZ1W%2f5A&pid=ImgRaw&r=0" alt="Bài 2">
+          <div class="card-content">
+            <h3>CI/CD</h3>
+            <p>Căn bản về CI/CD ,các nền tảng triển khai v.v</p>
+          </div>
+        </a> 
+
+
+        
+
+      </div>
+    <section>
+  <h2 class="section-title">AWS và các dịch vụ</h2>
+  <div class="card-grid">
+
+    <a href="ec2.html" class="card">
+      <img src="https://miro.medium.com/v2/resize:fit:419/1*rL5MaGb216UTRUib5320Aw.png" alt="AWS EC2">
+      <div class="card-content">
+        <h3>Bài 0 - AWS EC2: Máy chủ ảo đầu tiên của bạn</h3>
+        <p>Khởi tạo và quản lý máy chủ ảo trên AWS với EC2, làm nền tảng cho mọi ứng dụng đám mây.</p>
+      </div>
+    </a>
+
+    <a href="vpc.html" class="card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.lwIk3-9BJjxwHVHSY3L1jAHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS VPC">
+      <div class="card-content">
+        <h3>Bài 1 - AWS VPC: Mạng riêng ảo</h3>
+        <p>Tạo cấu trúc mạng nội bộ an toàn, kiểm soát luồng truy cập giữa các tài nguyên trong AWS.</p>
+      </div>
+    </a>
+
+    <a href="iam.html" class="card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.CwV94qcznyhQXuvU503k1wHaDr?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS IAM">
+      <div class="card-content">
+        <h3>Bài 2 - AWS IAM: Quản lý người dùng và quyền truy cập</h3>
+        <p>Thiết lập người dùng, nhóm và chính sách bảo mật để quản lý truy cập dịch vụ AWS hiệu quả.</p>
+      </div>
+    </a>
+
+    <a href="ecs.html" class="card">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.mNlj8EtsnApQPelKvtS2MQHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS ECS">
+      <div class="card-content">
+        <h3>Bài 3 - AWS ECS: Triển khai ứng dụng Docker</h3>
+        <p>Chạy và quản lý container tự động bằng ECS — dịch vụ mạnh mẽ cho kiến trúc microservices.</p>
+      </div>
+    </a>
+
+    <a href="ecr.html" class="card">
+      <img src="https://tse4.mm.bing.net/th/id/OIP.PqDucCuLFsaqvZ7s32_EeAAAAA?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS ECR">
+      <div class="card-content">
+        <h3>Bài 4 - AWS ECR: Kho lưu trữ Docker Image</h3>
+        <p>Lưu trữ và quản lý image container an toàn, tích hợp trực tiếp với ECS và CI/CD pipeline.</p>
+      </div>
+    </a>
+
+    <a href="s3.html" class="card">
+      <img src="https://miro.medium.com/v2/resize:fit:401/0*8qgeGxrtC7ynPl8I.png" alt="AWS S3">
+      <div class="card-content">
+        <h3>Bài 5 - AWS S3: Lưu trữ dữ liệu đám mây</h3>
+        <p>Tìm hiểu dịch vụ lưu trữ đối tượng nổi tiếng nhất AWS — dễ dùng, linh hoạt và bảo mật cao.</p>
+      </div>
+    </a>
+
+    <a href="rds.html" class="card">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.IN13nQ0DVSvUlXSEylow_AHaEk?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS RDS">
+      <div class="card-content">
+        <h3>Bài 6 - AWS RDS: Cơ sở dữ liệu quan hệ</h3>
+        <p>Tự động triển khai và quản lý cơ sở dữ liệu MySQL, PostgreSQL, hoặc MariaDB trên AWS.</p>
+      </div>
+    </a>
+
+    <a href="clfont.html" class="card">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.w40oRadXNSAgDk9LlxjEFwHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS CloudFront">
+      <div class="card-content">
+        <h3>Bài 7 - AWS CloudFront: Mạng phân phối nội dung (CDN)</h3>
+        <p>Tăng tốc độ tải trang và bảo mật nội dung toàn cầu với dịch vụ CDN mạnh mẽ của AWS.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+  </main>
+
+  <footer>
+    © 2025 Linh Osimi • All rights reserved
+  </footer>
+
+  <!-- ======= Script hiệu ứng ======= -->
+  <script>
+    // Hero xuất hiện khi cuộn
+    document.addEventListener('DOMContentLoaded', function() {
+      const heroContent = document.querySelector('.hero-content');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            heroContent.classList.add('visible');
+            observer.unobserve(heroContent);
+          }
+        });
+      }, { threshold: 0.4 });
+      observer.observe(heroContent);
+    });
+
+    // Header thu nhỏ khi cuộn
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+  </script>
+
+</body>
+</html>

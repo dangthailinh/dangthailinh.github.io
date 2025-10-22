@@ -125,7 +125,7 @@
       <button class="option-btn" onclick="selectTopic('to-mo')"> HỎI Thêm về anh linh</button>
       <button class="option-btn" onclick="selectTopic('gai-xinh')"> muốn ngắm gái xinh!</button>
         <button class="option-btn" onclick="selectTopic('3d')"> Xem các dự án 3d</button>
-
+            <button class="option-btn" onclick="selectTopic('kien-thuc')"> Tổng hợp kiến thức,tài liệu.</button>
       <!-- Free chat mode -->
       <button class="option-btn" onclick="selectTopic('free-chat')">🗨️ Trò chuyện tự do</button>
 
@@ -411,6 +411,7 @@
         case "free-chat": return "Trò chuyện tự do";
         case "gai-xinh": return "tổng hợp gái xinh";
              case "3d": return "các dự án 3d";
+              case "kien-thuc": return "chia sẻ tổng hợp tài liệu";
         default: return topic;
       }
     }
@@ -436,12 +437,20 @@
         ],
          "3d": [
           { name: "room", link: "3d/room/room.html" },
-            { name: "cube", link: "3d/cube/cube.html" },
-
-         
-        
+            { name: "cube", link: "3d/cube/cube.html" }
         ],
         
+   "kien-thuc": [
+          { name: "Trang chủ", link: "/kienthuc/0/kienthuc.html" },
+            { name: "Linux", link: "/kienthuc/0/linux.html" },
+              { name: "docker", link: "/kienthuc/0/docker.html" },
+                { name: "ec2", link: "/kienthuc/0/ec2.html" },
+                  { name: "vpc", link: "/kienthuc/0/vpc.html" ,}
+        ],
+
+
+
+
         "game": [
           { name: "🎮 Trò chơi giải đố", link: "game0/0/game-fun.html" },
           { name: "👾 Trò chơi nâng cao", link: "game0/0/game-fun2.html" },

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nginx: Người gác cổng thông minh của hệ thống bạn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?ixlib=rb-4.0.3&q=90&fm=jpg&crop=entropy&cs=srgb&w=1920" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 22, 2025 • 4:45 PM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>Nginx: Không chỉ là reverse proxy — mà là “người gác cổng” thông minh của hệ thống bạn</h1>
+
+        <h2 id="gioi-thieu">Giới thiệu: Khi hệ thống bạn có… quá nhiều cửa</h2>
+        <p>Tưởng tượng hệ thống của bạn là một tòa nhà hiện đại: có phòng API, phòng static files, phòng WebSocket, phòng admin, và cả một “phòng bí mật” dành cho health check. Mỗi phòng có quy tắc riêng — ai được vào, ai không, vào lúc nào, và mang theo gì.</p>
+        <p><strong>Nginx</strong> chính là người gác cổng — lịch sự, nhanh nhẹn, và cực kỳ thông minh. Nó không chỉ mở cửa, mà còn biết <em>ai là ai</em>, <em>muốn đi đâu</em>, và <em>có nên cho vào hay không</em>.</p>
+
+        <figure>
+          <img 
+            src="https://th.bing.com/th/id/R.fd6a88345b94733097632b4d8144dbff?rik=MJjb0OBRpk0UCg&pid=ImgRaw&r=0" 
+            width="800"
+            height="400"
+            alt="Nginx như người gác cổng của hệ thống">
+          <figcaption>
+            Nginx — người gác cổng không ngủ, luôn phân luồng và bảo vệ hệ thống bạn.
+          </figcaption>
+        </figure>
+
+        <h2 id="nginx-la-gi">Vậy Nginx thực sự là gì?</h2>
+        <p>Nginx (đọc là “engine-x”) là một máy chủ web mã nguồn mở, nổi tiếng với hiệu năng cao, tiêu thụ ít tài nguyên và khả năng xử lý hàng chục nghìn kết nối đồng thời nhờ kiến trúc event-driven.</p>
+        <p>Nhưng trong thế giới DevOps, Nginx hiếm khi “chỉ” là web server. Nó thường đóng vai trò:</p>
+        <ul>
+          <li><strong>Reverse Proxy</strong>: Đón request từ client, chuyển đến backend phù hợp (Node.js, Python, Java…).</li>
+          <li><strong>Load Balancer</strong>: Phân phối traffic đều giữa nhiều server — tránh quá tải.</li>
+          <li><strong>SSL Terminator</strong>: Xử lý HTTPS ở cổng vào, giải mã, rồi gửi request dạng HTTP vào nội bộ — giúp backend nhẹ gánh.</li>
+          <li><strong>Cache & Compression</strong>: Tăng tốc độ phản hồi bằng cách cache nội dung tĩnh hoặc nén dữ liệu.</li>
+        </ul>
+
+        <h2 id="cau-hinh-thong-minh">Cấu hình Nginx — ngôn ngữ của “người gác cổng”</h2>
+        <p>Cấu hình Nginx đơn giản đến bất ngờ — chỉ cần vài khối <code>server</code> và <code>location</code>, bạn đã có thể điều khiển toàn bộ luồng traffic.</p>
+
+        <p>Ví dụ: Một cấu hình “gác cổng” thông minh:</p>
+        <pre><code>server {
+    listen 443 ssl;
+    server_name api.myapp.com;
+
+    ssl_certificate /path/to/cert.pem;
+    ssl_certificate_key /path/to/key.pem;
+
+    # Ai vào /admin? Chỉ IP nội bộ!
+    location /admin {
+        allow 192.168.1.0/24;
+        deny all;
+        proxy_pass http://backend-admin;
+    }
+
+    # API công khai — nhưng giới hạn tốc độ
+    location /api {
+        limit_req zone=api burst=10;
+        proxy_pass http://backend-api;
+    }
+
+    # Static files — cache 1 giờ
+    location /static {
+        expires 1h;
+        root /var/www;
+    }
+}</code></pre>
+
+        <p>Chỉ trong vài dòng, Nginx đã:</p>
+        <ul>
+          <li>Bảo vệ khu vực admin</li>
+          <li>Chống flood API</li>
+          <li>Tăng tốc static assets</li>
+          <li>Xử lý SSL một cách thanh lịch</li>
+        </ul>
+
+        <h2 id="nginx-trong-kubernetes">Nginx trong Kubernetes: Ingress Controller</h2>
+        <p>Khi chạy ứng dụng trên Kubernetes, Nginx thường xuất hiện dưới dạng <strong>Nginx Ingress Controller</strong> — một “gác cổng tập trung” cho toàn cluster.</p>
+        <p>Thay vì mở từng Service với LoadBalancer (tốn kém), bạn chỉ cần một Ingress resource:</p>
+        <pre><code>apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-svc
+            port: { number: 80 }
+      - path: /web
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port: { number: 80 }</code></pre>
+        <p>Nginx Ingress sẽ tự động sinh cấu hình reverse proxy dựa trên định nghĩa này — DevOps dream!</p>
+
+        <figure>
+          <img 
+            src="https://tse3.mm.bing.net/th/id/OIP.zEM7bPXC5gEoROf7veokugHaEC?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="400"
+            alt="Nginx Ingress trong Kubernetes">
+          <figcaption>
+            Nginx Ingress — “gác cổng” cho toàn bộ Kubernetes cluster.
+          </figcaption>
+        </figure>
+
+        <h2 id="tip-hay">Một vài mẹo “gác cổng” chuyên nghiệp</h2>
+        <ul>
+          <li>Luôn bật <code>server_tokens off;</code> — đừng để lộ phiên bản Nginx (tránh bị khai thác).</li>
+          <li>Dùng <code>map</code> để tạo biến linh hoạt — ví dụ: ghi log theo user-agent.</li>
+          <li>Kết hợp với Let’s Encrypt + Certbot để tự động gia hạn SSL.</li>
+          <li>Giám sát Nginx bằng Prometheus + Grafana — theo dõi số request, lỗi 5xx, latency…</li>
+        </ul>
+
+        <h2 id="ket-luan">Kết luận: Đừng xem nhẹ “người gác cổng”</h2>
+        <p>Nginx có thể trông đơn giản — chỉ là một file cấu hình vài chục dòng. Nhưng đằng sau đó là cả một hệ thống kiểm soát, bảo vệ và tối ưu hóa traffic.</p>
+        <p>Hãy học cách “nói chuyện” với Nginx. Vì một ngày nào đó, chính nó sẽ cứu hệ thống bạn khỏi một cơn DDoS, một lỗi cấu hình, hay đơn giản — giúp ứng dụng của bạn <em>chạy nhanh hơn 200ms</em>.</p>
+        <p>Và trong thế giới DevOps, 200ms có thể là cả một vũ trụ.</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#nginx-la-gi">Nginx thực sự là gì?</a></li>
+        <li><a href="#cau-hinh-thong-minh">Cấu hình thông minh</a></li>
+        <li><a href="#nginx-trong-kubernetes">Nginx trong Kubernetes</a></li>
+        <li><a href="#tip-hay">Mẹo chuyên nghiệp</a></li>
+        <li><a href="#ket-luan">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+<section class="related-posts">
+  <h2>DevOps — Những điều cần học</h2>
+  <div class="related-grid">
+
+    <a href="linux.html" class="related-card">
+      <img src="https://d3mxt5v3yxgcsr.cloudfront.net/courses/5988/course_5988_image.jpg" alt="Linux">
+      <div class="related-content">
+        <h3>Giới thiệu về Linux</h3>
+        <p>Tổng quan về Linux và những câu lệnh cơ bản.</p>
+      </div>
+    </a>
+
+    <a href="docker.html" class="related-card">
+      <img src="https://storage.googleapis.com/static.ianlewis.org/prod/img/docker/large_v-trans.png" alt="Docker">
+      <div class="related-content">
+        <h3>Tổng quan về Docker</h3>
+        <p>Tìm hiểu về Docker, cách vận hành và chức năng chính.</p>
+      </div>
+    </a>
+
+    <a href="cloud.html" class="related-card">
+      <img src="https://cdn.axalize.vn/media/content/images/cloud-computing.jpg" alt="Cloud">
+      <div class="related-content">
+        <h3>Cloud Computing</h3>
+        <p>Hiểu rõ về Cloud và ứng dụng trong thực tế.</p>
+      </div>
+    </a>
+
+    <a href="network.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.j7ey9UDQrNyUSKpakne90AHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Networking">
+      <div class="related-content">
+        <h3>Networking</h3>
+        <p>Các khái niệm networking căn bản cần nắm rõ.</p>
+      </div>
+    </a>
+
+    <a href="terra.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.1gAEVon2RF5oko4iWCfftgHaHO?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Terraform">
+      <div class="related-content">
+        <h3>Tổng quan về Terraform</h3>
+        <p>Hiểu cơ bản và các lệnh căn bản của Terraform.</p>
+      </div>
+    </a>
+
+    <a href="nginx.html" class="related-card">
+      <img src="https://miro.medium.com/max/1200/1*qTJWhzlBH_zNVYSj5BJxrw.jpeg" alt="Nginx">
+      <div class="related-content">
+        <h3>Tổng quan về Nginx</h3>
+        <p>Cơ chế hoạt động, khái niệm về Nginx căn bản.</p>
+      </div>
+    </a>
+
+    <a href="ci-cd.html" class="related-card">
+      <img src="https://th.bing.com/th/id/R.385f93c510b66c9133840663a44f2dfb?rik=SgSCz4ByZ1W%2f5A&pid=ImgRaw&r=0" alt="CI/CD">
+      <div class="related-content">
+        <h3>CI/CD</h3>
+        <p>Căn bản về CI/CD, các nền tảng triển khai v.v.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

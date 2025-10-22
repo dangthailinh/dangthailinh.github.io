@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terraform: Từ câu lệnh đầu tiên đến infrastructure thực tế — hướng dẫn có tâm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/079f273b-6f16-4627-b550-c16014d022d7/terraform-series.drawio/w=1920,quality=90,fit=scale-down" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 22, 2025 • 6:30 PM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>Terraform: Từ câu lệnh đầu tiên đến infrastructure thực tế — hướng dẫn siu có tâm nhé em zai!</h1>
+
+        <h2 id="gioi-thieu">Giới thiệu: Đừng sợ — ai cũng từng “terraform apply” xong… hoảng!</h2>
+        <p>Lần đầu bạn gõ <code>terraform apply</code> và thấy AWS tạo ra 10 resource trong 30 giây — cảm giác như có phép thuật. Nhưng cũng chính lần đó, bạn có thể vô tình tạo một EC2 instance public với security group mở port 22 cho cả thế giới… và nhận được hóa đơn $500.</p>
+        <p>Đừng lo. Bài viết này dành cho bạn — người mới, người từng “hỏng tay”, hoặc người chỉ muốn học Terraform <strong>một cách an toàn, có hệ thống và… có tâm</strong>.</p>
+
+        <figure>
+          <img 
+            src="https://miro.medium.com/v2/resize:fit:606/1*g0nXaB6JIkg5InN3_UgOOA.png" 
+            width="800"
+            height="400"
+            alt="Terraform - Infrastructure as Code">
+          <figcaption>
+            Terraform giúp bạn xây dựng hạ tầng như viết phần mềm — có version, có review, có rollback.
+          </figcaption>
+        </figure>
+
+        <h2 id="terraform-la-gi">Terraform là gì? Và tại sao DevOps cần nó?</h2>
+        <p>Terraform là công cụ mã nguồn mở từ HashiCorp, cho phép bạn **khai báo hạ tầng dưới dạng code** (Infrastructure as Code - IaC). Thay vì click chuột trên AWS Console, bạn viết file `.tf` — và Terraform sẽ tự động tạo, cập nhật, hoặc xóa tài nguyên.</p>
+        <p>Lợi ích rõ rệt:</p>
+        <ul>
+          <li><strong>Tái tạo được</strong>: Môi trường dev, staging, prod giống hệt nhau.</li>
+          <li><strong>Kiểm soát phiên bản</strong>: Dùng Git để track thay đổi hạ tầng — ai sửa gì, lúc nào?</li>
+          <li><strong>Phòng tránh lỗi thủ công</strong>: Không còn “anh A tạo tay, anh B không biết”.</li>
+          <li><strong>Tự động hóa CI/CD</strong>: Deploy ứng dụng kèm luôn hạ tầng mới.</li>
+        </ul>
+
+        <h2 id="cau-hinh-ban-dau">Bước 1: Cài đặt và cấu hình ban đầu</h2>
+        <p>Trước tiên, cài Terraform:</p>
+        <pre><code># Trên macOS (dùng Homebrew)
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+# Trên Ubuntu/Debian
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform</code></pre>
+
+        <p>Kiểm tra phiên bản:</p>
+        <pre><code>terraform -version</code></pre>
+
+        <p>Với AWS (ví dụ phổ biến nhất), bạn cần cấu hình credentials:</p>
+        <pre><code>aws configure</code></pre>
+        <p>Nhập <code>AWS_ACCESS_KEY_ID</code> và <code>AWS_SECRET_ACCESS_KEY</code> (tạo từ IAM user có quyền cần thiết).</p>
+
+        <h2 id="cac-lenh-co-ban">Bước 2: Các lệnh Terraform “sống còn”</h2>
+        <p>Dưới đây là 5 lệnh bạn sẽ dùng 95% thời gian:</p>
+
+        <h3>1. <code>terraform init</code></h3>
+        <p>Khởi tạo thư mục làm việc — tải provider (ví dụ: AWS, Azure) và module.</p>
+        <p><strong>Chạy 1 lần duy nhất</strong> khi bắt đầu dự án hoặc thêm provider mới.</p>
+
+        <h3>2. <code>terraform fmt</code></h3>
+        <p>Định dạng code Terraform cho đẹp và chuẩn — nên dùng trước khi commit.</p>
+
+        <h3>3. <code>terraform validate</code></h3>
+        <p>Kiểm tra cú pháp file `.tf` — không cần kết nối cloud.</p>
+
+        <h3>4. <code>terraform plan</code></h3>
+        <p><strong>Quan trọng nhất!</strong> Xem Terraform “dự định” làm gì — tạo, thay đổi, hay xóa resource?</p>
+        <p>Luôn chạy <code>plan</code> trước khi <code>apply</code> — như “xem trước hóa đơn”.</p>
+
+        <h3>5. <code>terraform apply</code></h3>
+        <p>Thực thi thay đổi. Terraform sẽ hỏi bạn <code>yes/no</code> — đừng vội gõ <code>yes</code> nếu chưa đọc kỹ plan!</p>
+
+        <p>Mẹo: Dùng <code>terraform apply -auto-approve</code> trong CI/CD (không hỏi), nhưng <strong>chỉ khi bạn tin tưởng 100% vào pipeline</strong>.</p>
+
+        <h2 id="thuc-hanh">Bước 3: Thực hành — Tạo một S3 bucket trên AWS</h2>
+        <p>Hãy bắt đầu với thứ “an toàn”: S3 bucket (không tốn tiền nếu không lưu dữ liệu).</p>
+
+        <p>Tạo thư mục mới:</p>
+        <pre><code>mkdir terraform-s3-demo && cd terraform-s3-demo</code></pre>
+
+        <p>Tạo file <code>main.tf</code>:</p>
+        <pre><code>provider "aws" {
+  region = "ap-southeast-1" # Ví dụ: Singapore
+}
+
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-unique-bucket-name-20251022" # ⚠️ Phải là tên toàn cầu duy nhất!
+}
+
+resource "aws_s3_bucket_versioning" "my_bucket_versioning" {
+  bucket = aws_s3_bucket.my_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}</code></pre>
+
+        <p>Bây giờ chạy lần lượt:</p>
+        <pre><code>terraform init
+terraform fmt
+terraform validate
+terraform plan
+terraform apply</code></pre>
+
+        <p>Nếu thành công, bạn sẽ thấy bucket xuất hiện trong AWS Console!</p>
+        <p>Khi không cần nữa, gõ:</p>
+        <pre><code>terraform destroy</code></pre>
+        <p>→ Terraform sẽ xóa sạch mọi thứ đã tạo — “dọn dẹp sau bữa tiệc”.</p>
+
+        <figure>
+          <img 
+            src="https://www.techielass.com/content/images/2023/01/terraform-flow.png" 
+            width="800"
+            height="400"
+            alt="Terraform workflow">
+          <figcaption>
+            Luồng làm việc an toàn với Terraform: init → plan → review → apply.
+          </figcaption>
+        </figure>
+
+        <h2 id="best-practices">Bước 4: Best practices — học từ người đi trước</h2>
+        <p>Để không “mất tiền oan” hay “hỏng production”, hãy ghi nhớ:</p>
+        <ul>
+          <li><strong>Luôn dùng <code>terraform plan</code> trước apply</strong> — không ngoại lệ.</li>
+          <li><strong>Đừng hardcode secret</strong> — dùng <code>variables</code> + truyền qua environment hoặc secret manager.</li>
+          <li><strong>Tổ chức code theo module</strong> — chia nhỏ: network, compute, database…</li>
+          <li><strong>Lưu state ở remote</strong> (S3 + DynamoDB cho AWS) — tránh mất file <code>terraform.tfstate</code>.</li>
+          <li><strong>Review code như code ứng dụng</strong> — pull request, comment, approve.</li>
+        </ul>
+
+        <h2 id="ket-luan">Kết luận: Terraform không khó — chỉ cần kiên nhẫn và cẩn thận</h2>
+        <p>Terraform không yêu cầu bạn phải biết hết mọi resource ngay từ đầu. Hãy bắt đầu từ một bucket S3, rồi đến một EC2, rồi VPC… Mỗi bước nhỏ đều là tiến bộ.</p>
+        <p>Và nhớ: <strong>“Infrastructure as Code” không chỉ là công cụ — mà là tư duy</strong>. Khi bạn viết hạ tầng như viết phần mềm, bạn đã là một DevOps Engineer thực thụ.</p>
+        <p>Chúc bạn gõ <code>apply</code> thật tự tin — và ngủ ngon sau mỗi lần deploy!</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#terraform-la-gi">Terraform là gì?</a></li>
+        <li><a href="#cau-hinh-ban-dau">Cài đặt & cấu hình</a></li>
+        <li><a href="#cac-lenh-co-ban">Các lệnh cơ bản</a></li>
+        <li><a href="#thuc-hanh">Thực hành: Tạo S3 bucket</a></li>
+        <li><a href="#best-practices">Best practices</a></li>
+        <li><a href="#ket-luan">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+<section class="related-posts">
+  <h2>Những bài viết liên quan:</h2>
+  <div class="related-grid">
+
+    <a href="linux.html" class="related-card">
+      <img src="https://d3mxt5v3yxgcsr.cloudfront.net/courses/5988/course_5988_image.jpg" alt="Linux">
+      <div class="related-content">
+        <h3>Giới thiệu về Linux</h3>
+        <p>Tổng quan về Linux và những câu lệnh cơ bản.</p>
+      </div>
+    </a>
+
+    <a href="docker.html" class="related-card">
+      <img src="https://storage.googleapis.com/static.ianlewis.org/prod/img/docker/large_v-trans.png" alt="Docker">
+      <div class="related-content">
+        <h3>Tổng quan về Docker</h3>
+        <p>Tìm hiểu về Docker, cách vận hành và chức năng chính.</p>
+      </div>
+    </a>
+
+    <a href="cloud.html" class="related-card">
+      <img src="https://cdn.axalize.vn/media/content/images/cloud-computing.jpg" alt="Cloud">
+      <div class="related-content">
+        <h3>Cloud Computing</h3>
+        <p>Hiểu rõ về Cloud và ứng dụng trong thực tế.</p>
+      </div>
+    </a>
+
+    <a href="network.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.j7ey9UDQrNyUSKpakne90AHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Networking">
+      <div class="related-content">
+        <h3>Networking</h3>
+        <p>Các khái niệm networking căn bản cần nắm rõ.</p>
+      </div>
+    </a>
+
+  
+
+    <a href="nginx.html" class="related-card">
+      <img src="https://miro.medium.com/max/1200/1*qTJWhzlBH_zNVYSj5BJxrw.jpeg" alt="Nginx">
+      <div class="related-content">
+        <h3>Tổng quan về Nginx</h3>
+        <p>Cơ chế hoạt động, khái niệm về Nginx căn bản.</p>
+      </div>
+    </a>
+
+    <a href="ci-cd.html" class="related-card">
+      <img src="https://th.bing.com/th/id/R.385f93c510b66c9133840663a44f2dfb?rik=SgSCz4ByZ1W%2f5A&pid=ImgRaw&r=0" alt="CI/CD">
+      <div class="related-content">
+        <h3>CI/CD</h3>
+        <p>Căn bản về CI/CD, các nền tảng triển khai v.v.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

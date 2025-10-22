@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon CloudFront: Mạng phân phối nội dung toàn cầu trên AWS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      color: #333;
+      background-color: #fafafa;
+      margin: 0;
+      padding: 0;
+    }
+    .banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .layout {
+      display: flex;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .container {
+      flex: 3;
+    }
+    .toc {
+      flex: 1;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+    .toc h3 {
+      margin-top: 0;
+      font-weight: 600;
+    }
+    .toc a {
+      text-decoration: none;
+      color: #0066cc;
+    }
+    .toc a.active {
+      color: #d23b3b;
+      font-weight: 600;
+    }
+    h1, h2, h3 {
+      color: #1a1a1a;
+    }
+    h1 {
+      font-size: 1.9rem;
+    }
+    h2 {
+      margin-top: 2rem;
+      font-size: 1.4rem;
+      border-left: 4px solid #0066cc;
+      padding-left: 0.6rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+    }
+    p {
+      margin: 0.8rem 0;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9em;
+    }
+    figure {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    figcaption {
+      font-size: 0.9em;
+      color: #555;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      font-size: 0.9em;
+      background: #f1f1f1;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="banner">
+    <img src="https://tse2.mm.bing.net/th/id/OIP.5ZTytzPLcoY9Wou9usJvFwHaCf?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Blog Banner">
+  </header>
+
+  <div class="layout">
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả" width="60" height="60" style="border-radius:50%;">
+        </div>
+        <div class="meta">
+          <p class="date">23 Tháng 10, 2025 • 7:00 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh Osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>Amazon CloudFront: Mạng phân phối nội dung toàn cầu trên AWS</h1>
+        <p style="font-style: italic; color: #555;">
+          Từ nguyên lý hoạt động đến cách triển khai thực tế — giúp tăng tốc, bảo mật và tối ưu chi phí cho ứng dụng web của bạn.
+        </p>
+
+        <h2 id="gioi-thieu">1. CloudFront là gì?</h2>
+        <p>
+          Amazon CloudFront là dịch vụ <strong>CDN (Content Delivery Network)</strong> của AWS. 
+          Dịch vụ này giúp phân phối nội dung như HTML, CSS, JavaScript, hình ảnh, video và API đến người dùng trên toàn cầu nhanh hơn và an toàn hơn thông qua việc lưu trữ bản sao dữ liệu (cache) tại các điểm phân phối (edge location) gần họ nhất.
+        </p>
+        <p>
+          Ví dụ, khi người dùng ở Hà Nội truy cập một trang web có máy chủ đặt tại Mỹ, CloudFront sẽ tự động phân phối dữ liệu từ điểm biên gần nhất (chẳng hạn ở Singapore), giúp giảm độ trễ, tăng tốc độ tải và giảm tải cho máy chủ gốc.
+        </p>
+
+        <figure>
+          <img src="https://tse3.mm.bing.net/th/id/OIP.Bx7eUrLVafyk5cqQQEe44gHaDo?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" width="800" height="450" alt="Kiến trúc CDN CloudFront">
+          <figcaption>Hình 1: CloudFront lưu cache nội dung tại điểm biên gần người dùng, giảm tải cho máy chủ gốc.</figcaption>
+        </figure>
+
+        <h2 id="cac-khai-niem-cot-loi">2. Các khái niệm cốt lõi</h2>
+
+        <h3>2.1. Distribution</h3>
+        <p>
+          Là "phiên bản triển khai" của CloudFront. Mỗi distribution có một tên miền riêng (ví dụ: <code>d123456789.cloudfront.net</code>) và được cấu hình để trỏ đến một nguồn dữ liệu (origin).
+        </p>
+
+        <h3>2.2. Origin</h3>
+        <p>
+          Nơi chứa nội dung gốc được CloudFront phân phối. Có thể là:
+        </p>
+        <ul>
+          <li>Amazon S3 (cho website tĩnh)</li>
+          <li>Load Balancer (ALB hoặc EC2)</li>
+          <li>API Gateway</li>
+          <li>Bất kỳ máy chủ HTTP công khai nào</li>
+        </ul>
+
+        <h3>2.3. Edge Location và Regional Edge Cache</h3>
+        <p>
+          <strong>Edge Location</strong>: hơn 450 điểm trên toàn cầu, nơi lưu trữ và phục vụ nội dung cho người dùng gần nhất.<br>
+          <strong>Regional Edge Cache</strong>: lớp trung gian giữa edge và origin, giúp giảm số lần truy vấn về máy chủ gốc khi nội dung hết hạn.
+        </p>
+
+        <h3>2.4. TTL (Time to Live)</h3>
+        <p>
+          TTL xác định khoảng thời gian CloudFront lưu nội dung trong bộ nhớ đệm trước khi kiểm tra lại với origin. 
+          Có ba loại TTL: Min TTL, Default TTL, và Max TTL. Tốt nhất bạn nên để origin gửi header <code>Cache-Control</code> (ví dụ: <code>max-age=86400</code>) để CloudFront tự động tuân theo.
+        </p>
+
+        <h2 id="cache-va-invalidate">3. Cơ chế cache và làm mới nội dung</h2>
+        <p>
+          CloudFront lưu cache dựa trên URL đầy đủ, bao gồm cả phần query string. 
+          Ví dụ: <code>/style.css?version=1</code> và <code>/style.css?version=2</code> được xem là hai mục cache khác nhau.
+        </p>
+        <p>
+          Khi bạn cập nhật file trên origin, CloudFront sẽ không tự biết trừ khi TTL hết hạn. 
+          Nếu muốn cập nhật ngay, bạn có thể tạo lệnh “invalidation” để làm mới cache:
+        </p>
+        <pre>aws cloudfront create-invalidation --distribution-id E123456789 --paths "/style.css" "/app.js"</pre>
+
+        <p>
+          AWS cung cấp miễn phí 1.000 đường dẫn invalidation mỗi tháng. Để tránh vượt hạn mức, bạn nên áp dụng cách đặt tên file có version như <code>app.v1.2.js</code>.
+        </p>
+
+        <h2 id="bao-mat-voi-cloudfront">4. Bảo mật với CloudFront</h2>
+
+        <h3>4.1. Origin Access Control (OAC)</h3>
+        <p>
+          Nếu bạn dùng S3 làm origin, hãy tránh để bucket ở chế độ công khai. 
+          Hãy bật OAC (hoặc OAI phiên bản cũ hơn) để chỉ CloudFront mới có quyền truy cập vào S3. 
+          Nhờ đó, bucket của bạn vẫn hoàn toàn private nhưng website vẫn hoạt động bình thường.
+        </p>
+
+        <figure>
+          <img src="https://tse4.mm.bing.net/th/id/OIP.0sc2PXsE4TqUBlS5KnnDEwHaDO?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" width="800" height="400" alt="Origin Access Control trong CloudFront">
+          <figcaption>Hình 2: OAC đảm bảo chỉ CloudFront mới truy cập được vào bucket S3 private.</figcaption>
+        </figure>
+
+        <h3>4.2. HTTPS và tên miền tùy chỉnh</h3>
+        <p>
+          CloudFront hỗ trợ HTTPS mặc định với tên miền <code>*.cloudfront.net</code> và chứng chỉ AWS. 
+          Nếu muốn sử dụng tên miền riêng (như <code>cdn.myapp.com</code>), bạn chỉ cần cài chứng chỉ trong AWS Certificate Manager (vùng us-east-1).
+        </p>
+
+        <h3>4.3. AWS WAF tích hợp</h3>
+        <p>
+          Bạn có thể kết hợp CloudFront với AWS WAF để chặn các mối đe dọa như SQL Injection, XSS, giới hạn tần suất truy cập hoặc chặn IP từ khu vực cụ thể. 
+          Điều này giúp CloudFront trở thành lớp bảo mật đầu tiên trước khi lưu lượng đến máy chủ gốc.
+        </p>
+
+        <h2 id="thuc-hanh-trien-khai">5. Triển khai thực tế: Website tĩnh với S3 + CloudFront</h2>
+        <ol>
+          <li><strong>Bước 1:</strong> Tạo bucket S3 và tải lên các file HTML, CSS, JS. Không bật “Static website hosting”.</li>
+          <li><strong>Bước 2:</strong> Tạo CloudFront distribution, chọn origin là bucket S3, bật OAC, cấu hình “Redirect HTTP to HTTPS”.</li>
+          <li><strong>Bước 3:</strong> (Tùy chọn) Gắn tên miền riêng và chứng chỉ SSL từ ACM.</li>
+          <li><strong>Bước 4:</strong> Cấu hình Route 53 để trỏ domain đến CloudFront.</li>
+        </ol>
+        <p>Kết quả: Website được phục vụ toàn cầu, an toàn và hoàn toàn private ở S3.</p>
+
+        <h2 id="best-practices">6. Thực hành tốt (Best Practices)</h2>
+        <ul>
+          <li>Luôn bật HTTPS cho cả người dùng và origin.</li>
+          <li>Thiết lập cache header hợp lý thay vì dùng TTL mặc định.</li>
+          <li>Tránh invalidation, nên dùng versioning cho file.</li>
+          <li>Kết hợp WAF để chống bot hoặc tấn công DDoS.</li>
+          <li>Bật log truy cập để phân tích hành vi người dùng.</li>
+          <li>Giới hạn vùng địa lý nếu website chỉ phục vụ một khu vực.</li>
+        </ul>
+
+        <h2 id="ket-luan">7. Kết luận</h2>
+        <p>
+          Amazon CloudFront không chỉ giúp tăng tốc độ tải trang mà còn là lớp bảo vệ và tối ưu thông minh cho hệ thống web. 
+          Khi được kết hợp cùng S3, WAF và Route 53, nó trở thành trung tâm của kiến trúc web hiện đại trên AWS.
+        </p>
+        <p>
+          Hãy bắt đầu với một distribution cơ bản cho website tĩnh, sau đó mở rộng sang cache API hoặc bảo mật nâng cao khi cần. 
+          Trong thế giới số, tốc độ mang lại trải nghiệm — và bảo mật tạo nên niềm tin.
+        </p>
+      </article>
+    </main>
+
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">1. CloudFront là gì?</a></li>
+        <li><a href="#cac-khai-niem-cot-loi">2. Khái niệm cốt lõi</a></li>
+        <li><a href="#cache-va-invalidate">3. Cache và làm mới nội dung</a></li>
+        <li><a href="#bao-mat-voi-cloudfront">4. Bảo mật</a></li>
+        <li><a href="#thuc-hanh-trien-khai">5. Triển khai thực tế</a></li>
+        <li><a href="#best-practices">6. Best Practices</a></li>
+        <li><a href="#ket-luan">7. Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) current = section.getAttribute("id");
+      });
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) link.classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>

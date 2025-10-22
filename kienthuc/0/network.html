@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Networking cho DevOps</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/fa65a007-88ea-441f-a147-42bbb4296e37/Kubernetes_c_bn/w=1920,quality=90,fit=scale-down" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 22, 2025 • 10:00 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>Networking cho DevOps</h1>
+
+        <h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>Trong hành trình trở thành một DevOps Engineer, hiểu biết về mạng máy tính (networking) không còn là “nice-to-have” mà là “must-have”. Dù bạn làm việc với Kubernetes, CI/CD pipelines, hay cloud infrastructure, bạn đều sẽ va chạm với các khái niệm như IP, subnet, firewall, DNS, load balancing, và nhiều hơn nữa.</p>
+        <p>Bài viết này sẽ cung cấp nền tảng networking thiết yếu dành riêng cho DevOps — không đi sâu vào lý thuyết mạng truyền thống, mà tập trung vào những gì bạn thực sự cần khi triển khai, giám sát và gỡ lỗi hệ thống phân tán.</p>
+
+        <figure>
+          <img 
+            src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/fa65a007-88ea-441f-a147-42bbb4296e37/Kubernetes_c_bn/w=1920,quality=90,fit=scale-down" 
+            width="800"
+            height="400"
+            alt="Networking trong môi trường DevOps">
+          <figcaption>
+            Networking là xương sống của mọi hệ thống DevOps hiện đại.
+          </figcaption>
+        </figure>
+
+        <h2 id="cac-khai-niem-co-ban">Các khái niệm cơ bản</h2>
+        <p>Dưới đây là những khái niệm networking cốt lõi mà mọi DevOps Engineer nên nắm vững:</p>
+        <ul>
+          <li><strong>IP Address & Subnetting</strong>: Hiểu IPv4/IPv6, CIDR notation (ví dụ: 192.168.1.0/24), và cách chia mạng con.</li>
+          <li><strong>TCP/IP Model</strong>: Biết các lớp (Application, Transport, Network, Link) và vai trò của chúng.</li>
+          <li><strong>Ports & Protocols</strong>: HTTP/HTTPS (80/443), SSH (22), DNS (53), v.v.</li>
+          <li><strong>DNS</strong>: Cách tên miền được phân giải thành địa chỉ IP — đặc biệt quan trọng khi làm việc với service discovery trong Kubernetes hoặc cloud.</li>
+          <li><strong>NAT & Routing</strong>: Làm sao traffic đi từ pod trong Kubernetes ra internet và ngược lại.</li>
+        </ul>
+
+        <h2 id="networking-trong-cloud">Networking trong Cloud</h2>
+        <p>Các nền tảng cloud như AWS, GCP, Azure cung cấp các dịch vụ networking trừu tượng hóa hạ tầng vật lý:</p>
+        <ul>
+          <li><strong>VPC (Virtual Private Cloud)</strong>: Mạng riêng ảo trong AWS — nơi bạn định nghĩa subnet, route table, security group.</li>
+          <li><strong>Security Groups & NACLs</strong>: Tường lửa ở cấp instance và subnet.</li>
+          <li><strong>Load Balancer</strong>: Phân phối traffic đến nhiều instance (Application Load Balancer, Network Load Balancer).</li>
+          <li><strong>PrivateLink / VPC Peering</strong>: Kết nối an toàn giữa các VPC hoặc dịch vụ mà không qua internet.</li>
+        </ul>
+
+        <figure>
+          <img 
+            src="https://tse3.mm.bing.net/th/id/OIP.N6FlZ0AxY2sNyt_ADVvPzAHaFT?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="400"
+            alt="VPC và các thành phần networking trong AWS">
+          <figcaption>
+            Minh họa VPC, subnet, và load balancer trong AWS.
+          </figcaption>
+        </figure>
+
+        <h2 id="networking-trong-kubernetes">Networking trong Kubernetes</h2>
+        <p>Kubernetes có mô hình networking “flat” — mọi pod có thể giao tiếp trực tiếp với nhau mà không cần NAT. Các khái niệm quan trọng:</p>
+        <ul>
+          <li><strong>Pod IP</strong>: Mỗi pod có IP duy nhất trong cluster.</li>
+          <li><strong>Service</strong>: Cung cấp stable IP/DNS cho nhóm pod.</li>
+          <li><strong>Ingress</strong>: Quản lý truy cập HTTP/HTTPS từ bên ngoài vào service.</li>
+          <li><strong>CNI (Container Network Interface)</strong>: Plugin như Calico, Flannel, Cilium — chịu trách nhiệm cấu hình mạng cho pod.</li>
+        </ul>
+
+        <h2 id="cong-cu-huu-ich">Công cụ hữu ích cho DevOps Networking</h2>
+        <p>Khi gỡ lỗi mạng, bạn sẽ thường dùng các lệnh sau:</p>
+        <ul>
+          <li><code>ping</code> – Kiểm tra kết nối cơ bản.</li>
+          <li><code>traceroute</code> / <code>mtr</code> – Xem đường đi của gói tin.</li>
+          <li><code>dig</code> / <code>nslookup</code> – Kiểm tra DNS.</li>
+          <li><code>netstat</code> / <code>ss</code> – Xem port đang mở.</li>
+          <li><code>tcpdump</code> / <code>wireshark</code> – Phân tích gói tin sâu.</li>
+          <li><code>kubectl describe svc</code>, <code>kubectl get endpoints</code> – Kiểm tra service trong Kubernetes.</li>
+        </ul>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>Networking là nền tảng vô hình nhưng cực kỳ quan trọng trong DevOps. Hiểu rõ nó giúp bạn triển khai hệ thống ổn định, bảo mật và dễ dàng gỡ lỗi khi sự cố xảy ra. Đừng chỉ “copy-paste YAML” — hãy hiểu traffic đi đâu, qua đâu, và tại sao.</p>
+        <p>Hãy bắt đầu từ các khái niệm cơ bản, thực hành trên cloud sandbox hoặc minikube, và dần làm chủ mạng trong thế giới DevOps!</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#cac-khai-niem-co-ban">Các khái niệm cơ bản</a></li>
+        <li><a href="#networking-trong-cloud">Networking trong Cloud</a></li>
+        <li><a href="#networking-trong-kubernetes">Networking trong Kubernetes</a></li>
+        <li><a href="#cong-cu-huu-ich">Công cụ hữu ích</a></li>
+        <li><a href="#ket-luan">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+<section class="related-posts">
+  <h2>Những bài viết liên quan:</h2>
+  <div class="related-grid">
+
+    <a href="linux.html" class="related-card">
+      <img src="https://d3mxt5v3yxgcsr.cloudfront.net/courses/5988/course_5988_image.jpg" alt="Linux">
+      <div class="related-content">
+        <h3>Giới thiệu về Linux</h3>
+        <p>Tổng quan về Linux và những câu lệnh cơ bản.</p>
+      </div>
+    </a>
+
+    <a href="docker.html" class="related-card">
+      <img src="https://storage.googleapis.com/static.ianlewis.org/prod/img/docker/large_v-trans.png" alt="Docker">
+      <div class="related-content">
+        <h3>Tổng quan về Docker</h3>
+        <p>Tìm hiểu về Docker, cách vận hành và chức năng chính.</p>
+      </div>
+    </a>
+
+    <a href="cloud.html" class="related-card">
+      <img src="https://cdn.axalize.vn/media/content/images/cloud-computing.jpg" alt="Cloud">
+      <div class="related-content">
+        <h3>Cloud Computing</h3>
+        <p>Hiểu rõ về Cloud và ứng dụng trong thực tế.</p>
+      </div>
+    </a>
+
+
+    <a href="terra.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.1gAEVon2RF5oko4iWCfftgHaHO?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Terraform">
+      <div class="related-content">
+        <h3>Tổng quan về Terraform</h3>
+        <p>Hiểu cơ bản và các lệnh căn bản của Terraform.</p>
+      </div>
+    </a>
+
+    <a href="nginx.html" class="related-card">
+      <img src="https://miro.medium.com/max/1200/1*qTJWhzlBH_zNVYSj5BJxrw.jpeg" alt="Nginx">
+      <div class="related-content">
+        <h3>Tổng quan về Nginx</h3>
+        <p>Cơ chế hoạt động, khái niệm về Nginx căn bản.</p>
+      </div>
+    </a>
+
+    <a href="ci-cd.html" class="related-card">
+      <img src="https://th.bing.com/th/id/R.385f93c510b66c9133840663a44f2dfb?rik=SgSCz4ByZ1W%2f5A&pid=ImgRaw&r=0" alt="CI/CD">
+      <div class="related-content">
+        <h3>CI/CD</h3>
+        <p>Căn bản về CI/CD, các nền tảng triển khai v.v.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

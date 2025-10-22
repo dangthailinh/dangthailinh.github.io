@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tổng quan về linux</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://www.zdnet.com/a/img/resize/c2483aa13e8c5ef3fd0c26a6ce7183ac8919ab9b/2019/04/16/df9ecfb3-cdb2-454d-9f4f-75e6cd5e607f/the-linux-desktop-is-in-trouble-5cb48113bd785600b9e68b77-1-apr-16-2019-15-33-38-poster.jpg?auto=webp&fit=crop&height=675&width=1200" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Dec 19, 2022 • 7:25 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>Tổng quan về Linux và các câu lệnh.</h1>
+
+
+
+        <h2 id="gioi-thieu">Linux là gì?</h2>
+        <p>LINUX là một hệ điều hành hoặc hạt nhân được phân phối theo giấy phép nguồn mở. Danh sách chức năng của nó khá giống UNIX. Kernel là một chương trình cốt lõi của hệ điều hành Linux, đảm nhiệm những công việc cơ bản, như cho phép phần cứng giao tiếp với phần mềm.</p>
+           <figure>
+          <img src="https://www.guru99.com/images/OperatingSystemBasics.png" alt="Chu trình DevOps">
+          <figcaption>chu trình từ trên xuống</figcaption>
+        </figure>
+         <h3>Tại sao bạn cần một hệ điều hành?</h3>
+<p>Mỗi khi bật máy tính, bạn sẽ thấy một màn hình nơi bạn có thể thực hiện các hoạt động khác nhau như viết, duyệt internet hoặc xem video. Điều gì khiến phần cứng máy tính hoạt động như vậy? Làm thế nào bộ xử lý trên máy tính của bạn biết rằng bạn đang yêu cầu nó chạy tệp mp3?
+
+Vâng, chính hệ điều hành hoặc kernel thực hiện công việc này. Vì vậy, để làm việc trên máy tính, bạn cần một OperaHệ thống ting (HĐH). Trên thực tế, bạn đang sử dụng một cái khi bạn đọc nó trên máy tính. Bây giờ, bạn có thể đã sử dụng các hệ điều hành phổ biến như Windows, Apple OS X, nhưng ở đây chúng ta sẽ tìm hiểu phần giới thiệu về hệ điều hành Linux, tổng quan về Linux và những lợi ích mà nó mang lại so với các lựa chọn hệ điều hành khác.</p>
+<h3>Ai đã tạo ra Linux?</h3>
+<p></p>
+ <figure>
+          <img src="https://www.guru99.com/images/LinuxTrovald.png" alt="Chu trình DevOps">
+          <figcaption>Linus Torvalds</figcaption>
+        </figure>
+<p>Linux là một hệ điều hành hoặc một hạt nhân nảy mầm như một ý tưởng trong tâm trí của những người trẻ tuổi và thông minh. Linus Torvalds khi anh còn là sinh viên khoa học máy tính. Anh ấy từng làm việc trên Hệ điều hành UNIX (phần mềm độc quyền) và nghĩ rằng nó cần được cải tiến.
+
+Tuy nhiên, khi đề xuất của ông bị các nhà thiết kế UNIX từ chối, ông đã nghĩ đến việc tung ra một hệ điều hành sẽ tiếp thu những thay đổi, sửa đổi do người dùng đề xuất.</p>
+
+<h3>Lịch sử của Linux</h3>
+<p>So Linus đã phát minh ra hạt nhân đặt tên là Linux vào năm 1991. Mặc dù anh ấy sẽ cần các chương trình như Trình quản lý tệp, Trình chỉnh sửa tài liệu, chương trình Âm thanh -Video để chạy trên nó. Điều gì đó giống như bạn có một chiếc nón nhưng lại không có kem ở trên.
+
+Thời gian trôi qua, anh cộng tác với những người khác lập trình viên ở những nơi như MIT và các ứng dụng dành cho Linux bắt đầu xuất hiện. Vì vậy, vào khoảng năm 1991, một hệ điều hành Linux với một số ứng dụng đã chính thức ra mắt và đây là sự khởi đầu của một trong những Các tùy chọn hệ điều hành nguồn mở và được yêu thích nhất hiện nay.</p>
+
+<p>Các phiên bản trước của hệ điều hành Linux không thân thiện với người dùng như các lập trình viên máy tính và các nhà lập trình. Linus Torvalds chưa bao giờ có ý định thương mại hóa sản phẩm của anh ấy.
+
+Điều này chắc chắn đã hạn chế sự phổ biến của Linux như các hệ điều hành định hướng thương mại khác. Operahệ thống ting Windows đã nổi tiếng. Tuy nhiên, khía cạnh nguồn mở của hệ điều hành Linux đã khiến nó trở nên mạnh mẽ hơn.</p>
+<h3>Linux nhận được sự quan tâm đúng mức</h3>
+ <figure>
+          <img src="https://www.guru99.com/images/OurTimeIsNow.png" alt="Chu trình DevOps">
+          <figcaption>Quan tâm hơn đi mà</figcaption>
+        </figure>
+<p>Ưu điểm chính của Linux là các lập trình viên có thể sử dụng Linux Kernel để thiết kế hệ điều hành tùy chỉnh của riêng họ. Theo thời gian, một loạt hệ điều hành thân thiện với người dùng mới đã làm mưa làm gió trên thế giới máy tính. Hiện nay, Linux là một trong những Kernel phổ biến và được sử dụng rộng rãi nhất, và nó là xương sống của các hệ điều hành phổ biến như Debian, Knoppix, Ubuntu, và Fedora. Tuy nhiên, danh sách không kết thúc ở đây vì có sẵn hàng nghìn phiên bản Hệ điều hành Linux tốt nhất dựa trên Nhân Linux, cung cấp nhiều chức năng khác nhau cho người dùng.</p>
+
+<P>Hạt nhân Linux thường được sử dụng kết hợp GNU dự án của Tiến sĩ Richard Stallman. Tất cả các bản phân phối hiện đại của Linux thực chất là các bản phân phối của Linux/GNU</P>
+
+<h3>Lợi ích của Linux</h3>
+<p>Hệ điều hành Linux hiện đang rất phổ biến và nó nổi tiếng với các lập trình viên cũng như người dùng máy tính thông thường trên khắp thế giới. Lợi ích chính của nó là -
+
+Nó cung cấp một hệ điều hành miễn phí. Bạn không cần phải bỏ ra hàng trăm đô la để có được hệ điều hành như thế nào Windows!</p>
+ <figure>
+          <img src="https://www.guru99.com/images/Linux_Windows_Error.png" alt="Chu trình DevOps">
+          <figcaption>Oops</figcaption>
+        </figure>
+<p>1.Là nguồn mở nên bất kỳ ai có kiến ​​thức lập trình đều có thể sửa đổi nó.</p>
+<p>2.Thật dễ dàng để học Linux cho người mới bắt đầu</p>
+<p>3.Các hệ điều hành Linux hiện nay cung cấp hàng triệu chương trình/ứng dụng và phần mềm Linux để lựa chọn, hầu hết chúng đều miễn phí!</p>
+<p>4.Khi bạn đã cài đặt Linux, bạn không cần dùng phần mềm chống vi-rút nữa! Linux là một hệ thống có tính bảo mật cao. Hơn nữa, có một cộng đồng phát triển toàn cầu không ngừng tìm cách tăng cường tính bảo mật của mình. Với mỗi lần nâng cấp, hệ điều hành sẽ trở nên an toàn và mạnh mẽ hơn</p>
+<p>5.Phần mềm miễn phí Linux là hệ điều hành được lựa chọn cho môi trường Máy chủ do tính ổn định và độ tin cậy của nó (Mega-các công ty như Amazon, Facebook và Google sử dụng Linux cho Máy chủ của họ). Một máy chủ dựa trên Linux có thể chạy không ngừng nghỉ mà không cần khởi động lại trong nhiều năm</p>
+<h3>Có phải cho bạn không?</h3>
+
+ <figure>
+          <img src="https://www.guru99.com/images/Should_I_Use_IT.png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>Người dùng mới làm quen với Linux thường tránh xa nó bằng cách coi nó là một hệ điều hành kỹ thuật và khó vận hành, nhưng thành thật mà nói, trong vài năm gần đây, hệ điều hành Linux đã trở nên thân thiện với người dùng hơn rất nhiều so với các hệ điều hành của họ như Windows, vì vậy thử chúng là cách tốt nhất để biết Linux có phù hợp với bạn hay không.
+
+Có hàng ngàn Hệ điều hành Linux tốt nhất và các phần mềm Linux có sẵn dựa trên Linux Kernel; hầu hết trong số chúng cung cấp ứng dụng và bảo mật tiên tiến, tất cả đều miễn phí!
+
+Đây chính là nội dung của Linux và bây giờ chúng ta sẽ chuyển sang cách cài đặt Linux và bạn nên chọn phân phối nào.</p>
+
+<h3>Vậy thì tại sao lại là Linux?</h3>
+
+<p>UNIX được gọi là mẹ của các hệ điều hành đã đặt nền móng cho Linux. Unix được thiết kế chủ yếu cho máy tính lớn và trong các doanh nghiệp và trường đại học. Trong khi Linux đang nhanh chóng trở thành cái tên quen thuộc đối với người dùng máy tính, nhà phát triển và môi trường máy chủ. Bạn có thể phải trả tiền cho một hạt nhân Unix trong khi ở Linux thì nó miễn phí.</p>
+
+<p>Nhưng các lệnh được sử dụng trên cả hai hệ điều hành thường giống nhau. Không có nhiều sự khác biệt giữa UNIX và Linux. Mặc dù chúng có vẻ khác nhau nhưng về cốt lõi thì chúng giống nhau. Từ Linux là một bản sao của UNIX. Vì vậy, học cái này cũng giống như học cái khác.</p>
+
+
+
+
+
+
+<h2 id="devops-la-gi">Hướng dẫn dòng lệnh Linux: Thao tác với Terminal bằng lệnh CD</h2>
+<h3>Tại sao nên học Giao diện dòng lệnh?</h3>
+<p>Mặc dù thế giới đang chuyển sang các hệ thống dựa trên GUI, CLI vẫn có những cách sử dụng cụ thể và được sử dụng rộng rãi trong việc viết kịch bản và quản trị máy chủ. Chúng ta hãy xem xét một số công dụng hấp dẫn -
+
+</p>
+<p>-Tương tự, Lệnh cung cấp nhiều tùy chọn hơn và linh hoạt hơn. Đường ống và stdin/stdout cực kỳ mạnh mẽ không có sẵn trong GUI</p>
+<p>-Một số cấu hình trong GUI có độ sâu lên tới 5 màn hình trong khi ở CLI, đó chỉ là một lệnh duy nhất</p>
+<p>-Việc di chuyển, đổi tên hàng nghìn file trong GUI sẽ rất tốn thời gian (Sử dụng Control /Shift để chọn nhiều tệp), trong khi ở CLI, sử dụng các biểu thức thông thường để có thể thực hiện cùng một tác vụ chỉ bằng một lệnh duy nhất.</p>
+<p>-CLI tải nhanh và không tiêu tốn RAM so với GUI. Trong các tình huống khủng hoảng, điều này quan trọng.</p>
+<p>Cả GUI và CLI đều có những cách sử dụng cụ thể. Ví dụ, trong GUI, biểu đồ giám sát hiệu suất cho phản hồi trực quan ngay lập tức về tình trạng hệ thống, trong khi việc nhìn thấy hàng trăm dòng nhật ký trong CLI thật chướng mắt</p>
+<p>Bạn phải học cách sử dụng cả GUI (Trình quản lý tệp) và CLI (Thiết bị đầu cuối)
+
+GUI của một Hệ điều hành dựa trên Linux tương tự như bất kỳ hệ điều hành nào khác. Do đó, chúng ta sẽ tập trung vào CLI và tìm hiểu một số lệnh hữu íc</p>
+
+<h3>Khởi chạy CLI trên Ubuntu</h3>
+<p>Có 2 cách để khởi chạy terminal.</p>
+<p>1, Đi tới Dash và gõ terminal</p>
+<figure>
+          <img src="https://www.guru99.com/images/Terminal.png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>2, Hoặc bạn có thể nhấn CTRL + Alt + T để khởi chạy Terminal</p>
+<p>Sau khi khởi chạy CLI (Terminal), bạn sẽ tìm thấy thứ gì đó có tên guru99@VirtualBox(xem hình ảnh) được viết trên đó.</p>
+
+<figure>
+          <img src="https://www.guru99.com/images/Terminal_Description.png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>1, Phần đầu tiên của dòng này là tên của người sử dụng (bob, tom, Ubuntu, nhà…)</p>
+
+<p>2, Phần thứ hai là tên máy tính hoặc tên máy chủ. Tên máy chủ giúp xác định máy tính qua mạng. Trong môi trường máy chủ, tên máy chủ trở nên quan trọng.</p>
+
+<p>3,':' là một dấu phân cách đơn giản</p>
+
+<p>4, Dấu ngã '~' cho biết người dùng đang làm việc trong thư mục chính. Nếu bạn thay đổi thư mục, dấu hiệu này sẽ biến mất.
+
+</p>
+<figure>
+          <img src="https://www.guru99.com/images/Home-Directory.png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>Trong hình minh họa ở trên, chúng tôi đã chuyển từ thư mục /home sang /bin bằng cách sử dụng lệnh lệnh 'cd'. Dấu ~ không hiển thị khi làm việc trong thư mục /bin. Nó xuất hiện trong khi di chuyển trở lại thư mục chính.</p>
+
+
+<p>5, Dấu '$' gợi ý rằng bạn đang làm việc như một người dùng thông thường trên Linux. Khi làm việc với tư cách người dùng root, '#' được hiển thị.</p>
+
+<figure>
+          <img src="https://www.guru99.com/images/root_user.png" alt="Chu trình DevOps">
+        
+        </figure>
+<h3>Thư mục làm việc hiện tại</h3>
+<p>Thư mục mà bạn hiện đang duyệt được gọi là thư mục làm việc Hiện tại. Bạn đăng nhập vào thư mục chính khi khởi động PC. Nếu bạn muốn xác định thư mục bạn đang làm việc, hãy sử dụng lệnh –pwd</H1></p>
+
+
+<figure>
+          <img src="https://www.guru99.com/images/pwd.png" alt="Chu trình DevOps">
+        
+        </figure>
+<P>lệnh pwd là viết tắt của print wOrking dlời giảng
+
+Hình trên cho thấy /home/guru99 là thư mục chúng ta đang làm việc.</P>
+<h3>Thay đổi thư mục</h3>
+<p>Nếu bạn muốn thay đổi thư mục hiện tại của mình, hãy sử dụng 'cd' yêu cầu.</p>
+<p>Hãy xem xét ví dụ sau.</p>
+
+<figure>
+          <img src="https://www.guru99.com/images/cd.png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>Ở đây, chúng ta đã chuyển từ thư mục /tmp sang /bin sang /usr rồi quay lại /tmp.</p>
+
+<h3>Điều hướng đến thư mục chính</h3>
+<p>Nếu bạn muốn điều hướng đến thư mục chính, hãy gõ cd.</p>
+<figure>
+          <img src="https://www.guru99.com/images/cd(1).png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>Bạn cũng có thể sử dụng cd ~ chỉ huy.</p>
+
+<figure>
+          <img src="https://www.guru99.com/images/cd_.png" alt="Chu trình DevOps">
+        
+        </figure>
+
+<h3>Di chuyển đến thư mục gốc</h3>
+<P>Thư mục gốc của hệ thống tệp trong Linux được ký hiệu là '/'. Tương tự như 'c:\' trong Windows.
+
+Lưu ý: Trong Windows, bạn sử dụng dấu gạch chéo ngược “\” trong khi ở UNIX/Linux, dấu gạch chéo lên được sử dụng “/”
+
+Gõ “cd/” để di chuyển tới thư mục gốc.</P>
+
+
+<figure>
+          <img src="https://www.guru99.com/images/cd_root.png" alt="Chu trình DevOps">
+        
+        </figure>
+<h3>Điều hướng qua nhiều thư mục</h3>
+<p>Bạn có thể điều hướng qua nhiều thư mục cùng lúc bằng cách chỉ định đường dẫn đầy đủ của nó.
+
+Ví dụ: Nếu bạn muốn di chuyển /cpu thư mục dưới /dev, bạn không cần phải chia hoạt động thành hai phần.
+
+Thay vào đó, chúng ta có thể gõ '/dev/cpu' để truy cập trực tiếp vào thư mục.</p>
+
+<h3>Di chuyển lên một cấp thư mục</h3>
+
+<p>Để điều hướng lên một cấp thư mục, hãy thử "cd .."</p>
+
+<figure>
+          <img src="https://www.guru99.com/images/navigation_up_one_directory.png" alt="Chu trình DevOps">
+        
+        </figure>
+
+        <P>Ở đây bằng cách sử dụng lệnh 'cd ..', chúng tôi đã di chuyển một thư mục từ '/dev/cpu' lên '/dev'.
+
+Sau đó, bằng cách sử dụng lại lệnh tương tự, chúng ta đã chuyển từ thư mục gốc '/dev' sang '/'.</P>
+<h3>Đường dẫn tương đối và tuyệt đối</h3>
+<p>Đường dẫn trong máy tính là địa chỉ của một tập tin hoặc thư mục.
+
+Thí dụ -</p>
+
+<p>In Windows : C:\documentsandsettings\user\downloads</p>
+
+<p>Trong Linux :/home/user/downloads</p>
+
+<h3>Có hai loại đường dẫn:</h3>
+<p>1. Đường dẫn tuyệt đối:</p>
+<p>Giả sử bạn phải duyệt các hình ảnh được lưu trong thư mục Pictures của thư mục chính 'guru99'.
+
+Đường dẫn file tuyệt đối của thư mục Pictures /home/guru99/Hình ảnh</p>
+<p>Để điều hướng đến thư mục này, bạn có thể sử dụng lệnh.</p>
+<figure>
+          <img src="https://www.guru99.com/images/absolute_path.png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>Đây được gọi là đường dẫn tuyệt đối vì bạn đang chỉ định đường dẫn đầy đủ để truy cập tệp.</p>
+<p>2. Đường dẫn tương đối:
+</p>
+<p>Đường dẫn tương đối có ích khi bạn phải duyệt thư mục con khác trong một thư mục nhất định.
+
+Nó giúp bạn không phải mất công gõ các đường dẫn đầy đủ mọi lúc.
+
+Giả sử bạn hiện đang ở trong thư mục Home của mình. Bạn muốn điều hướng đến thư mục Tải xuống.
+
+Bạn không cần gõ đường dẫn tuyệt đối</p>
+
+
+<figure>
+          <img src="https://www.guru99.com/images/relative_path.png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>Thay vào đó, bạn có thể chỉ cần gõ 'Tải xuống cd' và bạn sẽ điều hướng đến thư mục Tải xuống vì bạn đã có mặt trong '/home/guru99' thư mục</p>
+
+
+
+<figure>
+          <img src="https://www.guru99.com/images/relative_path_1.png" alt="Chu trình DevOps">
+        
+        </figure>
+<p>Bằng cách này, bạn không cần phải chỉ định đường dẫn đầy đủ để đến một vị trí cụ thể trong cùng thư mục trong hệ thống tệp.</p>
+
+
+
+<h2 id="ky-nang">Các Lệnh cơ bản Linux</h2>
+
+<div class="linux-commands-grid">
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/4a90e2/ffffff?text=ls" alt="ls command">
+    <h3>ls</h3>
+    <p>Liệt kê nội dung thư mục</p>
+    <code>ls -l</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/50c878/ffffff?text=cd" alt="cd command">
+    <h3>cd</h3>
+    <p>Chuyển đổi thư mục</p>
+    <code>cd /home/user</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/ff6f61/ffffff?text=pwd" alt="pwd command">
+    <h3>pwd</h3>
+    <p>In đường dẫn thư mục hiện tại</p>
+    <code>pwd</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/9b59b6/ffffff?text=mkdir" alt="mkdir command">
+    <h3>mkdir</h3>
+    <p>Tạo thư mục mới</p>
+    <code>mkdir new_folder</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/f39c12/ffffff?text=rm" alt="rm command">
+    <h3>rm</h3>
+    <p>Xóa tệp hoặc thư mục</p>
+    <code>rm file.txt</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/e74c3c/ffffff?text=cp" alt="cp command">
+    <h3>cp</h3>
+    <p>Sao chép tệp/thư mục</p>
+    <code>cp file1.txt file2.txt</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/1abc9c/ffffff?text=mv" alt="mv command">
+    <h3>mv</h3>
+    <p>Di chuyển hoặc đổi tên tệp</p>
+    <code>mv old.txt new.txt</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/34495e/ffffff?text=cat" alt="cat command">
+    <h3>cat</h3>
+    <p>Xem nội dung tệp</p>
+    <code>cat file.txt</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/d35400/ffffff?text=man" alt="man command">
+    <h3>man</h3>
+    <p>Xem hướng dẫn sử dụng lệnh</p>
+    <code>man ls</code>
+  </div>
+
+  <div class="command-card">
+    <img src="https://placehold.co/150x150/2ecc71/ffffff?text=chmod" alt="chmod command">
+    <h3>chmod</h3>
+    <p>Thay đổi quyền truy cập tệp</p>
+    <code>chmod 755 script.sh</code>
+   
+    
+
+    
+  </div>
+</div>
+
+     <h2 id="cong-cu">Các lệnh Linux nâng cao</h2>
+
+<div class="advanced-command-section">
+  <!-- 1. rsync -->
+  <div class="command-detail">
+    <h3>1. <code>rsync</code> – Đồng bộ hóa tệp/thư mục hiệu quả</h3>
+    <div class="command-content">
+      <img src="https://placehold.co/300x160/2c3e50/ffffff?text=rsync" alt="rsync command">
+      <div class="text">
+        <p><code>rsync</code> là công cụ mạnh mẽ để sao chép và đồng bộ hóa tệp/thư mục giữa các hệ thống, hỗ trợ nén, tiếp tục khi gián đoạn và chỉ truyền phần thay đổi.</p>
+        <h4>Ví dụ:</h4>
+        <pre><code>rsync -avz /home/user/docs/ user@remote:/backup/docs/</code></pre>
+        <ul>
+          <li><code>-a</code>: chế độ archive (giữ nguyên quyền, thời gian, symlink...)</li>
+          <li><code>-v</code>: hiển thị chi tiết</li>
+          <li><code>-z</code>: nén dữ liệu khi truyền</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. awk -->
+  <div class="command-detail">
+    <h3>2. <code>awk</code> – Xử lý văn bản theo cột</h3>
+    <div class="command-content">
+      <img src="https://placehold.co/300x160/8e44ad/ffffff?text=awk" alt="awk command">
+      <div class="text">
+        <p><code>awk</code> là ngôn ngữ lập trình nhỏ gọn dùng để trích xuất và xử lý dữ liệu dạng bảng (ví dụ: file log, CSV) dựa trên dấu phân cách (mặc định là khoảng trắng).</p>
+        <h4>Ví dụ:</h4>
+        <pre><code>awk '{print $1, $3}' data.txt</code></pre>
+        <p>In cột thứ 1 và thứ 3 của mỗi dòng trong <code>data.txt</code>.</p>
+        <p>Ví dụ nâng cao: đếm số dòng có chứa "ERROR":</p>
+        <pre><code>awk '/ERROR/ {count++} END {print count+0}' logfile.log</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. sed -->
+  <div class="command-detail">
+    <h3>3. <code>sed</code> – Chỉnh sửa văn bản theo luồng (stream editor)</h3>
+    <div class="command-content">
+      <img src="https://placehold.co/300x160/e74c3c/ffffff?text=sed" alt="sed command">
+      <div class="text">
+        <p><code>sed</code> cho phép tìm kiếm, thay thế, xóa hoặc chèn văn bản mà không cần mở file — rất hữu ích trong shell script.</p>
+        <h4>Ví dụ:</h4>
+        <pre><code>sed 's/foo/bar/g' file.txt</code></pre>
+        <p>Thay thế mọi từ <code>foo</code> bằng <code>bar</code> trong <code>file.txt</code> (không ghi lại file).</p>
+        <p>Ghi kết quả trực tiếp vào file:</p>
+        <pre><code>sed -i 's/foo/bar/g' file.txt</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. tar + gzip -->
+  <div class="command-detail">
+    <h3>4. <code>tar</code> – Nén và giải nén thư mục</h3>
+    <div class="command-content">
+      <img src="https://placehold.co/300x160/f39c12/ffffff?text=tar" alt="tar command">
+      <div class="text">
+        <p><code>tar</code> không nén theo mặc định, nhưng thường kết hợp với <code>gzip</code> (<code>.tar.gz</code>) hoặc <code>bzip2</code> (<code>.tar.bz2</code>) để tạo file lưu trữ.</p>
+        <h4>Ví dụ nén:</h4>
+        <pre><code>tar -czvf archive.tar.gz /path/to/folder</code></pre>
+        <h4>Ví dụ giải nén:</h4>
+        <pre><code>tar -xzvf archive.tar.gz</code></pre>
+        <ul>
+          <li><code>c</code>: tạo archive</li>
+          <li><code>x</code>: giải nén</li>
+          <li><code>z</code>: dùng gzip</li>
+          <li><code>v</code>: hiển thị chi tiết</li>
+          <li><code>f</code>: chỉ định tên file</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. ssh + key -->
+  <div class="command-detail">
+    <h3>5. <code>ssh</code> – Truy cập từ xa an toàn</h3>
+    <div class="command-content">
+      <img src="https://placehold.co/300x160/1abc9c/ffffff?text=ssh" alt="ssh command">
+      <div class="text">
+        <p><code>ssh</code> cho phép đăng nhập và chạy lệnh trên máy chủ từ xa qua kết nối mã hóa.</p>
+        <h4>Ví dụ cơ bản:</h4>
+        <pre><code>ssh user@192.168.1.10</code></pre>
+        <p>Để không phải nhập mật khẩu, dùng SSH key:</p>
+        <pre><code>ssh-keygen -t ed25519
+ssh-copy-id user@server</code></pre>
+        <p>Sau đó, bạn có thể đăng nhập mà không cần mật khẩu.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. cron -->
+  <div class="command-detail">
+    <h3>6. <code>cron</code> – Lên lịch tác vụ tự động</h3>
+    <div class="command-content">
+      <img src="https://placehold.co/300x160/9b59b6/ffffff?text=cron" alt="cron command">
+      <div class="text">
+        <p><code>cron</code> là trình lập lịch chạy lệnh/script định kỳ (hàng phút, giờ, ngày...).</p>
+        <h4>Mở trình soạn lịch:</h4>
+        <pre><code>crontab -e</code></pre>
+        <p>Ví dụ: chạy backup mỗi ngày lúc 2h sáng:</p>
+        <pre><code>0 2 * * * /home/user/backup.sh</code></pre>
+        <p>Cú pháp: <code>phút giờ ngày tháng thứ</code></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+       <h2 id="lo-trinh">Tổng kết về Linux và các lệnh</h2>
+<p>
+  Linux là một hệ điều hành mã nguồn mở, mạnh mẽ và linh hoạt, được sử dụng rộng rãi từ máy chủ, thiết bị nhúng đến máy tính cá nhân. Một trong những điểm mạnh nổi bật của Linux chính là khả năng điều khiển và tự động hóa thông qua dòng lệnh (terminal). Các lệnh Linux — từ cơ bản như <code>ls</code>, <code>cd</code>, <code>cp</code> đến nâng cao như <code>awk</code>, <code>rsync</code>, <code>ssh</code> hay <code>cron</code> — không chỉ giúp người dùng thao tác nhanh chóng với hệ thống mà còn mở ra khả năng xây dựng script, quản trị mạng, xử lý dữ liệu hàng loạt và vận hành hệ thống ở quy mô lớn. Làm chủ các lệnh này đồng nghĩa với việc bạn có thể khai thác tối đa sức mạnh của Linux: hiệu quả, ổn định, bảo mật và hoàn toàn tự do tùy biến theo nhu cầu. Dù bạn là lập trình viên, quản trị viên hệ thống hay người đam mê công nghệ, hành trình làm quen với Linux chính là bước đệm quan trọng để làm chủ thế giới máy tính hiện đại.
+</p>
+    
+    
+  
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Linux là gì?</a></li>
+        <li><a href="#devops-la-gi">Hướng dẫn dòng lệnh Linux</a></li>
+        <li><a href="#ky-nang">Các lệnh linux căn bản</a></li>
+        <li><a href="#cong-cu">Các lệnh linux nâng cao</a></li>
+        <li><a href="#lo-trinh">Tổng kết</a></li>
+      </ul>
+    </aside>
+  </div>
+
+<section class="related-posts">
+  <h2>Những bài viết liên quan:</h2>
+  <div class="related-grid">
+
+  
+
+    <a href="docker.html" class="related-card">
+      <img src="https://storage.googleapis.com/static.ianlewis.org/prod/img/docker/large_v-trans.png" alt="Docker">
+      <div class="related-content">
+        <h3>Tổng quan về Docker</h3>
+        <p>Tìm hiểu về Docker, cách vận hành và chức năng chính.</p>
+      </div>
+    </a>
+
+    <a href="cloud.html" class="related-card">
+      <img src="https://cdn.axalize.vn/media/content/images/cloud-computing.jpg" alt="Cloud">
+      <div class="related-content">
+        <h3>Cloud Computing</h3>
+        <p>Hiểu rõ về Cloud và ứng dụng trong thực tế.</p>
+      </div>
+    </a>
+
+    <a href="network.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.j7ey9UDQrNyUSKpakne90AHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Networking">
+      <div class="related-content">
+        <h3>Networking</h3>
+        <p>Các khái niệm networking căn bản cần nắm rõ.</p>
+      </div>
+    </a>
+
+    <a href="terra.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.1gAEVon2RF5oko4iWCfftgHaHO?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Terraform">
+      <div class="related-content">
+        <h3>Tổng quan về Terraform</h3>
+        <p>Hiểu cơ bản và các lệnh căn bản của Terraform.</p>
+      </div>
+    </a>
+
+    <a href="nginx.html" class="related-card">
+      <img src="https://miro.medium.com/max/1200/1*qTJWhzlBH_zNVYSj5BJxrw.jpeg" alt="Nginx">
+      <div class="related-content">
+        <h3>Tổng quan về Nginx</h3>
+        <p>Cơ chế hoạt động, khái niệm về Nginx căn bản.</p>
+      </div>
+    </a>
+
+    <a href="ci-cd.html" class="related-card">
+      <img src="https://th.bing.com/th/id/R.385f93c510b66c9133840663a44f2dfb?rik=SgSCz4ByZ1W%2f5A&pid=ImgRaw&r=0" alt="CI/CD">
+      <div class="related-content">
+        <h3>CI/CD</h3>
+        <p>Căn bản về CI/CD, các nền tảng triển khai v.v.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

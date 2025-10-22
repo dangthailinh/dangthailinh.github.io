@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon ECR: Kho lưu trữ container riêng tư và an toàn trên AWS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://tse4.mm.bing.net/th/id/OIP.fOnJ2_BApgXxy5rkhoOAOQHaEC?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 23, 2025 • 5:00 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>Amazon ECR: Kho lưu trữ container riêng tư và an toàn trên AWS</h1>
+        <p style="font-style: italic; color: #555;">Hiểu ECR qua vai trò thực tế trong pipeline DevOps — từ build, push đến deploy</p>
+
+        <h2 id="gioi-thieu">1. ECR là gì và tại sao bạn cần nó?</h2>
+        <p>Khi bạn đóng gói ứng dụng vào Docker container, bạn cần một nơi để lưu trữ image đó — giống như GitHub cho mã nguồn, nhưng dành riêng cho container. Đó chính là **Amazon ECR (Elastic Container Registry)**.</p>
+        <p>ECR là dịch vụ lưu trữ container registry **riêng tư, được quản lý hoàn toàn bởi AWS**, tích hợp sâu với IAM, ECS, EKS và các dịch vụ khác. Khác với Docker Hub (công cộng hoặc trả phí cho private repo), ECR:</p>
+        <ul>
+          <li>Miễn phí cho private repository</li>
+          <li>Tự động quét lỗ hổng bảo mật (CVE) trong image</li>
+          <li>Tích hợp liền mạch với AWS CLI, Docker CLI và CI/CD tools</li>
+          <li>Chỉ cho phép truy cập qua IAM — không cần quản lý username/password riêng</li>
+        </ul>
+        <p>Nếu bạn chạy container trên AWS (ECS/EKS), **ECR là lựa chọn tự nhiên và an toàn nhất**.</p>
+
+        <figure>
+          <img 
+            src="https://storage.googleapis.com/zenn-user-upload/71a1f8e630e5-20240513.png" 
+            width="800"
+            height="400"
+            alt="ECR trong luồng CI/CD">
+          <figcaption>
+            Hình 1: ECR đóng vai trò trung tâm trong luồng CI/CD: build → push → pull → deploy.
+          </figcaption>
+        </figure>
+
+        <h2 id="cau-truc-va-khai-niem">2. Cấu trúc và khái niệm cơ bản</h2>
+
+        <h3>2.1. Repository</h3>
+        <p>Là nơi chứa các phiên bản (tag) của một image. Tên repository thường theo định dạng: <code>my-app/backend</code>, <code>nginx-custom</code>, v.v.</p>
+        <p>Mỗi repository có URL duy nhất, ví dụ:</p>
+        <pre>123456789012.dkr.ecr.ap-southeast-1.amazonaws.com/my-app</pre>
+
+        <h3>2.2. Image và Tag</h3>
+        <p>- Image là bản snapshot của ứng dụng đã build.<br>
+        - Tag là nhãn phiên bản, ví dụ: <code>latest</code>, <code>v1.2.0</code>, <code>sha-a1b2c3d</code>.<br>
+        - AWS khuyến nghị **tránh dùng <code>latest</code> trong production** — vì không xác định được phiên bản cụ thể.</p>
+
+        <h3>2.3. Scan lỗ hổng bảo mật</h3>
+        <p>ECR tự động quét image khi bạn push (hoặc theo lịch). Kết quả hiển thị trong console: số CVE, mức độ nghiêm trọng (CRITICAL, HIGH…), và CVE ID.</p>
+        <p>Bạn có thể chặn pipeline nếu phát hiện lỗ hổng nghiêm trọng — tăng độ tin cậy hệ thống.</p>
+
+        <h2 id="thuc-hanh-day-du">3. Thực hành: Từ build đến push image vào ECR</h2>
+        <p>Giả sử bạn có ứng dụng Node.js với Dockerfile trong thư mục hiện tại.</p>
+
+        <p><strong>Bước 1: Tạo repository trên AWS Console</strong></p>
+        <ul>
+          <li>Vào ECR → Repositories → Create repository</li>
+          <li>Tên: <code>my-web-app</code></li>
+          <li>Giữ nguyên các tùy chọn mặc định (private, scan on push: bật)</li>
+        </ul>
+
+        <p><strong>Bước 2: Build image cục bộ</strong></p>
+        <pre>docker build -t my-web-app .</pre>
+
+        <p><strong>Bước 3: Đăng nhập Docker CLI vào ECR</strong></p>
+        <p>Chạy lệnh sau (AWS CLI phải đã được cấu hình):</p>
+        <pre>aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.ap-southeast-1.amazonaws.com</pre>
+
+        <p><strong>Bước 4: Đặt tag cho image theo định dạng ECR</strong></p>
+        <pre>docker tag my-web-app:latest 123456789012.dkr.ecr.ap-southeast-1.amazonaws.com/my-web-app:v1.0.0</pre>
+
+        <p><strong>Bước 5: Push image lên ECR</strong></p>
+        <pre>docker push 123456789012.dkr.ecr.ap-southeast-1.amazonaws.com/my-web-app:v1.0.0</pre>
+
+        <p>Sau bước này, image sẽ xuất hiện trong repository, kèm kết quả quét bảo mật sau vài phút.</p>
+
+        <h2 id="tich-hop-voi-ecs-eks">4. Tích hợp ECR với ECS và EKS</h2>
+        <p>Khi tạo task definition (ECS) hoặc deployment (EKS), bạn chỉ cần khai báo image URL đầy đủ từ ECR:</p>
+        <pre>123456789012.dkr.ecr.ap-southeast-1.amazonaws.com/my-web-app:v1.0.0</pre>
+
+        <p>Với ECS (Fargate hoặc EC2), bạn cần đảm bảo:</p>
+        <ul>
+          <li>Task execution role có quyền <code>ecr:GetDownloadUrlForLayer</code>, <code>ecr:BatchGetImage</code>, <code>ecr:GetAuthorizationToken</code>.</li>
+          <li>Task chạy trong VPC có kết nối đến ECR (thường qua internet hoặc VPC endpoint).</li>
+        </ul>
+
+        <p>Với EKS, bạn có thể dùng IAM role cho service account (IRSA) để cấp quyền pull image — không cần secret Docker.</p>
+
+        <h2 id="best-practices">5. Best practices khi dùng ECR</h2>
+        <ul>
+          <li><strong>Luôn dùng tag có phiên bản cụ thể</strong> (ví dụ: git commit hash hoặc semantic version) — không dùng <code>latest</code> trong production.</li>
+          <li><strong>Bật scan on push</strong> và tích hợp vào CI pipeline để fail build nếu có lỗ hổng CRITICAL.</li>
+          <li><strong>Dọn dẹp image cũ</strong> bằng lifecycle policy — tránh tốn chi phí lưu trữ.</li>
+          <li><strong>Sử dụng VPC endpoint cho ECR</strong> (com.amazonaws.region.ecr.dkr, com.amazonaws.region.ecr.api) để giữ traffic trong AWS backbone — tăng bảo mật và hiệu năng.</li>
+          <li><strong>Giới hạn quyền pull/push bằng IAM policy</strong> — chỉ cho CI/CD user quyền push, chỉ cho ECS task quyền pull.</li>
+        </ul>
+
+        <figure>
+          <img 
+            src="https://www.cloudkeeper.com/cms-assets/s3fs-public/2023-08/inner-banner.png" 
+            width="800"
+            height="350"
+            alt="VPC endpoint cho ECR">
+          <figcaption>
+            Hình 2: Dùng VPC endpoint để container pull image từ ECR mà không qua internet.
+          </figcaption>
+        </figure>
+
+        <h2 id="ket-luan">6. Kết luận</h2>
+        <p>Amazon ECR không chỉ là “nơi lưu image” — mà là **mắt xích bảo mật và kiểm soát** trong toàn bộ vòng đời container. Khi được kết hợp với IAM, VPC endpoint và lifecycle policy, ECR giúp bạn:</p>
+        <ul>
+          <li>Ngăn rò rỉ image ra ngoài</li>
+          <li>Phát hiện lỗ hổng trước khi deploy</li>
+          <li>Tối ưu chi phí lưu trữ</li>
+          <li>Tăng tốc độ pull image trong VPC</li>
+        </ul>
+        <p>Trong hệ sinh thái AWS, **ECR + ECS/EKS là bộ đôi đáng tin cậy** cho mọi workload container — từ prototype đến hệ thống production quy mô lớn.</p>
+        <p>Hãy bắt đầu bằng cách tạo một repository, push image đầu tiên, và bật scan — bạn sẽ thấy ngay giá trị của một registry “có trách nhiệm”.</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">1. ECR là gì?</a></li>
+        <li><a href="#cau-truc-va-khai-niem">2. Cấu trúc cơ bản</a></li>
+        <li><a href="#thuc-hanh-day-du">3. Thực hành đầy đủ</a></li>
+        <li><a href="#tich-hop-voi-ecs-eks">4. Tích hợp với ECS/EKS</a></li>
+        <li><a href="#best-practices">5. Best practices</a></li>
+        <li><a href="#ket-luan">6. Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

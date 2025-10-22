@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS VPC: Kiến trúc mạng ảo nền tảng trong hệ sinh thái AWS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://tse4.mm.bing.net/th/id/OIP.yVte02pTVUrP96_94DNQLAHaC9?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 22, 2025 • 11:00 PM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>AWS VPC: Kiến trúc mạng ảo nền tảng trong hệ sinh thái AWS</h1>
+        <p style="font-style: italic; color: #555;">Phân tích chi tiết từ cơ bản đến nâng cao — kèm minh họa trực quan</p>
+
+        <h2 id="gioi-thieu">1. Giới thiệu</h2>
+        <p>AWS VPC (Virtual Private Cloud) là dịch vụ cho phép bạn tạo một **mạng ảo riêng biệt và cô lập** trong AWS — nơi bạn có toàn quyền kiểm soát không gian địa chỉ IP, subnet, route table, gateway và tường lửa. Mọi tài nguyên như EC2, RDS, Lambda (trong VPC) đều hoạt động trong phạm vi VPC này.</p>
+        <p>VPC là nền tảng bắt buộc cho bất kỳ hệ thống production nào trên AWS. Hiểu VPC không chỉ giúp bạn triển khai ứng dụng, mà còn đảm bảo **bảo mật, hiệu năng và khả năng mở rộng**.</p>
+
+        <figure>
+          <img 
+            src="https://tse3.mm.bing.net/th/id/OIP.N6FlZ0AxY2sNyt_ADVvPzAHaFT?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="450"
+            alt="Tổng quan AWS VPC">
+          <figcaption>
+            Hình 1: VPC là mạng riêng ảo cô lập trong AWS, chứa các tài nguyên như EC2, RDS, v.v.
+          </figcaption>
+        </figure>
+
+        <h2 id="khai-niem-co-ban">2. Các khái niệm cơ bản</h2>
+
+        <h3>2.1. CIDR và dải địa chỉ IP</h3>
+        <p>Khi tạo VPC, bạn phải chọn một khối địa chỉ IP theo chuẩn CIDR (Classless Inter-Domain Routing), ví dụ: <code>10.0.0.0/16</code>.</p>
+        <ul>
+          <li><code>/16</code> → 65.536 địa chỉ IP (từ 10.0.0.0 đến 10.0.255.255).</li>
+          <li>AWS **dành riêng 5 IP đầu tiên** trong mỗi subnet cho hệ thống → bạn chỉ dùng được 65.531 IP.</li>
+        </ul>
+        <p>Các dải IP được phép dùng trong VPC (theo RFC 1918):</p>
+        <ul>
+          <li><code>10.0.0.0 – 10.255.255.255</code> (/8)</li>
+          <li><code>172.16.0.0 – 172.31.255.255</code> (/12)</li>
+          <li><code>192.168.0.0 – 192.168.255.255</code> (/16)</li>
+        </ul>
+
+        <h3>2.2. Subnet: Public và Private</h3>
+        <p>Subnet là phân vùng con của VPC. Có hai loại chính:</p>
+        <ul>
+          <li><strong>Public Subnet</strong>: Có route ra internet (qua Internet Gateway). Dùng cho load balancer, bastion host.</li>
+          <li><strong>Private Subnet</strong>: Không có route trực tiếp ra internet. Dùng cho database, application server.</li>
+        </ul>
+
+        <figure>
+          <img 
+            src="https://2.bp.blogspot.com/-M5mou_8yyl4/XDLK-2xxWtI/AAAAAAAACeI/f4o3_L2PzP0Q8lVqzpAJ4W25GMdQzUOSwCLcBGAs/s1600/sample+vpc.jpg" 
+            width="800"
+            height="400"
+            alt="Public và Private Subnet trong VPC">
+          <figcaption>
+            Hình 2: Public subnet kết nối Internet Gateway; Private subnet không có route ra internet.
+          </figcaption>
+        </figure>
+
+        <h2 id="cac-thanh-phan-cot-loi">3. Các thành phần cốt lõi của VPC</h2>
+
+        <h3>3.1. Internet Gateway (IGW)</h3>
+        <p>Cổng ra internet cho VPC. Là thành phần **bắt buộc** để EC2 trong public subnet có thể truy cập internet (hoặc ngược lại).</p>
+        <p>IGW là highly available, không giới hạn băng thông, và **miễn phí**.</p>
+
+        <h3>3.2. Route Table</h3>
+        <p>Bảng định tuyến quyết định “gói tin đi đâu”. Mỗi subnet gắn với một route table.</p>
+        <p>Ví dụ route table cho public subnet:</p>
+        <pre><code>Destination       Target
+0.0.0.0/0         igw-12345678   ← route ra internet
+10.0.0.0/16       local          ← traffic nội bộ VPC</code></pre>
+
+        <p>Route table cho private subnet:</p>
+        <pre><code>Destination       Target
+10.0.0.0/16       local          ← chỉ giao tiếp nội bộ</code></pre>
+
+        <h3>3.3. NAT Gateway</h3>
+        <p>Cho phép instance trong **private subnet** truy cập internet (để tải package, cập nhật OS…) nhưng **không cho phép internet kết nối vào**.</p>
+        <p>NAT Gateway phải được đặt trong **public subnet** và có IP public.</p>
+        <p>Lưu ý: NAT Gateway **tính phí theo giờ + lưu lượng**.</p>
+
+        <figure>
+          <img 
+            src="https://storage.googleapis.com/zenn-user-upload/d4f61b62ed52-20211222.png" 
+            width="800"
+            height="450"
+            alt="NAT Gateway trong VPC">
+          <figcaption>
+            Hình 3: Private subnet sử dụng NAT Gateway để truy cập internet một chiều.
+          </figcaption>
+        </figure>
+
+        <h3>3.4. Security Group và Network ACL</h3>
+        <p>Cả hai đều là tường lửa, nhưng khác nhau:</p>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse; margin: 16px 0;">
+          <thead>
+            <tr style="background-color: #f5f5f5;">
+              <th>Đặc điểm</th>
+              <th>Security Group</th>
+              <th>Network ACL (NACL)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Mức áp dụng</strong></td><td>Instance</td><td>Subnet</td></tr>
+            <tr><td><strong>Loại tường lửa</strong></td><td>Stateful (ghi nhớ kết nối)</td><td>Stateless (xử lý từng gói riêng lẻ)</td></tr>
+            <tr><td><strong>Mặc định</strong></td><td>Chặn tất cả inbound, cho phép tất cả outbound</td><td>Cho phép tất cả inbound & outbound</td></tr>
+            <tr><td><strong>Thứ tự rule</strong></td><td>Không có — tất cả rule đều áp dụng</td><td>Có — rule số nhỏ hơn ưu tiên hơn</td></tr>
+          </tbody>
+        </table>
+
+        <p>→ **Security Group** dùng cho kiểm soát truy cập ở mức ứng dụng.  
+        → **NACL** dùng như “tấm lưới an toàn” ở mức subnet — thường để chặn IP độc hại hàng loạt.</p>
+
+        <h2 id="mo-hinh-vpc-thuc-te">4. Mô hình VPC thực tế: Multi-AZ, HA và bảo mật</h2>
+        <p>Trong production, VPC nên được triển khai trên **nhiều Availability Zone (AZ)** để đảm bảo high availability.</p>
+
+        <p>Mô hình điển hình:</p>
+        <ul>
+          <li>2 public subnet (1 per AZ) → cho Application Load Balancer.</li>
+          <li>2 private subnet (1 per AZ) → cho EC2 application.</li>
+          <li>2 private subnet database (1 per AZ) → cho RDS.</li>
+          <li>1 NAT Gateway mỗi AZ (hoặc dùng shared VPC).</li>
+        </ul>
+
+        <figure>
+          <img 
+            src="https://vinasupport.com/uploads/2019/03/Giai-Phap-Ket-Noi-VPC-Tren-Cac-Region-Khac-Nhau-inter-region-peering.png" 
+            width="800"
+            height="500"
+            alt="Mô hình VPC production multi-AZ">
+          <figcaption>
+            Hình 4: Mô hình VPC production với multi-AZ, phân tách rõ public/private, sử dụng ALB và NAT Gateway.
+          </figcaption>
+        </figure>
+
+        <h2 id="vpc-peering-va-transit-gateway">5. Kết nối giữa các VPC</h2>
+
+        <h3>5.1. VPC Peering</h3>
+        <p>Cho phép hai VPC giao tiếp **trực tiếp qua private IP**, như trong cùng mạng nội bộ.</p>
+        <p>Giới hạn:</p>
+        <ul>
+          <li>Không hỗ trợ transitive routing (A ↔ B, B ↔ C → A không giao tiếp được với C).</li>
+          <li>Phải không trùng CIDR.</li>
+        </ul>
+
+        <h3>5.2. AWS Transit Gateway</h3>
+        <p>Là “trung tâm kết nối” cho nhiều VPC, on-premises network (qua Direct Connect/VPN). Hỗ trợ transitive routing.</p>
+        <p>Phù hợp cho hệ thống lớn với hàng chục VPC.</p>
+
+        <figure>
+          <img 
+            src="https://d2908q01vomqb2.cloudfront.net/5b384ce32d8cdef02bc3a139d4cac0a22bb029e8/2023/04/20/TGWPeer_Figure7.png" 
+            width="800"
+            height="400"
+            alt="Transit Gateway kết nối nhiều VPC">
+          <figcaption>
+            Hình 5: Transit Gateway như hub trung tâm kết nối nhiều spoke (VPC, on-prem).
+          </figcaption>
+        </figure>
+
+        <h2 id="ket-luan">6. Kết luận</h2>
+        <p>AWS VPC không chỉ là “mạng ảo” — mà là **nền tảng kiến trúc** cho toàn bộ hệ thống cloud. Việc thiết kế VPC đúng từ đầu giúp bạn:</p>
+        <ul>
+          <li>Đảm bảo an toàn: tách biệt public/private, kiểm soát traffic chặt chẽ.</li>
+          <li>Tối ưu chi phí: tránh NAT Gateway dư thừa, chọn đúng AZ.</li>
+          <li>Dễ mở rộng: hỗ trợ multi-region, hybrid cloud.</li>
+        </ul>
+        <p>Hãy luôn bắt đầu dự án mới bằng việc **thiết kế sơ đồ VPC trên giấy** — xác định số subnet, AZ, gateway, và luồng dữ liệu — trước khi gõ lệnh hoặc click console.</p>
+        <p>Vì trong cloud, **mạng không phải là thứ “gắn thêm sau” — mà là xương sống của hệ thống**.</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">1. Giới thiệu</a></li>
+        <li><a href="#khai-niem-co-ban">2. Khái niệm cơ bản</a></li>
+        <li><a href="#cac-thanh-phan-cot-loi">3. Thành phần cốt lõi</a></li>
+        <li><a href="#mo-hinh-vpc-thuc-te">4. Mô hình thực tế</a></li>
+        <li><a href="#vpc-peering-va-transit-gateway">5. Kết nối VPC</a></li>
+        <li><a href="#ket-luan">6. Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>  
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
