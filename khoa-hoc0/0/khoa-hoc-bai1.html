@@ -1,266 +1,519 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linh-Osimi</title>
-    <link rel="stylesheet" href="/linhkun.css">
-    <style>
-        /* Xóa gạch dưới tất cả link */
-        a { text-decoration: none !important; color: inherit; }
-        a:hover { color: var(--primary-color); transition: color 0.3s ease; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog Khoa Học — Khám Phá &amp; OSIMI</title>
 
-        /* Giữ nguyên style cũ cho detail-page */
-        .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
-        .detail-header { position: relative; padding: 20px; text-align: center; }
-        .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
-        .detail-title { font-size: 32px; color: var(--primary-color); margin: 20px 0; z-index: 2; position: relative; }
-        .detail-subtitle { font-size: 18px; color: #666; margin-bottom: 20px; }
-        .detail-meta { text-align: center; font-size: 14px; color: #666; margin: 10px 0; }
-        .back-btn-detail { background: var(--primary-color); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; text-align: center; transition: all 0.3s; }
-        .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
-        .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
-        .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
-        .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .detail-content ul { margin-left: 20px; }
-        .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
-        .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
-        .sidebar-detail ul { list-style: none; padding: 0; }
-        .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
-
-        @media (max-width: 768px) {
-            .container-detail { flex-direction: column; }
-            .decor-image { width: 80px; top: 10px; left: 10px; }
-            .detail-title { font-size: 24px; }
-            .detail-content img { margin: 10px 0; }
-        }
-    </style>
-</head>
-<body class="detail-page">
-    <header>
-        <div class="logo">Linh Osimi</div>
-     
-        <div class="header-right">
-            
-            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        </div>
-    </header>
-
-    <div class="detail-header">
-        <!-- Hình trang trí góc trên -->
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
-            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
-            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
-            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
-        </svg>
-
-        <h1 class="detail-title">Vật lý lượng tử!</h1>
-        <p class="detail-subtitle">Vật lý lượng tử (Quantum Physics) là gì & tại sao chúng ta nên tìm hiểu về nó?</p>
-        <div class="detail-meta">Ngày đăng: Oct 3 2024 | Tác giả: Linh Ossimi</div>
-    </div>
-
-    <div class="container-detail">
-        <main class="detail-content">
-          <h3>Vật lý lượng tử (Quantum Physics), còn được gọi là Cơ học lượng tử (Quantum Mechanics) hoặc Lý thuyết Trường lượng tử (Quantum Field Theory) là một trong những nhánh nghiên cứu khoa học/vật lý được quan tâm nhất hiện nay.
-
-  <img src="https://cdn.noron.vn/2019/02/19/0249f7c880ab852ac28861dc3c1e2f95.jpg" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-
-
-
-Giới khoa học tin rằng nhánh nghiên cứu này, khi được phát triển đến một tầm mức đủ cao trong tương lai, sẽ có thể giúp giải đáp nhiều thắc mắc của họ về các quy luật vận hành của vũ trụ, cũng như tạo ra rất nhiều các ứng dụng thiết thực khác cho đời sống.</h3>
-            <h2>Trước hết, Vật lý lượng tử là gì? </h2>
-            <p>Nói đơn giản, vật lý lượng tử là lĩnh vực khoa học chuyên nghiên cứu các quy luật vật lý của thế giới vật chất ở tầng mức vô cùng nhỏ - tầng mức của các hạt nguyên tử (atomic) và hạ nguyên tử (subatomic), tức những hạt như electron, proton, neutron, gluon, quark, neutrino...mà chúng ta đã từng được học trong vật lý & hóa học phổ thông.
-Lĩnh vực này bắt đầu được quan tâm & phát triển từ những năm 1900. Max Planck - một nhà vật lý người Đức - được xem là một trong những người có đóng góp đầu tiên & quan trọng nhất trong lĩnh vực này.
-
-Về mặt khái niệm, từ "quantum" trong "Quantum Physics" có nguồn gốc từ tiếng Latin, nghĩa là "đơn vị nhỏ nhất giúp cấu thành một vật chất bất kỳ". Vật lý lượng tử nhìn nhận năng lượng (energy - được cho là thứ căn bản nhất cấu thành vũ trụ) như một dạng vật chất - thay vì cách gọi "trường năng lượng" của vật lý cổ điển, thế nên nó có thể được đo đếm, định lượng, chia nhỏ thành các đơn vị.</p>
-
-</p>
-     
-
-
-
-
- <img src="https://cdn.noron.vn/2019/02/19/cc265b3919ab7a22fb9f6debede83140.jpg" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-
-
-<h2>Các lý thuyết quan trọng của Vật lý lượng tử</h2>
-<p>Vật lý lượng tử, sau hơn 1 thế kỉ được nghiên cứu với vô số thí nghiệm, đã giúp các nhà khoa học đưa ra được rất nhiều giả thuyết & lý thuyết mang tính đột phá trong việc giải thích các quy luật vận hành của thế giới vật chất. Sau đây là một vài lý thuyết chính yếu & rất quan trọng trong vật lý lượng tử:
-
-Vạn vật quanh ta không "cố định" như ta tưởng (Superposition)
-Đây có lẽ là một trong những phát hiện quan trọng và đột phá nhất của vật lý lượng tử: chiếc màn hình vi tính trước mặt ta, bàn phím mà ta đang gõ, ly nước & những quyển sách trên bàn, và cả cơ thể con người chúng ta...tuy nhìn bên ngoài có vẻ thật "rắn chắc", nhưng thực chất đều được tạo thành từ những phân tử, nguyên tử, hạ nguyên tử nhỏ li ti. Những hạt này lại không bao giờ đứng yên mà di chuyển liên tục.</p>
-
-
-<img src="https://cdn.noron.vn/2019/02/19/9dc9a6d990b27d1096287e961b9f3152.gif" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-
-<p>Điều đáng nói là, ở tầng mức lượng tử, các nhà khoa học phát hiện ra rằng quỹ đạo di chuyển của các hạt này gần như không thể được nắm bắt, phỏng đoán một cách chính xác. Đối với vật lý cổ điển, thì việc này quả thực phi logic và khó có thể chấp nhận được.
-
-Để cho dễ hiểu, bạn đọc hãy hình dung mình đang chơi billiard (với cựu tổng thống Obama chẳng hạn!). Sau khi bạn dùng cơ đẩy viên bi đi, theo nguyên tắc vật lý thông thường, viên bi chắc chắn sẽ di chuyển theo hướng & quỹ đạo mà bạn muốn, tùy vào cách thức mà bạn dùng cơ tác động vào nó.</p>
-
-
- <img src="https://cdn.noron.vn/2019/02/18/e95add68d509ea83b3506db12d18191a.jpg" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-
-Giả sử viên bi này được thu nhỏ về kích thước hạ nguyên tử. Lần này, sau khi dùng cơ đẩy chúng đi, bạn sẽ không thể chắc chắn được viên bi "lượng tử" này sẽ di chuyển theo hướng hay quỹ đạo nào. Nó có thể lăn sang bên phải, hoặc bên trái, văng lên không trung, thậm chí di chuyển theo tất cả các hướng này cùng một lúc, cho dù bạn không hề thay đổi cách tác động đến viên bi này.
-
-Như vậy, toàn bộ thế giới vật chất, bao gồm cơ thể con người, tuy nhìn từ bên ngoài có vẻ rắn chắc & cố định, nhưng ở tầng mức căn bản nhất, chúng là một tập hợp gồm những hạt nguyên tử/hạ nguyên tử di chuyển theo cách hỗn loạn & khó xác định.
-
-Đặc biệt, mỗi hạt này dường như có thể tồn tại trong nhiều trạng thái và di chuyển trên nhiều quỹ đạo khác nhau cùng một lúc. Giới khoa học gọi nguyên lý này là chồng chập lượng tử (Superposition).
-
-Nguyên lý này được giải thích rõ ràng nhất qua thí nghiệm "khe kép" (double-slit experiment) nổi tiếng sau:
-
-
-<p>Theo đó, các electron có thể cùng một lúc tồn tại trong cả dạng sóng (wave) lẫn hạt (particle). Sự chuyển đổi qua lại giữa 2 dạng tồn tại này được cho là có thể bị tác động bởi người quan sát (phút thứ 4:00 trong video).
-
-Tại sao lại như vậy? Ấy là bởi vì, bản thân "người" quan sát này, cho dù là một người hay một thiết bị ghi hình, thì đều có cấu tạo căn bản nhất là từ các hạt nguyên tử & hạ nguyên tử. Bản thân người quan sát này chính là một hệ thống lượng tử khổng lồ: các hạt cấu thành người quan sát sẽ tương tác với các electron trong thí nghiệm, và do đó tác động đến quỹ đạo & dạng tồn tại của chúng.</p>
- <img src="https://cdn.noron.vn/2019/02/19/96d044bda8b31bc238bb7c1f9ca4b103.jpg" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-
-
-<h1>Sự "vướng mắc lượng tử" (Quantum Entanglement)</h1>
-<p>một "sợi dây" liên kết, một mối quan hệ, một vướng mắc (entanglement) nào đó giữa các hạt, ở tầng mức lượng tử, mà các nhà khoa học hiện chưa giải thích được.
-
-Theo lý thuyết này: 2 hạt (ví dụ: electron), dù ở cách xa nhau vô cùng (ví dụ: 1 hạt ở cực Bắc & 1 hạt ở cực Nam Trái Đất), thì một khi chúng ta tác động vào 1 electron bất kỳ trong cặp này, electron còn lại cũng sẽ ngay lập tức bị ảnh hưởng, mặc dù giữa chúng không có mối liên hệ rõ ràng nào. Cứ như thể các electron có khả năng tương tác, "trao đổi" thông tin từ xa với nhau vậy.</p>
-
-
-
- <img src="https://cdn.noron.vn/2019/02/19/2db95a067c18c6efead8707cc6c257a6.jpg" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-
-Một trong những ví dụ đời thường, và lãng mạn, để giúp bạn đọc có thể nắm bắt khái niệm này dễ dàng chính là những cặp tình nhân được cho là có "thần giao cách cảm" với nhau. Hãy tạm gọi tên cặp tình nhân này là Sơn & Thủy.
-
-Sơn & Thủy tuy sống ở cách xa nhau, Sơn ở Sài Gòn, Thủy ở Hà Nội. Xa mặt là vậy, nhưng họ không hề cách lòng. Do họ có thể "thần giao cách cảm", nên mỗi khi Sơn gặp chuyện buồn, ngay lập tức Thủy cũng sẽ không cảm thấy vui, dù cô không hề biết người yêu mình đang trải qua chuyện gì, và ngược lại...Thậm chí, bạn bè họ còn biết rằng nếu muốn thay đổi quan điểm của Sơn về một vấn đề nào đó, họ chỉ cần trước hết tác động vào Thủy, và sợi dây kết nối giữa 2 người sẽ hoàn tất nốt phần còn lại của công việc.
- <img src="https://cdn.noron.vn/2019/02/19/414c352a55887488508be5acd2a19389.jpg" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-
-
-(Liệu Sơn & Thủy có đang trải qua một mối tình Twin Flames - mối tình được cho là giữa những cặp đôi có "duyên nợ" với nhau!?)
-
-Như vậy, ở tầng mức lượng tử, các hạt dường như luôn có kết nối với nhau. Tuy nhiên, ở tầng mức lớn hơn lượng tử (macroscopic), thì hiệu ứng này dường như không được thể hiện rõ. Tại sao lại như vậy?
-
-<h1>Các đặc tính kỳ lạ chỉ tồn tại ở tầng mức lượng tử (Decoherence)</h1>
-
-<p>Thế giới vật chất ở tầng mức lượng tử "thiên biến vạn hóa" là vậy, nhưng một khi chúng ta quan sát nó ở tầng mức đời thực, tầng mức con người, thì những đặc tính trên gần như biến mất. Giới khoa học gọi hiện tượng này là sự mất liên kết lượng tử (Quantum Decoherence).
-
-Theo đó, một hệ thống lượng tử bất kỳ (ví dụ: các electron) khi chịu tác động từ môi trường hoặc các tác nhân bên ngoài (ví dụ: người quan sát, các loại máy móc đo đạc...) - vốn cũng là những hệ thống lượng tử khác - thì các đặc tính lượng tử của hệ thống này sẽ bị làm nhiễu loạn và cuối cùng sẽ biến mất, khiến hệ thống này phải tuân thủ các nguyên tắc vật lý thông thường.</p>
-
- <img src="https://cdn.noron.vn/2019/02/19/12a95826d182d0b5fbb05c09168449ea.gif" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-<P>Hiện tượng mất liên kết này hiện vẫn là một trong những chủ đề gây tranh cãi & khiến giới khoa học đau đầu. Nhưng ít nhất thì nó giúp chúng ta đưa ra được kết luận: ở tầng mức càng lớn, càng khổng lồ, thì tính chất "không cố định", tính entropy ("độ hỗn loạn") của một hệ thống bất kỳ sẽ càng nhỏ.
-
-Kết luận này vẫn sẽ đúng ngay cả khi bạn so sánh các hệ thống lớn với nhau, ví dụ như giữa hệ thống giao thông trên đường phố Sài Gòn với...quỹ đạo chuyển động của các hành tinh trong hệ Mặt Trời chẳng hạn! Sẽ không khó để bạn nhận ra rằng "quỹ đạo" chuyển động của xe cộ trên đường phố mang tính hỗn loạn nhiều hơn quỹ đạo quay của các hành tinh.</P>
-
-
-  <img src="https://cdn.noron.vn/2019/02/19/de969f0bdb079a972cd004454458c074.gif" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-Ở tầng mức vĩ mô hơn nữa, bản thân các Mặt Trời cũng chuyển động xung quanh lõi của thiên hà, nhưng việc này diễn ra có phần chậm rãi hơn: nếu Trái Đất mất 1 năm để chuyển động quanh Mặt Trời, thì Mặt Trời của chúng ta mất khoảng 200 - 250 triệu năm để hoàn tất vòng quay của nó quanh lõi thiên hà!
-<P>Tương tự, nếu như bạn đứng từ một tòa cao ốc và nhìn xuống, bạn sẽ thấy cảnh tượng một góc thành phố thật hỗn loạn: con người, xe cộ, chó mèo...mỗi thứ đi một ngả. Nhưng giả sử bạn đang đứng trên Mặt Trăng và nhìn xuống, bạn sẽ chỉ thấy một hành tinh xanh đẹp đẽ, thong thả tự quay quanh trục của nó!</P>
-
-
-
-<h3>Các ứng dụng của vật lý lượng tử</h3>
- <img src="https://cdn.noron.vn/2019/02/19/cd5a91fbb8535598043a77e6966ce011.jpg" alt="Quantum Horror" style="width: 100%; border-radius: 0; border: 2px solid #8b0000; box-shadow: 0 0 20px #8b0000; margin: 20px 0; animation: labFlicker 2s ease-in-out infinite;">
-
-Tuy được coi là một lĩnh vực cao siêu & chỉ được các chuyên gia quan tâm, nhưng thực tế vật lý lượng tử đã có đóng góp không ít trong việc giúp các nhà khoa học phát minh ra những thiết bị, dụng cụ vô cùng quen thuộc với chúng ta. Từ máy vi tính, điện thoại thông minh, các thiết bị bán dẫn, cho đến tia laser, công nghệ chụp MRI (Magnetic Resonance Imaging - "cộng hưởng từ") hay công nghệ vật liệu & quang học lượng tử...
-<p>Vật lý lượng tử rõ ràng đã & đang chứng minh được tính thực tiễn & tầm quan trọng của mình đối với sự phát triển của xã hội. Thậm chí, nhiều nhà nghiên cứu tin rằng lĩnh vực này chính là chìa khóa để con người có thể phát triển những loại hình công nghệ vượt trội hơn nữa như máy tính lượng tử (quantum computer), hoặc cỗ máy thời gian (time machine) trong tương lai.</p>
-
-
-
-
-
-
- 
-
-<button class="back-btn-detail" onclick="window.location.href='/khoa-hoc0/0/khoa-hoc.html'">← Quay lại Khoa Học</button>
-        </main>
-
-        <aside class="sidebar-detail">
-            <h3>Series Khoa Học Vũ Trụ</h3>
-            <ul>
-                <li><a href="khoa-hoc-bai0.html"> Chuẩn bị khám phá </a></li>
-                <li><a href="khoa-hoc-bai2.html"> bí mật hố đen</a></li>
-            </ul>
-            <h3>Liên quan</h3>
-            <ul>
-                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
-            </ul>
-        </aside>
-    </div>
-
-    <footer style="
-  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-  color: #cce0ff;
-  text-align: center;
-  padding: 30px 20px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 16px;
-  letter-spacing: 1.5px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-">
-  <p style="
-    margin: 0;
-    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-    animation: glow 3s ease-in-out infinite alternate;
-  ">
-    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
-  </p>
-
-  <!-- Hiệu ứng sao băng -->
-  <div class="stars"></div>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,300;0,700;1,300;1,700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#66d9ff;
+      --muted:#98a0b3;
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg) 0%, #071021 60%);
+      color:#e6f0ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:40px;
     }
 
-    .stars {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      overflow: hidden;
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
     }
 
-    .stars::before, .stars::after {
-      content: "";
-      position: absolute;
-      top: -10px;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 5s infinite ease-in-out;
-      box-shadow:
-        20px 30px white,
-        80px 120px white,
-        160px 90px white,
-        240px 50px white,
-        300px 200px white,
-        400px 150px white,
-        500px 80px white,
-        600px 180px white,
-        700px 40px white;
+    /* HERO */
+    header.hero{
+      grid-column:1/3;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:28px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    }
+    .hero__left{flex:1}
+    .hero__title{
+      font-family: 'Merriweather', serif;
+      font-size:28px; line-height:1.05;
+      margin:0 0 8px 0;
+      letter-spacing: -0.02em;
+    }
+    .hero__sub{color:var(--muted); margin:0 0 14px 0}
+    .hero__controls{display:flex; gap:10px; align-items:center}
+    select, button{background:var(--glass); color:var(--accent); border:1px solid rgba(255,255,255,0.04); padding:8px 12px; border-radius:10px}
+
+    /* ARTICLE */
+    article.card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 8px 24px rgba(2,6,23,0.5);
+    }
+    .meta{display:flex; gap:12px; align-items:center; font-size:13px; color:var(--muted)}
+
+    h2{font-family:'Space Grotesk', sans-serif; margin-top:14px}
+    p.lead{color:var(--muted)}
+
+    /* IMAGE SLIDESHOW */
+    .slideshow{
+      margin:18px 0;
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#071226 0%, #08121b 100%);
+      min-height:300px;
+    }
+    .slides{display:flex; transition:transform 700ms cubic-bezier(.22,.9,.27,1); height:100%}
+    .slide{min-width:100%; position:relative; display:block}
+    .slide img{width:100%; height:420px; object-fit:cover; display:block; filter:contrast(1.02) saturate(1.05)}
+
+    .caption{
+      position:absolute; left:18px; bottom:18px; background:linear-gradient(90deg, rgba(3,6,12,0.7), rgba(8,12,18,0.45));
+      padding:12px 14px; border-radius:10px; backdrop-filter: blur(6px);
+      max-width:85%;
+      color:#e6f7ff; font-size:14px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.6)
     }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.3); }
+    .nav-dots{position:absolute; right:18px; bottom:18px; display:flex; gap:8px}
+    .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.06); cursor:pointer}
+    .dot.active{background:var(--accent); box-shadow:0 4px 14px rgba(102,217,255,0.12)}
+
+    .slide-controls{position:absolute; left:12px; top:50%; transform:translateY(-50%); display:flex; gap:8px}
+    .ctrl{background:rgba(0,0,0,0.32); border-radius:10px; padding:6px; cursor:pointer}
+
+    /* image caption hover effect */
+    figure{margin:0; position:relative}
+    figcaption{font-size:13px; color:var(--muted); margin-top:8px}
+
+    /* SIDEBAR */
+    aside.sidebar{position:sticky; top:40px; align-self:start}
+    .widget{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px; border-radius:12px; margin-bottom:14px}
+    .video-embed{position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px}
+    .video-embed iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:0}
+
+    /* FONT PREVIEW */
+    .font-preview{display:flex; gap:10px; align-items:center}
+    .font-preview button{padding:8px 10px}
+
+    /* FOOTER */
+    .related{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .related article{padding:10px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01))}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr; padding:18px}
+      header.hero{flex-direction:column; gap:12px}
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    /* nice little animation for headings */
+    .animated-underline{position:relative}
+    .animated-underline:after{content:''; position:absolute; left:0; bottom:-6px; height:4px; width:40%; background:linear-gradient(90deg,var(--accent), rgba(102,217,255,0.28)); border-radius:4px; transform-origin:left; transform:scaleX(0); transition:transform .6s cubic-bezier(.2,.9,.3,1)}
+    .animated-underline:hover:after{transform:scaleX(1)}
+
   </style>
-</footer>
+</head>
+<body>
+    <a href="khoa-hoc.html" class="back-btn">← Quay về Khoa Học</a>
 
-    <div id="postModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalContent"></p>
+<style>
+.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  background-color: #192a3a;
+  border: 2px solid #022b46;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.back-btn:hover {
+  background-color: #01101a;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(1, 40, 65, 0.4);
+}
+
+.back-btn:active {
+  transform: translateY(0);
+}
+</style>
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero__left">
+        <h1 class="hero__title">Lượng Tử</h1>
+        <p class="hero__sub">Tổng hợp những kiến thức về lượng tử!</p>
+
+        <div class="hero__controls">
+          <label style="color:var(--muted); font-size:13px">Phông chữ:</label>
+          <select id="fontSelect">
+            <option value="Inter, sans-serif">Inter (Hiện tại)</option>
+            <option value="Merriweather, serif">Merriweather (Serif)</option>
+            <option value="Space Grotesk, sans-serif">Space Grotesk (Display)</option>
+          </select>
+
+          <button id="toggleTheme">Đổi theme</button>
+          <button id="playSlides">Tự động</button>
         </div>
-    </div>
+      </div>
 
-    <script src="\linhkun.js"></script>
+     <div class="featured-links">
+<small style="color:var(--muted)">Tác giả • Linh Osimi</small>
+<h3>Bài viết nổi bật</h3>
+<div class="featured-links">
+  <a href="khoa-hoc-bai0.html" class="featured-card">
+    <strong>Ai và con người</strong>
+    <span>-Thê nào là AI và nó có gì?</span>
+  </a>
+  <a href="khoa-hoc-bai1.html" class="featured-card">
+    <strong>Lượng tử</strong>
+    <span>— Định nghĩa về lượng tử</span>
+  </a>
+  <a href="khoa-hoc-bai2.html" class="featured-card">
+    <strong>Hố đen</strong>
+    <span>-Sự kỳ diệu của hố đen</span>
+  </a>
+</div>
+
+<style>
+.featured-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.featured-card {
+  display: block;
+  padding: 14px 18px;
+  background: #000008;
+  border: 1px solid #f2f2f4;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #efe9e9;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(37, 35, 35, 0.05);
+}
+
+.featured-card:hover {
+  background: #dbdde2;
+  border-color: #0c0c0e4e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(250, 248, 248, 0.1);
+  color: #a4b1bf;
+}
+
+.featured-card strong {
+  display: block;
+  font-size: 1.05em;
+  margin-bottom: 4px;
+}
+
+.featured-card span {
+  font-size: 0.95em;
+  color: #555;
+}
+</style>
+    </header>
+
+    <main>
+      <article class="card">
+        <div class="meta">
+          <div>📅 9/9/2025</div>
+          <div>•</div>
+          <div>🔬 Vật lý &amp; Vi mô!</div>
+        </div>
+
+        <h2 class="animated-underline">1. Lượng tử là gì?</h2>
+        <p class="lead">Lượng tử (quantum) trong vật lý học là một đại lượng rời rạc và nhỏ nhất của một thực thể vật lý.
+
+Ví dụ, photon là một lượng tử của ánh sáng, và electron là một lượng tử của nguyên tử.</p>
+
+        <section class="slideshow" aria-roledescription="carousel">
+          <div class="slides" id="slides">
+            <figure class="slide">
+              <img src="https://cdn.noron.vn/2019/11/10/0b807cc856f0a406e2a42df971017d50.jpg" alt="Thiên hà và ánh sáng bị bẻ cong">
+              <figcaption class="caption">Hình 1 — Mô tả về lượng tử.</figcaption>
+          
+            </figure>
+
+            <figure class="slide">
+              <img src="https://cdn.noron.vn/2019/11/10/177be8f291acbe0ca328c74989995638.gif" alt="Ống kính vũ trụ">
+              <figcaption class="caption">Hình 2 -qubit, có thể cùng lúc là một dạng thức kết hợp của 0 và 1.</figcaption>
+            </figure>
+
+            <figure class="slide">
+              <img src="https://cdn.noron.vn/2019/11/10/01750b027c3178b6ef9d5009bad0400f.gif" alt="Cận cảnh vũ trụ">
+              <figcaption class="caption">Hình 3- Orbital nguyên tử ( quỹ đạo nguyên tử ) </figcaption>
+            </figure>
+<figure class="slide">
+              <img src="https://cdn.noron.vn/2019/11/10/5a3c7018f27312bafcc612c483dd6b4f.gif" alt="Cận cảnh vũ trụ">
+              <figcaption class="caption">Hình 4- Vướng lượng tử </figcaption>
+            </figure>
+
+            <figure class="slide">
+              <img src="https://cdn.noron.vn/2019/11/10/7210fa4831d5e6d66f18ed2e6c665e7d.jpg" alt="Cận cảnh vũ trụ">
+              <figcaption class="caption">Hình 5- hiện tượng thần giao cách cảm   </figcaption>  
+            </figure>
+           <figure class="slide">
+              <img src="https://cdn.noron.vn/2019/11/10/ca885f3315cd037488f766c38d64840b.gif" alt="Cận cảnh vũ trụ">
+              <figcaption class="caption">Hình 6- SỰ MẤT LIÊN KẾT LƯỢNG TỬ ( QUANTUM DECOHERENCE)  </figcaption>  
+            </figure>
+            <figure class="slide">
+              <img src="https://cdn.noron.vn/2019/11/10/8ab6cdc4fbda84a726d8089e9712bb17.gif" alt="Cận cảnh vũ trụ">
+              <figcaption class="caption">Hình 7-các ứng dụng của vật lý lượng tử.  </figcaption>  
+            </figure>
+
+
+          </div>
+
+          <div class="slide-controls">
+            <div class="ctrl" id="prev" aria-label="Previous">◀</div>
+            <div class="ctrl" id="next" aria-label="Next">▶</div>
+          </div>
+
+          <div class="nav-dots" id="dots"></div>
+        </section>
+
+    
+  <h2 class="animated-underline">2.Nguyên nhân ra đời vật lý lượng tử:</h2>
+<p>Vào thời của Newton các nhà khoa học tin rằng các nguyên tử chỉ cấu thành từ dạng hạt, tuy nhiên năm 1924, nhà vật lý người Pháp Louis de Broglie cho rằng các hạt thông thường mang cả tính chất sóng.Từ đó thuật ngữ “lưỡng tính sóng – hạt” ra đời để thể hiện đặc tính của vật chất ở cấp độ nguyên tử và hạ nguyên tử</p>
+<p>Cũng chính vì tính chất sóng rất rõ rệt này, nên sự chuyển động của các hạt nguyên tử không tuân thủ cơ học cổ điển với nòng cốt là ba định luật của Newton, từ đó Vật Lý Lượng Tử ra đời.</p>
+
+    
+  <h2 class="animated-underline">3. Tóm tắt 3 lý thuyết quan trọng của Vật lý lượng tử</h2>
+<h3>CHỒNG CHẬP LƯỢNG TỬ: SUPERPOSITION QUANTUM</h3>
+<p>Một hệ lượng tử có thể cùng lúc đo được nhiều giá trị cho một tính chất vật lý.
+
+Ví dụ: Một đơn vị thông tin của máy tính thông thường được gọi là bit. Một bit chỉ có thể thể hiện giá trị 1 hoặc 0 tại một thời điểm. Trong khi đó, các máy tính lượng tử sử dụng các bit lượng tử, hay còn gọi là qubit, có thể cùng lúc là một dạng thức kết hợp của 0 và 1.</p>
+<h3>Giải thích bằng quỹ đạo electron quay quanh hạt nhân:</h3>
+<p>Nguyên lý bất định Heisenberg cho rằng: "Ta không bao giờ có thể xác định chính xác cả vị trí lẫn vận tốc (hay động lượng, hoặc xung lượng) của một hạt vào cùng một lúc. Nếu ta biết một đại lượng càng chính xác thì ta biết đại lượng kia càng kém chính xác." (1)
+
+Cùng lúc đó phương trình Schrödinger được chứng minh,từ đó vận tốc ( xung lượng ) của electron được xác định rõ ràng. (2)
+
+Kết hợp (1) và (2) Suy ra vị trí của electron sẽ bất định, có nghĩa là không thể tìm thấy quỹ đạo cố định của các hạt electron.</p>
+<h3>Tôi sẽ lấy ví dụ về Orbital nguyên tử cho các bạn dễ hiểu hơn:</h3>
+    
+
+<p>Orbital nguyên tử ( quỹ đạo nguyên tử ) giải thích rằng electron của nguyên tử không bay quanh hạt nhân của nó như trái đất quay quanh mặt trời ( hình tròn ) mà nó có thể “dịch chuyển tức thời” ở bất kì chỗ nào xung quanh hạt nhân nguyên tử đó.Giống như trái đất dịch chuyển tức thời liên tục tạo thành một đám mây hình cầu bao trùm quanh mặt trời vậy ( ví dụ thôi nhé chứ quỹ đạo nguyên tử có rất nhiều hình dạng )</p>
+  
+<h3>Quỹ đạo này hỗn loạn và khó xác định.</h3>
+<p>Đến đây là chúng ta đã dập tắt được một giả thuyết mà nhiều bạn vẫn tin: giả thuyết đó cho rằng thế giới lượng tử chỉ như một bản thu nhỏ của thế giới vĩ mô, các nguyên tử là mô hình thu nhỏ của các hành tinh, mỗi con người là một tiểu vũ trụ…</p>
+
+<p>Tuy nhiên tính chồng chập lượng tử lại mở ra những nhận thức mới về thế giới quan của chúng ta:</p>
+<p>Tất cả vật chất, con người, hành tinh, vũ trụ… đều chuyển động liên tục chứ không bao giờ đứng yên.Kể cả bạn thấy tôi đang nằm ngủ cũng không có nghĩa tôi nằm yên, mà tôi đang di chuyển liên tục, hỗn loạn, vì các hạt cấu thành nên cơ thể tôi đều đang di chuyển hỗn loạn.</p>
+
+<h3>VƯỚNG VÍU LƯỢNG TỬ: QUANTUM ENTANGLEMENT</h3>
+<h4>Định nghĩa:</h4>
+<p>Là một hiệu ứng trong cơ học lượng tử trong đó trạng thái lượng tử của hai hay nhiều vật thể có liên hệ với nhau, dù chúng cách xa tới mức nào, thậm chí là tới khoảng cách lên tới cả nhiều năm ánh sáng.</p>
+<h4>Giải thích:</h4>
+    <p>"Nếu có hai electron đặt gần nhau,trạng thái lượng tử của chúng có thể liên hệ với nhau " Giờ nếu tách chúng ra xa nhau, hàng trăm thậm chí hàng ngàn năm ánh sáng, chúng vẫn sẽ tiếp tục giữ được mối liên hệ này.
+
+"Nếu lắc nhẹ một electron, electron ở đầu kia sẽ 'cảm ứng' được dao động này ngay lập tức, có thể nhanh hơn tốc độ ánh sáng"</p>
+<h4>Ví dụ:</h4>
+<p>Mối liên hệ thần giao cách cảm giữa con người với nhau từng bị xem là một hiện tượng tâm linh không có thật. Thế nhưng vào năm 2014, nhà thần kinh học Carlos Grau cùng các đồng nghiệp tại Đại học Barcelona (Tây Ban Nha) đã chứng minh tính xác thực của việc giao tiếp qua tâm trí.</p>
+
+<p>Thần giao cách cảm thường xảy ra giữa những người có mối quan hệ gần gũi. Ví dụ như các cặp song sinh thường nói rằng họ có thể cảm nhận được cảm xúc của nhau dù đang ở rất xa nhau. Giữa họ dường như có sẵn một mối liên kết từ kể khi mới sinh.
+
+Mặc dù chưa có nghiên cứu khoa học nào chỉ ra mối tương quan giữa thần giao cách cảm và rối lượng tử nhưng tôi vẫn lấy ví dụ này để các bạn dễ hình dung hơn, cách thức hiện tượng này hoạt động.</p>
+<h3>SỰ MẤT LIÊN KẾT LƯỢNG TỬ ( QUANTUM DECOHERENCE)</h3>
+
+<h4>Định Nghĩa:</h4>
+<p>Nếu một hệ thống lượng tử được cách ly hoàn hảo, nó sẽ duy trì sự kết hợp vô thời hạn, chúng ta sẽ không thể thao túng hoặc kiểm tra nó
+
+Nhưng nếu hệ thống lượng tử đó chịu tác động từ môi trường hoặc các tác nhân bên ngoài (ví dụ chúng ta quan sát, đo đạc nó ) thì các đặc tính lượng tử của hệ thống này sẽ bị làm nhiễu loạn và cuối cùng sẽ biến mất, khiến hệ thống này phải tuân thủ các nguyên tắc vật lý thông thường.</p>
+<p>Giải thích : Đây chính là hiệu ứng người quan sát.
+
+Khi các nhà khoa học đo đạc các tính chất của hệ thống lượng tử họ thấy rằng dường như hệ thống đó “cảm nhận” được lúc nào các nhà Khoa học đang quan sát mình, và “hành xử” khác nhau khi đang được quan sát và khi không được quan sát.
+
+Nhiều báo chí cũng viết về hiện tượng này và thần thánh hóa hệ thống lượng tử lên như một sinh vật sống biết cảm nhận, tuy nhiên hiểu đơn giản đây chỉ là sự sai lệch về kết quả khi đo đạc mà thôi.
+Khi muốn đo đạc hệ thống lượng tử, chúng ta phải "bắn" một hạt nào đó vào hệ thống để nhận kết quả phản xạ lại từ hạt đã bắn, ví dụ muốn nhìn thấy một người trong bóng tối, chúng ta phải "bắn" photon vào họ, chính là đèn pin, sau khi chiếu đèn, mắt chúng ta sẽ thu nhận hình ảnh từ những photon đã phản xạ.
+
+Vì vậy khi đo đạc hệ thống lượng tử chúng ta vô hình chung đã thêm các hạt vào hệ thống, phá vỡ trạng thái vốn có của nó.</p>
+
+
+
+
+  <h2 class="animated-underline">3. Ứng dụng của vật lý lượng tử</h2>
+
+<p>Ngày nay vật lý lượng tử đang được ứng dụng trong rất nhiều lĩnh vực, như chế tạo máy tính lượng tử, viễn tải lượng tử, hay đơn giản chỉ là chế tạo các màn hình vi tính bạn đang sử dụng...và càng hiểu sâu hơn về lượng tử giới – thế giới vi mô của chúng ta, loài người sẽ càng trả lời được nhiều câu hỏi còn bỏ ngỏ. Từ đó hiểu hơn về bản chất sự tồn tại của chính chúng ta và vũ trụ.</p>
+
+
+      
+  <h2 class="animated-underline">Thuyết tương đối rộng</h2>
+
+
+
+
+
+<div style="margin-top:18px">
+          <h4>Liên quan</h4>
+          <div class="related">
+            <article><strong>Ai và đơi sống</strong><p style="color:var(--muted)">Sử dụng thấu kính hấp dẫn để ước lượng khối lượng tối.</p></article>
+            <article><strong>Trí tuệ nhân tạo siêu việt</strong><p style="color:var(--muted)">Kỹ thuật microlensing giúp tìm hành tinh cách xa hàng nghìn năm ánh sáng.</p></article>
+          </div>
+        </div>
+
+      </article>
+    </main>
+
+    <aside class="sidebar">
+      <div class="widget">
+       <h4>Video tri tiết hơn về lượng tử!</h4>
+<div class="video-embed">
+  <iframe 
+    src="https://www.youtube.com/watch?v=qJZ1Ez28C-A" 
+    title="YouTube video"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+      <div class="widget">
+        <h4>Thay đổi phông chữ xem trước</h4>
+        <div class="font-preview">
+          <button onclick="setPreview('Inter, sans-serif')">Inter</button>
+          <button onclick="setPreview('Merriweather, serif')">Merriweather</button>
+          <button onclick="setPreview('Space Grotesk, sans-serif')">Space Grotesk</button>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h4>Ghi chú ảnh</h4>
+        <p style="color:var(--muted); font-size:13px">Anh con nguồn từ internet.</p>
+      </div>
+    </aside>
+
+  </div>
+
+  <script>
+    // SLIDESHOW
+    const slidesEl = document.getElementById('slides');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsEl = document.getElementById('dots');
+    let idx = 0;
+    let autoplay = false;
+    let timer = null;
+
+    function makeDots(){
+      slides.forEach((s,i)=>{
+        const d = document.createElement('div'); d.className='dot';
+        d.addEventListener('click', ()=> goTo(i));
+        dotsEl.appendChild(d);
+      });
+      updateDots();
+    }
+    function updateDots(){
+      const dots = Array.from(dotsEl.children);
+      dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
+    }
+
+    function goTo(i){ idx = (i+slides.length) % slides.length; slidesEl.style.transform = `translateX(-${idx*100}%)`; updateDots(); }
+    function next(){ goTo(idx+1) }
+    function prev(){ goTo(idx-1) }
+
+    document.getElementById('next').addEventListener('click', next);
+    document.getElementById('prev').addEventListener('click', prev);
+
+    makeDots();
+
+    // click to open fullscreen modal with caption and metadata
+    slides.forEach(s=>{
+      const img = s.querySelector('img');
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', ()=>{
+        openModal(img.src, s.querySelector('figcaption').innerText || '');
+      })
+    })
+
+    function openModal(src, caption){
+      const m = document.createElement('div');
+      m.style.position='fixed'; m.style.inset='0'; m.style.display='flex'; m.style.alignItems='center'; m.style.justifyContent='center';
+      m.style.background='rgba(2,6,23,0.85)'; m.style.zIndex=9999;
+      m.innerHTML = `
+        <div style="max-width:95%; max-height:90%; border-radius:12px; overflow:hidden; background:#000">
+          <img src="${src}" style="display:block; max-width:100%; max-height:70vh; width:auto; height:auto" />
+          <div style="padding:12px; color:#dbefff; background:linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6))">${caption}</div>
+        </div>
+      `;
+      m.addEventListener('click', ()=> m.remove());
+      document.body.appendChild(m);
+    }
+
+    // autoplay toggle
+    const playBtn = document.getElementById('playSlides');
+    playBtn.addEventListener('click', ()=>{
+      autoplay = !autoplay; playBtn.textContent = autoplay ? 'Dừng' : 'Tự động';
+      if(autoplay) startAuto(); else stopAuto();
+    })
+    function startAuto(){ timer = setInterval(next, 4500); }
+    function stopAuto(){ clearInterval(timer); timer = null; }
+
+    // FONT selector
+    const select = document.getElementById('fontSelect');
+    select.addEventListener('change', (e)=> document.body.style.fontFamily = e.target.value);
+
+    // small sidebar buttons
+    function setPreview(font){ document.body.style.fontFamily = font }
+
+    // theme toggle: invert background and accent
+    document.getElementById('toggleTheme').addEventListener('click', ()=>{
+      if(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()==='#0f1724'){
+        document.documentElement.style.setProperty('--bg','#f5f7fb');
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--accent','#0077b6');
+        document.documentElement.style.setProperty('--muted','#344155');
+        document.body.style.color = '#07203a';
+      } else {
+        document.documentElement.style.setProperty('--bg','#0f1724');
+        document.documentElement.style.setProperty('--card','#0b1220');
+        document.documentElement.style.setProperty('--accent','#66d9ff');
+        document.documentElement.style.setProperty('--muted','#98a0b3');
+        document.body.style.color = '#e6f0ff';
+      }
+    })
+
+    // accessibility: keyboard nav
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === ' ') { e.preventDefault(); playBtn.click(); }
+    })
+
+    // small entrance animation
+    document.querySelectorAll('.slide').forEach((s,i)=>{
+      s.style.opacity=0; s.style.transform='translateY(8px)';
+      setTimeout(()=>{ s.style.transition='opacity .6s ease, transform .6s ease'; s.style.opacity=1; s.style.transform='translateY(0)'; }, 200 + i*120)
+    });
+
+  </script>
 </body>
 </html>

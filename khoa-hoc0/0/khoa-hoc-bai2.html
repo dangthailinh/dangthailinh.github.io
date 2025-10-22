@@ -1,194 +1,471 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linh-Osimi</title>
-    <link rel="stylesheet" href="/linhkun.css">
-    <style>
-        /* Xóa gạch dưới tất cả link */
-        a { text-decoration: none !important; color: inherit; }
-        a:hover { color: var(--primary-color); transition: color 0.3s ease; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog Khoa Học — Khám Phá &amp; OSIMI</title>
 
-        /* Giữ nguyên style cũ cho detail-page */
-        .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
-        .detail-header { position: relative; padding: 20px; text-align: center; }
-        .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
-        .detail-title { font-size: 32px; color: var(--primary-color); margin: 20px 0; z-index: 2; position: relative; }
-        .detail-subtitle { font-size: 18px; color: #666; margin-bottom: 20px; }
-        .detail-meta { text-align: center; font-size: 14px; color: #666; margin: 10px 0; }
-        .back-btn-detail { background: var(--primary-color); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; text-align: center; transition: all 0.3s; }
-        .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
-        .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
-        .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
-        .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .detail-content ul { margin-left: 20px; }
-        .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
-        .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
-        .sidebar-detail ul { list-style: none; padding: 0; }
-        .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #f8f9fa; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: white; }
-
-        @media (max-width: 768px) {
-            .container-detail { flex-direction: column; }
-            .decor-image { width: 80px; top: 10px; left: 10px; }
-            .detail-title { font-size: 24px; }
-            .detail-content img { margin: 10px 0; }
-        }
-    </style>
-</head>
-<body class="detail-page">
-    <header>
-        <div class="logo">Linhosimi</div>
-       
-        <div class="header-right">
-            
-            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        </div>
-    </header>
-
-    <div class="detail-header">
-        
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="https://cdn-icons-png.flaticon.com/512/9486/9486933.png">
-            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
-            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/> <!-- Mũi tên sao -->
-            <circle cx="20" cy="20" r="8" fill="#ffd700"/> <!-- Sao nhỏ -->
-            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text> <!-- Icon kính -->
-        </svg>
-
-        <h1 class="detail-title">Hố đen siêu to khổng lồ</h1>
-        <p class="detail-subtitle">Hôm nay tở vừa đi du hành vũ trụ (bú đá) về và... suýt nữa bị hút vào hố đen! </p>
-        <div class="detail-meta">Ngày đăng: Oct 10, 2025 | Tác giả: Linh Ok</div>
-    </div>
-
-    <div class="container-detail">
-        <main class="detail-content">
-            <p>🌀 He lô mọi người, tôi là Linh đây!.</p>
-            
-            <h2>🌌 Hố đen là cái dell gì?</h2>
-            <ul>
-                <li><strong>Hiểu cơ bản:</strong> Nói đơn giản, hố đen (black hole) là một “quái vật” trong vũ trụ có lực hấp dẫn mạnh đến mức ánh sáng còn không thoát nổi.
-Nghe như kiểu “đứa bạn giữ bí mật” mà ai kể gì xong là không bao giờ thấy tin đó quay lại nữa.
-Một khi rơi vô là thôi, coi như xóa tài khoản vũ trụ luôn nha. 💀</li>
-
-                <li><strong>💫Hố đen được tạo ra như nào?</strong> Thật ra hố đen không tự nhiên mà có đâu, nó là kết quả của một ngôi sao to bự “ngủm” sau khi đốt hết nhiên liệu.
-Khi đó, ngôi sao sẽ phát nổ dữ dội (gọi là siêu tân tinh 💥), rồi phần lõi còn lại bị chính trọng lực của nó nghiền nát thành một điểm siêu nhỏ nhưng có khối lượng siêu to khổng lồ.
-Nói nôm na là:
-
-“Ngôi sao quá mệt, nổ một cái cho sảng khoái rồi tự ép mình thành... hố đen.”
-Một màn nghỉ việc vũ trụ đúng nghĩa! 😂</li>
-                <li><strong>🌠 Mấy kiểu hố đen nổi bật</strong> Hố đen sao: sinh ra từ một ngôi sao khổng lồ.
-
-Hố đen siêu nặng: nằm giữa các thiên hà, kiểu trùm cuối trong vũ trụ.
-
-Hố đen trung bình: hiếm gặp, kiểu “không quá to cũng không quá nhỏ, vừa đủ hút nhẹ thôi”.</li>
-            </ul>
-            
-            <h2>Nếu Linh rơi vào hố đen thì sao?</h2>
-            <p>Ờ thì... Linh sẽ bị kéo dài ra như mì Ý 🍝 (vâng, các nhà khoa học gọi vui là spaghettification).
-Rồi Linh sẽ dần biến mất khỏi không gian-thời gian, trở thành một tua cà phê vũ trụ trong truyền thuyết.
-Cũng ngầu chứ bộ?</p>
-            
-            <p>Hố đen nghe đáng sợ thật, nhưng chính nhờ nó mà vũ trụ trở nên bí ẩn và thú vị hơn nhiều.
-Ai biết được, có khi trong tương lai, nhân loại lại tìm cách dùng hố đen để... đi du lịch xuyên không gian!
-
-Còn giờ thì, he lô vũ trụ, Linh xin phép... không bị hút nữa nha!</p>
-            
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'">← Quay lại Khoa Học</button>
-        </main>
-
-        <aside class="sidebar-detail">
-            <h3>Series Khoa Học Vũ Trụ</h3>
-            <ul>
-                <li><a href="khoa-hoc-bai0.html">Chuẩn bị khám phá</a></li>
-                <li><a href="khoa-hoc-bai1.html">Khái niệm lượng tử</a></li>
-            </ul>
-            <h3>Liên quan</h3>
-            <ul>
-                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
-            </ul>
-        </aside>
-    </div>
-
-   <footer style="
-  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-  color: #cce0ff;
-  text-align: center;
-  padding: 30px 20px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 16px;
-  letter-spacing: 1.5px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-">
-  <p style="
-    margin: 0;
-    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-    animation: glow 3s ease-in-out infinite alternate;
-  ">
-    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
-  </p>
-
-  <!-- Hiệu ứng sao băng -->
-  <div class="stars"></div>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,300;0,700;1,300;1,700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#66d9ff;
+      --muted:#98a0b3;
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg) 0%, #071021 60%);
+      color:#e6f0ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:40px;
     }
 
-    .stars {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      overflow: hidden;
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
     }
 
-    .stars::before, .stars::after {
-      content: "";
-      position: absolute;
-      top: -10px;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 5s infinite ease-in-out;
-      box-shadow:
-        20px 30px white,
-        80px 120px white,
-        160px 90px white,
-        240px 50px white,
-        300px 200px white,
-        400px 150px white,
-        500px 80px white,
-        600px 180px white,
-        700px 40px white;
+    /* HERO */
+    header.hero{
+      grid-column:1/3;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:28px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    }
+    .hero__left{flex:1}
+    .hero__title{
+      font-family: 'Merriweather', serif;
+      font-size:28px; line-height:1.05;
+      margin:0 0 8px 0;
+      letter-spacing: -0.02em;
+    }
+    .hero__sub{color:var(--muted); margin:0 0 14px 0}
+    .hero__controls{display:flex; gap:10px; align-items:center}
+    select, button{background:var(--glass); color:var(--accent); border:1px solid rgba(255,255,255,0.04); padding:8px 12px; border-radius:10px}
+
+    /* ARTICLE */
+    article.card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 8px 24px rgba(2,6,23,0.5);
+    }
+    .meta{display:flex; gap:12px; align-items:center; font-size:13px; color:var(--muted)}
+
+    h2{font-family:'Space Grotesk', sans-serif; margin-top:14px}
+    p.lead{color:var(--muted)}
+
+    /* IMAGE SLIDESHOW */
+    .slideshow{
+      margin:18px 0;
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#071226 0%, #08121b 100%);
+      min-height:300px;
+    }
+    .slides{display:flex; transition:transform 700ms cubic-bezier(.22,.9,.27,1); height:100%}
+    .slide{min-width:100%; position:relative; display:block}
+    .slide img{width:100%; height:420px; object-fit:cover; display:block; filter:contrast(1.02) saturate(1.05)}
+
+    .caption{
+      position:absolute; left:18px; bottom:18px; background:linear-gradient(90deg, rgba(3,6,12,0.7), rgba(8,12,18,0.45));
+      padding:12px 14px; border-radius:10px; backdrop-filter: blur(6px);
+      max-width:85%;
+      color:#e6f7ff; font-size:14px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.6)
     }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.3); }
+    .nav-dots{position:absolute; right:18px; bottom:18px; display:flex; gap:8px}
+    .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.06); cursor:pointer}
+    .dot.active{background:var(--accent); box-shadow:0 4px 14px rgba(102,217,255,0.12)}
+
+    .slide-controls{position:absolute; left:12px; top:50%; transform:translateY(-50%); display:flex; gap:8px}
+    .ctrl{background:rgba(0,0,0,0.32); border-radius:10px; padding:6px; cursor:pointer}
+
+    /* image caption hover effect */
+    figure{margin:0; position:relative}
+    figcaption{font-size:13px; color:var(--muted); margin-top:8px}
+
+    /* SIDEBAR */
+    aside.sidebar{position:sticky; top:40px; align-self:start}
+    .widget{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px; border-radius:12px; margin-bottom:14px}
+    .video-embed{position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px}
+    .video-embed iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:0}
+
+    /* FONT PREVIEW */
+    .font-preview{display:flex; gap:10px; align-items:center}
+    .font-preview button{padding:8px 10px}
+
+    /* FOOTER */
+    .related{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .related article{padding:10px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01))}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr; padding:18px}
+      header.hero{flex-direction:column; gap:12px}
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    /* nice little animation for headings */
+    .animated-underline{position:relative}
+    .animated-underline:after{content:''; position:absolute; left:0; bottom:-6px; height:4px; width:40%; background:linear-gradient(90deg,var(--accent), rgba(102,217,255,0.28)); border-radius:4px; transform-origin:left; transform:scaleX(0); transition:transform .6s cubic-bezier(.2,.9,.3,1)}
+    .animated-underline:hover:after{transform:scaleX(1)}
+
   </style>
-</footer>
+</head>
+<body>
+  <a href="khoa-hoc.html" class="back-btn">← Quay về Khoa Học</a>
 
-    <div id="postModal" class="modal" style="display: none;"> <!-- Giữ nếu cần, nhưng ít dùng -->
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalContent"></p>
+<style>
+.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  background-color: #192a3a;
+  border: 2px solid #022b46;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.back-btn:hover {
+  background-color: #01101a;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(1, 40, 65, 0.4);
+}
+
+.back-btn:active {
+  transform: translateY(0);
+}
+</style>
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero__left">
+        <h1 class="hero__title">Lỗ đen</h1>
+        <p class="hero__sub">Tổng hợp về lỗ đen và những thứ siêu kỳ thú về nó!</p>
+
+        <div class="hero__controls">
+          <label style="color:var(--muted); font-size:13px">Phông chữ:</label>
+          <select id="fontSelect">
+            <option value="Inter, sans-serif">Inter (Hiện tại)</option>
+            <option value="Merriweather, serif">Merriweather (Serif)</option>
+            <option value="Space Grotesk, sans-serif">Space Grotesk (Display)</option>
+          </select>
+
+          <button id="toggleTheme">Đổi theme</button>
+          <button id="playSlides">Tự động</button>
         </div>
-    </div>
+      </div>
 
-    <script src="/linhkun.js"></script> <!-- Giữ cho theme/search nếu cần -->
+         <div class="featured-links">
+<small style="color:var(--muted)">Tác giả • Linh Osimi</small>
+<h3>Bài viết nổi bật</h3>
+<div class="featured-links">
+  <a href="khoa-hoc-bai0.html" class="featured-card">
+    <strong>Ai và con người</strong>
+    <span>-Thê nào là AI và nó có gì?</span>
+  </a>
+  <a href="khoa-hoc-bai1.html" class="featured-card">
+    <strong>Lượng tử</strong>
+    <span>— Định nghĩa về lượng tử</span>
+  </a>
+  <a href="khoa-hoc-bai2.html" class="featured-card">
+    <strong>Hố đen</strong>
+    <span>-Sự kỳ diệu của hố đen</span>
+  </a>
+</div>
+
+<style>
+.featured-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.featured-card {
+  display: block;
+  padding: 14px 18px;
+  background: #000008;
+  border: 1px solid #f2f2f4;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #efe9e9;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(37, 35, 35, 0.05);
+}
+
+.featured-card:hover {
+  background: #dbdde2;
+  border-color: #0c0c0e4e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(250, 248, 248, 0.1);
+  color: #a4b1bf;
+}
+
+.featured-card strong {
+  display: block;
+  font-size: 1.05em;
+  margin-bottom: 4px;
+}
+
+.featured-card span {
+  font-size: 0.95em;
+  color: #555;
+}
+</style>
+    </header>
+
+    <main>
+      <article class="card">
+        <div class="meta">
+          <div>📅 15/10/2025</div>
+          <div>•</div>
+          <div>🔬 Vật lý &amp; Thiên văn</div>
+        </div>
+
+        <h2 class="animated-underline">Hố đen là gì?</h2>
+        <p class="lead">Lỗ đen (hay hố đen, tiếng Anh: black hole) là một vùng không–thời gian có trường hấp dẫn cực mạnh đến mức không gì—kể cả hạt vật chất hay bức xạ điện từ như ánh sáng—có thể thoát ra khỏi nó. Theo thuyết tương đối rộng của Einstein, khi một lượng vật chất đủ lớn bị nén vào một thể tích đủ nhỏ, nó sẽ làm cong không–thời gian đến mức hình thành lỗ đen. Biên giới xác định vùng không thể thoát ra này được gọi là chân trời sự kiện—một mặt toán học mà một khi vật chất hoặc bức xạ vượt qua, sẽ không thể quay trở lại.</p>
+
+        <section class="slideshow" aria-roledescription="carousel">
+          <div class="slides" id="slides">
+            <figure class="slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Black_hole_-_Messier_87.jpg/960px-Black_hole_-_Messier_87.jpg" alt="Thiên hà và ánh sáng bị bẻ cong">
+              <figcaption class="caption">Hình 1 —  Đĩa bồi tụ bao quanh lỗ đen siêu khối lượng ở trung tâm của thiên hà elip khổng lồ Messier 87 trong chòm sao Xử Nữ. Khối lượng của nó khoảng 7 tỉ lần khối lượng Mặt Trời.[1] Đây là hình ảnh đầu tiên về hố đen thu được từ dự án Kính thiên văn Chân trời sự kiện, công bố ngày 10 tháng 4 năm 2019.[2][3] Trong hình ảnh được các nhà khoa học công bố ngày 10 tháng 4 năm 2019, vòng tròn màu đen ở giữa chỉ là "chiếc bóng" của lỗ đen có đường kính xấp xỉ 2,6 lần chân trời sự kiện nằm bên trong vùng bóng tối này. Ranh giới của nó là vòng vật chất phát sáng bao quanh được phóng đại bởi hiệu ứng thấu kính hấp dẫn và hình dạng ảnh hưởng từ sự quay của lỗ đen. Màu sắc trong hình là màu được các nhà khoa học của EHT lựa chọn để thể hiện độ phát sáng của các vật chất bao quanh. Nguồn: Unsplash.</figcaption>
+            </figure>
+
+            <figure class="slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/BH_LMC.png/960px-BH_LMC.png" alt="Ống kính vũ trụ">
+              <figcaption class="caption">Hình 2 — Mô phỏng lỗ đen uốn cong không thời gian quanh nó, xuất hiện nhiều ảnh của cùng một sao cũng như vành Einstein.</figcaption>
+            </figure>
+
+            <figure class="slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/A_stellar_black_hole.jpg/960px-A_stellar_black_hole.jpg" alt="Cận cảnh vũ trụ">
+              <figcaption class="caption">Hình 3- Hình minh họa một lỗ đen có khối lượng gấp vài lần Mặt Trời cùng với sao đồng hành của nó chuyển động gần nhau đến mức khoảng cách giữa chúng nhỏ hơn giới hạn Roche. Vật chất của ngôi sao gần đó bị lỗ đen hút về tạo nên đĩa bồi tụ vật chất. Chùm hạt và bức xạ năng lượng cao phóng ra ở hai cực do tác động của sự quay quanh trục và từ trường của lỗ đen.</figcaption>
+            </figure>
+          </div>
+
+          <div class="slide-controls">
+            <div class="ctrl" id="prev" aria-label="Previous">◀</div>
+            <div class="ctrl" id="next" aria-label="Next">▶</div>
+          </div>
+
+          <div class="nav-dots" id="dots"></div>
+        </section>
+
+        <h3>Tại sao nó đen?</h3>
+        <p>Lỗ đen được gọi là “đen” vì nó hấp thụ toàn bộ bức xạ rơi vào nó, giống như một vật đen tuyệt đối trong nhiệt động lực học. Tuy nhiên, theo lý thuyết trường lượng tử trong không–thời gian cong, tại chân trời sự kiện tồn tại bức xạ Hawking—một dạng bức xạ nhiệt phát ra từ lỗ đen với nhiệt độ tỉ lệ nghịch với khối lượng của nó. Do đó, bức xạ này cực kỳ yếu đối với các lỗ đen thiên văn thông thường và gần như không thể quan sát được.</p>
+
+        <h3>Lịch sử phát triển lý thuyết</h3>
+       <p>Ý tưởng về các vật thể hấp dẫn mạnh đến mức ánh sáng không thể thoát ra đã được John Michell và Pierre-Simon Laplace đề xuất từ thế kỷ 18 dựa trên cơ học cổ điển. Tuy nhiên, nền tảng lý thuyết hiện đại bắt đầu từ năm 1916, khi Karl Schwarzschild tìm ra nghiệm chính xác đầu tiên của phương trình trường Einstein, mô tả một lỗ đen không quay. Ý nghĩa vật lý của nghiệm này—đặc biệt là khái niệm chân trời sự kiện—chỉ được làm rõ bởi David Finkelstein vào năm 1958.
+
+Trong thập niên 1960, các nghiên cứu lý thuyết đã chứng minh rằng lỗ đen là hệ quả tất yếu của sự suy sụp hấp dẫn trong khuôn khổ thuyết tương đối rộng. Sự phát hiện các sao neutron, pulsar, và đặc biệt là nguồn tia X Cygnus X-1—ứng cử viên lỗ đen đầu tiên—đã củng cố niềm tin rằng lỗ đen không chỉ là cấu trúc toán học mà còn tồn tại thực tế trong vũ trụ.</p>
+        <h3>Hình thành và phân loại</h3>
+ <p>Theo lý thuyết, lỗ đen khối lượng sao (từ vài đến vài chục lần khối lượng Mặt Trời) hình thành từ sự sụp đổ hấp dẫn của các sao khối lượng lớn ở giai đoạn cuối đời. Sau khi hình thành, chúng có thể tiếp tục hấp thụ vật chất từ môi trường xung quanh hoặc sáp nhập với các lỗ đen khác, dẫn đến sự tồn tại của lỗ đen siêu khối (từ hàng triệu đến hàng tỷ lần khối lượng Mặt Trời) tại trung tâm của hầu hết các thiên hà lớn, bao gồm cả Ngân Hà—nơi có lỗ đen trung tâm Sagittarius A* với khối lượng khoảng 4,3 triệu lần Mặt Trời.</p>
+<h3>Phát hiện gián tiếp và bằng chứng quan sát</h3>
+
+<p>Mặc dù bản thân lỗ đen không phát ra ánh sáng, sự tồn tại của chúng có thể được suy luận gián tiếp qua các hiệu ứng hấp dẫn và bức xạ từ môi trường xung quanh. Khi vật chất rơi vào lỗ đen, nó tạo thành đĩa bồi tụ—một cấu trúc plasma nóng, phát ra bức xạ điện từ mạnh (đặc biệt ở dải tia X), khiến vùng lân cận lỗ đen trở thành một trong những nguồn sáng mạnh nhất vũ trụ.
+
+Trong các hệ sao đôi, chuyển động quỹ đạo của ngôi sao đồng hành cho phép các nhà thiên văn xác định khối lượng và vị trí của vật thể vô hình, từ đó phân biệt được lỗ đen với các thiên thể đặc khác như sao neutron.
+
+Một bước ngoặt quan trọng xảy ra vào ngày 11 tháng 2 năm 2016, khi nhóm LIGO công bố phát hiện trực tiếp đầu tiên về sóng hấp dẫn, được tạo ra từ sự hợp nhất của hai lỗ đen khối lượng sao. Sự kiện này không chỉ xác nhận tiên đoán của Einstein mà còn cung cấp bằng chứng trực tiếp về sự tồn tại và động lực học của lỗ đen.</p>
+
+  <h2 class="animated-underline">Thuyết tương đối rộng</h2>
+<h3>Sự ra đời của lý thuyết lỗ đen từ thuyết tương đối rộng</h3>
+<p>Năm 1915, Albert Einstein hoàn thiện thuyết tương đối rộng, trong đó mô tả lực hấp dẫn như là sự cong của không–thời gian do sự hiện diện của khối lượng và năng lượng. Một trong những hệ quả đầu tiên của lý thuyết này là ánh sáng bị lệch khi đi qua gần một vật thể có trường hấp dẫn mạnh—một tiên đoán sau này được xác nhận qua quan sát nhật thực năm 1919.
+
+Chỉ hai tháng sau khi Einstein công bố lý thuyết, Karl Schwarzschild tìm ra nghiệm chính xác đầu tiên của phương trình trường Einstein. Nghiệm này mô tả trường hấp dẫn xung quanh một khối lượng điểm hoặc một quả cầu khối lượng phân bố đều, không quay, trong hệ tọa độ cầu bốn chiều. Không lâu sau, Johannes Droste—một sinh viên của Hendrik Lorentz—cũng độc lập thu được nghiệm tương tự và phân tích sâu hơn các đặc tính của nó.
+
+Nghiệm Schwarzschild chứa một bán kính đặc biệt, ngày nay gọi là bán kính Schwarzschild , tại đó các thành phần metric trong hệ tọa độ Schwarzschild dường như trở nên kỳ dị (phân kỳ). Ban đầu, các nhà vật lý cho rằng đây là một giới hạn vật lý, nơi phương trình Einstein không còn áp dụng được. Tuy nhiên, vào năm 1924, Arthur Eddington chứng minh rằng kỳ dị này biến mất nếu chuyển sang một hệ tọa độ khác (sau này được mở rộng thành hệ tọa độ Eddington–Finkelstein). Ông chỉ ra rằng độ cong không–thời gian tại bán kính này là hữu hạn và không phụ thuộc vào hệ tọa độ, hàm ý rằng kỳ dị tại r 
+s
+​
+  chỉ là kỳ dị tọa độ, không mang ý nghĩa vật lý.</p>
+
+  <p>Phải đến năm 1933, Georges Lemaître mới nhận ra rõ ràng rằng bán kính Schwarzschild không phải là rào cản vật lý, mà là chân trời sự kiện—một biên giới một chiều: vật chất và bức xạ có thể đi vào nhưng không thể thoát ra.</p>
+ <h3>Giới hạn khối lượng và sự sụp đổ hấp dẫn</h3>
+<p>Song song với việc hiểu cấu trúc không–thời gian, các nhà vật lý cũng nghiên cứu giới hạn ổn định của các thiên thể đặc. Năm 1931, Subrahmanyan Chandrasekhar áp dụng thuyết tương đối hẹp và cơ học lượng tử để tính toán cấu trúc của sao lùn trắng—những sao đã cạn nhiên liệu và được chống đỡ bởi áp suất suy biến electron. Ông phát hiện rằng nếu khối lượng vượt quá ~1,4 lần khối lượng Mặt Trời (nay gọi là giới hạn Chandrasekhar), sao lùn trắng sẽ không thể tồn tại ổn định và sẽ tiếp tục sụp đổ dưới tác dụng của hấp dẫn.
+
+Phát hiện này gặp phải sự phản đối mạnh mẽ từ các nhà vật lý nổi tiếng như Arthur Eddington và Lev Landau, những người tin rằng một cơ chế vật lý chưa biết sẽ ngăn chặn sự sụp đổ hoàn toàn. Thực tế, họ đúng một phần: nếu khối lượng chỉ vượt nhẹ giới hạn Chandrasekhar, vật chất có thể tái cấu trúc thành sao neutron, nơi áp suất suy biến neutron (do nguyên lý loại trừ Pauli) giữ cho sao không sụp đổ tiếp.
+
+Tuy nhiên, vào năm 1939, J. Robert Oppenheimer cùng George Volkoff và Hartland Snyder chứng minh rằng ngay cả sao neutron cũng có giới hạn khối lượng—khoảng 2–3 lần khối lượng Mặt Trời (nay gọi là giới hạn Tolman–Oppenheimer–Volkoff). Vượt quá giới hạn này, không lực lượng vật lý nào có thể chống lại hấp dẫn, và sao sẽ sụp đổ hoàn toàn thành một lỗ đen.</p>
+<h3>Hiểu đúng về chân trời sự kiện và “ngôi sao đóng băng”</h3>
+<p>Oppenheimer và cộng sự mô tả quá trình sụp đổ hấp dẫn như sau: đối với người quan sát ở xa, vật thể rơi vào lỗ đen dường như chậm dần và “đóng băng” ngay tại chân trời sự kiện—ánh sáng phát ra từ nó bị dịch đỏ vô hạn và mờ dần đến mất hút. Vì vậy, trong thời gian dài, các nhà vật lý gọi các vật thể này là “ngôi sao bị đóng băng”.
+
+Tuy nhiên, điều này chỉ đúng trong hệ quy chiếu của người quan sát bên ngoài. Đối với vật thể thực sự rơi vào, nó vượt qua chân trời sự kiện trong thời gian hữu hạn theo đồng hồ riêng của mình và tiếp tục tiến về kỳ dị trung tâm. Sự khác biệt này phản ánh bản chất tương đối của thời gian trong thuyết tương đối rộng và nhấn mạnh rằng chân trời sự kiện không phải là bề mặt vật lý, mà là một đặc trưng hình học của không–thời gian.</p>
+
+
+
+
+
+
+<div style="margin-top:18px">
+          <h4>Liên quan</h4>
+          <div class="related">
+            <article><strong>Đo khoảng cách vũ trụ</strong><p style="color:var(--muted)">Sử dụng thấu kính hấp dẫn để ước lượng khối lượng tối.</p></article>
+            <article><strong>Phát hiện hành tinh</strong><p style="color:var(--muted)">Kỹ thuật microlensing giúp tìm hành tinh cách xa hàng nghìn năm ánh sáng.</p></article>
+          </div>
+        </div>
+
+      </article>
+    </main>
+
+    <aside class="sidebar">
+      <div class="widget">
+       <h4>Video minh họa</h4>
+<div class="video-embed">
+  <iframe 
+    src="https://www.youtube.com/embed/RL25kplyilM" 
+    title="YouTube video"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+      <div class="widget">
+        <h4>Thay đổi phông chữ xem trước</h4>
+        <div class="font-preview">
+          <button onclick="setPreview('Inter, sans-serif')">Inter</button>
+          <button onclick="setPreview('Merriweather, serif')">Merriweather</button>
+          <button onclick="setPreview('Space Grotesk, sans-serif')">Space Grotesk</button>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h4>Ghi chú ảnh</h4>
+        <p style="color:var(--muted); font-size:13px">Mỗi ảnh lấy từ nguồn khác nhau tri tiết liên hệ :nasa.com  để thêm thông tin kĩ thuật hoặc nguồn dữ liệu.</p>
+      </div>
+    </aside>
+
+  </div>
+
+  <script>
+    // SLIDESHOW
+    const slidesEl = document.getElementById('slides');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsEl = document.getElementById('dots');
+    let idx = 0;
+    let autoplay = false;
+    let timer = null;
+
+    function makeDots(){
+      slides.forEach((s,i)=>{
+        const d = document.createElement('div'); d.className='dot';
+        d.addEventListener('click', ()=> goTo(i));
+        dotsEl.appendChild(d);
+      });
+      updateDots();
+    }
+    function updateDots(){
+      const dots = Array.from(dotsEl.children);
+      dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
+    }
+
+    function goTo(i){ idx = (i+slides.length) % slides.length; slidesEl.style.transform = `translateX(-${idx*100}%)`; updateDots(); }
+    function next(){ goTo(idx+1) }
+    function prev(){ goTo(idx-1) }
+
+    document.getElementById('next').addEventListener('click', next);
+    document.getElementById('prev').addEventListener('click', prev);
+
+    makeDots();
+
+    // click to open fullscreen modal with caption and metadata
+    slides.forEach(s=>{
+      const img = s.querySelector('img');
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', ()=>{
+        openModal(img.src, s.querySelector('figcaption').innerText || '');
+      })
+    })
+
+    function openModal(src, caption){
+      const m = document.createElement('div');
+      m.style.position='fixed'; m.style.inset='0'; m.style.display='flex'; m.style.alignItems='center'; m.style.justifyContent='center';
+      m.style.background='rgba(2,6,23,0.85)'; m.style.zIndex=9999;
+      m.innerHTML = `
+        <div style="max-width:95%; max-height:90%; border-radius:12px; overflow:hidden; background:#000">
+          <img src="${src}" style="display:block; max-width:100%; max-height:70vh; width:auto; height:auto" />
+          <div style="padding:12px; color:#dbefff; background:linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6))">${caption}</div>
+        </div>
+      `;
+      m.addEventListener('click', ()=> m.remove());
+      document.body.appendChild(m);
+    }
+
+    // autoplay toggle
+    const playBtn = document.getElementById('playSlides');
+    playBtn.addEventListener('click', ()=>{
+      autoplay = !autoplay; playBtn.textContent = autoplay ? 'Dừng' : 'Tự động';
+      if(autoplay) startAuto(); else stopAuto();
+    })
+    function startAuto(){ timer = setInterval(next, 4500); }
+    function stopAuto(){ clearInterval(timer); timer = null; }
+
+    // FONT selector
+    const select = document.getElementById('fontSelect');
+    select.addEventListener('change', (e)=> document.body.style.fontFamily = e.target.value);
+
+    // small sidebar buttons
+    function setPreview(font){ document.body.style.fontFamily = font }
+
+    // theme toggle: invert background and accent
+    document.getElementById('toggleTheme').addEventListener('click', ()=>{
+      if(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()==='#0f1724'){
+        document.documentElement.style.setProperty('--bg','#f5f7fb');
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--accent','#0077b6');
+        document.documentElement.style.setProperty('--muted','#344155');
+        document.body.style.color = '#07203a';
+      } else {
+        document.documentElement.style.setProperty('--bg','#0f1724');
+        document.documentElement.style.setProperty('--card','#0b1220');
+        document.documentElement.style.setProperty('--accent','#66d9ff');
+        document.documentElement.style.setProperty('--muted','#98a0b3');
+        document.body.style.color = '#e6f0ff';
+      }
+    })
+
+    // accessibility: keyboard nav
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === ' ') { e.preventDefault(); playBtn.click(); }
+    })
+
+    // small entrance animation
+    document.querySelectorAll('.slide').forEach((s,i)=>{
+      s.style.opacity=0; s.style.transform='translateY(8px)';
+      setTimeout(()=>{ s.style.transition='opacity .6s ease, transform .6s ease'; s.style.opacity=1; s.style.transform='translateY(0)'; }, 200 + i*120)
+    });
+
+  </script>
 </body>
 </html>

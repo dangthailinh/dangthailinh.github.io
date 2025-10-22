@@ -1,188 +1,482 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linh-Osimi</title>
-    <link rel="stylesheet" href="/linhkun.css">
-    <style>
-        /* Xóa gạch dưới tất cả link */
-        a { text-decoration: none !important; color: inherit; }
-        a:hover { color: var(--primary-color); transition: color 0.3s ease; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog Khoa Học — Khám Phá &amp; OSIMI</title>
 
-        /* Giữ nguyên style cũ cho detail-page */
-        .detail-page { background: linear-gradient(to bottom, #020b12 0%, var(--bg-color) 50%); min-height: 100vh; }
-        .detail-header { position: relative; padding: 20px; text-align: center; }
-        .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
-        .detail-title { font-size: 32px; color: var(--primary-color); margin: 20px 0; z-index: 2; position: relative; }
-        .detail-subtitle { font-size: 18px; color: #666; margin-bottom: 20px; }
-        .detail-meta { text-align: center; font-size: 14px; color: #666; margin: 10px 0; }
-        .back-btn-detail { background: var(--primary-color); color: rgb(4, 1, 1); padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; text-align: center; transition: all 0.3s; }
-        .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
-        .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
-        .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
-        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; } /* Style cho ảnh chèn */
-        .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .detail-content ul { margin-left: 20px; }
-        .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
-        .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
-        .sidebar-detail ul { list-style: none; padding: 0; }
-        .sidebar-detail li { margin: 10px 0; }
-        .sidebar-detail a { display: block; padding: 8px; background: #727578; border-radius: 5px; transition: background 0.3s; }
-        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(93, 87, 87); }
-
-        @media (max-width: 768px) {
-            .container-detail { flex-direction: column; }
-            .decor-image { width: 80px; top: 10px; left: 10px; }
-            .detail-title { font-size: 24px; }
-            .detail-content img { margin: 10px 0; }
-        }
-    </style>
-</head>
-<body class="detail-page">
-    <header>
-        <div class="logo">Linh Osimi</div>
-     
-        <div class="header-right">
-            
-            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        </div>
-    </header>
-
-    <div class="detail-header">
-        <!-- Hình trang trí góc trên -->
-        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
-            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
-            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
-            <text x="10" y="95" font-size="12" fill="#26a69a">🔭</text>
-        </svg>
-
-        <h1 class="detail-title">Bài 0 - Chuẩn bị khám phá vũ trụ</h1>
-        <p class="detail-subtitle">Giới thiệu cơ bản về kính viễn vọng James Webb và cách bắt đầu hành trình khoa học vũ trụ</p>
-        <div class="detail-meta">Ngày đăng: Oct 10, 2025 | Tác giả: Linh Ossimi</div>
-    </div>
-
-    <div class="container-detail">
-        <main class="detail-content">
-            <p>Trong vũ trụ bao la, việc khám phá bắt đầu từ việc chuẩn bị đúng cách. Kính viễn vọng James Webb (JWST) là một trong những công cụ mạnh mẽ nhất mà nhân loại từng tạo ra, giúp chúng ta nhìn sâu vào quá khứ của vũ trụ.</p>
-            
-            <!-- Placeholder chèn ảnh 1: Ảnh JWST -->
-            <img src="https://cdn.mos.cms.futurecdn.net/NQRzVz58E3xE3i4Jvopew5.jpg" alt="Kính viễn vọng James Webb trong không gian" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
-
-            <h2>Tại sao cần chuẩn bị?</h2>
-            <ul>
-                <li><strong>Hiểu cơ bản:</strong> Vũ trụ hình thành từ Big Bang cách đây 13.8 tỷ năm. JWST có thể quan sát ánh sáng từ 13.5 tỷ năm trước.</li>
-                <li><strong>Công cụ cần thiết:</strong> Phần mềm như Stellarium để mô phỏng bầu trời, hoặc app NASA để theo dõi dữ liệu thực tế.</li>
-                <li><strong>Bước đầu:</strong> Đọc sách "Cosmos" của Carl Sagan để có nền tảng.</li>
-            </ul>
-            
-            
-            <img src="big-bang-image.jpg" alt="Hình minh họa Big Bang" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
-
-            <h2>Tìm hiểu về Hệ mặt trời (solar system)</h2>
-            <p>Bắt đầu bằng việc theo dõi các sứ mệnh của NASA. JWST đã phát hiện hàng trăm hành tinh ngoài hệ Mặt Trời, mở ra khả năng tìm kiếm sự sống.</p>
-            
-          
-            <img src="https://th.bing.com/th/id/R.2aba04a82b2a75f74a936f6cbf77b811?rik=%2fm7gFqFl7YnP%2bQ&riu=http%3a%2f%2fhdwpro.com%2fwp-content%2fuploads%2f2019%2f08%2fAmazing-Solar-System.jpg&ehk=RFJp%2bWuhGfdfU5Y%2b2uJGMPeuBUChmSJCofOYuqcP%2bsI%3d&risl=&pid=ImgRaw&r=0" alt="Hành tinh ngoài hệ Mặt Trời qua JWST" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
-            
-            <p>Hệ Mặt trời (hay Thái Dương Hệ) là hệ hành tinh gồm có Mặt Trời ở trung tâm và các vật quay xung quanh. Hệ Mặt Trời được hình thành từ sự suy sụp của một đám mây phân tử khổng lồ cách đây gần 4,6 tỷ năm.
-
-Mặt Trời là ngôi sao ở trung tâm và nổi bật nhất trong Thái Dương Hệ. Khối lượng khổng lồ của nó (332.900 lần khối lượng Trái Đất) tạo ra nhiệt độ và mật độ đủ lớn tại lõi để xảy ra phản ứng tổng hợp hạt nhân, làm giải phóng 1 lượng năng lượng khổng lồ, phần lớn phát xạ vào không gian dưới dạng bức xạ điện từ, với cực đại trong dải quang phổ 400-700 nm mà chúng ta gọi là ánh sáng khả kiến.</p>
-            
-            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc.html'">← Quay lại Khoa Học</button>
-        </main>
-
-        <aside class="sidebar-detail">
-            <h3>Series Khoa Học Vũ Trụ</h3>
-            <ul>
-                <li><a href="khoa-hoc-bai1.html"> khái niệm lượng tử</a></li>
-                <li><a href="khoa-hoc-bai2.html"> bí mật hố đen</a></li>
-            </ul>
-            <h3>Liên quan</h3>
-            <ul>
-                <li><a href="phim.html">Phim Khoa Học Viễn Tưởng</a></li>
-            </ul>
-        </aside>
-    </div>
-
-    <footer style="
-  background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%);
-  color: #cce0ff;
-  text-align: center;
-  padding: 30px 20px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 16px;
-  letter-spacing: 1.5px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);
-">
-  <p style="
-    margin: 0;
-    text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
-    animation: glow 3s ease-in-out infinite alternate;
-  ">
-    &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
-  </p>
-
-  <!-- Hiệu ứng sao băng -->
-  <div class="stars"></div>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,300;0,700;1,300;1,700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; }
-      to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; }
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#66d9ff;
+      --muted:#98a0b3;
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg) 0%, #071021 60%);
+      color:#e6f0ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:40px;
     }
 
-    .stars {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      overflow: hidden;
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
     }
 
-    .stars::before, .stars::after {
-      content: "";
-      position: absolute;
-      top: -10px;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 5s infinite ease-in-out;
-      box-shadow:
-        20px 30px white,
-        80px 120px white,
-        160px 90px white,
-        240px 50px white,
-        300px 200px white,
-        400px 150px white,
-        500px 80px white,
-        600px 180px white,
-        700px 40px white;
+    /* HERO */
+    header.hero{
+      grid-column:1/3;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:28px;
+      display:flex;
+      gap:20px;
+      align-items:center;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    }
+    .hero__left{flex:1}
+    .hero__title{
+      font-family: 'Merriweather', serif;
+      font-size:28px; line-height:1.05;
+      margin:0 0 8px 0;
+      letter-spacing: -0.02em;
+    }
+    .hero__sub{color:var(--muted); margin:0 0 14px 0}
+    .hero__controls{display:flex; gap:10px; align-items:center}
+    select, button{background:var(--glass); color:var(--accent); border:1px solid rgba(255,255,255,0.04); padding:8px 12px; border-radius:10px}
+
+    /* ARTICLE */
+    article.card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 8px 24px rgba(2,6,23,0.5);
+    }
+    .meta{display:flex; gap:12px; align-items:center; font-size:13px; color:var(--muted)}
+
+    h2{font-family:'Space Grotesk', sans-serif; margin-top:14px}
+    p.lead{color:var(--muted)}
+
+    /* IMAGE SLIDESHOW */
+    .slideshow{
+      margin:18px 0;
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#071226 0%, #08121b 100%);
+      min-height:300px;
+    }
+    .slides{display:flex; transition:transform 700ms cubic-bezier(.22,.9,.27,1); height:100%}
+    .slide{min-width:100%; position:relative; display:block}
+    .slide img{width:100%; height:420px; object-fit:cover; display:block; filter:contrast(1.02) saturate(1.05)}
+
+    .caption{
+      position:absolute; left:18px; bottom:18px; background:linear-gradient(90deg, rgba(3,6,12,0.7), rgba(8,12,18,0.45));
+      padding:12px 14px; border-radius:10px; backdrop-filter: blur(6px);
+      max-width:85%;
+      color:#e6f7ff; font-size:14px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.6)
     }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.3); }
+    .nav-dots{position:absolute; right:18px; bottom:18px; display:flex; gap:8px}
+    .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.06); cursor:pointer}
+    .dot.active{background:var(--accent); box-shadow:0 4px 14px rgba(102,217,255,0.12)}
+
+    .slide-controls{position:absolute; left:12px; top:50%; transform:translateY(-50%); display:flex; gap:8px}
+    .ctrl{background:rgba(0,0,0,0.32); border-radius:10px; padding:6px; cursor:pointer}
+
+    /* image caption hover effect */
+    figure{margin:0; position:relative}
+    figcaption{font-size:13px; color:var(--muted); margin-top:8px}
+
+    /* SIDEBAR */
+    aside.sidebar{position:sticky; top:40px; align-self:start}
+    .widget{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px; border-radius:12px; margin-bottom:14px}
+    .video-embed{position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px}
+    .video-embed iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:0}
+
+    /* FONT PREVIEW */
+    .font-preview{display:flex; gap:10px; align-items:center}
+    .font-preview button{padding:8px 10px}
+
+    /* FOOTER */
+    .related{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .related article{padding:10px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01))}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr; padding:18px}
+      header.hero{flex-direction:column; gap:12px}
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    /* nice little animation for headings */
+    .animated-underline{position:relative}
+    .animated-underline:after{content:''; position:absolute; left:0; bottom:-6px; height:4px; width:40%; background:linear-gradient(90deg,var(--accent), rgba(102,217,255,0.28)); border-radius:4px; transform-origin:left; transform:scaleX(0); transition:transform .6s cubic-bezier(.2,.9,.3,1)}
+    .animated-underline:hover:after{transform:scaleX(1)}
+
   </style>
-</footer>
+</head>
+<body>
+    <a href="khoa-hoc.html" class="back-btn">← Quay về Khoa Học</a>
 
-    <div id="postModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalContent"></p>
+<style>
+.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  background-color: #192a3a;
+  border: 2px solid #022b46;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.back-btn:hover {
+  background-color: #01101a;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(1, 40, 65, 0.4);
+}
+
+.back-btn:active {
+  transform: translateY(0);
+}
+</style>
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero__left">
+        <h1 class="hero__title">Trí tuệ nhân tạo
+
+</h1>
+        <p class="hero__sub">AI bước tiến hay sự diệt vong của nhân loại?</p>
+
+        <div class="hero__controls">
+          <label style="color:var(--muted); font-size:13px">Phông chữ:</label>
+          <select id="fontSelect">
+            <option value="Inter, sans-serif">Inter (Hiện tại)</option>
+            <option value="Merriweather, serif">Merriweather (Serif)</option>
+            <option value="Space Grotesk, sans-serif">Space Grotesk (Display)</option>
+          </select>
+
+          <button id="toggleTheme">Đổi theme</button>
+          <button id="playSlides">Tự động</button>
         </div>
-    </div>
+      </div>
 
-    <script src="\linhkun.js"></script>
+    <div class="featured-links">
+<small style="color:var(--muted)">Tác giả • Linh Osimi</small>
+<h3>Bài viết nổi bật</h3>
+<div class="featured-links">
+  <a href="khoa-hoc-bai0.html" class="featured-card">
+    <strong>Ai và con người</strong>
+    <span>-Thê nào là AI và nó có gì?</span>
+  </a>
+  <a href="khoa-hoc-bai1.html" class="featured-card">
+    <strong>Lượng tử</strong>
+    <span>— Định nghĩa về lượng tử</span>
+  </a>
+  <a href="khoa-hoc-bai2.html" class="featured-card">
+    <strong>Hố đen</strong>
+    <span>-Sự kỳ diệu của hố đen</span>
+  </a>
+</div>
+
+<style>
+.featured-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.featured-card {
+  display: block;
+  padding: 14px 18px;
+  background: #000008;
+  border: 1px solid #f2f2f4;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #efe9e9;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(37, 35, 35, 0.05);
+}
+
+.featured-card:hover {
+  background: #dbdde2;
+  border-color: #0c0c0e4e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(250, 248, 248, 0.1);
+  color: #a4b1bf;
+}
+
+.featured-card strong {
+  display: block;
+  font-size: 1.05em;
+  margin-bottom: 4px;
+}
+
+.featured-card span {
+  font-size: 0.95em;
+  color: #555;
+}
+</style>
+    </header>
+
+    <main>
+      <article class="card">
+        <div class="meta">
+          <div>📅 11/10/2025</div>
+          <div>•</div>
+          <div>🔬 Vật lý &amp; Thiên văn</div>
+        </div>
+
+        <h2 class="animated-underline">Trí tuệ nhân tạo là gì?</h2>
+        <p class="lead">Trí tuệ nhân tạo tiếng Anh Artificial intelligence viết tắt AI là khả năng của các hệ thống máy tính thực hiện các nhiệm vụ liên quan đến trí thông minh của con người như học tập suy luận giải quyết vấn đề nhận thức và đưa ra quyết định Đây là một lĩnh vực nghiên cứu thuộc khoa học máy tính tập trung phát triển và nghiên cứu các phương pháp cùng phần mềm giúp máy móc có khả năng nhận thức môi trường xung quanh sử dụng học tập và trí tuệ để thực hiện hành động nhằm tối đa hóa khả năng đạt được các mục tiêu đã định</p>
+ 
+
+
+
+<section class="slideshow" aria-roledescription="carousel">
+          <div class="slides" id="slides">
+            <figure class="slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Dall-e_3_%28jan_%2724%29_artificial_intelligence_icon.png" alt="Thiên hà và ánh sáng bị bẻ cong">
+              <figcaption class="caption">Hình 1 — Trí tuệ máy tính ngày càng phát triển giống 1 bộ não.</figcaption>
+          
+            </figure>
+
+            <figure class="slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/General_Formal_Ontology.svg/1024px-General_Formal_Ontology.svg.png" alt="Ống kính vũ trụ">
+              <figcaption class="caption">Hình 2 - Một mô hình bản thể học thể hiện cách con người xây dựng và sắp xếp tri thức thông qua một hệ thống các khái niệm trong một lĩnh vực nhất định, cùng với mạng lưới quan hệ liên kết giữa các khái niệm đó</figcaption>
+            </figure>
+
+            <figure class="slide">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Supervised_and_unsupervised_learning.png" alt="Cận cảnh vũ trụ">
+              <figcaption class="caption">Hình 3- Trong học có giám sát, dữ liệu huấn luyện được gán nhãn với kết quả mong đợi, cho phép mô hình học từ các ví dụ cụ thể. Ngược lại, trong học không có giám sát, mô hình tự khám phá các mẫu hoặc cấu trúc tiềm ẩn trong dữ liệu không có nhãn.</figcaption>
+            </figure>
+          </div>
+
+          <div class="slide-controls">
+            <div class="ctrl" id="prev" aria-label="Previous">◀</div>
+            <div class="ctrl" id="next" aria-label="Next">▶</div>
+          </div>
+
+          <div class="nav-dots" id="dots"></div>
+        </section>
+
+      <p>Các ứng dụng nổi bật của AI bao gồm công cụ tìm kiếm web tiên tiến ví dụ Google Tìm kiếm hệ thống đề xuất được sử dụng bởi YouTube Amazon và Netflix trợ lý ảo ví dụ Trợ lý Google Siri và Alexa xe tự lái ví dụ Waymo công cụ sáng tạo và nội dung tạo sinh ví dụ mô hình ngôn ngữ và nghệ thuật AI cùng khả năng chơi và phân tích vượt trội hơn con người trong các trò chơi chiến lược ví dụ cờ vua và cờ vây Tuy nhiên nhiều ứng dụng AI không được nhận diện là AI Rất nhiều công nghệ AI đỉnh cao đã được tích hợp vào các ứng dụng thông thường thường không còn được gọi là AI vì một khi thứ gì đó trở nên đủ hữu ích và phổ biến nó không còn được dán nhãn AI nữa
+
+Nhiều phân ngành trong nghiên cứu trí tuệ nhân tạo tập trung vào các mục tiêu cụ thể và sử dụng những công cụ đặc thù Các mục tiêu truyền thống của nghiên cứu AI bao gồm học tập lập luận biểu diễn tri thức lập kế hoạch xử lý ngôn ngữ tự nhiên nhận thức và hỗ trợ robot Để đạt được những mục tiêu đó các nhà nghiên cứu AI đã ứng dụng và tích hợp đa dạng kỹ thuật như tìm kiếm và tối ưu hóa toán học logic hình thức mạng nơron nhân tạo cùng các phương pháp dựa trên thống kê nghiên cứu hoạt động và kinh tế học Ngoài ra AI còn kế thừa kiến thức từ tâm lý học ngôn ngữ học triết học khoa học thần kinh và nhiều lĩnh vực khác Một số công ty như OpenAI Google DeepMind và Meta đang đặt mục tiêu phát triển trí tuệ nhân tạo tổng quát AGI một dạng AI có khả năng thực hiện hầu hết mọi nhiệm vụ nhận thức ở mức độ ngang bằng hoặc vượt trội so với con người</p>
+ 
+<p>Trí tuệ nhân tạo ban đầu được thành lập như một ngành học thuật vào năm 1956 và lĩnh vực này đã trải qua nhiều chu kỳ lạc quan trong suốt lịch sử xen kẽ với nó là những giai đoạn thất vọng và mất nguồn tài trợ được gọi là mùa đông AI Nguồn tài trợ và sự quan tâm dần tăng mạnh sau năm 2012 khi các bộ xử lý đồ họa GPU bắt đầu được sử dụng để tăng tốc mạng nơron và kỹ năng học sâu dần vượt trội hơn so với các kỹ thuật AI trước đó Sự tăng trưởng này tiếp tục tăng tốc sau năm 2017 nhờ kiến trúc transformer Trong những năm 2020 sự xuất hiện của trí tuệ nhân tạo tạo sinh tiên tiến đã trở nên nổi tiếng đánh dấu giai đoạn tiến bộ nhanh chóng của lĩnh vực này với tên gọi là cơn sốt AI Trí tuệ nhân tạo tạo sinh với khả năng tạo ra cũng như chỉnh sửa nội dung đã làm lộ rõ nhiều hậu quả ngoài ý muốn ở hiện tại đồng thời dấy lên lo ngại đạo đức về ảnh hưởng lâu dài của AI và những rủi ro tồn vong tiềm tàng từ đó thúc đẩy các cuộc thảo luận về chính sách quản lý nhằm đảm bảo tính an toàn và lợi ích của công nghệ này</p>
+<h3>Mục đích</h3>
+     <h4>Suy luận và giải quyết vấn đề</h4>
+<p>Các nhà nghiên cứu từ thời kỳ đầu đã phát triển những thuật toán mô phỏng quá trình suy luận từng bước mà con người sử dụng khi giải các câu đố hay thực hiện những suy diễn logic Đến cuối những năm 1980 và 1990 các phương pháp xử lý thông tin không chắc chắn hoặc không đầy đủ đã được phát triển bằng cách sử dụng các khái niệm từ lý thuyết xác suất và kinh tế học</p>
+<p>Nhiều thuật toán trong số này không đủ khả năng để giải quyết các bài toán suy luận quy mô lớn vì chúng gặp phải hiện tượng bùng nổ tổ hợp về cơ bản các thuật toán sẽ trở nên chậm đi theo cấp số nhân khi bài toán được phát triển Ngay cả con người cũng hiếm khi sử dụng phương pháp suy diễn từng bước mà những nghiên cứu AI thời kỳ đầu có thể mô phỏng Chúng ta giải quyết phần lớn vấn đề bằng những phán đoán trực giác nhanh chóng Việc đạt được khả năng suy luận chính xác và hiệu quả vẫn là một bài toán chưa có lời giải</p>
+<h4>Biểu diễn tri thức</h4>
+
+<p>Một mô hình bản thể học thể hiện cách con người xây dựng và sắp xếp tri thức thông qua một hệ thống các khái niệm trong một lĩnh vực nhất định cùng với mạng lưới quan hệ liên kết giữa các khái niệm đó
+Biểu diễn tri thức và kỹ thuật xử lý tri thức đóng vai trò then chốt trong việc trang bị cho các hệ thống AI khả năng trả lời câu hỏi một cách thông minh và suy luận về các hiện tượng trong thế giới thực Những phương pháp biểu diễn tri thức mang tính hình thức này không chỉ được ứng dụng trong lập chỉ mục và truy xuất nội dung mà còn giữ vai trò quan trọng trong việc diễn giải bối cảnh hỗ trợ quyết định trong lĩnh vực y học lâm sàng khám phá tri thức từ cơ sở dữ liệu lớn tức là khai thác những suy luận có ý nghĩa và khả thi về mặt hành động cùng nhiều lĩnh vực chuyên sâu khác
+
+Cơ sở tri thức là tập hợp tri thức được cấu trúc theo cách mà các hệ thống máy tính có thể hiểu và vận dụng Một bản thể học trong ngữ cảnh này là hệ thống các đối tượng khái niệm thuộc tính và mối quan hệ được xác định trong phạm vi một lĩnh vực tri thức cụ thể Để trở nên hữu ích cơ sở tri thức cần có khả năng biểu diễn một cách rõ ràng và nhất quán các thực thể như đối tượng thuộc tính phân loại và mối quan hệ giữa các đối tượng đồng thời bao hàm cả các tình huống sự kiện trạng thái và yếu tố thời gian các mối quan hệ nhân quả tri thức bậc hai tức là kiến thức về tri thức những gì ta biết về hiểu biết của người khác và lý luận mặc định tức những giả định được con người chấp nhận là đúng cho đến khi có bằng chứng bác bỏ và vẫn được xem là đúng trong nhiều tình huống thay đổi Ngoài ra cơ sở tri thức còn phải bao phủ được nhiều chiều cạnh khác nhau của tri thức đáp ứng yêu cầu của các lĩnh vực chuyên sâu và ngữ cảnh ứng dụng đa dạng
+
+Một trong những thách thức lớn nhất trong biểu diễn tri thức nằm ở độ rộng bao phủ của kiến thức thông thường tập hợp khổng lồ các tri thức nguyên tử mà một người bình thường nắm giữ trong đời sống hằng ngày Không chỉ đồ sộ về số lượng phần lớn loại tri thức này còn tồn tại dưới dạng phi biểu tượng tức không được mã hóa rõ ràng thành các sự kiện hay mệnh đề mà con người có thể dễ dàng diễn đạt bằng ngôn ngữ tự nhiên Bên cạnh đó quá trình thu thập và chuẩn hóa tri thức phục vụ cho các ứng dụng AI cũng đặt ra nhiều thách thức về cả quy mô độ chính xác và tính phù hợp với ngữ cảnh ứng dụng cụ thể</p>
+
+<h4>Lập kế hoạch và ra quyết định</h4>
+
+<p>Tác nhân được hiểu là bất kỳ thực thể nào có khả năng nhận thức và thực hiện hành động trong thế giới Một tác nhân lý trí là tác nhân sở hữu mục tiêu hoặc sở thích nhất định và hành động nhằm hiện thực hóa những mục tiêu hoặc thỏa mãn sở thích đó Trong lĩnh vực lập kế hoạch tự động tác nhân được định hướng bởi một mục tiêu cụ thể Ngược lại trong bối cảnh ra quyết định tự động tác nhân được cho là có những sở thích tức là một số trạng huống mà nó mong muốn tham gia và những trạng huống khác mà nó tìm cách tránh né Để biểu thị mức độ ưa thích đối với từng trạng huống tác nhân gán cho mỗi trạng huống một giá trị số gọi là tiện ích Khi đối mặt với các hành động khả thi tác nhân có thể tính toán tiện ích kỳ vọng của từng hành động tức là giá trị trung bình của tiện ích các kết quả có thể xảy ra có xét đến xác suất tương ứng của mỗi kết quả Dựa trên phép tính này tác nhân sẽ lựa chọn hành động có tiện ích kỳ vọng cao nhất nhằm tối ưu hóa mức độ thỏa mãn sở thích của mình
+
+Trong kế hoạch cổ điển tác nhân được giả định là biết một cách chính xác hệ quả của mọi hành động mà nó có thể thực hiện Tuy nhiên trong phần lớn các bài toán thực tế tác nhân thường phải đối mặt với sự bất định nó có thể không nắm rõ tình trạng hiện tại của môi trường nghĩa là môi trường không xác định hoặc không thể quan sát đầy đủ và cũng không chắc chắn về kết quả của mỗi hành động khả thi tức môi trường không mang tính quyết định Trong bối cảnh đó tác nhân buộc phải lựa chọn hành động dựa trên các suy luận xác suất đồng thời liên tục đánh giá lại tình hình sau mỗi hành động để xác định mức độ hiệu quả của hành động vừa thực hiện
+
+Trong một số bài toán sở thích của tác nhân không hoàn toàn chắc chắn đặc biệt khi có sự tham gia của các tác nhân khác hoặc con người Những sở thích này có thể được rút trích thông qua học tập chẳng hạn như học tăng cường ngược hoặc tác nhân có thể chủ động tìm kiếm thông tin nhằm cải thiện hiểu biết của mình về sở thích nội tại Trong bối cảnh đó lý thuyết giá trị thông tin đóng vai trò quan trọng trong việc đánh giá lợi ích của các hành động khám phá hoặc thử nghiệm Tuy nhiên không gian hành động và trạng huống có thể xảy ra trong tương lai thường có quy mô và độ phức tạp cao đến mức không thể xử lý một cách khả thi buộc tác nhân phải đưa ra quyết định và đánh giá hiệu quả của hành động dưới điều kiện bất định về kết quả
+
+</p>
+
+<p>Quá trình quyết định Markov bao gồm một mô hình chuyển trạng thái mô tả xác suất mà một hành động cụ thể sẽ làm thay đổi trạng thái hệ thống theo một cách nhất định cùng với một hàm phần thưởng dùng để xác định tiện ích tương ứng của mỗi trạng thái cũng như chi phí tương ứng của mỗi hành động Một policy là một ánh xạ từ mỗi trạng thái có thể xảy ra đến một hành động mà tác nhân sẽ thực hiện trong trạng thái đó Policy tối ưu có thể được tính toán một cách hệ thống ví dụ thông qua phép lặp policy có thể được thiết lập bằng các kỹ thuật heuristic hoặc có thể được học từ dữ liệu tương tác với môi trường
+
+Lý thuyết trò chơi nghiên cứu hành vi hợp lý của nhiều tác nhân tương tác lẫn nhau và đóng vai trò nền tảng trong các hệ thống trí tuệ nhân tạo có nhiệm vụ ra quyết định trong môi trường có sự hiện diện của các tác nhân khác</p>
+
+<h4>Học hỏi</h4>
+<p>Học máy là lĩnh vực nghiên cứu tập trung vào việc xây dựng các chương trình có khả năng tự động cải thiện hiệu suất thực hiện một nhiệm vụ cụ thể thông qua kinh nghiệm Đây không phải là một ý tưởng mới xuất hiện trong thời đại hiện nay mà ngược lại nó đã là một thành phần cốt lõi của AI ngay từ những bước đi đầu tiên của lĩnh vực này
+
+Trong học có giám sát dữ liệu huấn luyện được gán nhãn với kết quả mong đợi cho phép mô hình học từ các ví dụ cụ thể Ngược lại trong học không có giám sát mô hình tự khám phá các mẫu hoặc cấu trúc tiềm ẩn trong dữ liệu không có nhãn
+Máy học bao gồm nhiều hình thức tiếp cận khác nhau Trong đó học không giám sát hướng đến việc phân tích dòng dữ liệu chưa được gán nhãn nhằm nhận diện các quy luật tiềm ẩn và đưa ra suy luận mà không cần đến hướng dẫn trực tiếp Trái lại học có giám sát yêu cầu dữ liệu huấn luyện phải được dán nhãn với kết quả mong đợi qua đó mô hình học cách liên kết đầu vào với đầu ra Phương pháp này bao gồm hai dạng tiêu biểu phân loại khi mục tiêu là xác định đầu vào thuộc nhóm nào và hồi quy khi nhiệm vụ là ước lượng một hàm số liên tục từ dữ liệu đầu vào
+
+Học tăng cường là phương pháp trong đó tác nhân học thông qua tương tác với môi trường được thưởng khi hành động dẫn đến phản hồi tích cực và bị phạt khi kết quả không mong muốn từ đó dần hình thành chiến lược lựa chọn hành vi tối ưu Học chuyển giao đề cập đến khả năng ứng dụng tri thức đã học từ một bài toán vào bối cảnh mới góp phần nâng cao hiệu quả học tập trong môi trường biến đổi Trong khi đó học sâu là một nhánh của học máy sử dụng mạng nơron nhân tạo lấy cảm hứng từ cấu trúc sinh học cho phép xử lý dữ liệu đầu vào theo tầng lớp và có thể tích hợp với mọi hình thức học kể trên để gia tăng năng lực biểu đạt và khái quát hóa
+
+Lý thuyết học tập tính toán cung cấp khung phân tích hình thức để đánh giá người học không chỉ dựa trên khả năng đạt được kết quả chính xác mà còn xét đến các tiêu chí như độ phức tạp tính toán độ phức tạp mẫu tức lượng dữ liệu cần thiết để học hiệu quả và những chuẩn mực tối ưu hóa khác phản ánh chi phí và hiệu năng trong quá trình học</p>
+
+
+
+  <h2 class="animated-underline">Liệu AI có thể hủy diệt con người </h2>
+<h3>Câu trả lời rất đơn giản là có "nếu con người lập trình nó cho mục đích hủy diệt nhân loại và có xu hướng tự nhận thức căm ghét loài người và "Không" nếu Ai chỉ là 1 công cụ hỗ trợ con người trong các công việc thường ngày.Nhưng các bạn đều đã biết khả năng vũ khí hóa mọi thứ của nhân loại rồi đấy ...tất cả chỉ là vấn đề thời gian!</h3>
+
+
+
+
+<div style="margin-top:18px">
+          <h4>Liên quan</h4>
+          <div class="related">
+            <article><strong>Ai và đơi sống</strong><p style="color:var(--muted)">Sử dụng thấu kính hấp dẫn để ước lượng khối lượng tối.</p></article>
+            <article><strong>Trí tuệ nhân tạo siêu việt</strong><p style="color:var(--muted)">Kỹ thuật microlensing giúp tìm hành tinh cách xa hàng nghìn năm ánh sáng.</p></article>
+          </div>
+        </div>
+
+      </article>
+    </main>
+
+    <aside class="sidebar">
+      <div class="widget">
+       <h4>Video về sự nguy hiểm Ai nếu mất kiểm soát</h4>
+<div class="video-embed">
+  <iframe 
+    src="https://www.youtube.com/watch?v=4Z-QCDyL2q4" 
+    title="YouTube video"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+      <div class="widget">
+        <h4>Thay đổi phông chữ xem trước</h4>
+        <div class="font-preview">
+          <button onclick="setPreview('Inter, sans-serif')">Inter</button>
+          <button onclick="setPreview('Merriweather, serif')">Merriweather</button>
+          <button onclick="setPreview('Space Grotesk, sans-serif')">Space Grotesk</button>
+        </div>
+      </div>
+
+      <div class="widget">
+        <h4>Ghi chú ảnh</h4>
+        <p style="color:var(--muted); font-size:13px">Cập nhật và tổng hợp dựa trên wikipedia và các nguồn nước ngoài.</p>
+      </div>
+    </aside>
+
+  </div>
+
+  <script>
+    // SLIDESHOW
+    const slidesEl = document.getElementById('slides');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsEl = document.getElementById('dots');
+    let idx = 0;
+    let autoplay = false;
+    let timer = null;
+
+    function makeDots(){
+      slides.forEach((s,i)=>{
+        const d = document.createElement('div'); d.className='dot';
+        d.addEventListener('click', ()=> goTo(i));
+        dotsEl.appendChild(d);
+      });
+      updateDots();
+    }
+    function updateDots(){
+      const dots = Array.from(dotsEl.children);
+      dots.forEach((d,i)=> d.classList.toggle('active', i===idx));
+    }
+
+    function goTo(i){ idx = (i+slides.length) % slides.length; slidesEl.style.transform = `translateX(-${idx*100}%)`; updateDots(); }
+    function next(){ goTo(idx+1) }
+    function prev(){ goTo(idx-1) }
+
+    document.getElementById('next').addEventListener('click', next);
+    document.getElementById('prev').addEventListener('click', prev);
+
+    makeDots();
+
+    // click to open fullscreen modal with caption and metadata
+    slides.forEach(s=>{
+      const img = s.querySelector('img');
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', ()=>{
+        openModal(img.src, s.querySelector('figcaption').innerText || '');
+      })
+    })
+
+    function openModal(src, caption){
+      const m = document.createElement('div');
+      m.style.position='fixed'; m.style.inset='0'; m.style.display='flex'; m.style.alignItems='center'; m.style.justifyContent='center';
+      m.style.background='rgba(2,6,23,0.85)'; m.style.zIndex=9999;
+      m.innerHTML = `
+        <div style="max-width:95%; max-height:90%; border-radius:12px; overflow:hidden; background:#000">
+          <img src="${src}" style="display:block; max-width:100%; max-height:70vh; width:auto; height:auto" />
+          <div style="padding:12px; color:#dbefff; background:linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6))">${caption}</div>
+        </div>
+      `;
+      m.addEventListener('click', ()=> m.remove());
+      document.body.appendChild(m);
+    }
+
+    // autoplay toggle
+    const playBtn = document.getElementById('playSlides');
+    playBtn.addEventListener('click', ()=>{
+      autoplay = !autoplay; playBtn.textContent = autoplay ? 'Dừng' : 'Tự động';
+      if(autoplay) startAuto(); else stopAuto();
+    })
+    function startAuto(){ timer = setInterval(next, 4500); }
+    function stopAuto(){ clearInterval(timer); timer = null; }
+
+    // FONT selector
+    const select = document.getElementById('fontSelect');
+    select.addEventListener('change', (e)=> document.body.style.fontFamily = e.target.value);
+
+    // small sidebar buttons
+    function setPreview(font){ document.body.style.fontFamily = font }
+
+    // theme toggle: invert background and accent
+    document.getElementById('toggleTheme').addEventListener('click', ()=>{
+      if(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()==='#0f1724'){
+        document.documentElement.style.setProperty('--bg','#f5f7fb');
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--accent','#0077b6');
+        document.documentElement.style.setProperty('--muted','#344155');
+        document.body.style.color = '#07203a';
+      } else {
+        document.documentElement.style.setProperty('--bg','#0f1724');
+        document.documentElement.style.setProperty('--card','#0b1220');
+        document.documentElement.style.setProperty('--accent','#66d9ff');
+        document.documentElement.style.setProperty('--muted','#98a0b3');
+        document.body.style.color = '#e6f0ff';
+      }
+    })
+
+    // accessibility: keyboard nav
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === ' ') { e.preventDefault(); playBtn.click(); }
+    })
+
+    // small entrance animation
+    document.querySelectorAll('.slide').forEach((s,i)=>{
+      s.style.opacity=0; s.style.transform='translateY(8px)';
+      setTimeout(()=>{ s.style.transition='opacity .6s ease, transform .6s ease'; s.style.opacity=1; s.style.transform='translateY(0)'; }, 200 + i*120)
+    });
+
+  </script>
 </body>
 </html>
