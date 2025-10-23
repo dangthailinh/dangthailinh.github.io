@@ -6,263 +6,289 @@
   <title>Trang chủ — Series Bài Viết</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    /* ======= Tổng thể ======= */
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #fff;
-      margin: 0;
-      padding: 0;
-      color: #222;
-      overflow-x: hidden;
-      font-weight: 400;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
+    
+  /* ======= Tổng thể ======= */
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    color: #222;
+    overflow-x: hidden;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-    /* ======= Header ======= */
+  /* ======= Header ======= */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 14px 36px;
+    background: rgba(250, 250, 250, 0.95);
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+    transition: all 0.3s ease;
+  }
+
+  header.shrink {
+    padding: 8px 28px;
+    background: rgba(245, 245, 245, 0.96);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  header img.logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+  }
+
+  header img.logo:hover {
+    transform: scale(1.1);
+  }
+
+  /* ======= Navigation ======= */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    align-items: center;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #555;
+    font-size: 15.5px;
+    font-weight: 500;
+    padding-bottom: 4px;
+    transition: color 0.25s ease, border-bottom 0.25s ease;
+  }
+
+  nav a:hover {
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  nav a.active {
+    color: #000;
+    border-bottom: 2px solid #000;
+    font-weight: 600;
+  }
+
+  /* ======= Nút mở menu trên mobile ======= */
+  .menu-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  /* ======= Hero Section ======= */
+  .hero {
+    position: relative;
+    height: 340px;
+    background: linear-gradient(rgba(7,6,6,0.35), rgba(0,0,0,0.35)),
+      url('https://tse4.mm.bing.net/th/id/OIP.UbFoaELDyjCbQbCuf0KR-wHaFj?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+
+  .hero-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .hero p {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    color: #eee;
+  }
+
+  /* ======= Main nội dung ======= */
+  main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  h2.section-title {
+    margin: 40px 0 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #111;
+  }
+
+  /* ======= Grid bài viết ======= */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+  }
+
+  .card-content {
+    padding: 14px 16px;
+  }
+
+  .card-content h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .card-content p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* ======= Footer ======= */
+  footer {
+    background: #fafafa;
+    border-top: 1px solid #eee;
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+    color: #555;
+  }
+
+  /* ======= Responsive ======= */
+  @media (max-width: 768px) {
     header {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      padding: 14px 36px;
-      background: rgba(250, 250, 250, 0.95);
-      border-bottom: 1px solid #eee;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(6px);
-      transition: all 0.3s ease;
-    }
-
-    header.shrink {
-      padding: 8px 28px;
-      background: rgba(245, 245, 245, 0.96);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-
-    header img.logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: transform 0.25s ease;
-    }
-
-    header img.logo:hover {
-      transform: scale(1.1);
-    }
-
-    /* ======= Navigation ======= */
-    nav {
-      display: flex;
+      padding: 10px 18px;
       flex-wrap: wrap;
-      gap: 26px;
-      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+
+    nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: #fff;
+      border: 1px solid #eee;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      padding: 12px 16px;
+      border-radius: 12px;
+      z-index: 999;
+      animation: slideDown 0.3s ease;
     }
 
     nav a {
-      text-decoration: none;
-      color: #555;
-      font-size: 15.5px;
-      font-weight: 500;
-      padding-bottom: 4px;
-      transition: color 0.25s ease, border-bottom 0.25s ease;
-    }
-
-    nav a:hover {
-      color: #000;
-      border-bottom: 2px solid #000;
-    }
-
-    nav a.active {
-      color: #000;
-      border-bottom: 2px solid #000;
-      font-weight: 600;
-    }
-
-    /* ======= Hero Section ======= */
-    .hero {
-      position: relative;
-      height: 340px;
-      background: linear-gradient(rgba(7,6,6,0.35), rgba(0,0,0,0.35)),
-        url('https://tse4.mm.bing.net/th/id/OIP.UbFoaELDyjCbQbCuf0KR-wHaFj?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .hero-content {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1.2s ease, transform 1.2s ease;
-    }
-
-    .hero-content.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .hero h1 {
-      font-size: 40px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      font-weight: 400;
-      margin: 0;
-      color: #eee;
-    }
-
-    /* ======= Main nội dung ======= */
-    main {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    h2.section-title {
-      margin: 40px 0 20px;
-      font-size: 22px;
-      font-weight: 600;
-      color: #111;
-    }
-
-    /* ======= Grid bài viết ======= */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .card img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
+      padding: 10px 0;
+      font-size: 15px;
       border-bottom: 1px solid #eee;
     }
 
-    .card-content {
-      padding: 14px 16px;
+    nav a:last-child {
+      border-bottom: none;
     }
 
-    .card-content h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-      font-weight: 600;
+    nav.active {
+      display: flex;
     }
 
-    .card-content p {
-      font-size: 14px;
-      color: #666;
-      margin: 0;
-      line-height: 1.4;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* ======= Footer ======= */
-    footer {
-      background: #fafafa;
-      border-top: 1px solid #eee;
-      text-align: center;
-      padding: 12px;
-      font-size: 13px;
-      color: #555;
-    }
-
-    /* ======= Responsive ======= */
-    @media (max-width: 768px) {
-      header {
-        padding: 10px 18px;
-        flex-wrap: wrap;
-        gap: 10px;
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
       }
-
-      nav {
-        gap: 16px;
-      }
-
-      .hero h1 {
-        font-size: 28px;
-      }
-
-      .hero p {
-        font-size: 15px;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    header {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Căn giữa tất cả nội dung trong header */
-  padding: 10px 0;
-}
+    .hero h1 {
+      font-size: 28px;
+    }
 
-.logo {
-  height: 40px;
-  margin-right: 20px;
-}
-
-nav .nav-links {
-  display: flex;
-  justify-content: center; /* Căn giữa các mục trong thanh nav */
-  gap: 30px; /* Khoảng cách giữa các mục */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #666;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.nav-links a:hover {
-  color: #000;
-}
+    .hero p {
+      font-size: 15px;
+    }
+  }
+</style>
 
   </style>
-</head>
-<body>
+<header id="main-header">
+  <a href="/index.html"><img src="/img/l.jpg" alt="Logo" class="logo"></a>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
 
-   <header id="main-header">
-    <a href="/index.html"><img src="/img/l.jpg" alt="Logo" class="logo"></a>
-    <nav>
-      <a href="/khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
-      <a href="/nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
-      <a href="/phim0/0/phim.html">Phim</a>
-       <a href="/manga0/0/truyen-manga.html">manga</a>
-      <a href="/am-nhac.html">Âm nhac</a>
-      <a href="/game0/0/game.html" >Game</a>
-      <a href="/kienthuc/0/kienthuc.html" class="active">Kiến thức</a>
-      
-    </nav>
-  </header>
+  <nav id="main-nav">
+    <a href="/khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+    <a href="/nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+    <a href="/phim0/0/phim.html">Phim</a>
+    <a href="/manga0/0/truyen-manga.html">Manga</a>
+    <a href="/am-nhac.html">Âm nhạc</a>
+    <a href="/game0/0/game.html">Game</a>
+    <a href="/kienthuc/0/kienthuc.html" class="active">Kiến thức</a>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('main-nav');
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+</script>
 
   <!-- ======= Hero Section ======= -->
   <section class="hero">
@@ -401,6 +427,50 @@ nav .nav-links {
 
   </div>
 </section>
+
+<section>
+  <h2 class="section-title">Trí tuệ nhân tạo (AI) và các chủ đề liên quan</h2>
+  <div class="card-grid">
+
+    <!-- AI là gì -->
+    <a href="/kienthuc/1/ai.html" class="card">
+      <img src="https://tse4.mm.bing.net/th/id/OIP.5Ykp3dw4ExLgclTjLlit_wHaEt?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AI là gì">
+      <div class="card-content">
+        <h3> AI là gì? Tổng quan về trí tuệ nhân tạo</h3>
+        <p>Tìm hiểu khái niệm trí tuệ nhân tạo, cách nó mô phỏng tư duy con người, và vai trò ngày càng lớn trong đời sống hiện đại.</p>
+      </div>
+    </a>
+
+    <!-- Machine Learning -->
+    <a href="/kienthuc/1/ai2.html" class="card">
+      <img src="https://www.profesionalreview.com/wp-content/uploads/2019/08/Machine-Learning-5.jpeg" alt="Machine Learning">
+      <div class="card-content">
+        <h3> Machine Learning: Học máy và thuật toán</h3>
+        <p>Khám phá cách máy tính học từ dữ liệu mà không cần lập trình trực tiếp, cùng các thuật toán phổ biến như Linear Regression và Decision Tree.</p>
+      </div>
+    </a>
+
+    <!-- Deep Learning -->
+    <a href="/kienthuc/1/ai3.html" class="card">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.V3s04mx4W568ztHTRKJTlAHaFP?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Deep Learning">
+      <div class="card-content">
+        <h3>Deep Learning: Học sâu và mạng nơ-ron nhân tạo</h3>
+        <p>Tìm hiểu nguyên lý của mạng neuron sâu (Deep Neural Network), CNN, RNN và cách chúng giúp máy nhận diện hình ảnh, âm thanh, và ngôn ngữ tự nhiên.</p>
+      </div>
+    </a>
+
+    <!-- Ứng dụng AI cho lập trình -->
+    <a href="/kienthuc/1/ai4.html" class="card">
+      <img src="https://tse4.mm.bing.net/th/id/OIP.nk_ru2A2MM5_IdgBWQR3GQHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ứng dụng AI trong lập trình">
+      <div class="card-content">
+        <h3> Ứng dụng AI trong lập trình</h3>
+        <p>Khám phá cách AI hỗ trợ lập trình viên qua công cụ gợi ý mã, phân tích lỗi, tự động hoá quy trình và tạo ra thế hệ công cụ phát triển thông minh mới.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
 
   </main>
 
