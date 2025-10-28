@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Portfolio Cube</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #38B6FF;
+      --chip-image: url("https://lh5.googleusercontent.com/y58mIMZC-IwE41TNehTaXikfD26LtOLULH3BRTAnFxSB33UHwDwf5wVfVvwVwsju1uo=w2400");
+      --whiteish-letters: #dafffd;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      color: white;
+      font-size: 14px;
+    }
+
+    body {
+      background-color: black;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    main {
+      padding: 50px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu {
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .menu>button {
+      width: 120px;
+      height: 40px;
+      margin-top: 20px;
+      background-color: transparent;
+      background-image: url(https://lh6.googleusercontent.com/B3GZqaB4CtIuOZqveBVoBvWZPBZQ7bkkyTEXs9kBCWaop3KXDi5GaHa_zi9Dekl_igc=w2400);
+      background-size: contain;
+      background-repeat: no-repeat;
+      border: none;
+      color: var(--whiteish-letters);
+      transition: width 0.3s, color 0.3s;
+    }
+
+    .menu>.btn:hover {
+      color: var(--blue);
+      width: 140px;
+      cursor: pointer;
+    }
+
+    .scene {
+      width: 600px;
+      height: 600px;
+      perspective: 1800px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: translateZ(-300px);
+      transition: transform 1s;
+    }
+
+    .cube.show-front { transform: translateZ(-300px) rotateY(0deg); }
+    .cube.show-right { transform: translateZ(-300px) rotateY(-90deg); }
+    .cube.show-back { transform: translateZ(-300px) rotateY(-180deg); }
+    .cube.show-left { transform: translateZ(-300px) rotateY(90deg); }
+    .cube.show-top { transform: translateZ(-300px) rotateX(-90deg); }
+    .cube.show-bottom { transform: translateZ(-300px) rotateX(90deg); }
+
+    .cube-face {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0,0,0,0.8);
+      background-image: var(--chip-image);
+      background-size: contain;
+      background-repeat: no-repeat;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+
+    .cube-face-front { transform: rotateY(0deg) translateZ(300px); }
+    .cube-face-back { transform: rotateY(180deg) translateZ(300px); }
+    .cube-face-right { transform: rotateY(90deg) translateZ(300px); }
+    .cube-face-left { transform: rotateY(-90deg) translateZ(300px); }
+    .cube-face-top { transform: rotateX(90deg) translateZ(300px); }
+    .cube-face-bottom { transform: rotateX(-90deg) translateZ(300px); }
+
+    .intro-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .image {
+      border-radius: 50%;
+      overflow: hidden;
+      width: 150px;
+      height: 150px;
+      border: 1px dashed var(--blue);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-wrapper {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .intro {
+      width: 70%;
+      margin-left: 20px;
+    }
+
+    .intro-heading {
+      font-size: 2.5rem;
+      color: var(--whiteish-letters);
+      padding-bottom: 20px;
+      line-height: 3rem;
+    }
+
+    .intro-heading>span {
+      color: var(--blue);
+    }
+
+    .intro-text {
+      color: var(--whiteish-letters);
+      width: 90%;
+      padding: 5px 0;
+    }
+
+    .work-edu-section {
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .work-edu-heading {
+      font-size: 1.3rem;
+      padding-bottom: 10px;
+      font-weight: 400;
+    }
+
+    .work-edu-heading.date {
+      color: var(--blue);
+    }
+
+    .work-edu-info {
+      width: 70%;
+      margin-left: 20px;
+    }
+
+    .certificate-section {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .certificate-date {
+      font-size: 1.3rem;
+      color: var(--blue);
+      margin-right: 15px;
+    }
+
+    .certificate-heading {
+      font-size: 1.3rem;
+    }
+
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .project-border {
+      width: 120px;
+      height: 120px;
+      background-image: url("https://lh5.googleusercontent.com/zgccmEHip1xVXgGhdxVPYB6skDCyHX5LpfqmHHw09nbybd9en_GQdBxOlUlXFSnURks=w2400");
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .project-wrapper {
+      width: 90px;
+      height: 90px;
+    }
+
+    .visit-wrapper {
+      background-color: rgba(0,0,0,0.5);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-title {
+      background-color: rgba(0,0,0,0.7);
+      padding: 3px 7px;
+      margin-bottom: 10px;
+    }
+
+    .visit-app {
+      background-color: rgba(0,0,0,0.7);
+      padding: 5px 5px;
+      font-size: 0.8rem;
+    }
+
+    .visit-app>i {
+      color: var(--blue);
+    }
+
+    .visit-app:hover {
+      text-decoration: underline;
+    }
+
+    .social-media-btns {
+      margin-top: 10px;
+    }
+
+    .social-media-btns>i {
+      font-size: 2rem;
+      margin: 5px 10px;
+    }
+
+    .social-media-btns>i:hover {
+      color: var(--blue);
+      cursor: pointer;
+    }
+/* Mobile responsiveness - FINAL FIX */
+@media (max-width: 768px) {
+  main {
+    padding: 15px;
+    flex-direction: column-reverse;
+    align-items: center;
+    overflow-y: auto;
+  }
+
+  .menu {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .menu > button {
+    width: 80px;
+    height: 36px;
+    font-size: 11px;
+    background-size: 70%;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 5px;
+  }
+
+  .scene {
+    width: 260px;
+    height: 260px;
+    perspective: 600px; /* Giảm perspective để phù hợp màn hình nhỏ */
+    margin-bottom: 15px;
+  }
+
+  .cube {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: translateZ(-130px) rotateY(0deg); /* Reset default */
+    transition: transform 0.8s ease-out;
+  }
+
+  /* Các class show-* */
+  .cube.show-front { transform: translateZ(-130px) rotateY(0deg); }
+  .cube.show-right  { transform: translateZ(-130px) rotateY(-90deg); }
+  .cube.show-back   { transform: translateZ(-130px) rotateY(-180deg); }
+  .cube.show-left   { transform: translateZ(-130px) rotateY(90deg); }
+  .cube.show-top    { transform: translateZ(-130px) rotateX(-90deg); }
+  .cube.show-bottom { transform: translateZ(-130px) rotateX(90deg); }
+
+  .cube-face {
+    width: 260px;
+    height: 260px;
+    padding: 12px;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8);
+    background-image: var(--chip-image);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    backface-visibility: hidden; /* Quan trọng: tránh mặt sau bị lộ */
+    overflow-y: auto;
+  }
+
+  /* Đặt transform cho từng mặt */
+  .cube-face-front { transform: rotateY(0deg) translateZ(130px); }
+  .cube-face-back { transform: rotateY(180deg) translateZ(130px); }
+  .cube-face-right { transform: rotateY(90deg) translateZ(130px); }
+  .cube-face-left { transform: rotateY(-90deg) translateZ(130px); }
+  .cube-face-top { transform: rotateX(90deg) translateZ(130px); }
+  .cube-face-bottom { transform: rotateX(-90deg) translateZ(130px); }
+
+  /* Responsive content */
+  .intro-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .image {
+    width: 70px;
+    height: 70px;
+    border: 1px dashed var(--blue);
+  }
+
+  .image-wrapper {
+    width: 65px;
+    height: 65px;
+  }
+
+  img {
+    height: 65px;
+  }
+
+  .intro {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .intro-heading {
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+    word-wrap: break-word;
+  }
+
+  .intro-text {
+    font-size: 0.85rem;
+    width: 100%;
+    padding: 5px 0;
+  }
+
+  .work-edu-section,
+  .certificate-section {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .work-edu-info,
+  .certificate-heading {
+    margin-left: 0;
+    margin-top: 5px;
+    width: 100%;
+  }
+
+  .work-edu-heading.date,
+  .certificate-date {
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+  }
+
+  .projects {
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  .project-border {
+    width: 70px;
+    height: 70px;
+  }
+
+  .project-wrapper {
+    width: 55px;
+    height: 55px;
+  }
+
+  .app-title,
+  .visit-app {
+    font-size: 0.65rem;
+    padding: 2px 4px;
+  }
+
+  .social-media-btns i {
+    font-size: 1.2rem;
+    margin: 5px;
+  }
+
+  /* Đảm bảo nội dung không tràn */
+  .cube-face p,
+  .cube-face h1,
+  .cube-face h4,
+  .cube-face ul {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin: 5px 0;
+  }
+}
+.social-media-btns a,
+.visit-app {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.social-media-btns a:hover i {
+  color: var(--blue);
+  cursor: pointer;
+}
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="menu df fd-c">
+      <button class="btn" data-side="front">Intro</button>
+      <button class="btn" data-side="right">Work</button>
+      <button class="btn" data-side="back">Education</button>
+      <button class="btn" data-side="left">Certificates</button>
+      <button class="btn" data-side="top">Projects</button>
+      <button class="btn" data-side="bottom">Contacts</button>
+    </div>
+
+    <section class="scene">
+      <div class="cube show-front" id="cube" data-side="front">
+
+        <div class="cube-face cube-face-front">
+          <div class="intro-wrapper">
+            <div class="intro">
+              <h1 class="intro-heading">Hi,Tôi là Linh OSIMI ! <span>Ux/ui </span> <span> Devops </span> <span>designer</span></h1>
+              <p class="intro-text">Đây là cv ảo của tôi gồm 1 số thông tin cá nhân v.v kĩ năng kinh nghiệm.</p>
+
+              
+              <p class="intro-text">1 số thông tin mà tôi muốn chia sẻ về bản thân và kinh nghiệm có thể là làm việc và phát triển (không có tác dụng thay thế cv thật nhá)</p>
+            </div>
+            <div class="image">
+              <div class="image-wrapper">
+                <img src="img/linhkun.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cube-face cube-face-right">
+         
+             <div class="work-edu-section">
+            <h4 class="work-edu-heading date">2023-2025</h4>
+            <div class="work-edu-info">
+              <h4 class="work-edu-heading company">Work p2</h4>
+              <ul>
+                <li>Tham gia 1 số dự án nhỏ lẻ về cloud</li>
+                <li>Devops căn bản và AWS +iot </li>
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="cube-face cube-face-back">
+          <p class="intro-heading">Educa<span>tion</span></p>
+          <div class="work-edu-section">
+            <h4 class="work-edu-heading date">2022-2025</h4>
+            <div class="work-edu-info">
+              <h4 class="work-edu-heading company">OUM university</h4>
+              <ul>
+                <li>DALLE_2024-03-30_09</li>
+                <li>IT 0912-2321</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="cube-face cube-face-left">
+          <p class="intro-heading">Certi<span>fi</span>cates</p>
+          <div class="certificate-section">
+            <h4 class="certificate-date">2023</h4>
+            <h4 class="certificate-heading">Certificate #1 B2</h4>
+          </div>
+          <div class="certificate-section">
+            <h4 class="certificate-date">2024</h4>
+            <h4 class="certificate-heading">Certificate #2 devops desu</h4>
+          </div>
+        </div>
+
+        <div class="cube-face cube-face-top">
+  <p class="intro-heading"><span>Pro</span>jects</p>
+  <div class="projects">
+    <div class="project-border">
+      <div class="project-wrapper">
+        <div class="visit-wrapper">
+          <p class="app-title">#1 Web project</p>
+          <a class="visit-app" href="https://dangthailinh.github.io" target="_blank" rel="noopener">
+            Visit Site <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+   <div class="cube-face cube-face-bottom">
+  <p class="intro-heading">Con<span>tacts</span></p>
+  <h4 class="work-edu-heading"><i class="far fa-envelope"></i> dangthailinh2004@gmail.com</h4>
+  <h4 class="work-edu-heading"><i class="fas fa-phone"></i> +84 924 796 542</h4>
+  <div class="social-media-btns">
+    <a href="https://www.facebook.com/dangthailinh.927" target="_blank" rel="noopener">
+      <i class="fab fa-facebook"></i>
+    </a>
+    <a href="https://github.com/dangthailinh" target="_blank" rel="noopener">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://discord.gg/CUYXDxxju2" target="_blank" rel="noopener">
+      <i class="fab fa-discord"></i>
+    </a>
+  </div>
+</div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cube = document.getElementById("cube");
+    const clickOnSide = (side) => {
+      const activeSide = cube.dataset.side;
+      cube.classList.replace(`show-${activeSide}`, `show-${side}`);
+      cube.setAttribute("data-side", side);
+    };
+    document.querySelectorAll(".btn").forEach(btn => {
+      btn.addEventListener("click", e => {
+        const sideToTurn = e.target.dataset.side;
+        clickOnSide(sideToTurn);
+      });
+    });
+  </script>
+</body>
+</html>
