@@ -1286,6 +1286,8 @@ lightbox.addEventListener('click', (e) => {
   <div class="vn-clock-face">
     <div class="clock-number number-12">12</div>
     <div class="clock-number number-3">3</div>
+    <div class="clock-number number-6">6</div>
+    <div class="clock-number number-9">9</div>
     <div class="hand hour" id="hour-hand"></div>
     <div class="hand minute" id="minute-hand"></div>
     <div class="hand second" id="second-hand"></div>
@@ -1297,7 +1299,7 @@ lightbox.addEventListener('click', (e) => {
 
 <style>
   .vn-clock-card {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.10);
     backdrop-filter: blur(12px);
     border-radius: 20px;
     padding: 25px 45px;
@@ -1346,7 +1348,16 @@ lightbox.addEventListener('click', (e) => {
     top: 50%;
     transform: translateY(-50%);
   }
-
+  .number-6 {
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .number-9 {
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   /* Kim đồng hồ */
   .hand {
     position: absolute;
@@ -1450,7 +1461,7 @@ lightbox.addEventListener('click', (e) => {
 
 <style>
   .vn-crypto-card {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.10);
     backdrop-filter: blur(12px);
     border-radius: 20px;
     padding: 25px 45px;
@@ -1555,7 +1566,7 @@ lightbox.addEventListener('click', (e) => {
 
 <style>
   .vn-weather-card {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.10);
     backdrop-filter: blur(12px);
     border-radius: 20px;
     padding: 25px 45px;
@@ -1642,7 +1653,6 @@ lightbox.addEventListener('click', (e) => {
   renderWeather();
   setInterval(renderWeather, 60000); // Thay đổi ngẫu nhiên mỗi phút
 </script>
-
 
 </div>
 
