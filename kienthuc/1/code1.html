@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Các khái niệm quan trọng trong lập trình</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://cdn5.vectorstock.com/i/1000x1000/28/44/programming-concept-with-icon-set-template-banner-vector-43792844.jpg" alt="Programming Concepts Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 28, 2025 • 11:00 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>Các khái niệm quan trọng trong lập trình</h1>
+
+        <h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>Trước khi bắt đầu hành trình học lập trình, điều quan trọng nhất là hiểu rõ các khái niệm nền tảng. Những khái niệm này chính là “ngôn ngữ chung” giữa các lập trình viên, giúp bạn nắm vững tư duy logic, đọc hiểu mã nguồn và phát triển phần mềm hiệu quả.</p>
+        <p>Bài viết này sẽ giúp bạn hệ thống lại những khái niệm cốt lõi nhất trong lập trình, từ biến, kiểu dữ liệu đến hàm, cấu trúc điều khiển và lập trình hướng đối tượng.</p>
+
+        <figure>
+          <img 
+            src="https://tse4.mm.bing.net/th/id/OIP.5fuBrjl9lMSZuE3198yG8AHaDq?rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="400">
+          <figcaption>Lập trình là quá trình biến ý tưởng thành mã lệnh có thể thực thi.</figcaption>
+        </figure>
+
+        <h2 id="bien-va-kieu-du-lieu">Biến và kiểu dữ liệu</h2>
+        <p><strong>Biến (Variable)</strong> là vùng nhớ được đặt tên để lưu trữ dữ liệu. Trong lập trình, bạn có thể coi biến như một “hộp” chứa giá trị mà bạn có thể đọc, thay đổi hoặc xử lý.</p>
+        <p>Mỗi biến đều có <strong>kiểu dữ liệu (Data Type)</strong>, cho biết loại thông tin mà nó lưu trữ — ví dụ: số nguyên (<code>int</code>), số thực (<code>float</code>), chuỗi ký tự (<code>string</code>), hoặc giá trị đúng/sai (<code>boolean</code>).</p>
+        <p>Ví dụ về khai báo biến và kiểu dữ liệu trong một số ngôn ngữ lập trình phổ biến:</p>
+        <pre><code>// Ví dụ trong JavaScript
+let age = 21; // kiểu số
+let name = "Linh"; // kiểu chuỗi
+let isStudent = true; // kiểu boolean
+</code></pre>
+
+
+        <p>Hiểu rõ kiểu dữ liệu giúp tránh lỗi khi thao tác trên giá trị — ví dụ, bạn không thể cộng một chuỗi với một số mà không chuyển đổi kiểu.</p>
+ 
+        <h2 id="toan-tu-va-bieu-thuc">Toán tử và biểu thức</h2>
+        <p><strong>Toán tử (Operator)</strong> là ký hiệu thực hiện các phép tính hoặc thao tác trên dữ liệu, như <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, hoặc <code>==</code>.</p>
+        <p><strong>Biểu thức (Expression)</strong> là sự kết hợp giữa các toán tử và toán hạng, trả về một giá trị. Ví dụ: <code>x + y</code> là một biểu thức tính tổng hai biến.</p>
+
+        <h2 id="cau-truc-dieu-khien">Cấu trúc điều khiển</h2>
+        <p>Cấu trúc điều khiển giúp chương trình có thể <strong>ra quyết định</strong> hoặc <strong>lặp lại</strong> các hành động.</p>
+        <ul>
+          <li><strong>Cấu trúc rẽ nhánh:</strong> Sử dụng <code>if</code>, <code>else if</code>, <code>switch</code> để lựa chọn hành động.</li>
+          <li><strong>Cấu trúc lặp:</strong> Dùng <code>for</code>, <code>while</code>, <code>do...while</code> để lặp lại công việc cho đến khi điều kiện sai.</li>
+          
+          <li><strong>Cấu trúc nhảy:</strong> Sử dụng <code>break</code>, <code>continue</code> để điều khiển luồng thực thi trong vòng lặp hoặc switch.</li>
+          <li><strong>Cấu trúc xử lý ngoại lệ:</strong> Dùng <code>try...catch</code> để xử lý lỗi trong quá trình thực thi chương trình.</li>
+          <li><strong>Cấu trúc hàm:</strong> Sử dụng <code>return</code> để trả về giá trị từ hàm và kết thúc hàm.</li>
+        </ul>
+
+        <pre><code>// Ví dụ: vòng lặp for trong C++
+for (int i = 0; i < 5; i++) {
+    cout << "Hello world!" << endl;
+}
+</code></pre>
+
+        <h2 id="ham-va-thu-tuc">Hàm và thủ tục</h2>
+        <p><strong>Hàm (Function)</strong> là khối mã thực hiện một nhiệm vụ cụ thể và có thể được tái sử dụng. Hàm giúp chia nhỏ chương trình, dễ đọc và dễ bảo trì.</p>
+        <p>Hàm có thể nhận <strong>tham số (parameter)</strong> và trả về <strong>kết quả (return value)</strong>.</p>
+
+        <pre><code>// Ví dụ trong Python
+def greet(name):
+    return "Xin chào, " + name
+
+print(greet("Linh"))
+</code></pre>
+
+        <p><strong>Thủ tục (Procedure)</strong> tương tự như hàm nhưng không trả về giá trị — nó chỉ thực hiện hành động.</p>
+
+        <h2 id="mang-va-danh-sach">Mảng và danh sách</h2>
+        <p><strong>Mảng (Array)</strong> là cấu trúc dữ liệu lưu trữ nhiều giá trị cùng kiểu trong một biến duy nhất.</p>
+        <p><strong>Danh sách (List)</strong> linh hoạt hơn, có thể chứa các phần tử khác kiểu và có khả năng thêm, xóa phần tử dễ dàng (ví dụ trong Python hoặc JavaScript).</p>
+
+        <pre><code>// Ví dụ trong Python
+numbers = [1, 2, 3, 4, 5]
+print(numbers[0])  # In ra phần tử đầu tiên
+</code></pre>
+
+        <h2 id="lap-trinh-huong-doi-tuong">Lập trình hướng đối tượng (OOP)</h2>
+        <p>Lập trình hướng đối tượng là phương pháp thiết kế phần mềm dựa trên <strong>đối tượng (object)</strong> — nơi mỗi đối tượng đại diện cho một thực thể có dữ liệu và hành vi.</p>
+        <p>OOP giúp tổ chức mã nguồn tốt hơn, dễ bảo trì và tái sử dụng thông qua các khái niệm như <strong>lớp (class)</strong>, <strong>kế thừa (inheritance)</strong>, và <strong>đa hình (polymorphism)</strong>.</p>   
+        
+        <p>Các khái niệm chính trong OOP gồm:</p>
+        <ul>
+          <li><strong>Class (Lớp):</strong> Mẫu thiết kế cho đối tượng.</li>
+          <li><strong>Object (Đối tượng):</strong> Thể hiện cụ thể của một lớp.</li>
+          <li><strong>Encapsulation (Đóng gói):</strong> Bảo vệ dữ liệu nội bộ.</li>
+          <li><strong>Inheritance (Kế thừa):</strong> Cho phép lớp con thừa hưởng đặc tính của lớp cha.</li>
+          <li><strong>Polymorphism (Đa hình):</strong> Cho phép một hành động có nhiều cách thể hiện khác nhau.</li>
+        </ul>
+
+        <pre><code>// Ví dụ trong Java
+class Animal {
+    void sound() {
+        System.out.println("Động vật phát ra âm thanh");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Gâu gâu!");
+    }
+}
+</code></pre>
+
+        <h2 id="thuat-toan-va-tư-duy">Thuật toán và tư duy lập trình</h2>
+        <p><strong>Thuật toán (Algorithm)</strong> là tập hợp các bước cụ thể để giải quyết một vấn đề.  
+        Hiểu và viết thuật toán là cốt lõi của việc lập trình — từ sắp xếp, tìm kiếm đến xử lý dữ liệu phức tạp.</p>
+        <p>Tư duy lập trình chính là khả năng phân tích, chia nhỏ vấn đề và biến chúng thành các bước logic có thể mã hóa.</p>
+        <p>Phát triển tư duy thuật toán giúp bạn trở thành lập trình viên giỏi, có thể giải quyết mọi thử thách trong công việc.</p>
+        
+        <figure>
+          <img 
+            src="https://tse4.mm.bing.net/th/id/OIF.0eJHXYOzgPsardgaFYkVJg?rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="400">
+          <figcaption>Tư duy thuật toán là kỹ năng nền tảng giúp lập trình viên giải quyết mọi bài toán.</figcaption>
+        </figure>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>Nắm vững các khái niệm cơ bản là bước đi đầu tiên nhưng quan trọng nhất trong hành trình học lập trình. Khi hiểu rõ biến, kiểu dữ liệu, hàm, vòng lặp và hướng đối tượng, bạn sẽ có nền tảng vững chắc để tiến xa hơn — dù là trong phát triển web, phần mềm hay trí tuệ nhân tạo.</p>
+        <p>Hãy nhớ rằng: <strong>ngôn ngữ có thể thay đổi, nhưng tư duy lập trình là thứ ở lại mãi mãi.</strong></p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#bien-va-kieu-du-lieu">Biến và kiểu dữ liệu</a></li>
+        <li><a href="#toan-tu-va-bieu-thuc">Toán tử và biểu thức</a></li>
+        <li><a href="#cau-truc-dieu-khien">Cấu trúc điều khiển</a></li>
+        <li><a href="#ham-va-thu-tuc">Hàm và thủ tục</a></li>
+        <li><a href="#mang-va-danh-sach">Mảng và danh sách</a></li>
+        <li><a href="#lap-trinh-huong-doi-tuong">Lập trình hướng đối tượng (OOP)</a></li>
+        <li><a href="#thuat-toan-va-tư-duy">Thuật toán và tư duy lập trình</a></li>
+        <li><a href="#ket-luan">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+<section class="related-posts">
+    <h2>Các bài viết liên quan:</h2>
+    <div class="related-grid">
+
+      <a href="/kienthuc/1/code1.html" class="related-card">
+        <img src="https://cdn5.vectorstock.com/i/1000x1000/28/44/programming-concept-with-icon-set-template-banner-vector-43792844.jpg" alt="Lập trình cơ bản">
+        <div class="related-content">
+          <h3>Các khái niệm quan trọng trong lập trình</h3>
+          <p>Tìm hiểu những khái niệm nền tảng giúp bạn hiểu sâu hơn về logic lập trình và cấu trúc chương trình.</p>
+        </div>
+      </a>
+
+      <a href="/kienthuc/1/c.html" class="related-card">
+        <img src="https://www.educative.io/api/page/5295407815458816/image/download/4810048073629696" alt="C và C++">
+        <div class="related-content">
+          <h3>C và C++: Nền tảng của lập trình hiện đại</h3>
+          <p>Từ C đến C++ — tìm hiểu cách hai ngôn ngữ này đặt nền móng cho lập trình máy tính.</p>
+        </div>
+      </a>
+
+      <a href="/kienthuc/1/java.html" class="related-card">
+        <img src="https://cdn.eduonix.com/assets/images/header_img/2022082908170014019.png" alt="Java và JavaScript">
+        <div class="related-content">
+          <h3>Java và JavaScript</h3>
+          <p>Tìm hiểu sự khác biệt và ứng dụng của hai ngôn ngữ phổ biến nhất thế giới lập trình hiện nay.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức lập trình chuyên sâu</p>
+  </footer>
+
+  <!-- Script hiệu ứng highlight mục đang xem -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
