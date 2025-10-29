@@ -140,6 +140,7 @@
     </div>
   </div>
 
+
   <script>
   (function(){
     const input = document.getElementById('siteSearch');
@@ -432,7 +433,7 @@
           "gai-xinh": [
           { name: "gái xinh nhật bổn", link: "gai-xinh/1.html" },
           {name :"gái xinh trung quốc", link:"gai-xinh/2.html"},
-          {name :"Tổng hợp dự án 3d ", link:"gai-xinh/3.html"},
+          {name :"Gái xinh tây  ", link:"gai-xinh/3.html"},
           
         ],
          "3d": [
@@ -528,15 +529,21 @@
       if (s.includes('phim') && s.includes('phim')) return "Bạn thích thể loại gì? Mình có thể gợi ý vài phim.";
       if (s.includes('mẹo') && s.includes('lập trình')) return "Hãy thử chia nhỏ vấn đề, debug từng bước và viết test nhỏ.";
          if (s.includes('ngu') && s.includes('ngu')) return "Ngu con cặc!Đã biết mặc tã chưa mà chửi thầy?";
-          if (s.includes('địt') && s.includes('địt')) return "địt mẹ mày!";
+          if (s.includes('địt') && s.includes('địt')) return "địt mẹ mày!"; 
            if (s.includes('là ') && s.includes('cái gì')) return "nghĩa là cái gì?";
-
+      if (s.includes('giúp') && s.includes('học')) return "Mình có thể giúp bạn với các mẹo học tập và tài nguyên.";  
+      if (s.includes('mày') && s.includes('ngu')) return "Tao không ngu, mày mù à?";
+      if (s.includes('1+1')) return "1+1=2 chứ còn gì nữa!";  
+      if (s.includes('chat bot')) return "Đúng rồi, tôi là một trợ lý ảo được lập trình để giúp bạn!";  
+      if (s.includes('mày') && s.includes('chat bot')) return "Đúng rồi, tôi là một trợ lý ảo được lập trình để giúp bạn!";
 
          if (s.includes('chat bot') && s.includes('ngu')) return "Không tôi là bot trả lời theo lập trình không phải chat gpt";
     
       if (s.includes('?')) return "Câu hỏi hay — bạn có thể nói rõ hơn để mình trả lời chi tiết hơn không?";
       return "Chưa có câu trả lời cho câu hỏi của bé cưng nha :" + text;
     }
+
+    
 
     function chatClickHandler(e) {
       const msgEl = e.target.closest('.message');

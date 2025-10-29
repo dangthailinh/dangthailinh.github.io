@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS và cách mọi thứ được hoạt động.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/4c8416f0-ba9c-44a4-a5f8-c771612613c0/javier-miranda-MrWOCGKFVDg-unsplash/w=1920,quality=90,fit=scale-down" alt="Blog Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Oct 22, 2025 • 2:30 PM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>AWS và cách mọi thứ được hoạt động.</h1>
+
+        <h2 id="gioi-thieu">Giới thiệu</h2>
+        <p><strong>AWS (Amazon Web Services)</strong> là nền tảng điện toán đám mây hàng đầu thế giới, cung cấp hơn 200 dịch vụ như tính toán, lưu trữ, cơ sở dữ liệu, mạng, AI và nhiều lĩnh vực khác. Điều khiến AWS đặc biệt là cách họ xây dựng và vận hành một “quốc gia cloud” thật sự — với hàng trăm nghìn máy chủ, trung tâm dữ liệu khổng lồ, và hệ thống tự động hóa toàn cầu.</p>
+
+        <figure>
+          <img 
+            src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1GCOMy.img?w=750&h=422&m=4&q=91" 
+            width="800"
+            height="400"
+            alt="AWS Data Centers">
+          <figcaption>Hạ tầng toàn cầu của AWS gồm nhiều Region và Availability Zone.</figcaption>
+        </figure>
+
+        <h2 id="cach-san-xuat">1️⃣ Cách các dịch vụ AWS được sản xuất ngoài đời</h2>
+
+        <h3>🏗️ Hạ tầng vật lý</h3>
+        <p>AWS sở hữu hàng trăm trung tâm dữ liệu (Data Center) trên toàn cầu. Mỗi trung tâm chứa hàng nghìn máy chủ vật lý, ổ lưu trữ, router, và thiết bị mạng. Các trung tâm được chia thành:</p>
+        <ul>
+          <li><strong>Region:</strong> Khu vực địa lý (ví dụ Singapore, Tokyo, Frankfurt).</li>
+          <li><strong>Availability Zone (AZ):</strong> Mỗi region có 3–6 AZ để dự phòng sự cố.</li>
+        </ul>
+        <p>Các trung tâm này kết nối bằng <strong>cáp quang riêng tốc độ cao</strong>, có hệ thống điện dự phòng, bảo mật sinh trắc học, và được bảo vệ 24/7.</p>
+
+        <h3>⚙️ Lớp ảo hóa và điều phối</h3>
+        <p>Trên các máy chủ thật, AWS sử dụng <strong>hypervisor Nitro</strong> để chia nhỏ tài nguyên thành các “máy ảo” (instance). Khi người dùng tạo một EC2 instance, AWS tự động:</p>
+        <ol>
+          <li>Chọn server vật lý trống trong một AZ.</li>
+          <li>Cắt phần CPU, RAM, ổ đĩa (EBS) theo cấu hình.</li>
+          <li>Khởi tạo hệ điều hành và gán IP.</li>
+        </ol>
+        <p>Tất cả được thực hiện chỉ trong vài giây — nhờ hệ thống ảo hóa và API điều phối tự động.</p>
+
+        <h3>🧱 Lớp dịch vụ (Service Layer)</h3>
+        <p>Các dịch vụ như EC2, S3, Lambda hay RDS được xây dựng trên tầng ảo hóa. Mỗi dịch vụ gồm 3 phần:</p>
+        <ul>
+          <li><strong>API Gateway:</strong> Nhận yêu cầu từ người dùng.</li>
+          <li><strong>Control Plane:</strong> Điều phối tài nguyên (chọn máy, phân vùng, scaling).</li>
+          <li><strong>Data Plane:</strong> Thực thi thực tế (lưu trữ, xử lý dữ liệu).</li>
+        </ul>
+
+        <figure>
+          <img 
+            src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*V5a2zkQGZQo4FvKGr_wbTg.png" 
+            width="800"
+            height="400"
+            alt="AWS Layers">
+          <figcaption>Cấu trúc 3 lớp chính trong hệ thống AWS.</figcaption>
+        </figure>
+
+        <h2 id="cach-van-hanh">2️⃣ Cách các dịch vụ AWS vận hành trong thực tế</h2>
+
+        <h3>🚀 EC2 (Elastic Compute Cloud)</h3>
+        <p>Khi người dùng tạo một EC2 instance, AWS chọn máy vật lý, tạo máy ảo, gắn ổ EBS, khởi động OS, rồi giám sát bằng CloudWatch. Khi có lỗi phần cứng, instance tự động di chuyển sang server khác.</p>
+        <dl>
+          <img 
+            src="https://th.bing.com/th/id/R.b6607faaa4e55b67abd4a9b625ec1ed3?rik=cJekSTRZcoPe%2fg&pid=ImgRaw&r=0" 
+            width="800"
+            height="400"
+            alt="EC2 Workflow">
+          <figcaption>Quy trình tạo và vận hành một EC2 instance.</figcaption>
+
+
+        <h3>💾 S3 (Simple Storage Service)</h3>
+        <p>Khi upload một file lên S3, AWS chia nhỏ dữ liệu, mã hóa, rồi lưu ít nhất 3 bản sao ở 3 AZ khác nhau. Khi tải xuống, S3 chọn bản sao gần nhất hoặc qua CloudFront để tăng tốc.</p>
+
+        <h3>🔄 Lambda (Serverless Function)</h3>
+        <p>Khi gọi một hàm Lambda, AWS kiểm tra xem có container đang chạy sẵn không. Nếu chưa, nó tạo một microVM (Firecracker), nạp code, chạy, rồi hủy sau khi hoàn thành — giúp tiết kiệm chi phí idle.</p>
+  
+        <h3>🌐 CloudFront (CDN)</h3>
+        <p>CloudFront sử dụng hàng nghìn <strong>Edge Location</strong> trên toàn cầu để lưu cache nội dung gần người dùng nhất. Khi người dùng truy cập, nếu dữ liệu có sẵn → phản hồi ngay; nếu không → lấy từ S3 hoặc EC2.</p>
+        <p>CloudFront còn tích hợp WAF để bảo vệ khỏi tấn công DDoS và các mối đe dọa khác.</p>
+
+        <h3>🧠 RDS và DynamoDB</h3>
+        <p><strong>RDS</strong> là dịch vụ cơ sở dữ liệu quan hệ được quản lý toàn phần. AWS tự động cài đặt, sao lưu, và cập nhật.  
+        <strong>DynamoDB</strong> là NoSQL được phân tán toàn cầu, tự động chia nhỏ (shard) dữ liệu và mở rộng khi lưu lượng tăng.</p>
+
+        <h3>🔒 IAM, CloudWatch và CloudTrail</h3>
+        <p><strong>IAM</strong> quản lý quyền truy cập tài nguyên.  
+        <strong>CloudWatch</strong> thu thập log, metric, gửi cảnh báo.  
+        <strong>CloudTrail</strong> ghi lại toàn bộ hành động API — giúp audit và bảo mật.</p>
+
+      
+        <h2 id="tong-quan">3️⃣ Tổng quan hệ thống vận hành AWS</h2>
+        <p>Tưởng tượng AWS như một quốc gia cloud khổng lồ:</p>
+        <ul>
+          <li><strong>Data Center:</strong> Hạ tầng vật lý.</li>
+          <li><strong>Region / AZ:</strong> Cấu trúc địa lý và dự phòng.</li>
+          <li><strong>Hypervisor Nitro:</strong> Ảo hóa tài nguyên.</li>
+          <li><strong>Control Plane:</strong> Điều phối dịch vụ.</li>
+          <li><strong>Data Plane:</strong> Xử lý thực tế (lưu trữ, chạy app).</li>
+          <li><strong>Monitoring System:</strong> Giám sát hoạt động toàn cầu.</li>
+          <li><strong>Automation Layer:</strong> Tự động scaling, backup, failover.</li>
+        </ul>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>AWS là nền tảng không chỉ cung cấp dịch vụ đám mây mà còn là minh chứng cho sức mạnh của hạ tầng toàn cầu, tự động hóa, và khả năng vận hành ở quy mô cực lớn. Mỗi dịch vụ như EC2, S3 hay Lambda đều là kết quả của sự kết hợp giữa phần cứng, phần mềm, và hàng chục năm tối ưu.</p>
+        <p>Nhờ kiến trúc phân tầng, tự động và phân tán, AWS duy trì độ tin cậy hàng đầu thế giới – trở thành nền tảng mà các công ty như Netflix, Spotify, Airbnb hay Epic Games tin tưởng để vận hành hàng tỷ yêu cầu mỗi ngày.</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#cach-san-xuat">Cách AWS được sản xuất</a></li>
+        <li><a href="#cach-van-hanh">Cách AWS vận hành</a></li>
+        <li><a href="#tong-quan">Tổng quan hệ thống</a></li>
+        <li><a href="#ket-luan">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <section class="related-posts">
+  <h2>Các bài viết liên quan:</h2>
+  <div class="related-grid">
+
+   
+
+    <a href="vpc.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.lwIk3-9BJjxwHVHSY3L1jAHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS VPC">
+      <div class="related-content">
+        <h3>Bài 1 - AWS VPC: Mạng riêng ảo</h3>
+        <p>Tạo cấu trúc mạng nội bộ an toàn, kiểm soát luồng truy cập giữa các tài nguyên trong AWS.</p>
+      </div>
+    </a>
+
+    <a href="iam.html" class="related-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.CwV94qcznyhQXuvU503k1wHaDr?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS IAM">
+      <div class="related-content">
+        <h3>Bài 2 - AWS IAM: Quản lý người dùng và quyền truy cập</h3>
+        <p>Thiết lập người dùng, nhóm và chính sách bảo mật để quản lý truy cập dịch vụ AWS hiệu quả.</p>
+      </div>
+    </a>
+
+    <a href="ecs.html" class="related-card">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.mNlj8EtsnApQPelKvtS2MQHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS ECS">
+      <div class="related-content">
+        <h3>Bài 3 - AWS ECS: Triển khai ứng dụng Docker</h3>
+        <p>Chạy và quản lý container tự động bằng ECS — dịch vụ mạnh mẽ cho kiến trúc microservices.</p>
+      </div>
+    </a>
+
+    <a href="ecr.html" class="related-card">
+      <img src="https://tse4.mm.bing.net/th/id/OIP.PqDucCuLFsaqvZ7s32_EeAAAAA?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS ECR">
+      <div class="related-content">
+        <h3>Bài 4 - AWS ECR: Kho lưu trữ Docker Image</h3>
+        <p>Lưu trữ và quản lý image container an toàn, tích hợp trực tiếp với ECS và CI/CD pipeline.</p>
+      </div>
+    </a>
+
+    <a href="s3.html" class="related-card">
+      <img src="https://miro.medium.com/v2/resize:fit:401/0*8qgeGxrtC7ynPl8I.png" alt="AWS S3">
+      <div class="related-content">
+        <h3>Bài 5 - AWS S3: Lưu trữ dữ liệu đám mây</h3>
+        <p>Tìm hiểu dịch vụ lưu trữ đối tượng nổi tiếng nhất AWS — dễ dùng, linh hoạt và bảo mật cao.</p>
+      </div>
+    </a>
+
+    <a href="rds.html" class="related-card">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.IN13nQ0DVSvUlXSEylow_AHaEk?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS RDS">
+      <div class="related-content">
+        <h3>Bài 6 - AWS RDS: Cơ sở dữ liệu quan hệ</h3>
+        <p>Tự động triển khai và quản lý cơ sở dữ liệu MySQL, PostgreSQL, hoặc MariaDB trên AWS.</p>
+      </div>
+    </a>
+
+    <a href="clfont.html" class="related-card">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.w40oRadXNSAgDk9LlxjEFwHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AWS CloudFront">
+      <div class="related-content">
+        <h3>Bài 7 - AWS CloudFront: Mạng phân phối nội dung (CDN)</h3>
+        <p>Tăng tốc độ tải trang và bảo mật nội dung toàn cầu với dịch vụ CDN mạnh mẽ của AWS.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Chia sẻ kiến thức công nghệ</p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
