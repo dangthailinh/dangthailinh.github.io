@@ -125,6 +125,7 @@
       <button class="option-btn" onclick="selectTopic('to-mo')"> HỎI Thêm về anh linh</button>
       <button class="option-btn" onclick="selectTopic('gai-xinh')"> muốn ngắm gái xinh!</button>
         <button class="option-btn" onclick="selectTopic('3d')"> Xem các dự án 3d</button>
+           <button class="option-btn" onclick="selectTopic('bot')"> bot discord siêu cute!</button>
             <button class="option-btn" onclick="selectTopic('kien-thuc')"> Tổng hợp kiến thức,tài liệu.</button>
       <!-- Free chat mode -->
       <button class="option-btn" onclick="selectTopic('free-chat')">🗨️ Trò chuyện tự do</button>
@@ -413,6 +414,7 @@
         case "gai-xinh": return "tổng hợp gái xinh";
              case "3d": return "các dự án 3d";
               case "kien-thuc": return "chia sẻ tổng hợp tài liệu";
+                  case "bot": return "Bot discord siêu cute hãy thêm nó vào server của bạn!";
         default: return topic;
       }
     }
@@ -485,6 +487,9 @@
         "am-nhac": [
           { name: "🎵 Album & Playlist", link: "am-nhac.html" }
           
+        ],
+        "bot": [
+          { name: "🤖 Thêm bot vào server của bạn", link: "/discord-bot-landing-page-web/discordbot.html" }
         ]
       };
       return map[topic] || [];
