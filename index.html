@@ -299,9 +299,68 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 
-
 </head>
 <body>
+
+<!-- KAWAII CURSOR - PHIÊN BẢN CHẮC CHẠN NHẤT 2025 -->
+<style>
+  *, *::before, *::after { cursor: none !important; } /* Đè chết mọi cursor khác */
+  
+  #kawaii-cursor {
+    position: fixed;
+    width: 70px; height: 70px;
+    pointer-events: none !important;
+    z-index: 999999;
+    left: 0; top: 0;
+    transform: translate(-15px, -15px);
+    transition: transform .25s cubic-bezier(.18,.89,.32,1.28);
+  }
+  #kawaii-cursor img {
+    position: absolute;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(255,255,255,.8));
+    transition: opacity .2s ease;
+  }
+  #cursor-normal { opacity: 1; }
+  #cursor-hover  { opacity: 0; }
+  #kawaii-cursor.hover {
+    transform: translate(-20px, -20px) scale(1.6) rotate(15deg);
+  }
+  #kawaii-cursor.hover #cursor-normal { opacity: 0; }
+  #kawaii-cursor.hover #cursor-hover  { opacity: 1; }
+</style>
+
+<div id="kawaii-cursor">
+  <img id="cursor-normal" src="Kawaii.png">
+  <img id="cursor-hover"  src="kawaiiin.png">
+</div>
+
+<script>
+  const cursor = document.getElementById('kawaii-cursor');
+  
+  document.addEventListener('mousemove', e => {
+    requestAnimationFrame(() => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+  });
+
+  // Bắt TẤT CẢ phần tử có thể hover (rất rộng để chắc ăn)
+  document.querySelectorAll('a, button, input, textarea, select, [onclick], [role="button"], [tabindex], .clickable, .btn, .button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  // Nếu vẫn không bắt được một số nút → dùng cách bắt toàn trang (cực chắc)
+  document.body.addEventListener('mouseover', e => {
+    if (e.target.closest('a, button, input, [onclick], [role="button"]')) {
+      cursor.classList.add('hover');
+    } else {
+      cursor.classList.remove('hover');
+    }
+  });
+</script>
 <div class="intro-screen" id="introScreen">
   <video class="intro-video" autoplay muted playsinline>
     <source src="intro.mp4" type="video/mp4">
@@ -616,7 +675,9 @@ nav a {
   <script>
     // Danh sách file MP3
     const sounds = [
+     
       "muv/giude.mp3",
+        "muv/loveyou.mp3",
       "muv/tuturu.mp3",
       "muv/Cver.mp3",
       "muv/yamate.mp3",
