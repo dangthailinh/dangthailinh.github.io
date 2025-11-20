@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudFlare là gì? Hiểu đúng và đầy đủ về CloudFlare năm 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header banner -->
+  <header class="banner">
+    <img src="https://wiki.matbao.net/wp-content/uploads/2018/06/cloudflare-la-gi-1.jpg" alt="CloudFlare Banner">
+  </header>
+
+  <!-- Main layout -->
+  <div class="layout">
+    
+    <main class="container">
+      <section class="author">
+        <div class="avatar">
+          <img src="/img/linhkun.jpg" alt="Tác giả">
+        </div>
+        <div class="meta">
+          <p class="date">Nov 20, 2025 • 10:15 AM</p>
+          <p class="author-name">Tác giả: <strong>Linh osimi</strong></p>
+        </div>
+      </section>
+
+      <article class="post">
+        <h1>CloudFlare là gì? Tất tần tật về CloudFlare năm 2025</h1>
+
+        <h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>Mới gần đây có vụ lỗi kỹ thuật CloudFlare nên nổi hứng viết bài về cái dịch vụ nền bảo về hàng triệu website trên internet tí. </p>
+        <p><strong>CloudFlare</strong> (nay chính thức là <strong>Cloudflare, Inc.</strong>) là một trong những công ty cung cấp hạ tầng Internet lớn nhất thế giới, hoạt động như một <strong>mạng phân phối nội dung (CDN)</strong>, <strong>tường lửa ứng dụng web (WAF)</strong>, <strong>hệ thống DNS nhanh nhất hành tinh</strong> và rất nhiều dịch vụ bảo mật, tối ưu hiệu suất khác.</p>
+        <p>Được thành lập năm 2009, đến năm 2025 Cloudflare đã bảo vệ và tăng tốc hơn <strong>20% lượng traffic Internet toàn cầu</strong>, phục vụ hàng chục triệu website từ cá nhân đến các tập đoàn lớn như IBM, Shopify, Discord, Zendesk…</p>
+
+        <figure>
+          <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1QFxyh.img?w=1280&h=854&m=4&q=60" width="800" height="400">
+          <figcaption>Cloudflare hiện là một trong những mạng lưới lớn nhất thế giới với hơn 330 trung tâm dữ liệu tại 120+ quốc gia.</figcaption>
+        </figure>
+
+        <h2 id="lich-su">Lịch sử phát triển</h2>
+        <p>Cloudflare được sáng lập năm 2009 bởi <strong>Matthew Prince</strong>, <strong>Lee Holloway</strong> và <strong>Michelle Zatlyn</strong> với mục tiêu ban đầu rất đơn giản: “Giúp mọi website đều được bảo vệ như website của chính phủ và ngân hàng”.</p>
+        <p>Năm 2010 ra mắt dịch vụ CDN + DDoS miễn phí gây chấn động. Đến nay (2025), Cloudflare đã IPO thành công (2019), đạt vốn hóa hàng chục tỷ USD và liên tục mở rộng các sản phẩm Zero Trust, Workers, R2, Images, Stream…</p>
+        
+        <h2 id="tinh-nang-chinh">Các tính năng chính của Cloudflare</h2>
+        <ul>
+          <li><strong>CDN toàn cầu:</strong> Cache nội dung gần người dùng → giảm latency đáng kể.</li>
+          <li><strong>Bảo vệ DDoS mạnh nhất thế giới:</strong> Hấp thụ hàng trăm Tbps tấn công mỗi ngày.</li>
+          <li><strong>WAF & Firewall Rules:</strong> Chặn SQL injection, XSS, bot xấu tự động.</li>
+          <li><strong>DNS 1.1.1.1:</strong> DNS công cộng nhanh nhất, bảo vệ quyền riêng tư (không lưu log).</li>
+          <li><strong>Cloudflare Workers:</strong> Serverless platform chạy JavaScript/TypeScript ở edge.</li>
+          <li><strong>Zero Trust (Access, Gateway):</strong> Thay thế VPN truyền thống.</li>
+          <li><strong>R2 Storage, Images, Stream:</strong> Giải pháp lưu trữ và tối ưu media giá rẻ.</li>
+          <li><strong>Nhược điểm chính:</strong> Nếu website của bạn nằm trên hosting có máy chủ đặt tại Việt Nam, khách hàng truy cập chủ yếu đến từ Việt Nam thì việc sử dụng CloudFlare làm chậm đi tốc độ tải trang vì chất lượng đường truyền quốc tế tại Việt Nam. Nguyên nhân được cho là lúc này truy vấn sẽ đi vòng từ Việt Nam đến DNS Server của CloudFare rồi mới trả kết quả về Việt Nam.</li>
+        </ul>
+
+        <figure>
+          <img src="https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2020/10/cloudflare-features.jpg" width="800" height="400">
+          <figcaption>Mạng lưới hơn 330 thành phố giúp Cloudflare xử lý traffic gần như tức thì.</figcaption>
+        </figure>
+
+        <h2 id="goi-mien-phi">Gói miễn phí của Cloudflare có gì?</h2>
+        <ul>
+          <li>CDN không giới hạn băng thông</li>
+          <li>Bảo vệ DDoS không giới hạn</li>
+          <li>SSL/TLS miễn phí (Universal SSL)</li>
+          <li>3 Page Rules</li>
+          <li>WAF cơ bản + Managed Rules</li>
+          <li>DNS quản lý dễ dàng</li>
+        </ul>
+        <p>→ Đủ mạnh để hầu hết blog, website doanh nghiệp nhỏ – vừa sử dụng thoải mái mà không tốn đồng nào!</p>
+
+        <h2 id="so-sanh">So sánh Cloudflare với các đối thủ (2025)</h2>
+        <table border="1" cellpadding="8" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Tiêu chí</th>
+              <th>Cloudflare</th>
+              <th>Akamai</th>
+              <th>Fastly</th>
+              <th>AWS CloudFront</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gói miễn phí</td>
+              <td>Rất mạnh & không giới hạn</td>
+              <td>Không có</td>
+              <td>Có giới hạn</td>
+              <td>12 tháng đầu</td>
+            </tr>
+            <tr>
+              <td>Số PoP (2025)</td>
+              <td>330+ thành phố</td>
+              <td>~1.500</td>
+              <td>~100</td>
+              <td>~400</td>
+            </tr>
+            <tr>
+              <td>DDoS Protection</td>
+              <td>Miễn phí & mạnh nhất</td>
+              <td>Trả phí cao</td>
+              <td>Trả phí</td>
+              <td>Shield Advanced (trả phí)</td>
+            </tr>
+            <tr>
+              <td>DNS tốc độ</td>
+              <td>1.1.1.1 – Nhanh nhất thế giới</td>
+              <td>Trung bình</td>
+              <td>Nhanh</td>
+              <td>Route 53 (nhanh)</td>
+            </tr>
+            <tr>
+              <td>Serverless Edge</td>
+              <td>Workers (rẻ & mạnh)</td>
+              <td>EdgeWorkers</td>
+              <td>Compute@Edge</td>
+              <td>Lambda@Edge (đắt hơn)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="ung-dung">Ứng dụng thực tế của Cloudflare</h2>
+        <ul>
+          <li>Tăng tốc website/blog WordPress, Laravel, Next.js…</li>
+          <li>Bảo vệ website khỏi DDoS, brute force, bot quét</li>
+          <li>Triển khai serverless full-stack với Workers + KV + R2 + D1</li>
+          <li>Quản lý DNS tập trung cho hàng trăm domain</li>
+          <li>Zero Trust thay thế VPN cho doanh nghiệp</li>
+          <li>Tối ưu hình ảnh tự động (Polish, Resize)</li>
+          <li>Phân tích traffic chi tiết miễn phí</li>
+          <li>Giúp tiết kiệm được băng thông cho máy chủ vì hạn chế truy trực trực tiếp vào máy chủ. Lúc này, băng thông sử dụng giảm hẳn chỉ còn 1/2 – 1/3 so với trước khi dùng.</li>
+          <li>Giúp website của bạn tăng tốc độ truy cập bằng cách CloudFlare sẽ lưu một bản bộ nhớ đệm (cache) của website trên máy chủ của CDN của họ. Từ đó phân phối cho người dùng truy cập ở gần máy chủ đó nhất. Chẳng hạn như nếu mua Cloud Hosting tại Mắt Bão đặt máy chủ đặt ở TP.HCM thì người dùng ở New York sẽ truy cập chậm vì máy chủ vật lý ở xa và ngược lại. Bên cạnh đó, những dữ liệu tĩnh như hình ảnh, CSS, các tập tin,…cũng được CloudFlare nén gzip lại nên tốc độ tải nhanh hơn.</li>
+        </ul>
+
+        <figure>
+          <img src="https://s3.amazonaws.com/dd-integrations/cloudflare/media_gallery/overview-dashboard.png" width="800" height="400">
+          <figcaption>Dashboard Cloudflare hiện đại, dễ dùng ngay cả với người mới.</figcaption>
+        </figure>
+
+        <h2 id="huong-dan">Hướng dẫn bắt đầu với Cloudflare (5 phút)</h2>
+        <ol>
+          <li>Đăng ký tài khoản miễn phí tại <a href="https://dash.cloudflare.com" target="_blank">dash.cloudflare.com</a></li>
+          <li>Thêm website → Cloudflare sẽ quét DNS records tự động</li>
+          <li>Thay nameserver tại nhà đăng ký domain (Namecheap, GoDaddy…)</li>
+          <li>Chờ 5–60 phút để DNS propagate</li>
+          <li>Bật chế độ Proxy (màu cam) cho các record A/AAAA/CNAME</li>
+          <li>Bật Automatic HTTPS Rewrites + Always Use HTTPS</li>
+          <li>Thưởng thức tốc độ và bảo mật ngay lập tức!</li>
+        </ol>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>Năm 2025, <strong>Cloudflare không chỉ là một CDN</strong> — nó đã trở thành một nền tảng hạ tầng Internet toàn diện, miễn phí cho người dùng cá nhân và cực kỳ mạnh mẽ với doanh nghiệp.</p>
+        <p>Nếu bạn chưa dùng Cloudflare, hãy thử ngay hôm nay. Chỉ 5 phút setup, bạn sẽ thấy website nhanh hơn, an toàn hơn và tiết kiệm băng thông đáng kể.</p>
+      </article>
+    </main>
+
+    <!-- Sidebar mục lục -->
+    <aside class="toc">
+      <h3>Mục lục</h3>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#lich-su">Lịch sử phát triển</a></li>
+        <li><a href="#tinh-nang-chinh">Tính năng chính</a></li>
+        <li><a href="#goi-mien-phi">Gói miễn phí</a></li>
+        <li><a href="#so-sanh">So sánh với đối thủ</a></li>
+        <li><a href="#ung-dung">Ứng dụng thực tế</a></li>
+        <li><a href="#huong-dan">Hướng dẫn bắt đầu</a></li>
+        <li><a href="#ket-luan">Kết luận</a></li>
+      </ul>
+    </aside>
+  </div>
+
+ <section class="related-posts">
+    <h2>Các bài viết liên quan:</h2>
+    <div class="related-grid">
+
+      <a href="/kienthuc/1/code1.html" class="related-card">
+        <img src="https://cdn5.vectorstock.com/i/1000x1000/28/44/programming-concept-with-icon-set-template-banner-vector-43792844.jpg" alt="Lập trình cơ bản">
+        <div class="related-content">
+          <h3>Các khái niệm quan trọng trong lập trình</h3>
+          <p>Tìm hiểu những khái niệm nền tảng giúp bạn hiểu sâu hơn về logic lập trình và cấu trúc chương trình.</p>
+        </div>
+      </a>
+
+      <a href="/kienthuc/1/c.html" class="related-card">
+        <img src="https://www.educative.io/api/page/5295407815458816/image/download/4810048073629696" alt="C và C++">
+        <div class="related-content">
+          <h3>C và C++: Nền tảng của lập trình hiện đại</h3>
+          <p>Từ C đến C++ — tìm hiểu cách hai ngôn ngữ này đặt nền móng cho lập trình máy tính.</p>
+        </div>
+      </a>
+
+      <a href="/kienthuc/1/java.html" class="related-card">
+        <img src="https://cdn.eduonix.com/assets/images/header_img/2022082908170014019.png" alt="Java và JavaScript">
+        <div class="related-content">
+          <h3>Java và JavaScript</h3>
+          <p>Tìm hiểu sự khác biệt và ứng dụng của hai ngôn ngữ phổ biến nhất thế giới lập trình hiện nay.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Linh's Blog • Kiến thức chuyên sâu về lập trình & hạ tầng Internet</p>
+  </footer>
+
+  <!-- Script highlight mục lục khi scroll -->
+  <script>
+    const sections = document.querySelectorAll("article h2");
+    const tocLinks = document.querySelectorAll(".toc a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
