@@ -236,6 +236,9 @@ window.onclick = function(event) {
         closeModal();
     }
 };
+
+
+
 // Lấy các phần tử
 const items = document.querySelectorAll('.item');
 const lightbox = document.getElementById('lightbox');
