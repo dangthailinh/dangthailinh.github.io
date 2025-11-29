@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tại sao Natri + Clo = Muối ăn?</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <style>
+        a { text-decoration: none !important; color: inherit; }
+        a:hover { color: var(--primary-color); transition: color 0.3s ease; }
+
+        .detail-page { background: linear-gradient(to bottom, #f0f8ff 0%, var(--bg-color) 50%); min-height: 100vh; }
+        .detail-header { position: relative; padding: 20px; text-align: center; }
+        .decor-image { position: absolute; top: 20px; left: 20px; width: 120px; height: auto; z-index: 1; opacity: 0.8; }
+        .detail-title { font-size: 32px; color: var(--primary-color); margin: 20px 0; z-index: 2; position: relative; }
+        .detail-subtitle { font-size: 18px; color: #666; margin-bottom: 20px; }
+        .detail-meta { text-align: center; font-size: 14px; color: #666; margin: 10px 0; }
+        .back-btn-detail { background: var(--primary-color); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; text-align: center; transition: all 0.3s; }
+        .back-btn-detail:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,123,255,0.3); }
+        .container-detail { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px; }
+        .detail-content { flex: 1; line-height: 1.8; font-size: 16px; }
+        .detail-content img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 20px 0; display: block; }
+        .detail-content h2 { color: var(--primary-color); margin-top: 30px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .sidebar-detail { width: 250px; background: var(--bg-color); padding: 20px; border-radius: 10px; }
+        .sidebar-detail h3 { color: var(--primary-color); margin-bottom: 15px; }
+        .sidebar-detail a { display: block; padding: 8px; background: #6e6f70; border-radius: 5px; transition: background 0.3s; }
+        .sidebar-detail a:hover { background: var(--primary-color); color: rgb(106, 106, 108); }
+
+        @media (max-width: 768px) {
+            .container-detail { flex-direction: column; }
+            .decor-image { width: 80px; top: 10px; left: 10px; }
+            .detail-title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body class="detail-page">
+    <header>
+        <div class="logo">Linh Osimi</div>
+        <div class="header-right">
+            <button class="theme-toggle" onclick="toggleTheme()">Night Mode</button>
+        </div>
+    </header>
+
+    <div class="detail-header">
+        <svg class="decor-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="#4ecdc4" stroke="#26a69a" stroke-width="2"/>
+            <path d="M30 70 Q50 50 70 70" stroke="#26a69a" stroke-width="3" fill="none"/>
+            <circle cx="20" cy="20" r="8" fill="#ffd700"/>
+            <text x="10" y="95" font-size="12" fill="#26a69a">⚗️</text>
+        </svg>
+
+        <h1 class="detail-title">Tại sao Natri và Clo cực độc, nhưng khi gặp nhau lại tạo ra… muối ăn?</h1>
+        <p class="detail-subtitle">Một trong những điều kỳ diệu và “ngược đời” nhất của hóa học!</p>
+        <div class="detail-meta">Ngày đăng: 27 Tháng 11 2025 | Tác giả: Linh Osimi</div>
+    </div>
+
+    <div class="container-detail">
+        <main class="detail-content">
+            <h2>1. Natri nguyên chất – Kim loại “điên cuồng”</h2>
+            <p>Natri (Na) là kim loại kiềm hoạt động cực mạnh. Chỉ cần một mẩu nhỏ tiếp xúc với không khí ẩm:</p>
+            <ul>
+                <li>Phản ứng bùng nổ với nước → tạo kiềm mạnh NaOH + khí H₂ dễ nổ</li>
+                <li>Chạm vào da → bỏng hóa học ngay lập tức</li>
+                <li>Thậm chí tự bốc cháy trong không khí ẩm</li>
+            </ul>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Sodium_%28Na%29.jpg/800px-Sodium_%28Na%29.jpg" alt="Natri kim loại nguyên chất">
+
+            <h2>2. Clo – Khí độc từng là vũ khí hóa học</h2>
+            <p>Cl₂ là khí màu vàng lục, mùi hắc. Trong Thế chiến I, nó được dùng làm vũ khí hóa học vì:</p>
+            <ul>
+                <li>Hít phải → tạo HCl + HClO trong phổi → phá hủy niêm mạc, gây phù phổi chết người</li>
+                <li>Chỉ 0,1% trong không khí đã đủ gây tử vong trong vài phút</li>
+            </ul>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Chlorine_gas.jpg/800px-Chlorine_gas.jpg" alt="Khí clo">
+
+            <h2>3. Khi “kẻ thù không đội trời chung” gặp nhau…</h2>
+            <p>Phương trình đơn giản nhất của hóa học:</p>
+            <strong>2Na + Cl₂ → 2NaCl</strong>
+            <p>Kết quả: Muối ăn – thứ chúng ta rắc lên cơm mỗi ngày!</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Sodium-chloride-crystal.jpg/800px-Sodium-chloride-crystal.jpg" alt="Tinh thể NaCl">
+
+            <h2>4. Tại sao hợp chất lại an toàn?</h2>
+            <p>Độc tính của natri → từ tính <strong>khử cực mạnh</strong> (dễ cho electron)<br>
+               Độc tính của clo → từ tính <strong>oxi hóa cực mạnh</strong> (dễ nhận electron)</p>
+            <p>Khi gặp nhau, chúng “cho và nhận” electron ngay lập tức → tạo ion Na⁺ và Cl⁻ liên kết bền vững trong mạng tinh thể.</p>
+            <p>→ Cả hai đều <strong>mất đi hoàn toàn</strong> tính chất nguy hiểm ban đầu!</p>
+
+            <h2>5. Những cặp “độc + độc = vô hại” khác</h2>
+            <ul>
+                <li>H₂ (khí nổ) + O₂ (cháy mạnh) → H₂O (nước)</li>
+                <li>C (than) + O₂ (đốt cháy) → khi kết hợp đúng cách tạo CaCO₃ (đá vôi)</li>
+            </ul>
+
+            <h2>Kết luận vui</h2>
+            <p>Trong hóa học, đôi khi “kẻ thù không đội trời chung” gặp nhau lại tạo ra thứ mà cả thế giới cần để sống.</p>
+            <blockquote>
+                <strong>Natri và Clo chính là minh chứng sống động nhất cho câu nói:<br>
+                “Hợp chất có tính chất hoàn toàn khác với các nguyên tố cấu tạo nên nó.”</strong>
+            </blockquote>
+
+            <button class="back-btn-detail" onclick="window.location.href='khoa-hoc2.html'">← Quay lại Khoa Học</button>
+        </main>
+
+        <aside class="sidebar-detail">
+            <h3>Series Hóa Học Thú Vị</h3>
+            <ul>
+                <li><a href="nuoc-la-chat-doc.html">Nước – chất độc chết người nếu uống quá nhiều?</a></li>
+                <li><a href="oxy.html">Oxy – thứ giúp ta sống mà cũng có thể giết ta</a></li>
+                <li><a href="bang-tuan-hoan.html">Bảng tuần hoàn và những nguyên tố “điên rồ”</a></li>
+                <li><a href="phan-ung-no.html">10 phản ứng hóa học đẹp lung linh</a></li>
+            </ul>
+            <h3>Liên quan</h3>
+            <ul>
+                <li><a href="phim-khoa-hoc.html">Phim tài liệu Hóa học</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- Footer giữ nguyên đẹp như cũ -->
+    <footer style="background: radial-gradient(circle at 20% 50%, #0a0a2a, #000010 80%); color: #cce0ff; text-align: center; padding: 30px 20px; font-family: 'Orbitron', sans-serif; font-size: 16px; letter-spacing: 1.5px; position: relative; overflow: hidden; box-shadow: 0 -2px 15px rgba(0, 0, 60, 0.8);">
+        <p style="margin: 0; text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff; animation: glow 3s ease-in-out infinite alternate;">
+            &copy; 2025 <span style="color:#00e0ff;">OSIMI</span> | <span style="color:#ff69b4;">Linh O9</span>
+        </p>
+        <div class="stars"></div>
+        <style>
+            @keyframes glow { from { text-shadow: 0 0 5px #0077ff, 0 0 10px #00bfff; } to { text-shadow: 0 0 20px #66ffff, 0 0 40px #00ccff; } }
+            .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; overflow: hidden; }
+            .stars::before, .stars::after { content: ""; position: absolute; top: -10px; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 5s infinite ease-in-out; box-shadow: 20px 30px white, 80px 120px white, 160px 90px white, 240px 50px white, 300px 200px white, 400px 150px white, 500px 80px white, 600px 180px white, 700px 40px white; }
+            @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.3); } }
+            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        </style>
+    </footer>
+
+    <script src="\linhkun.js"></script>
+</body>
+</html>
