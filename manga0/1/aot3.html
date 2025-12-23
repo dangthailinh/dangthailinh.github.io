@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Born Into This World - Attack on Titan Tribute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e0e0e0; /* Màu chữ sáng */
+            --accent-color: #8a0303; /* Màu đỏ đậm (biểu tượng cho máu/khăn quàng) */
+            --bg-dark: #0f1014; /* Màu nền tối */
+            --bg-secondary: #1a1b21;
+            --steam-color: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--primary-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- HEADER / HERO SECTION --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://inasianspaces.com/wp-content/uploads/2022/08/aotr-part-3-armin-and-zeke-in-paths.png?w=923'); /* Ảnh nền Eren hoặc Tự do */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Hiệu ứng Parallax */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            border-top: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+            padding: 20px 0;
+            margin: 0 20px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            color: var(--accent-color);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        /* --- SLIDER AREA (LUẬN ĐIỂM) --- */
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            height: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 40px;
+            text-align: left;
+        }
+
+        .slide-content h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .slide-content p {
+            font-size: 1.1rem;
+            max-width: 80%;
+        }
+
+        /* Nút điều hướng Slider */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+        .slider-btn:hover { background: var(--accent-color); }
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        /* --- BLOG CONTENT --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-left: 3px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .blog-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* --- QUOTE SECTION --- */
+        .quote-section {
+            background-color: #000;
+            text-align: center;
+            padding: 100px 20px;
+            font-style: italic;
+        }
+        .quote-text {
+            font-size: 1.8rem;
+            font-family: 'Cinzel', serif;
+            color: #ccc;
+        }
+        .quote-author {
+            margin-top: 20px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: #050505;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #333;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .slide-content h3 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Zeke vs. Armin</h1>
+        <p>(Nihilism vs. Absurdism)</p>
+        <div class="scroll-down">▼</div>
+    </header>
+
+    <section>
+        <h2 class="section-title">Cuộc Đối Thoại Cuối Cùng</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+            Cuộc đối thoại giữa Zeke và Armin ở cuối truyện là một trong những khoảnh khắc sâu sắc và đáng nhớ nhất của
+            <i>Attack on Titan</i>. Đây không chỉ là một cuộc trò chuyện giữa hai nhân vật, mà là sự va chạm trực diện
+            giữa hai hệ tư tưởng đối lập về ý nghĩa của sự tồn tại.
+            <br><br>
+            <b>Zeke:</b> “Mục đích của cuộc sống là sinh sôi nảy nở…”
+            <br>
+            <b>Armin:</b> “Có lẽ lý do tôi được sinh ra là để ba chúng tôi có thể chạy đua đến đó…”
+            <br><br>
+            Chỉ trong vài câu ngắn ngủi, Isayama đã cô đọng toàn bộ chủ đề trung tâm của tác phẩm: con người tồn tại để
+            tiếp tục vòng lặp sinh học vô nghĩa, hay để trân trọng những khoảnh khắc nhỏ bé nhưng đẹp đẽ trong một thế
+            giới đầy đau khổ?
+        </p>
+    </section>
+
+    <section>
+        <h2 class="section-title">Sự Hai Mặt Của Cuộc Sống</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+            Zeke coi cuộc sống vốn dĩ là vô nghĩa. Với anh, con người chỉ bị sinh ra để tiếp tục một chu kỳ tàn nhẫn:
+            sinh sản – xung đột – chiến tranh – đau khổ – và cuối cùng là cái chết. Nếu kết cục đã được định sẵn như vậy,
+            thì việc chưa từng được sinh ra có lẽ chính là “sự cứu rỗi vĩ đại nhất”.
+            <br><br>
+            Trái lại, Armin không phủ nhận đau khổ. Cậu hiểu rất rõ sự tàn khốc của thế giới, nhưng vẫn tin rằng cuộc sống
+            không chỉ gói gọn trong sinh tồn hay sinh sản. Ý nghĩa của sự tồn tại nằm ở những khoảnh khắc nhỏ bé:
+            một bữa tối cùng gia đình, chạy dưới cơn mưa với bạn bè, cho mèo ăn bên vệ đường, hay giúp một ông lão mù
+            qua đường.
+            <br><br>
+            Chính những khoảnh khắc tưởng chừng tầm thường ấy lại khiến cuộc sống trở nên đáng sống.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="section-title">Khoảnh Khắc Thức Tỉnh Của Zeke</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+            “Thật là một ngày đẹp trời. Nếu như tôi nhận ra điều đó sớm hơn…”
+            <br><br>
+            Lần đầu tiên trong đời, Zeke trân trọng một khoảnh khắc giản dị của sự tồn tại. Nhưng cùng lúc đó, anh cũng
+            nhận ra bi kịch lớn nhất của chính mình: anh đã tước đi cơ hội được sống và trải nghiệm những khoảnh khắc như
+            thế của vô số người khác.
+            <br><br>
+            Sự thức tỉnh ấy không xóa bỏ tội lỗi của Zeke, nhưng nó khiến nhân vật này trở nên bi thương hơn bao giờ hết.
+            Anh không còn là một kẻ phản diện đơn thuần, mà là nạn nhân của một thế giới đã nghiền nát niềm tin vào ý
+            nghĩa của sự sống.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="section-title">Thế Giới Vừa Tàn Ác Vừa Đẹp Đẽ</h2>
+        <div class="slider-container">
+            <div class="slide active" style="background-image: url('https://i.swncdn.com/media/950w/via/images/2023/10/03/32784/32784-gettyimages-1056871376_source_file.jpg');">
+                <div class="slide-content">
+                    <h3>Chủ Nghĩa Hư Vô – Zeke</h3>
+                    <p>
+                        Cuộc sống là một lời nguyền. Sinh ra chỉ để tiếp tục đau khổ và rồi chết đi.
+                        Chấm dứt sự tồn tại đồng nghĩa với chấm dứt khổ đau.
+                    </p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F54456e60-3c2b-4e2e-8e3c-724bbdb63584_1920x1080.jpeg');">
+                <div class="slide-content">
+                    <h3>Chủ Nghĩa Phi Lý – Armin</h3>
+                    <p>
+                        Thế giới không có sẵn ý nghĩa, nhưng con người có thể tự tạo ra ý nghĩa
+                        từ những khoảnh khắc nhỏ bé của cuộc sống.
+                    </p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://i.ytimg.com/vi/i7UC_qkTmy4/maxresdefault.jpg');">
+                <div class="slide-content">
+                    <h3>Kết Luận Của Isayama</h3>
+                    <p>
+                        Không có quan điểm nào hoàn toàn sai.
+                        Thế giới này tàn ác… nhưng cũng đẹp đẽ.
+                    </p>
+                </div>
+            </div>
+
+            <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Thông Điệp Cuối Cùng</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <h3>Không Có Lời Giải Hoàn Hảo</h3>
+                <p>
+                    Attack on Titan kết thúc mà không mang lại sự khép lại trọn vẹn.
+                    Nhưng chính sự dang dở ấy phản ánh đúng bản chất của cuộc sống.
+                </p>
+            </div>
+            <div class="blog-card">
+                <h3>Ý Nghĩa Nằm Ở Trải Nghiệm</h3>
+                <p>
+                    Dù thế giới đầy bạo lực và mất mát, những khoảnh khắc đẹp đẽ vẫn tồn tại
+                    và chính chúng khiến con người tiếp tục sống.
+                </p>
+            </div>
+            <div class="blog-card">
+                <h3>Tại Sao Attack on Titan Đặc Biệt</h3>
+                <p>
+                    Tác phẩm không cho ta câu trả lời, mà buộc ta phải tự đối diện
+                    với câu hỏi về ý nghĩa của sự tồn tại.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="quote-section">
+        <div class="quote-text">"Thế giới này tàn ác… nhưng cũng đẹp đẽ."</div>
+        <div class="quote-author">- Hajime Isayama -</div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Đặng Thái Linh. Lấy cảm hứng từ Hajime Isayama & Attack on Titan.</p>
+        <p>Tatakae.</p>
+    </footer>
+
+</body>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
+            showSlide(currentSlide);
+        }
+
+        // Tự động chuyển slide sau 5 giây
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Born Into This World - Attack on Titan Tribute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e0e0e0; /* Màu chữ sáng */
+            --accent-color: #8a0303; /* Màu đỏ đậm (biểu tượng cho máu/khăn quàng) */
+            --bg-dark: #0f1014; /* Màu nền tối */
+            --bg-secondary: #1a1b21;
+            --steam-color: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--primary-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- HEADER / HERO SECTION --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://wallpaperaccess.com/full/3678194.jpg'); /* Ảnh nền Eren hoặc Tự do */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Hiệu ứng Parallax */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            border-top: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+            padding: 20px 0;
+            margin: 0 20px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            color: var(--accent-color);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        /* --- SLIDER AREA (LUẬN ĐIỂM) --- */
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            height: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 40px;
+            text-align: left;
+        }
+
+        .slide-content h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .slide-content p {
+            font-size: 1.1rem;
+            max-width: 80%;
+        }
+
+        /* Nút điều hướng Slider */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+        .slider-btn:hover { background: var(--accent-color); }
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        /* --- BLOG CONTENT --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-left: 3px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .blog-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* --- QUOTE SECTION --- */
+        .quote-section {
+            background-color: #000;
+            text-align: center;
+            padding: 100px 20px;
+            font-style: italic;
+        }
+        .quote-text {
+            font-size: 1.8rem;
+            font-family: 'Cinzel', serif;
+            color: #ccc;
+        }
+        .quote-author {
+            margin-top: 20px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: #050505;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #333;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .slide-content h3 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+ <header>
+    <h1>Griffith</h1>
+    <p>Vấn đề về sự đồng thuận và bi kịch của một con người bị nghiền nát</p>
+    <div class="scroll-down">▼</div>
+</header>
+
+<section>
+    <h2 class="section-title">Vấn Đề Lên Án Griffith</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Tôi thực sự không thể hiểu nổi vì sao nhiều người lại lên án
+        <b>Griffith khi còn là con người</b> vì những gì anh đã làm.
+        <br><br>
+        Khi nói đến sự hiến tế trong Eclipse, tôi sẽ sử dụng khái niệm
+        <b>INFORMED CONSENT (sự đồng thuận có nhận thức)</b>
+        để lý giải vì sao Griffith không hề “làm sai”.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Eclipse Không Phải Một Sự Lựa Chọn Công Bằng</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Sự hiến tế trong Eclipse là một <b>hợp đồng</b>,
+        nhưng không phải ai cũng có đủ năng lực tinh thần để
+        đưa ra sự đồng thuận hợp lệ cho một thỏa thuận như vậy.
+        <br><br>
+        Trong luật pháp hiện đại, những người mắc bệnh tâm thần nghiêm trọng
+        không đủ khả năng nhận thức hậu quả sẽ không thể bị xem là
+        có trách nhiệm pháp lý khi ký kết hợp đồng.
+        <br><br>
+        Lý do rất rõ ràng: họ <b>không đủ khả năng hiểu</b>
+        điều mình đang làm và những hệ quả kéo theo.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Tình Trạng Tâm Thần Của Griffith</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Điều này áp dụng hoàn toàn chính xác với Griffith.
+        <br><br>
+        Anh vừa trải qua <b>một năm tra tấn liên tục</b>
+        trong hầm ngục Wyndham: bị bỏ đói, tước ánh sáng,
+        bị đánh đập, thiêu đốt, cắt gân tay, cắt lưỡi,
+        tra tấn cả thể xác lẫn tinh thần.
+        <br><br>
+        Hệ quả là Griffith hoàn toàn suy sụp:
+        hành vi bạo lực mất kiểm soát,
+        ảo giác liên tục,
+        và quan trọng nhất —
+        <b>anh vừa cố tự sát chỉ vài phút trước Eclipse</b>.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Sự Cưỡng Ép Được Thiết Kế Sẵn</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Behelit chỉ kích hoạt khi chủ nhân ở
+        <b>trạng thái tinh thần bất ổn nhất</b>.
+        Điều này cho thấy bản chất của “hợp đồng”
+        là <b>cưỡng ép ngay từ thiết kế</b>.
+        <br><br>
+        Một người đang trong trạng thái hoảng loạn,
+        ảo giác, suy sụp và có ý định tự sát
+        không thể được xem là có năng lực
+        đưa ra sự đồng thuận có nhận thức.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Sự Bất Cân Xứng Quyền Lực</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Tương tự như việc trẻ vị thành niên
+        không thể ký hợp đồng vì sự bất cân xứng quyền lực,
+        Griffith cũng rơi vào hoàn cảnh tương tự —
+        nhưng ở mức độ <b>cực đoan hơn nhiều</b>.
+        <br><br>
+        Một con người hấp hối, hoang mang,
+        đối diện với những thực thể toàn tri,
+        đọc được suy nghĩ và tự xưng là ý chí của Thượng Đế —
+        đây là một sự chênh lệch quyền lực
+        không thể xem là công bằng.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Lời Nói Dối Của God Hand</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        God Hand đã <b>nói dối</b> về sự đồng thuận của Hawks.
+        <br><br>
+        Slan khẳng định rằng đồng đội của Griffith
+        sẽ tha thứ cho anh, rằng họ yêu anh,
+        rằng họ sẽ hạnh phúc khi hy sinh cho giấc mơ ấy.
+        <br><br>
+        Nhưng sự thật là họ bị ném vào
+        <b>vòng xoáy linh hồn vĩnh viễn đau khổ</b> —
+        một điều không hề được tiết lộ.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Kết Luận</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Griffith khi còn là con người
+        <b>không có trách nhiệm pháp lý lẫn đạo đức</b>
+        cho sự hiến tế trong Eclipse.
+        <br><br>
+        Trách nhiệm duy nhất thuộc về
+        <b>God Hand</b> —
+        những kẻ đã lợi dụng một con người
+        ở trạng thái dễ tổn thương nhất.
+    </p>
+</section>
+
+<div class="quote-section">
+    <div class="quote-text">
+        "A contract signed in despair is not a choice — it is coercion."
+    </div>
+    <div class="quote-author">— Berserk Analysis —</div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Đặng Thái Linh.</p>
+    <p>Griffith không phải quỷ dữ ngay từ đầu — anh ta được tạo ra như vậy.</p>
+</footer>
+
+
+
+</body>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
+            showSlide(currentSlide);
+        }
+
+        // Tự động chuyển slide sau 5 giây
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>

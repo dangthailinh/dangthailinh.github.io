@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Born Into This World - Attack on Titan Tribute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e0e0e0; /* Màu chữ sáng */
+            --accent-color: #8a0303; /* Màu đỏ đậm (biểu tượng cho máu/khăn quàng) */
+            --bg-dark: #0f1014; /* Màu nền tối */
+            --bg-secondary: #1a1b21;
+            --steam-color: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--primary-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- HEADER / HERO SECTION --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://i.gifer.com/origin/7a/7a5bb2fe2636bb42df486a3506f90d85.gif'); /* Ảnh nền Eren hoặc Tự do */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Hiệu ứng Parallax */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            border-top: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+            padding: 20px 0;
+            margin: 0 20px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            color: var(--accent-color);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        /* --- SLIDER AREA (LUẬN ĐIỂM) --- */
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            height: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 40px;
+            text-align: left;
+        }
+
+        .slide-content h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .slide-content p {
+            font-size: 1.1rem;
+            max-width: 80%;
+        }
+
+        /* Nút điều hướng Slider */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+        .slider-btn:hover { background: var(--accent-color); }
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        /* --- BLOG CONTENT --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-left: 3px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .blog-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* --- QUOTE SECTION --- */
+        .quote-section {
+            background-color: #000;
+            text-align: center;
+            padding: 100px 20px;
+            font-style: italic;
+        }
+        .quote-text {
+            font-size: 1.8rem;
+            font-family: 'Cinzel', serif;
+            color: #ccc;
+        }
+        .quote-author {
+            margin-top: 20px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: #050505;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #333;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .slide-content h3 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+ <header>
+    <h1>L Lawliet</h1>
+    <p>Bi kịch của trí thông minh</p>
+    <div class="scroll-down">▼</div>
+</header>
+
+<section>
+    <h2 class="section-title">Hình Ảnh Thật Sự Của L</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Trong một cuộc phỏng vấn năm 2022, Fu Takahashi – ca sĩ thủ vai L trong vở nhạc kịch
+        <i>Death Note</i> (bản Nhật) – đã đưa ra một góc nhìn rất đáng suy ngẫm về nhân vật này.
+        Anh cho rằng, đằng sau hình ảnh bề ngoài của một thiên tài lạnh lùng, ghét thất bại,
+        L thực chất là một con người cô độc và khao khát được yêu thương.
+        <br><br>
+        Fu Takahashi nhận xét rằng, ở mọi phiên bản của <i>Death Note</i> – từ manga, anime,
+        điện ảnh cho đến nhạc kịch – L đều mang một điểm chung: anh cố gắng kiểm soát và kìm nén
+        cảm xúc của mình. Có lẽ vì xuất thân mồ côi, L không cho phép bản thân bộc lộ tình cảm,
+        dù là với cha mẹ, tình yêu hay sự gắn bó với người khác.
+        <br><br>
+        Thay vào đó, L tìm đến trò chơi trí tuệ và những cuộc đấu trí như một cách tồn tại.
+        Đó không chỉ là công việc, mà là nơi duy nhất anh có thể cảm thấy an toàn.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Sự Cô Đơn Của Trí Tuệ</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Người ta thường nói rằng những người có trí tuệ vượt trội rất dễ cảm thấy cô độc.
+        Điều này thể hiện rõ ở L, Near và Mello – những con người dù luôn được bao quanh
+        bởi cộng sự và người chăm sóc, nhưng vẫn không thể thực sự kết nối với ai.
+        <br><br>
+        Với L, công việc chính là toàn bộ cuộc sống. Những con người xung quanh anh không phải
+        là bạn bè theo nghĩa thông thường, mà là những “chức năng” nhằm hỗ trợ và bảo vệ
+        một tài sản quý giá: bộ não của anh.
+        <br><br>
+        Trong bài phân tích nổi tiếng về “Monster Speech” (2015), tác giả lux-mea-lex đã chỉ ra
+        một chi tiết vô cùng đau lòng: L thừa nhận rằng anh tìm kiếm tình bạn, nhưng lại không
+        biết cách yêu thương.
+        <br><br>
+        L không đổ lỗi cho người khác vì không hiểu mình. Ngược lại, anh tự trách bản thân vì
+        không thể tin tưởng ai hoàn toàn. Và chính điều đó, vừa khiến anh trở thành thám tử
+        vĩ đại nhất thế giới, vừa khiến anh trở nên cô độc hơn bất kỳ ai.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Một Con Người Đầy Mâu Thuẫn</h2>
+    <p style="text-align: center; max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        L chưa bao giờ tự nhận mình là biểu tượng tuyệt đối của công lý.
+        Anh thẳng thắn thừa nhận bản thân là một kẻ nói dối, một con người
+        đứng trong vùng xám đạo đức.
+        <br><br>
+        Anh sẵn sàng vi phạm pháp luật, chấp nhận thương vong và hậu quả
+        để đạt được mục tiêu. Nhưng khác với Light Yagami,
+        L sở hữu một thứ mà Light dần đánh mất: sự tự nhận thức.
+        <br><br>
+        L hiểu rõ bóng tối bên trong chính mình. Anh không che giấu điều đó,
+        thậm chí còn nói với những đứa trẻ ở Wammy’s House rằng
+        điều anh sợ nhất… chính là bản thân mình.
+        <br><br>
+        Đây không phải lời thú nhận của “L – thám tử”.
+        Đó là lời thú nhận của Lawliet – con người thật phía sau chiếc mặt nạ.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Những Chiếc Mặt Nạ Của Lawliet</h2>
+    <div class="slider-container">
+        <div class="slide active" style="background-image: url('https://tse3.mm.bing.net/th/id/OIP.BhtRTPxCV62ZU_51K2C0UwHaEK?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3');">
+            <div class="slide-content">
+                <h3>L – Biểu Tượng</h3>
+                <p>
+                    “L” chỉ là một danh xưng, một công cụ.
+                    Nó nổi tiếng, quyền lực, nhưng không định nghĩa con người thật của anh.
+                </p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/03/Featured---All-Versions-of-L-in-Death-Note-Ranked.jpg');">
+            <div class="slide-content">
+                <h3>Lawliet – Con Người</h3>
+                <p>
+                    Một con người không chắc liệu bản thân có còn được định nghĩa
+                    bởi chính cái tên thật của mình hay không.
+                </p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://tse3.mm.bing.net/th/id/OIP.XyQnTOYTUuJCBEegSNcM_QHaFr?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3');">
+            <div class="slide-content">
+                <h3>Sự Tự Kiểm Soát</h3>
+                <p>
+                    Kìm nén cảm xúc, nghi ngờ tất cả, che giấu bản thân –và light kẻ đối lập của L
+                    sống sau vô số lớp mặt nạ để có thể tiếp tục tồn tại.
+                </p>
+            </div>
+        </div>
+
+        <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+</section>
+
+<section>
+    <h2 class="section-title">Một Trí Óc Đau Đớn</h2>
+    <div class="blog-grid">
+        <div class="blog-card">
+            <h3>Căng Thẳng Thường Trực</h3>
+            <p>
+                L thường xuyên mất bình tĩnh, run rẩy khi bị nhìn chằm chằm,
+                nghe thấy ảo thanh, cắn móng tay, ăn quá nhiều đồ ngọt để chịu đựng áp lực.
+            </p>
+        </div>
+        <div class="blog-card">
+            <h3>Cơn Sụp Đổ Hiếm Hoi</h3>
+            <p>
+                Trong <i>L: Change the World</i>, L quỵ ngã, đập tay xuống đất
+                đến bật máu – một cảm xúc nguyên sơ mà anh đã kìm nén cả đời.
+            </p>
+        </div>
+        <div class="blog-card">
+            <h3>Gánh Nặng Công Lý</h3>
+            <p>
+                Hàng ngàn nạn nhân, vô số cái chết, những giọt nước mắt của người sống sót –
+                tất cả đè nặng lên cơ thể và tâm trí của L.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="quote-section">
+    <div class="quote-text">"Being alone is better than being with the wrong person. "</div>
+    <div class="quote-author">- L Lawliet -</div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Đặng Thái Linh. Lấy cảm hứng từ Death Note.</p>
+    <p>Có lẽ… L chỉ cần một cái ôm. Và một kỳ nghỉ thật dài.</p>
+</footer>
+
+
+</body>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
+            showSlide(currentSlide);
+        }
+
+        // Tự động chuyển slide sau 5 giây
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>

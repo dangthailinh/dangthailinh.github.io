@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Greatest Salvation – Zeke Yeager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #e0e0e0;
+            --accent-color: #8a0303;
+            --bg-dark: #0f1014;
+            --bg-secondary: #1a1b21;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--primary-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
+                        url('https://scontent.fsgn5-15.fna.fbcdn.net/v/t39.30808-6/473337819_1114028397069736_7690185525128390203_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=j8xwpAOJws4Q7kNvwGc-ImI&_nc_oc=AdlZ8kFFQ0Qdu70B_C9SWz-InuwG1_6YBkCeYsRqIVBEFuLUI0PqA5Zr3yMtZbc0uLi976pAUsA262IkNvn6pEsM&_nc_zt=23&_nc_ht=scontent.fsgn5-15.fna&_nc_gid=cMPZuNQD-93v27BMdEJWEg&oh=00_Afm6dx7U0-tZ1dKfPTrfcYrz4PHN6ORQsBZHR6xr2SQCNw&oe=695053D6');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        header p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            border-top: 1px solid #aaa;
+            border-bottom: 1px solid #aaa;
+            padding: 20px 0;
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 2rem;
+            color: var(--accent-color);
+            animation: bounce 2s infinite;
+        }
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.4rem;
+            margin-bottom: 50px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            height: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active { opacity: 1; }
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 40px;
+        }
+        .slide-content h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .blog-card {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-left: 3px solid var(--accent-color);
+        }
+        .quote-section {
+            background: #000;
+            text-align: center;
+            padding: 100px 20px;
+            font-style: italic;
+        }
+        .quote-text {
+            font-size: 1.8rem;
+            font-family: 'Cinzel', serif;
+        }
+        .quote-author {
+            margin-top: 20px;
+            color: var(--accent-color);
+        }
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: #050505;
+            color: #666;
+        }
+        @keyframes bounce {
+            0%,100% {transform: translateY(0);}
+            50% {transform: translateY(-10px);}
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>The Greatest Salvation</h1>
+    <p>
+        “The greatest salvation is not being born in this world.”  
+        <br>— Sự cứu rỗi vĩ đại nhất là không được sinh ra trên thế giới này —
+    </p>
+    <div class="scroll-down">▼</div>
+</header>
+
+<section>
+    <h2 class="section-title">Quan Niệm Của Zeke Yeager</h2>
+    <p style="max-width: 900px; margin: 0 auto; font-size: 1.1rem;">
+        Zeke Yeager hình thành tư tưởng phản sinh (anti-natalism) không phải từ sự bi quan hời hợt,
+        mà từ trải nghiệm trực tiếp với khổ đau, chiến tranh và tội ác lặp đi lặp lại của con người.
+        Tuổi thơ bất hạnh, sự thao túng của cha mẹ, và lịch sử đẫm máu của dân tộc Eldia khiến Zeke
+        đi đến kết luận rằng: bản thân việc sinh ra đã là một bi kịch.
+        <br><br>
+        Theo Zeke, dù Eldia có tồn tại hay không, chiến tranh và phân biệt chủng tộc vẫn sẽ tiếp diễn.
+        Con người sẽ luôn tìm lý do để tàn sát lẫn nhau. Việc sinh ra rồi lại chết đi, để thế hệ sau
+        tiếp tục chịu khổ, chỉ là một vòng lặp vô nghĩa của đau đớn.
+        <br><br>
+        Vì vậy, giải pháp của Zeke không phải là chinh phục hay trả thù, mà là chấm dứt chuỗi sinh tồn.
+        Không sinh ra đồng nghĩa với không còn đau khổ, không còn hận thù, không còn chiến tranh.
+    </p>
+</section>
+
+<section>
+    <h2 class="section-title">Các Trụ Cột Trong Tư Tưởng Của Zeke</h2>
+    <div class="slider-container">
+        <div class="slide active" style="background-image:url('https://tse2.mm.bing.net/th/id/OIP.XBLOyWCdsprbm1xFmkzjxgHaDt?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3');">
+            <div class="slide-content">
+                <h3>Khổ Đau & Chiến Tranh</h3>
+                <p>
+                    Cuộc sống đối với Zeke là chuỗi đau khổ nối tiếp nhau. Không sinh ra
+                    là cách duy nhất để đảm bảo không ai phải trải qua nó.
+                </p>
+            </div>
+        </div>
+        <div class="slide" style="background-image:url('https://tse1.mm.bing.net/th/id/OIP.m6ZT99iRQcG0cqfe65ShMQHaDS?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3');">
+            <div class="slide-content">
+                <h3>Chu Kỳ Đau Khổ</h3>
+                <p>
+                    Sinh ra → chịu khổ → chết đi → thế hệ sau tiếp tục chịu khổ.
+                    Zeke muốn chấm dứt vòng lặp này vĩnh viễn.
+                </p>
+            </div>
+        </div>
+        <div class="slide" style="background-image:url('https://tse1.mm.bing.net/th/id/OIP.1HIrlixABTyL5AmIQ7nVSwHaEK?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3');">
+            <div class="slide-content">
+                <h3>Mất Kiểm Soát & Bất Định</h3>
+                <p>
+                    Con người không kiểm soát được tương lai. Không tồn tại đồng nghĩa
+                    với không còn rủi ro.
+                </p>
+            </div>
+        </div>
+        <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+</section>
+
+<section>
+    <h2 class="section-title">Liên Hệ Với Phật Giáo</h2>
+    <div class="blog-grid">
+        <div class="blog-card">
+            <h3>Khổ (Dukkha)</h3>
+            <p>
+                Phật giáo cho rằng khổ đau là bản chất của đời sống:
+                sinh, lão, bệnh, tử — không ai tránh khỏi.
+            </p>
+        </div>
+        <div class="blog-card">
+            <h3>Luân Hồi</h3>
+            <p>
+                Chuỗi sinh tử tái diễn vô tận chính là điều mà Zeke
+                nhìn thấy trong lịch sử Eldia.
+            </p>
+        </div>
+        <div class="blog-card">
+            <h3>Giải Thoát</h3>
+            <p>
+                Phật giáo tìm cách chấm dứt khổ đau bằng giác ngộ (Niết Bàn),
+                còn Zeke chọn cách chấm dứt sự sinh ra.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="quote-section">
+    <div class="quote-text">
+        “Nếu không được sinh ra… thì sẽ không cần phải cứu rỗi.”
+    </div>
+    <div class="quote-author">— Zeke Yeager —</div>
+</div>
+
+<footer>
+    <p>&copy; 2025 Đặng Thái Linh</p>
+    <p>Attack on Titan – A Philosophical Reflection</p>
+</footer>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    function showSlide(index) {
+        slides.forEach((s,i)=>s.classList.toggle('active',i===index));
+    }
+    function changeSlide(dir) {
+        currentSlide = (currentSlide + dir + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+    setInterval(()=>changeSlide(1),5000);
+</script>
+
+</body>
+</html>
