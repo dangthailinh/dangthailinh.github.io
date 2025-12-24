@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johan Liebert</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #e0e0e0;
+            --accent: #8a0303;
+            --bg-dark: #0e0e0e;
+            --bg-secondary: #151515;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--bg-dark);
+            color: var(--primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.9)),
+                        url('https://i.pinimg.com/736x/3e/60/85/3e6085e78d044598d9b89feefcdd08a2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+        }
+
+        header p {
+            margin-top: 20px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .scroll-down {
+            margin-top: 50px;
+            font-size: 2rem;
+            color: var(--accent);
+            animation: bounce 1.5s infinite;
+        }
+
+        /* ===== SECTION ===== */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            margin: 15px auto 0;
+        }
+
+        .section-text {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: .9;
+        }
+
+        /* ===== IMAGE ===== */
+        .image-box {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .image-box img {
+            width: 720px;
+            max-width: 100%;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.7);
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .image-gallery img {
+            width: 260px;
+            border-radius: 12px;
+            transition: transform .3s ease;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.06);
+        }
+
+        /* ===== FADE IN ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== QUOTE ===== */
+        .quote-section {
+            background: #050505;
+            padding: 90px 20px;
+            text-align: center;
+        }
+
+        .quote-text {
+            font-size: 1.6rem;
+            font-style: italic;
+        }
+
+        .quote-author {
+            margin-top: 20px;
+            color: var(--accent);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 40px;
+            text-align: center;
+            font-size: .9rem;
+            opacity: .6;
+            border-top: 1px solid #333;
+        }
+
+        /* ===== ANIM ===== */
+        @keyframes bounce {
+            0%,100% {transform: translateY(0);}
+            50% {transform: translateY(8px);}
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.6rem; }
+            .image-gallery img { width: 90%; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Johan Liebert</h1>
+    <p>"A nonexistent human being. Or is he?"</p>
+    <div class="scroll-down">▼</div>
+</header>
+
+<section>
+    <h2 class="section-title">Khởi Đầu Của Johan</h2>
+    <div class="image-box fade-in">
+        <img src="">
+    </div>
+    <p class="section-text fade-in">"Gần đây tôi mới đọc một cuốn sách được một bạn fan của bộ Monster giới thiệu, đó là cuốn 'The Divided Self' (Cái Tôi Chia Cắt) của Ronald David Laing. Bạn ấy gợi ý tác phẩm của Laing cho bất kỳ ai đang cảm thấy hoang mang về tâm lý và động cơ của Johan, điều mà tôi tin là rất nhiều người trong chúng ta cũng từng gặp phải... Phải nói là lời giới thiệu này QUÁ TUYỆT VỜI, nó sâu sắc đến mức tôi nóng lòng muốn chia sẻ ngay suy nghĩ của mình với các bạn và nghe ý kiến của mọi người về cách lý giải mà tôi vừa nghiệm ra.
+
+Lưu ý nhé: Mọi đoạn trích dẫn trong bài viết này đều lấy từ cuốn 'The Divided Self', vì trích nhiều quá nên tôi sẽ không ghi nguồn cho từng cái đâu, các bạn cứ ngầm hiểu là được :)
+
+Bài viết này sẽ dài một cách 'đau đớn' đấy, nhưng hy vọng là sẽ bõ công các bạn đọc."</p>
+ <p class="section-text fade-in">okay ...let go</p>
+</section>
+
+<section>
+    <h2 class="section-title">PHẦN 1: ĐỊNH NGHĨA VỀ BẤT AN HIỆN SINH (ONTOLOGICAL INSECURITY), CÁI TÔI CHÂN THẬT VÀ CÁI TÔI GIẢ TẠO</h2>
+    <div class="image-box fade-in">
+        <img src="https://preview.redd.it/y6cfj24jh1k91.png?width=320&crop=smart&auto=webp&s=1bc37d7a2f9a3cc9c6d0afaa54b231701edd9893">
+    </div>
+    <p class="section-text fade-in">Ở phần đầu tiên, tôi cần giới thiệu một vài khái niệm quan trọng để các bạn có thể hiểu được phần còn lại của bài luận. Cuốn sách của Laing mô tả những người dạng phân liệt (schizoids) và tâm thần phân liệt (schizophrenics), khám phá các cơ chế đằng sau căn bệnh của họ. Nhưng điều quan trọng cần hiểu là Laing, dù là một bác sĩ tâm thần, lại thừa nhận bệnh tâm thần chủ yếu là một vấn đề triết học hơn là y học thuần túy. Ông thấy việc thấu hiểu trải nghiệm của bệnh nhân về thế giới có giá trị hơn là cứ mãi kiểm tra và tác động lên cơ thể họ. Thuật ngữ đầu tiên chúng ta cần là sự bất an hiện sinh (ontological insecurity). Hãy cùng so sánh cách Laing mô tả một người tự tin vào thực tại của mình và một người không có điều đó.</p>
+    <p class="section-text fade-in">Cá nhân đó có thể cảm nhận sự hiện hữu của mình là thật, sống động, trọn vẹn; được phân biệt với phần còn lại của thế giới trong những hoàn cảnh bình thường một cách rõ ràng đến mức danh tính và sự tự chủ của anh ta không bao giờ bị nghi ngờ; như một sự tiếp nối theo thời gian; có sự nhất quán bên trong, có tính thực chất, chân thật và giá trị; đồng nhất về mặt không gian với cơ thể; và thường là, được bắt đầu từ khi sinh ra và sẽ kết thúc khi chết đi. Anh ta sở hữu một cốt lõi vững chắc của sự an toàn hiện sinh. [...] Một cá nhân trong những hoàn cảnh sống bình thường lại có thể cảm thấy hư ảo hơn là thực; theo nghĩa đen, là chết hơn là sống; sự phân biệt giữa bản thân với thế giới mong manh đến mức danh tính và sự tự chủ của anh ta luôn bị đặt dấu hỏi. [...] Anh ta có thể cảm thấy mình vô định hình hơn là thực chất, và không thể tin rằng những gì tạo nên con người mình là chân thật, tốt đẹp hay có giá trị. Và anh ta có thể cảm thấy cái tôi của mình bị tách biệt một phần khỏi cơ thể. Nếu một vị trí của sự an toàn hiện sinh sơ cấp đã đạt được, thì những hoàn cảnh bình thường của cuộc sống sẽ không tạo ra mối đe dọa thường trực đối với sự tồn tại của người đó. Nếu nền tảng sống này chưa đạt được, thì những hoàn cảnh bình thường của cuộc sống hàng ngày sẽ cấu thành một mối đe dọa liên tục và chết người.
+    <p class="section-text fade-in">Đối với một cá nhân không chắc chắn về sự tồn tại của chính mình, cuộc sống trở thành một cuộc đấu tranh không ngừng để bảo tồn cái tôi. Mọi nỗ lực được thực hiện để tránh sự nuốt chửng (engulfment), sự sụp đổ vào trong (implosion), và sự hóa đá (petrification). Nỗi sợ bị hấp thụ về cơ bản là nỗi sợ bị thấu hiểu, bị nắm bắt, bị nhìn thấy, được yêu thương, bị "tóm lấy".
+
+Được hiểu đúng nghĩa là bị nuốt chửng, bị bao vây, bị nuốt trôi, bị chết đuối, bị ăn mòn, bị làm cho ngạt thở, bị bóp nghẹt trong hoặc bởi sự thấu hiểu được cho là bao trùm tất cả của người khác. Luôn bị hiểu lầm thì thật cô đơn và đau đớn, nhưng ít nhất từ quan điểm này, sự cô lập lại mang đến một mức độ an toàn nhất định.
+
+Cách để đối phó với nỗi sợ này là đưa cái tôi chân thật ra khỏi thế giới thực, hoàn toàn nằm ngoài tầm với của người khác. Một cái tôi chân thật rút lui vào sâu thẳm của thế giới nội tâm, sự kết nối của nó với cơ thể cá nhân bị gián đoạn. Thứ tương tác với thế giới "bên ngoài" và kiểm soát hành động, cử chỉ, lời nói, biểu cảm khuôn mặt là cái tôi giả tạo. Một hình ảnh được làm giả kỹ lưỡng được thiết kế để đánh lạc hướng cái nhìn của người khác.
+<P class="section-text fade-in">Tuy nhiên, một nỗi sợ khác, nỗi sợ bị hóa đá, hay bị vật thể hóa, lại xung đột với nỗi sợ trước đó. Nỗi sợ bị hấp thụ khiến người ta chạy trốn khỏi cái nhìn của người khác, nhưng bằng cách trốn tránh nó, một cá nhân không còn được ai nhận thức nữa, điều này một lần nữa lại đặt sự thực chất của họ vào vòng nghi vấn. Một cá nhân rất sợ bị người khác nhìn nhận như một đồ vật, như một thứ vô tri, như một cái máy, như một nó không có chủ quan tính. Cứ như thể bất kỳ người quan sát tiềm năng nào cũng là Medusa, kẻ có thể ngay lập tức biến cá nhân thành đá chỉ bằng một cái nhìn. Nỗi sợ này đẩy một người đến chỗ "tự sát hiện sinh" - anh ta giả vờ "chết", từ bỏ sự tự chủ của chính mình trước khi ai đó có thể làm anh ta chết đi và đối xử với anh ta như một vật vô tri. Ngoài ra, như một cách để bảo vệ bản thân, một cá nhân có thể biến tất cả mọi người xung quanh thành đá - bởi vì một bóng ma, ảo giác, hoặc một đồ vật thì không thể làm hại anh ta, chỉ có con người thật mới có khả năng đó.
+
+Nỗi sợ sụp đổ vào trong (implosion) cũng giống như nỗi sợ hấp thụ trải nghiệm thực tế của cuộc sống. Một cá nhân trống rỗng, anh ta là một khoảng chân không - nhưng anh ta bắt đầu coi khoảng chân không này là chính mình. Bất kỳ mối quan hệ thực chất nào với thế giới và con người đều đe dọa sẽ "xé toạc" anh ta, vì vậy anh ta cũng tránh né nó.
+
+Bây giờ hãy làm rõ cái tôi giả tạo là gì, nó liên quan thế nào đến cái tôi chân thật và thế giới.
+<p class="section-text fade-in"> <strong>Nếu cá nhân giao phó mọi giao dịch giữa bản thân và người khác cho một hệ thống bên trong con người mình mà hệ thống đó không phải là 'anh ta', thì thế giới sẽ được trải nghiệm là không thực, và tất cả những gì thuộc về hệ thống này đều được cảm thấy là giả dối, vô ích và vô nghĩa.</strong> 
+<p class="section-text fade-in"> 
+
+    <h2 class="section-title">PHẦN 2: NGUỒN GỐC SỰ BẤT AN HIỆN SINH CỦA JOHAN</h2>
+    <div class="image-gallery fade-in">
+        <img src="https://preview.redd.it/nkf3o2pth1k91.png?width=464&format=png&auto=webp&s=8b827240fa5c38353c777f226b7a660323c75ee4">
+        <img src="https://preview.redd.it/ytlirjxwh1k91.png?width=776&format=png&auto=webp&s=b75f0c2d01328fd94ef338b74d3f3d3cd3604002">
+        <img src="https://preview.redd.it/owb8oa5zh1k91.png?width=301&format=png&auto=webp&s=25420e8d3673ebaa1ddee4f8adb2afad2344cc55">
+    </div>
+</section>
+  <p class="section-text fade-in">Đầu tiên, tất nhiên là việc cải trang thành em gái. Cậu bé có lẽ đã cảm nhận được rằng việc này được thực hiện vì một lý do nào đó chứ không phải để cho vui. Gia đình họ đã sống một "cuộc sống lặng lẽ", điều này có lẽ rất khó thực hiện với hai đứa trẻ :)) Vì vậy, giả thuyết của tôi là: cặp song sinh lớn lên với cảm giác rằng chúng phải trốn chạy khỏi một mối nguy hiểm nào đó và tránh gây chú ý. Nhưng Anna không cần phải giấu giếm ngoại hình thật của mình, không giống như Johan, người mà việc giả vờ làm một ai đó khác đã trở thành một phần quan trọng để được an toàn.
+
+Cậu ấy đã ẩn mình dưới lốt một người khác, hay cậu chỉ là kẻ mạo danh cho một con người thật sự chắc chắn đang hiện diện trên thế giới này? Bởi vì tất cả mọi người, ngoại trừ mẹ và em gái, đều chỉ biết đến người em gái, bé gái, cô con gái. Cô bé chắc chắn là thật. Liệu cậu ấy có bao giờ thực sự tồn tại ở đó không? Ngay cả người mẹ cũng không thể phân biệt được chúng. Cậu ấy đã trở thành một người anh em song sinh ảo ảnh.
+
+Khoảnh khắc người mẹ do dự chỉ càng củng cố thêm những suy nghĩ xâm lấn trong đầu Johan. Bà đã có một người trong tâm trí, liệu có phải bà do dự vì ngay khoảnh khắc đó bà không thể phân biệt được đâu là đứa trẻ mình định từ bỏ? Liệu cậu ấy chỉ có cơ hội sống sót, về mặt sinh học và hiện sinh, nếu cậu cải trang thành người khác? Bởi vì nếu mọi người nhìn thấy con người thật của cậu, cậu sẽ không được cứu?
+
+Phỏng đoán của tôi là nhận thức của Johan về bản thân đã bị méo mó đến mức cậu không còn coi mình là thực thể thật sự nữa; rằng cái tôi chân thật đáng được bảo vệ không nằm bên trong cậu, mà chính là em gái cậu, và cậu hoàn toàn là đồ giả. Cậu chỉ là một kẻ giả mạo có nhiệm vụ xua đuổi nguy hiểm khỏi cái tôi chân thật. Hãy nhớ lại khái niệm về cái tôi giả và thật, cái tôi giả được tạo ra chỉ để bảo vệ cái tôi thật. Việc Johan nói "Anh là em" và gọi Anna là "cái tôi khác của anh" gián tiếp xác nhận giả định của tôi - cậu bắt đầu coi bản thân và em gái như một hệ thống thống nhất, nơi cậu không gì hơn là một mặt tiền che đậy, còn em gái cậu mới là con người sống động, có thật và mang tính thực chất.
+
+Sự do dự của người mẹ khi lựa chọn giữa hai đứa con có thể đã "đổ thêm dầu" vào cảm giác vốn đã mong manh của Johan về sự thực chất của chính mình. Nhỡ đâu bà không phải đang chọn giữa cặp song sinh, mà đơn giản là lúc đó bà không thể nhận ra đứa nào là đứa nào? Giữ một đứa trẻ cụ thể trong tâm trí, nhưng bà chỉ đơn giản là không thể phân biệt được ai thực sự là đứa trẻ bà muốn giữ và ai đang đóng giả đứa đó? Đâu là cái tôi thật và đâu là cái giả?
+
+Cảm giác bất an, sự cô đơn, nỗi đau bị mẹ bỏ rơi, lòng thương cảm cho người em gái, và cảm giác tội lỗi to lớn rằng người thật sự của hai anh em đã rơi vào nanh vuốt của những con quái vật. Cả cuộc đời của cặp song sinh bao gồm những nỗ lực không ngừng nghỉ, nếu không phải để giết họ, thì là để phá hủy cuộc sống và danh tính của họ.
+
+Những ngày sau khi Anna trở về trước khi được tìm thấy ở biên giới Séc-Đức đánh dấu cái chết hiện sinh của Johan. Có thứ gì đó trong cậu đã sụp đổ trong khoảng thời gian đó. Khi mẹ cậu lựa chọn giữa họ, cậu vẫn là một đứa trẻ bình thường (hoặc ít nhất, không có gì được mô tả trong manga cho thấy sự bất thường của cậu) - sợ bị mẹ bỏ rơi, sợ bị giao nộp để bị xâu xé bởi những kẻ lạ mặt độc ác không rõ ý đồ, những kẻ mà cậu đã phải chạy trốn từ khi mới bắt đầu có ký ức. Tất cả những cảm xúc này đã chết trong cậu. Chính xác là khi nào và như thế nào, chúng ta không biết, nhưng một Johan hoàn toàn khác đã băng qua biên giới Séc-Đức - tách biệt, bình thản đến đáng sợ, thờ ơ với cái chết. Theo một nghĩa nào đó, cậu không còn gì để sợ nữa, chuỗi sự kiện ngắn ngủi đó đã tàn khốc đến mức cậu đã vô tình thực hiện hành vi tự sát hiện sinh. Ngay cả khi cái chết đang chờ đợi họ, sẽ không ai có thể chạm tay vào họ, không ai có thể vặn vẹo linh hồn và tâm trí họ nữa.
+
+Các bệnh nhân của Laing thường mô tả thế giới nội tâm của họ như một vùng đất hoang vu, không có bất kỳ dấu hiệu nào của sự sống. Có một trích dẫn từ cuốn sách của Laing, trong đó ông nói về bệnh nhân của mình và trích lời anh ta:
+<strong>Cái tôi trở nên khô cằn và chết chóc. Trong thế giới giấc mơ của mình, James trải nghiệm bản thân thậm chí còn cô độc hơn trong một thế giới hoang tàn so với lúc thức, ví dụ: "... Tôi đang đứng giữa một cảnh quan cằn cỗi. Nó hoàn toàn bằng phẳng. Không có sự sống nào trong tầm mắt. Cỏ hầu như không mọc. Chân tôi bị kẹt trong bùn..." "... Tôi đang ở một nơi cô quạnh đầy đá và cát. Tôi đã chạy trốn đến đó từ một thứ gì đó; bây giờ tôi đang cố gắng quay trở lại đâu đó nhưng không biết phải đi đường nào..."</strong>
+<p class="section-text fade-in">Nghe quen chứ? Và đó là sự phản chiếu chính xác thế giới của Johan, Johan thực sự, nơi cái tôi của cậu bị giam cầm. Tuy nhiên, cậu may mắn hơn những người phân liệt khác một chút - có chỗ cho một người nữa trong thế giới của cậu. Về mặt tinh thần, Johan chưa bao giờ thoát khỏi vùng đất hoang vu đó, chỉ có cơ thể cậu được cứu. Cậu gọi cảnh quan này là khung cảnh của Ngày Tận Thế, không chỉ vì cơ thể cậu đã cận kề cái chết trong chính không gian đó, mà vì nó quá giống với phong cảnh nội tâm của Johan. Đó là nơi cuối cùng linh hồn cậu nhìn thấy.
+     <h2 class="section-title">PHẦN 3: KINDERHEIM 511 VÀ NHÀ LIEBERT</h2>
+<p class="section-text fade-in">Cái tôi chân thật của một người, cư ngụ trong một thế giới của những bóng ma, ngừng tương tác với thế giới thực thông qua cơ thể của cá nhân đó. Vậy trong lúc đó nó bận làm gì?
+
+Thay vì là cốt lõi của cái tôi chân thật, cơ thể được cảm nhận như cốt lõi của một cái tôi giả tạo, mà một cái tôi 'chân thật', 'bên trong', phi cơ thể và tách biệt nhìn vào với sự dịu dàng, thích thú, hoặc căm ghét tùy theo từng trường hợp. [...] Cái tôi phi cơ thể, như một kẻ đứng nhìn tất cả những gì cơ thể làm, không trực tiếp tham gia vào bất cứ điều gì.
+<p class="section-text fade-in">Điều này đưa ra câu trả lời cho việc tại sao Kinderheim không có tác động hủy diệt đối với Johan như đối với những đứa trẻ khác. Cái tôi chân thật của cậu đã nằm ngoài tầm với, nó không thể bị chiếm đoạt bất kể họ làm gì với cậu từ bên ngoài.
+
+Họ không thể lấy được gì từ anh ta. "Họ chỉ có thể đánh đập tôi nhưng họ không thể làm hại tôi thực sự." Tức là, bất kỳ tổn thương nào đối với cơ thể anh ta cũng không thể thực sự làm anh ta đau.
+<p class="section-text fade-in">Theo một cách buồn bã, các thí nghiệm trên tâm lý của Johan đã không thành công, vì chính cậu, hoàn toàn không hay biết, đã tự bắt mình chịu đựng tất cả những nỗi kinh hoàng mà các quản ngục Kinderheim định áp đặt lên cậu. Bạn không thể giết những gì đã chết, rút cạn những gì trống rỗng, vật thể hóa những gì vô tri. Đó là lý do tại sao họ không thành công. Nhưng Johan, tất nhiên, là kết quả mà họ phấn đấu đạt được nhưng không thể: một con người quá sợ hãi và không có khả năng tự vệ đến mức bị đẩy đến việc từ bỏ sự nhạy cảm của mình để tồn tại.
+
+Do đó, từ bỏ sự tự chủ của mình trở thành phương tiện để bí mật bảo vệ nó; giả vờ ngây ngô, giả chết, trở thành một phương tiện để bảo tồn sự sống của mình. Tự biến mình thành đá trở thành một cách để không bị ai đó biến thành đá.
+   
+<p class="section-text fade-in">Với tôi, dường như Johan đã sẵn sàng ổn định cuộc sống và ngừng chạy trốn sau khi thoát khỏi Kinderheim 511. Nhưng cậu rời trại trẻ mồ côi với một nhận thức nguy hiểm mang tính sống còn - đôi khi là hoặc mày, hoặc tất cả những người khác; hành động của cậu cho thấy rõ cậu sẽ không ngần ngại xóa sổ mọi thứ và mọi người nếu điều đó đảm bảo sự an toàn. Tôi chỉ không nghĩ rằng cậu ngờ được mình lại rơi vào tình huống tương tự sớm như vậy khi được nhà Liebert nhận nuôi. Vấn đề ở cậu là cậu đã diễn theo, cậu trở thành những gì thế giới muốn cậu trở thành, nhưng vẫn không đủ để cuối cùng được để yên. Người đàn ông mà họ chạy trốn đã xuất hiện ngay trước cửa nhà và Johan mất bình tĩnh. Không gì giúp họ thoát khỏi những con quái vật - sống dưới những cái tên khác nhau, với những người chăm sóc khác nhau, ở những nơi khác nhau, cùng nhau, tách biệt - KHÔNG GÌ là đủ cả. Có lẽ đó là khoảng thời gian kế hoạch trở thành người sống sót cuối cùng của cậu được hình thành. Quét sạch mọi tia sáng của sự sống khỏi thế giới là nỗ lực cuối cùng để đạt được sự an toàn.
+
+Johan không quan tâm lắm đến cái chết vì cái chết hiện sinh của cậu đã xảy ra rồi, cậu đã cảm thấy chết và đóng băng hơn nhiều so với việc còn sống. Cậu đã tự thuyết phục bản thân rằng không có gì chân thật về mình, và trong hai người họ, em gái cậu mới là cái tôi chân thật. Không quan trọng nếu cậu chết, cậu chưa bao giờ ở đó ngay từ đầu. Nhưng ngay cả sau phát súng, cậu vẫn hy vọng được sống trong em gái mình. Mọi thứ diễn ra sau đêm mưa khốn khổ đó là nỗ lực để bảo vệ bản thân và em gái khỏi thế giới đã bám đuôi họ suốt cuộc đời. Cậu sẵn sàng tách khỏi cô và để cô sống dưới một cái tên khác nếu đó là cách để con quái vật cuối cùng mất dấu cô; cậu sẵn sàng bước vào thế giới ngầm, nắm quyền kiểm soát nền kinh tế Đức, giết người. Với tôi, dường như vì sự giam cầm cái tôi chân thật của mình trong cõi hư vô, cậu trở nên không thể nhận thức con người từ thế giới thực là đang sống và có sự tự chủ, đó là lý do buồn bã tại sao cậu có thể giết người dễ dàng đến vậy. Những gì cậu thấy xung quanh là những bóng ma, những đồ vật đang bắt chước con người, chứ không phải con người thực sự. Nhưng có những ngoại lệ. Chỉ có Anna và Tenma được hiển thị cùng với Johan trong vùng đất hoang vu của thế giới nội tâm cậu, nơi cái tôi chân thật của cậu cư ngụ - việc họ ở đó với cậu là cách để nói với chúng ta, những độc giả, rằng chỉ có hai người này thực sự biết Johan. Và do đó, chỉ có họ mới có thể được tha mạng.
+<strong>Tôi chỉ muốn nhấn mạnh: đối với Johan, 'hủy diệt thế giới' và 'là người sống sót cuối cùng' không phải là điều cậu làm cho vui, hay chỉ vì cậu có thể. Đó là nỗ lực cuối cùng của một đứa trẻ bị tra tấn, tin vào sự thù địch của mọi sinh vật sống, để tìm kiếm sự bình yên</strong>
+<h2 class="section-title">PHẦN 4: CÂU CHUYỆN QUÁI VẬT KHÔNG TÊN</h2>
+<p class="section-text fade-in">Tuy nhiên, cái tôi bị nạp đầy lòng thù hận trong sự ghen tị với cuộc sống phong phú, sống động, dồi dào vốn luôn ở nơi khác; luôn ở đó, không bao giờ ở đây. Cái tôi, như chúng ta đã nói, là trống rỗng và khô khốc. Người ta có thể gọi nó là một cái tôi miệng (oral self) ở mức độ nó trống rỗng và khao khát được tồn tại nhưng lại khiếp sợ việc bị lấp đầy. Nhưng tính chất miệng của nó là như thế này: nó không bao giờ có thể được thỏa mãn bởi bất kỳ lượng uống, ăn, nhai, nuốt nào. Nó không thể kết hợp bất cứ thứ gì vào mình. Nó vẫn là một cái hố không đáy; một cái miệng há hốc không bao giờ có thể lấp đầy. </p>
+
+<p class="section-text fade-in">Trong câu chuyện về con quái vật không tên, Johan có thể là cả con quái vật lẫn cậu bé bị một thực thể lạ chiếm hữu. Điều đó phụ thuộc vào cách bạn diễn giải nó. Câu chuyện này có thể là một ẩn dụ cho những gì đang xảy ra với cặp song sinh, những người được đại diện như những con quái vật không tên. Johan không thể duy trì là chính mình, luôn ẩn mình dưới những "khuôn mặt" khác nhau, thay đổi tên và danh tính. Tuy nhiên, cậu không thể ở lại trong bất kỳ cái nào quá lâu. Bản chất của cậu bùng nổ, phá hủy những chiếc mặt nạ này và bất cứ thứ gì hay bất cứ ai xung quanh trong quá trình đó. Nina mặt khác, ngay cả khi biết quá khứ của mình, đã chấp nhận sự thật. Chấp nhận sự lựa chọn của mẹ, chấp nhận số phận mà cô phải chịu đựng. Cô không còn cố gắng tỏ ra là ai khác, đã chọn tiếp tục cuộc sống của mình.
+
+Một cách giải thích thứ hai: Johan-Hoàng tử và Johan của chúng ta đều là những cậu bé yếu ớt bên bờ vực cái chết. Đối với mỗi người trong số họ, việc để Con Quái Vật vào, một thứ gì đó đáng sợ, phi tự nhiên đối với con người, là một cách để tồn tại. Vì vậy, Johan của chúng ta đã kìm nén sự nhạy cảm và dễ bị tổn thương của mình bằng cách giả vờ là một thứ không-hoàn-toàn-là-người, cho đến khi dấu vết và thậm chí cả những tham chiếu đến nhân tính của cậu gần như biến mất hoàn toàn. Tôi không nghĩ câu chuyện cổ tích đã ảnh hưởng đến cậu khi còn nhỏ, làm rối loạn ý thức của cậu. Điều thực sự nham hiểm về cuốn sách tranh này là nó đã báo trước số phận của Johan. Khi trưởng thành, cậu cầm cuốn sách này lên và nhìn thấy chính mình trong cả con quái vật, kẻ không thể chịu đựng cái tôi hiện tại và đã mang hình hài của kẻ khác, và cậu bé, người trong nỗ lực sinh tồn đã không còn là con người, đã phá hủy mọi thứ xung quanh mình. Tất cả những gì còn lại là sự cô độc. Hình ảnh của hoàng tử và con quái vật hòa làm một, và trong một điều chúng giống nhau - trong nỗi sợ mất mạng, chúng đã nói dối chủ yếu với chính mình, và lời nói dối đó đã phá hủy sự hiện hữu của mỗi người. Cả quái vật lẫn hoàng tử đều không thực sự cứu được những gì họ đang bảo vệ một cách tuyệt vọng.
+
+Thêm vào đó, bản thân cuốn sách là một vật thể từ tuổi thơ xa xôi của Johan, giờ gần như bị lãng quên, và cũng đóng vai trò như một lời nhắc nhở về thời gian khi cậu là một đứa trẻ bình thường. Johan luôn đeo mặt nạ, nhưng sự lừa dối lớn nhất trong tất cả các sự lừa dối của cậu không phải là sống dưới cái tên 'Johan Liebert', 'Franz Heinau', 'Erich Springer', hay bất kỳ cái tên nào khác. Lời nói dối tàn bạo nhất là đeo chiếc mặt nạ của con quái vật không tên, thậm chí thuyết phục bản thân rằng đây chính là con người cậu, rằng sự trống rỗng và hư vô là tất cả những gì thuộc về cậu. Đeo lốt con quái vật không tên trong nhiều năm, cậu gần như đã mất mọi ký ức về việc làm người, và cuốn sách trên tay cậu là một lời nhắc nhở đau đớn, bạo lực về sự tự lừa dối hèn nhát, nhân tính bị ruồng bỏ và cái tôi bị lãng quên của cậu.
+
+<h2 class="section-title">PHẦN 5: TÔI KHÔNG PHẢI LÀ EM, VÀ EM KHÔNG PHẢI LÀ TÔI</h2>
+<p class="section-text fade-in">Từ khoảnh khắc cuốn sách rơi vào tay, Johan có lẽ nhận ra rằng thế giới quan của mình bị méo mó rất nhiều. Một trong những niềm tin cơ bản của cậu về bản thân đã bị lung lay, vì vậy việc lật tẩy phần còn lại của những ảo tưởng trở thành ưu tiên hàng đầu. Cậu nhớ việc dàn dựng vụ thảm sát tại Kinderheim, nhưng niềm tin rằng cậu luôn có khả năng làm những việc như vậy đã bị lung lay. Cậu nghi ngờ rằng trong những ký ức đã mất, cậu sẽ tìm thấy câu trả lời cho câu hỏi mà cậu thậm chí chưa từng nghĩ đến việc hỏi. Nếu cậu không sinh ra là một con quái vật, làm thế nào cậu lại trở thành một con?
+
+Chúng ta không được phép nghe toàn bộ nội dung của cuốn băng. Chỉ có sự gắn bó của cậu với Anna là trở nên rõ ràng từ đó; nhưng có lẽ cậu tiếp tục nói về Biệt thự Hoa hồng Đỏ. Trong quá trình thẩm vấn, cậu có thể nhớ lại những lời của em gái, những lời cậu đã nghe đi nghe lại sau khi cô trở về. Câu chuyện của cô được kể ở ngôi thứ nhất: "Em đã thấy [....] Em nghe thấy […] Em là [...] Em đã chạy [...]". Trong bản ghi âm, cậu có thể lặp lại nguyên văn những gì nghe được từ em gái, và sau đó, khi là một người lớn nghe lại nó, đã hiểu sai ý nghĩa của những từ đó. Rốt cuộc, cậu nghe thấy chính mình nói "Tôi bị bắt đi, tôi thấy người chết, tôi bỏ chạy..." Và chỉ dựa trên cơ sở này, cậu bám vào câu chuyện về Biệt thự Hoa hồng Đỏ như một lời giải thích cho những gì cậu đã trở thành. (Tôi không có lời giải thích nào khác cho việc làm thế nào khác cậu có thể khám phá lại những gì đã xảy ra tại Biệt thự. Hãy sửa nếu tôi sai.) Sau đó Johan quyết định phá hủy nơi này. Mặc dù cậu rõ ràng không nhận ra nó, nó chưa gợi lại ký ức gì.
+
+Lời nói của cậu trước bức chân dung của mẹ về việc những cái tên không quan trọng có ý nghĩa gì? Cậu chắc chắn vẫn coi mình là một tập hợp nhân cách duy nhất với em gái, và tin rằng trong mắt mẹ, họ trông giống nhau. Tôi chỉ có thể giả định rằng cậu đã nói với Čapek rằng Nina sẽ giết ông ta vì cậu lầm tưởng Nina cũng có cùng quan điểm về sự kết nối của họ như cậu. Nếu cậu sẵn sàng giết người vì cô, cô cũng sẽ làm như vậy. Tất nhiên, cậu đã sai: cậu coi mình là một phần mở rộng, một cái bóng của em gái, coi niềm vui và nỗi đau của cô là của riêng mình; Nina, dù yêu anh trai mình đến đâu, cũng không coi mình và anh là một thực thể, và vạch rõ ranh giới giữa sự hiện hữu của cô và của Johan.
+
+<storng>Khả năng trải nghiệm bản thân như một cá thể tự chủ có nghĩa là người đó thực sự nhận ra rằng mình là một người riêng biệt với tất cả những người khác. Dù tôi có cam kết sâu sắc đến đâu trong niềm vui hay đau khổ với người khác, anh ta không phải là tôi, và tôi không phải là anh ta.</storng>
+
+<p class="section-text fade-in">Dưới đây là phần dịch cho toàn bộ các phần còn lại của bài luận, được chia làm hai phong cách như bạn yêu cầu.
+
+1. Bản dịch Sát nghĩa & Tự nhiên (Phù hợp nghiên cứu, blog phân tích, giọng văn trầm lắng)
+PHẦN 2: NGUỒN GỐC SỰ BẤT AN HIỆN SINH CỦA JOHAN
+
+Đầu tiên, tất nhiên là việc cải trang thành em gái. Cậu bé có lẽ đã cảm nhận được rằng việc này được thực hiện vì một lý do nào đó chứ không phải để cho vui. Gia đình họ đã sống một "cuộc sống lặng lẽ", điều này có lẽ rất khó thực hiện với hai đứa trẻ :)) Vì vậy, giả thuyết của tôi là: cặp song sinh lớn lên với cảm giác rằng chúng phải trốn chạy khỏi một mối nguy hiểm nào đó và tránh gây chú ý. Nhưng Anna không cần phải giấu giếm ngoại hình thật của mình, không giống như Johan, người mà việc giả vờ làm một ai đó khác đã trở thành một phần quan trọng để được an toàn.
+
+Cậu ấy đã ẩn mình dưới lốt một người khác, hay cậu chỉ là kẻ mạo danh cho một con người thật sự chắc chắn đang hiện diện trên thế giới này? Bởi vì tất cả mọi người, ngoại trừ mẹ và em gái, đều chỉ biết đến người em gái, bé gái, cô con gái. Cô bé chắc chắn là thật. Liệu cậu ấy có bao giờ thực sự tồn tại ở đó không? Ngay cả người mẹ cũng không thể phân biệt được chúng. Cậu ấy đã trở thành một người anh em song sinh ảo ảnh.
+
+Khoảnh khắc người mẹ do dự chỉ càng củng cố thêm những suy nghĩ xâm lấn trong đầu Johan. Bà đã có một người trong tâm trí, liệu có phải bà do dự vì ngay khoảnh khắc đó bà không thể phân biệt được đâu là đứa trẻ mình định từ bỏ? Liệu cậu ấy chỉ có cơ hội sống sót, về mặt sinh học và hiện sinh, nếu cậu cải trang thành người khác? Bởi vì nếu mọi người nhìn thấy con người thật của cậu, cậu sẽ không được cứu?
+
+Phỏng đoán của tôi là nhận thức của Johan về bản thân đã bị méo mó đến mức cậu không còn coi mình là thực thể thật sự nữa; rằng cái tôi chân thật đáng được bảo vệ không nằm bên trong cậu, mà chính là em gái cậu, và cậu hoàn toàn là đồ giả. Cậu chỉ là một kẻ giả mạo có nhiệm vụ xua đuổi nguy hiểm khỏi cái tôi chân thật. Hãy nhớ lại khái niệm về cái tôi giả và thật, cái tôi giả được tạo ra chỉ để bảo vệ cái tôi thật. Việc Johan nói "Anh là em" và gọi Anna là "cái tôi khác của anh" gián tiếp xác nhận giả định của tôi - cậu bắt đầu coi bản thân và em gái như một hệ thống thống nhất, nơi cậu không gì hơn là một mặt tiền che đậy, còn em gái cậu mới là con người sống động, có thật và mang tính thực chất.
+
+Sự do dự của người mẹ khi lựa chọn giữa hai đứa con có thể đã "đổ thêm dầu" vào cảm giác vốn đã mong manh của Johan về sự thực chất của chính mình. Nhỡ đâu bà không phải đang chọn giữa cặp song sinh, mà đơn giản là lúc đó bà không thể nhận ra đứa nào là đứa nào? Giữ một đứa trẻ cụ thể trong tâm trí, nhưng bà chỉ đơn giản là không thể phân biệt được ai thực sự là đứa trẻ bà muốn giữ và ai đang đóng giả đứa đó? Đâu là cái tôi thật và đâu là cái giả?
+
+Cảm giác bất an, sự cô đơn, nỗi đau bị mẹ bỏ rơi, lòng thương cảm cho người em gái, và cảm giác tội lỗi to lớn rằng người thật sự của hai anh em đã rơi vào nanh vuốt của những con quái vật. Cả cuộc đời của cặp song sinh bao gồm những nỗ lực không ngừng nghỉ, nếu không phải để giết họ, thì là để phá hủy cuộc sống và danh tính của họ.
+
+Những ngày sau khi Anna trở về trước khi được tìm thấy ở biên giới Séc-Đức đánh dấu cái chết hiện sinh của Johan. Có thứ gì đó trong cậu đã sụp đổ trong khoảng thời gian đó. Khi mẹ cậu lựa chọn giữa họ, cậu vẫn là một đứa trẻ bình thường (hoặc ít nhất, không có gì được mô tả trong manga cho thấy sự bất thường của cậu) - sợ bị mẹ bỏ rơi, sợ bị giao nộp để bị xâu xé bởi những kẻ lạ mặt độc ác không rõ ý đồ, những kẻ mà cậu đã phải chạy trốn từ khi mới bắt đầu có ký ức. Tất cả những cảm xúc này đã chết trong cậu. Chính xác là khi nào và như thế nào, chúng ta không biết, nhưng một Johan hoàn toàn khác đã băng qua biên giới Séc-Đức - tách biệt, bình thản đến đáng sợ, thờ ơ với cái chết. Theo một nghĩa nào đó, cậu không còn gì để sợ nữa, chuỗi sự kiện ngắn ngủi đó đã tàn khốc đến mức cậu đã vô tình thực hiện hành vi tự sát hiện sinh. Ngay cả khi cái chết đang chờ đợi họ, sẽ không ai có thể chạm tay vào họ, không ai có thể vặn vẹo linh hồn và tâm trí họ nữa.
+
+Các bệnh nhân của Laing thường mô tả thế giới nội tâm của họ như một vùng đất hoang vu, không có bất kỳ dấu hiệu nào của sự sống. Có một trích dẫn từ cuốn sách của Laing, trong đó ông nói về bệnh nhân của mình và trích lời anh ta:
+
+Cái tôi trở nên khô cằn và chết chóc. Trong thế giới giấc mơ của mình, James trải nghiệm bản thân thậm chí còn cô độc hơn trong một thế giới hoang tàn so với lúc thức, ví dụ: "... Tôi đang đứng giữa một cảnh quan cằn cỗi. Nó hoàn toàn bằng phẳng. Không có sự sống nào trong tầm mắt. Cỏ hầu như không mọc. Chân tôi bị kẹt trong bùn..." "... Tôi đang ở một nơi cô quạnh đầy đá và cát. Tôi đã chạy trốn đến đó từ một thứ gì đó; bây giờ tôi đang cố gắng quay trở lại đâu đó nhưng không biết phải đi đường nào..."
+
+Nghe quen chứ? Và đó là sự phản chiếu chính xác thế giới của Johan, Johan thực sự, nơi cái tôi của cậu bị giam cầm. Tuy nhiên, cậu may mắn hơn những người phân liệt khác một chút - có chỗ cho một người nữa trong thế giới của cậu. Về mặt tinh thần, Johan chưa bao giờ thoát khỏi vùng đất hoang vu đó, chỉ có cơ thể cậu được cứu. Cậu gọi cảnh quan này là khung cảnh của Ngày Tận Thế, không chỉ vì cơ thể cậu đã cận kề cái chết trong chính không gian đó, mà vì nó quá giống với phong cảnh nội tâm của Johan. Đó là nơi cuối cùng linh hồn cậu nhìn thấy.
+
+PHẦN 3: KINDERHEIM 511 VÀ NHÀ LIEBERT
+
+Cái tôi chân thật của một người, cư ngụ trong một thế giới của những bóng ma, ngừng tương tác với thế giới thực thông qua cơ thể của cá nhân đó. Vậy trong lúc đó nó bận làm gì?
+
+Thay vì là cốt lõi của cái tôi chân thật, cơ thể được cảm nhận như cốt lõi của một cái tôi giả tạo, mà một cái tôi 'chân thật', 'bên trong', phi cơ thể và tách biệt nhìn vào với sự dịu dàng, thích thú, hoặc căm ghét tùy theo từng trường hợp. [...] Cái tôi phi cơ thể, như một kẻ đứng nhìn tất cả những gì cơ thể làm, không trực tiếp tham gia vào bất cứ điều gì.
+
+Điều này đưa ra câu trả lời cho việc tại sao Kinderheim không có tác động hủy diệt đối với Johan như đối với những đứa trẻ khác. Cái tôi chân thật của cậu đã nằm ngoài tầm với, nó không thể bị chiếm đoạt bất kể họ làm gì với cậu từ bên ngoài.
+
+Họ không thể lấy được gì từ anh ta. "Họ chỉ có thể đánh đập tôi nhưng họ không thể làm hại tôi thực sự." Tức là, bất kỳ tổn thương nào đối với cơ thể anh ta cũng không thể thực sự làm anh ta đau.
+
+Theo một cách buồn bã, các thí nghiệm trên tâm lý của Johan đã không thành công, vì chính cậu, hoàn toàn không hay biết, đã tự bắt mình chịu đựng tất cả những nỗi kinh hoàng mà các quản ngục Kinderheim định áp đặt lên cậu. Bạn không thể giết những gì đã chết, rút cạn những gì trống rỗng, vật thể hóa những gì vô tri. Đó là lý do tại sao họ không thành công. Nhưng Johan, tất nhiên, là kết quả mà họ phấn đấu đạt được nhưng không thể: một con người quá sợ hãi và không có khả năng tự vệ đến mức bị đẩy đến việc từ bỏ sự nhạy cảm của mình để tồn tại.
+
+Do đó, từ bỏ sự tự chủ của mình trở thành phương tiện để bí mật bảo vệ nó; giả vờ ngây ngô, giả chết, trở thành một phương tiện để bảo tồn sự sống của mình. Tự biến mình thành đá trở thành một cách để không bị ai đó biến thành đá.
+
+Với tôi, dường như Johan đã sẵn sàng ổn định cuộc sống và ngừng chạy trốn sau khi thoát khỏi Kinderheim 511. Nhưng cậu rời trại trẻ mồ côi với một nhận thức nguy hiểm mang tính sống còn - đôi khi là hoặc mày, hoặc tất cả những người khác; hành động của cậu cho thấy rõ cậu sẽ không ngần ngại xóa sổ mọi thứ và mọi người nếu điều đó đảm bảo sự an toàn. Tôi chỉ không nghĩ rằng cậu ngờ được mình lại rơi vào tình huống tương tự sớm như vậy khi được nhà Liebert nhận nuôi. Vấn đề ở cậu là cậu đã diễn theo, cậu trở thành những gì thế giới muốn cậu trở thành, nhưng vẫn không đủ để cuối cùng được để yên. Người đàn ông mà họ chạy trốn đã xuất hiện ngay trước cửa nhà và Johan mất bình tĩnh. Không gì giúp họ thoát khỏi những con quái vật - sống dưới những cái tên khác nhau, với những người chăm sóc khác nhau, ở những nơi khác nhau, cùng nhau, tách biệt - KHÔNG GÌ là đủ cả. Có lẽ đó là khoảng thời gian kế hoạch trở thành người sống sót cuối cùng của cậu được hình thành. Quét sạch mọi tia sáng của sự sống khỏi thế giới là nỗ lực cuối cùng để đạt được sự an toàn.
+
+Johan không quan tâm lắm đến cái chết vì cái chết hiện sinh của cậu đã xảy ra rồi, cậu đã cảm thấy chết và đóng băng hơn nhiều so với việc còn sống. Cậu đã tự thuyết phục bản thân rằng không có gì chân thật về mình, và trong hai người họ, em gái cậu mới là cái tôi chân thật. Không quan trọng nếu cậu chết, cậu chưa bao giờ ở đó ngay từ đầu. Nhưng ngay cả sau phát súng, cậu vẫn hy vọng được sống trong em gái mình. Mọi thứ diễn ra sau đêm mưa khốn khổ đó là nỗ lực để bảo vệ bản thân và em gái khỏi thế giới đã bám đuôi họ suốt cuộc đời. Cậu sẵn sàng tách khỏi cô và để cô sống dưới một cái tên khác nếu đó là cách để con quái vật cuối cùng mất dấu cô; cậu sẵn sàng bước vào thế giới ngầm, nắm quyền kiểm soát nền kinh tế Đức, giết người. Với tôi, dường như vì sự giam cầm cái tôi chân thật của mình trong cõi hư vô, cậu trở nên không thể nhận thức con người từ thế giới thực là đang sống và có sự tự chủ, đó là lý do buồn bã tại sao cậu có thể giết người dễ dàng đến vậy. Những gì cậu thấy xung quanh là những bóng ma, những đồ vật đang bắt chước con người, chứ không phải con người thực sự. Nhưng có những ngoại lệ. Chỉ có Anna và Tenma được hiển thị cùng với Johan trong vùng đất hoang vu của thế giới nội tâm cậu, nơi cái tôi chân thật của cậu cư ngụ - việc họ ở đó với cậu là cách để nói với chúng ta, những độc giả, rằng chỉ có hai người này thực sự biết Johan. Và do đó, chỉ có họ mới có thể được tha mạng.
+
+Tôi chỉ muốn nhấn mạnh: đối với Johan, 'hủy diệt thế giới' và 'là người sống sót cuối cùng' không phải là điều cậu làm cho vui, hay chỉ vì cậu có thể. Đó là nỗ lực cuối cùng của một đứa trẻ bị tra tấn, tin vào sự thù địch của mọi sinh vật sống, để tìm kiếm sự bình yên.
+
+PHẦN 4: CÂU CHUYỆN QUÁI VẬT KHÔNG TÊN
+
+Tuy nhiên, cái tôi bị nạp đầy lòng thù hận trong sự ghen tị với cuộc sống phong phú, sống động, dồi dào vốn luôn ở nơi khác; luôn ở đó, không bao giờ ở đây. Cái tôi, như chúng ta đã nói, là trống rỗng và khô khốc. Người ta có thể gọi nó là một cái tôi miệng (oral self) ở mức độ nó trống rỗng và khao khát được tồn tại nhưng lại khiếp sợ việc bị lấp đầy. Nhưng tính chất miệng của nó là như thế này: nó không bao giờ có thể được thỏa mãn bởi bất kỳ lượng uống, ăn, nhai, nuốt nào. Nó không thể kết hợp bất cứ thứ gì vào mình. Nó vẫn là một cái hố không đáy; một cái miệng há hốc không bao giờ có thể lấp đầy.
+
+Trong câu chuyện về con quái vật không tên, Johan có thể là cả con quái vật lẫn cậu bé bị một thực thể lạ chiếm hữu. Điều đó phụ thuộc vào cách bạn diễn giải nó. Câu chuyện này có thể là một ẩn dụ cho những gì đang xảy ra với cặp song sinh, những người được đại diện như những con quái vật không tên. Johan không thể duy trì là chính mình, luôn ẩn mình dưới những "khuôn mặt" khác nhau, thay đổi tên và danh tính. Tuy nhiên, cậu không thể ở lại trong bất kỳ cái nào quá lâu. Bản chất của cậu bùng nổ, phá hủy những chiếc mặt nạ này và bất cứ thứ gì hay bất cứ ai xung quanh trong quá trình đó. Nina mặt khác, ngay cả khi biết quá khứ của mình, đã chấp nhận sự thật. Chấp nhận sự lựa chọn của mẹ, chấp nhận số phận mà cô phải chịu đựng. Cô không còn cố gắng tỏ ra là ai khác, đã chọn tiếp tục cuộc sống của mình.
+
+Một cách giải thích thứ hai: Johan-Hoàng tử và Johan của chúng ta đều là những cậu bé yếu ớt bên bờ vực cái chết. Đối với mỗi người trong số họ, việc để Con Quái Vật vào, một thứ gì đó đáng sợ, phi tự nhiên đối với con người, là một cách để tồn tại. Vì vậy, Johan của chúng ta đã kìm nén sự nhạy cảm và dễ bị tổn thương của mình bằng cách giả vờ là một thứ không-hoàn-toàn-là-người, cho đến khi dấu vết và thậm chí cả những tham chiếu đến nhân tính của cậu gần như biến mất hoàn toàn. Tôi không nghĩ câu chuyện cổ tích đã ảnh hưởng đến cậu khi còn nhỏ, làm rối loạn ý thức của cậu. Điều thực sự nham hiểm về cuốn sách tranh này là nó đã báo trước số phận của Johan. Khi trưởng thành, cậu cầm cuốn sách này lên và nhìn thấy chính mình trong cả con quái vật, kẻ không thể chịu đựng cái tôi hiện tại và đã mang hình hài của kẻ khác, và cậu bé, người trong nỗ lực sinh tồn đã không còn là con người, đã phá hủy mọi thứ xung quanh mình. Tất cả những gì còn lại là sự cô độc. Hình ảnh của hoàng tử và con quái vật hòa làm một, và trong một điều chúng giống nhau - trong nỗi sợ mất mạng, chúng đã nói dối chủ yếu với chính mình, và lời nói dối đó đã phá hủy sự hiện hữu của mỗi người. Cả quái vật lẫn hoàng tử đều không thực sự cứu được những gì họ đang bảo vệ một cách tuyệt vọng.
+
+Thêm vào đó, bản thân cuốn sách là một vật thể từ tuổi thơ xa xôi của Johan, giờ gần như bị lãng quên, và cũng đóng vai trò như một lời nhắc nhở về thời gian khi cậu là một đứa trẻ bình thường. Johan luôn đeo mặt nạ, nhưng sự lừa dối lớn nhất trong tất cả các sự lừa dối của cậu không phải là sống dưới cái tên 'Johan Liebert', 'Franz Heinau', 'Erich Springer', hay bất kỳ cái tên nào khác. Lời nói dối tàn bạo nhất là đeo chiếc mặt nạ của con quái vật không tên, thậm chí thuyết phục bản thân rằng đây chính là con người cậu, rằng sự trống rỗng và hư vô là tất cả những gì thuộc về cậu. Đeo lốt con quái vật không tên trong nhiều năm, cậu gần như đã mất mọi ký ức về việc làm người, và cuốn sách trên tay cậu là một lời nhắc nhở đau đớn, bạo lực về sự tự lừa dối hèn nhát, nhân tính bị ruồng bỏ và cái tôi bị lãng quên của cậu.
+
+PHẦN 5: TÔI KHÔNG PHẢI LÀ EM, VÀ EM KHÔNG PHẢI LÀ TÔI
+
+Từ khoảnh khắc cuốn sách rơi vào tay, Johan có lẽ nhận ra rằng thế giới quan của mình bị méo mó rất nhiều. Một trong những niềm tin cơ bản của cậu về bản thân đã bị lung lay, vì vậy việc lật tẩy phần còn lại của những ảo tưởng trở thành ưu tiên hàng đầu. Cậu nhớ việc dàn dựng vụ thảm sát tại Kinderheim, nhưng niềm tin rằng cậu luôn có khả năng làm những việc như vậy đã bị lung lay. Cậu nghi ngờ rằng trong những ký ức đã mất, cậu sẽ tìm thấy câu trả lời cho câu hỏi mà cậu thậm chí chưa từng nghĩ đến việc hỏi. Nếu cậu không sinh ra là một con quái vật, làm thế nào cậu lại trở thành một con?
+
+Chúng ta không được phép nghe toàn bộ nội dung của cuốn băng. Chỉ có sự gắn bó của cậu với Anna là trở nên rõ ràng từ đó; nhưng có lẽ cậu tiếp tục nói về Biệt thự Hoa hồng Đỏ. Trong quá trình thẩm vấn, cậu có thể nhớ lại những lời của em gái, những lời cậu đã nghe đi nghe lại sau khi cô trở về. Câu chuyện của cô được kể ở ngôi thứ nhất: "Em đã thấy [....] Em nghe thấy […] Em là [...] Em đã chạy [...]". Trong bản ghi âm, cậu có thể lặp lại nguyên văn những gì nghe được từ em gái, và sau đó, khi là một người lớn nghe lại nó, đã hiểu sai ý nghĩa của những từ đó. Rốt cuộc, cậu nghe thấy chính mình nói "Tôi bị bắt đi, tôi thấy người chết, tôi bỏ chạy..." Và chỉ dựa trên cơ sở này, cậu bám vào câu chuyện về Biệt thự Hoa hồng Đỏ như một lời giải thích cho những gì cậu đã trở thành. (Tôi không có lời giải thích nào khác cho việc làm thế nào khác cậu có thể khám phá lại những gì đã xảy ra tại Biệt thự. Hãy sửa nếu tôi sai.) Sau đó Johan quyết định phá hủy nơi này. Mặc dù cậu rõ ràng không nhận ra nó, nó chưa gợi lại ký ức gì.
+
+Lời nói của cậu trước bức chân dung của mẹ về việc những cái tên không quan trọng có ý nghĩa gì? Cậu chắc chắn vẫn coi mình là một tập hợp nhân cách duy nhất với em gái, và tin rằng trong mắt mẹ, họ trông giống nhau. Tôi chỉ có thể giả định rằng cậu đã nói với Čapek rằng Nina sẽ giết ông ta vì cậu lầm tưởng Nina cũng có cùng quan điểm về sự kết nối của họ như cậu. Nếu cậu sẵn sàng giết người vì cô, cô cũng sẽ làm như vậy. Tất nhiên, cậu đã sai: cậu coi mình là một phần mở rộng, một cái bóng của em gái, coi niềm vui và nỗi đau của cô là của riêng mình; Nina, dù yêu anh trai mình đến đâu, cũng không coi mình và anh là một thực thể, và vạch rõ ranh giới giữa sự hiện hữu của cô và của Johan.
+
+Khả năng trải nghiệm bản thân như một cá thể tự chủ có nghĩa là người đó thực sự nhận ra rằng mình là một người riêng biệt với tất cả những người khác. Dù tôi có cam kết sâu sắc đến đâu trong niềm vui hay đau khổ với người khác, anh ta không phải là tôi, và tôi không phải là anh ta.
+
+Giả định về việc bị Bonaparta bắt đi và bị mẹ vứt bỏ là một trong những điểm tựa cuối cùng bảo vệ cậu khỏi sự thật kinh hoàng - cậu mới chính là người đã biến bản thân thành quái vật. Cậu khóc khi nghe câu chuyện của Nina. Nhận ra rằng họ không phải là một, và cô chưa bao giờ nhìn nhận Johan theo cách này. Cô không phải là cái tôi chân thật của cậu, và cậu không phải là cái tôi giả tạo của em gái. Cậu nhìn thấy ngày càng rõ ràng hơn những đường nét của cái tôi chân thật bên trong mình, và cậu hoàn toàn không thích bức tranh đang hiện ra trước mắt. Tất cả sự cứu rỗi mà cậu đang làm hóa ra là một sự giả tạo không mang lại cho bất kỳ ai trong cặp song sinh kết quả mong đợi. Cậu trải nghiệm cảm giác tội lỗi khi phủ nhận sự tồn tại của chính mình và trở nên giận dữ đến mức quyết định tự sát, một lần và mãi mãi. Giờ đây cậu đã thấy cái tôi chân thật của mình - mang tính hủy diệt, không có lý do chính đáng. Và nhận ra nó phải bị diệt trừ, cùng với người đàn ông, Con Quái Vật, kẻ đã biến cậu thành như vậy - Franz Bonaparta.
+
+<h2 class="section-title">PHẦN 6: RUHENHEIM</h2>
+
+<p class="section-text fade-in">Màn chốt hạ ở Ruhenheim. Đến nhà cũ Bonaparta, thấy đống tranh vẽ hai anh em, nó hiểu Bonaparta không phải 'con quái vật bên ngoài'.
+
+Nó từng đổ lỗi cho lão làm nó thành sát nhân. Nhưng nhìn tranh thì thấy lão đã thay đổi, và hai anh em thoát được là nhờ lòng trắc ẩn của lão. Không phải để bênh Bonaparta, nhưng tranh vẽ chứng minh lão có ý tốt (dù ban đầu thì không).
+
+Hóa ra lúc Bonaparta đến thăm, lão không còn nguy hiểm nữa. Johan nhận ra đêm đó mình đã lỡ tay, giết nhà Liebert là sai lầm chí mạng đẩy nó ra xa em gái và rơi xuống hố sâu tuyệt vọng. Cái sự kiện làm nó tin thế giới này toàn kẻ thù hóa ra là do nó tự tưởng tượng ra vì sợ hãi. Pha này là giọt nước tràn ly. Mọi hình tượng về bản thân sụp đổ hoàn toàn.
+
+Cái kết của "Monster" là Johan nhận ra mình chắc chắn CÓ TỒN TẠI. Nó là thật, là nó. Và chính nó lại nằm trong số những kẻ phủ nhận quyền sống của mình; nó không dám đứng lên giành quyền sống như em gái. Nó mải xóa dấu vết đến mức không thấy vệt máu dài sau lưng - bằng chứng cho sự tồn tại của nó. Nó chả cần làm mấy chuyện kinh khủng đó. Nó cố trốn mấy kẻ ác đến mức tự giết cái tôi của mình trước khi ai kịp chạm vào.
+<strong>Tội lỗi của hắn là hắn không dám sống dù lương tâm bảo hắn sai. Hắn tội ở chỗ tự quyết định rằng mình không có quyền sống, và tự chặn đường sống của mình.</strong>
+Sau tất cả, Johan không tha thứ được cho bản thân. Vì đã tự ném mình vào bóng tối. Vì đã tự biến mình thành quái vật. Nó cũng xứng đáng có cuộc sống bình thường và được yêu thương. Nó chỉ tự kỷ ám thị là mình không phải người thôi. Nó muốn bảo vệ mọi người khỏi chính nó. Nó nghĩ tình yêu của mình là tai họa - vì nó mà Anna mất tất cả, Tenma phải trốn chui trốn lủi.
+<strong>Người phân liệt hay tin vào sự hủy diệt của mình. Yêu ai là hại người đó. Tình yêu của hắn nguy hiểm vãi. Hắn cô lập không chỉ vì mình, mà còn vì lo cho người khác. [...] 'Sẽ không công bằng cho bất kỳ ai tôi yêu, nếu tôi yêu người đó.' Hắn chìm vào hư vô để bảo vệ sự hiện hữu khỏi chính mình.</strong>
+
+Giờ nó muốn chết thật sự. Cái kết thực sự. Trước mặt Bonaparta và Tenma, nó không bắn Franz, vì nó không còn đổ lỗi cho lão nữa. Nhưng đến chết vẫn sai. Vẫn nghĩ mình không có quyền tồn tại, nó muốn cười vào mặt thế giới lần cuối, và chết dưới tay người từng cứu nó. Đúng không, Bác sĩ Tenma?... Thề là tôi muốn thấy cái kết khác. Em gái tha thứ, ân nhân không hối hận. Những người thân yêu công nhận quyền sống của nó. Nhưng thôi, đành chịu. Tôi muốn tin là nó có ý nghĩa gì đó với Johan... Nhưng chắc chắn Johan ở cuối truyện là một người khác hẳn. Tan vỡ, thảm hại. Nhưng cuối cùng đó mới thực sự là nó. "Tôi nghĩ tôi hiểu kết phim rồi. Siêu nhân Steiner, ông ấy có lẽ, đã trở lại làm người."
+<h2 class="section-title">PHẦN 7: CUỘC ĐÀO TẨU CUỐI CÙNG</h2>
+<p class="section-text fade-in">Bà mẹ đóng vai trò to lớn trong vụ "ngáo" hiện sinh của con cái. Đây là trích dẫn từ "The Divided Self":
+
+... phát triển cái tôi cần trải nghiệm bản thân dưới ánh mắt yêu thương của mẹ. Hắn cảm thấy bố mẹ không muốn có hắn, và chưa bao giờ tha thứ vì hắn đã sinh ra. [...] Hắn bị coi như không khí. Hắn thấy tội lỗi chỉ vì 'có mặt trên đời'. Mẹ hắn chỉ biết mình bà thôi. Bà mù tịt về hắn.
+
+Sự lựa chọn của mẹ Johan là khởi nguồn mọi đau khổ. Nhưng Johan không biết bà đã đặt tên cho cả hai. Bà đã mong chờ có cả hai đứa. Bà luôn thừa nhận cả hai, chứ không phải coi chúng là một cục chia đôi.
+
+Nhưng Johan nghe Tenma nói xong trông sốc vãi. Tiết lộ này có khi lại mở ra cái địa ngục mới. Cánh cửa không được mở. Sau đó là thiên đường hay quái vật khác? Tenma nói mẹ đặt tên cho cả hai, có khi lại dìm Johan xuống đáy. Nơi mẹ công nhận cả hai nhưng lại nghiêm túc chọn bỏ một đứa.
+
+Chuyện này chả có ngoài đời đâu, nhưng trong truyện thì việc Johan chỉ tỉnh dậy sau khi nghe Tenma nói là có ý đồ cả. Nó kẹt giữa sống và chết lâu thế là biểu tượng đấy. Kiểu như nó đang chày cối không muốn sống lại. Nhưng nó chưa chết - một phần Johan vẫn bám lấy sự sống.
+
+Lúc tỉnh lại, nó khốn khổ vì biết sự thật. Nó muốn chết, nhưng Tenma không bắn, em gái tha thứ - chả giống kịch bản nó tính tí nào. Nó có thể nhìn ký ức về mẹ theo cách mới. Nó thừa nhận đó là lý do đủ to để nó bỏ làm người, vì thế giới quá nguy hiểm. Giả vờ là bản năng sinh tồn thôi. Có lẽ, cuối cùng nó cũng tha thứ cho bản thân. Không còn ai để đổ lỗi, kể cả chính mình. (Nói rõ nhé: "tha thứ cho bản thân" không phải là phủi tay mấy tội ác nó làm. Mà là tha thứ cho việc nó đã tự hành hạ bản thân, vì hoàn cảnh xô đẩy thôi.)
+
+Nó chấp nhận rằng mình có quyền tồn tại ngay từ đầu. Cuối cùng, trích đoạn sách của Laing:
+
+... Chắc chắn rằng mình có một người mẹ yêu thương mình, yêu tất cả con người mình; ngay cả nước tiểu và phân của mình. ... Nếu không anh ta cảm thấy mình không có quyền tồn tại. ... Bạn chỉ có thể bị phá vỡ nếu bạn đã vỡ vụn sẵn rồi. [...] ... Điều duy nhất tôi chắc chắn là trở thành một kẻ 'tâm thần phân liệt'. ... Điều đó ít nhất cho tôi một danh tính. [Điều gì đã khiến cô thay đổi?] Khi tôi chắc chắn rằng ông sẽ để tôi cảm thấy như con của ông... Tôi có thể cho phép mình chỉ là tôi và không cần một danh hiệu nào cả. ... Ở bệnh viện tôi có thể được để yên. ... Nhưng rồi tôi nhận ra rằng tôi có thể có tình yêu và niềm vui trong thế giới thực và tôi bắt đầu ghét bệnh viện.
+
+Đoạn này giống Johan vãi: khao khát sống, nghi ngờ tình mẹ, mối liên kết với Tenma... Bác sĩ không chỉ tha cho nó, mà chủ động cứu nó. Và giống như bệnh nhân kia khó bỏ cái mác "điên" vì đó là thứ duy nhất định nghĩa cô ta, Johan cũng không nỡ bỏ cái mặt nạ quái vật không tên. Đó là hằng số duy nhất đời nó. Nhưng giờ nó biết cái "không tên" đó là xạo. Nó chỉ là nó.
+
+Johan chọn sống hay chết thì tùy anh em tranh luận. Tôi chỉ muốn tin là tia hy vọng mới đã kéo nó ra khỏi giường bệnh.
+
+
+
+
+    <section class="quote-section fade-in">
+    <div class="quote-text">
+        "The only thing all humans are equal in is death."
+    </div>
+    <div class="quote-author">— Johan Liebert —</div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Linh Osimi</p>
+    <p>Monster — Naoki Urasawa</p>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
