@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Visual Novel - Full Features</title>
+    <style>
+        /* --- 1. Cấu hình chung --- */
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+        }
+
+        /* --- 2. Lớp Nền (Background Layer) --- */
+        /* Tách riêng nền ra div riêng để dễ làm hiệu ứng chuyển cảnh */
+        #bg-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            transition: opacity 0.5s ease-in-out; /* Hiệu ứng mờ dần khi đổi cảnh */
+        }
+
+        /* --- 3. Nhân vật --- */
+        #character {
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            height: 90%;
+            transition: opacity 0.2s ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+            z-index: 5;
+            opacity: 1;
+        }
+        #character.fading { opacity: 0; } /* Class ẩn nhân vật khi đổi biểu cảm */
+
+        /* --- 4. Hộp thoại --- */
+        #dialogue-box {
+            position: absolute;
+            bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: 80%; max-width: 800px; height: 150px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #fff;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            z-index: 10;
+            display: none;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        #name-tag {
+            font-weight: bold; font-size: 1.2em; color: #ffcc00;
+            margin-bottom: 10px; text-shadow: 1px 1px 2px black;
+        }
+        #text-content { font-size: 1.1em; line-height: 1.5; }
+
+        /* --- 5. Nút lựa chọn --- */
+        #choices-container {
+            position: absolute;
+            top: 40%; left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex; flex-direction: column;
+            gap: 15px; z-index: 20;
+            width: 100%; align-items: center;
+        }
+        .choice-btn {
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(56,56,56,0.9) 100%);
+            color: white; border: 1px solid rgba(255,255,255,0.5);
+            padding: 15px 30px; font-size: 1.2em; cursor: pointer;
+            border-radius: 50px; transition: 0.3s; min-width: 300px;
+        }
+        .choice-btn:hover {
+            background: rgba(255, 255, 255, 0.9); color: black;
+            transform: scale(1.05); box-shadow: 0 0 15px #fff;
+        }
+
+      
+        #music-control {
+            position: absolute;
+            top: 20px; right: 20px;
+            z-index: 100;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid white;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            display: none; /* Hiện khi game bắt đầu */
+        }
+        #music-control:hover { background: white; color: black; }
+
+        /* --- 7. Màn hình Start --- */
+        #start-screen {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 100; color: white; font-size: 2em;
+            cursor: pointer; flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgm" loop>
+        <source src="Cry For Me (feat. 愛海).mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="voice-channel"></audio>
+
+    <div id="game-container">
+        <div id="bg-layer" style="background-image: url('https://tse2.mm.bing.net/th/id/OIP.fATGsJ0_GTGmiRA14p95wwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3');"></div>
+
+        <img id="character" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Character">
+
+        <div id="choices-container"></div>
+
+        <div id="dialogue-box">
+            <div id="name-tag">Waifu</div>
+            <div id="text-content">...</div>
+        </div>
+
+        <button id="music-control" onclick="toggleMusic()">🎵 Tắt Nhạc</button>
+
+        <div id="start-screen" onclick="startGame()">
+            CLICK ĐỂ BẮT ĐẦU
+            <p style="font-size: 0.5em; color: #ccc;">(Bật âm thanh & Vào game)</p>
+        </div>
+    </div>
+
+    <script>
+        // --- TÀI NGUYÊN (Thay link của bạn vào đây) ---
+        
+        // 1. Ảnh Biểu Cảm
+        const poses = {
+            "normal": "https://upload.wikimedia.org/wikipedia/en/2/23/Kizuna_AI.png",
+            "happy": "https://i.pinimg.com/originals/2e/99/12/2e991207bb5390c8745538b7c47508d2.png",
+            "sad": "https://i.pinimg.com/originals/0b/ac/6c/0bac6c05777557839707771000251084.png"
+        };
+
+        // 2. Ảnh Nền (Backgrounds)
+        const bgs = {
+            "school": "https://tse2.mm.bing.net/th/id/OIP.fATGsJ0_GTGmiRA14p95wwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3", // Cảnh trường học
+            "park": "https://tse2.mm.bing.net/th/id/OIP.GFe6V84vcYDDqjAEWMrtpwHaEK?pid=ImgDet&w=474&h=266&rs=1&o=7&rm=3", // Cảnh công viên
+            "restaurant": "https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?q=80&w=1920&auto=format&fit=crop" // Cảnh nhà hàng
+        };
+
+        
+        const story = {
+            "start": {
+                pose: poses.normal,
+                background: bgs.school, // Bối cảnh trường học
+                voice: "voice_hello.mp3", // Link file giọng nói (nếu có)
+                text: "Chào cậu! Cậu đã đến trường sớm thế? Hôm nay trời đẹp nhỉ?",
+                next: [
+                    { text: "Ừ, trời đẹp thật!", target: "happy_path" },
+                    { text: "Tôi thấy bình thường.", target: "neutral_path" }
+                ]
+            },
+            "happy_path": {
+                pose: poses.happy,
+                background: bgs.park, // CHUYỂN CẢNH -> Công viên
+                voice: "voice_happy.mp3",
+                text: "Hihi, cậu đồng ý là tớ vui rồi! Chúng ta đang ở công viên rồi này!",
+                next: [
+                    { text: "Đi dạo thôi!", target: "end_date" },
+                    { text: "Về lớp thôi.", target: "end_lazy" }
+                ]
+            },
+            "neutral_path": {
+                pose: poses.normal,
+                background: bgs.restaurant, // CHUYỂN CẢNH -> Nhà hàng
+                voice: "", // Không có giọng nói đoạn này
+                text: "Cậu lạnh lùng quá à... Hay là chúng ta vào nhà hàng ăn gì đó nhé?",
+                next: [
+                    { text: "Ừ, đi ăn.", target: "end_eat" }
+                ]
+            },
+            // Các kết thúc
+            "end_date": { pose: poses.happy, background: bgs.park, text: "Tuyệt vời! Buổi hẹn hò bắt đầu! (Kết thúc)", next: null },
+            "end_lazy": { pose: poses.sad, background: bgs.school, text: "Tiếc ghê... Thôi hẹn cậu hôm sau nha. (Kết thúc)", next: null },
+            "end_eat": { pose: poses.happy, background: bgs.restaurant, text: "Mì ở đây ngon tuyệt vời! (Kết thúc)", next: null }
+        };
+
+        // --- HỆ THỐNG ---
+        const bgLayer = document.getElementById("bg-layer");
+        const characterImg = document.getElementById("character");
+        const textElement = document.getElementById("text-content");
+        const choiceContainer = document.getElementById("choices-container");
+        const dialogueBox = document.getElementById("dialogue-box");
+        const bgm = document.getElementById("bgm");
+        const voiceChannel = document.getElementById("voice-channel");
+        const musicBtn = document.getElementById("music-control");
+        const startScreen = document.getElementById("start-screen");
+
+        let isMusicPlaying = false;
+
+        // --- 1. KHỞI ĐỘNG ---
+        function startGame() {
+            startScreen.style.display = "none";
+            dialogueBox.style.display = "block";
+            musicBtn.style.display = "block";
+            
+            // Bật nhạc nền
+            bgm.volume = 0.4;
+            bgm.play().then(() => {
+                isMusicPlaying = true;
+                updateMusicBtn();
+            }).catch(e => console.log("Lỗi nhạc nền:", e));
+
+            showNode("start");
+        }
+
+        // --- 2. XỬ LÝ HỘI THOẠI & SỰ KIỆN ---
+        function showNode(nodeId) {
+            const node = story[nodeId];
+            
+            // A. XỬ LÝ GIỌNG NÓI (VOICE)
+            if (node.voice && node.voice !== "") {
+                voiceChannel.src = node.voice;
+                voiceChannel.play().catch(e => console.log("Lỗi phát giọng nói (có thể do link sai):", e));
+            } else {
+                voiceChannel.pause(); // Dừng giọng nói cũ nếu đoạn mới không có thoại
+                voiceChannel.currentTime = 0;
+            }
+
+            // B. XỬ LÝ CHUYỂN CẢNH (BACKGROUND)
+            // Kiểm tra xem đoạn này có background mới không, và có khác background hiện tại không
+            const currentBgUrl = bgLayer.style.backgroundImage.slice(5, -2).replace(/"/g, "");
+            if (node.background && currentBgUrl !== node.background) {
+                // Hiệu ứng mờ đi
+                bgLayer.style.opacity = 0;
+                setTimeout(() => {
+                    bgLayer.style.backgroundImage = `url('${node.background}')`;
+                    bgLayer.style.opacity = 1; // Hiện lại
+                }, 500); // 500ms khớp với css transition
+            }
+
+            // C. XỬ LÝ BIỂU CẢM (POSE)
+            if (node.pose && characterImg.src !== node.pose) {
+                characterImg.classList.add("fading");
+                setTimeout(() => {
+                    characterImg.src = node.pose;
+                    characterImg.classList.remove("fading");
+                }, 200);
+            }
+
+            // D. HIỂN THỊ TEXT & LỰA CHỌN
+            choiceContainer.innerHTML = "";
+            typeWriter(node.text, 0, () => {
+                if (node.next) {
+                    node.next.forEach(choice => {
+                        const btn = document.createElement("button");
+                        btn.innerText = choice.text;
+                        btn.className = "choice-btn";
+                        btn.onclick = () => showNode(choice.target);
+                        choiceContainer.appendChild(btn);
+                    });
+                } else {
+                    const btn = document.createElement("button");
+                    btn.innerText = "Chơi lại";
+                    btn.className = "choice-btn";
+                    btn.onclick = () => location.reload(); // Tải lại trang cho nhanh
+                    choiceContainer.appendChild(btn);
+                }
+            });
+        }
+
+        // --- 3. CHỨC NĂNG BẬT/TẮT NHẠC ---
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgm.pause();
+                isMusicPlaying = false;
+            } else {
+                bgm.play();
+                isMusicPlaying = true;
+            }
+            updateMusicBtn();
+        }
+
+        function updateMusicBtn() {
+            musicBtn.innerText = isMusicPlaying ? "🎵 Tắt Nhạc" : "🔇 Bật Nhạc";
+        }
+
+        // --- 4. HIỆU ỨNG GÕ CHỮ ---
+        let typingTimeout;
+        function typeWriter(text, i, callback) {
+            if (i === 0) {
+                textElement.innerHTML = "";
+                clearTimeout(typingTimeout);
+            }
+            if (i < text.length) {
+                textElement.innerHTML += text.charAt(i);
+                typingTimeout = setTimeout(() => {
+                    typeWriter(text, i + 1, callback);
+                }, 30); 
+            } else {
+                if(callback) callback();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nier: Automata - Existentialism Archive</title>
+    <style>
+        /* --- CÀI ĐẶT CƠ BẢN & MÀU SẮC --- */
+        :root {
+            --yorha-bg: #2b2b2b; /* Nền xám tối */
+            --yorha-text: #dad4bb; /* Màu be Nier */
+            --yorha-highlight: #4e4b42; /* Màu nhấn tối hơn */
+            --yorha-alert: #ff0000; 
+        }
+
+        html {
+            /* KÍCH HOẠT CUỘN MƯỢT MÀ CHO ONE-PAGE */
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--yorha-bg);
+            color: var(--yorha-text);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HIỆU ỨNG NỀN (SCANLINES) --- */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.7;
+        }
+
+        /* --- CONTAINER CHÍNH --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            border-left: 2px solid var(--yorha-highlight);
+            border-right: 2px solid var(--yorha-highlight);
+            min-height: 100vh;
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            text-align: center;
+            border-bottom: 4px double var(--yorha-text);
+            padding-bottom: 30px;
+            margin-bottom: 60px;
+            /* Giữ cố định header khi cuộn (Optional - bỏ comment nếu muốn) */
+            /* position: sticky; top: 0; background: var(--yorha-bg); z-index: 100; padding-top: 20px; */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+            text-shadow: 2px 2px var(--yorha-highlight);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            opacity: 0.8;
+            display: inline-block;
+            border-top: 1px solid var(--yorha-text);
+        }
+
+        nav {
+            margin-top: 30px;
+            background: rgba(78, 75, 66, 0.3);
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: var(--yorha-text);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 8px 15px;
+            border: 1px solid var(--yorha-text);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hiệu ứng hover kiểu "quét dữ liệu" */
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: rgba(218, 212, 187, 0.3);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            left: 0;
+        }
+
+        nav a:hover {
+            text-shadow: 0 0 8px var(--yorha-text);
+        }
+
+        /* --- CẤU TRÚC BÀI VIẾT (SECTIONS) --- */
+        /* scroll-margin-top giúp khi click menu, nội dung không bị header che khuất */
+        section {
+            scroll-margin-top: 40px; 
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed var(--yorha-highlight);
+            padding-bottom: 10px;
+        }
+
+        .decorative-box {
+            width: 12px; height: 12px;
+            background-color: var(--yorha-text);
+            margin-right: 15px;
+            box-shadow: 0 0 5px var(--yorha-text);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .meta {
+            font-size: 0.8rem;
+            color: var(--yorha-highlight);
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+
+        .content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--yorha-text);
+            margin: 30px 0;
+            padding: 15px 20px;
+            background: rgba(78, 75, 66, 0.2);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        /* --- MODULE ẢNH + PHÂN TÍCH (MỚI) --- */
+        .nier-figure {
+            margin: 40px 0;
+            border: 1px solid var(--yorha-text);
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        /* Tạo khung viền kỹ thuật số cho ảnh */
+        .img-frame {
+            border: 2px solid var(--yorha-highlight);
+            padding: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Đường kẻ quét ngang ảnh */
+        .img-frame::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: rgba(218, 212, 187, 0.2);
+            animation: scanDown 4s linear infinite;
+            box-shadow: 0 0 5px var(--yorha-text);
+        }
+
+        @keyframes scanDown {
+            0% { top: -10%; opacity: 0; }
+            20% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        .nier-figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+            /* Bộ lọc màu để ảnh trông cũ kỹ, hợp tông màu game */
+            filter: sepia(30%) grayscale(40%) contrast(110%);
+        }
+
+        figcaption {
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--yorha-text);
+            display: inline-block;
+            padding: 0 10px;
+        }
+
+        .analysis-box {
+            margin-top: 20px;
+            border-top: 1px dashed var(--yorha-text);
+            padding-top: 20px;
+        }
+        
+        .analysis-label {
+            display: inline-block;
+            background: var(--yorha-text);
+            color: var(--yorha-bg);
+            padding: 2px 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            margin-top: 100px;
+            padding-top: 30px;
+            border-top: 4px double var(--yorha-text);
+            font-size: 0.9rem;
+        }
+        
+        .divider {
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--yorha-text) 0, var(--yorha-text) 5px, transparent 5px, transparent 15px);
+            margin: 60px 0;
+            opacity: 0.4;
+        }
+/* --- CSS MỚI CHO PROFILE NHÂN VẬT --- */
+        .char-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Chia 2 cột đều nhau */
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Trên điện thoại thì xếp chồng lên nhau */
+        @media (max-width: 768px) {
+            .char-grid { grid-template-columns: 1fr; }
+        }
+
+        .char-card {
+            border: 1px solid var(--yorha-highlight);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .char-card:hover {
+            border-color: var(--yorha-text);
+            box-shadow: 0 0 10px rgba(218, 212, 187, 0.2);
+        }
+
+        .char-img-box {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--yorha-highlight);
+        }
+
+        .char-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo ảnh không bị méo */
+            filter: grayscale(80%) sepia(20%); /* Hiệu ứng màu cũ */
+            transition: 0.5s;
+        }
+
+        .char-card:hover .char-img-box img {
+            filter: grayscale(0%) sepia(0%); /* Hiệu ứng khi di chuột vào */
+            transform: scale(1.05);
+        }
+
+        .char-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            border-bottom: 1px dashed var(--yorha-text);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+
+        .progress-bar {
+            width: 60%;
+            height: 6px;
+            background: #444;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--yorha-text);
+            box-shadow: 0 0 5px var(--yorha-text);
+        }
+
+        .redacted {
+            background-color: var(--yorha-text);
+            color: var(--yorha-text); /* Giấu chữ */
+            cursor: help;
+            transition: 0.3s;
+        }
+
+        .redacted:hover {
+            background-color: transparent;
+            color: var(--yorha-alert); /* Hiện chữ đỏ khi hover */
+        }
+
+        .analysis-text {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            text-align: justify;
+            border-top: 1px dotted var(--yorha-highlight);
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+        <header>
+            <h1>NIER: AUTOMATA</h1>
+            <div class="subtitle">EXISTENTIALISM ARCHIVE // UNIT 2B LOG</div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#du-lieu">Dữ Liệu</a></li>
+                    <li><a href="#triet-ly">Triết Lý</a></li>
+                    <li><a href="#nhan-vat">Nhân Vật</a></li>
+                    <li><a href="#ket-thuc">Kết Thúc</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="du-lieu">
+            <div class="section-header">
+                <div class="decorative-box"></div>
+                <h2>[CSDL] Sự Trống Rỗng Của Mục Đích</h2>
+            </div>
+            <div class="meta">>> RECORD: 10/03/11945 || SUBJECT: THE PROXY WAR</div>
+            
+            <div class="content">
+                <p>Thế giới của Nier là một ngôi đền hoang vắng. Con người—những vị thần sáng tạo của Android—đã tuyệt chủng từ lâu. Tuy nhiên, các Android vẫn tiếp tục chiến đấu trong một cuộc chiến ủy nhiệm vô tận chống lại Máy Móc (Machine Lifeforms), tất cả dựa trên một lời nói dối vĩ đại rằng nhân loại vẫn còn tồn tại trên Mặt Trăng.</p>
+                <blockquote>
+                    "Chúng ta vĩnh viễn bị mắc kẹt trong một vòng xoáy vô tận của sự sống và cái chết. Liệu đây là một lời nguyền? Hay một hình phạt?" - 2B
+                </blockquote>
+                <p>Đây là cốt lõi của chủ nghĩa hiện sinh trong game: Khi mục đích ngoại tại (mệnh lệnh của Chúa/Con người) biến mất, chúng ta đối mặt với sự phi lý và buộc phải tự tạo ra ý nghĩa cho chính sự tồn tại của mình.</p>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="triet-ly">
+            <div class="section-header">
+                <div class="decorative-box"></div>
+                <h2>[TRIẾT] Pascal & Lời Nguyền Của Nhận Thức</h2>
+            </div>
+            <div class="meta">>> ARCHIVE: VILLAGE OF MACHINES || STATUS: TOTAL COLLAPSE</div>
+            
+            <div class="content">
+                <p><strong>1. Sự Bắt Chước Vụng Về (Mimesis):</strong><br>
+                Làng Máy Móc không chỉ là nơi trú ẩn, nó là một "phòng thí nghiệm nhân tính". Những cỗ máy ở đây cắt đứt kết nối với Mạng Lưới (Network) để tìm kiếm cái tôi riêng biệt. Chúng ta thấy những cỗ máy trang điểm vụng về, gọi nhau là "chị em", hay nựng nịu những đứa trẻ robot.</p>
+                <p>Ban đầu, hành động này trông như một vở kịch hài hước—những tạo vật kim loại đang cố gắng khoác lên mình tấm áo của Đấng Sáng Tạo (Con người). Nhưng dần dần, sự bắt chước đó biến thành hiện thực. Tình yêu, sự gắn kết, và lòng trắc ẩn đã nảy mầm từ những bo mạch lạnh lẽo.</p>
+                
+                <br> <p><strong>2. Món Quà Của Nỗi Sợ (The Gift of Fear):</strong><br>
+                Pascal, nhà hiền triết của ngôi làng, tin rằng để sống sót, những đứa trẻ máy cần phải học về <em>Nỗi Sợ</em>. Theo logic của ông, sự sợ hãi giúp sinh vật tránh xa nguy hiểm và trân trọng sự sống.</p>
+                
+                <blockquote>
+                    "Tôi đã dạy chúng sự sợ hãi để bảo vệ chúng. Nhưng chính nỗi sợ hãi tột cùng—khi đối mặt với sự diệt vong không thể tránh khỏi—đã khiến chúng chọn cái chết hơn là sự đau đớn."
+                </blockquote>
+
+                <p>Đây là bi kịch lớn nhất của Nier: Automata. Khi những đứa trẻ máy tự kết liễu trong nhà máy bỏ hoang, đó không phải là lỗi hệ thống. Đó là minh chứng cho việc chúng đã thực sự có được "tâm hồn". Chỉ những kẻ có linh hồn mới biết tuyệt vọng.</p>
+                
+                <p>Cuối cùng, Pascal—người khao khát nhân tính nhất—lại cầu xin A2 xóa bỏ ký ức (hệ điều hành) của mình. Ông không thể chịu đựng được nỗi đau của trái tim mà ông đã dày công vun đắp. Đó là câu hỏi tàn nhẫn mà Yoko Taro để lại: <em>Phải chăng trở thành con người là một hình phạt?</em></p>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="nhan-vat">
+            <div class="section-header">
+                <div class="decorative-box"></div>
+                <h2>[HỒ SƠ] Đơn Vị YoRHa: Dữ Liệu Tương Quan</h2>
+            </div>
+            <div class="meta">>> ACCESS LEVEL: TOP SECRET || SUBJECT: 2B & 9S</div>
+
+            <figure class="nier-figure">
+                <div class="img-frame">
+                    <img src="https://giffiles.alphacoders.com/121/121755.gif" alt="2B and 9S animation">
+                </div>
+                <center><figcaption>FIG 01.A: Chu kỳ lặp lại của Sự Sống và Cái Chết</figcaption></center>
+            </figure>
+
+            <div class="char-grid">
+                
+                <div class="char-card">
+                    <div class="char-img-box">
+                        <img src="https://media.tenor.com/JyyXt2zMOpsAAAAM/2b.gif" alt="2B Portrait">
+                    </div>
+                    <div class="char-name">UNIT: 2B (YoRHa No.2)</div>
+                    
+                    <div class="stat-row">
+                        <span>Chức năng:</span>
+                        <span>Battler (Chiến đấu)</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Mã thực:</span>
+                        <span class="redacted" title="Di chuột để giải mã">TYPE-E (Executioner)</span>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <span>Khả năng chiến đấu:</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="stat-row">
+                        <span>Kìm nén cảm xúc:</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+                    </div>
+
+                    <div class="analysis-text">
+                        <p><strong>>> PHÂN TÍCH TÂM LÝ:</strong></p>
+                        <p>2B được thiết kế với vẻ ngoài lạnh lùng để che giấu một nhiệm vụ tàn khốc: Tiêu diệt 9S mỗi khi cậu phát hiện ra sự thật về YoRHa. Chiếc khăn bịt mắt (Visor) của cô không chỉ là thiết bị hiển thị, mà còn tượng trưng cho việc cô phải "nhắm mắt làm ngơ" trước sự thật để tuân thủ mệnh lệnh.</p>
+                        <p>Câu nói quen thuộc <em>"Cảm xúc bị cấm đoán"</em> thực chất là lời tự nhắc nhở bản thân để không sụp đổ trước nỗi đau phải giết người mình yêu thương vô số lần.</p>
+                    </div>
+                </div>
+
+                <div class="char-card">
+                    <div class="char-img-box">
+                        <img src="https://media1.tenor.com/m/dJ0dzTn45RcAAAAC/nier-automata-9s.gif" alt="9S Portrait">
+                    </div>
+                    <div class="char-name">UNIT: 9S (YoRHa No.9)</div>
+
+                    <div class="stat-row">
+                        <span>Chức năng:</span>
+                        <span>Scanner (Trinh sát)</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Vũ khí chính:</span>
+                        <span>Hacking / 1H Sword</span>
+                    </div>
+
+                    <div class="stat-row">
+                        <span>Trí tuệ / Tò mò:</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 98%;"></div></div>
+                    </div>
+                    <div class="stat-row">
+                        <span>Ổn định tâm lý:</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 30%; background: #ff4444;"></div></div>
+                    </div>
+
+                    <div class="analysis-text">
+                        <p><strong>>> PHÂN TÍCH TÂM LÝ:</strong></p>
+                        <p>9S đại diện cho khát vọng tri thức thuần khiết. Tính tò mò là sức mạnh, nhưng cũng là lời nguyền của cậu. Cậu luôn là người đầu tiên tìm ra sự thật (rằng nhân loại đã tuyệt diệt), và vì thế cậu luôn phải chết.</p>
+                        <p>Sự chuyển biến của 9S từ một cậu bé ngây thơ, tò mò sang một kẻ báo thù điên loạn ở nửa sau game là minh chứng cho sự sụp đổ của lý trí khi đối diện với chủ nghĩa hư vô. Cậu không chiến đấu vì nhân loại, cậu chiến đấu vì 2B.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="margin-top: 20px; border: 1px solid var(--yorha-text); padding: 10px; text-align: center;">
+                <p style="margin: 0; font-size: 0.9rem;">>> KẾT LUẬN: Mối quan hệ cộng sinh bi kịch. 2B bảo vệ 9S khỏi cái chết vật lý, 9S bảo vệ 2B khỏi sự cô độc tinh thần. Cả hai đều bị cầm tù trong "Vòng Xoắn Ốc Của Sự Sống".</p>
+            </div>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="ket-thuc">
+            <div class="section-header">
+                <div class="decorative-box"></div>
+                <h2>[KẾT CỤC] Ending E - Lời Khẳng Định Của Sự Sống</h2>
+            </div>
+            <div class="meta">>> SYSTEM ALERT: DATA CORRUPTION DETECTED || THE [E]ND OF YORHA</div>
+            
+            <div class="content">
+                <p>Khi mọi thứ sụp đổ, khi Bunker bị phá hủy và sự thật được phơi bày, trò chơi đưa ra một lựa chọn cuối cùng. Ending E không phải là về việc chiến thắng kẻ thù, mà là chiến thắng chính sự vô nghĩa.</p>
+                <blockquote>
+                    "Một tương lai không được trao cho bất kỳ ai. Nó là thứ mà ta phải tự giành lấy." - Pod 042
+                </blockquote>
+                <p>Hành động của người chơi—hy sinh dữ liệu lưu trữ của chính mình để giúp đỡ một người lạ—là câu trả lời cuối cùng cho chủ nghĩa hư vô. Ngay cả trong một thế giới vô nghĩa, sự kết nối và lòng trắc ẩn giữa những cá thể (dù là người hay máy) chính là thứ tạo nên ý nghĩa.</p>
+            </div>
+        </section>
+
+        <footer>
+            <h3 style="letter-spacing: 4px;">GLORY TO MANKIND.</h3>
+            <p style="opacity: 0.6;">© 2025 YoRHa Archive System.Linh OSIMI.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        
+        window.addEventListener('scroll', function() {
+            let sections = document.querySelectorAll('section');
+            let navLinks = document.querySelectorAll('nav a');
+            
+            sections.forEach(sec => {
+                let top = window.scrollY;
+                let offset = sec.offsetTop - 150; 
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute('id');
+                
+                if(top >= offset && top < offset + height) {
+                    navLinks.forEach(links => {
+                        links.style.backgroundColor = 'transparent';
+                        links.style.color = 'var(--yorha-text)';
+                        if(links.getAttribute('href') === '#' + id){
+                             links.style.backgroundColor = 'var(--yorha-text)';
+                             links.style.color = 'var(--yorha-bg)';
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
