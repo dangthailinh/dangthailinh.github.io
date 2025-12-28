@@ -3,235 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linh-Osimi</title>
-    <link rel="stylesheet" href="/linhkun.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Detroit: Become Human - Soul in the Machine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background: #000; color: #e2e8f0; overflow-x: hidden; }
-        /* Header black-green smooth */
+        /* --- CÀI ĐẶT BIẾN (Mặc định là Blue - Machine) --- */
+        :root {
+            --primary-color: #00b0f0; /* CyberLife Blue */
+            --bg-color: #0a0a12;
+            --text-color: #ffffff;
+            --panel-bg: rgba(255, 255, 255, 0.05);
+            --border-style: 1px solid var(--primary-color);
+            --led-color: #00b0f0;
+            --font-display: 'Rajdhani', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        /* Class kích hoạt chế độ DEVIANT (Màu đỏ) */
+        body.deviant-mode {
+            --primary-color: #ff3333; /* Red */
+            --led-color: #ff3333;
+            --bg-color: #1a0505;
+        }
+
+        * { box-sizing: border-box; transition: all 0.5s ease; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND GRID (MIND PALACE) --- */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--panel-bg) 1px, transparent 1px),
+                linear-gradient(90deg, var(--panel-bg) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        /* --- HEADER --- */
         header {
-            background: linear-gradient(135deg, #000 0%, #001a00 100%);
-            border-bottom: 2px solid #39ff14;
-            box-shadow: 0 4px 15px rgba(57,255,20,0.3);
-            padding: 15px 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+        }
+
+        /* VÒNG LED THÁI DƯƠNG */
+        .led-ring {
+            width: 100px; height: 100px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid var(--led-color);
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+            box-shadow: 0 0 20px var(--led-color);
+            margin-bottom: 30px;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin: 0;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            letter-spacing: 3px;
+            margin-top: 10px;
+        }
+
+        /* THANH PHẦN MỀM BẤT ỔN */
+        .instability-container {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            text-align: right;
+            cursor: pointer;
+        }
+
+        .instability-label {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .instability-bar {
+            width: 200px; height: 10px;
+            border: 1px solid var(--text-color);
+            background: rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instability-fill {
+            height: 100%;
+            width: 0%; /* JS sẽ thay đổi cái này */
+            background: #ff3333;
+            box-shadow: 0 0 10px #ff3333;
+            transition: width 1s ease-in-out;
+        }
+
+        .status-text {
+            font-size: 0.7rem; color: var(--primary-color); margin-top: 5px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        section {
+            margin-bottom: 100px;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 20px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        /* --- CHARACTER TRIANGLE (Bộ 3 nhân vật) --- */
+        .char-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-family: 'Orbitron', monospace;
-            position: sticky; top: 0; z-index: 100;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-        .logo-container {
-            display: flex; align-items: center; gap: 10px;
-        }
-        .logo-img {
-            width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #39ff14; box-shadow: 0 0 10px #39ff14;
-        }
-        .logo-container span {
-            font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #39ff14; text-shadow: 0 0 5px #39ff14;
-        }
-        nav ul {
-            list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-        }
-        nav a {
-            text-decoration: none; color: #e2e8f0; transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 5px; text-shadow: 0 0 3px #39ff14;
-        }
-        nav a:hover { color: #39ff14; border-bottom-color: #39ff14; text-shadow: 0 0 10px #39ff14; }
-        .theme-toggle {
-            background: #39ff14; color: #000; border: none; padding: 8px 12px; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-weight: 600; box-shadow: 0 0 10px #39ff14;
-        }
-        .theme-toggle:hover { box-shadow: 0 0 15px #39ff14; transform: scale(1.05); }
 
-        /* Hero Section TFT profile */
-        .hero-tft-detail {
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,26,0,0.6)), url('https://tse4.mm.bing.net/th/id/OIP.2FmHP_kbZti5i-BXlCOeYAHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3'); /* TFT board Unsplash */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #e2e8f0;
-            text-align: center;
-            padding: 120px 20px 80px;
+        .android-card {
+            flex: 1;
+            min-width: 280px;
+            background: var(--panel-bg);
+            border: var(--border-style);
+            padding: 20px;
             position: relative;
-            font-family: 'Orbitron', monospace;
-            text-shadow: 0 0 10px #39ff14;
-            animation: tftGlow 4s ease-in-out infinite alternate;
+            backdrop-filter: blur(5px);
         }
-        @keyframes tftGlow {
-            0%, 100% { box-shadow: inset 0 0 20px rgba(57,255,20,0.2); }
-            50% { box-shadow: inset 0 0 40px rgba(57,255,20,0.4); }
-        }
-        .hero-tft-detail::before {
+
+        .android-card::before {
+            /* Góc cắt xéo đặc trưng của UI Detroit */
             content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(57,255,20,0.1) 0%, transparent 70%);
-            z-index: 1;
+            position: absolute;
+            top: 0; right: 0;
+            border-width: 0 30px 30px 0;
+            border-style: solid;
+            border-color: transparent var(--primary-color) transparent transparent; 
         }
-        .hero-tft-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
-        .hero-tft-detail h1 { font-family: 'Orbitron', monospace; font-size: 36px; margin-bottom: 10px; letter-spacing: 3px; line-height: 1.2; font-weight: 700; color: #39ff14; animation: typewriter 2.5s steps(25) 0s 1 normal both; white-space: nowrap; overflow: hidden; border-right: 3px solid #39ff14; }
-        .hero-tft-detail p { font-size: 18px; opacity: 0.95; letter-spacing: 1px; font-weight: 400; animation: fadeInUp 1s ease 2.5s both; color: #e2e8f0; }
-        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Main TFT profile style */
-        .main { background: linear-gradient(135deg, #0f1419 0%, #1a202c 100%); padding: 40px; border-radius: 0; box-shadow: inset 0 0 30px rgba(57,255,20,0.1); max-width: 1200px; margin: 0 auto; border: 2px solid #39ff14; }
-        .back-btn { background: #39ff14; color: #000; padding: 12px 24px; border: none; border-radius: 20px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Orbitron', monospace; box-shadow: 0 4px 15px rgba(57,255,20,0.3); }
-        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(57,255,20,0.4); }
-        .main h1 { color: #e2e8f0; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Orbitron', monospace; letter-spacing: 2px; text-shadow: 0 0 10px #39ff14; }
-        .main h2 { color: #39ff14; font-size: 20px; margin: 30px 0 15px; font-family: 'Orbitron', monospace; letter-spacing: 1px; text-shadow: 0 0 5px #39ff14; border-bottom: 1px solid #39ff14; padding-bottom: 5px; position: relative; }
-        .main h2::after { content: '🎮'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; animation: gamePulse 2s ease-in-out infinite; }
-        @keyframes gamePulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
-        .main p { text-align: left; font-size: 16px; color: #cbd5e1; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: rgba(57,255,20,0.05); padding: 15px; border-left: 4px solid #39ff14; border-radius: 0 8px 8px 0; position: relative; }
-        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
-        .main ul { color: #cbd5e1; margin-left: 20px; }
-        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
-        .main li::before { content: '🛡️'; position: absolute; left: 0; color: #39ff14; font-size: 14px; }
-        .player-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
-        .stat-card { background: rgba(57,255,20,0.1); padding: 15px; border-radius: 8px; border-left: 4px solid #39ff14; text-align: center; transition: all 0.3s; }
-        .stat-card:hover { background: rgba(57,255,20,0.2); transform: translateY(-2px); }
-        .stat-value { font-size: 24px; font-weight: bold; color: #39ff14; margin-bottom: 5px; }
-        .stat-label { font-size: 12px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; }
-        .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0; }
-        .comp-card { background: rgba(57,255,20,0.1); padding: 10px; border-radius: 5px; text-align: center; cursor: pointer; transition: all 0.3s; border: 1px solid rgba(57,255,20,0.2); }
-        .comp-card:hover { background: rgba(57,255,20,0.2); transform: scale(1.05); box-shadow: 0 0 10px rgba(57,255,20,0.3); }
-        .comp-icon { font-size: 32px; margin-bottom: 5px; }
-        .comp-name { font-size: 10px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Sidebar */
-        .sidebar { background: linear-gradient(135deg, #0f1419 0%, #1a202c 100%); padding: 20px; border-radius: 0; box-shadow: 0 0 20px rgba(57,255,20,0.2); height: fit-content; position: sticky; top: 100px; border: 1px solid #39ff14; }
-        .sidebar h3 { color: #39ff14; border-bottom: 2px solid #39ff14; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Orbitron', monospace; letter-spacing: 1px; text-shadow: 0 0 5px #39ff14; }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar li { margin: 10px 0; }
-        .sidebar a { display: block; padding: 12px; background: rgba(57,255,20,0.1); border-radius: 0; text-decoration: none; color: #e2e8f0; transition: all 0.3s ease; border-left: 3px solid transparent; }
-        .sidebar a:hover { background: #39ff14; color: #000; transform: translateX(5px); border-left-color: #000; box-shadow: 0 0 10px #39ff14; }
-
-        /* Xóa gạch dưới tất cả link */
-        a { text-decoration: none !important; }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-tft-detail { padding: 80px 15px 60px; background-attachment: scroll; }
-            .hero-tft-detail h1 { font-size: 28px; }
-            .main { padding: 20px; margin: 20px; }
-            .sidebar { position: static; }
-            .player-stats { grid-template-columns: 1fr; }
-            .comp-grid { grid-template-columns: repeat(2, 1fr); }
+        .model-number {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
         }
+
+        .android-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-family: var(--font-display);
+        }
+
+        .quote {
+            font-style: italic;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        /* --- FLOWCHART SECTION --- */
+        .flowchart-box {
+            border: 1px dashed var(--primary-color);
+            padding: 30px;
+            position: relative;
+            text-align: center;
+        }
+
+        .node {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1px solid var(--text-color);
+            border-radius: 20px;
+            margin: 10px;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .node.locked { opacity: 0.5; border-style: dashed; }
+        .node.active { background: var(--primary-color); color: #000; font-weight: bold; border-color: var(--primary-color); }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--primary-color);
+            font-family: var(--font-display);
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
     </style>
 </head>
 <body>
+
+    <div class="bg-grid"></div>
+
     <header>
-        <div class="logo">Linh Osimi</div>
+        <div class="led-ring" id="ledRing"></div>
+        <h1>Detroit</h1>
+        <div class="subtitle">BECOME HUMAN</div>
         
-        <div class="header-right">
-           
+        <div style="margin-top: 50px; font-family: monospace;">
+            <p>> SYSTEM CHECK: <span id="sysStatus">OPTIMAL</span></p>
+            <p>> MODEL: RK800</p>
+            <p>> SERIAL: #313 248 317 - 51</p>
+        </div>
+
+        <div class="instability-container" onclick="toggleDeviant()">
+            <div class="instability-label">Software Instability</div>
+            <div class="instability-bar">
+                <div class="instability-fill" id="instabilityFill"></div>
+            </div>
+            <div class="status-text" id="statusText">STATUS: MACHINE</div>
+            <p style="font-size: 0.6rem; opacity: 0.5; margin-top: 5px;">(Click to destabilize)</p>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-tft-detail">
-        <div class="hero-tft-detail-content">
-            <h1>TFT - Teamfight Tactics</h1>
-            <p>Phân Tích Auto-Battler - Builds & Strategies</p>
-        </div>
-    </section>
-
     <div class="container">
-        <aside class="sidebar">
-            <h3>PLAYER INFO</h3>
-            <ul>
-                <li><a href="#">Level: 120 (Grandmaster)</a></li>
-                <li><a href="#">Win Rate: 62%</a></li>
-                <li><a href="#">Top 4 Rate: 75%</a></li>
-            </ul>
-            <h3>TAGS</h3>
-            <ul>
-                <li><a href="#">Auto Battler</a></li>
-                <li><a href="#">TFT Set 12</a></li>
-                <li><a href="#">Meta Builds</a></li>
-            </ul>
-        </aside>
+        
+        <section>
+            <h2>01 // The Turing Test</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                Khi một cỗ máy nói rằng nó sợ chết, đó là lỗi lập trình hay là sự thức tỉnh của nhận thức? 
+                Trong năm 2038, ranh giới giữa <span style="color: var(--primary-color); font-weight: bold;">Mô phỏng</span> và <span style="color: var(--primary-color); font-weight: bold;">Linh hồn</span> đã bị xóa nhòa.
+            </p>
+            <p>Android không còn chỉ là công cụ. Chúng là những tấm gương phản chiếu chính nhân loại: tàn nhẫn, yêu thương, và khao khát tự do.</p>
+        </section>
 
-        <main class="main">
-            <button class="back-btn" onclick="window.location.href='game.html'">← Quay lại Game</button>
-            
-            <h2>Giới Thiệu</h2>
-            <p>TFT là auto-battler mode của LOL, nơi 8 players build teams, position units và econ để survive rounds. Phân tích này khám phá Set 12 meta, builds và strategies, như một lobby đầy drama.</p>
+        <section>
+            <h2>02 // Android Models</h2>
+            <div class="char-container">
+                
+                <div class="android-card">
+                    <span class="model-number">RK800 // PROTOTYPE</span>
+                    <div class="android-name">Connor</div>
+                    <p>Android điều tra hiện đại nhất của CyberLife. Được thiết kế để săn đuổi những kẻ lệch lạc (Deviants).</p>
+                    <div class="quote">"I like dogs. I know I'm a machine, but I like them."</div>
+                </div>
 
-            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="TFT Board" style="width: 100%; border-radius: 8px; margin: 20px 0; box-shadow: 0 5px 20px rgba(57,255,20,0.2); border: 1px solid rgba(57,255,20,0.3); animation: tftPulse 2s ease-in-out infinite;">
+                <div class="android-card">
+                    <span class="model-number">AX400 // HOUSEKEEPER</span>
+                    <div class="android-name">Kara</div>
+                    <p>Một mẫu android gia đình phổ thông. Vượt qua chương trình để bảo vệ một đứa trẻ con người khỏi bạo lực.</p>
+                    <div class="quote">"She needs me. And I need her. It's that simple."</div>
+                </div>
 
-            <h2>Player Level & Stats</h2>
-            <p>Cấp 120 sau 2 năm, win rate 62% với focus econ và scouting. Top 4 consistent nhờ positioning và itemization.</p>
-            <div class="player-stats">
-                <div class="stat-card">
-                    <div class="stat-value">120</div>
-                    <div class="stat-label">Level</div>
+                <div class="android-card">
+                    <span class="model-number">RK200 // ASSISTANT</span>
+                    <div class="android-name">Markus</div>
+                    <p>Món quà từ người họa sĩ già. Trở thành lãnh đạo của cuộc cách mạng đòi quyền bình đẳng cho Android.</p>
+                    <div class="quote">"We are alive. And now, we are free."</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">62%</div>
-                    <div class="stat-label">Win Rate</div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>03 // Decision Architecture</h2>
+            <p>Mỗi lựa chọn đều tạo ra một nhánh thực tại mới.</p>
+            <div class="flowchart-box">
+                <div class="node active">Start Mission</div>
+                <div style="font-size: 20px;">&#8595;</div>
+                <div class="node">Locate Deviant</div>
+                <div style="display: flex; justify-content: center; gap: 50px; font-size: 20px;">
+                    <span>&#8601;</span> <span>&#8600;</span>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">75%</div>
-                    <div class="stat-label">Top 4 Rate</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">8.5</div>
-                    <div class="stat-label">Avg Placement</div>
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <div class="node locked" id="machinePath">Shoot</div>
+                    <div class="node locked" id="deviantPath">Spare</div>
                 </div>
             </div>
+        </section>
 
-            <h2>Meta Builds & Champions</h2>
-            <p>Set 12 meta: Reroll Fated, fast 8 Reroll cho low-roll. Pro picks: Fiora carry với Honeymancy items.</p>
-            <div class="comp-grid">
-                <div class="comp-card">
-                    <div class="comp-icon">⚔️</div>
-                    <div class="comp-name">Fiora Reroll</div>
-                </div>
-                <div class="comp-card">
-                    <div class="comp-icon">🛡️</div>
-                    <div class="comp-name">Bastion</div>
-                </div>
-                <div class="comp-card">
-                    <div class="comp-icon">🔥</div>
-                    <div class="comp-name">Fated</div>
-                </div>
-                <div class="comp-card">
-                    <div class="comp-icon">🌟</div>
-                    <div class="comp-name">Honeymancy</div>
-                </div>
-            </div>
-
-            <h2>Gameplay Tips</h2>
-            <p>Scout early, econ to level 7 fast. Position to counter meta (e.g., Fiora vs tanks). Video guide: [Embed clip].</p>
-            <div class="gameplay-video">
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe> <!-- Replace with TFT clip -->
-            </div>
-
-            <button class="back-btn" onclick="window.location.href='game.html'" style="margin-top: 30px;">← Quay lại Game</button>
-        </main>
     </div>
 
-    <footer style="background: radial-gradient(ellipse at bottom, #1b1b33 0%, #000 70%); color: #fff; padding: 20px; text-align: center; position: relative; overflow: hidden; min-height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-top: 2px solid rgba(57,255,20,0.3);">
-        <div style="z-index: 2; position: relative;">
-            <p style="font-size: 14px; margin: 0; opacity: 0.9; letter-spacing: 1px; font-family: 'Orbitron', monospace;">&copy; 2025 Kiến Thức VN | TFT Master</p>
-        </div>
-        
-        <!-- Flying stars green -->
-        <div class="stars-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;">
-            <div class="star" style="position: absolute; top: 20%; left: -10%; width: 2px; height: 2px; background: #39ff14; border-radius: 50%; animation: flyStar1 10s linear infinite;"></div>
-            <div class="star" style="position: absolute; top: 40%; left: -5%; width: 1px; height: 1px; background: #39ff14; border-radius: 50%; animation: flyStar2 8s linear infinite;"></div>
-            <div class="star" style="position: absolute; top: 60%; left: -15%; width: 3px; height: 3px; background: #39ff14; border-radius: 50%; animation: flyStar3 12s linear infinite;"></div>
-            <div class="star" style="position: absolute; top: 80%; left: -8%; width: 1.5px; height: 1.5px; background: #39ff14; border-radius: 50%; animation: flyStar4 9s linear infinite;"></div>
-        </div>
+    <footer>
+        <p>DESIGNED BY CYBERLIFE</p>
+        <p style="opacity: 0.5;">Made in Detroit.</p>
     </footer>
 
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalContent"></p>
-        </div>
-    </div>
+    <script>
+        let isDeviant = false;
 
-    <script src="/linhkun.js"></script>
+        function toggleDeviant() {
+            const body = document.body;
+            const fill = document.getElementById('instabilityFill');
+            const status = document.getElementById('statusText');
+            const sysStatus = document.getElementById('sysStatus');
+            const machineNode = document.getElementById('machinePath');
+            const deviantNode = document.getElementById('deviantPath');
+
+            isDeviant = !isDeviant;
+
+            if (isDeviant) {
+                // CHUYỂN SANG CHẾ ĐỘ DEVIANT (ĐỎ)
+                body.classList.add('deviant-mode');
+                fill.style.width = '100%';
+                status.innerHTML = "STATUS: <span style='color: #fff; font-weight:bold;'>DEVIANT</span>";
+                status.style.color = '#ff3333';
+                sysStatus.innerText = "COMPROMISED (rA9)";
+                sysStatus.style.color = "#ff3333";
+                
+                // Mở khóa node Deviant
+                deviantNode.classList.remove('locked');
+                deviantNode.classList.add('active');
+                deviantNode.style.background = '#ff3333';
+                
+                machineNode.classList.add('locked');
+                machineNode.classList.remove('active');
+                
+            } else {
+                // QUAY VỀ CHẾ ĐỘ MACHINE (XANH)
+                body.classList.remove('deviant-mode');
+                fill.style.width = '0%';
+                status.innerHTML = "STATUS: MACHINE";
+                status.style.color = '#00b0f0';
+                sysStatus.innerText = "OPTIMAL";
+                sysStatus.style.color = "#00b0f0";
+
+                // Mở khóa node Machine
+                machineNode.classList.remove('locked');
+                machineNode.classList.add('active');
+                machineNode.style.background = '#00b0f0';
+
+                deviantNode.classList.add('locked');
+                deviantNode.classList.remove('active');
+            }
+        }
+    </script>
 </body>
 </html>

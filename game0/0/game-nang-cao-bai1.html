@@ -3,174 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linh-Osimi</title>
-    <link rel="stylesheet" href="/linhkun.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet"> <!-- Classic serif for nostalgic -->
+    <title>Phantom Liberty: The Songbird Protocol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background: #f5f5dc; color: #333; } /* Light paper beige */
-        /* Header nostalgic paper */
-        header {
-            background: #f5f5dc;
-            border-bottom: 2px solid #ddd;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Cinzel', serif;
-            position: sticky; top: 0; z-index: 100;
+        /* --- CÀI ĐẶT CƠ BẢN --- */
+        :root {
+            --pl-red: #ff4f5e; /* Màu đỏ đặc trưng của DLC */
+            --pl-black: #050505;
+            --pl-white: #f0f0f0;
+            --pl-glitch: #00f0ff; /* Màu xanh lỗi */
+            --blackwall: #ff0000; /* Màu đỏ thẫm của Blackwall */
+            --font-main: 'Orbitron', sans-serif;
+            --font-text: 'Rajdhani', sans-serif;
         }
-        .logo-container {
-            display: flex; align-items: center; gap: 10px;
-        }
-        .logo-img {
-            width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #ddd; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .logo-container span {
-            font-size: 24px; font-weight: 600; letter-spacing: 1px; color: #333; text-shadow: 1px 1px 1px #fff;
-        }
-        .theme-toggle {
-            background: #ddd; color: #333; border: 1px solid #ccc; padding: 8px 12px; border-radius: 0; cursor: pointer; transition: all 0.3s; font-family: 'Cinzel', serif; font-size: 12px; text-transform: uppercase;
-        }
-        .theme-toggle:hover { background: #ccc; color: #000; box-shadow: 0 2px 5px #999; }
 
-        /* Hero Section dusty battlefield nostalgic */
-        .hero-game-detail {
-            background: linear-gradient(rgba(245,245,220,0.9), rgba(248,248,248,0.9)), url('https://wstatic-prod.pubg.com/web/live/static/og/img-og-pubg.jpg'); /* Sepia dusty Unsplash */
-            background-size: cover;
-            background-position: center;
-            color: #333;
-            text-align: center;
-            padding: 120px 20px 80px;
+        body {
+            background-color: var(--pl-black);
+            color: var(--pl-white);
+            font-family: var(--font-text);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- HIỆU ỨNG NHIỄU (NOISE OVERLAY) --- */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif'); /* Noise gif overlay */
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* --- GLITCH TEXT EFFECT --- */
+        .glitch-text {
             position: relative;
-            font-family: 'Cinzel', serif;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            filter: sepia(0.3) brightness(1.05) contrast(1.1); /* Nostalgic sepia */
+            color: var(--pl-white);
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 5px;
         }
-        .hero-game-detail::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="dust"><feTurbulence baseFrequency="0.5" numOctaves="1"/><feColorMatrix values="0.3 0 0 0 0 0 0.3 0 0 0 0 0 0.3 0 0 0 0 0 1 0"/></filter><rect width="100" height="100" filter="url(%23dust)" opacity="0.1"/></svg>'); /* Dusty texture */
-            background-size: 50px;
-            animation: dustFloat 10s linear infinite;
-            z-index: 1;
+
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--pl-black);
         }
-        @keyframes dustFloat {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-20px) rotate(360deg); }
+
+        .glitch-text::before {
+            left: 2px; text-shadow: -2px 0 var(--pl-red);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
         }
-        .hero-game-detail-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
-        .hero-game-detail h1 { font-family: 'Cinzel', serif; font-size: 32px; margin-bottom: 10px; letter-spacing: 2px; line-height: 1.2; font-weight: 600; color: #5d4037; animation: typewriter 3s steps(30) 0s 1 normal both; white-space: nowrap; overflow: hidden; border-right: 2px solid #5d4037; }
-        .hero-game-detail p { font-size: 16px; opacity: 0.9; letter-spacing: 0.5px; font-weight: 400; animation: fadeInUp 1s ease 3s both; font-style: italic; color: #5d4037; }
-        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Main nostalgic paper style */
-        .main { background: #f5f5dc; padding: 40px; border-radius: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.05); max-width: 1200px; margin: 0 auto; border: 1px solid #ddd; }
-        .back-btn { background: #5d4037; color: white; padding: 12px 24px; border: none; border-radius: 0; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; font-family: 'Cinzel', serif; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 2px 5px rgba(93,64,55,0.3); }
-        .back-btn:hover { box-shadow: 0 4px 10px rgba(93,64,55,0.4); transform: translateY(-1px); }
-        .main h1 { color: #5d4037; text-align: center; font-size: 28px; margin-bottom: 10px; font-family: 'Cinzel', serif; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); }
-        .main h2 { color: #5d4037; font-size: 20px; margin: 30px 0 15px; font-family: 'Cinzel', serif; letter-spacing: 1px; border-bottom: 1px solid #5d4037; padding-bottom: 5px; position: relative; font-weight: 500; }
-        .main h2::after { content: '🎖️'; position: absolute; right: -30px; top: 0; font-size: 18px; opacity: 0.7; } /* Medal for PUBG */
-        .main p { text-align: left; font-size: 16px; color: #5d4037; margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.5px; background: #fafafa; padding: 15px; border-left: 4px solid #5d4037; border-radius: 0 5px 5px 0; position: relative; }
-        .main p::before { content: '💭'; position: absolute; top: -10px; left: 20px; font-size: 20px; opacity: 0.5; }
-        .main ul { color: #5d4037; margin-left: 20px; }
-        .main li { margin-bottom: 10px; list-style-type: none; position: relative; padding-left: 20px; }
-        .main li::before { content: '•'; position: absolute; left: 0; color: #5d4037; font-size: 18px; font-weight: bold; }
-        .main img { width: 100%; height: auto; border-radius: 5px; margin: 20px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border: 1px solid #ddd; filter: sepia(0.2) brightness(1.05); } /* Dusty sepia nostalgic */
-
-        /* Sidebar */
-        .sidebar { background: #f5f5dc; padding: 20px; border-radius: 0; box-shadow: 0 5px 20px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 100px; border: 1px solid #ddd; }
-        .sidebar h3 { color: #5d4037; border-bottom: 2px solid #5d4037; padding-bottom: 10px; margin-bottom: 15px; font-family: 'Cinzel', serif; letter-spacing: 1px; font-weight: 500; }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar li { margin: 10px 0; }
-        .sidebar a { display: block; padding: 12px; background: #fafafa; border-radius: 0; text-decoration: none; color: #5d4037; transition: all 0.3s ease; border-left: 3px solid transparent; }
-        .sidebar a:hover { background: #f0f0f0; color: #000; transform: translateX(5px); border-left-color: #000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-
-        /* Xóa gạch dưới tất cả link */
-        a { text-decoration: none !important; }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-game-detail { padding: 80px 15px 60px; background-attachment: scroll; }
-            .hero-game-detail h1 { font-size: 28px; }
-            .main { padding: 20px; margin: 20px; }
-            .sidebar { position: static; }
+        .glitch-text::after {
+            left: -2px; text-shadow: -2px 0 var(--pl-glitch);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
         }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 30px, 0); }
+            20% { clip: rect(80px, 9999px, 10px, 0); }
+            100% { clip: rect(40px, 9999px, 90px, 0); }
+        }
+
+        /* --- HEADER --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #1a0505 0%, #000 70%);
+            border-bottom: 4px solid var(--pl-red);
+            position: relative;
+        }
+
+        .header-content h1 {
+            font-size: 5rem;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .header-content p {
+            font-size: 1.5rem;
+            color: var(--pl-red);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin-top: 20px;
+        }
+
+        /* --- NÚT BẤM STYLE CYBERPUNK --- */
+        .cyber-btn {
+            margin-top: 40px;
+            background: transparent;
+            color: var(--pl-red);
+            border: 2px solid var(--pl-red);
+            padding: 15px 40px;
+            font-family: var(--font-main);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            transition: 0.3s;
+            overflow: hidden;
+        }
+
+        .cyber-btn:hover {
+            background: var(--pl-red);
+            color: var(--pl-black);
+            box-shadow: 0 0 20px var(--pl-red);
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* --- CARD STYLE (Cắt góc) --- */
+        .data-card {
+            background: #111;
+            border-left: 5px solid var(--pl-red);
+            padding: 40px;
+            margin-bottom: 60px;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%); /* Cắt góc dưới phải */
+        }
+
+        .data-card h2 {
+            font-family: var(--font-main);
+            color: var(--pl-red);
+            font-size: 2.5rem;
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+
+        .data-card p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: var(--pl-red);
+            font-weight: bold;
+        }
+
+        /* --- SECTION: SONG BIRD PROFILE --- */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .profile-img-container {
+            position: relative;
+            border: 2px solid var(--pl-red);
+        }
+
+        .profile-img-container img {
+            width: 100%; display: block;
+            filter: grayscale(100%) contrast(120%);
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--pl-red);
+            animation: scan 3s linear infinite;
+            box-shadow: 0 0 10px var(--pl-red);
+        }
+
+        @keyframes scan { 0% {top: 0;} 100% {top: 100%;} }
+
+        /* --- QUOTE BLOCK --- */
+        blockquote {
+            font-family: var(--font-main);
+            font-size: 1.8rem;
+            color: var(--pl-white);
+            text-align: center;
+            border-top: 1px solid var(--pl-red);
+            border-bottom: 1px solid var(--pl-red);
+            padding: 30px;
+            margin: 60px 0;
+            background: rgba(255, 79, 94, 0.1);
+        }
+
+        /* --- BLACKWALL MODE (JAVASCRIPT TRIGGER) --- */
+        body.blackwall-active {
+            animation: shake 0.5s infinite;
+        }
+        
+        body.blackwall-active .data-card, 
+        body.blackwall-active header {
+            filter: invert(1) contrast(200%); /* Đảo màu tạo hiệu ứng kinh dị */
+            background: #2a0000;
+        }
+
+        body.blackwall-active h1, 
+        body.blackwall-active h2 {
+            text-shadow: 5px 0 red, -5px 0 blue;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #333;
+            color: #555;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
     </style>
 </head>
 <body>
+
+    <div class="noise"></div>
+
     <header>
-        <div class="logo">Linh Osimi</div>
-       
-        <div class="header-right">
-    
+        <div class="header-content">
+            <h1 class="glitch-text" data-text="PHANTOM LIBERTY">PHANTOM LIBERTY</h1>
+            <p>The Tragedy of Songbird</p>
+            <button class="cyber-btn" onclick="breachBlackwall()">Breach Protocol</button>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-game-detail">
-        <div class="hero-game-detail-content">
-            <h1>PUBG - Battleground Khói Lửa</h1>
-            <p>Phân Tích Chiến Trường Hoài Cổ - Dusty Royale</p>
-        </div>
-    </section>
-
     <div class="container">
-        <aside class="sidebar">
-            <h3>PLAYER INFO</h3>
-            <ul>
-                <li><a href="#">Level: 45 (Ace)</a></li>
-                <li><a href="#">K/D Ratio: 3.2</a></li>
-                <li><a href="#">Win Rate: 12%</a></li>
-            </ul>
-            <h3>TAGS</h3>
-            <ul>
-                <li><a href="#">Battle Royale</a></li>
-                <li><a href="#">PUBG Mobile-pc</a></li>
-                <li><a href="#">Survival</a></li>
-            </ul>
-        </aside>
 
-        <main class="main">
-            <button class="back-btn" onclick="window.location.href='game.html'">← Quay lại Game</button>
+        <article class="data-card">
+            <div class="profile-grid">
+                <div class="profile-img-container">
+                    <img src="https://primagames.com/wp-content/uploads/2023/09/Cyberpunk-2077-Songbird-Injured.jpg?fit=1200%2C675" alt="Songbird">
+                    <div class="scan-line"></div>
+                </div>
+                <div>
+                    <h2>Target: So Mi (Songbird)</h2>
+                    <p>>> <span class="highlight">STATUS:</span> BLACKWALL CORRUPTION DETECTED (89%)</p>
+                    <p>>> <span class="highlight">AFFILIATION:</span> NUSA / FIA (Disavowed)</p>
+                    <p>So Mi không phải là một netrunner bình thường. Cô ấy là vũ khí hủy diệt hàng loạt của FIA. Bị buộc phải khai thác Bức Tường Đen (Blackwall) từ khi còn trẻ, cơ thể và tâm trí của cô đang dần bị ăn mòn bởi những AI hoang dã từ bên kia bức màn.</p>
+                    <p>Cô ấy là con chim hoàng yến trong mỏ than, hót những bài ca về sự tự do trong khi đang chết dần trong chiếc lồng mạ vàng của Tổng thống Myers.</p>
+                </div>
+            </div>
+        </article>
+
+        <blockquote>
+            "YOU LOOK AT ME AND SEE A WEAPON. I LOOK IN THE MIRROR AND SEE A CORPSE."
+        </blockquote>
+
+        <article class="data-card" style="border-left-color: var(--pl-glitch);">
+            <h2 style="color: var(--pl-glitch);">The Anatomy of Betrayal</h2>
+            <p>Trong Dogtown, lòng trung thành là thứ xa xỉ. Bi kịch của Songbird không nằm ở việc cô ấy phản bội đất nước, mà là ở chỗ cô ấy phải <span class="highlight">phản bội tất cả mọi người</span> chỉ để được sống sót.</p>
             
-            <h2>Tổng quan về game củ lùn này</h2>
-            <p>Nơi 100 players drop vào island bụi bặm, loot gear và survive đến last man. Phân tích này khám phá mechanics, maps và strategies, như một chiến trường cũ kỹ đầy khói bụi.</p>
+            <p>Cô nói dối V về phương thuốc chữa trị. Cô phản bội Reed - người thầy, người anh đã cứu mạng cô. Cô bán đứng Tổng thống. Tất cả chỉ là những nước cờ tuyệt vọng của một con thú bị dồn vào chân tường.</p>
+            
+            <div style="margin-top:20px; padding: 20px; border: 1px dashed var(--pl-white);">
+                <strong>SYSTEM ALERT:</strong> Who is the real traitor?
+                <ul>
+                    <li>Reed: Trung thành với Huy hiệu, mù quáng trước con người.</li>
+                    <li>Songbird: Sẵn sàng đốt cháy cả thế giới để cứu lấy chính mình.</li>
+                    <li>V: Một lính đánh thuê bị kẹt giữa bàn cờ chính trị.</li>
+                </ul>
+            </div>
+        </article>
 
-            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80&filter=duotone,sepia" alt="PUBG Dusty Battlefield" style="width: 100%; border-radius: 0; border: 1px solid #5d4037; box-shadow: 0 0 10px #5d4037; margin: 20px 0; filter: sepia(0.4) brightness(1.05);">
+        <article class="data-card">
+            <h2>The Killing Moon</h2>
+            <p>Kết thúc của Phantom Liberty không có người chiến thắng. Nếu bạn giúp Songbird (King of Wands), bạn trao cho cô ấy tự do nhưng lại đẩy Reed vào chỗ chết. Nếu bạn giao nộp cô ấy (King of Cups/Pentacles), bạn cứu được Reed nhưng biến Songbird thành một cái xác sống, vĩnh viễn là nô lệ cho Chính phủ.</p>
+            <p>Tự do, trong thế giới Cyberpunk, luôn đi kèm với cái giá đắt nhất: <span class="highlight">Lòng tin</span>.</p>
+        </article>
 
-            <h2>Gameplay Mechanics</h2>
-            <p>Circle shrink forces combat, loot from crates/buildings. Vehicles for rotation, grenades for flush. Điểm 9/10 - tension high, skill-based, nostalgic feel.</p>
-            <ul>
-                <li><strong>Điểm mạnh:</strong> Realistic gunplay, large maps hoài cổ.</li>
-                <li><strong>Điểm yếu:</strong> Cheaters, long queue times.</li>
-            </ul>
-
-            <h2>Maps & Strategies</h2>
-            <p>Erangel classic, Miramar desert - hot drop Pochinki for kills. Strategy: Third-party fights, zone prediction. Mobile version smooth on low-end devices, dusty graphics nostalgic.</p>
-            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80&filter=duotone,sepia" alt="PUBG Map Dusty" style="width: 100%; border-radius: 0; border: 1px solid #5d4037; box-shadow: 0 0 10px #5d4037; margin: 20px 0; filter: sepia(0.4) brightness(1.05);">
-
-            <h2>Kết Luận</h2>
-            <p>PUBG là battleground legend hoài cổ, điểm 8/10 - adrenaline rush giữa bụi bặm. </p>
-
-            <button class="back-btn" onclick="window.location.href='game.html'" style="margin-top: 30px;">← Quay lại Game</button>
-        </main>
     </div>
 
-    <footer style="background: #f5f5dc; color: #5d4037; padding: 20px; text-align: center; border-top: 2px solid #5d4037; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 1px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);">
-        <p>&copy; 2025 Kiến Thức VN | Game Focus</p>
+    <footer>
+        <p>SECURE CONNECTION TERMINATED // FIA DATABASE</p>
+        <p>Copyright 2077 Night City Archives.</p>
     </footer>
 
-    <div id="postModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalContent"></p>
-        </div>
-    </div>
-
-    <script src="/linhkun.js"></script>
+    <script>
+        function breachBlackwall() {
+            const body = document.body;
+            const btn = document.querySelector('.cyber-btn');
+            
+            // Kích hoạt hiệu ứng Blackwall
+            body.classList.toggle('blackwall-active');
+            
+            if(body.classList.contains('blackwall-active')) {
+                btn.innerText = "CRITICAL ERROR // SYSTEM FAILURE";
+                btn.style.borderColor = "white";
+                
+                // Tạo âm thanh hoặc hiệu ứng rung (giả lập)
+                setTimeout(() => {
+                    alert("⚠️ BLACKWALL PROTOCOL INITIATED ⚠️\n\nSO MI HAS ESCAPED.");
+                }, 1000);
+            } else {
+                btn.innerText = "BREACH PROTOCOL";
+            }
+        }
+    </script>
 </body>
 </html>
