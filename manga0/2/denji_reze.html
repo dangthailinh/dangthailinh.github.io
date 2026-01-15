@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denji & Reze | The Manga Cut</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- 1. BIẾN & RESET --- */
+        :root {
+            --ink-black: #000000;
+            --paper-white: #ffffff;
+            --screentone-grey: #cccccc;
+            --accent-red: #ff0000; /* Chỉ dùng rất ít cho điểm nhấn cực mạnh */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--paper-white);
+            color: var(--ink-black);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Lớp phủ Texture giấy và chấm tram toàn trang */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Tạo hiệu ứng chấm tram (halftone dot pattern) */
+            background-image: radial-gradient(var(--screentone-grey) 1px, transparent 1px);
+            background-size: 4px 4px; /* Kích thước chấm */
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: multiply;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Kiểu chữ SFX (Sound Effect) */
+        .sfx-text {
+            font-family: 'Bangers', cursive;
+            color: var(--paper-white);
+            text-shadow: 
+                3px 3px 0 var(--ink-black),
+                -1px -1px 0 var(--ink-black),  
+                1px -1px 0 var(--ink-black),
+                -1px 1px 0 var(--ink-black),
+                1px 1px 0 var(--ink-black);
+            letter-spacing: 2px;
+        }
+
+        /* --- 2. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            /* Sử dụng ảnh manga đen trắng có độ tương phản cao */
+            background: url('https://i.pinimg.com/originals/2b/09/67/2b0967b1707c378033da7c4090944730.jpg'); 
+            background-size: cover;
+            background-position: center top;
+            /* Ép buộc ảnh về đen trắng tương phản cao */
+            filter: grayscale(100%) contrast(120%) brightness(90%);
+        }
+
+        /* Lớp phủ tạo hiệu ứng tốc độ (Speed Lines) ở nền */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-conic-gradient(
+                from 0deg, 
+                transparent 0deg 10deg, 
+                rgba(255,255,255,0.1) 10deg 20deg
+            );
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            /* Tạo khung thoại (speech bubble) thô ráp */
+            background: var(--paper-white);
+            border: 4px solid var(--ink-black);
+            padding: 30px 50px;
+            transform: skew(-5deg); /* Nghiêng nhẹ tạo động lực */
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.8);
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            line-height: 0.9;
+            margin-bottom: 15px;
+            transform: skew(5deg); /* Nghiêng ngược lại để chữ thẳng */
+        }
+
+        .subtitle-box {
+            display: inline-block;
+            background: var(--ink-black);
+            color: var(--paper-white);
+            padding: 5px 15px;
+            font-weight: bold;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            transform: skew(5deg);
+        }
+
+        /* --- 3. COMMON LAYOUT & MANGA ELEMENTS --- */
+        .character-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 50px 5vw;
+            position: relative;
+            /* Nền tối để làm nổi bật các khung tranh trắng */
+            background-color: #111; 
+            border-top: 5px solid var(--ink-black);
+            border-bottom: 5px solid var(--ink-black);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0; /* Loại bỏ khoảng cách để các panel dính vào nhau */
+            align-items: stretch;
+        }
+
+        /* Manga Panel chứa ảnh */
+        .manga-image-panel {
+            position: relative;
+            height: 600px;
+            border: 4px solid var(--ink-black);
+            background: var(--paper-white);
+            overflow: hidden;
+            /* Tạo hiệu ứng viền mực thô ráp bằng clip-path */
+            clip-path: polygon(2% 2%, 98% 0%, 100% 98%, 0% 100%);
+            transition: transform 0.3s;
+        }
+        
+        .manga-image-panel:hover {
+             transform: scale(1.02) rotate(-1deg);
+        }
+
+        .manga-image-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ép ảnh về đen trắng và tăng tương phản mạnh */
+            filter: grayscale(100%) contrast(130%) brightness(110%);
+        }
+        
+        /* Lớp phủ chấm tram lên ảnh */
+        .manga-image-panel::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(0,0,0,0.3) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+        }
+
+        /* Hộp thoại/Dẫn chuyện */
+        .narrator-box {
+            background: var(--paper-white);
+            color: var(--ink-black);
+            padding: 50px;
+            border: 4px solid var(--ink-black);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Tạo hình dạng hộp thoại hơi méo */
+            clip-path: polygon(0% 5%, 100% 0%, 95% 100%, 5% 95%);
+            z-index: 2;
+            /* Đổ bóng cứng */
+            filter: drop-shadow(8px 8px 0px var(--ink-black));
+        }
+
+        /* Mũi tên chỉ của hộp thoại */
+        .narrator-box::before {
+            content: '';
+            position: absolute;
+            width: 0; height: 0;
+            border-style: solid;
+        }
+        
+        /* Cấu hình mũi tên cho từng bên */
+        #denji .narrator-box { margin-right: -20px; }
+        #denji .narrator-box::before {
+            top: 50px; right: -30px;
+            border-width: 20px 0 20px 40px;
+            border-color: transparent transparent transparent var(--paper-white);
+            filter: drop-shadow(4px 0px 0px var(--ink-black)); /* Viền cho mũi tên */
+        }
+
+        #reze .narrator-box { margin-left: -20px; }
+        #reze .narrator-box::before {
+            top: 50px; left: -30px;
+            border-width: 20px 40px 20px 0;
+            border-color: transparent var(--paper-white) transparent transparent;
+            filter: drop-shadow(-4px 0px 0px var(--ink-black));
+        }
+
+
+        .narrator-box h2 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            /* Hiệu ứng chữ SFX */
+            text-shadow: 3px 3px 0 #000;
+            color: white;
+            -webkit-text-stroke: 2px black;
+        }
+
+        .narrator-box p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: justify;
+            line-height: 1.4;
+        }
+
+        /* Dấu nhấn đậm trong văn bản */
+        .bold-ink {
+            font-weight: 800;
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+        }
+
+        /* --- 4. SECTION SPECIFIC --- */
+        
+        /* Relationship Section - The Impact Frame */
+        #relationship {
+            background: var(--paper-white);
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Hiệu ứng nền tập trung (Impact Lines) */
+        #relationship::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 200%; height: 200%;
+            background: repeating-conic-gradient(
+                var(--ink-black) 0deg 2deg,
+                transparent 2deg 5deg
+            );
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .impact-bubble {
+            position: relative;
+            background: var(--paper-white);
+            border: 5px solid var(--ink-black);
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            /* Tạo hình bong bóng nổ (Explosion bubble) */
+            clip-path: polygon(10% 0%, 20% 5%, 30% 0%, 40% 5%, 50% 0%, 60% 5%, 70% 0%, 80% 5%, 90% 0%, 100% 10%, 95% 20%, 100% 30%, 95% 40%, 100% 50%, 95% 60%, 100% 70%, 95% 80%, 100% 90%, 90% 100%, 80% 95%, 70% 100%, 60% 95%, 50% 100%, 40% 95%, 30% 100%, 20% 95%, 10% 100%, 0% 90%, 5% 80%, 0% 70%, 5% 60%, 0% 50%, 5% 40%, 0% 30%, 5% 20%, 0% 10%);
+        }
+
+        .quote {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--ink-black);
+            line-height: 1.2;
+        }
+
+        /* --- 5. RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero-content { padding: 20px 30px; }
+            
+            .container { grid-template-columns: 1fr; gap: 30px;}
+            .manga-image-panel { height: 400px; clip-path: none; border-width: 3px;}
+            
+            /* Reset lại các hiệu ứng méo và margin âm trên mobile cho dễ nhìn */
+            .narrator-box { 
+                clip-path: none; 
+                margin: 0 !important; 
+                filter: none;
+                border-width: 3px;
+                box-shadow: 5px 5px 0 var(--ink-black);
+            }
+            .narrator-box::before { display: none; }
+            
+            #reze .container { display: flex; flex-direction: column-reverse; }
+        }
+        /* --- RELATIONSHIP SPECIFIC STYLES --- */
+
+/* Timeline dạng dọc */
+.memory-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    max-width: 900px;
+    margin: 60px auto;
+    position: relative;
+}
+
+/* Đường kẻ dọc nối các ký ức (Timeline line) */
+.memory-strip::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    width: 4px; height: 100%;
+    background: var(--ink-black);
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+/* Từng khối ký ức */
+.memory-moment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+/* Đảo chiều layout cho các thẻ chẵn/lẻ */
+.memory-moment:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* Khung ảnh ký ức */
+.moment-frame {
+    width: 45%;
+    height: 300px;
+    border: 4px solid var(--ink-black);
+    background: #fff;
+    position: relative;
+    /* Hiệu ứng khung tranh bị nghiêng/xộc xệch */
+    box-shadow: 8px 8px 0 var(--ink-black);
+    transition: transform 0.3s;
+}
+
+.moment-frame:hover {
+    transform: scale(1.03) rotate(2deg);
+}
+
+.moment-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(120%);
+}
+
+/* Khung chữ phân tích */
+.moment-text {
+    width: 45%;
+    background: var(--paper-white);
+    padding: 20px;
+    border: 2px solid var(--ink-black);
+    position: relative;
+}
+
+/* Nút tròn ở giữa timeline */
+.timeline-dot {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px; height: 20px;
+    background: var(--ink-black);
+    border: 3px solid var(--paper-white);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Typography cho phần này */
+.moment-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--ink-black);
+    display: inline-block;
+}
+
+.moment-desc {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+
+.final-boom {
+    margin-top: 100px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+
+@media (max-width: 768px) {
+    .memory-strip::before { left: 20px; } 
+    .memory-moment, .memory-moment:nth-child(even) {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 50px; 
+    }
+    .moment-frame, .moment-text { width: 100%; margin-bottom: 20px; }
+    .timeline-dot { left: 20px; }
+}
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
+            <h1 class="sfx-text">DENJI & REZE</h1>
+            <div class="subtitle-box">
+                BOMB GIRL ARC: TÌNH YÊU VÀ NGÒI NỔ
+            </div>
+        </div>
+    </header>
+
+    <section id="denji" class="character-section">
+        <div class="container">
+            <div class="narrator-box" data-aos="fade-right">
+                <h2 class="sfx-text">THE CHAINSAW</h2>
+                <p>
+                    Tên: Denji. Nghề nghiệp: Thợ săn quỷ (Bán chuyên).
+                    Mục tiêu sống: <span class="bold-ink">Ăn ngon, ngủ kỹ, và chạm vào [CẤM].</span>
+                </p>
+                <p>
+                    Đơn giản là một con chó hoang nơi đáy xã hội. Không học thức, không tương lai. 
+                    Thứ duy nhất Denji có là trái tim của Pochita và một khao khát được yêu thương đến ngu muội.
+                    Mà cũng dễ hiểu kẻ thiếu sự yêu thương thường đi tìm kiếm tình thương ,hết Makima lại đến Reze.
+                    Thằng này kiểu hơi thèm gái quá đà mà thằng đực nào chả thế .v
+                </p>
+            </div>
+            
+            <div class="manga-image-panel" data-aos="fade-left" data-aos-delay="200">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.WYl7VQ3xom70ydzZ83qouwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Denji Manga Panel">
+            </div>
+        </div>
+    </section>
+
+    <section id="reze" class="character-section">
+        <div class="container">
+            <div class="manga-image-panel" data-aos="fade-right">
+                 <img src="https://i.pinimg.com/originals/bc/00/0d/bc000d718edad04d7649ae93538b00a7.jpg" alt="Reze Manga Panel">
+            </div>
+
+            <div class="narrator-box" data-aos="fade-left" data-aos-delay="200">
+                <h2 class="sfx-text">THE BOMB</h2>
+                <p>
+                    Cô gái ở quán cà phê. Dịu dàng, biết lắng nghe, và có mùi thuốc súng.
+                </p>
+                <p>
+                    Reze là <span class="bold-ink">giấc mơ ngọt ngào nhất</span> mà Denji từng có. 
+                    Một em gái nga siêu xinh cute? Ừ thì đúng là vậy, nhưng đằng sau nụ cười ấy là một vũ khí giết người hàng loạt.
+                    Một buổi hẹn hò ở lễ hội, dạy bơi trong đêm... tất cả chỉ là màn kịch của một vũ khí Xô Viết tàn độc. 
+                    BOMBING HEARTBREAK!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="relationship">
+    <div class="container" style="display: block;"> <div style="text-align: center; margin-bottom: 60px;" data-aos="fade-down">
+            <h2 class="sfx-text" style="font-size: 4rem; color: var(--ink-black); -webkit-text-stroke: 0px;">FUCKUP ROMANCE</h2>
+            <p style="font-weight: 800; letter-spacing: 2px;">PHÂN TÍCH HỒ SƠ: SỐ 42 & SỐ 43</p>
+        </div>
+
+        <div class="memory-strip">
+
+            <div class="memory-moment" data-aos="fade-right">
+                <div class="timeline-dot"></div>
+                
+                <div class="moment-frame">
+                    <img src="https://i.pinimg.com/736x/21/07/94/210794749dad2a55b536f53008355eac.jpg" alt="Night Swimming">
+                </div>
+                
+                <div class="moment-text">
+                    <h3 class="moment-title">01. BÀI HỌC ĐẦU TIÊN</h3>
+                    <p class="moment-desc">
+                        "Cậu có biết bơi không? Để tôi dạy cậu nhé."<br><br>
+                        Giữa màn đêm yên tĩnh, Reze không dạy Denji cách chiến đấu, mà dạy cậu cách <b>sống</b>. 
+                        Đó là lần đầu tiên Denji cảm thấy mình không phải là một con chó hay một cái cưa, mà là một cậu con trai bình thường bên cạnh một cô gái.
+                    </p>
+                </div>
+            </div>
+
+            <div class="memory-moment" data-aos="fade-left">
+                <div class="timeline-dot"></div>
+                
+                <div class="moment-frame">
+                    <img src="https://i.redd.it/jrcc50v0cye61.jpg" alt="Fireworks Kiss">
+                </div>
+                
+                <div class="moment-text">
+                    <h3 class="moment-title">02. NỤ HÔN VỊ THUỐC SÚNG</h3>
+                    <p class="moment-desc">
+                        Dưới bầu trời rực sáng pháo hoa, một nụ hôn đã xảy ra. <br>
+                        Đau đớn. Máu me. Reze cắn đứt lưỡi Denji.<br><br>
+                        Đó là phép ẩn dụ hoàn hảo cho mối quan hệ này: 
+                        <span style="background: var(--ink-black); color: #fff; padding: 0 5px;">Ngọt ngào chết người.</span>
+                        Khoảnh khắc cô ấy lộ diện bản chất Quỷ Bom cũng là lúc trái tim Denji thực sự nổ tung.
+                    </p>
+                </div>
+            </div>
+
+            <div class="memory-moment" data-aos="fade-right">
+                <div class="timeline-dot"></div>
+                
+                <div class="moment-frame">
+                    <img src="https://i.pinimg.com/736x/5d/59/38/5d59381eec6fd689a39192342ba9240d.jpg" alt="The Flower in Alley">
+                </div>
+                
+                <div class="moment-text">
+                    <h3 class="moment-title">03. LỜI HỨA KHÔNG THÀNH</h3>
+                    <p class="moment-desc">
+                        Denji đợi ở quán cà phê. Reze đã quay lại. Cô ấy thực sự đã chọn Denji thay vì nhiệm vụ.<br><br>
+                        Nhưng Makima đã ở đó.<br>
+                        Reze không bao giờ đến được chỗ hẹn. Cô ấy chết trong con hẻm nhỏ, với suy nghĩ cuối cùng hướng về "chuột đồng". Một cái kết tàn nhẫn đúng chất Fujimoto.
+                        Denji chỉ còn lại nỗi đau và lời hứa dang dở,tội thằng nhỏ vãi lồn..D
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="final-boom" data-aos="zoom-in-up" data-aos-duration="1200">
+            <h2 class="sfx-text" style="font-size: 5rem; line-height: 1; margin-bottom: 20px;">BOOM!</h2>
+            
+            <div class="impact-bubble">
+                <p class="quote">"DENJI, CÙNG NHAU BỎ TRỐN NHÉ?"</p>
+                <div style="margin-top: 20px; border-top: 2px dashed var(--ink-black); padding-top: 10px;">
+                    <p style="font-weight: bold; font-family: 'Montserrat', sans-serif;">— Reze (The Bomb Devil)</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px; font-style: italic; color: #555;">
+               No...
+            </p>
+        </div>
+
+    </div>
+</section>
+
+    <footer style="background: var(--ink-black); color: var(--paper-white); text-align: center; padding: 20px; border-top: 3px solid var(--paper-white);">
+        <p style="font-family: 'Bangers', cursive; letter-spacing: 1px;">Linh Osimi // TRIBUTE TO FUJIMOTO</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 100,
+            duration: 800,
+            easing: 'ease-in-out-sine',
+            once: false,
+        });
+    </script>
+</body>
+</html>

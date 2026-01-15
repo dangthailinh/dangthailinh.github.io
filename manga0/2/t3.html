@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linh-Osimi</title>
+    <link rel="stylesheet" href="/linhkun.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&family=Bangers&display=swap" rel="stylesheet"> <!-- Font manga-style: Noto Sans JP + Bangers cho tiêu đề comic -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Hero Section với style manga */
+        .hero-manga {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://wallpapers.com/images/featured/manga-panel-background-r325ovueaen5u590.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .hero-manga::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(220,53,69,0.1) 0%, transparent 70%);
+            z-index: 1;
+        }
+        .hero-manga-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+        .hero-manga h1 { 
+            font-family: 'Bangers', cursive; /* Phông chữ manga comic-style */
+            font-size: 60px; 
+            margin-bottom: 10px; 
+            text-shadow: 3px 3px 0 #dc3545, 4px 4px 0 #000; /* Shadow kiểu vẽ tay manga */
+            animation: typewriter 2s steps(20) 0s 1 normal both, blink 0.75s step-end infinite; /* Hiệu ứng typewriter + blink cursor */
+            white-space: nowrap; 
+            overflow: hidden; 
+            border-right: 3px solid #dc3545;
+        }
+        .hero-manga p { font-size: 20px; opacity: 0.95; animation: fadeInUp 1s ease 2s both; font-weight: 300; }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #dc3545; }
+        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Main */
+        .main { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 1200px; margin: 0 auto; }
+        .back-btn { background: var(--primary-color); color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(40,167,69,0.4); }
+        .main h1 { color: var(--primary-color); text-align: center; font-size: 36px; margin-bottom: 10px; }
+        .main p { text-align: center; font-size: 18px; color: #666; margin-bottom: 40px; }
+
+        /* Card Grid với style manga */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .card-link { text-decoration: none; color: inherit; display: block; }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+            border-top: 4px solid #dc3545;
+        }
+        .card::before {
+            content: '';
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #dc3545, rgba(220,53,69,0.5));
+        }
+        .card::after {
+            content: '💭'; /* Bubble speech decor manga-style */
+            position: absolute; top: 10px; right: 10px; font-size: 24px; opacity: 0.1; z-index: 0;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .card-img { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            filter: drop-shadow(0 0 10px rgba(220,53,69,0.3)); /* Glow manga-style */
+        }
+        .rating-stars { color: #ffc107; font-size: 18px; margin-bottom: 10px; }
+        .genre-tags { display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }
+        .genre-tag { background: #f8f9fa; padding: 4px 8px; border-radius: 12px; font-size: 12px; color: #dc3545; font-weight: 500; border: 1px solid #dc3545; }
+        .card-diagram { 
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin: 15px 0; 
+            font-size: 14px; 
+            color: #555; 
+            border-left: 4px solid #dc3545; 
+            font-family: 'Noto Sans JP', sans-serif;
+            position: relative;
+        }
+        .card-diagram::after {
+            content: '✒️'; /* Bút vẽ decor */
+            position: absolute; top: -5px; right: 10px; font-size: 16px; opacity: 0.3;
+        }
+        .card h3 { 
+            color: #dc3545; 
+            margin: 15px 0 10px; 
+            font-size: 22px; 
+            font-weight: 600; 
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.1); /* Shadow nhẹ như vẽ tay */
+        }
+        .card-meta { font-size: 14px; color: #999; margin-bottom: 0; font-style: italic; }
+
+        /* Sub-section */
+        .sub-section { margin-top: 70px; padding-top: 40px; border-top: 2px dashed #ddd; }
+        .sub-section h2 { 
+            color: var(--primary-color); 
+            text-align: center; 
+            font-size: 32px; 
+            margin-bottom: 30px; 
+            position: relative; 
+            font-family: 'Bangers', cursive; /* Phông manga cho h2 */
+            text-shadow: 2px 2px 0 #dc3545;
+        }
+        .sub-section h2::after { 
+            content: '✨'; /* Decor sao manga */
+            position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); font-size: 20px; opacity: 0.8;
+        }
+
+        /* Pagination */
+        .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 50px; }
+        .pagination button { padding: 12px 20px; border: 2px solid var(--primary-color); background: transparent; color: var(--primary-color); cursor: pointer; border-radius: 30px; transition: all 0.3s; font-weight: 500; font-size: 16px; }
+        .pagination button:hover, .pagination button.active { background: var(--primary-color); color: white; transform: scale(1.05); box-shadow: 0 5px 15px rgba(40,167,69,0.3); }
+
+        /* Xóa gạch dưới tất cả link */
+        a { text-decoration: none !important; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-manga { background-attachment: scroll; padding: 80px 15px 60px; }
+            .hero-manga h1 { font-size: 40px; }
+            .main { padding: 20px; margin: 20px; }
+            .card-grid { grid-template-columns: 1fr; gap: 20px; }
+            .sub-section h2 { font-size: 28px; }
+            .genre-tags { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+   <header class="manga-header">
+  <!-- Logo -->
+  <div class="logo-container">
+    <div class="logo-box">📖</div>
+    <span class="logo-text">Linh OSIMI</span>
+  </div>
+
+  <!-- Nút menu cho mobile -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- Thanh điều hướng -->
+  <nav id="mainNav">
+ <ul>
+        <li><a href="/khoa-hoc0/0/khoa-hoc.html">Khoa Học</a></li>
+        <li><a href="/nghe-thuat0/nghe-thuat.html">Nghệ Thuật</a></li>
+        <li><a href="/phim0/0/phim.html">Phim</a></li>
+        <li><a href="/manga0/0/truyen-manga.html">Truyện (Manga)</a></li>
+        <li><a href="/am-nhac.html">Âm Nhạc</a></li>
+        <li><a href="/game0/0/game.html">Game</a></li>
+         <li><a href="/kienthuc/0/kienthuc.html">Kiến thức</a></li>
+      </ul>
+  </nav>
+
+  <!-- Góc phải -->
+  <div class="header-right">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </div>
+</header>
+
+
+<style>
+/* ===== Tổng thể header manga ===== */
+.manga-header {
+  background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+  border-bottom: 3px solid #dc3545;
+  box-shadow: 0 4px 15px rgba(220,53,69,0.4);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Noto Sans JP', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ===== Logo ===== */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-box {
+  width: 40px;
+  height: 40px;
+  background: #dc3545;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(220,53,69,0.6), inset 0 0 10px rgba(255,255,255,0.2);
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  text-shadow: 1px 1px 2px #000;
+}
+.logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  font-family: 'Bangers', cursive;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px #dc3545;
+}
+
+/* ===== Navigation ===== */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+nav a {
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+nav a:hover {
+  color: #dc3545;
+  border-bottom-color: #dc3545;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5), 0 0 10px #dc3545;
+  transform: scale(1.05);
+}
+nav a.active {
+  color: #dc3545;
+  border-bottom: 2px solid #dc3545;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5), 0 0 5px #dc3545;
+}
+
+/* ===== Nút theme ===== */
+.theme-toggle {
+  background: #dc3545;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 16px;
+  box-shadow: 0 0 15px rgba(220,53,69,0.6);
+  font-weight: bold;
+}
+.theme-toggle:hover {
+  box-shadow: 0 0 20px #dc3545;
+  transform: scale(1.1) rotate(180deg);
+}
+
+/* ===== Nút menu (mobile) ===== */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.menu-toggle:hover {
+  color: #dc3545;
+  transform: scale(1.2);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .manga-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+  }
+
+  .menu-toggle {
+    display: block;
+    align-self: flex-end;
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+  }
+
+  nav.active {
+    display: block;
+    width: 100%;
+    animation: menuSlide 0.4s ease;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .header-right {
+    align-self: center;
+    margin-top: 10px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
+}
+
+/* Hiệu ứng menu mở */
+@keyframes menuSlide {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+<script>
+function toggleMenu() {
+  document.getElementById("mainNav").classList.toggle("active");
+}
+</script>
+
+
+    <!-- Hero Section -->
+    <section class="hero-manga">
+        <div class="hero-manga-content">
+            <h1>Truyện (Manga)</h1>
+            <p>Cập nhật chap mới, review và spoiler-free</p>
+        </div>
+    </section>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<title>Manga Anime Button</title>
+<style>
+    body {
+        background: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    /* Manga / Anime Button */
+    .manga-btn {
+        position: relative;
+        padding: 14px 28px;
+        font-size: 18px;
+        font-weight: 800;
+        font-family: 'Arial Black', 'Comic Sans MS', sans-serif;
+        text-transform: uppercase;
+
+        color: #000;
+        background: #fff;
+        border: 4px solid #000;
+
+        cursor: pointer;
+        overflow: hidden;
+
+        box-shadow: 6px 6px 0 #000;
+        transition: all 0.2s ease;
+    }
+
+    /* Speed lines manga */
+    .manga-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+            -45deg,
+            transparent 0px,
+            transparent 6px,
+            rgba(0,0,0,0.15) 6px,
+            rgba(0,0,0,0.15) 8px
+        );
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    /* Hover */
+    .manga-btn:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 10px 10px 0 #e63946;
+    }
+
+    .manga-btn:hover::before {
+        opacity: 1;
+    }
+
+    /* Click */
+    .manga-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 3px 3px 0 #000;
+    }
+</style>
+</head>
+
+<body>
+    <main class="main">
+        <button class="manga-btn" onclick="window.location.href='/index.html'">
+            ← Quay về Trang chủ
+        </button>
+    </main>
+</body>
+</html>
+   <div class="sub-section">
+            <h2>Nhân vật AOT</h2>
+        <!-- Grid card chính -->
+        <div class="card-grid">
+            <a href="aot.html" class="card-link">
+                <div class="card">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.C5x7KGdEeevwTcCN5fMSRAHaFW?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AOT" class="card-img">
+                   
+                    <div class="genre-tags">
+                        <span class="genre-tag">Action</span>
+                        <span class="genre-tag">Adventure</span>
+                    </div>
+                  
+                    <h3>Attack on titan</h3>
+                    <div class="card-meta">BORN INTO THIS WORLD</div>
+                </div>
+            </a>
+
+            <a href="aot2.html" class="card-link">
+                <div class="card">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.ZIJ-md_Gd109jtyS7hnZLQHaHa?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Attack on Titan" class="card-img">
+                   
+                    <div class="genre-tags">
+                        <span class="genre-tag">Dark Fantasy</span>
+                        <span class="genre-tag">Action</span>
+                    </div>
+                 
+                    <h3>Attack on titan </h3>
+                    <div class="card-meta">THE Greatest slavation is not being born!</div>
+                </div>
+            </a>
+
+            <a href="aot3.html" class="card-link">
+                <div class="card">
+                    <img src="https://images3.alphacoders.com/134/thumbbig-1341528.webp" alt="Jujutsu Kaisen" class="card-img">
+                  
+                    <div class="genre-tags">
+                        <span class="genre-tag">FUCK </span>
+                        <span class="genre-tag">UP</span>
+                    </div>
+                   
+                    <h3>Zeke Và Armin</h3>
+                    
+                    <div class="card-meta">(Nihilism vs. Absurdism)</div>
+                </div>
+            </a>
+        </div>
+
+
+     
+
+        <!-- Phần phụ -->
+        <div class="sub-section">
+            <h2>Một số nhân vật anime khác</h2>
+            <div class="card-grid">
+                <a href="m.html" class="card-link">
+                    <div class="card">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.Ury3rGONNsVNJuPKh4k5GQHaEo?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Chainsaw Man" class="card-img">
+
+                        <div class="genre-tags">
+                            <span class="genre-tag">JOI09</span>
+                            <span class="genre-tag">IDK STUPID</span>
+                        </div>
+                      
+                        <h3>L Lawliet</h3>
+                        <div class="card-meta">Bi kịch của trí tuệ </div>
+                    </div>
+                </a>
+
+                <a href="m2.html"
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                class="card-link">
+                    <div class="card">
+                        <img src="https://th.bing.com/th/id/OIP.05B0Hoq3_lqnOlC7fM9_IQHaEQ?o=7&cb=ucfimg2&rm=3&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Griffith" class="card-img">
+                       
+                        <div class="genre-tags">
+                            <span class="genre-tag">Dark</span>
+                            <span class="genre-tag">seinen</span>
+                        </div>
+                     
+                        <h3>Griffith</h3>
+                        <div class="card-meta">DID NOTHING wrong</div>
+                    </div>
+                </a>
+
+                <a href="m3.html" class="card-link">
+                    <div class="card">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.GEs6TYj_TKfzlOYn3uJM8AHaD5?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Demon Slayer" class="card-img">
+                    
+                        <div class="genre-tags">
+                            <span class="genre-tag">Action</span>
+                            <span class="genre-tag">Dark</span>
+                            <span class="genre-tag">18+</span>
+                        </div>
+                       
+                        <h3>JO han liebert</h3>
+                        <div class="card-meta">A MONSTER FUCKING NAMELESS MONSTER</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+       <div class="pagination-container">
+        <div class="pagination" role="navigation" aria-label="Pagination">
+        <a href="#" id="prevBtn" class="page-btn" aria-label="Previous page">◀</a>
+        <a href="/manga0/0/truyen-manga.html" id="page1" class="page-btn">1</a>
+        <a href="/manga0/1/t2.html" id="page2" class="page-btn">2</a>
+       
+        
+        
+        <a href="#" id="nextBtn" class="page-btn" aria-label="Next page">▶</a>
+        </div>
+
+        <!-- 🔸 Dropdown chọn trang -->
+        <div class="page-dropdown" id="pageDropdown" aria-hidden="true">
+        <label for="pageInput">Nhập số trang:</label>
+        <input type="number" id="pageInput" min="1" max="5" placeholder="VD: 2,3...">
+        <button id="goBtn" class="go-btn">Đi</button>
+        </div>
+      </div>
+
+      <style>
+        /* prevent horizontal shifting on mobile */
+        * { box-sizing: border-box; }
+        html, body { overflow-x: hidden; -webkit-overflow-scrolling: touch; }
+
+        :root {
+        --pag-bg: rgba(255,255,255,0.06);
+        --accent: #2e92a4;
+        --accent-2: #1b909d;
+        --muted: #dbeafe;
+        --pill-shadow: 0 6px 18px rgba(11, 83, 37, 0.12);
+        }
+
+        .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 18px 0;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+        }
+
+        .pagination {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+        padding: 8px;
+        border-radius: 12px;
+        box-shadow: 0 4px 18px rgba(3,10,27,0.08);
+        backdrop-filter: blur(6px);
+        }
+
+        /* Base style for buttons/links: remove underline and make pill (compact) */
+        .pagination a, .pagination span {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 38px;
+        height: 38px;
+        padding: 0 10px;
+        border-radius: 10px;
+        font-size: 13px;
+        color: #073642;
+        background: linear-gradient(180deg,#ffffff,#f7fbff);
+        border: 1px solid rgba(14,61,95,0.06);
+        box-shadow: var(--pill-shadow);
+        transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+        cursor: pointer;
+        user-select: none;
+        }
+
+        .pagination a:hover, .pagination span:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 26px rgba(3,10,27,0.12);
+        background: linear-gradient(180deg,#ffffff,#ecf8ff);
+        }
+
+        /* Active page */
+        .pagination a.active {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: white;
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: 0 8px 26px rgba(46,164,79,0.18);
+        font-weight: 600;
+        transform: translateY(-2px);
+        }
+
+        /* Prev/Next styling (compact) */
+        .pagination .page-btn {
+        min-width: 46px;
+        padding: 0 8px;
+        font-weight: 600;
+        color: #0b4a2f;
+        background: linear-gradient(180deg,#fbfffe,#f1fff4);
+        }
+
+        /* Dots control look */
+        .pagination .page-dots {
+        min-width: 38px;
+        height: 38px;
+        font-size: 18px;
+        line-height: 0;
+        background: linear-gradient(180deg,#f8f9fb,#eef6ff);
+        color: #1f2937;
+        border-radius: 10px;
+        padding-top: 2px;
+        }
+
+        /* Disabled state */
+        .pagination a.disabled {
+        pointer-events: none;
+        opacity: 0.45;
+        transform: none;
+        box-shadow: none;
+        background: linear-gradient(180deg,#f5f7f9,#f1f5f8);
+        color: #97a0aa;
+        }
+
+        /* Page dropdown */
+        .page-dropdown {
+        display: none;
+        position: absolute;
+        top: 56px;
+        background: white;
+        border: 1px solid rgba(3,10,27,0.06);
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 8px 30px rgba(3,10,27,0.08);
+        text-align: center;
+        z-index: 9999;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 200px;
+        }
+
+        .page-dropdown label {
+        display: block;
+        margin-bottom: 6px;
+        color: #243447;
+        font-size: 13px;
+        }
+
+        .page-dropdown input {
+        width: 80px;
+        padding: 8px;
+        margin-right: 8px;
+        border: 1px solid rgba(3,10,27,0.06);
+        border-radius: 8px;
+        text-align: center;
+        font-size: 14px;
+        }
+
+        .go-btn {
+        padding: 8px 12px;
+        background: linear-gradient(90deg,var(--accent),var(--accent-2));
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 6px 18px rgba(27,157,106,0.18);
+        }
+
+        .go-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 26px rgba(27,157,106,0.2);
+        }
+
+        /* Responsive: make pagination even more compact on small screens */
+        @media (max-width: 420px) {
+        .pagination { gap: 6px; padding: 6px; }
+        .pagination a, .pagination span { min-width: 34px; height: 34px; padding: 0 8px; font-size: 12px; }
+        .pagination .page-btn { min-width: 40px; padding: 0 6px; }
+        .page-dropdown { top: 52px; left: 50%; transform: translateX(-50%); }
+        /* ensure main doesn't cause horizontal overflow */
+        .main { padding-left: 12px; padding-right: 12px; margin: 0 auto; }
+        }
+      </style>
+
+      <script>
+        // 🔹 Danh sách các trang
+        const pages = [
+        '/manga0/0/truyen-manga.html',
+        '/manga0/1/t2.html',
+       
+        ]
+
+        const currentPath = window.location.pathname;
+        let pageNum = pages.findIndex(p => currentPath.includes(p.split('/').pop())) + 1;
+        if (pageNum < 1) pageNum = 1;
+
+        const activePage = document.getElementById(`page${pageNum}`);
+        if (activePage) activePage.classList.add('active');
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        if (pageNum > 1) {
+        prevBtn.href = pages[pageNum - 2];
+        prevBtn.classList.remove('disabled');
+        } else {
+        prevBtn.classList.add('disabled');
+        prevBtn.removeAttribute('href');
+        }
+
+        if (pageNum < pages.length) {
+        nextBtn.href = pages[pageNum];
+        nextBtn.classList.remove('disabled');
+        } else {
+        nextBtn.classList.add('disabled');
+        nextBtn.removeAttribute('href');
+        }
+
+        // ✅ Dropdown điều khiển
+        const dots = document.getElementById('pageDots');
+        const dropdown = document.getElementById('pageDropdown');
+        const goBtn = document.getElementById('goBtn');
+        const input = document.getElementById('pageInput');
+
+        // Khi bấm "..." hiện dropdown
+        dots.addEventListener('click', (e) => {
+        e.stopPropagation(); // tránh bị đóng ngay lập tức
+        const shown = dropdown.style.display === 'block';
+        dropdown.style.display = shown ? 'none' : 'block';
+        dropdown.setAttribute('aria-hidden', shown ? 'true' : 'false');
+        if (!shown) input.focus();
+        });
+
+        // Khi bấm "Đi"
+        goBtn.addEventListener('click', () => {
+        const page = parseInt(input.value);
+        if (page >= 1 && page <= pages.length) {
+          window.location.href = pages[page - 1];
+        } else {
+          alert('Số trang không hợp lệ!');
+        }
+        });
+
+        // Bấm ra ngoài thì đóng dropdown
+        document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target) && e.target !== dots) {
+          dropdown.style.display = 'none';
+          dropdown.setAttribute('aria-hidden', 'true');
+        }
+        });
+
+        // Accessibility: Enter key on input triggers go
+        input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') goBtn.click();
+        });
+      </script>
+    </main>
+
+    <footer style="background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border-top: 3px solid #dc3545; box-shadow: 0 4px 15px rgba(220,53,69,0.4); padding: 20px; text-align: center; font-family: 'Noto Sans JP', sans-serif; position: relative; overflow: hidden;">
+    <p style="color: #fff; text-shadow: 1px 1px 2px #000, 0 0 5px #dc3545; margin: 0; font-size: 14px; transform: skew(-2deg);">&copy; 2025 Kiến Thức VN | Truyện (Manga) Focus</p>
+    <div style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%) rotate(10deg); font-size: 30px; opacity: 0.2;">💭</div> <!-- Speech bubble decor -->
+</footer>
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
+        </div>
+    </div>
+
+    <script src="/linhkun.js"></script>
+</body>
+</html>

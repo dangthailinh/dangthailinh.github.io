@@ -346,13 +346,11 @@ img { max-width: 100%; height: auto; display: block; }
     });
   });
 
-  // Bắt TẤT CẢ phần tử có thể hover (rất rộng để chắc ăn)
   document.querySelectorAll('a, button, input, textarea, select, [onclick], [role="button"], [tabindex], .clickable, .btn, .button').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
 
-  // Nếu vẫn không bắt được một số nút → dùng cách bắt toàn trang (cực chắc)
   document.body.addEventListener('mouseover', e => {
     if (e.target.closest('a, button, input, [onclick], [role="button"]')) {
       cursor.classList.add('hover');
@@ -1251,7 +1249,293 @@ lightbox.addEventListener('click', (e) => {
 });
 </script>
 
+<div class="video-gallery-section">
+    <h2 class="section-title">My Favorite <span style="color: var(--primary-color);">Vids on ytb</span></h2>
+    
+    <div class="video-slider">
+        </div>
+</div>
 
+<div id="video-modal" class="video-modal">
+    <div class="modal-content">
+        <span class="close-video-btn" onclick="closeVideoModal()">×</span>
+        <div class="iframe-container">
+            <iframe id="youtube-player" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3 id="modal-video-title">Video Title</h3>
+    </div>
+</div>
+
+<style>
+    /* --- CSS CHO PHẦN VIDEO --- */
+    .video-gallery-section {
+        width: 95%;
+        max-width: 1200px;
+        margin: 60px auto;
+        text-align: center;
+        position: relative;
+        z-index: 5; /* Đảm bảo nổi lên trên nền */
+    }
+
+    .section-title {
+        font-family: 'Bangers', cursive; /* Dùng font giống logo */
+        font-size: 3rem;
+        color: white;
+        margin-bottom: 30px;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        letter-spacing: 2px;
+    }
+
+    /* Container trượt ngang */
+    .video-slider {
+        display: flex;
+        gap: 25px;
+        overflow-x: auto;
+        padding: 20px 10px;
+        scroll-behavior: smooth;
+        scrollbar-width: thin; /* Firefox */
+        scrollbar-color: var(--primary-color) rgba(0,0,0,0.3);
+    }
+
+    /* Tùy chỉnh thanh cuộn cho Chrome/Safari */
+    .video-slider::-webkit-scrollbar {
+        height: 8px;
+    }
+    .video-slider::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+    }
+    .video-slider::-webkit-scrollbar-thumb {
+        background: #ab6005; /* Màu cam giống theme của bạn */
+        border-radius: 10px;
+    }
+
+    /* Card Video */
+    .video-card {
+        flex: 0 0 280px; /* Chiều rộng cố định */
+        height: 180px;
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        background: #000;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    /* Ảnh thumbnail */
+    .video-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: 0.5s;
+    }
+
+    /* Hiệu ứng khi hover vào card */
+    .video-card:hover {
+        transform: scale(1.05) translateY(-10px);
+        border-color: #ff9f43; /* Viền sáng lên */
+        box-shadow: 0 0 25px rgba(255, 159, 67, 0.6);
+        z-index: 10;
+    }
+
+    .video-card:hover img {
+        opacity: 0.4; /* Làm tối ảnh để hiện nút play */
+        transform: scale(1.1);
+    }
+
+    /* Nút Play và Tiêu đề hiện lên khi hover */
+    .video-info {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .video-card:hover .video-info {
+        opacity: 1;
+    }
+
+    .play-icon-overlay {
+        font-size: 50px;
+        color: white;
+        text-shadow: 0 0 20px #ff9f43;
+        margin-bottom: 10px;
+        transform: scale(0);
+        transition: 0.3s;
+    }
+
+    .video-card:hover .play-icon-overlay {
+        transform: scale(1);
+    }
+
+    .video-title-overlay {
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        padding: 0 10px;
+        text-shadow: 1px 1px 2px black;
+    }
+
+   
+    .video-modal {
+        display: none; /* Mặc định ẩn */
+        position: fixed;
+        z-index: 10000; /* Cao hơn cả Kawaii cursor */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95); /* Nền tối thui */
+        backdrop-filter: blur(10px);
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .video-modal.show {
+        display: flex;
+        opacity: 1;
+    }
+
+    .modal-content {
+        position: relative;
+        width: 90%;
+        max-width: 900px;
+        background: transparent;
+        animation: zoomIn 0.4s ease;
+    }
+
+    @keyframes zoomIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Khung tỷ lệ 16:9 cho video */
+    .iframe-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 2px solid #ff9f43;
+        box-shadow: 0 0 50px rgba(255, 159, 67, 0.3);
+    }
+
+    .iframe-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .close-video-btn {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .close-video-btn:hover {
+        color: #ff9f43;
+        transform: rotate(90deg);
+    }
+
+    #modal-video-title {
+        color: white;
+        margin-top: 15px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Responsive cho mobile */
+    @media (max-width: 768px) {
+        .video-card { flex: 0 0 220px; height: 140px; }
+        .section-title { font-size: 2rem; }
+    }
+</style>
+
+<script>
+    
+    const myVideos = [
+        { id: 'AN1RJF55NXI', title: 'Never Fade Away' },
+        { id: 'KvMY1uzSC1E', title: 'I Really Want to Stay At Your House' },
+        { id: 'mSfgFcWPL-Q', title: 'Weight of the World' },
+        { id: 'E2Rj2gQAyPA', title: 'The line' },
+        { id: 'pFoc5XKkIIw', title: 'Call Your Name (hay vl)' },
+        { id: 'lTRiuFIWV54', title: 'Nintendo Sleepy' }
+    ];
+
+    const videoSlider = document.querySelector('.video-slider');
+    const videoModal = document.getElementById('video-modal');
+    const youtubePlayer = document.getElementById('youtube-player');
+    const modalTitle = document.getElementById('modal-video-title');
+
+    // Hàm tạo danh sách video
+    function renderVideos() {
+        myVideos.forEach(video => {
+            // Tạo thẻ Card
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            
+            // Lấy ảnh thumbnail chất lượng cao
+            const thumbUrl = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
+            
+            card.innerHTML = `
+                <img src="${thumbUrl}" alt="${video.title}">
+                <div class="video-info">
+                    <div class="play-icon-overlay"><i class="fas fa-play-circle"></i></div>
+                    <div class="video-title-overlay">${video.title}</div>
+                </div>
+            `;
+
+            // Bắt sự kiện click để mở modal
+            card.onclick = () => openVideoModal(video.id, video.title);
+            
+            videoSlider.appendChild(card);
+        });
+    }
+
+    // Hàm mở modal
+    function openVideoModal(videoId, title) {
+        videoModal.classList.add('show');
+        // Tự động phát video
+        youtubePlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        modalTitle.innerText = title;
+    }
+
+    // Hàm đóng modal
+    function closeVideoModal() {
+        videoModal.classList.remove('show');
+        // Xóa src để dừng video
+        youtubePlayer.src = "";
+    }
+
+    // Đóng modal khi click ra ngoài vùng video
+    videoModal.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+            closeVideoModal();
+        }
+    });
+
+    // Chạy hàm khởi tạo
+    renderVideos();
+</script>
 <!-- Topics (responsive: desktop unchanged, mobile shows shrinked vertical list with up/down buttons) -->
 <style>
 /* Desktop: keep original grid look */
