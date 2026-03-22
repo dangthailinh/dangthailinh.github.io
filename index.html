@@ -302,7 +302,7 @@ img { max-width: 100%; height: auto; display: block; }
 </head>
 <body>
 
-<!-- KAWAII CURSOR - PHIÊN BẢN CHẮC CHẠN NHẤT 2025 -->
+
 <style>
   *, *::before, *::after { cursor: none !important; } /* Đè chết mọi cursor khác */
   
@@ -1620,7 +1620,1111 @@ lightbox.addEventListener('click', (e) => {
 </style>
 
 
+<!-- ================================================
+   MY PROJECTS SECTION — paste vào trước <footer>
+   ================================================ -->
 
+<section id="my-projects" class="projects-section">
+  <div class="projects-header">
+    <span class="projects-eyebrow">— portfolio —</span>
+    <h2 class="projects-title">My <span class="accent">Projects</span></h2>
+    <p class="projects-subtitle">Click vào project để xem chi tiết ✦</p>
+  </div>
+
+  <!-- Slider wrapper -->
+  <div class="proj-slider-wrap">
+    <button class="proj-nav proj-nav--left" id="projLeft" aria-label="Trước">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <div class="proj-track-viewport">
+      <div class="proj-track" id="projTrack">
+
+        <!-- ======= PROJECT CARD 1 ======= -->
+        <article class="proj-card" data-proj="0">
+          <div class="proj-card__thumb">
+            <img src="img/vip.jpg" alt="Project 1" loading="lazy">
+            <div class="proj-card__overlay">
+              <span class="proj-card__cta">Xem chi tiết →</span>
+            </div>
+            <span class="proj-card__num">01</span>
+          </div>
+          <div class="proj-card__body">
+            <h3>Linh-Osimi Blog</h3>
+            <p>Trang blog cá nhân full-stack với anime theme, animated cursor, intro screen.</p>
+            <div class="proj-tags">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ======= PROJECT CARD 2 ======= -->
+        <article class="proj-card" data-proj="1">
+          <div class="proj-card__thumb">
+            <img src="img/lawliet.jpg" alt="Project 2" loading="lazy">
+            <div class="proj-card__overlay">
+              <span class="proj-card__cta">Xem chi tiết →</span>
+            </div>
+            <span class="proj-card__num">02</span>
+          </div>
+          <div class="proj-card__body">
+            <h3>Manga Reader App</h3>
+            <p>Ứng dụng đọc truyện manga với chapter navigator và dark mode.</p>
+            <div class="proj-tags">
+              <span>JavaScript</span><span>API</span><span>CSS Grid</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ======= PROJECT CARD 3 ======= -->
+        <article class="proj-card" data-proj="2">
+          <div class="proj-card__thumb">
+            <img src="img/joker.jpg" alt="Project 3" loading="lazy">
+            <div class="proj-card__overlay">
+              <span class="proj-card__cta">Xem chi tiết →</span>
+            </div>
+            <span class="proj-card__num">03</span>
+          </div>
+          <div class="proj-card__body">
+            <h3>AI Chat Assistant</h3>
+            <p>Chatbot tích hợp Anthropic Claude API với giao diện retro terminal.</p>
+            <div class="proj-tags">
+              <span>Python</span><span>Claude API</span><span>Flask</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ======= PROJECT CARD 4 ======= -->
+        <article class="proj-card" data-proj="3">
+          <div class="proj-card__thumb">
+            <img src="img/chad.jpg" alt="Project 4" loading="lazy">
+            <div class="proj-card__overlay">
+              <span class="proj-card__cta">Xem chi tiết →</span>
+            </div>
+            <span class="proj-card__num">04</span>
+          </div>
+          <div class="proj-card__body">
+            <h3>Crypto Dashboard</h3>
+            <p>Dashboard real-time theo dõi giá crypto với chart động và alert system.</p>
+            <div class="proj-tags">
+              <span>React</span><span>Chart.js</span><span>CoinGecko API</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ======= PROJECT CARD 5 ======= -->
+        <article class="proj-card" data-proj="4">
+          <div class="proj-card__thumb">
+            <img src="img/zeke.jpg" alt="Project 5" loading="lazy">
+            <div class="proj-card__overlay">
+              <span class="proj-card__cta">Xem chi tiết →</span>
+            </div>
+            <span class="proj-card__num">05</span>
+          </div>
+          <div class="proj-card__body">
+            <h3>Game 2D Platformer</h3>
+            <p>Game platformer 2D viết bằng Python + Pygame với level editor tự thiết kế.</p>
+            <div class="proj-tags">
+              <span>Python</span><span>Pygame</span><span>Game Dev</span>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /proj-track -->
+    </div><!-- /proj-track-viewport -->
+
+    <button class="proj-nav proj-nav--right" id="projRight" aria-label="Tiếp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <!-- Dot indicators -->
+  <div class="proj-dots" id="projDots"></div>
+</section>
+
+<!-- ============================================================
+     PROJECT DETAIL MODAL
+     ============================================================ -->
+<div class="proj-modal-backdrop" id="projModalBackdrop">
+  <div class="proj-modal" id="projModal" role="dialog" aria-modal="true" aria-label="Chi tiết project">
+    <button class="proj-modal__close" id="projModalClose" aria-label="Đóng">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Prev / Next inside modal -->
+    <button class="proj-modal__arrow proj-modal__arrow--left" id="modalPrev" aria-label="Project trước">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="proj-modal__arrow proj-modal__arrow--right" id="modalNext" aria-label="Project tiếp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <div class="proj-modal__inner">
+      <!-- Media (image / video) -->
+      <div class="proj-modal__media" id="modalMedia"></div>
+
+      <!-- Content -->
+      <div class="proj-modal__content">
+        <div class="proj-modal__meta">
+          <span class="proj-modal__num" id="modalNum">01</span>
+          <div class="proj-modal__tags" id="modalTags"></div>
+        </div>
+        <h2 class="proj-modal__title" id="modalTitle"></h2>
+        <p class="proj-modal__desc" id="modalDesc"></p>
+
+        <div class="proj-modal__analysis" id="modalAnalysis">
+          <h4>📊 Phân tích kỹ thuật</h4>
+          <ul id="modalAnalysisList"></ul>
+        </div>
+
+        <div class="proj-modal__features" id="modalFeaturesWrap">
+          <h4>✨ Tính năng chính</h4>
+          <ul id="modalFeaturesList"></ul>
+        </div>
+
+        <!-- Code snippet -->
+        <div class="proj-modal__code-wrap" id="modalCodeWrap">
+          <div class="proj-modal__code-header">
+            <span id="modalCodeLang">JS</span>
+            <button class="copy-btn" id="copyCodeBtn">Copy</button>
+          </div>
+          <pre class="proj-modal__code"><code id="modalCode"></code></pre>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="proj-modal__actions">
+          <a href="#" id="modalGithub" target="_blank" rel="noopener" class="proj-btn proj-btn--github">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.52 1.02 1.52 1.02.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.84c.85.004 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.68-4.57 4.92.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
+            GitHub
+          </a>
+          <a href="#" id="modalDemo" target="_blank" rel="noopener" class="proj-btn proj-btn--demo">
+            🚀 Live Demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     STYLES
+     ============================================================ -->
+<style>
+/* ---- Variables (inherit site palette) ---- */
+:root {
+  --proj-accent: #e8890c;
+  --proj-accent2: #ff6b35;
+  --proj-dark: #1a120b;
+  --proj-glass: rgba(255,255,255,0.07);
+  --proj-border: rgba(255,255,255,0.12);
+  --proj-radius: 18px;
+  --proj-font: 'Bangers', cursive;
+}
+
+/* ---- Section ---- */
+.projects-section {
+  position: relative;
+  z-index: 5;
+  padding: 80px 20px 60px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 20%, rgba(0,0,0,0.55) 80%, transparent 100%);
+  overflow: hidden;
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.projects-eyebrow {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: var(--proj-accent);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.projects-title {
+  font-family: var(--proj-font);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  color: #fff;
+  letter-spacing: 3px;
+  margin: 8px 0 10px;
+  text-shadow: 0 0 40px rgba(232,137,12,0.4);
+  line-height: 1;
+}
+.projects-title .accent { color: var(--proj-accent); }
+.projects-subtitle {
+  color: rgba(255,255,255,0.55);
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+/* ---- Slider wrapper ---- */
+.proj-slider-wrap {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.proj-track-viewport {
+  flex: 1;
+  overflow: hidden;
+}
+.proj-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+}
+
+/* ---- Project Card ---- */
+.proj-card {
+  flex: 0 0 calc(33.333% - 16px);
+  min-width: 260px;
+  background: var(--proj-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--proj-border);
+  border-radius: var(--proj-radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.3s ease;
+}
+.proj-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px var(--proj-accent);
+  border-color: var(--proj-accent);
+}
+
+/* Card thumbnail */
+.proj-card__thumb {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+.proj-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+.proj-card:hover .proj-card__thumb img {
+  transform: scale(1.08);
+}
+.proj-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.proj-card:hover .proj-card__overlay { opacity: 1; }
+.proj-card__cta {
+  color: var(--proj-accent);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.proj-card__num {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-family: var(--proj-font);
+  font-size: 42px;
+  color: rgba(255,255,255,0.12);
+  line-height: 1;
+  pointer-events: none;
+  transition: color 0.3s;
+}
+.proj-card:hover .proj-card__num { color: rgba(232,137,12,0.25); }
+
+/* Card body */
+.proj-card__body {
+  padding: 18px 20px 20px;
+}
+.proj-card__body h3 {
+  font-family: var(--proj-font);
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0 0 8px;
+  letter-spacing: 1px;
+}
+.proj-card__body p {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.55;
+  margin: 0 0 14px;
+}
+.proj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.proj-tags span {
+  background: rgba(232,137,12,0.15);
+  border: 1px solid rgba(232,137,12,0.35);
+  color: var(--proj-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+/* ---- Nav Buttons ---- */
+.proj-nav {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--proj-border);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+.proj-nav svg { width: 20px; height: 20px; }
+.proj-nav:hover {
+  background: var(--proj-accent);
+  border-color: var(--proj-accent);
+  transform: scale(1.1);
+}
+.proj-nav:disabled { opacity: 0.3; cursor: default; transform: none; }
+
+/* ---- Dots ---- */
+.proj-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+.proj-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+.proj-dot.active {
+  background: var(--proj-accent);
+  width: 24px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(232,137,12,0.6);
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.proj-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(12px);
+  z-index: 100000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.proj-modal-backdrop.show {
+  display: flex;
+  opacity: 1;
+}
+.proj-modal {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: linear-gradient(145deg, #1e1408, #110c05);
+  border: 1px solid rgba(232,137,12,0.3);
+  border-radius: 24px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
+  animation: modalIn 0.42s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  scrollbar-width: thin;
+  scrollbar-color: var(--proj-accent) transparent;
+}
+.proj-modal::-webkit-scrollbar { width: 6px; }
+.proj-modal::-webkit-scrollbar-thumb { background: var(--proj-accent); border-radius: 3px; }
+
+@keyframes modalIn {
+  from { transform: scale(0.88) translateY(24px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.proj-modal__close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+.proj-modal__close:hover { background: rgba(255,255,255,0.15); transform: rotate(90deg); }
+.proj-modal__close svg { width: 18px; height: 18px; }
+
+/* Modal prev/next arrows */
+.proj-modal__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+.proj-modal__arrow--left { left: 12px; }
+.proj-modal__arrow--right { right: 12px; }
+.proj-modal__arrow:hover { background: var(--proj-accent); border-color: var(--proj-accent); }
+.proj-modal__arrow svg { width: 18px; }
+
+/* Modal inner layout */
+.proj-modal__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 420px;
+}
+
+/* Media panel */
+.proj-modal__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px 0 0 24px;
+  min-height: 320px;
+  background: #0d0805;
+}
+.proj-modal__media img,
+.proj-modal__media iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 24px 0 0 24px;
+}
+.proj-modal__media iframe {
+  aspect-ratio: 16/9;
+  height: auto;
+  min-height: 100%;
+}
+
+/* Content panel */
+.proj-modal__content {
+  padding: 36px 32px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.proj-modal__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.proj-modal__num {
+  font-family: var(--proj-font);
+  font-size: 3.5rem;
+  color: rgba(232,137,12,0.2);
+  line-height: 1;
+}
+.proj-modal__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.proj-modal__tags span {
+  background: rgba(232,137,12,0.15);
+  border: 1px solid rgba(232,137,12,0.4);
+  color: var(--proj-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.proj-modal__title {
+  font-family: var(--proj-font);
+  font-size: 2.2rem;
+  color: #fff;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1.1;
+}
+.proj-modal__desc {
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Analysis block */
+.proj-modal__analysis,
+.proj-modal__features {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.proj-modal__analysis h4,
+.proj-modal__features h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--proj-accent);
+  margin: 0 0 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.proj-modal__analysis ul,
+.proj-modal__features ul {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.proj-modal__analysis li,
+.proj-modal__features li {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.5;
+}
+.proj-modal__analysis li::before { content: '⬡'; position: absolute; left: 0; color: var(--proj-accent); font-size: 10px; top: 2px; }
+.proj-modal__features li::before { content: '✓'; position: absolute; left: 0; color: #4ade80; font-size: 12px; }
+
+/* Code block */
+.proj-modal__code-wrap {
+  background: #0d0d0d;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.proj-modal__code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.proj-modal__code-header span {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--proj-accent);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.copy-btn {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  background: none;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.copy-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+.proj-modal__code {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 12.5px;
+  color: #b5cea8;
+  line-height: 1.65;
+  white-space: pre;
+}
+
+/* Action buttons */
+.proj-modal__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.proj-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  letter-spacing: 0.5px;
+}
+.proj-btn--github {
+  background: #1a1a2e;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+}
+.proj-btn--github:hover {
+  background: #333;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+.proj-btn--demo {
+  background: linear-gradient(135deg, var(--proj-accent), var(--proj-accent2));
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(232,137,12,0.35);
+}
+.proj-btn--demo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(232,137,12,0.5);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .proj-modal__inner { grid-template-columns: 1fr; }
+  .proj-modal__media { border-radius: 24px 24px 0 0; min-height: 220px; }
+  .proj-modal__media img, .proj-modal__media iframe { border-radius: 24px 24px 0 0; }
+  .proj-modal__content { padding: 24px 20px 24px; }
+  .proj-modal__arrow { display: none; }
+}
+@media (max-width: 768px) {
+  .proj-card { flex: 0 0 calc(100% - 0px); }
+  .projects-section { padding: 50px 12px 40px; }
+  .proj-slider-wrap { gap: 10px; }
+  .proj-nav { width: 38px; height: 38px; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .proj-card { flex: 0 0 calc(50% - 12px); }
+}
+</style>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function(){
+ 
+  const PROJECTS = [
+    {
+      title: "Linh-Osimi Blog",
+      num: "01",
+      tags: ["HTML", "CSS", "JavaScript"],
+      desc: "Trang blog cá nhân với full anime aesthetic: animated kawaii cursor, intro cinematic screen, parallax hero, glassmorphism cards, crypto widget real-time và music player tích hợp. Được thiết kế từ đầu với 100% vanilla code, không framework.",
+      image: "img/vip.jpg",
+      video: null,
+      github: "https://github.com/dangthailinh/dangthailinh.github.io",
+      demo: "https://dangthailinh.github.io",
+      analysis: [
+        "Kiến trúc single-page với modular CSS variables để dễ theming",
+        "Sử dụng CSS backdrop-filter + glassmorphism tạo depth perception",
+        "Custom cursor bằng DOM manipulation + requestAnimationFrame",
+        "Intro animation dùng sessionStorage để không repeat khi navigate",
+        "CoinGecko API integration cho live crypto data không cần backend"
+      ],
+      features: [
+        "Kawaii animated cursor tùy chỉnh 2 trạng thái",
+        "Cinematic intro screen với typing animation",
+        "Parallax hero với background-attachment fixed",
+        "Real-time đồng hồ analog + digital (ICT UTC+7)",
+        "Video gallery với YouTube embed modal",
+        "Image lightbox slider với scroll navigation"
+      ],
+      codeLang: "JavaScript",
+      code: `// Kawaii cursor với 2 trạng thái
+const cursor = document.getElementById('kawaii-cursor');
+
+document.addEventListener('mousemove', e => {
+  requestAnimationFrame(() => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+});
+
+document.body.addEventListener('mouseover', e => {
+  if (e.target.closest('a, button, [onclick]')) {
+    cursor.classList.add('hover');
+  } else {
+    cursor.classList.remove('hover');
+  }
+});`
+    },
+    {
+      title: "Manga Reader App",
+      num: "02",
+      tags: ["JavaScript", "REST API", "CSS Grid"],
+      desc: "Ứng dụng đọc truyện manga trực tuyến kết nối MangaDex API. Hỗ trợ tìm kiếm, lọc theo thể loại, chapter navigator với lazy loading và dark/light mode toggle. Lưu lịch sử đọc vào localStorage.",
+      image: "img/lawliet.jpg",
+      video: null,
+      github: "https://github.com/dangthailinh",
+      demo: "#",
+      analysis: [
+        "Sử dụng MangaDex public API v5 với fetch + async/await",
+        "Lazy loading hình ảnh chapter bằng IntersectionObserver",
+        "CSS Grid masonry layout cho danh sách manga",
+        "localStorage để persist reading progress và bookmarks",
+        "Debounce search input giảm API calls không cần thiết"
+      ],
+      features: [
+        "Tìm kiếm manga real-time với debounce 400ms",
+        "Chapter navigator với keyboard shortcut",
+        "Lazy loading ảnh tiết kiệm bandwidth",
+        "Reading history + bookmark system",
+        "Dark / Light mode toggle",
+        "Responsive layout cả mobile lẫn desktop"
+      ],
+      codeLang: "JavaScript",
+      code: `// Lazy load chapter images
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.classList.add('loaded');
+      observer.unobserve(img);
+    }
+  });
+}, { rootMargin: '100px' });
+
+document.querySelectorAll('img[data-src]')
+  .forEach(img => observer.observe(img));`
+    },
+    {
+      title: "AI Chat Assistant",
+      num: "03",
+      tags: ["Python", "Claude API", "Flask"],
+      desc: "Chatbot web tích hợp Anthropic Claude API với giao diện retro terminal xanh. Backend Flask xử lý conversation history, frontend vanilla JS stream responses real-time. Hỗ trợ markdown rendering và code highlighting.",
+      image: "img/joker.jpg",
+      video: null,
+      github: "https://github.com/dangthailinh",
+      demo: "assistant.html",
+      analysis: [
+        "Flask backend REST API endpoint /chat nhận POST JSON",
+        "Anthropic Python SDK với streaming mode cho UX mượt",
+        "Server-Sent Events (SSE) truyền response từng token",
+        "Conversation history management giữ context qua turns",
+        "Marked.js + highlight.js render markdown và code blocks"
+      ],
+      features: [
+        "Streaming response real-time như ChatGPT",
+        "Retro terminal giao diện với font Courier",
+        "Markdown + syntax highlighting support",
+        "Multi-turn conversation với memory",
+        "Copy code button trên mỗi code block",
+        "Typing indicator animation"
+      ],
+      codeLang: "Python",
+      code: `# Flask endpoint với streaming
+@app.route('/chat', methods=['POST'])
+def chat():
+    data = request.json
+    messages = data.get('messages', [])
+    
+    def generate():
+        with anthropic.messages.stream(
+            model="claude-sonnet-4-20250514",
+            max_tokens=1024,
+            messages=messages
+        ) as stream:
+            for text in stream.text_stream:
+                yield f"data: {text}\n\n"
+    
+    return Response(generate(),
+        mimetype='text/event-stream')`
+    },
+    {
+      title: "Crypto Dashboard",
+      num: "04",
+      tags: ["React", "Chart.js", "CoinGecko API"],
+      desc: "Dashboard real-time theo dõi top 50 cryptocurrency. Biểu đồ giá 7 ngày, market cap, volume, thay đổi 24h. Hệ thống alert khi giá vượt ngưỡng tùy chỉnh, notification push browser.",
+      image: "img/chad.jpg",
+      video: null,
+      github: "https://github.com/dangthailinh",
+      demo: "#",
+      analysis: [
+        "CoinGecko API free tier polling mỗi 60s tránh rate limit",
+        "Chart.js Line chart với gradient fill và animation",
+        "React useState + useEffect quản lý data lifecycle",
+        "Web Notifications API cho price alert system",
+        "Custom hook useCrypto() abstraction data fetching logic",
+        "useMemo() optimize re-render khi filter/sort danh sách"
+      ],
+      features: [
+        "Top 50 coin real-time với auto refresh",
+        "Biểu đồ giá 1D / 7D / 30D",
+        "Price alert với browser push notification",
+        "Filter / Sort theo market cap, volume, change",
+        "Favorite list với localStorage persist",
+        "Dark mode mặc định, toggle light mode"
+      ],
+      codeLang: "JavaScript",
+      code: `// Custom hook fetch crypto data
+function useCrypto(ids, currency = 'usd') {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = \`https://api.coingecko.com/api/v3/
+simple/price?ids=\${ids}&vs_currencies=\${currency}
+&include_24hr_change=true\`;
+      const res = await fetch(url);
+      setData(await res.json());
+      setLoading(false);
+    };
+    fetchData();
+    const interval = setInterval(fetchData, 60000);
+    return () => clearInterval(interval);
+  }, [ids, currency]);
+
+  return { data, loading };
+}`
+    },
+    {
+      title: "Game 2D Platformer",
+      num: "05",
+      tags: ["Python", "Pygame", "Game Dev"],
+      desc: "Game platformer 2D hoàn chỉnh viết bằng Python + Pygame. Có hệ thống physics gravity, collision detection, enemy AI đơn giản, level editor JSON-based và particle effects khi nhân vật chạy/nhảy.",
+      image: "img/zeke.jpg",
+      video: null,
+      github: "https://github.com/dangthailinh",
+      demo: "#",
+      analysis: [
+        "Game loop chuẩn: update → draw tách biệt logic và render",
+        "AABB collision detection giữa player và tilemap",
+        "Enemy AI state machine: PATROL → CHASE → ATTACK",
+        "Particle system pool tái sử dụng objects tránh GC",
+        "Level data lưu JSON, load động không hardcode",
+        "Delta time movement đảm bảo tốc độ nhất quán mọi FPS"
+      ],
+      features: [
+        "Physics engine: gravity, jump, friction",
+        "Tilemap renderer từ JSON level files",
+        "Enemy AI với 3 trạng thái behavior",
+        "Particle effects: bụi chân, hiệu ứng nhảy",
+        "Score system + lives counter",
+        "Level editor tích hợp (F1 để toggle)"
+      ],
+      codeLang: "Python",
+      code: `# Game loop với delta time
+class Game:
+    def run(self):
+        clock = pygame.time.Clock()
+        while self.running:
+            dt = clock.tick(60) / 1000.0  # seconds
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+            
+            # Update với delta time
+            self.player.update(dt, self.tilemap)
+            self.enemies.update(dt)
+            self.particles.update(dt)
+            
+            # Render
+            self.screen.fill((20, 12, 8))
+            self.tilemap.draw(self.screen)
+            self.player.draw(self.screen)
+            pygame.display.flip()`
+    }
+  ];
+
+  /* -------------------------------------------------------
+     Slider logic
+     ------------------------------------------------------- */
+  const track     = document.getElementById('projTrack');
+  const leftBtn   = document.getElementById('projLeft');
+  const rightBtn  = document.getElementById('projRight');
+  const dotsWrap  = document.getElementById('projDots');
+  const cards     = Array.from(document.querySelectorAll('.proj-card'));
+
+  let currentIdx = 0;
+  const CARD_WIDTH = () => {
+    const c = cards[0];
+    if (!c) return 300;
+    return c.offsetWidth + parseInt(getComputedStyle(track).gap || 24);
+  };
+
+  /* Calculate how many cards are visible */
+  const visibleCount = () => {
+    const vp = document.querySelector('.proj-track-viewport');
+    return Math.max(1, Math.round(vp.offsetWidth / CARD_WIDTH()));
+  };
+
+  const maxIdx = () => Math.max(0, cards.length - visibleCount());
+
+  /* Build dots */
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    const total = maxIdx() + 1;
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('button');
+      d.className = 'proj-dot' + (i === currentIdx ? ' active' : '');
+      d.setAttribute('aria-label', `Slide ${i + 1}`);
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function updateDots() {
+    document.querySelectorAll('.proj-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentIdx);
+    });
+  }
+
+  function goTo(idx) {
+    currentIdx = Math.max(0, Math.min(idx, maxIdx()));
+    track.style.transform = `translateX(-${currentIdx * CARD_WIDTH()}px)`;
+    leftBtn.disabled  = currentIdx === 0;
+    rightBtn.disabled = currentIdx >= maxIdx();
+    updateDots();
+  }
+
+  leftBtn.addEventListener('click',  () => goTo(currentIdx - 1));
+  rightBtn.addEventListener('click', () => goTo(currentIdx + 1));
+
+  // Touch swipe
+  let touchStart = 0;
+  track.addEventListener('touchstart', e => { touchStart = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    const diff = touchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goTo(currentIdx + (diff > 0 ? 1 : -1));
+  }, {passive:true});
+
+  window.addEventListener('resize', () => { buildDots(); goTo(Math.min(currentIdx, maxIdx())); }, {passive:true});
+  buildDots();
+  goTo(0);
+
+  /* -------------------------------------------------------
+     Modal logic
+     ------------------------------------------------------- */
+  const backdrop   = document.getElementById('projModalBackdrop');
+  const modal      = document.getElementById('projModal');
+  const closeBtn   = document.getElementById('projModalClose');
+  const modalPrev  = document.getElementById('modalPrev');
+  const modalNext  = document.getElementById('modalNext');
+  let activeProj   = 0;
+
+  function renderModal(idx) {
+    const p = PROJECTS[idx];
+    if (!p) return;
+    activeProj = idx;
+
+    /* Media */
+    const mediaEl = document.getElementById('modalMedia');
+    if (p.video) {
+      mediaEl.innerHTML = `<iframe src="${p.video}" frameborder="0"
+        allow="autoplay; encrypted-media" allowfullscreen style="width:100%;height:100%;min-height:280px;"></iframe>`;
+    } else {
+      mediaEl.innerHTML = `<img src="${p.image}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;">`;
+    }
+
+    document.getElementById('modalNum').textContent  = p.num;
+    document.getElementById('modalTitle').textContent = p.title;
+    document.getElementById('modalDesc').textContent  = p.desc;
+
+    /* Tags */
+    const tagsEl = document.getElementById('modalTags');
+    tagsEl.innerHTML = p.tags.map(t => `<span>${t}</span>`).join('');
+
+    /* Analysis */
+    const anaList = document.getElementById('modalAnalysisList');
+    anaList.innerHTML = p.analysis.map(a => `<li>${a}</li>`).join('');
+
+    /* Features */
+    const featList = document.getElementById('modalFeaturesList');
+    featList.innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
+
+    /* Code */
+    document.getElementById('modalCodeLang').textContent = p.codeLang;
+    document.getElementById('modalCode').textContent = p.code;
+
+    /* Links */
+    document.getElementById('modalGithub').href = p.github;
+    document.getElementById('modalDemo').href   = p.demo || '#';
+    if (!p.demo || p.demo === '#') {
+      document.getElementById('modalDemo').style.opacity = '0.4';
+      document.getElementById('modalDemo').style.pointerEvents = 'none';
+    } else {
+      document.getElementById('modalDemo').style.opacity = '';
+      document.getElementById('modalDemo').style.pointerEvents = '';
+    }
+
+    /* Arrows */
+    modalPrev.disabled = idx === 0;
+    modalNext.disabled = idx === PROJECTS.length - 1;
+  }
+
+  function openModal(idx) {
+    renderModal(idx);
+    backdrop.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => backdrop.classList.add('show'));
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('show');
+    setTimeout(() => {
+      backdrop.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 300);
+  }
+
+  /* Attach click to cards */
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => openModal(parseInt(card.dataset.proj)));
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+  modalPrev.addEventListener('click', () => { if (activeProj > 0) renderModal(activeProj - 1); });
+  modalNext.addEventListener('click', () => { if (activeProj < PROJECTS.length - 1) renderModal(activeProj + 1); });
+
+  /* Keyboard navigation */
+  document.addEventListener('keydown', e => {
+    if (!backdrop.classList.contains('show')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft')  { if (activeProj > 0) renderModal(activeProj - 1); }
+    if (e.key === 'ArrowRight') { if (activeProj < PROJECTS.length - 1) renderModal(activeProj + 1); }
+  });
+
+  /* Copy code */
+  document.getElementById('copyCodeBtn').addEventListener('click', function() {
+    const code = document.getElementById('modalCode').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      this.textContent = 'Copied!';
+      this.style.color = '#4ade80';
+      setTimeout(() => { this.textContent = 'Copy'; this.style.color = ''; }, 2000);
+    });
+  });
+})();
+</script>
 
 
 

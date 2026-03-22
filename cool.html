@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sụp Đổ - Dark Vibe</title>
+    <style>
+        /* CSS variables cho tông màu Dark/Monochrome */
+        :root {
+            --bg-color: #050505;
+            --screen-bg: #0a0a0a;
+            --text-color: #d1d1d1;
+            --glow-color: rgba(209, 209, 209, 0.6);
+            --tv-frame: #121212;
+            --button-color: #222;
+            --button-hover: #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        /* Khung tivi / màn hình */
+        .tv-container {
+            background: var(--tv-frame);
+            padding: 30px 20px 20px 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9),
+                        inset 0 0 10px rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        /* Màn hình hiển thị */
+        .screen {
+            background-color: var(--screen-bg);
+            height: 300px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px #000;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hiệu ứng sọc ngang (Scanlines) của TV cũ */
+        .screen::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* Chữ hiển thị */
+        #text-display {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            text-shadow: 0 0 8px var(--glow-color);
+            z-index: 3;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Con trỏ nhấp nháy */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2rem;
+            background-color: var(--text-color);
+            box-shadow: 0 0 8px var(--glow-color);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Hiệu ứng Glitch (sụp đổ) khi cần */
+        .glitch {
+            animation: glitch-anim 0.2s linear infinite;
+        }
+
+        @keyframes glitch-anim {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 1px) }
+            40% { transform: translate(-1px, -1px) }
+            60% { transform: translate(2px, 1px) }
+            80% { transform: translate(1px, -1px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Bảng điều khiển */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            background-color: var(--button-color);
+            color: #888;
+            border: 2px solid #111;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.05),
+                        0 4px 6px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+            color: var(--text-color);
+            box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.1),
+                        0 2px 3px rgba(0, 0, 0, 0.5);
+            transform: translateY(2px);
+        }
+
+        button.active {
+            color: #fff;
+            text-shadow: 0 0 5px #fff;
+            border-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tv-container">
+        <div class="screen" id="tv-screen">
+            <div id="text-display"></div><span class="cursor"></span>
+        </div>
+        
+        <div class="controls">
+            <button id="btn-rewind" title="Bắt đầu lại">⏮ TUA LẠI</button>
+            <button id="btn-pause" title="Dừng/Tiếp tục">⏸ DỪNG</button>
+            <button id="btn-music" title="Bật/Tắt nhạc">🎵 BẬT NHẠC</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Cấu hình mảng chữ tâm trạng
+        const texts = [
+            "Hệ thống đang sụp đổ...",
+            "Cũng giống như tâm trí tôi lúc này.",
+            "Có những ngày mọi thứ thật trống rỗng...",
+            "Bạn cố gắng kết nối, nhưng chỉ nhận lại sự im lặng.",
+            "Error 404: Không tìm thấy lối thoát.",
+            "Khởi động lại? (Y/N) ... Không phản hồi."
+        ];
+
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let isPaused = false;
+        let typeSpeed = 100; // Tốc độ gõ
+        let deleteSpeed = 50; // Tốc độ xóa
+        let pauseEnd = 2000;  // Thời gian chờ sau khi gõ xong 1 câu
+        
+        const textDisplay = document.getElementById("text-display");
+        const tvScreen = document.getElementById("tv-screen");
+        
+        // Timeout ID để có thể clear khi Dừng/Tua lại
+        let currentTimeout;
+
+        function typeWriter() {
+            if (isPaused) return;
+
+            const currentText = texts[textIndex];
+
+            if (isDeleting) {
+                // Đang xóa chữ
+                textDisplay.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = deleteSpeed;
+            } else {
+                // Đang gõ chữ
+                textDisplay.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100 + Math.random() * 50; // Tạo độ trễ gõ ngẫu nhiên cho giống người
+            }
+
+            // Xử lý hiệu ứng sụp đổ (Glitch) ở câu cuối cùng
+            if (textIndex === texts.length - 1 && charIndex > 5 && !isDeleting) {
+                textDisplay.classList.add("glitch");
+                tvScreen.style.boxShadow = "inset 0 0 20px #ff0000"; // Đổi màu màn hình nhẹ
+            } else {
+                textDisplay.classList.remove("glitch");
+                tvScreen.style.boxShadow = "inset 0 0 20px #000";
+            }
+
+            // Hoàn thành gõ 1 câu
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                typeSpeed = pauseEnd; // Dừng lại một lúc trước khi xóa
+            } 
+            // Hoàn thành xóa 1 câu
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length; // Chuyển sang câu tiếp theo
+                typeSpeed = 500; // Nghỉ trước khi gõ câu mới
+            }
+
+            currentTimeout = setTimeout(typeWriter, typeSpeed);
+        }
+
+        // Bắt đầu hiệu ứng
+        typeWriter();
+
+        // Xử lý các nút bấm
+        const btnPause = document.getElementById("btn-pause");
+        const btnRewind = document.getElementById("btn-rewind");
+        const btnMusic = document.getElementById("btn-music");
+        const audio = document.getElementById("bg-music");
+
+        // Nút Dừng / Tiếp tục
+        btnPause.addEventListener("click", () => {
+            isPaused = !isPaused;
+            if (isPaused) {
+                btnPause.innerHTML = "▶ TIẾP TỤC";
+                btnPause.classList.add("active");
+                clearTimeout(currentTimeout);
+            } else {
+                btnPause.innerHTML = "⏸ DỪNG";
+                btnPause.classList.remove("active");
+                typeWriter();
+            }
+        });
+
+        // Nút Tua lại
+        btnRewind.addEventListener("click", () => {
+            clearTimeout(currentTimeout);
+            textIndex = 0;
+            charIndex = 0;
+            isDeleting = false;
+            textDisplay.textContent = "";
+            textDisplay.classList.remove("glitch");
+            tvScreen.style.boxShadow = "inset 0 0 20px #000";
+            
+            if (!isPaused) {
+                typeWriter();
+            }
+        });
+
+        // Nút Nhạc
+        btnMusic.addEventListener("click", () => {
+            if (audio.paused) {
+                // Bạn nên thay link nhạc trong file HTML bằng một bản nhạc lofi buồn không bản quyền
+                audio.play();
+                btnMusic.innerHTML = "🔇 TẮT NHẠC";
+                btnMusic.classList.add("active");
+            } else {
+                audio.pause();
+                btnMusic.innerHTML = "🎵 BẬT NHẠC";
+                btnMusic.classList.remove("active");
+            }
+        });
+    </script>
+</body>
+</html>
