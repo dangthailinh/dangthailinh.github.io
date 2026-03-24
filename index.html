@@ -1621,703 +1621,733 @@ lightbox.addEventListener('click', (e) => {
 
 
 <!-- ================================================
-   MY PROJECTS SECTION — paste vào trước <footer>
+   MY PROJECTS SECTION v2 — paste vào trước <footer>
    ================================================ -->
 
 <section id="my-projects" class="projects-section">
   <div class="projects-header">
     <span class="projects-eyebrow">— portfolio —</span>
     <h2 class="projects-title">My <span class="accent">Projects</span></h2>
-    <p class="projects-subtitle">Click vào project để xem chi tiết ✦</p>
+    <p class="projects-subtitle">Click vào project để xem chi tiết & video demo ✦</p>
   </div>
 
-  <!-- Slider wrapper -->
   <div class="proj-slider-wrap">
     <button class="proj-nav proj-nav--left" id="projLeft" aria-label="Trước">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-
     <div class="proj-track-viewport">
       <div class="proj-track" id="projTrack">
 
-        <!-- ======= PROJECT CARD 1 ======= -->
         <article class="proj-card" data-proj="0">
           <div class="proj-card__thumb">
-            <img src="img/vip.jpg" alt="Project 1" loading="lazy">
-            <div class="proj-card__overlay">
-              <span class="proj-card__cta">Xem chi tiết →</span>
-            </div>
+            <img src="img/vip.jpg" alt="Linh-Osimi Blog" loading="lazy">
+            <div class="proj-card__play-hint"><span>▶ Video Demo</span></div>
             <span class="proj-card__num">01</span>
+            <span class="proj-card__badge">Web</span>
           </div>
           <div class="proj-card__body">
             <h3>Linh-Osimi Blog</h3>
-            <p>Trang blog cá nhân full-stack với anime theme, animated cursor, intro screen.</p>
-            <div class="proj-tags">
-              <span>HTML</span><span>CSS</span><span>JavaScript</span>
-            </div>
+            <p>Trang blog cá nhân full anime aesthetic với kawaii cursor, parallax hero, real-time widgets.</p>
+            <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
           </div>
         </article>
 
-        <!-- ======= PROJECT CARD 2 ======= -->
         <article class="proj-card" data-proj="1">
           <div class="proj-card__thumb">
-            <img src="img/lawliet.jpg" alt="Project 2" loading="lazy">
-            <div class="proj-card__overlay">
-              <span class="proj-card__cta">Xem chi tiết →</span>
-            </div>
+            <img src="img/lawliet.jpg" alt="Manga Reader" loading="lazy">
+            <div class="proj-card__play-hint"><span>▶ Video Demo</span></div>
             <span class="proj-card__num">02</span>
+            <span class="proj-card__badge">App</span>
           </div>
           <div class="proj-card__body">
             <h3>Manga Reader App</h3>
-            <p>Ứng dụng đọc truyện manga với chapter navigator và dark mode.</p>
-            <div class="proj-tags">
-              <span>JavaScript</span><span>API</span><span>CSS Grid</span>
-            </div>
+            <p>Đọc manga online với chapter navigator, lazy loading và dark mode.</p>
+            <div class="proj-tags"><span>JavaScript</span><span>API</span><span>CSS Grid</span></div>
           </div>
         </article>
 
-        <!-- ======= PROJECT CARD 3 ======= -->
         <article class="proj-card" data-proj="2">
           <div class="proj-card__thumb">
-            <img src="img/joker.jpg" alt="Project 3" loading="lazy">
-            <div class="proj-card__overlay">
-              <span class="proj-card__cta">Xem chi tiết →</span>
-            </div>
+            <img src="img/joker.jpg" alt="AI Chat" loading="lazy">
+            <div class="proj-card__play-hint"><span>▶ Video Demo</span></div>
             <span class="proj-card__num">03</span>
+            <span class="proj-card__badge">AI</span>
           </div>
           <div class="proj-card__body">
             <h3>AI Chat Assistant</h3>
             <p>Chatbot tích hợp Anthropic Claude API với giao diện retro terminal.</p>
-            <div class="proj-tags">
-              <span>Python</span><span>Claude API</span><span>Flask</span>
-            </div>
+            <div class="proj-tags"><span>Python</span><span>Claude API</span><span>Flask</span></div>
           </div>
         </article>
 
-        <!-- ======= PROJECT CARD 4 ======= -->
         <article class="proj-card" data-proj="3">
           <div class="proj-card__thumb">
-            <img src="img/chad.jpg" alt="Project 4" loading="lazy">
-            <div class="proj-card__overlay">
-              <span class="proj-card__cta">Xem chi tiết →</span>
-            </div>
+            <img src="img/chad.jpg" alt="Crypto Dashboard" loading="lazy">
+            <div class="proj-card__play-hint"><span>▶ Video Demo</span></div>
             <span class="proj-card__num">04</span>
+            <span class="proj-card__badge">Dashboard</span>
           </div>
           <div class="proj-card__body">
             <h3>Crypto Dashboard</h3>
             <p>Dashboard real-time theo dõi giá crypto với chart động và alert system.</p>
-            <div class="proj-tags">
-              <span>React</span><span>Chart.js</span><span>CoinGecko API</span>
-            </div>
+            <div class="proj-tags"><span>React</span><span>Chart.js</span><span>API</span></div>
           </div>
         </article>
 
-        <!-- ======= PROJECT CARD 5 ======= -->
         <article class="proj-card" data-proj="4">
           <div class="proj-card__thumb">
-            <img src="img/zeke.jpg" alt="Project 5" loading="lazy">
-            <div class="proj-card__overlay">
-              <span class="proj-card__cta">Xem chi tiết →</span>
-            </div>
+            <img src="img/zeke.jpg" alt="2D Platformer" loading="lazy">
+            <div class="proj-card__play-hint"><span>▶ Video Demo</span></div>
             <span class="proj-card__num">05</span>
+            <span class="proj-card__badge">Game</span>
           </div>
           <div class="proj-card__body">
             <h3>Game 2D Platformer</h3>
-            <p>Game platformer 2D viết bằng Python + Pygame với level editor tự thiết kế.</p>
-            <div class="proj-tags">
-              <span>Python</span><span>Pygame</span><span>Game Dev</span>
-            </div>
+            <p>Platformer 2D với physics, enemy AI state machine và level editor JSON.</p>
+            <div class="proj-tags"><span>Python</span><span>Pygame</span><span>Game Dev</span></div>
           </div>
         </article>
 
-      </div><!-- /proj-track -->
-    </div><!-- /proj-track-viewport -->
-
+      </div>
+    </div>
     <button class="proj-nav proj-nav--right" id="projRight" aria-label="Tiếp">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
-
-  <!-- Dot indicators -->
   <div class="proj-dots" id="projDots"></div>
 </section>
 
 <!-- ============================================================
-     PROJECT DETAIL MODAL
-     ============================================================ -->
+     MODAL
+============================================================ -->
 <div class="proj-modal-backdrop" id="projModalBackdrop">
-  <div class="proj-modal" id="projModal" role="dialog" aria-modal="true" aria-label="Chi tiết project">
-    <button class="proj-modal__close" id="projModalClose" aria-label="Đóng">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+  <div class="proj-modal" id="projModal" role="dialog" aria-modal="true">
 
-    <!-- Prev / Next inside modal -->
-    <button class="proj-modal__arrow proj-modal__arrow--left" id="modalPrev" aria-label="Project trước">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="proj-modal__arrow proj-modal__arrow--right" id="modalNext" aria-label="Project tiếp">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-
-    <div class="proj-modal__inner">
-      <!-- Media (image / video) -->
-      <div class="proj-modal__media" id="modalMedia"></div>
-
-      <!-- Content -->
-      <div class="proj-modal__content">
-        <div class="proj-modal__meta">
-          <span class="proj-modal__num" id="modalNum">01</span>
-          <div class="proj-modal__tags" id="modalTags"></div>
-        </div>
-        <h2 class="proj-modal__title" id="modalTitle"></h2>
-        <p class="proj-modal__desc" id="modalDesc"></p>
-
-        <div class="proj-modal__analysis" id="modalAnalysis">
-          <h4>📊 Phân tích kỹ thuật</h4>
-          <ul id="modalAnalysisList"></ul>
-        </div>
-
-        <div class="proj-modal__features" id="modalFeaturesWrap">
-          <h4>✨ Tính năng chính</h4>
-          <ul id="modalFeaturesList"></ul>
-        </div>
-
-        <!-- Code snippet -->
-        <div class="proj-modal__code-wrap" id="modalCodeWrap">
-          <div class="proj-modal__code-header">
-            <span id="modalCodeLang">JS</span>
-            <button class="copy-btn" id="copyCodeBtn">Copy</button>
-          </div>
-          <pre class="proj-modal__code"><code id="modalCode"></code></pre>
-        </div>
-
-        <!-- Action buttons -->
-        <div class="proj-modal__actions">
-          <a href="#" id="modalGithub" target="_blank" rel="noopener" class="proj-btn proj-btn--github">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.52 1.02 1.52 1.02.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.84c.85.004 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.68-4.57 4.92.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
-            GitHub
-          </a>
-          <a href="#" id="modalDemo" target="_blank" rel="noopener" class="proj-btn proj-btn--demo">
-            🚀 Live Demo
-          </a>
+    <!-- Header bar -->
+    <div class="proj-modal__header">
+      <div class="proj-modal__header-left">
+        <span class="proj-modal__num-badge" id="mNum">01</span>
+        <div>
+          <div class="proj-modal__header-title" id="mTitle">Project Name</div>
+          <div class="proj-modal__header-tags" id="mTags"></div>
         </div>
       </div>
+      <div class="proj-modal__header-right">
+        <a href="#" id="mGithub" target="_blank" rel="noopener" class="proj-hbtn proj-hbtn--gh">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.52 1.02 1.52 1.02.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.84c.85.004 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.68-4.57 4.92.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </a>
+        <button class="proj-modal__close" id="projModalClose" aria-label="Đóng">✕</button>
+      </div>
     </div>
+
+    <!-- Tab navigation -->
+    <div class="proj-tabs" role="tablist">
+      <button class="proj-tab active" data-tab="overview" role="tab">📋 Overview</button>
+      <button class="proj-tab"        data-tab="video"    role="tab">🎬 Video Demo</button>
+      <button class="proj-tab"        data-tab="analysis" role="tab">📊 Phân tích</button>
+      <button class="proj-tab"        data-tab="code"     role="tab">💻 Code</button>
+    </div>
+
+    <!-- Tab content -->
+    <div class="proj-tab-body">
+
+      <!-- ── TAB: OVERVIEW ── -->
+      <div class="proj-tab-panel active" data-panel="overview">
+        <div class="overview-grid">
+          <div class="overview-img-col">
+            <div class="overview-img-wrap">
+              <img id="mThumb" src="" alt="">
+              <div class="overview-img-shine"></div>
+            </div>
+            <a href="#" id="mDemo" target="_blank" rel="noopener" class="proj-btn proj-btn--demo">
+              🚀 Live Demo
+            </a>
+          </div>
+          <div class="overview-text-col">
+            <p class="overview-desc" id="mDesc"></p>
+            <div class="overview-features" id="mFeatures">
+              <div class="of-title">✨ Tính năng chính</div>
+              <ul id="mFeatureList"></ul>
+            </div>
+            <div class="overview-stack" id="mStack">
+              <div class="of-title">🛠 Tech Stack</div>
+              <div class="stack-bars" id="mStackBars"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TAB: VIDEO DEMO ── -->
+      <div class="proj-tab-panel" data-panel="video">
+        <div class="video-tab-inner">
+
+          <!-- Thumbnail preview / player -->
+          <div class="video-player-wrap" id="mVideoWrap">
+            <!-- State A: no video -->
+            <div class="video-placeholder" id="mVideoPlaceholder">
+              <div class="vp-icon">🎬</div>
+              <div class="vp-text">Chưa có video demo cho project này</div>
+            </div>
+            <!-- State B: video available (hidden until loaded) -->
+            <div class="video-thumb-preview" id="mVideoThumbPreview" style="display:none">
+              <img id="mVideoThumb" src="" alt="Video thumbnail">
+              <button class="vtp-play-btn" id="mVideoPlayBtn">
+                <svg viewBox="0 0 24 24" fill="white" width="36"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+              <div class="vtp-overlay"></div>
+              <div class="vtp-info">
+                <span class="vtp-label">▶ Nhấn để phát video demo</span>
+              </div>
+            </div>
+            <!-- State C: iframe playing (hidden until play clicked) -->
+            <div class="video-iframe-wrap" id="mVideoIframeWrap" style="display:none">
+              <iframe id="mVideoIframe" src="" frameborder="0"
+                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <!-- Video meta + chapters -->
+          <div class="video-meta-panel" id="mVideoMeta" style="display:none">
+            <div class="vmp-title" id="mVideoTitle"></div>
+            <div class="vmp-chapters" id="mVideoChapters"></div>
+          </div>
+
+          <!-- How to add video hint box -->
+          <div class="video-hint-box" id="mVideoHint" style="display:none">
+            <div class="vhb-icon">💡</div>
+            <div>
+              <div class="vhb-title">Cách gắn video YouTube</div>
+              <div class="vhb-code" id="mVideoHintCode"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── TAB: ANALYSIS ── -->
+      <div class="proj-tab-panel" data-panel="analysis">
+        <div class="analysis-inner">
+
+          <!-- Tech radar / stat bars -->
+          <div class="analysis-block">
+            <div class="ab-title">⚙️ Độ phức tạp kỹ thuật</div>
+            <div class="complexity-bars" id="mComplexityBars"></div>
+          </div>
+
+          <!-- Breakdown cards -->
+          <div class="analysis-block">
+            <div class="ab-title">🔍 Phân tích chức năng chi tiết</div>
+            <div class="func-cards" id="mFuncCards"></div>
+          </div>
+
+          <!-- Challenges & Solutions -->
+          <div class="analysis-block">
+            <div class="ab-title">⚡ Thách thức & Giải pháp</div>
+            <div class="challenge-list" id="mChallenges"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── TAB: CODE ── -->
+      <div class="proj-tab-panel" data-panel="code">
+        <div class="code-tab-inner">
+          <div class="code-snippets" id="mCodeSnippets"></div>
+        </div>
+      </div>
+
+    </div><!-- /tab-body -->
+
+    <!-- Modal prev / next -->
+    <button class="proj-modal__arrow proj-modal__arrow--left"  id="modalPrev" aria-label="Trước">‹</button>
+    <button class="proj-modal__arrow proj-modal__arrow--right" id="modalNext" aria-label="Tiếp">›</button>
   </div>
 </div>
 
 <!-- ============================================================
-     STYLES
-     ============================================================ -->
+     CSS
+============================================================ -->
 <style>
-/* ---- Variables (inherit site palette) ---- */
 :root {
-  --proj-accent: #e8890c;
-  --proj-accent2: #ff6b35;
-  --proj-dark: #1a120b;
-  --proj-glass: rgba(255,255,255,0.07);
-  --proj-border: rgba(255,255,255,0.12);
-  --proj-radius: 18px;
-  --proj-font: 'Bangers', cursive;
+  --pa: #e8890c;
+  --pa2: #ff6b35;
+  --pd: #1a120b;
+  --pg: rgba(255,255,255,0.07);
+  --pb: rgba(255,255,255,0.1);
+  --pr: 18px;
+  --pfont: 'Bangers', cursive;
 }
 
-/* ---- Section ---- */
+/* ── Section ── */
 .projects-section {
-  position: relative;
-  z-index: 5;
+  position: relative; z-index: 5;
   padding: 80px 20px 60px;
-  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 20%, rgba(0,0,0,0.55) 80%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 15%, rgba(0,0,0,0.55) 85%, transparent 100%);
   overflow: hidden;
 }
-
-.projects-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
+.projects-header { text-align: center; margin-bottom: 50px; }
 .projects-eyebrow {
   font-family: 'Courier New', monospace;
-  font-size: 13px;
-  letter-spacing: 4px;
-  color: var(--proj-accent);
-  text-transform: uppercase;
-  opacity: 0.8;
+  font-size: 12px; letter-spacing: 5px;
+  color: var(--pa); text-transform: uppercase; opacity: .8;
 }
 .projects-title {
-  font-family: var(--proj-font);
+  font-family: var(--pfont);
   font-size: clamp(2.8rem, 7vw, 5rem);
-  color: #fff;
-  letter-spacing: 3px;
+  color: #fff; letter-spacing: 3px;
   margin: 8px 0 10px;
-  text-shadow: 0 0 40px rgba(232,137,12,0.4);
+  text-shadow: 0 0 40px rgba(232,137,12,.4);
   line-height: 1;
 }
-.projects-title .accent { color: var(--proj-accent); }
-.projects-subtitle {
-  color: rgba(255,255,255,0.55);
-  font-size: 15px;
-  letter-spacing: 1px;
-}
+.projects-title .accent { color: var(--pa); }
+.projects-subtitle { color: rgba(255,255,255,.5); font-size: 14px; letter-spacing: 1px; }
 
-/* ---- Slider wrapper ---- */
+/* ── Slider ── */
 .proj-slider-wrap {
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  position: relative; max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; gap: 16px;
 }
-.proj-track-viewport {
-  flex: 1;
-  overflow: hidden;
-}
+.proj-track-viewport { flex: 1; overflow: hidden; }
 .proj-track {
-  display: flex;
-  gap: 24px;
-  transition: transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex; gap: 24px;
+  transition: transform .55s cubic-bezier(.25,.8,.25,1);
   will-change: transform;
 }
 
-/* ---- Project Card ---- */
+/* ── Card ── */
 .proj-card {
-  flex: 0 0 calc(33.333% - 16px);
-  min-width: 260px;
-  background: var(--proj-glass);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--proj-border);
-  border-radius: var(--proj-radius);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.3s ease;
+  flex: 0 0 calc(33.333% - 16px); min-width: 260px;
+  background: var(--pg); backdrop-filter: blur(14px);
+  border: 1px solid var(--pb); border-radius: var(--pr);
+  overflow: hidden; cursor: pointer;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s, border-color .3s;
 }
 .proj-card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px var(--proj-accent);
-  border-color: var(--proj-accent);
+  box-shadow: 0 24px 48px rgba(0,0,0,.5), 0 0 0 1px var(--pa);
+  border-color: var(--pa);
 }
-
-/* Card thumbnail */
-.proj-card__thumb {
-  position: relative;
-  overflow: hidden;
-  height: 200px;
-}
+.proj-card__thumb { position: relative; overflow: hidden; height: 200px; }
 .proj-card__thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-  display: block;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .5s ease;
 }
-.proj-card:hover .proj-card__thumb img {
-  transform: scale(1.08);
+.proj-card:hover .proj-card__thumb img { transform: scale(1.08); }
+.proj-card__play-hint {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.1) 55%, transparent 100%);
+  display: flex; align-items: flex-end; padding: 14px 16px;
+  opacity: 0; transition: opacity .3s;
 }
-.proj-card__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
-  display: flex;
-  align-items: flex-end;
-  padding: 16px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.proj-card__play-hint span {
+  color: var(--pa); font-weight: 700; font-size: 13px;
+  letter-spacing: 1px; display: flex; align-items: center; gap: 6px;
 }
-.proj-card:hover .proj-card__overlay { opacity: 1; }
-.proj-card__cta {
-  color: var(--proj-accent);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1px;
-}
+.proj-card:hover .proj-card__play-hint { opacity: 1; }
 .proj-card__num {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  font-family: var(--proj-font);
-  font-size: 42px;
-  color: rgba(255,255,255,0.12);
-  line-height: 1;
-  pointer-events: none;
-  transition: color 0.3s;
+  position: absolute; top: 10px; right: 12px;
+  font-family: var(--pfont); font-size: 42px;
+  color: rgba(255,255,255,.1); line-height: 1; pointer-events: none;
+  transition: color .3s;
 }
-.proj-card:hover .proj-card__num { color: rgba(232,137,12,0.25); }
-
-/* Card body */
-.proj-card__body {
-  padding: 18px 20px 20px;
+.proj-card:hover .proj-card__num { color: rgba(232,137,12,.22); }
+.proj-card__badge {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(0,0,0,.55); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff; font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px;
 }
+.proj-card__body { padding: 18px 20px 20px; }
 .proj-card__body h3 {
-  font-family: var(--proj-font);
-  font-size: 1.5rem;
-  color: #fff;
-  margin: 0 0 8px;
-  letter-spacing: 1px;
+  font-family: var(--pfont); font-size: 1.5rem; color: #fff;
+  margin: 0 0 8px; letter-spacing: 1px;
 }
-.proj-card__body p {
-  font-size: 13.5px;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.55;
-  margin: 0 0 14px;
-}
-.proj-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+.proj-card__body p { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.55; margin: 0 0 14px; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .proj-tags span {
-  background: rgba(232,137,12,0.15);
-  border: 1px solid rgba(232,137,12,0.35);
-  color: var(--proj-accent);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  text-transform: uppercase;
+  background: rgba(232,137,12,.13); border: 1px solid rgba(232,137,12,.3);
+  color: var(--pa); font-size: 10px; font-weight: 700;
+  letter-spacing: .5px; padding: 3px 9px; border-radius: 20px; text-transform: uppercase;
 }
 
-/* ---- Nav Buttons ---- */
+/* Nav btns */
 .proj-nav {
-  flex-shrink: 0;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 1px solid var(--proj-border);
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(8px);
+  flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--pb); background: rgba(0,0,0,.5);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .25s; backdrop-filter: blur(8px);
 }
 .proj-nav svg { width: 20px; height: 20px; }
-.proj-nav:hover {
-  background: var(--proj-accent);
-  border-color: var(--proj-accent);
-  transform: scale(1.1);
-}
-.proj-nav:disabled { opacity: 0.3; cursor: default; transform: none; }
-
-/* ---- Dots ---- */
-.proj-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 28px;
-}
+.proj-nav:hover { background: var(--pa); border-color: var(--pa); transform: scale(1.1); }
+.proj-nav:disabled { opacity: .3; cursor: default; transform: none; }
+.proj-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
 .proj-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,.2); border: none; cursor: pointer;
+  transition: all .3s; padding: 0;
 }
 .proj-dot.active {
-  background: var(--proj-accent);
-  width: 24px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(232,137,12,0.6);
+  background: var(--pa); width: 24px; border-radius: 4px;
+  box-shadow: 0 0 10px rgba(232,137,12,.6);
 }
 
 /* ============================================================
-   MODAL
-   ============================================================ */
+   MODAL SHELL
+============================================================ */
 .proj-modal-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.92);
-  backdrop-filter: blur(12px);
-  z-index: 100000;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.9); backdrop-filter: blur(14px);
+  z-index: 100000; align-items: center; justify-content: center;
+  padding: 12px; opacity: 0; transition: opacity .3s;
 }
-.proj-modal-backdrop.show {
-  display: flex;
-  opacity: 1;
-}
+.proj-modal-backdrop.show { display: flex; opacity: 1; }
 .proj-modal {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: linear-gradient(145deg, #1e1408, #110c05);
-  border: 1px solid rgba(232,137,12,0.3);
-  border-radius: 24px;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
-  animation: modalIn 0.42s cubic-bezier(0.34,1.56,0.64,1) forwards;
-  scrollbar-width: thin;
-  scrollbar-color: var(--proj-accent) transparent;
+  position: relative; width: 100%; max-width: 1000px;
+  max-height: 92vh; overflow: hidden;
+  background: linear-gradient(160deg, #1c1208 0%, #110c05 100%);
+  border: 1px solid rgba(232,137,12,.25); border-radius: 22px;
+  box-shadow: 0 40px 80px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.03);
+  display: flex; flex-direction: column;
+  animation: pModalIn .42s cubic-bezier(.34,1.4,.64,1) forwards;
 }
-.proj-modal::-webkit-scrollbar { width: 6px; }
-.proj-modal::-webkit-scrollbar-thumb { background: var(--proj-accent); border-radius: 3px; }
-
-@keyframes modalIn {
-  from { transform: scale(0.88) translateY(24px); opacity: 0; }
-  to { transform: scale(1) translateY(0); opacity: 1; }
+@keyframes pModalIn {
+  from { transform: scale(.9) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0);     opacity: 1; }
 }
 
+/* ── Header bar ── */
+.proj-modal__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  flex-shrink: 0; gap: 12px;
+}
+.proj-modal__header-left  { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+.proj-modal__header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.proj-modal__num-badge {
+  font-family: var(--pfont); font-size: 2.4rem;
+  color: rgba(232,137,12,.3); line-height: 1; flex-shrink: 0;
+}
+.proj-modal__header-title {
+  font-family: var(--pfont); font-size: 1.5rem;
+  color: #fff; letter-spacing: 2px; line-height: 1.1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.proj-modal__header-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+.proj-modal__header-tags span {
+  background: rgba(232,137,12,.12); border: 1px solid rgba(232,137,12,.3);
+  color: var(--pa); font-size: 10px; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: .5px;
+}
+.proj-hbtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 700; text-decoration: none;
+  transition: all .2s; letter-spacing: .5px;
+}
+.proj-hbtn--gh {
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+  color: #fff;
+}
+.proj-hbtn--gh:hover { background: rgba(255,255,255,.15); transform: translateY(-1px); }
 .proj-modal__close {
-  position: absolute;
-  top: 16px; right: 16px;
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  z-index: 10;
-  transition: all 0.2s ease;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05); color: #fff;
+  cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;
+  transition: all .2s; flex-shrink: 0;
 }
-.proj-modal__close:hover { background: rgba(255,255,255,0.15); transform: rotate(90deg); }
-.proj-modal__close svg { width: 18px; height: 18px; }
+.proj-modal__close:hover { background: rgba(255,50,50,.3); transform: rotate(90deg); }
 
-/* Modal prev/next arrows */
-.proj-modal__arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  z-index: 10;
-  transition: all 0.2s ease;
+/* ── Tabs ── */
+.proj-tabs {
+  display: flex; gap: 2px; padding: 10px 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07); flex-shrink: 0;
+  overflow-x: auto; scrollbar-width: none;
 }
-.proj-modal__arrow--left { left: 12px; }
-.proj-modal__arrow--right { right: 12px; }
-.proj-modal__arrow:hover { background: var(--proj-accent); border-color: var(--proj-accent); }
-.proj-modal__arrow svg { width: 18px; }
-
-/* Modal inner layout */
-.proj-modal__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 420px;
+.proj-tabs::-webkit-scrollbar { display: none; }
+.proj-tab {
+  padding: 9px 18px; border-radius: 10px 10px 0 0;
+  background: none; border: none; color: rgba(255,255,255,.45);
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .2s; letter-spacing: .5px; white-space: nowrap;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.proj-tab:hover { color: rgba(255,255,255,.8); background: rgba(255,255,255,.05); }
+.proj-tab.active {
+  color: var(--pa); border-bottom-color: var(--pa);
+  background: rgba(232,137,12,.08);
 }
 
-/* Media panel */
-.proj-modal__media {
-  position: relative;
-  overflow: hidden;
-  border-radius: 24px 0 0 24px;
-  min-height: 320px;
-  background: #0d0805;
-}
-.proj-modal__media img,
-.proj-modal__media iframe {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 24px 0 0 24px;
-}
-.proj-modal__media iframe {
-  aspect-ratio: 16/9;
-  height: auto;
-  min-height: 100%;
-}
+/* ── Tab panels ── */
+.proj-tab-body { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--pa) transparent; }
+.proj-tab-body::-webkit-scrollbar { width: 5px; }
+.proj-tab-body::-webkit-scrollbar-thumb { background: var(--pa); border-radius: 3px; }
+.proj-tab-panel { display: none; padding: 24px 24px 28px; animation: tabIn .25s ease; }
+.proj-tab-panel.active { display: block; }
+@keyframes tabIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-/* Content panel */
-.proj-modal__content {
-  padding: 36px 32px 32px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  overflow-y: auto;
+/* ── OVERVIEW TAB ── */
+.overview-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px; }
+.overview-img-col { display: flex; flex-direction: column; gap: 16px; }
+.overview-img-wrap {
+  position: relative; border-radius: 14px; overflow: hidden;
+  aspect-ratio: 16/10; background: #0d0805;
+  box-shadow: 0 12px 30px rgba(0,0,0,.5);
+  border: 1px solid rgba(255,255,255,.07);
 }
-
-.proj-modal__meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.proj-modal__num {
-  font-family: var(--proj-font);
-  font-size: 3.5rem;
-  color: rgba(232,137,12,0.2);
-  line-height: 1;
-}
-.proj-modal__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.proj-modal__tags span {
-  background: rgba(232,137,12,0.15);
-  border: 1px solid rgba(232,137,12,0.4);
-  color: var(--proj-accent);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
-
-.proj-modal__title {
-  font-family: var(--proj-font);
-  font-size: 2.2rem;
-  color: #fff;
-  letter-spacing: 2px;
-  margin: 0;
-  line-height: 1.1;
-}
-.proj-modal__desc {
-  font-size: 14.5px;
-  color: rgba(255,255,255,0.72);
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* Analysis block */
-.proj-modal__analysis,
-.proj-modal__features {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 12px;
-  padding: 16px 18px;
-}
-.proj-modal__analysis h4,
-.proj-modal__features h4 {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--proj-accent);
-  margin: 0 0 10px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-.proj-modal__analysis ul,
-.proj-modal__features ul {
-  list-style: none;
-  padding: 0; margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-.proj-modal__analysis li,
-.proj-modal__features li {
-  font-size: 13px;
-  color: rgba(255,255,255,0.7);
-  padding-left: 18px;
-  position: relative;
-  line-height: 1.5;
-}
-.proj-modal__analysis li::before { content: '⬡'; position: absolute; left: 0; color: var(--proj-accent); font-size: 10px; top: 2px; }
-.proj-modal__features li::before { content: '✓'; position: absolute; left: 0; color: #4ade80; font-size: 12px; }
-
-/* Code block */
-.proj-modal__code-wrap {
-  background: #0d0d0d;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  overflow: hidden;
-}
-.proj-modal__code-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 14px;
-  background: rgba(255,255,255,0.04);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-.proj-modal__code-header span {
-  font-family: 'Courier New', monospace;
-  font-size: 11px;
-  color: var(--proj-accent);
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-.copy-btn {
-  font-size: 11px;
-  color: rgba(255,255,255,0.5);
-  background: none;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 6px;
-  padding: 3px 10px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.copy-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
-.proj-modal__code {
-  margin: 0;
-  padding: 16px;
-  overflow-x: auto;
-  font-family: 'Courier New', monospace;
-  font-size: 12.5px;
-  color: #b5cea8;
-  line-height: 1.65;
-  white-space: pre;
-}
-
-/* Action buttons */
-.proj-modal__actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 4px;
+.overview-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.overview-img-shine {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 50%);
+  pointer-events: none;
 }
 .proj-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 22px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
-  letter-spacing: 0.5px;
-}
-.proj-btn--github {
-  background: #1a1a2e;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #fff;
-}
-.proj-btn--github:hover {
-  background: #333;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 20px; border-radius: 30px;
+  font-weight: 700; font-size: 13px; text-decoration: none;
+  transition: all .25s cubic-bezier(.34,1.56,.64,1); letter-spacing: .5px; text-align: center;
 }
 .proj-btn--demo {
-  background: linear-gradient(135deg, var(--proj-accent), var(--proj-accent2));
+  background: linear-gradient(135deg, var(--pa), var(--pa2));
+  color: #fff; box-shadow: 0 4px 16px rgba(232,137,12,.35);
   border: none;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(232,137,12,0.35);
 }
-.proj-btn--demo:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 26px rgba(232,137,12,0.5);
+.proj-btn--demo:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(232,137,12,.5); }
+.proj-btn--demo.disabled { opacity: .35; pointer-events: none; }
+
+.overview-text-col { display: flex; flex-direction: column; gap: 18px; }
+.overview-desc { font-size: 14px; color: rgba(255,255,255,.72); line-height: 1.75; margin: 0; }
+.overview-features, .overview-stack {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px; padding: 16px 18px;
+}
+.of-title {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--pa); margin-bottom: 12px;
+}
+.overview-features ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; }
+.overview-features li {
+  font-size: 13px; color: rgba(255,255,255,.7);
+  padding-left: 18px; position: relative; line-height: 1.5;
+}
+.overview-features li::before { content: '✓'; position: absolute; left: 0; color: #4ade80; font-size: 11px; top: 1px; }
+
+/* Stack bars */
+.stack-bars { display: flex; flex-direction: column; gap: 10px; }
+.stack-bar-item { display: flex; flex-direction: column; gap: 4px; }
+.sbi-label { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.7); }
+.sbi-label span:last-child { color: var(--pa); font-weight: 700; }
+.sbi-track { height: 6px; background: rgba(255,255,255,.08); border-radius: 3px; overflow: hidden; }
+.sbi-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--pa), var(--pa2));
+  width: 0; transition: width 1s cubic-bezier(.25,.8,.25,1);
 }
 
-/* ---- Responsive ---- */
+/* ── VIDEO TAB ── */
+.video-tab-inner { display: flex; flex-direction: column; gap: 20px; }
+.video-player-wrap {
+  position: relative; border-radius: 14px; overflow: hidden;
+  background: #0a0705;
+  border: 1px solid rgba(255,255,255,.07);
+  min-height: 260px;
+}
+/* placeholder */
+.video-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 60px 20px; gap: 14px;
+}
+.vp-icon { font-size: 48px; opacity: .3; }
+.vp-text { color: rgba(255,255,255,.35); font-size: 14px; letter-spacing: .5px; }
+/* thumbnail preview */
+.video-thumb-preview {
+  position: relative; cursor: pointer; aspect-ratio: 16/9;
+}
+.video-thumb-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vtp-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.35);
+  transition: background .25s;
+}
+.video-thumb-preview:hover .vtp-overlay { background: rgba(0,0,0,.5); }
+.vtp-play-btn {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(232,137,12,.92); border: 3px solid rgba(255,255,255,.8);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform .2s cubic-bezier(.34,1.56,.64,1);
+  z-index: 3; box-shadow: 0 8px 30px rgba(0,0,0,.5);
+}
+.video-thumb-preview:hover .vtp-play-btn { transform: translate(-50%, -50%) scale(1.12); }
+.vtp-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 14px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,.85), transparent);
+  z-index: 3;
+}
+.vtp-label { color: rgba(255,255,255,.9); font-size: 13px; font-weight: 700; letter-spacing: .5px; }
+/* iframe */
+.video-iframe-wrap { position: relative; aspect-ratio: 16/9; }
+.video-iframe-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Video meta */
+.video-meta-panel {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px; padding: 16px 18px;
+}
+.vmp-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 14px; }
+.vmp-chapters { display: flex; flex-direction: column; gap: 8px; }
+.vmc-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 12px; border-radius: 9px; cursor: pointer;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.05);
+  transition: all .2s;
+}
+.vmc-item:hover { background: rgba(232,137,12,.1); border-color: rgba(232,137,12,.25); }
+.vmc-time {
+  font-family: 'Courier New', monospace; font-size: 12px;
+  color: var(--pa); font-weight: 700; flex-shrink: 0;
+  background: rgba(232,137,12,.12); padding: 2px 8px; border-radius: 6px;
+}
+.vmc-desc { font-size: 13px; color: rgba(255,255,255,.7); }
+.vmc-play { color: rgba(255,255,255,.3); font-size: 11px; margin-left: auto; }
+.vmc-item:hover .vmc-play { color: var(--pa); }
+
+/* hint box */
+.video-hint-box {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(232,137,12,.07); border: 1px solid rgba(232,137,12,.2);
+  border-radius: 12px; padding: 16px 18px;
+}
+.vhb-icon { font-size: 22px; flex-shrink: 0; }
+.vhb-title { font-size: 13px; font-weight: 700; color: var(--pa); margin-bottom: 8px; }
+.vhb-code {
+  font-family: 'Courier New', monospace; font-size: 12px;
+  color: rgba(255,255,255,.7); background: rgba(0,0,0,.3);
+  padding: 8px 12px; border-radius: 8px; line-height: 1.8;
+  white-space: pre-wrap; word-break: break-all;
+}
+
+/* ── ANALYSIS TAB ── */
+.analysis-inner { display: flex; flex-direction: column; gap: 24px; }
+.analysis-block {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px; padding: 20px 20px 22px;
+}
+.ab-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--pa); margin-bottom: 16px;
+}
+
+/* Complexity bars */
+.complexity-bars { display: flex; flex-direction: column; gap: 12px; }
+.cb-item { display: flex; align-items: center; gap: 14px; }
+.cb-label { width: 120px; font-size: 12px; color: rgba(255,255,255,.7); flex-shrink: 0; font-weight: 600; }
+.cb-track { flex: 1; height: 8px; background: rgba(255,255,255,.08); border-radius: 4px; overflow: hidden; }
+.cb-fill {
+  height: 100%; border-radius: 4px; width: 0;
+  transition: width 1.1s cubic-bezier(.25,.8,.25,1);
+}
+.cb-pct { width: 36px; text-align: right; font-size: 12px; color: var(--pa); font-weight: 700; flex-shrink: 0; }
+
+/* Func cards */
+.func-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.fc-item {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px; padding: 14px 16px;
+  transition: border-color .2s, transform .2s;
+}
+.fc-item:hover { border-color: rgba(232,137,12,.3); transform: translateY(-2px); }
+.fc-icon { font-size: 22px; margin-bottom: 8px; }
+.fc-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+.fc-detail { font-size: 12px; color: rgba(255,255,255,.55); line-height: 1.5; }
+
+/* Challenge list */
+.challenge-list { display: flex; flex-direction: column; gap: 12px; }
+.cl-item {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  background: rgba(255,255,255,.03); border-radius: 10px; overflow: hidden;
+}
+.cl-challenge, .cl-solution {
+  padding: 12px 14px;
+}
+.cl-challenge { border-right: 1px solid rgba(255,255,255,.06); }
+.cl-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 6px;
+}
+.cl-challenge .cl-label { color: #f87171; }
+.cl-solution  .cl-label { color: #4ade80; }
+.cl-text { font-size: 12.5px; color: rgba(255,255,255,.65); line-height: 1.55; }
+
+/* ── CODE TAB ── */
+.code-tab-inner { display: flex; flex-direction: column; gap: 20px; }
+.code-snippet-block {
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.07);
+}
+.csb-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px; background: rgba(255,255,255,.05);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.csb-title { font-size: 13px; font-weight: 700; color: #fff; }
+.csb-lang {
+  font-family: 'Courier New', monospace; font-size: 11px;
+  color: var(--pa); text-transform: uppercase; letter-spacing: 1px;
+}
+.csb-copy {
+  font-size: 11px; color: rgba(255,255,255,.45); background: none;
+  border: 1px solid rgba(255,255,255,.1); border-radius: 6px;
+  padding: 3px 10px; cursor: pointer; transition: all .2s;
+}
+.csb-copy:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+.csb-pre {
+  margin: 0; background: #0d0d0d; padding: 16px;
+  font-family: 'Courier New', monospace; font-size: 12.5px;
+  color: #b5cea8; line-height: 1.7; overflow-x: auto;
+  white-space: pre; max-height: 240px; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: var(--pa) transparent;
+}
+.csb-desc {
+  padding: 10px 14px; font-size: 12px;
+  color: rgba(255,255,255,.5); line-height: 1.6;
+  border-top: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.02);
+}
+
+/* ── Modal arrows ── */
+.proj-modal__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.1); background: rgba(0,0,0,.5);
+  color: #fff; cursor: pointer; font-size: 20px; font-weight: 300;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; z-index: 10;
+}
+.proj-modal__arrow--left  { left: -16px; }
+.proj-modal__arrow--right { right: -16px; }
+.proj-modal__arrow:hover { background: var(--pa); border-color: var(--pa); }
+.proj-modal__arrow:disabled { opacity: .2; cursor: default; }
+
+/* ── Responsive ── */
 @media (max-width: 900px) {
-  .proj-modal__inner { grid-template-columns: 1fr; }
-  .proj-modal__media { border-radius: 24px 24px 0 0; min-height: 220px; }
-  .proj-modal__media img, .proj-modal__media iframe { border-radius: 24px 24px 0 0; }
-  .proj-modal__content { padding: 24px 20px 24px; }
+  .overview-grid { grid-template-columns: 1fr; }
   .proj-modal__arrow { display: none; }
 }
 @media (max-width: 768px) {
-  .proj-card { flex: 0 0 calc(100% - 0px); }
+  .proj-card { flex: 0 0 100%; }
   .projects-section { padding: 50px 12px 40px; }
   .proj-slider-wrap { gap: 10px; }
   .proj-nav { width: 38px; height: 38px; }
+  .func-cards { grid-template-columns: 1fr 1fr; }
+  .cl-item { grid-template-columns: 1fr; }
+  .cl-challenge { border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
   .proj-card { flex: 0 0 calc(50% - 12px); }
@@ -2326,38 +2356,101 @@ lightbox.addEventListener('click', (e) => {
 
 <!-- ============================================================
      JAVASCRIPT
-     ============================================================ -->
+============================================================ -->
 <script>
 (function(){
- 
-  const PROJECTS = [
-    {
-      title: "Linh-Osimi Blog",
-      num: "01",
-      tags: ["HTML", "CSS", "JavaScript"],
-      desc: "Trang blog cá nhân với full anime aesthetic: animated kawaii cursor, intro cinematic screen, parallax hero, glassmorphism cards, crypto widget real-time và music player tích hợp. Được thiết kế từ đầu với 100% vanilla code, không framework.",
-      image: "img/vip.jpg",
-      video: null,
-      github: "https://github.com/dangthailinh/dangthailinh.github.io",
-      demo: "https://dangthailinh.github.io",
-      analysis: [
-        "Kiến trúc single-page với modular CSS variables để dễ theming",
-        "Sử dụng CSS backdrop-filter + glassmorphism tạo depth perception",
-        "Custom cursor bằng DOM manipulation + requestAnimationFrame",
-        "Intro animation dùng sessionStorage để không repeat khi navigate",
-        "CoinGecko API integration cho live crypto data không cần backend"
-      ],
-      features: [
-        "Kawaii animated cursor tùy chỉnh 2 trạng thái",
-        "Cinematic intro screen với typing animation",
-        "Parallax hero với background-attachment fixed",
-        "Real-time đồng hồ analog + digital (ICT UTC+7)",
-        "Video gallery với YouTube embed modal",
-        "Image lightbox slider với scroll navigation"
-      ],
-      codeLang: "JavaScript",
-      code: `// Kawaii cursor với 2 trạng thái
-const cursor = document.getElementById('kawaii-cursor');
+
+/* ================================================================
+   ✏️  DỮ LIỆU PROJECT — SỬA TẠI ĐÂY
+   ================================================================
+
+   videoYoutubeId:  ID video YouTube (phần sau watch?v=)
+                    Ví dụ: "AN1RJF55NXI"
+                    Để null nếu chưa có video.
+
+   videoTitle:      Tiêu đề hiển thị trên tab video
+
+   videoChapters:   Mảng các mốc thời gian trong video
+                    { time: "0:00", label: "Giới thiệu" }
+                    Để [] nếu không cần.
+
+   stack:           Mảng { name, pct } — thanh tiến độ tech stack
+                    pct: 0–100
+
+   complexity:      Mảng { label, pct, color } — độ phức tạp
+                    color: chuỗi CSS cho thanh màu
+
+   funcCards:       Phân tích chức năng — { icon, name, detail }
+
+   challenges:      { problem, solution }
+
+   snippets:        Mảng code — { title, lang, code, desc }
+================================================================ */
+const PROJECTS = [
+  {
+    title: "Linh-Osimi Blog",
+    num: "01",
+    tags: ["HTML", "CSS", "JavaScript"],
+    badge: "Web",
+    image: "img/vip.jpg",
+    github: "https://github.com/dangthailinh",
+    demo: null,
+    desc: "Trang blog cá nhân với full anime aesthetic: animated kawaii cursor, intro cinematic screen, parallax hero, glassmorphism cards, crypto widget real-time và music player. 100% vanilla code, không framework.",
+
+    // ── VIDEO ──────────────────────────────────────────
+    videoYoutubeId: null,              // ← THAY ID VIDEO YouTube của bạn vào đây
+    videoTitle: "Linh-Osimi Blog — Demo full features",
+    videoChapters: [
+      { time: "0:00", label: "Giới thiệu tổng quan" },
+      { time: "0:45", label: "Kawaii cursor & intro screen" },
+      { time: "1:30", label: "Parallax hero & profile" },
+      { time: "2:10", label: "Image slider & lightbox" },
+      { time: "2:55", label: "Crypto widget real-time" },
+      { time: "3:30", label: "Video gallery & modal" },
+    ],
+
+    // ── OVERVIEW ───────────────────────────────────────
+    features: [
+      "Kawaii animated cursor với 2 trạng thái hover",
+      "Cinematic intro screen không lặp khi reload",
+      "Parallax hero với background-attachment fixed",
+      "Real-time đồng hồ analog + digital (ICT)",
+      "YouTube video gallery với embed modal",
+      "Image lightbox slider scroll navigation",
+    ],
+    stack: [
+      { name: "HTML / CSS",     pct: 55 },
+      { name: "JavaScript",     pct: 35 },
+      { name: "External APIs",  pct: 10 },
+    ],
+
+    // ── ANALYSIS ───────────────────────────────────────
+    complexity: [
+      { label: "Frontend UI",   pct: 92, color: "linear-gradient(90deg,#e8890c,#ff6b35)" },
+      { label: "Animation",     pct: 85, color: "linear-gradient(90deg,#7c3aed,#a855f7)" },
+      { label: "API Integration",pct: 40, color: "linear-gradient(90deg,#0891b2,#22d3ee)" },
+      { label: "Performance",   pct: 70, color: "linear-gradient(90deg,#16a34a,#4ade80)" },
+      { label: "Responsive",    pct: 88, color: "linear-gradient(90deg,#be123c,#fb7185)" },
+    ],
+    funcCards: [
+      { icon: "🖱️", name: "Custom Cursor",    detail: "requestAnimationFrame tracking, 2-state morph với CSS transition" },
+      { icon: "🎬", name: "Intro Screen",      detail: "sessionStorage flag, per-letter stagger animation, slide-up exit" },
+      { icon: "📸", name: "Image Slider",      detail: "Scroll-based + button nav, lightbox fullscreen overlay" },
+      { icon: "📈", name: "Crypto Widget",     detail: "CoinGecko API polling 60s, hiển thị BTC/ETH/BNB real-time" },
+      { icon: "🕐", name: "Analog Clock",      detail: "JS Date + CSS transform rotate, cập nhật mỗi giây" },
+      { icon: "🎵", name: "Sound Player",      detail: "Web Audio API, tuần tự danh sách MP3, fade animation" },
+    ],
+    challenges: [
+      { problem: "Custom cursor lag trên mobile do mousemove events liên tục", solution: "Dùng requestAnimationFrame throttle + tắt hoàn toàn cursor trên touch devices" },
+      { problem: "Intro screen bị lặp mỗi lần F5 gây khó chịu", solution: "sessionStorage.setItem check — chỉ hiện 1 lần trong tab session" },
+      { problem: "CoinGecko API bị rate limit khi reload nhiều lần", solution: "Cache kết quả vào biến, setInterval 60s thay vì fetch liên tục" },
+    ],
+    snippets: [
+      {
+        title: "Kawaii Cursor — 2-state tracking",
+        lang: "JavaScript",
+        desc: "requestAnimationFrame đảm bảo cursor không lag, mouseover delegation thay vì attach từng element.",
+        code: `const cursor = document.getElementById('kawaii-cursor');
 
 document.addEventListener('mousemove', e => {
   requestAnimationFrame(() => {
@@ -2367,84 +2460,170 @@ document.addEventListener('mousemove', e => {
 });
 
 document.body.addEventListener('mouseover', e => {
-  if (e.target.closest('a, button, [onclick]')) {
-    cursor.classList.add('hover');
-  } else {
-    cursor.classList.remove('hover');
+  const isHoverable = e.target
+    .closest('a, button, [onclick], [role="button"]');
+  cursor.classList.toggle('hover', !!isHoverable);
+});`,
+      },
+      {
+        title: "Intro Screen — sessionStorage guard",
+        lang: "JavaScript",
+        desc: "Dùng sessionStorage để chỉ hiện intro 1 lần duy nhất mỗi lần mở tab.",
+        code: `(function() {
+  if (sessionStorage.getItem('introShown')) {
+    document.getElementById('introScreen')
+      .classList.add('hidden');
+    return;
   }
-});`
-    },
-    {
-      title: "Manga Reader App",
-      num: "02",
-      tags: ["JavaScript", "REST API", "CSS Grid"],
-      desc: "Ứng dụng đọc truyện manga trực tuyến kết nối MangaDex API. Hỗ trợ tìm kiếm, lọc theo thể loại, chapter navigator với lazy loading và dark/light mode toggle. Lưu lịch sử đọc vào localStorage.",
-      image: "img/lawliet.jpg",
-      video: null,
-      github: "https://github.com/dangthailinh",
-      demo: "#",
-      analysis: [
-        "Sử dụng MangaDex public API v5 với fetch + async/await",
-        "Lazy loading hình ảnh chapter bằng IntersectionObserver",
-        "CSS Grid masonry layout cho danh sách manga",
-        "localStorage để persist reading progress và bookmarks",
-        "Debounce search input giảm API calls không cần thiết"
-      ],
-      features: [
-        "Tìm kiếm manga real-time với debounce 400ms",
-        "Chapter navigator với keyboard shortcut",
-        "Lazy loading ảnh tiết kiệm bandwidth",
-        "Reading history + bookmark system",
-        "Dark / Light mode toggle",
-        "Responsive layout cả mobile lẫn desktop"
-      ],
-      codeLang: "JavaScript",
-      code: `// Lazy load chapter images
-const observer = new IntersectionObserver((entries) => {
+  sessionStorage.setItem('introShown', 'true');
+
+  // Stagger letter animation
+  const text = "LINH OSIMI";
+  text.split("").forEach((char, i) => {
+    const span = document.createElement("span");
+    span.textContent = char === " " ? "\\u00A0" : char;
+    span.style.animationDelay = i * 0.25 + "s";
+    container.appendChild(span);
+  });
+})();`,
+      },
+    ],
+  },
+
+  {
+    title: "Manga Reader App",
+    num: "02",
+    tags: ["JavaScript", "REST API", "CSS Grid"],
+    badge: "App",
+    image: "img/lawliet.jpg",
+    github: "https://github.com/dangthailinh",
+    demo: null,
+    desc: "Ứng dụng đọc truyện manga trực tuyến kết nối MangaDex API v5. Hỗ trợ tìm kiếm real-time, lọc thể loại, chapter navigator với lazy loading và dark/light mode.",
+
+    videoYoutubeId: null,              // ← THAY ID VIDEO YouTube
+    videoTitle: "Manga Reader — Demo đọc truyện online",
+    videoChapters: [
+      { time: "0:00", label: "Trang chủ & tìm kiếm" },
+      { time: "0:50", label: "Lọc theo thể loại" },
+      { time: "1:40", label: "Chapter reader & lazy load" },
+      { time: "2:20", label: "Dark mode toggle" },
+    ],
+
+    features: [
+      "Tìm kiếm manga real-time với debounce 400ms",
+      "Chapter navigator với keyboard shortcut ← →",
+      "Lazy loading ảnh qua IntersectionObserver",
+      "Reading history + bookmark system (localStorage)",
+      "Dark / Light mode toggle",
+      "Responsive grid layout mobile-first",
+    ],
+    stack: [
+      { name: "JavaScript",   pct: 60 },
+      { name: "CSS Grid",     pct: 25 },
+      { name: "MangaDex API", pct: 15 },
+    ],
+    complexity: [
+      { label: "API Design",    pct: 80, color: "linear-gradient(90deg,#e8890c,#ff6b35)" },
+      { label: "UX / Reader",   pct: 85, color: "linear-gradient(90deg,#7c3aed,#a855f7)" },
+      { label: "Performance",   pct: 88, color: "linear-gradient(90deg,#16a34a,#4ade80)" },
+      { label: "Offline Cache", pct: 35, color: "linear-gradient(90deg,#0891b2,#22d3ee)" },
+      { label: "Responsive",    pct: 82, color: "linear-gradient(90deg,#be123c,#fb7185)" },
+    ],
+    funcCards: [
+      { icon: "🔍", name: "Real-time Search",  detail: "Debounce 400ms giảm API calls, highlight từ khớp trong kết quả" },
+      { icon: "📖", name: "Chapter Reader",    detail: "Keyboard nav, progress bar, auto scroll to top khi next chapter" },
+      { icon: "🖼️", name: "Lazy Loading",      detail: "IntersectionObserver API, placeholder skeleton, blur-up effect" },
+      { icon: "🔖", name: "Bookmark System",   detail: "localStorage JSON store, sync giữa các tab cùng origin" },
+      { icon: "🌓", name: "Dark Mode",         detail: "CSS variables swap, prefers-color-scheme media query support" },
+      { icon: "📱", name: "Mobile Reader",     detail: "Swipe gesture detect, pinch-to-zoom native browser support" },
+    ],
+    challenges: [
+      { problem: "MangaDex CORS chặn request từ browser trực tiếp", solution: "Dùng proxy CORS hoặc server-side fetch Node.js làm middle layer" },
+      { problem: "Lazy load 200+ ảnh một chương gây jank scroll", solution: "IntersectionObserver rootMargin='200px' preload trước khi vào viewport" },
+    ],
+    snippets: [
+      {
+        title: "IntersectionObserver — Lazy Load",
+        lang: "JavaScript",
+        desc: "Chỉ load ảnh khi gần đến viewport, tiết kiệm bandwidth đáng kể.",
+        code: `const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const img = entry.target;
       img.src = img.dataset.src;
       img.classList.add('loaded');
-      observer.unobserve(img);
+      observer.unobserve(img); // Dừng observe sau khi load
     }
   });
-}, { rootMargin: '100px' });
+}, { rootMargin: '200px 0px' }); // Preload sớm 200px
 
 document.querySelectorAll('img[data-src]')
-  .forEach(img => observer.observe(img));`
-    },
-    {
-      title: "AI Chat Assistant",
-      num: "03",
-      tags: ["Python", "Claude API", "Flask"],
-      desc: "Chatbot web tích hợp Anthropic Claude API với giao diện retro terminal xanh. Backend Flask xử lý conversation history, frontend vanilla JS stream responses real-time. Hỗ trợ markdown rendering và code highlighting.",
-      image: "img/joker.jpg",
-      video: null,
-      github: "https://github.com/dangthailinh",
-      demo: "assistant.html",
-      analysis: [
-        "Flask backend REST API endpoint /chat nhận POST JSON",
-        "Anthropic Python SDK với streaming mode cho UX mượt",
-        "Server-Sent Events (SSE) truyền response từng token",
-        "Conversation history management giữ context qua turns",
-        "Marked.js + highlight.js render markdown và code blocks"
-      ],
-      features: [
-        "Streaming response real-time như ChatGPT",
-        "Retro terminal giao diện với font Courier",
-        "Markdown + syntax highlighting support",
-        "Multi-turn conversation với memory",
-        "Copy code button trên mỗi code block",
-        "Typing indicator animation"
-      ],
-      codeLang: "Python",
-      code: `# Flask endpoint với streaming
-@app.route('/chat', methods=['POST'])
+  .forEach(img => observer.observe(img));`,
+      },
+    ],
+  },
+
+  {
+    title: "AI Chat Assistant",
+    num: "03",
+    tags: ["Python", "Gemini API", "Flask"],
+    badge: "AI",
+    image: "img/joker.jpg",
+    github: "https://github.com/dangthailinh",
+    demo: "assistant.html",
+    desc: "Chatbot web tích hợp Anthropic Claude API với giao diện retro terminal. Backend Flask xử lý conversation history, streaming response real-time qua SSE, hỗ trợ markdown + code highlight.",
+
+    videoYoutubeId: "G-rJivBanOM",        
+    videoTitle: "AI Chat — Streaming demo với Claude API",
+    videoChapters: [
+      { time: "0:00", label: "Giao diện terminal retro" },
+      { time: "0:40", label: "Streaming response" },
+      { time: "1:20", label: "Code block + copy button" },
+      { time: "8:00", label: "Multi-turn conversation" },
+    ],
+
+    features: [
+      "Streaming response real-time từng token",
+      "Giao diện retro terminal với font Courier",
+      "Markdown + syntax highlighting đầy đủ",
+      "Multi-turn conversation với context memory",
+      "Copy button tự động trên mỗi code block",
+      "Typing indicator animation khi AI đang xử lý",
+    ],
+    stack: [
+      { name: "Python / Flask", pct: 45 },
+      { name: "JavaScript",     pct: 30 },
+      { name: "Claude API",     pct: 25 },
+    ],
+    complexity: [
+      { label: "Backend API",    pct: 75, color: "linear-gradient(90deg,#e8890c,#ff6b35)" },
+      { label: "Streaming SSE",  pct: 80, color: "linear-gradient(90deg,#7c3aed,#a855f7)" },
+      { label: "UI Terminal",    pct: 70, color: "linear-gradient(90deg,#be123c,#fb7185)" },
+      { label: "AI Integration", pct: 85, color: "linear-gradient(90deg,#16a34a,#4ade80)" },
+      { label: "Security",       pct: 60, color: "linear-gradient(90deg,#0891b2,#22d3ee)" },
+    ],
+    funcCards: [
+      { icon: "🤖", name: "Claude API",       detail: "claude-sonnet-4, system prompt tùy chỉnh, temperature 0.7" },
+      { icon: "⚡", name: "SSE Streaming",    detail: "Server-Sent Events truyền từng token, EventSource JS phía client" },
+      { icon: "📝", name: "Markdown Render",  detail: "Marked.js parse, highlight.js auto-detect language" },
+      { icon: "🧠", name: "Context Memory",   detail: "Full conversation history gửi mỗi request, trim khi > 4k tokens" },
+      { icon: "🖥️", name: "Terminal UI",      detail: "CSS scanlines effect, green-on-black, blinking cursor CSS" },
+      { icon: "🔒", name: "API Key Safety",   detail: "Key lưu server .env, không expose ra client bao giờ" },
+    ],
+    challenges: [
+      { problem: "Streaming response bị buffer trên một số proxy/nginx", solution: "Thêm X-Accel-Buffering: no header, flush() sau mỗi chunk" },
+      { problem: "Context window overflow khi chat dài", solution: "Token counter ước tính, auto trim messages cũ giữ system prompt" },
+    ],
+    snippets: [
+      {
+        title: "Flask SSE Streaming Endpoint",
+        lang: "Python",
+        desc: "Response generator trả về từng token real-time thay vì đợi toàn bộ response.",
+        code: `@app.route('/chat', methods=['POST'])
 def chat():
     data = request.json
     messages = data.get('messages', [])
-    
+
     def generate():
         with anthropic.messages.stream(
             model="claude-sonnet-4-20250514",
@@ -2452,280 +2631,529 @@ def chat():
             messages=messages
         ) as stream:
             for text in stream.text_stream:
-                yield f"data: {text}\n\n"
-    
+                # Escape newlines cho SSE format
+                safe = text.replace('\\n', '\\\\n')
+                yield f"data: {safe}\\n\\n"
+        yield "data: [DONE]\\n\\n"
+
     return Response(generate(),
-        mimetype='text/event-stream')`
-    },
-    {
-      title: "Crypto Dashboard",
-      num: "04",
-      tags: ["React", "Chart.js", "CoinGecko API"],
-      desc: "Dashboard real-time theo dõi top 50 cryptocurrency. Biểu đồ giá 7 ngày, market cap, volume, thay đổi 24h. Hệ thống alert khi giá vượt ngưỡng tùy chỉnh, notification push browser.",
-      image: "img/chad.jpg",
-      video: null,
-      github: "https://github.com/dangthailinh",
-      demo: "#",
-      analysis: [
-        "CoinGecko API free tier polling mỗi 60s tránh rate limit",
-        "Chart.js Line chart với gradient fill và animation",
-        "React useState + useEffect quản lý data lifecycle",
-        "Web Notifications API cho price alert system",
-        "Custom hook useCrypto() abstraction data fetching logic",
-        "useMemo() optimize re-render khi filter/sort danh sách"
-      ],
-      features: [
-        "Top 50 coin real-time với auto refresh",
-        "Biểu đồ giá 1D / 7D / 30D",
-        "Price alert với browser push notification",
-        "Filter / Sort theo market cap, volume, change",
-        "Favorite list với localStorage persist",
-        "Dark mode mặc định, toggle light mode"
-      ],
-      codeLang: "JavaScript",
-      code: `// Custom hook fetch crypto data
-function useCrypto(ids, currency = 'usd') {
-  const [data, setData] = useState(null);
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'X-Accel-Buffering': 'no'
+        })`,
+      },
+    ],
+  },
+
+  {
+    title: "Crypto Dashboard",
+    num: "04",
+    tags: ["React", "Chart.js", "API"],
+    badge: "Dashboard",
+    image: "img/chad.jpg",
+    github: "https://github.com/dangthailinh",
+    demo: null,
+    desc: "Dashboard real-time top 50 cryptocurrency. Biểu đồ giá 7 ngày, market cap, volume. Alert system khi giá vượt ngưỡng tùy chỉnh với Web Notifications API.",
+
+    videoYoutubeId: null,
+    videoTitle: "Crypto Dashboard — Real-time demo",
+    videoChapters: [
+      { time: "0:00", label: "Overview dashboard" },
+      { time: "0:50", label: "Biểu đồ giá 7 ngày" },
+      { time: "1:35", label: "Thiết lập price alert" },
+      { time: "2:15", label: "Filter & sort coins" },
+    ],
+
+    features: [
+      "Top 50 coin real-time với auto refresh 60s",
+      "Biểu đồ giá 1D / 7D / 30D (Line + Candlestick)",
+      "Price alert với browser push notification",
+      "Filter / Sort theo market cap, volume, change%",
+      "Favorite list với localStorage persist",
+      "Dark mode mặc định",
+    ],
+    stack: [
+      { name: "React",          pct: 50 },
+      { name: "Chart.js",       pct: 25 },
+      { name: "CoinGecko API",  pct: 25 },
+    ],
+    complexity: [
+      { label: "State Mgmt",    pct: 82, color: "linear-gradient(90deg,#e8890c,#ff6b35)" },
+      { label: "Data Viz",      pct: 88, color: "linear-gradient(90deg,#7c3aed,#a855f7)" },
+      { label: "Alert System",  pct: 65, color: "linear-gradient(90deg,#16a34a,#4ade80)" },
+      { label: "API Handling",  pct: 70, color: "linear-gradient(90deg,#0891b2,#22d3ee)" },
+      { label: "Performance",   pct: 78, color: "linear-gradient(90deg,#be123c,#fb7185)" },
+    ],
+    funcCards: [
+      { icon: "📊", name: "Chart.js",         detail: "Line + gradient fill, custom tooltip, responsive aspect ratio" },
+      { icon: "🔔", name: "Price Alert",      detail: "Web Notifications API, localStorage lưu alert rules" },
+      { icon: "⚡", name: "Custom Hook",      detail: "useCrypto() abstraction fetch + cache + interval logic" },
+      { icon: "🔄", name: "Auto Refresh",     detail: "setInterval 60s, loading spinner không block UI" },
+      { icon: "🌟", name: "Favorites",        detail: "Heart toggle, localStorage sync, sort favorites lên đầu" },
+      { icon: "📱", name: "Responsive",       detail: "CSS Grid auto-fit, card collapse trên mobile" },
+    ],
+    challenges: [
+      { problem: "CoinGecko free tier giới hạn 10–30 calls/phút", solution: "Cache response vào Map với TTL 55s, batch request nhiều coin 1 lần" },
+      { problem: "Chart re-render lag khi update 50 coin cùng lúc", solution: "useMemo filter/sort, React.memo trên CoinRow, chart.update() thay vì destroy" },
+    ],
+    snippets: [
+      {
+        title: "useCrypto Hook — Fetch + Cache",
+        lang: "JavaScript",
+        desc: "Custom hook quản lý toàn bộ fetch lifecycle: loading, error, cache, auto-refresh.",
+        code: `function useCrypto(ids, currency = 'usd') {
+  const [data, setData]       = useState(null);
   const [loading, setLoading] = useState(true);
+  const cache = useRef(new Map());
 
   useEffect(() => {
     const fetchData = async () => {
+      const cacheKey = ids + currency;
+      const cached   = cache.current.get(cacheKey);
+      
+      // Dùng cache nếu còn mới (< 55s)
+      if (cached && Date.now() - cached.ts < 55000) {
+        setData(cached.data); setLoading(false); return;
+      }
+
       const url = \`https://api.coingecko.com/api/v3/
 simple/price?ids=\${ids}&vs_currencies=\${currency}
 &include_24hr_change=true\`;
-      const res = await fetch(url);
-      setData(await res.json());
-      setLoading(false);
+      const res  = await fetch(url);
+      const json = await res.json();
+      cache.current.set(cacheKey, { data: json, ts: Date.now() });
+      setData(json); setLoading(false);
     };
     fetchData();
-    const interval = setInterval(fetchData, 60000);
-    return () => clearInterval(interval);
+    const id = setInterval(fetchData, 60000);
+    return () => clearInterval(id);
   }, [ids, currency]);
 
   return { data, loading };
-}`
-    },
-    {
-      title: "Game 2D Platformer",
-      num: "05",
-      tags: ["Python", "Pygame", "Game Dev"],
-      desc: "Game platformer 2D hoàn chỉnh viết bằng Python + Pygame. Có hệ thống physics gravity, collision detection, enemy AI đơn giản, level editor JSON-based và particle effects khi nhân vật chạy/nhảy.",
-      image: "img/zeke.jpg",
-      video: null,
-      github: "https://github.com/dangthailinh",
-      demo: "#",
-      analysis: [
-        "Game loop chuẩn: update → draw tách biệt logic và render",
-        "AABB collision detection giữa player và tilemap",
-        "Enemy AI state machine: PATROL → CHASE → ATTACK",
-        "Particle system pool tái sử dụng objects tránh GC",
-        "Level data lưu JSON, load động không hardcode",
-        "Delta time movement đảm bảo tốc độ nhất quán mọi FPS"
-      ],
-      features: [
-        "Physics engine: gravity, jump, friction",
-        "Tilemap renderer từ JSON level files",
-        "Enemy AI với 3 trạng thái behavior",
-        "Particle effects: bụi chân, hiệu ứng nhảy",
-        "Score system + lives counter",
-        "Level editor tích hợp (F1 để toggle)"
-      ],
-      codeLang: "Python",
-      code: `# Game loop với delta time
-class Game:
+}`,
+      },
+    ],
+  },
+
+  {
+    title: "Game 2D Platformer",
+    num: "05",
+    tags: ["Python", "Pygame", "Game Dev"],
+    badge: "Game",
+    image: "img/zeke.jpg",
+    github: "https://github.com/dangthailinh",
+    demo: null,
+    desc: "Game platformer 2D hoàn chỉnh với Pygame. Physics gravity/friction, AABB collision, enemy AI state machine (Patrol→Chase→Attack), particle system và level editor JSON-based.",
+
+    videoYoutubeId: null,
+    videoTitle: "2D Platformer — Gameplay demo",
+    videoChapters: [
+      { time: "0:00", label: "Gameplay level 1" },
+      { time: "1:00", label: "Enemy AI demo" },
+      { time: "1:50", label: "Particle effects" },
+      { time: "2:30", label: "Level editor (F1)" },
+    ],
+
+    features: [
+      "Physics engine: gravity, jump, friction delta-time",
+      "Tilemap renderer từ JSON level files",
+      "Enemy AI state machine: Patrol / Chase / Attack",
+      "Particle system pool tái sử dụng objects",
+      "Score system + lives counter + HUD",
+      "Level editor tích hợp (toggle F1)",
+    ],
+    stack: [
+      { name: "Python",  pct: 60 },
+      { name: "Pygame",  pct: 30 },
+      { name: "JSON",    pct: 10 },
+    ],
+    complexity: [
+      { label: "Physics Engine", pct: 80, color: "linear-gradient(90deg,#e8890c,#ff6b35)" },
+      { label: "Enemy AI",       pct: 72, color: "linear-gradient(90deg,#7c3aed,#a855f7)" },
+      { label: "Particle Sys",   pct: 65, color: "linear-gradient(90deg,#16a34a,#4ade80)" },
+      { label: "Level Editor",   pct: 60, color: "linear-gradient(90deg,#0891b2,#22d3ee)" },
+      { label: "Game Loop",      pct: 90, color: "linear-gradient(90deg,#be123c,#fb7185)" },
+    ],
+    funcCards: [
+      { icon: "⚙️", name: "Game Loop",      detail: "Update → Draw tách biệt, delta time đảm bảo nhất quán mọi FPS" },
+      { icon: "🟩", name: "AABB Collision", detail: "Axis-Aligned Bounding Box, separate X/Y axis resolution" },
+      { icon: "🤖", name: "Enemy AI",       detail: "FSM 3 state: PATROL random walk, CHASE pathfind, ATTACK cooldown" },
+      { icon: "✨", name: "Particle Pool",  detail: "Object pool tái dùng 200 particles, không GC pressure" },
+      { icon: "🗺️", name: "Tilemap",        detail: "JSON array 2D, 16x16 tiles, layer: background/collision/decoration" },
+      { icon: "📝", name: "Level Editor",   detail: "F1 toggle, click tile đặt/xóa, save JSON real-time" },
+    ],
+    challenges: [
+      { problem: "Player xuyên tường khi FPS thấp do vận tốc > tile size", solution: "Swept AABB collision + substep tối đa 4 lần mỗi frame" },
+      { problem: "Particle system tạo nhiều object → GC spike", solution: "Object pool cố định 200 particles, reuse thay vì new mỗi frame" },
+    ],
+    snippets: [
+      {
+        title: "Game Loop — Delta Time",
+        lang: "Python",
+        desc: "Delta time đảm bảo tốc độ di chuyển nhất quán dù FPS thay đổi.",
+        code: `class Game:
     def run(self):
         clock = pygame.time.Clock()
         while self.running:
-            dt = clock.tick(60) / 1000.0  # seconds
-            
+            dt = clock.tick(60) / 1000.0  # Giây
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
-            
+
             # Update với delta time
             self.player.update(dt, self.tilemap)
-            self.enemies.update(dt)
+            self.enemies.update(dt, self.player.rect)
             self.particles.update(dt)
-            
+
             # Render
-            self.screen.fill((20, 12, 8))
-            self.tilemap.draw(self.screen)
+            self.screen.fill((15, 10, 5))
+            self.tilemap.draw(self.screen, self.camera)
             self.player.draw(self.screen)
-            pygame.display.flip()`
-    }
-  ];
+            self.particles.draw(self.screen)
+            pygame.display.flip()`,
+      },
+      {
+        title: "Enemy AI — State Machine",
+        lang: "Python",
+        desc: "Finite State Machine đơn giản 3 trạng thái cho enemy AI.",
+        code: `class Enemy:
+    PATROL = 'patrol'
+    CHASE  = 'chase'
+    ATTACK = 'attack'
+    DETECT_RANGE = 200
+    ATTACK_RANGE = 40
 
-  /* -------------------------------------------------------
-     Slider logic
-     ------------------------------------------------------- */
-  const track     = document.getElementById('projTrack');
-  const leftBtn   = document.getElementById('projLeft');
-  const rightBtn  = document.getElementById('projRight');
-  const dotsWrap  = document.getElementById('projDots');
-  const cards     = Array.from(document.querySelectorAll('.proj-card'));
+    def update(self, dt, player_rect):
+        dist = self.rect.centerx - player_rect.centerx
 
-  let currentIdx = 0;
-  const CARD_WIDTH = () => {
-    const c = cards[0];
-    if (!c) return 300;
-    return c.offsetWidth + parseInt(getComputedStyle(track).gap || 24);
-  };
+        if abs(dist) <= self.ATTACK_RANGE:
+            self.state = self.ATTACK
+        elif abs(dist) <= self.DETECT_RANGE:
+            self.state = self.CHASE
+        else:
+            self.state = self.PATROL
 
-  /* Calculate how many cards are visible */
-  const visibleCount = () => {
-    const vp = document.querySelector('.proj-track-viewport');
-    return Math.max(1, Math.round(vp.offsetWidth / CARD_WIDTH()));
-  };
+        if self.state == self.PATROL:
+            self.patrol(dt)
+        elif self.state == self.CHASE:
+            self.chase(dt, player_rect)
+        elif self.state == self.ATTACK:
+            self.attack()`,
+      },
+    ],
+  },
+];
 
-  const maxIdx = () => Math.max(0, cards.length - visibleCount());
+/* ================================================================
+   SLIDER
+================================================================ */
+const track   = document.getElementById('projTrack');
+const leftBtn = document.getElementById('projLeft');
+const rightBtn= document.getElementById('projRight');
+const dotsWrap= document.getElementById('projDots');
+const cards   = Array.from(document.querySelectorAll('.proj-card'));
+let curIdx    = 0;
 
-  /* Build dots */
-  function buildDots() {
-    dotsWrap.innerHTML = '';
-    const total = maxIdx() + 1;
-    for (let i = 0; i < total; i++) {
-      const d = document.createElement('button');
-      d.className = 'proj-dot' + (i === currentIdx ? ' active' : '');
-      d.setAttribute('aria-label', `Slide ${i + 1}`);
-      d.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(d);
-    }
+const cardW = () => {
+  const c = cards[0];
+  return c ? c.offsetWidth + parseInt(getComputedStyle(track).gap || 24) : 300;
+};
+const visN   = () => Math.max(1, Math.round(document.querySelector('.proj-track-viewport').offsetWidth / cardW()));
+const maxIdx = () => Math.max(0, cards.length - visN());
+
+function buildDots() {
+  dotsWrap.innerHTML = '';
+  for (let i = 0; i <= maxIdx(); i++) {
+    const d = document.createElement('button');
+    d.className = 'proj-dot' + (i === curIdx ? ' active' : '');
+    d.setAttribute('aria-label', `Slide ${i+1}`);
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
   }
+}
+function updDots() {
+  document.querySelectorAll('.proj-dot').forEach((d,i) => d.classList.toggle('active', i===curIdx));
+}
+function goTo(i) {
+  curIdx = Math.max(0, Math.min(i, maxIdx()));
+  track.style.transform = `translateX(-${curIdx * cardW()}px)`;
+  leftBtn.disabled  = curIdx === 0;
+  rightBtn.disabled = curIdx >= maxIdx();
+  updDots();
+}
+leftBtn.addEventListener('click',  () => goTo(curIdx-1));
+rightBtn.addEventListener('click', () => goTo(curIdx+1));
+let ts = 0;
+track.addEventListener('touchstart', e => { ts = e.touches[0].clientX; }, {passive:true});
+track.addEventListener('touchend',   e => {
+  const d = ts - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 50) goTo(curIdx + (d > 0 ? 1 : -1));
+}, {passive:true});
+window.addEventListener('resize', () => { buildDots(); goTo(Math.min(curIdx, maxIdx())); }, {passive:true});
+buildDots(); goTo(0);
 
-  function updateDots() {
-    document.querySelectorAll('.proj-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === currentIdx);
+/* ================================================================
+   MODAL
+================================================================ */
+const backdrop    = document.getElementById('projModalBackdrop');
+const modalClose  = document.getElementById('projModalClose');
+const modalPrevBtn= document.getElementById('modalPrev');
+const modalNextBtn= document.getElementById('modalNext');
+let activeP = 0;
+let videoLoaded = false;
+
+function ytThumb(id) {
+  return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+}
+function ytEmbed(id, autoplay=0) {
+  return `https://www.youtube.com/embed/${id}?autoplay=${autoplay}&rel=0&modestbranding=1`;
+}
+
+function renderModal(idx) {
+  const p = PROJECTS[idx];
+  if (!p) return;
+  activeP     = idx;
+  videoLoaded = false;
+
+  // ── Header ──
+  document.getElementById('mNum').textContent   = p.num;
+  document.getElementById('mTitle').textContent = p.title;
+  const tagsEl = document.getElementById('mTags');
+  tagsEl.innerHTML = p.tags.map(t => `<span>${t}</span>`).join('');
+  document.getElementById('mGithub').href = p.github;
+
+  // ── Arrows ──
+  modalPrevBtn.disabled = idx === 0;
+  modalNextBtn.disabled = idx === PROJECTS.length - 1;
+
+  // ── OVERVIEW TAB ──
+  document.getElementById('mThumb').src   = p.image;
+  document.getElementById('mThumb').alt   = p.title;
+  document.getElementById('mDesc').textContent = p.desc;
+
+  const demoBtn = document.getElementById('mDemo');
+  demoBtn.href = p.demo || '#';
+  demoBtn.classList.toggle('disabled', !p.demo);
+
+  const fList = document.getElementById('mFeatureList');
+  fList.innerHTML = (p.features||[]).map(f => `<li>${f}</li>`).join('');
+
+  const sbars = document.getElementById('mStackBars');
+  sbars.innerHTML = (p.stack||[]).map(s => `
+    <div class="stack-bar-item">
+      <div class="sbi-label"><span>${s.name}</span><span>${s.pct}%</span></div>
+      <div class="sbi-track"><div class="sbi-fill" data-pct="${s.pct}"></div></div>
+    </div>`).join('');
+
+  // ── VIDEO TAB ──
+  const placeholder      = document.getElementById('mVideoPlaceholder');
+  const thumbPreview     = document.getElementById('mVideoThumbPreview');
+  const iframeWrap       = document.getElementById('mVideoIframeWrap');
+  const iframe           = document.getElementById('mVideoIframe');
+  const metaPanel        = document.getElementById('mVideoMeta');
+  const hintBox          = document.getElementById('mVideoHint');
+
+  // Reset
+  iframe.src = '';
+  iframeWrap.style.display  = 'none';
+  thumbPreview.style.display= 'none';
+  placeholder.style.display = 'flex';
+  metaPanel.style.display   = 'none';
+  hintBox.style.display     = 'none';
+
+  if (p.videoYoutubeId) {
+    placeholder.style.display  = 'none';
+    thumbPreview.style.display = 'block';
+    document.getElementById('mVideoThumb').src = ytThumb(p.videoYoutubeId);
+    document.getElementById('mVideoTitle').textContent = p.videoTitle || p.title;
+
+    // Chapters
+    const chapEl = document.getElementById('mVideoChapters');
+    chapEl.innerHTML = (p.videoChapters||[]).map((c,i) => `
+      <div class="vmc-item" data-index="${i}" data-id="${p.videoYoutubeId}" data-time="${c.time}">
+        <span class="vmc-time">${c.time}</span>
+        <span class="vmc-desc">${c.label}</span>
+        <span class="vmc-play">▶</span>
+      </div>`).join('');
+    metaPanel.style.display = 'block';
+
+    // Attach chapter click
+    chapEl.querySelectorAll('.vmc-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const id   = item.dataset.id;
+        const time = item.dataset.time;
+        // convert "m:ss" to seconds
+        const parts = time.split(':').map(Number);
+        const secs  = parts.length === 2 ? parts[0]*60 + parts[1] : parts[0]*3600 + parts[1]*60 + parts[2];
+        loadVideo(id, secs);
+      });
     });
+
+    // Play button
+    document.getElementById('mVideoPlayBtn').onclick = () => loadVideo(p.videoYoutubeId, 0);
+
+  } else {
+    // No video: show hint
+    document.getElementById('mVideoHintCode').textContent =
+`// Trong mảng PROJECTS, project "${p.title}":
+videoYoutubeId: "YOUR_VIDEO_ID",
+
+// Ví dụ link YouTube:
+// https://www.youtube.com/watch?v=AN1RJF55NXI
+//                                 ^^^^^^^^^^^
+//                           Copy phần này`;
+    hintBox.style.display = 'flex';
   }
 
-  function goTo(idx) {
-    currentIdx = Math.max(0, Math.min(idx, maxIdx()));
-    track.style.transform = `translateX(-${currentIdx * CARD_WIDTH()}px)`;
-    leftBtn.disabled  = currentIdx === 0;
-    rightBtn.disabled = currentIdx >= maxIdx();
-    updateDots();
-  }
+  // ── ANALYSIS TAB ──
+  const cbars = document.getElementById('mComplexityBars');
+  cbars.innerHTML = (p.complexity||[]).map(c => `
+    <div class="cb-item">
+      <div class="cb-label">${c.label}</div>
+      <div class="cb-track"><div class="cb-fill" data-pct="${c.pct}" style="background:${c.color}"></div></div>
+      <div class="cb-pct">${c.pct}%</div>
+    </div>`).join('');
 
-  leftBtn.addEventListener('click',  () => goTo(currentIdx - 1));
-  rightBtn.addEventListener('click', () => goTo(currentIdx + 1));
+  const fcards = document.getElementById('mFuncCards');
+  fcards.innerHTML = (p.funcCards||[]).map(f => `
+    <div class="fc-item">
+      <div class="fc-icon">${f.icon}</div>
+      <div class="fc-name">${f.name}</div>
+      <div class="fc-detail">${f.detail}</div>
+    </div>`).join('');
 
-  // Touch swipe
-  let touchStart = 0;
-  track.addEventListener('touchstart', e => { touchStart = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend', e => {
-    const diff = touchStart - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) goTo(currentIdx + (diff > 0 ? 1 : -1));
-  }, {passive:true});
+  const clist = document.getElementById('mChallenges');
+  clist.innerHTML = (p.challenges||[]).map(c => `
+    <div class="cl-item">
+      <div class="cl-challenge">
+        <div class="cl-label">⚠ Thách thức</div>
+        <div class="cl-text">${c.problem}</div>
+      </div>
+      <div class="cl-solution">
+        <div class="cl-label">✅ Giải pháp</div>
+        <div class="cl-text">${c.solution}</div>
+      </div>
+    </div>`).join('');
 
-  window.addEventListener('resize', () => { buildDots(); goTo(Math.min(currentIdx, maxIdx())); }, {passive:true});
-  buildDots();
-  goTo(0);
+  // ── CODE TAB ──
+  const snippets = document.getElementById('mCodeSnippets');
+  snippets.innerHTML = (p.snippets||[]).map((s,i) => `
+    <div class="code-snippet-block">
+      <div class="csb-header">
+        <span class="csb-title">${s.title}</span>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="csb-lang">${s.lang}</span>
+          <button class="csb-copy" data-idx="${i}">Copy</button>
+        </div>
+      </div>
+      <pre class="csb-pre"><code>${escHtml(s.code)}</code></pre>
+      ${s.desc ? `<div class="csb-desc">${s.desc}</div>` : ''}
+    </div>`).join('');
 
-  /* -------------------------------------------------------
-     Modal logic
-     ------------------------------------------------------- */
-  const backdrop   = document.getElementById('projModalBackdrop');
-  const modal      = document.getElementById('projModal');
-  const closeBtn   = document.getElementById('projModalClose');
-  const modalPrev  = document.getElementById('modalPrev');
-  const modalNext  = document.getElementById('modalNext');
-  let activeProj   = 0;
-
-  function renderModal(idx) {
-    const p = PROJECTS[idx];
-    if (!p) return;
-    activeProj = idx;
-
-    /* Media */
-    const mediaEl = document.getElementById('modalMedia');
-    if (p.video) {
-      mediaEl.innerHTML = `<iframe src="${p.video}" frameborder="0"
-        allow="autoplay; encrypted-media" allowfullscreen style="width:100%;height:100%;min-height:280px;"></iframe>`;
-    } else {
-      mediaEl.innerHTML = `<img src="${p.image}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;">`;
-    }
-
-    document.getElementById('modalNum').textContent  = p.num;
-    document.getElementById('modalTitle').textContent = p.title;
-    document.getElementById('modalDesc').textContent  = p.desc;
-
-    /* Tags */
-    const tagsEl = document.getElementById('modalTags');
-    tagsEl.innerHTML = p.tags.map(t => `<span>${t}</span>`).join('');
-
-    /* Analysis */
-    const anaList = document.getElementById('modalAnalysisList');
-    anaList.innerHTML = p.analysis.map(a => `<li>${a}</li>`).join('');
-
-    /* Features */
-    const featList = document.getElementById('modalFeaturesList');
-    featList.innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
-
-    /* Code */
-    document.getElementById('modalCodeLang').textContent = p.codeLang;
-    document.getElementById('modalCode').textContent = p.code;
-
-    /* Links */
-    document.getElementById('modalGithub').href = p.github;
-    document.getElementById('modalDemo').href   = p.demo || '#';
-    if (!p.demo || p.demo === '#') {
-      document.getElementById('modalDemo').style.opacity = '0.4';
-      document.getElementById('modalDemo').style.pointerEvents = 'none';
-    } else {
-      document.getElementById('modalDemo').style.opacity = '';
-      document.getElementById('modalDemo').style.pointerEvents = '';
-    }
-
-    /* Arrows */
-    modalPrev.disabled = idx === 0;
-    modalNext.disabled = idx === PROJECTS.length - 1;
-  }
-
-  function openModal(idx) {
-    renderModal(idx);
-    backdrop.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => backdrop.classList.add('show'));
-  }
-
-  function closeModal() {
-    backdrop.classList.remove('show');
-    setTimeout(() => {
-      backdrop.style.display = 'none';
-      document.body.style.overflow = '';
-    }, 300);
-  }
-
-  /* Attach click to cards */
-  cards.forEach((card, i) => {
-    card.addEventListener('click', () => openModal(parseInt(card.dataset.proj)));
-  });
-
-  closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
-  modalPrev.addEventListener('click', () => { if (activeProj > 0) renderModal(activeProj - 1); });
-  modalNext.addEventListener('click', () => { if (activeProj < PROJECTS.length - 1) renderModal(activeProj + 1); });
-
-  /* Keyboard navigation */
-  document.addEventListener('keydown', e => {
-    if (!backdrop.classList.contains('show')) return;
-    if (e.key === 'Escape') closeModal();
-    if (e.key === 'ArrowLeft')  { if (activeProj > 0) renderModal(activeProj - 1); }
-    if (e.key === 'ArrowRight') { if (activeProj < PROJECTS.length - 1) renderModal(activeProj + 1); }
-  });
-
-  /* Copy code */
-  document.getElementById('copyCodeBtn').addEventListener('click', function() {
-    const code = document.getElementById('modalCode').textContent;
-    navigator.clipboard.writeText(code).then(() => {
-      this.textContent = 'Copied!';
-      this.style.color = '#4ade80';
-      setTimeout(() => { this.textContent = 'Copy'; this.style.color = ''; }, 2000);
+  // Copy buttons
+  snippets.querySelectorAll('.csb-copy').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const idx  = parseInt(this.dataset.idx);
+      const code = p.snippets[idx].code;
+      navigator.clipboard.writeText(code).then(() => {
+        this.textContent = '✓ Copied';
+        this.style.color = '#4ade80';
+        setTimeout(() => { this.textContent = 'Copy'; this.style.color = ''; }, 2000);
+      });
     });
   });
+}
+
+function loadVideo(id, startSeconds) {
+  const iframeWrap  = document.getElementById('mVideoIframeWrap');
+  const thumbPreview= document.getElementById('mVideoThumbPreview');
+  const iframe      = document.getElementById('mVideoIframe');
+  thumbPreview.style.display = 'none';
+  iframeWrap.style.display   = 'block';
+  iframe.src = ytEmbed(id, 1) + (startSeconds > 0 ? `&start=${startSeconds}` : '');
+  videoLoaded = true;
+}
+
+function stopVideo() {
+  document.getElementById('mVideoIframe').src = '';
+  document.getElementById('mVideoIframeWrap').style.display = 'none';
+  const p = PROJECTS[activeP];
+  if (p && p.videoYoutubeId) {
+    document.getElementById('mVideoThumbPreview').style.display = 'block';
+  }
+  videoLoaded = false;
+}
+
+function openModal(idx) {
+  // Reset tab to overview
+  document.querySelectorAll('.proj-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'overview'));
+  document.querySelectorAll('.proj-tab-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === 'overview'));
+  renderModal(idx);
+  backdrop.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => {
+    backdrop.classList.add('show');
+    // Animate bars after paint
+    setTimeout(animateBars, 120);
+  });
+}
+
+function closeModal() {
+  stopVideo();
+  backdrop.classList.remove('show');
+  setTimeout(() => { backdrop.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+}
+
+function animateBars() {
+  document.querySelectorAll('.sbi-fill[data-pct], .cb-fill[data-pct]').forEach(el => {
+    el.style.width = el.dataset.pct + '%';
+  });
+}
+
+// Tab switching
+document.querySelectorAll('.proj-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.proj-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.proj-tab-panel').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    document.querySelector(`.proj-tab-panel[data-panel="${this.dataset.tab}"]`).classList.add('active');
+    // Animate bars when switching to analysis or overview
+    if (this.dataset.tab === 'analysis' || this.dataset.tab === 'overview') {
+      setTimeout(animateBars, 80);
+    }
+    // Stop video when leaving video tab
+    if (this.dataset.tab !== 'video' && videoLoaded) stopVideo();
+  });
+});
+
+// Card clicks
+cards.forEach(card => {
+  card.addEventListener('click', () => openModal(parseInt(card.dataset.proj)));
+});
+
+modalClose.addEventListener('click', closeModal);
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+modalPrevBtn.addEventListener('click', () => {
+  if (activeP > 0) { renderModal(activeP - 1); setTimeout(animateBars, 120); stopVideo(); }
+});
+modalNextBtn.addEventListener('click', () => {
+  if (activeP < PROJECTS.length - 1) { renderModal(activeP + 1); setTimeout(animateBars, 120); stopVideo(); }
+});
+document.addEventListener('keydown', e => {
+  if (!backdrop.classList.contains('show')) return;
+  if (e.key === 'Escape')      closeModal();
+  if (e.key === 'ArrowLeft'  && activeP > 0)                    { renderModal(activeP-1); setTimeout(animateBars,120); stopVideo(); }
+  if (e.key === 'ArrowRight' && activeP < PROJECTS.length - 1) { renderModal(activeP+1); setTimeout(animateBars,120); stopVideo(); }
+});
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 })();
 </script>
-
 
 
 <div class="horizontal-container">
