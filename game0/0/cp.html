@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDGERUNNERS // DAVID × LUCY</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--cyan:#00f5ff;--pink:#ff0090;--yellow:#ffe600;--orange:#ff6200;--void:#04060a;--panel:#070d14;--gbord:rgba(0,245,255,0.15);--tp:#e8f4f8;--dim:#5a7a8a}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--tp);font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:crosshair}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);pointer-events:none;z-index:9999;animation:scanMove 8s linear infinite}
+@keyframes scanMove{to{background-position:0 200px}}
+body::after{content:'';position:fixed;inset:-50%;width:200%;height:200%;opacity:.04;pointer-events:none;z-index:9998;animation:grain .5s steps(1) infinite;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,-3%)}50%{transform:translate(3%,2%)}75%{transform:translate(-2%,4%)}to{transform:translate(4%,-2%)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(4,6,10,.96),transparent);backdrop-filter:blur(6px)}
+.nav-logo{font-family:'Orbitron',monospace;font-weight:900;font-size:15px;letter-spacing:3px;color:var(--tp)}
+.nav-logo::after{content:'//';color:var(--pink);margin-left:6px}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--dim);text-decoration:none;text-transform:uppercase;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--cyan);box-shadow:0 0 6px var(--cyan);transform:scaleX(0);transition:transform .3s}
+.nav-links a:hover{color:var(--cyan)}.nav-links a:hover::after{transform:scaleX(1)}
+
+/* BANNER */
+#banner{position:relative;height:100vh;min-height:680px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 60px 60px;overflow:hidden}
+#bannerImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:0}
+#bannerImg.on{display:block}
+.bbg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 30%,rgba(0,100,150,.25),transparent 60%),radial-gradient(ellipse 50% 80% at 20% 80%,rgba(255,0,144,.12),transparent 50%),linear-gradient(180deg,#04060a,#050b12 50%,#030508);z-index:1}
+.bov{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,6,10,.85),rgba(4,6,10,.3) 50%,rgba(4,6,10,.2));z-index:2;pointer-events:none}
+.earth{position:absolute;top:-5%;right:-5%;width:65%;height:110%;background:radial-gradient(circle at 40% 40%,rgba(20,80,120,.8),rgba(10,40,70,.6) 30%,transparent 70%);border-radius:50%;z-index:1;animation:eGlow 6s ease-in-out infinite alternate}
+@keyframes eGlow{0%{box-shadow:0 0 80px rgba(0,200,255,.15),inset 0 0 80px rgba(0,100,200,.2)}to{box-shadow:0 0 140px rgba(0,200,255,.25),inset 0 0 120px rgba(0,100,200,.3)}}
+.crack-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.35;z-index:3}
+.hero-c{position:relative;z-index:4}
+.hero-tag{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp .8s ease forwards .5s}
+.hero-tag::before{content:'';width:40px;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.hero-t{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(48px,8vw,110px);line-height:.88;letter-spacing:-2px;opacity:0;animation:fadeUp .8s ease forwards .7s}
+.hero-t .l1{display:block;color:var(--tp);text-shadow:0 0 40px rgba(0,245,255,.2)}
+.hero-t .l2{display:block;color:transparent;-webkit-text-stroke:1.5px var(--cyan);filter:drop-shadow(0 0 12px rgba(0,245,255,.5));position:relative}
+.hero-t .l2::after{content:'LUCY';position:absolute;left:2px;top:2px;color:transparent;-webkit-text-stroke:1px var(--pink);opacity:.4;animation:glS 4s infinite}
+@keyframes glS{0%,90%,100%{transform:translate(0);opacity:0}92%{transform:translate(-4px,2px);opacity:.6}94%{transform:translate(4px,-2px);opacity:.4}96%{transform:translate(-2px,0);opacity:.5}}
+.hero-div{width:80px;height:3px;background:linear-gradient(90deg,var(--pink),transparent);margin:24px 0;opacity:0;animation:fadeUp .8s ease forwards .9s}
+.hero-sub{font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--dim);letter-spacing:2px;max-width:400px;line-height:1.8;opacity:0;animation:fadeUp .8s ease forwards 1.1s}
+.hero-sub span{color:var(--yellow)}
+.scroll-h{position:absolute;bottom:30px;right:60px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:3px;writing-mode:vertical-rl;display:flex;align-items:center;gap:10px;animation:pOp 2s ease-in-out infinite;z-index:4}
+.scroll-h::after{content:'';width:1px;height:60px;background:linear-gradient(transparent,var(--cyan));box-shadow:0 0 6px var(--cyan);animation:sLine 2s ease-in-out infinite}
+@keyframes sLine{0%,100%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+@keyframes pOp{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* GLITCH BAR */
+.gb{position:relative;height:2px;background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow),var(--pink));background-size:300%;animation:gMov 4s linear infinite;overflow:visible}
+@keyframes gMov{0%{background-position:0%}to{background-position:300%}}
+.gb-t{position:absolute;top:8px;left:0;right:0;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--pink);letter-spacing:6px;text-transform:uppercase;white-space:nowrap;overflow:hidden;animation:mq 20s linear infinite;opacity:.5}
+@keyframes mq{0%{transform:translateX(100%)}to{transform:translateX(-100%)}}
+
+/* SEC LABEL */
+.sec-lbl{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:5px;text-transform:uppercase;margin-bottom:50px;display:flex;align-items:center;gap:16px}
+.sec-lbl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gbord),transparent)}
+.sec-n{color:var(--pink);font-size:14px}
+
+/* CHAR CARDS */
+.story-sec{padding:100px 40px}
+.sg{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2px;position:relative}
+.sg::before{content:'';position:absolute;left:48%;top:-20px;width:3px;height:calc(100% + 40px);background:linear-gradient(180deg,transparent,var(--cyan) 20%,var(--pink) 50%,var(--cyan) 80%,transparent);box-shadow:0 0 12px var(--cyan);transform:rotate(1.5deg);z-index:10;animation:cP 3s ease-in-out infinite}
+@keyframes cP{0%,100%{opacity:.6;box-shadow:0 0 8px var(--cyan)}50%{opacity:1;box-shadow:0 0 20px var(--cyan),0 0 40px rgba(0,245,255,.4)}}
+.cc{position:relative;background:var(--panel);padding:50px 44px;border:1px solid var(--gbord);overflow:hidden;transition:border-color .4s}
+.cc:hover{border-color:rgba(0,245,255,.4)}
+.cc::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 30px,rgba(0,245,255,.015) 30px,rgba(0,245,255,.015) 31px);pointer-events:none}
+.cc .fr{position:absolute;border:1px solid;pointer-events:none}
+.cc.dv .fr:nth-child(1){top:-1px;right:40px;width:80px;height:80px;border-color:rgba(255,0,144,.3);transform:rotate(15deg) translateY(-30px);background:rgba(255,0,144,.04)}
+.cc.dv .fr:nth-child(2){bottom:30px;right:-20px;width:60px;height:120px;border-color:rgba(0,245,255,.2);transform:rotate(-10deg);background:rgba(0,245,255,.03)}
+.cc.lc .fr:nth-child(1){top:20px;left:-10px;width:50px;height:90px;border-color:rgba(0,245,255,.25);transform:rotate(8deg);background:rgba(0,245,255,.04)}
+.cc.lc .fr:nth-child(2){bottom:-10px;right:60px;width:100px;height:50px;border-color:rgba(255,230,0,.2);transform:rotate(-5deg);background:rgba(255,230,0,.02)}
+.ci{font-family:'Orbitron',monospace;font-weight:900;font-size:120px;line-height:1;position:absolute;bottom:-20px;right:30px;opacity:.04;letter-spacing:-5px;pointer-events:none}
+.dv .ci{color:var(--pink)}.lc .ci{color:var(--cyan)}
+
+/* Char image slot */
+.cimg{position:relative;width:100%;aspect-ratio:16/9;margin-bottom:26px;overflow:hidden;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));background:rgba(0,0,0,.35);border:1px dashed rgba(0,245,255,.15)}
+.dv .cimg{border-color:rgba(255,0,144,.15)}
+.cimg img{width:100%;height:100%;object-fit:cover;display:none;transition:transform .5s}
+.cimg:hover img{transform:scale(1.04)}
+.cimg img.on{display:block}
+.cimg-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none;transition:opacity .3s}
+.cimg-ph .big{font-size:28px;opacity:.2}
+.cimg-ph span{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;text-align:center;padding:0 10px}
+.cimg::before,.cimg::after{content:'';position:absolute;width:14px;height:14px;z-index:2;border-style:solid;opacity:.4}
+.cimg::before{top:6px;left:6px;border-width:1px 0 0 1px;border-color:rgba(0,245,255,.6)}
+.cimg::after{bottom:6px;right:6px;border-width:0 1px 1px 0;border-color:rgba(0,245,255,.6)}
+.dv .cimg::before,.dv .cimg::after{border-color:rgba(255,0,144,.5)}
+
+.cbadge{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:4px;padding:4px 12px;border:1px solid;display:inline-block;margin-bottom:20px;text-transform:uppercase}
+.dv .cbadge{color:var(--pink);border-color:rgba(255,0,144,.4);background:rgba(255,0,144,.06)}
+.lc .cbadge{color:var(--cyan);border-color:rgba(0,245,255,.4);background:rgba(0,245,255,.06)}
+.cname{font-family:'Orbitron',monospace;font-weight:700;font-size:40px;letter-spacing:-1px;margin-bottom:4px;line-height:1}
+.dv .cname{color:var(--tp)}.lc .cname{color:transparent;-webkit-text-stroke:1px var(--tp)}
+.cjp{font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--dim);letter-spacing:3px;margin-bottom:26px;font-weight:300}
+.cdesc{font-family:'Rajdhani',sans-serif;font-size:16px;line-height:1.9;color:rgba(232,244,248,.75);border-left:2px solid;padding-left:20px;margin-bottom:26px}
+.dv .cdesc{border-color:rgba(255,0,144,.5)}.lc .cdesc{border-color:rgba(0,245,255,.5)}
+.cstats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.si{padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05)}
+.sl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);display:block;margin-bottom:3px;text-transform:uppercase}
+.sv{font-family:'Orbitron',monospace;font-size:13px;font-weight:700}
+.dv .sv{color:var(--pink)}.lc .sv{color:var(--cyan)}
+
+/* GALLERY */
+.gal-sec{padding:20px 40px 80px;max-width:1200px;margin:0 auto}
+.gg{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:3px}
+.gs{position:relative;background:var(--panel);border:1px solid rgba(255,255,255,.05);overflow:hidden}
+.gs:nth-child(1){grid-row:1/3}
+.gs img{width:100%;height:100%;object-fit:cover;display:none;transition:transform .5s}
+.gs img.on{display:block}
+.gs:hover img.on{transform:scale(1.04)}
+.gph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:16px;pointer-events:none}
+.gph .gn{font-family:'Orbitron',monospace;font-size:22px;color:rgba(0,245,255,.1);font-weight:900}
+.gph .gl{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--dim);text-transform:uppercase}
+.gs::after{content:'';position:absolute;top:-100%;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 12px var(--cyan);transition:top .4s;pointer-events:none;z-index:10}
+.gs:hover::after{top:50%}
+.gcap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(4,6,10,.9));padding:30px 14px 12px;z-index:6;opacity:0;transition:opacity .3s;pointer-events:none}
+.gs:hover .gcap{opacity:1}
+.gcap span{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase}
+
+/* QUOTE */
+.quote-sec{padding:80px 40px;position:relative;overflow:hidden}
+.q-inner{max-width:1200px;margin:0 auto;position:relative}
+.q-bg{position:absolute;font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(80px,12vw,180px);color:transparent;-webkit-text-stroke:1px rgba(0,245,255,.05);top:-30px;left:-20px;pointer-events:none;line-height:1;white-space:nowrap}
+.q-box{position:relative;padding:60px 70px;border:1px solid var(--gbord);background:linear-gradient(135deg,rgba(0,245,255,.03),transparent 50%);clip-path:polygon(0 0,calc(100% - 40px) 0,100% 40px,100% 100%,40px 100%,0 calc(100% - 40px))}
+.q-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan) 30%,transparent);box-shadow:0 0 20px var(--cyan)}
+.qm{font-family:'Orbitron',monospace;font-size:80px;color:var(--cyan);line-height:.6;opacity:.3;margin-bottom:20px;display:block}
+.qt{font-family:'Rajdhani',sans-serif;font-size:clamp(22px,3vw,34px);font-weight:600;line-height:1.5;color:var(--tp);margin-bottom:30px;letter-spacing:.5px}
+.qt em{color:var(--yellow);font-style:normal;text-shadow:0 0 20px rgba(255,230,0,.4)}
+.qa{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--pink);letter-spacing:4px;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.qa::before{content:'';width:30px;height:1px;background:var(--pink);box-shadow:0 0 6px var(--pink)}
+
+/* TIMELINE */
+.tl-sec{padding:80px 40px 120px;max-width:1200px;margin:0 auto}
+.tl{position:relative;padding-left:60px}
+.tl::before{content:'';position:absolute;left:16px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--cyan),var(--pink) 50%,transparent);box-shadow:0 0 10px var(--cyan)}
+.ti{position:relative;margin-bottom:60px;opacity:0;transform:translateX(-20px);animation:slIn .6s ease forwards}
+.ti:nth-child(1){animation-delay:.1s}.ti:nth-child(2){animation-delay:.25s}.ti:nth-child(3){animation-delay:.4s}.ti:nth-child(4){animation-delay:.55s}.ti:nth-child(5){animation-delay:.7s}
+@keyframes slIn{to{opacity:1;transform:translateX(0)}}
+.td{position:absolute;left:-52px;top:6px;width:12px;height:12px;border:1px solid var(--cyan);background:var(--void);transform:rotate(45deg);box-shadow:0 0 12px var(--cyan),0 0 4px var(--cyan) inset}
+.td.p{border-color:var(--pink);box-shadow:0 0 12px var(--pink),0 0 4px var(--pink) inset}
+.td.g{border-color:var(--yellow);box-shadow:0 0 12px var(--yellow),0 0 4px var(--yellow) inset}
+.tep{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:3px;margin-bottom:6px;text-transform:uppercase}
+.ttt{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;color:var(--tp);margin-bottom:12px;letter-spacing:-.5px}
+.tb{font-family:'Rajdhani',sans-serif;font-size:16px;line-height:1.8;color:rgba(232,244,248,.65);max-width:680px}
+.tb strong{color:var(--yellow);font-weight:600}
+
+/* FRAGMENTS */
+.fr-sec{padding:80px 40px;background:rgba(0,245,255,.02);border-top:1px solid var(--gbord);border-bottom:1px solid var(--gbord);position:relative;overflow:hidden}
+.fr-sec::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan) 30%,var(--pink) 70%,transparent);box-shadow:0 0 20px rgba(0,245,255,.3)}
+.fgrid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.fc{padding:40px 36px;background:var(--panel);border:1px solid rgba(255,255,255,.04);position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+.fc:hover{transform:translateY(-3px);border-color:rgba(0,245,255,.2)}
+.fc::after{content:'';position:absolute;top:0;right:0;border-left:30px solid transparent;border-top:30px solid rgba(0,245,255,.08)}
+.fi{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;margin-bottom:20px;display:block}
+.fc:nth-child(1) .fi{color:var(--cyan)}.fc:nth-child(2) .fi{color:var(--pink)}.fc:nth-child(3) .fi{color:var(--yellow)}
+.ftt{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;letter-spacing:1px;color:var(--tp);margin-bottom:14px;text-transform:uppercase}
+.ftx{font-family:'Rajdhani',sans-serif;font-size:15px;line-height:1.85;color:rgba(232,244,248,.6)}
+
+/* ENDING */
+.end-sec{padding:140px 40px;text-align:center;position:relative;overflow:hidden}
+.end-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 50%,rgba(0,245,255,.06),transparent 70%);pointer-events:none}
+.end-sup{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:6px;color:var(--dim);text-transform:uppercase;margin-bottom:40px}
+.end-t{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(40px,8vw,100px);line-height:.9;margin-bottom:40px;display:inline-block}
+.end-t .w1{display:block;color:var(--tp);animation:gTx 5s infinite}
+.end-t .w2{display:block;color:transparent;-webkit-text-stroke:1px var(--cyan);filter:drop-shadow(0 0 15px rgba(0,245,255,.6))}
+@keyframes gTx{0%,88%,100%{clip-path:none;transform:none}90%{clip-path:inset(20% 0 60% 0);transform:translate(-5px,0)}92%{clip-path:inset(50% 0 20% 0);transform:translate(5px,0)}94%{clip-path:none;transform:none}}
+.end-q{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:400;color:rgba(232,244,248,.5);max-width:600px;margin:0 auto 60px;line-height:2;letter-spacing:.5px}
+.end-q em{color:var(--yellow);font-style:normal}
+.dl{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:3px;display:flex;justify-content:center;align-items:center;gap:20px;opacity:.4}
+.dl::before,.dl::after{content:'';width:60px;height:1px;background:var(--dim)}
+
+/* FOOTER */
+footer{padding:40px;border-top:1px solid var(--gbord);display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+.fl{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--cyan);letter-spacing:2px}
+.fr{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;text-align:right;line-height:2}
+
+/* STATUS BAR */
+.stbar{position:fixed;bottom:0;left:0;right:0;padding:8px 60px;background:rgba(4,6,10,.9);border-top:1px solid var(--gbord);display:flex;justify-content:space-between;align-items:center;z-index:100;backdrop-filter:blur(4px)}
+.stbar-l,.stbar-r{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:2px;display:flex;align-items:center;gap:20px}
+.stdot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:blk 1.5s ease-in-out infinite}
+@keyframes blk{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* PARTICLES */
+.pts{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.pt{position:absolute;width:2px;height:2px;background:var(--cyan);border-radius:50%;box-shadow:0 0 4px var(--cyan);animation:fUp linear infinite;opacity:0}
+.pt:nth-child(even){background:var(--pink);box-shadow:0 0 4px var(--pink)}
+.pt:nth-child(3n){background:var(--yellow);box-shadow:0 0 4px var(--yellow);width:1px;height:1px}
+@keyframes fUp{0%{opacity:0;transform:translateY(0)}10%{opacity:.8}90%{opacity:.4}100%{opacity:0;transform:translateY(-100vh) translateX(20px)}}
+
+/* ═══ LINK PANEL ═══ */
+#lpBtn{
+  position:fixed;top:50%;right:0;transform:translateY(-50%);
+  z-index:600;writing-mode:vertical-rl;
+  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;
+  padding:16px 9px;
+  background:rgba(4,6,10,.95);
+  border:1px solid rgba(0,245,255,.4);border-right:none;
+  color:var(--cyan);cursor:pointer;text-transform:uppercase;
+  box-shadow:-4px 0 20px rgba(0,245,255,.15);
+  transition:background .3s,box-shadow .3s;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%);
+}
+#lpBtn:hover{background:rgba(0,245,255,.08);box-shadow:-6px 0 30px rgba(0,245,255,.3)}
+
+#lp{
+  position:fixed;top:50%;right:0;transform:translateY(-50%) translateX(100%);
+  z-index:601;width:350px;
+  background:rgba(4,6,10,.98);
+  border:1px solid var(--gbord);
+  backdrop-filter:blur(20px);
+  box-shadow:0 0 60px rgba(0,0,0,.8),-4px 0 30px rgba(0,245,255,.1);
+  transition:transform .45s cubic-bezier(.23,1,.32,1);
+  max-height:88vh;overflow-y:auto;
+}
+#lp.open{transform:translateY(-50%) translateX(0)}
+#lp::-webkit-scrollbar{width:2px}
+#lp::-webkit-scrollbar-thumb{background:rgba(0,245,255,.2)}
+
+.lph{padding:14px 18px;border-bottom:1px solid rgba(0,245,255,.1);background:rgba(0,245,255,.04);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:2}
+.lph-t{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:2px}
+.lph-x{background:none;border:none;color:var(--dim);cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:13px;transition:color .2s}
+.lph-x:hover{color:var(--pink)}
+.lpb{padding:18px}
+.lps{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:4px;color:var(--dim);text-transform:uppercase;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.lps:first-child{margin-top:0}
+.lps::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+.lpr{margin-bottom:12px}
+.lplab{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:5px}
+.lpiw{display:flex;gap:6px}
+.lpi{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--tp);font-family:'Share Tech Mono',monospace;font-size:9px;padding:7px 10px;letter-spacing:1px;outline:none;transition:border-color .3s;min-width:0}
+.lpi:focus{border-color:rgba(0,245,255,.5);background:rgba(0,245,255,.03)}
+.lpi::placeholder{color:rgba(90,122,138,.45)}
+.lpbtn{background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:9px;padding:0 12px;cursor:pointer;letter-spacing:1px;white-space:nowrap;transition:background .2s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+.lpbtn:hover{background:rgba(0,245,255,.2);box-shadow:0 0 10px rgba(0,245,255,.2)}
+.lpbtn.pk{background:rgba(255,0,144,.1);border-color:rgba(255,0,144,.3);color:var(--pink)}
+.lpbtn.pk:hover{background:rgba(255,0,144,.2)}
+.lpst{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;margin-top:4px;min-height:12px;color:rgba(0,245,255,.55)}
+.lpst.er{color:rgba(255,0,144,.8)}
+.lp-tip{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(90,122,138,.55);line-height:1.9;margin-top:6px;letter-spacing:1px}
+
+/* ═══ MUSIC PLAYER ═══ */
+.mp{position:fixed;bottom:42px;right:20px;width:305px;background:rgba(4,6,10,.97);border:1px solid var(--gbord);backdrop-filter:blur(20px);z-index:500;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));box-shadow:0 0 40px rgba(0,0,0,.6);transition:transform .4s cubic-bezier(.23,1,.32,1),opacity .4s}
+.mp.hid{transform:translateY(calc(100% + 52px));opacity:0;pointer-events:none}
+.mph{padding:10px 16px;border-bottom:1px solid rgba(0,245,255,.1);display:flex;align-items:center;justify-content:space-between;background:rgba(0,245,255,.04)}
+.mph-l{display:flex;align-items:center;gap:8px}
+.mpdot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:blk 1.5s infinite}
+.mpdot.off{background:var(--pink);box-shadow:0 0 6px var(--pink)}
+.mplbl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase}
+.mpx{background:none;border:none;color:var(--dim);cursor:pointer;font-size:13px;font-family:'Share Tech Mono',monospace;transition:color .2s}
+.mpx:hover{color:var(--pink)}
+.mpbody{padding:14px 16px}
+.mpuw{display:flex;gap:6px;margin-bottom:12px}
+.mpui{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--tp);font-family:'Share Tech Mono',monospace;font-size:9px;padding:7px 10px;letter-spacing:1px;outline:none;transition:border-color .3s;min-width:0}
+.mpui:focus{border-color:rgba(0,245,255,.5)}
+.mpui::placeholder{color:rgba(90,122,138,.45)}
+.mplb{background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:9px;padding:0 10px;cursor:pointer;letter-spacing:1px;transition:background .2s;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.mplb:hover{background:rgba(0,245,255,.2)}
+.mpti{display:flex;align-items:center;gap:10px;margin-bottom:10px;min-height:28px}
+.mpbrs{display:flex;align-items:flex-end;gap:2px;height:18px;flex-shrink:0}
+.mpb{width:3px;background:var(--cyan);box-shadow:0 0 4px var(--cyan);border-radius:1px;animation:bD .8s ease-in-out infinite alternate;transform-origin:bottom}
+.mpb:nth-child(1){height:40%;animation-delay:0s}.mpb:nth-child(2){height:80%;animation-delay:.15s}.mpb:nth-child(3){height:60%;animation-delay:.3s}.mpb:nth-child(4){height:100%;animation-delay:.1s}.mpb:nth-child(5){height:50%;animation-delay:.25s}
+.mpb.st{animation-play-state:paused;height:20%!important}
+@keyframes bD{0%{transform:scaleY(.3)}100%{transform:scaleY(1)}}
+.mptn{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--tp);letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.mptn.em{color:var(--dim);font-size:8px}
+.mppt{width:100%;height:2px;background:rgba(255,255,255,.08);cursor:pointer;margin-bottom:6px;position:relative}
+.mppf{height:100%;background:linear-gradient(90deg,var(--cyan),var(--pink));box-shadow:0 0 6px var(--cyan);width:0%;transition:width .1s linear;position:relative}
+.mppf::after{content:'';position:absolute;right:-4px;top:-3px;width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 8px var(--cyan)}
+.mptm{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--dim);letter-spacing:1px;margin-bottom:10px}
+.mpc{display:flex;align-items:center;gap:8px}
+.mcc{background:none;border:1px solid rgba(255,255,255,.08);color:var(--tp);cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:11px;transition:border-color .2s,color .2s;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.mcc:hover{border-color:var(--cyan);color:var(--cyan)}
+.mcc.pl{width:38px;height:38px;border-color:rgba(0,245,255,.4);color:var(--cyan);font-size:13px}
+.mcc.pl:hover{background:rgba(0,245,255,.08);box-shadow:0 0 16px rgba(0,245,255,.25)}
+.mpvw{display:flex;align-items:center;gap:6px;flex:1}
+.mpvi{font-size:10px;color:var(--dim)}
+input[type=range].mpvr{flex:1;-webkit-appearance:none;height:2px;background:rgba(255,255,255,.1);outline:none;cursor:pointer}
+input[type=range].mpvr::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;background:var(--cyan);box-shadow:0 0 6px var(--cyan);cursor:pointer;clip-path:polygon(50% 0%,100% 50%,50% 100%,0 50%)}
+#mpFab{position:fixed;bottom:50px;right:20px;z-index:501;background:rgba(4,6,10,.95);border:1px solid rgba(0,245,255,.4);color:var(--cyan);width:42px;height:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));box-shadow:0 0 16px rgba(0,245,255,.2);animation:pOp 3s ease-in-out infinite;transition:box-shadow .3s}
+#mpFab:hover{box-shadow:0 0 28px rgba(0,245,255,.5)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:16px 24px}.nav-links{display:none}
+  #banner{padding:0 0 60px 24px}
+  .story-sec,.quote-sec{padding:60px 24px}
+  .sg{grid-template-columns:1fr}.sg::before{display:none}
+  .fgrid{grid-template-columns:1fr}
+  .gg{grid-template-columns:1fr 1fr}.gs:nth-child(1){grid-row:auto}
+  .tl-sec{padding:60px 24px}.end-sec{padding:100px 24px}
+  footer{padding:30px 24px;flex-direction:column;gap:20px;text-align:center}
+  .stbar{padding:8px 24px}.cc{padding:36px 24px}.q-box{padding:40px 28px}
+  #lp{width:95vw;right:0;top:auto;bottom:0;transform:translateX(105%);max-height:80vh;clip-path:none}
+  #lp.open{transform:translateX(0)}
+  #lpBtn{top:auto;bottom:54px;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="pts" id="pts"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">EDGERUNNERS</div>
+  <ul class="nav-links">
+    <li><a href="#characters">Characters</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#ending">Ending</a></li>
+  </ul>
+</nav>
+
+<!-- BANNER -->
+<section id="banner">
+  <img id="bannerImg" alt="Banner">
+  <div class="bbg"></div>
+  <div class="earth" id="earth"></div>
+  <div class="bov"></div>
+  <svg class="crack-svg" viewBox="0 0 1200 700" preserveAspectRatio="none">
+    <defs><filter id="gw"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+    <polyline points="600,0 580,80 620,140 550,200 600,280 560,350 610,420 570,500 600,700" fill="none" stroke="rgba(0,245,255,0.6)" stroke-width="1" filter="url(#gw)"/>
+    <polyline points="600,140 680,180 720,160 780,220" fill="none" stroke="rgba(0,245,255,0.3)" stroke-width="0.5"/>
+    <polyline points="580,280 500,300 460,350 520,400" fill="none" stroke="rgba(255,0,144,0.35)" stroke-width="0.5"/>
+    <polyline points="560,200 480,240 430,200" fill="none" stroke="rgba(255,230,0,0.2)" stroke-width="0.5"/>
+    <line x1="700" y1="100" x2="780" y2="120" stroke="rgba(0,245,255,0.2)" stroke-width="0.5"/>
+    <line x1="450" y1="350" x2="400" y2="380" stroke="rgba(255,0,144,0.2)" stroke-width="0.5"/>
+  </svg>
+  <div class="hero-c">
+    <div class="hero-tag"><span>NIGHT CITY // 2076</span><span style="color:rgba(90,122,138,.6)">— STUDIO TRIGGER × CD PROJEKT RED</span></div>
+    <h1 class="hero-t"><span class="l1">DAVID</span><span class="l2">LUCY</span></h1>
+    <div class="hero-div"></div>
+    <p class="hero-sub">Một câu chuyện về <span>tham vọng</span>, tình yêu<br>và cái giá của việc chạy quá nhanh<br>trong một thành phố không bao giờ ngủ.</p>
+  </div>
+  <div class="scroll-h">SCROLL</div>
+</section>
+
+<div class="gb"><div class="gb-t">CYBERPUNK: EDGERUNNERS &nbsp;///&nbsp; NIGHT CITY &nbsp;///&nbsp; STUDIO TRIGGER &nbsp;///&nbsp; DAVID MARTINEZ &nbsp;///&nbsp; LUCY &nbsp;///&nbsp; 2076 &nbsp;///&nbsp; NEURAL LINK &nbsp;///&nbsp; MILITECH &nbsp;///&nbsp; ARASAKA &nbsp;///&nbsp;</div></div>
+
+<!-- CHARACTERS -->
+<section class="story-sec" id="characters">
+  <div class="sec-lbl" style="max-width:1200px;margin-left:auto;margin-right:auto"><span class="sec-n">01</span><span>EDGERUNNERS</span></div>
+  <div class="sg">
+    <!-- DAVID -->
+    <div class="cc dv">
+      <div class="fr"></div><div class="fr"></div><span class="ci">D</span>
+      <div class="cimg" id="cimg-dv">
+        <img id="img-dv" src="" alt="David Martinez">
+        <div class="cimg-ph" id="ph-dv"><span class="big">⬡</span><span>Dán link ảnh David qua panel →</span></div>
+      </div>
+      <div class="cbadge">Protagonist // Edgerunner</div>
+      <h2 class="cname">DAVID</h2>
+      <div class="cname" style="font-size:26px;margin-bottom:4px;color:rgba(232,244,248,.4)">MARTINEZ</div>
+      <p class="cjp">デイヴィッド・マルティネス</p>
+      <p class="cdesc">Một cậu trai xuất thân từ khu ổ chuột Santo Domingo, Night City. Sau cái chết của mẹ, David tình cờ lắp bộ cyberware Sandevistan quân đội vào cơ thể — thứ mà hầu hết người bình thường không thể chịu đựng nổi. Từ đó, con đường dẫn vào thế giới ngầm tối tăm của những Edgerunner.</p>
+      <div class="cstats">
+        <div class="si"><span class="sl">Cyberware</span><span class="sv">Sandevistan</span></div>
+        <div class="si"><span class="sl">Role</span><span class="sv">Leader</span></div>
+        <div class="si"><span class="sl">Status</span><span class="sv" style="color:var(--orange)">Deceased</span></div>
+        <div class="si"><span class="sl">Origin</span><span class="sv">S.Domingo</span></div>
+      </div>
+    </div>
+    <!-- LUCY -->
+    <div class="cc lc">
+      <div class="fr"></div><div class="fr"></div><span class="ci">L</span>
+      <div class="cimg" id="cimg-lc">
+        <img id="img-lc" src="" alt="Lucy">
+        <div class="cimg-ph" id="ph-lc"><span class="big">◈</span><span>Dán link ảnh Lucy qua panel →</span></div>
+      </div>
+      <div class="cbadge">Netrunner // Free Soul</div>
+      <h2 class="cname">LUCY</h2>
+      <div class="cname" style="font-size:26px;margin-bottom:4px;color:rgba(232,244,248,.4)">&nbsp;</div>
+      <p class="cjp">ルーシー</p>
+      <p class="cdesc">Một Netrunner bí ẩn với mái tóc bạc và đôi mắt chứa đựng cả vũ trụ. Từng là sản phẩm đào tạo bởi Arasaka để khai thác tâm trí người khác, Lucy chỉ có một ước mơ — đặt chân lên Mặt Trăng và thoát khỏi mọi thứ thuộc về Night City mãi mãi.</p>
+      <div class="cstats">
+        <div class="si"><span class="sl">Cyberware</span><span class="sv">Neural Link</span></div>
+        <div class="si"><span class="sl">Role</span><span class="sv">Netrunner</span></div>
+        <div class="si"><span class="sl">Status</span><span class="sv" style="color:var(--cyan)">Alive</span></div>
+        <div class="si"><span class="sl">Dream</span><span class="sv">The Moon</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gal-sec" id="gallery">
+  <div class="sec-lbl" style="max-width:100%;margin-bottom:30px"><span class="sec-n" style="color:var(--cyan)">✦</span><span>GALLERY — DAVID × LUCY</span></div>
+  <div class="gg">
+    <div class="gs" id="gs1" style="aspect-ratio:3/4"><img id="gi1" src="" alt=""><div class="gph" id="gph1"><div class="gn">01</div><div class="gl">Ảnh chính · David &amp; Lucy</div></div><div class="gcap"><span>DAVID × LUCY // NIGHT CITY</span></div></div>
+    <div class="gs" id="gs2" style="aspect-ratio:4/3"><img id="gi2" src="" alt=""><div class="gph" id="gph2"><div class="gn">02</div><div class="gl">Ảnh David</div></div><div class="gcap"><span>DAVID // EDGERUNNER</span></div></div>
+    <div class="gs" id="gs3" style="aspect-ratio:4/3"><img id="gi3" src="" alt=""><div class="gph" id="gph3"><div class="gn">03</div><div class="gl">Ảnh Lucy</div></div><div class="gcap"><span>LUCY // NETRUNNER</span></div></div>
+    <div class="gs" id="gs4" style="aspect-ratio:4/3"><img id="gi4" src="" alt=""><div class="gph" id="gph4"><div class="gn">04</div><div class="gl">Night City</div></div><div class="gcap"><span>NIGHT CITY // 2076</span></div></div>
+    <div class="gs" id="gs5" style="aspect-ratio:4/3"><img id="gi5" src="" alt=""><div class="gph" id="gph5"><div class="gn">05</div><div class="gl">Above the Moon</div></div><div class="gcap"><span>ABOVE THE MOON</span></div></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-sec">
+  <div class="q-inner"><div class="q-bg">DREAM</div>
+    <div class="q-box">
+      <span class="qm">"</span>
+      <p class="qt">Anh muốn đưa em lên <em>Mặt Trăng</em>.<br>Không phải vì Night City không đủ đẹp,<br>mà vì <em>em</em> xứng đáng được nhìn thấy<br>những thứ vượt ra ngoài tất cả những thứ này.</p>
+      <div class="qa">David Martinez</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="tl-sec" id="story">
+  <div class="sec-lbl" style="max-width:100%;margin-bottom:50px"><span class="sec-n">02</span><span>ARC STORY</span></div>
+  <div class="tl">
+    <div class="ti"><div class="td"></div><div class="tep">Episode 01 — Khai Đầu</div><h3 class="ttt">KHÔNG CÒN GÌ ĐỂ MẤT</h3><p class="tb">David Martinez — học sinh trường Arasaka Academy, sống bằng học bổng của mẹ. Một vụ tai nạn cướp đi người thân duy nhất. Với bộ <strong>Sandevistan quân đội</strong> lắp vào cơ thể và trái tim tan vỡ, David bước vào thế giới tội phạm không phải vì muốn — mà vì không còn lựa chọn nào khác.</p></div>
+    <div class="ti"><div class="td p"></div><div class="tep">Episode 03 — Gặp Gỡ</div><h3 class="ttt">CÔ GÁI VỚI MÁI TÓC BẠC</h3><p class="tb">Lucy — Netrunner lạnh lùng, sắc sảo, và chứa đựng bí mật đen tối về quá khứ Arasaka. Giữa Night City hỗn loạn, hai người tìm thấy nhau. Lucy nhìn thấy ở David thứ mà cô lâu nay tìm kiếm: một người <strong>dám mơ mà không sợ</strong>.</p></div>
+    <div class="ti"><div class="td"></div><div class="tep">Episode 05–08 — Đỉnh Cao</div><h3 class="ttt">EDGERUNNER</h3><p class="tb">David dần trở thành leader của đội Edgerunner — liều lĩnh hơn, mạnh hơn, nguy hiểm hơn sau mỗi nhiệm vụ. Nhưng <strong>Cyberpsychosis</strong> đang gõ cửa — giới hạn sinh học của con người không được tạo ra để chịu đựng nhiều cyberware đến vậy.</p></div>
+    <div class="ti"><div class="td p"></div><div class="tep">Episode 09 — Vỡ Vụn</div><h3 class="ttt">GIÁ CỦA TỰ DO</h3><p class="tb">Arasaka truy lùng Lucy. Đội của David tan rã. Những người thân thiết lần lượt ra đi. David, đứng trên ranh giới của sự điên loạn, chọn tiếp tục — vì <strong>lời hứa đưa Lucy lên Mặt Trăng</strong> vẫn còn đó.</p></div>
+    <div class="ti"><div class="td g"></div><div class="tep">Episode 10 — Kết Thúc</div><h3 class="ttt">ABOVE THE SKY</h3><p class="tb">Trên quỹ đạo, trong một cuộc chiến không cân sức, David tiêu hao mọi thứ còn lại để bảo vệ Lucy. Anh đến điểm <strong>vượt ra ngoài ranh giới người và máy</strong> — rồi tan vào khoảng không tối. Lucy nhìn Mặt Trăng một mình, nhưng không thực sự một mình.</p></div>
+  </div>
+</section>
+
+<!-- FRAGMENTS -->
+<section class="fr-sec">
+  <div class="sec-lbl" style="max-width:1200px;margin:0 auto 50px"><span class="sec-n">03</span><span>FRAGMENTS OF NIGHT CITY</span></div>
+  <div class="fgrid">
+    <div class="fc"><span class="fi">◈</span><h3 class="ftt">Cyberpsychosis</h3><p class="ftx">Khi con người lắp quá nhiều cyberware, ranh giới giữa nhân tính và máy móc bắt đầu mờ dần. David nhận ra điều này không qua lý thuyết — mà qua từng vết nứt trong tâm trí mình sau mỗi lần kích hoạt Sandevistan.</p></div>
+    <div class="fc"><span class="fi">◆</span><h3 class="ftt">Night City Dreams</h3><p class="ftx">Night City không giết người bằng đạn — nó giết bằng những giấc mơ quá lớn. David muốn trở thành huyền thoại. Lucy muốn lên Mặt Trăng. Night City luôn sẵn sàng cho bạn tất cả, rồi lấy lại mọi thứ.</p></div>
+    <div class="fc"><span class="fi">◇</span><h3 class="ftt">Love in the Ruins</h3><p class="ftx">Tình yêu giữa David và Lucy không phải loại êm đềm — đó là thứ tình yêu hình thành giữa đống đổ nát, đo bằng nhiệm vụ nguy hiểm và những đêm trốn chạy. Dữ dội, vỡ vụn, và không thể nào quên.</p></div>
+  </div>
+</section>
+
+<!-- ENDING -->
+<section class="end-sec" id="ending">
+  <p class="end-sup">— Fin —</p>
+  <h2 class="end-t"><span class="w1">ABOVE</span><span class="w2">THE MOON</span></h2>
+  <p class="end-q">Anh đã đưa em lên Mặt Trăng,<br>theo cách mà chỉ <em>David Martinez</em> mới có thể làm.<br>Không phải bằng con tàu — mà bằng chính cuộc đời anh.</p>
+  <div class="dl">EDGERUNNERS 2022 // STUDIO TRIGGER × CD PROJEKT RED // NETFLIX</div>
+</section>
+
+<footer>
+  <div class="fl">EDGE // BLOG</div>
+  <div class="fr"><span>CYBERPUNK: EDGERUNNERS</span><br><span style="color:rgba(90,122,138,.4)">STUDIO TRIGGER × CD PROJEKT RED</span></div>
+</footer>
+
+<div class="stbar">
+  <div class="stbar-l"><span class="stdot"></span><span>SYS_ONLINE</span><span style="opacity:.4">|</span><span>NIGHT_CITY_NET v4.2</span></div>
+  <div class="stbar-r"><span>LAT: 37.24° N</span><span style="opacity:.4">|</span><span id="dateD">2076.04.02</span></div>
+</div>
+
+<!-- ═══ LINK PANEL ═══ -->
+<button id="lpBtn" onclick="toggleLP()">⚙ LINK PANEL</button>
+
+<div id="lp">
+  <div class="lph">
+    <span class="lph-t">// LINK MANAGER</span>
+    <button class="lph-x" onclick="toggleLP()">✕ ĐÓNG</button>
+  </div>
+  <div class="lpb">
+
+    <div class="lps">🖼 Banner</div>
+    <div class="lpr">
+      <span class="lplab">Link ảnh banner (hero background)</span>
+      <div class="lpiw"><input class="lpi" id="i-banner" placeholder="https://external-preview.redd.it/qmhD3Jon3de3T2N9vhUvkpPeWDzM5BikfC6GDAaQsUY.png?format=pjpg&auto=webp&s=2afe5571d64011f2b17753742d7b4ba37209ce71" type="url"><button class="lpbtn" onclick="applyLnk('banner')">ÁP DỤNG</button></div>
+      <div class="lpst" id="s-banner"></div>
+    </div>
+
+    <div class="lps">👤 Nhân vật</div>
+    <div class="lpr">
+      <span class="lplab">Ảnh David Martinez</span>
+      <div class="lpiw"><input class="lpi" id="i-dv" placeholder="https://..." type="url"><button class="lpbtn pk" onclick="applyLnk('dv')">ÁP DỤNG</button></div>
+      <div class="lpst" id="s-dv"></div>
+    </div>
+    <div class="lpr">
+      <span class="lplab">Ảnh Lucy</span>
+      <div class="lpiw"><input class="lpi" id="i-lc" placeholder="https://..." type="url"><button class="lpbtn" onclick="applyLnk('lc')">ÁP DỤNG</button></div>
+      <div class="lpst" id="s-lc"></div>
+    </div>
+
+    <div class="lps">🗂 Gallery (5 ô)</div>
+    <div class="lpr"><span class="lplab">Gallery 01 — Ảnh chính (David &amp; Lucy)</span><div class="lpiw"><input class="lpi" id="i-g1" placeholder="https://..." type="url"><button class="lpbtn" onclick="applyLnk('g1')">ÁP DỤNG</button></div><div class="lpst" id="s-g1"></div></div>
+    <div class="lpr"><span class="lplab">Gallery 02 — David</span><div class="lpiw"><input class="lpi" id="i-g2" placeholder="https://..." type="url"><button class="lpbtn" onclick="applyLnk('g2')">ÁP DỤNG</button></div><div class="lpst" id="s-g2"></div></div>
+    <div class="lpr"><span class="lplab">Gallery 03 — Lucy</span><div class="lpiw"><input class="lpi" id="i-g3" placeholder="https://..." type="url"><button class="lpbtn" onclick="applyLnk('g3')">ÁP DỤNG</button></div><div class="lpst" id="s-g3"></div></div>
+    <div class="lpr"><span class="lplab">Gallery 04</span><div class="lpiw"><input class="lpi" id="i-g4" placeholder="https://..." type="url"><button class="lpbtn" onclick="applyLnk('g4')">ÁP DỤNG</button></div><div class="lpst" id="s-g4"></div></div>
+    <div class="lpr"><span class="lplab">Gallery 05</span><div class="lpiw"><input class="lpi" id="i-g5" placeholder="https://..." type="url"><button class="lpbtn" onclick="applyLnk('g5')">ÁP DỤNG</button></div><div class="lpst" id="s-g5"></div></div>
+
+    <div class="lps">🎵 Nhạc nền</div>
+    <div class="lpr">
+      <span class="lplab">Link file nhạc trực tiếp</span>
+      <div class="lpiw"><input class="lpi" id="i-music" placeholder="https://...track.mp3" type="url"><button class="lpbtn" onclick="applyLnk('music')">LOAD</button></div>
+      <div class="lpst" id="s-music"></div>
+      <div class="lp-tip">💡 Cần link file nhạc trực tiếp (.mp3/.ogg).<br>Gợi ý: GitHub raw, Dropbox direct link, CDN.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MUSIC PLAYER -->
+<audio id="aud" loop></audio>
+<button id="mpFab" onclick="toggleMP()">♪</button>
+
+<div class="mp hid" id="mpWrap">
+  <div class="mph"><div class="mph-l"><div class="mpdot" id="mpdot"></div><span class="mplbl">Audio // Night City</span></div><button class="mpx" onclick="toggleMP()">✕</button></div>
+  <div class="mpbody">
+    <div class="mpuw">
+      <input class="mpui" id="mpUrl" placeholder="Dán link nhạc .mp3 vào đây..." type="url">
+      <button class="mplb" onclick="mpLoad()">LOAD</button>
+    </div>
+    <div class="mpti">
+      <div class="mpbrs"><div class="mpb st"></div><div class="mpb st"></div><div class="mpb st"></div><div class="mpb st"></div><div class="mpb st"></div></div>
+      <span class="mptn em" id="mpName">// Chưa có bài nhạc</span>
+    </div>
+    <div class="mppt" onclick="mpSeek(event)"><div class="mppf" id="mpFill"></div></div>
+    <div class="mptm"><span id="mpCur">0:00</span><span id="mpTot">0:00</span></div>
+    <div class="mpc">
+      <button class="mcc" onclick="mpRestart()">⟵</button>
+      <button class="mcc pl" id="mpPlay" onclick="mpToggle()">▶</button>
+      <button class="mcc" id="mpLp" onclick="mpLoop()" style="font-size:9px">↺</button>
+      <div class="mpvw"><span class="mpvi">♪</span><input type="range" class="mpvr" min="0" max="1" step="0.01" value="0.7" oninput="mpVol(this.value)"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Particles
+const pc=document.getElementById('pts');
+for(let i=0;i<30;i++){const p=document.createElement('div');p.className='pt';p.style.cssText=`left:${Math.random()*100}%;bottom:${Math.random()*20}%;animation-duration:${8+Math.random()*15}s;animation-delay:${Math.random()*10}s;opacity:0`;pc.appendChild(p);}
+
+// Timeline
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.style.animationPlayState='running'}),{threshold:.1});
+document.querySelectorAll('.ti').forEach(el=>{el.style.animationPlayState='paused';obs.observe(el);});
+
+// Date
+const nd=new Date();document.getElementById('dateD').textContent=`${nd.getFullYear()}.${String(nd.getMonth()+1).padStart(2,'0')}.${String(nd.getDate()).padStart(2,'0')}`;
+
+// Glitch flash
+setInterval(()=>{const b=document.getElementById('banner');b.style.filter='brightness(1.06) saturate(1.2)';setTimeout(()=>b.style.filter='',65);},5500+Math.random()*4000);
+
+// ═══ LINK PANEL ═══
+let lpOpen=false;
+function toggleLP(){lpOpen=!lpOpen;document.getElementById('lp').classList.toggle('open',lpOpen);document.getElementById('lpBtn').style.opacity=lpOpen?.4:1;}
+
+function setSt(id,msg,err=false){const el=document.getElementById('s-'+id);if(!el)return;el.textContent=msg;el.className='lpst'+(err?' er':'');if(msg)setTimeout(()=>el.textContent='',3000);}
+
+function applyLnk(key){
+  const url=(document.getElementById('i-'+key)||{value:''}).value.trim();
+  if(!url){setSt(key,'⚠ Chưa nhập link',true);return;}
+
+  if(key==='banner'){
+    const img=document.getElementById('bannerImg');
+    img.onload=()=>{img.classList.add('on');document.getElementById('earth').style.display='none';setSt('banner','✓ Banner đã áp dụng');};
+    img.onerror=()=>setSt('banner','✕ Link ảnh không tải được',true);
+    img.src=url;
+  }
+  else if(key==='dv'||key==='lc'){
+    const img=document.getElementById('img-'+key);
+    const ph=document.getElementById('ph-'+key);
+    img.onload=()=>{img.classList.add('on');if(ph)ph.style.display='none';setSt(key,'✓ Ảnh đã áp dụng');};
+    img.onerror=()=>setSt(key,'✕ Link ảnh không tải được',true);
+    img.src=url;
+  }
+  else if(key.startsWith('g')){
+    const idx=key[1];
+    const img=document.getElementById('gi'+idx);
+    const ph=document.getElementById('gph'+idx);
+    img.onload=()=>{img.classList.add('on');if(ph)ph.style.display='none';setSt(key,'✓ Ảnh đã áp dụng');};
+    img.onerror=()=>setSt(key,'✕ Link ảnh không tải được',true);
+    img.src=url;
+  }
+  else if(key==='music'){
+    const aud=document.getElementById('aud');
+    aud.src=url;aud.load();
+    const name=url.split('/').pop().replace(/\?.*$/,'').replace(/\.[^.]+$/,'')||'Track';
+    document.getElementById('mpName').textContent=name;
+    document.getElementById('mpName').classList.remove('em');
+    document.getElementById('mpUrl').value=url;
+    setSt('music','✓ Nhạc đã tải — nhấn ▶ để phát');
+    if(document.getElementById('mpWrap').classList.contains('hid'))toggleMP();
+  }
+}
+
+// Enter key
+document.querySelectorAll('.lpi').forEach(inp=>{inp.addEventListener('keydown',e=>{if(e.key==='Enter'){const k=inp.id.replace('i-','');applyLnk(k);}});});
+
+// ═══ MUSIC PLAYER ═══
+const aud=document.getElementById('aud');
+let mpOpen=false,mpLoping=true;
+aud.volume=0.7;aud.loop=true;
+
+function toggleMP(){mpOpen=!mpOpen;document.getElementById('mpWrap').classList.toggle('hid',!mpOpen);document.getElementById('mpFab').style.display=mpOpen?'none':'flex';}
+
+function mpLoad(){const url=document.getElementById('mpUrl').value.trim();if(!url)return;aud.src=url;aud.load();const name=url.split('/').pop().replace(/\?.*$/,'').replace(/\.[^.]+$/,'')||'Track';document.getElementById('mpName').textContent=name;document.getElementById('mpName').classList.remove('em');aud.play().catch(()=>{});}
+
+function mpSetPlay(v){document.getElementById('mpPlay').textContent=v?'⏸':'▶';document.getElementById('mpdot').className='mpdot'+(v?'':' off');document.querySelectorAll('.mpb').forEach(b=>b.classList.toggle('st',!v));}
+function mpToggle(){if(!aud.src)return;if(aud.paused){aud.play();mpSetPlay(true);}else{aud.pause();mpSetPlay(false);}}
+function mpRestart(){if(!aud.src)return;aud.currentTime=0;aud.play();mpSetPlay(true);}
+function mpLoop(){mpLoping=!mpLoping;aud.loop=mpLoping;const b=document.getElementById('mpLp');b.style.color=mpLoping?'var(--cyan)':'var(--dim)';b.style.borderColor=mpLoping?'rgba(0,245,255,.4)':'rgba(255,255,255,.08)';}
+function mpVol(v){aud.volume=parseFloat(v);}
+function mpSeek(e){if(!aud.duration)return;const r=e.currentTarget.getBoundingClientRect();aud.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*aud.duration;}
+function fmt(s){if(!s||isNaN(s))return'0:00';return`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;}
+
+aud.addEventListener('timeupdate',()=>{if(!aud.duration)return;document.getElementById('mpFill').style.width=(aud.currentTime/aud.duration*100)+'%';document.getElementById('mpCur').textContent=fmt(aud.currentTime);document.getElementById('mpTot').textContent=fmt(aud.duration);});
+aud.addEventListener('play',()=>mpSetPlay(true));
+aud.addEventListener('pause',()=>mpSetPlay(false));
+aud.addEventListener('ended',()=>{if(!mpLoping)mpSetPlay(false);});
+
+// Sync loop visual on load
+mpLoop();mpLoop();
+
+// Music player url enter
+document.getElementById('mpUrl').addEventListener('keydown',e=>{if(e.key==='Enter')mpLoad();});
+</script>
+</body>
+</html>
