@@ -101,242 +101,304 @@
     </style>
 </head>
 <body>
-  <header id="main-header" class="astro-header">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nav Preview – Linh OSIMI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+ 
+<!-- =============================================
+     HEADER – giữ nguyên desktop, mobile mới
+     Chỉ thay thế toàn bộ <header> + <script toggleMenu>
+     trong file gốc bằng đoạn này
+============================================= -->
+ 
+<header id="main-header" class="astro-header">
   <div class="header-glow"></div>
-
+ 
   <div class="logo-container">
-    <div class="logo-orb">
-      <span>⚛️</span>
-    </div>
+    <div class="logo-orb"><span>⚛️</span></div>
     <span class="logo-text">Linh OSIMI</span>
   </div>
-
-  <!-- Nút menu mobile -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-  <nav id="nav-menu">
-     <ul>
-        <li><a href="/khoa-hoc0/0/khoa-hoc.html">Khoa Học</a></li>
-        <li><a href="/nghe-thuat0/nghe-thuat.html">Nghệ Thuật</a></li>
-        <li><a href="/phim0/0/phim.html">Phim</a></li>
-        <li><a href="/manga0/0/truyen-manga.html">Truyện (Manga)</a></li>
-        <li><a href="/am-nhac.html">Âm Nhạc</a></li>
-        <li><a href="/game0/0/game.html">Game</a></li>
-         <li><a href="/kienthuc/0/kienthuc.html">Kiến thức</a></li>
-      </ul>
+ 
+  <!-- Desktop nav (không đổi) -->
+  <nav id="nav-desktop">
+    <ul>
+      <li><a href="/khoa-hoc0/0/khoa-hoc.html">Khoa Học</a></li>
+      <li><a href="/nghe-thuat0/nghe-thuat.html">Nghệ Thuật</a></li>
+      <li><a href="/phim0/0/phim.html">Phim</a></li>
+      <li><a href="/manga0/0/truyen-manga.html">Truyện (Manga)</a></li>
+      <li><a href="/am-nhac.html">Âm Nhạc</a></li>
+      <li><a href="/game0/0/game.html">Game</a></li>
+      <li><a href="/kienthuc/0/kienthuc.html">Kiến thức</a></li>
+    </ul>
   </nav>
-
+ 
   <div class="header-right">
     <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-    
   </div>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
-    .astro-header {
-      background: linear-gradient(135deg, #0b0c25 0%, #1a2a3a 50%, #050513 100%);
-      border-bottom: 2px solid rgba(0, 255, 255, 0.2);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
-      padding: 15px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Orbitron', sans-serif;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      transition: top 0.4s ease;
-      overflow: hidden;
-      flex-wrap: wrap;
-    }
-.header-right {
-  margin-right: 25px; 
-}
-
-    /* Logo */
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-orb {
-      width: 45px; height: 45px;
-      background: radial-gradient(circle at center, #00d4ff, #001a33);
-      border: 1px solid rgba(0, 255, 255, 0.3);
-      border-radius: 50%;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
-      position: relative;
-      animation: rotateGlow 6s linear infinite;
-      flex-shrink: 0;
-    }
-
-    .logo-orb span {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 20px; color: #00ffff;
-      text-shadow: 0 0 10px #00eaff;
-    }
-
-    .logo-text {
-      font-size: 24px;
-      font-weight: 600;
-      color: #00d0ff;
-      text-shadow: 0 0 8px #00d0ff, 0 0 15px #0077ff;
-    }
-
-    /* Menu */
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-      margin: 0;
-      padding: 0;
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .nav-link {
-      text-decoration: none;
-      color: rgba(200, 255, 255, 0.9);
-      transition: all 0.3s;
-      padding-bottom: 5px;
-      border-bottom: 2px solid transparent;
-      text-shadow: 0 0 5px rgba(0,255,255,0.3);
-    }
-
-    .nav-link:hover {
-      color: #00ffff;
-      border-bottom: 2px solid #00ffff;
-      text-shadow: 0 0 12px #00eaff, 0 0 25px #0077ff;
-    }
-
-    .theme-toggle {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(0,255,255,0.3);
-      color: #aef6ff;
-      padding: 8px 14px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 15px;
-      font-weight: 600;
-      box-shadow: 0 0 12px rgba(0,255,255,0.2);
-    }
-
-    .theme-toggle:hover {
-      background: rgba(0,255,255,0.15);
-      box-shadow: 0 0 15px rgba(0,255,255,0.4);
-      transform: scale(1.05);
-    }
-
-    .header-glow {
-      position: absolute;
-      top: 0; left: -50%;
-      width: 200%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #00ffff, transparent);
-      animation: moveLight 6s linear infinite;
-    }
-
-    @keyframes moveLight {
-      0% { left: -50%; }
-      100% { left: 50%; }
-    }
-
-    @keyframes rotateGlow {
-      0% { box-shadow: 0 0 15px #00ffff; }
-      50% { box-shadow: 0 0 30px #00ccff, 0 0 50px #729ad6; }
-      100% { box-shadow: 0 0 15px #00ffff; }
-    }
-
-    /* Nút menu ☰ */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: #00ffff;
-      font-size: 26px;
-      cursor: pointer;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .logo-text {
-        font-size: 18px;
-      }
-
-      nav {
-        display: none;
-        width: 100%;
-      }
-
-      nav ul {
-        flex-direction: column;
-        gap: 10px;
-        background: rgba(0, 20, 40, 0.9);
-        padding: 10px 20px;
-        border-radius: 10px;
-      }
-
-      nav ul li {
-        width: 100%;
-      }
-
-      nav.active {
-        display: block;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-    }
-  </style>
+ 
+  <!-- Hamburger button (chỉ hiện mobile) -->
+  <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-label="Mở menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 </header>
-
-<script>
-  // Ẩn header khi cuộn xuống – hiện lại khi cuộn lên
-  let lastScrollY = window.scrollY;
-  const header = document.getElementById("main-header");
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > lastScrollY && window.scrollY > 100) {
-      header.style.top = "-100px"; // Ẩn
-    } else {
-      header.style.top = "0"; // Hiện
-    }
-    lastScrollY = window.scrollY;
-  });
-
-  // Bật/tắt menu mobile
-  function toggleMenu() {
-    const menu = document.getElementById("nav-menu");
-    menu.classList.toggle("active");
-  }
-</script>
-
-
-
+ 
+<!-- ── Backdrop overlay ── -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeMenu()"></div>
+ 
+<!-- ── Slide-in Drawer (mobile) ── -->
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <!-- Header drawer -->
+  <div class="drawer-head">
+    <div class="drawer-logo">
+      <span>⚛️</span>
+      <span class="drawer-logo-text">Linh OSIMI</span>
+    </div>
+    <button class="drawer-close" onclick="closeMenu()" aria-label="Đóng">✕</button>
+  </div>
+ 
+  <!-- Nav links -->
+  <ul class="drawer-nav">
+    <li style="--i:0"><a href="/khoa-hoc0/0/khoa-hoc.html"><span class="nav-icon">🔬</span>Khoa Học</a></li>
+    <li style="--i:1"><a href="/nghe-thuat0/nghe-thuat.html"><span class="nav-icon">🎨</span>Nghệ Thuật</a></li>
+    <li style="--i:2"><a href="/phim0/0/phim.html"><span class="nav-icon">🎬</span>Phim</a></li>
+    <li style="--i:3"><a href="/manga0/0/truyen-manga.html"><span class="nav-icon">📖</span>Truyện (Manga)</a></li>
+    <li style="--i:4"><a href="/am-nhac.html"><span class="nav-icon">🎵</span>Âm Nhạc</a></li>
+    <li style="--i:5"><a href="/game0/0/game.html"><span class="nav-icon">🎮</span>Game</a></li>
+    <li style="--i:6"><a href="/kienthuc/0/kienthuc.html"><span class="nav-icon">💡</span>Kiến thức</a></li>
+  </ul>
+ 
+  <!-- Footer drawer -->
+  <div class="drawer-footer">© 2025 OSIMI · Linh O9</div>
+</nav>
+ 
+<!-- =============================================
+     STYLES
+============================================= -->
 <style>
-
-.logo-container:hover { text-shadow: 1px 1px 3px rgba(0,0,0,0.2), 0 0 10px rgba(0,123,255,0.3); }
-nav a:hover {
-    color: rgb(70, 63, 203); border-bottom-color: rgb(37, 10, 117); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); transform: scale(1.02);
-}
-.theme-toggle:hover {
-    background: rgba(255,255,255,0.3); box-shadow: 0 2px 10px rgba(0,123,255,0.2); transform: scale(1.05);
-}
-@media (max-width: 768px) {
-    header { flex-direction: column; gap: 10px; }
-    nav ul { flex-direction: column; gap: 10px; text-align: center; }
-    .header-right { width: 100%; justify-content: center; }
-    .logo-container span { font-size: 20px; }
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Orbitron', sans-serif; background: #050513; overflow-x: hidden; }
+ 
+  /* ── HEADER (giữ nguyên) ── */
+  .astro-header {
+    background: linear-gradient(135deg, #0b0c25 0%, #1a2a3a 50%, #050513 100%);
+    border-bottom: 2px solid rgba(0,255,255,.2);
+    box-shadow: 0 0 25px rgba(0,255,255,.15);
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 200;
+    transition: top .4s ease;
+  }
+  .header-glow {
+    position: absolute; top: 0; left: -50%; width: 200%; height: 3px;
+    background: linear-gradient(90deg, transparent, #00ffff, transparent);
+    animation: moveLight 6s linear infinite;
+  }
+  @keyframes moveLight { 0%{left:-50%} 100%{left:50%} }
+ 
+  .logo-container { display: flex; align-items: center; gap: 10px; }
+  .logo-orb {
+    width: 45px; height: 45px;
+    background: radial-gradient(circle at center, #00d4ff, #001a33);
+    border: 1px solid rgba(0,255,255,.3); border-radius: 50%;
+    box-shadow: 0 0 25px rgba(0,255,255,.6);
+    display: flex; align-items: center; justify-content: center;
+    animation: rotateGlow 6s linear infinite; flex-shrink: 0;
+  }
+  .logo-orb span { font-size: 20px; color: #00ffff; text-shadow: 0 0 10px #00eaff; }
+  .logo-text { font-size: 24px; font-weight: 600; color: #00d0ff; text-shadow: 0 0 8px #00d0ff, 0 0 15px #0077ff; }
+  @keyframes rotateGlow {
+    0%   { box-shadow: 0 0 15px #00ffff; }
+    50%  { box-shadow: 0 0 30px #00ccff, 0 0 50px #729ad6; }
+    100% { box-shadow: 0 0 15px #00ffff; }
+  }
+ 
+  /* Desktop nav */
+  #nav-desktop ul { list-style: none; display: flex; gap: 30px; font-size: 15px; font-weight: 500; }
+  #nav-desktop a {
+    text-decoration: none; color: rgba(200,255,255,.9);
+    padding-bottom: 5px; border-bottom: 2px solid transparent;
+    transition: all .3s; text-shadow: 0 0 5px rgba(0,255,255,.3);
+  }
+  #nav-desktop a:hover { color: #00ffff; border-bottom-color: #00ffff; text-shadow: 0 0 12px #00eaff, 0 0 25px #0077ff; }
+ 
+  .header-right { margin-right: 25px; }
+  .theme-toggle {
+    background: rgba(255,255,255,.1); border: 1px solid rgba(0,255,255,.3);
+    color: #aef6ff; padding: 8px 14px; border-radius: 25px; cursor: pointer;
+    transition: all .3s; font-size: 15px; box-shadow: 0 0 12px rgba(0,255,255,.2);
+  }
+  .theme-toggle:hover { background: rgba(0,255,255,.15); box-shadow: 0 0 15px rgba(0,255,255,.4); transform: scale(1.05); }
+ 
+  /* ── HAMBURGER (mobile only) ── */
+  .menu-toggle {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 40px; height: 40px;
+    background: rgba(0,255,255,.08); border: 1px solid rgba(0,255,255,.25);
+    border-radius: 10px; cursor: pointer;
+    transition: background .3s, box-shadow .3s;
+  }
+  .menu-toggle:hover { background: rgba(0,255,255,.15); box-shadow: 0 0 12px rgba(0,255,255,.3); }
+  .bar {
+    display: block; width: 20px; height: 2px;
+    background: #00ffff; border-radius: 2px;
+    transition: transform .35s ease, opacity .35s ease;
+  }
+  /* Hamburger → X */
+  .menu-toggle.open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .menu-toggle.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ 
+  /* ── BACKDROP ── */
+  .drawer-backdrop {
+    position: fixed; inset: 0; z-index: 299;
+    background: rgba(0,0,0,.55);
+    backdrop-filter: blur(3px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .35s ease;
+  }
+  .drawer-backdrop.active { opacity: 1; pointer-events: auto; }
+ 
+  /* ── DRAWER ── */
+  .mobile-drawer {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(80vw, 300px);
+    z-index: 300;
+    background: linear-gradient(160deg, #0d1b2e 0%, #081420 60%, #050513 100%);
+    border-left: 1px solid rgba(0,255,255,.18);
+    box-shadow: -8px 0 40px rgba(0,0,0,.6);
+    display: flex; flex-direction: column;
+    transform: translateX(105%);
+    transition: transform .38s cubic-bezier(.4,0,.2,1);
+    overflow: hidden;
+  }
+  .mobile-drawer.open { transform: translateX(0); }
+ 
+  /* Glow strip */
+  .mobile-drawer::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 2px; height: 100%;
+    background: linear-gradient(180deg, transparent 0%, #00ffff 40%, #0077ff 70%, transparent 100%);
+    opacity: .6;
+  }
+ 
+  /* Drawer head */
+  .drawer-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px 16px;
+    border-bottom: 1px solid rgba(0,255,255,.12);
+  }
+  .drawer-logo { display: flex; align-items: center; gap: 8px; }
+  .drawer-logo span:first-child { font-size: 22px; filter: drop-shadow(0 0 6px #00eaff); }
+  .drawer-logo-text { font-family: 'Orbitron', sans-serif; font-size: 16px; color: #00d0ff; text-shadow: 0 0 8px #0077ff; }
+  .drawer-close {
+    background: rgba(0,255,255,.08); border: 1px solid rgba(0,255,255,.2);
+    color: #00ffff; width: 32px; height: 32px; border-radius: 8px;
+    cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center;
+    transition: background .25s, transform .25s;
+  }
+  .drawer-close:hover { background: rgba(0,255,255,.2); transform: rotate(90deg); }
+ 
+  /* Drawer nav list */
+  .drawer-nav { list-style: none; flex: 1; padding: 12px 0; overflow-y: auto; }
+  .drawer-nav li {
+    opacity: 0; transform: translateX(20px);
+    transition: opacity .3s ease calc(var(--i) * 50ms + 80ms),
+                transform .3s ease calc(var(--i) * 50ms + 80ms);
+  }
+  .mobile-drawer.open .drawer-nav li { opacity: 1; transform: translateX(0); }
+ 
+  .drawer-nav a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 22px;
+    font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 500;
+    color: rgba(180,230,255,.85);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: background .2s, color .2s, border-color .2s, padding-left .2s;
+    letter-spacing: .5px;
+  }
+  .drawer-nav a:hover {
+    background: rgba(0,255,255,.07);
+    color: #00ffff;
+    border-left-color: #00ffff;
+    padding-left: 28px;
+  }
+  .nav-icon { font-size: 16px; width: 22px; text-align: center; flex-shrink: 0; }
+ 
+  /* Drawer footer */
+  .drawer-footer {
+    padding: 14px 22px;
+    font-size: 11px; letter-spacing: 1px;
+    color: rgba(0,200,255,.35);
+    border-top: 1px solid rgba(0,255,255,.1);
+    font-family: 'Orbitron', sans-serif;
+  }
+ 
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #nav-desktop { display: none; }
+    .header-right { display: none; }   /* theme toggle ẩn trên mobile để gọn */
+    .menu-toggle { display: flex; }
+    .logo-text { font-size: 18px; }
+    .astro-header { padding: 12px 16px; }
+  }
+ 
+  /* Demo content */
+  .demo-body { height: 100vh; display: flex; align-items: center; justify-content: center; color: rgba(0,200,255,.4); font-family: 'Orbitron', sans-serif; font-size: 14px; padding-top: 74px; }
 </style>
+ 
+<!-- =============================================
+     SCRIPT – thay thế hàm toggleMenu() gốc
+============================================= -->
+<script>
+  /* ── Scroll hide header ── */
+  let lastY = window.scrollY;
+  const hdr = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > lastY && window.scrollY > 80) hdr.style.top = '-80px';
+    else hdr.style.top = '0';
+    lastY = window.scrollY;
+  });
+ 
+  /* ── Drawer helpers ── */
+  const drawer   = document.getElementById('mobileDrawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+  const toggle   = document.getElementById('menuToggle');
+ 
+  function openMenu() {
+    drawer.classList.add('open');
+    backdrop.classList.add('active');
+    toggle.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    drawer.classList.remove('open');
+    backdrop.classList.remove('active');
+    toggle.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function toggleMenu() {
+    drawer.classList.contains('open') ? closeMenu() : openMenu();
+  }
+ 
+  /* Đóng khi nhấn Escape */
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+ 
+  /* ── Theme toggle stub ── */
+  function toggleTheme() { document.body.classList.toggle('light'); }
+</script>
+ 
 
     <!-- Hero Section -->
     <section class="hero-science">
@@ -419,7 +481,7 @@ nav a:hover {
         <a href="/khoa-hoc0/1/khoa-hoc2.html" id="page2" class="page-btn">2</a>
         <a href="/khoa-hoc0/2/khoa-hoc3.html" id="page3" class="page-btn">3</a>
         <a href="/khoa-hoc0/3/khoa-hoc4.html" id="page4" class="page-btn">4</a>
-        <!-- ✅ phải có id="pageDots" -->
+        
         <span id="pageDots" class="page-dots" title="Chọn trang">…</span>
         <a href="/khoa-hoc0/4/khoa-hoc5.html" id="page5" class="page-btn">5</a>
         <a href="#" id="nextBtn" class="page-btn" aria-label="Next page">▶</a>
