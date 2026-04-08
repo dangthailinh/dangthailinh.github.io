@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OYASUMI PUNPUN | Lạc Lối Trong Vô Nghĩa</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Montserrat:wght@300;400;600;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- PUNPUN THEME: FRAGMENTED & NIHILISTIC --- */
+        :root {
+            --ink-black: #0d0d0d;
+            --paper-aged: #e8e6d9;
+            --screentone-grey: #b8b5a8;
+            --punpun-yellow: #f4d03f;
+            --decay-brown: #6e6449;
+            --blood-rust: #8b4513;
+            --void-grey: #2c2c2c;
+            --sky-sick: #7d8471;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--paper-aged);
+            color: var(--ink-black);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Aged Paper + Grain Texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(var(--screentone-grey) 1px, transparent 1px),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            background-size: 4px 4px, 200px 200px;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: multiply;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .sfx-text {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--ink-black);
+            text-shadow: 
+                3px 3px 0 var(--punpun-yellow),
+                -1px -1px 0 rgba(255,255,255,0.5);
+            letter-spacing: 5px;
+            transform: rotate(-2deg);
+        }
+
+        .scramble-text {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 3px;
+        }
+
+        /* --- HERO: FRAGMENTED REALITY --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #7d8471 0%, #e8e6d9 50%, #2c2c2c 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.03) 2px,
+                rgba(0,0,0,0.03) 4px
+            );
+        }
+
+        /* Broken Bird Silhouette Effect */
+        .bird-fragments {
+            position: absolute;
+            top: 20%; right: 10%;
+            width: 300px; height: 300px;
+            opacity: 0.3;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,50 Q40,20 60,50 T100,50" fill="none" stroke="black" stroke-width="2" stroke-dasharray="5,5"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            position: relative;
+            padding: 40px;
+        }
+
+        .hero h1 {
+            font-size: 7rem;
+            line-height: 0.9;
+            margin-bottom: 30px;
+            color: var(--ink-black);
+            font-family: 'Permanent Marker', cursive;
+            transform: rotate(-3deg);
+            text-shadow: 5px 5px 0 var(--punpun-yellow);
+            opacity: 0.9;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: 3rem;
+            color: var(--decay-brown);
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 15px;
+            transform: rotate(2deg);
+            margin-top: 20px;
+            text-shadow: none;
+        }
+
+        .subtitle-box {
+            display: inline-block;
+            background: var(--ink-black);
+            color: var(--paper-aged);
+            padding: 15px 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transform: rotate(1deg);
+            letter-spacing: 3px;
+            border: 3px solid var(--punpun-yellow);
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Distorted Quote */
+        .distorted-quote {
+            position: absolute;
+            bottom: 15%;
+            left: 5%;
+            max-width: 400px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.8rem;
+            color: var(--void-grey);
+            transform: rotate(-5deg);
+            opacity: 0.7;
+            text-shadow: 2px 2px 0 rgba(244,208,63,0.3);
+            line-height: 1.4;
+        }
+
+        /* --- FRAGMENTED GRID LAYOUT --- */
+        .fragment-section {
+            min-height: 100vh;
+            padding: 100px 5vw;
+            position: relative;
+            background: var(--paper-aged);
+            border-top: 8px solid var(--ink-black);
+            overflow: hidden;
+        }
+
+        .fragment-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            position: relative;
+        }
+
+        /* Irregular Panels */
+        .fragment-panel {
+            background: var(--paper-aged);
+            border: 3px solid var(--ink-black);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 10px 10px 0 rgba(110,100,73,0.3);
+            transition: all 0.4s ease;
+        }
+
+        .fragment-panel:hover {
+            transform: translateY(-8px) rotate(0deg) !important;
+            box-shadow: 15px 15px 0 rgba(139,69,19,0.2);
+        }
+
+        .fragment-panel::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+            background-size: 4px 4px;
+            pointer-events: none;
+        }
+
+        /* Panel Variations */
+        .fp-5 { grid-column: span 5; transform: rotate(-1deg); }
+        .fp-7 { grid-column: span 7; transform: rotate(1deg); }
+        .fp-4 { grid-column: span 4; transform: rotate(-2deg); }
+        .fp-8 { grid-column: span 8; transform: rotate(0.5deg); }
+        .fp-6 { grid-column: span 6; transform: rotate(-0.5deg); }
+        .fp-12 { grid-column: span 12; transform: rotate(0deg); }
+
+        .fp-tall { min-height: 500px; }
+        .fp-short { min-height: 300px; }
+
+        .fragment-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%) sepia(20%);
+            opacity: 0.9;
+        }
+
+        .fragment-text {
+            padding: 35px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            background: rgba(232,230,217,0.95);
+        }
+
+        .fragment-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1;
+            color: var(--ink-black);
+            border-bottom: 4px solid var(--punpun-yellow);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .fragment-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--decay-brown);
+        }
+
+        .fragment-text p {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+        }
+
+        .highlight-dark {
+            background: var(--ink-black);
+            color: var(--paper-aged);
+            padding: 2px 8px;
+        }
+
+        .highlight-yellow {
+            background: var(--punpun-yellow);
+            color: var(--ink-black);
+            padding: 2px 8px;
+            font-weight: 800;
+        }
+
+        .void-text {
+            color: var(--void-grey);
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* Scribble Effect */
+        .scribble-box {
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 80px; height: 80px;
+            border: 3px solid var(--blood-rust);
+            border-radius: 50%;
+            opacity: 0.5;
+            transform: rotate(45deg);
+        }
+
+        .scribble-box::after {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px;
+            right: 10px; bottom: 10px;
+            border: 2px solid var(--punpun-yellow);
+            border-radius: 50%;
+        }
+
+        /* --- VOID SECTION (Darkness) --- */
+        .void-section {
+            background: var(--void-grey);
+            color: var(--paper-aged);
+            padding: 120px 5vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .void-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-radial-gradient(
+                circle at 50% 50%,
+                transparent 0,
+                transparent 10px,
+                rgba(0,0,0,0.3) 10px,
+                rgba(0,0,0,0.3) 20px
+            );
+        }
+
+        .void-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .void-title {
+            font-size: 5rem;
+            color: var(--paper-aged);
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 4px 4px 0 var(--blood-rust);
+            opacity: 0.9;
+        }
+
+        .nihilism-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .nihil-card {
+            background: var(--paper-aged);
+            color: var(--ink-black);
+            padding: 40px;
+            border: 3px solid var(--punpun-yellow);
+            transform: rotate(var(--rot));
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.5);
+        }
+
+        .nihil-card:nth-child(1) { --rot: -2deg; }
+        .nihil-card:nth-child(2) { --rot: 1.5deg; }
+        .nihil-card:nth-child(3) { --rot: 1deg; }
+        .nihil-card:nth-child(4) { --rot: -1.5deg; }
+
+        .nihil-card h3 {
+            color: var(--blood-rust);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--ink-black);
+            display: inline-block;
+        }
+
+        .nihil-card p {
+            font-weight: 600;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* --- CHARACTER RELATIONSHIPS --- */
+        .relation-section {
+            background: linear-gradient(to bottom, var(--paper-aged), #d4d2c5);
+            padding: 100px 5vw;
+        }
+
+        .relation-title {
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 60px;
+            color: var(--decay-brown);
+            text-shadow: 3px 3px 0 var(--ink-black);
+        }
+
+        .relation-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .relation-card {
+            background: var(--paper-aged);
+            border: 4px solid var(--ink-black);
+            padding: 30px;
+            position: relative;
+            box-shadow: 8px 8px 0 rgba(139,69,19,0.2);
+        }
+
+        .relation-card:nth-child(1) { transform: rotate(-2deg); }
+        .relation-card:nth-child(2) { transform: rotate(1deg) translateY(20px); }
+        .relation-card:nth-child(3) { transform: rotate(-1deg); }
+
+        .relation-card h4 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--ink-black);
+        }
+
+        .relation-card .role {
+            display: inline-block;
+            background: var(--punpun-yellow);
+            padding: 3px 10px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            transform: rotate(-2deg);
+        }
+
+        .relation-card p {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* --- DECAY TIMELINE --- */
+        .decay-section {
+            background: var(--ink-black);
+            color: var(--paper-aged);
+            padding: 100px 5vw;
+            position: relative;
+        }
+
+        .decay-title {
+            text-align: center;
+            font-size: 5rem;
+            margin-bottom: 60px;
+            color: var(--punpun-yellow);
+            text-shadow: 4px 4px 0 var(--blood-rust);
+        }
+
+        .decay-timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .decay-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--punpun-yellow) 0,
+                var(--punpun-yellow) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            transform: translateX(-50%);
+        }
+
+        .decay-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .decay-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .decay-content {
+            width: 45%;
+            background: var(--paper-aged);
+            color: var(--ink-black);
+            padding: 25px;
+            border: 3px solid var(--punpun-yellow);
+            transform: rotate(var(--rot));
+            box-shadow: 8px 8px 0 rgba(244,208,63,0.2);
+        }
+
+        .decay-item:nth-child(1) .decay-content { --rot: -1deg; }
+        .decay-item:nth-child(2) .decay-content { --rot: 1deg; }
+        .decay-item:nth-child(3) .decay-content { --rot: -0.5deg; }
+        .decay-item:nth-child(4) .decay-content { --rot: 2deg; }
+
+        .decay-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px; height: 24px;
+            background: var(--punpun-yellow);
+            border: 4px solid var(--ink-black);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--blood-rust);
+        }
+
+        .decay-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--blood-rust);
+        }
+
+        .decay-content p {
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- THE END (Tragedy) --- */
+        .end-section {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #1a1a1a, #000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 80px 20px;
+            overflow: hidden;
+        }
+
+        .end-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, #000 100%);
+            opacity: 0.8;
+        }
+
+        .end-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .end-title {
+            font-size: 6rem;
+            color: var(--punpun-yellow);
+            margin-bottom: 40px;
+            text-shadow: 
+                5px 5px 0 var(--blood-rust),
+                -2px -2px 0 #fff;
+            transform: rotate(-3deg);
+            opacity: 0.9;
+        }
+
+        .final-manga-panel {
+            background: var(--paper-aged);
+            border: 6px solid var(--ink-black);
+            padding: 50px;
+            transform: rotate(1deg);
+            box-shadow: 
+                20px 20px 0 rgba(244,208,63,0.1),
+                inset 0 0 100px rgba(0,0,0,0.1);
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .final-manga-panel::before {
+            content: '...';
+            position: absolute;
+            top: 20px; right: 40px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 4rem;
+            color: var(--void-grey);
+            opacity: 0.2;
+        }
+
+        .end-quote {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.2rem;
+            line-height: 1.5;
+            color: var(--ink-black);
+            margin-bottom: 30px;
+        }
+
+        .end-desc {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.9;
+            color: #333;
+            text-align: justify;
+        }
+
+        .end-highlight {
+            background: var(--ink-black);
+            color: var(--punpun-yellow);
+            padding: 3px 8px;
+            font-weight: 800;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #000;
+            color: var(--paper-aged);
+            text-align: center;
+            padding: 40px;
+            border-top: 5px solid var(--punpun-yellow);
+            font-family: 'Permanent Marker', cursive;
+            letter-spacing: 3px;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 4rem; }
+            .hero h1 span { font-size: 1.5rem; }
+            .distorted-quote { display: none; }
+            
+            .fragment-grid { grid-template-columns: 1fr; }
+            .fp-5, .fp-7, .fp-4, .fp-8, .fp-6 { grid-column: span 1; }
+            
+            .nihilism-grid { grid-template-columns: 1fr; }
+            .relation-grid { grid-template-columns: 1fr; }
+            .decay-item, .decay-item:nth-child(even) { flex-direction: column; }
+            .decay-content { width: 100%; margin-bottom: 20px; }
+            .decay-line { left: 20px; }
+            .decay-dot { left: 20px; }
+            
+            .end-title { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="bird-fragments"></div>
+        
+        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1200">
+            <h1>OYASUMI<br><span>PUNPUN</span></h1>
+            <div class="subtitle-box">
+                SỰ LẠC LỐI TRONG THẾ GIỚI VÔ NGHĨA
+            </div>
+        </div>
+
+        <div class="distorted-quote" data-aos="fade-up" data-aos-delay="600">
+            "Thế giới này...<br>
+            không có gì là đúng đắn cả.<br>
+            Chỉ là một mớ hỗn độn<br>
+            của những kẻ đang cố gắng<br>
+            tồn tại."
+        </div>
+    </header>
+
+    <!-- FRAGMENTED REALITY -->
+    <section class="fragment-section">
+        <div class="fragment-grid">
+            
+            <!-- Panel 1: The Bird -->
+            <div class="fragment-panel fp-5 fp-tall" data-aos="fade-right">
+                <div class="fragment-text">
+                    <h2>CON CHIM PHẲNG</h2>
+                    <p>
+                        Punpun Punyama - một cậu bé được vẽ như một <span class="highlight-yellow">con chim phẳng hai chiều</span>. 
+                        Không biểu cảm, không lời thoại trực tiếp. Chỉ một hình vẽ đơn giản giữa thế giới thực tại đầy màu sắc.
+                    </p>
+                    <p style="margin-top: 20px;">
+                        Đây là <span class="void-text">sự tách biệt</span> - Punpun không thể kết nối với thế giới xung quanh. 
+                        Cậu quan sát, im lặng, và dần dần tan rã từ bên trong.
+                    </p>
+                    <div class="scribble-box"></div>
+                </div>
+            </div>
+
+            <!-- Panel 2: Childhood Trauma -->
+            <div class="fragment-panel fp-7 fp-tall" data-aos="fade-left">
+                <div style="padding: 0; height: 100%; background: #2c2c2c;">
+                    <img src="https://wallpaperaccess.com/full/2326521.jpg" alt="Broken home" class="fragment-image" style="height: 60%; opacity: 0.7;">
+                    <div style="padding: 30px; color: var(--paper-aged);">
+                        <h3 style="color: var(--punpun-yellow); font-family: 'Anton'; font-size: 2rem; margin-bottom: 15px;">TUỔI THƠ VỤN VẶT</h3>
+                        <p style="font-weight: 600; line-height: 1.7;">
+                            Cha bạo lực, mẹ trầm cảm, gia đình tan vỡ. Punpun lớn lên trong <span style="color: var(--punpun-yellow);">sự im lặng đau đớn</span>, 
+                            học cách tự trách móc bản thân cho mọi thứ tồi tệ xảy ra.
+                            Haizz ,tại sao có thể như vậy chứ? Mọi thứ có thể tốt hơn mà, tại sao lại như vậy?
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 3: Aiko -->
+            <div class="fragment-panel fp-4 fp-short" style="background: var(--blood-rust); color: white;" data-aos="fade-up">
+                <div style="padding: 30px; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                    <h3 style="font-family: 'Anton'; font-size: 2rem; margin-bottom: 15px; color: var(--punpun-yellow);">AIKO</h3>
+                    <p style="font-weight: 600; font-size: 0.95rem; line-height: 1.6;">
+                        "Tình yêu" đầu đời. Một <span style="background: #000; color: #fff; padding: 2px 5px;">ảo tưởng</span> về sự cứu rỗi. 
+                        Aiko trở thành lý do sống, rồi trở thành gánh nặng, rồi trở thành bi kịch.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Panel 4: Growing Up -->
+            <div class="fragment-panel fp-8 fp-short" data-aos="fade-up" data-aos-delay="100">
+                <div class="fragment-text">
+                    <h3 style="font-size: 2rem;">TRƯỞNG THÀNH LÀ SỤP ĐỔ</h3>
+                    <p>
+                        Từ học sinh cấp 2 đến người lớn, Punpun chứng kiến <span class="highlight-dark">sự tàn nhẫn của thực tại</span>. 
+                        Không có phép màu, không có tình yêu vĩnh cửu. Chỉ có công việc nhàm chán, bạn bè sa ngã, và những giấc mơ chết dần.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Panel 5: The Void -->
+            <div class="fragment-panel fp-6 fp-tall" data-aos="fade-right">
+                <div class="fragment-text" style="background: #1a1a1a; color: var(--paper-aged);">
+                    <h2 style="color: var(--punpun-yellow); border-color: var(--blood-rust);">HƯ KHÔNG</h2>
+                    <p>
+                        Punpun phát triển <span style="color: var(--punpun-yellow);">ý nghĩ về tự tử</span> từ sớm. 
+                        Không phải vì quá buồn, mà vì <span style="font-style: italic; opacity: 0.8;">"không thấy lý do gì để tiếp tục"</span>.
+                    </p>
+                    <p style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--punpun-yellow);">
+                        Cậu tạo ra một "Punpun khác" trong đầu - một thực thể tối tăm, méo mó, thốt ra những lời thú nhận đáng sợ nhất.
+                    </p>
+                    <p>
+                        "Tôi muốn chết... nhưng tôi cũng sợ chết. Tôi không biết phải làm gì nữa..."</p>
+                </div>
+            </div>
+
+            <!-- Panel 6: God -->
+            <div class="fragment-panel fp-6 fp-tall" data-aos="fade-left">
+                <div style="height: 100%; position: relative;">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.i8LyX1dIy3KOo9FM7hisXgHaIb?rs=1&pid=ImgDetMain&o=7&rm=3" class="fragment-image" style="filter: grayscale(100%) contrast(150%) brightness(40%);">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 40px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); color: white;">
+                        <h3 style="font-family: 'Anton'; font-size: 2.5rem; color: var(--punpun-yellow); margin-bottom: 15px;">"CHÚA"</h3>
+                        <p style="font-weight: 600; line-height: 1.6;">
+                            Người bạn tưởng tượng biến thành kẻ thù. "Chúa" trong đầu Punpun không ban phước lành, mà không ngừng <span style="color: var(--blood-rust);">chỉ trích, thao túng, và dẫn dắt cậu đến chỗ tự hủy diệt</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- VOID SECTION -->
+    <section class="void-section">
+        <div class="void-content">
+            <h2 class="void-title sfx-text" data-aos="fade-down">CHỦ NGHĨA HƯ VÔ</h2>
+            
+            <div class="nihilism-grid">
+                <div class="nihil-card" data-aos="fade-up" data-aos-delay="0">
+                    <h3>THẾ GIỚI KHÔNG CÔNG BẰNG</h3>
+                    <p>
+                        Người tốt không được đền đáp. Kẻ xấu không bị trừng phạt. 
+                        Yêu thương không đảm bảo hạnh phúc. Punpun học được rằng <span style="background: var(--punpun-yellow); padding: 2px 5px;">đạo đức là một câu chuyện cổ tích</span> để ru ngủ trẻ con.
+                    </p>
+                </div>
+
+                <div class="nihil-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>GIẢ TẠO CỦA TÌNH YÊU</h3>
+                    <p>
+                        Tình yêu trong Oyasumi Punpun không phải cứu rỗi, mà là <span style="color: var(--blood-rust); font-weight: 800;">xiềng xích</span>. 
+                        Aiko và Punpun yêu nhau như hai người đuối nước ôm lấy nhau - cùng nhau chìm xuống đáy.
+                    </p>
+                </div>
+
+                <div class="nihil-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>QUÊN LÃNG LÀ CỨU RỖI</h3>
+                    <p>
+                        Shimizu - người bạn duy nhất còn lại - đại diện cho <span style="background: #000; color: #fff; padding: 2px 5px;">sự vô thức</span>, 
+                        quên đi quá khứ để tiếp tục sống. Đó là cách duy nhất để tồn tại trong thế giới này.
+                    </p>
+                </div>
+
+                <div class="nihil-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>KHÔNG CÓ KẾT THÚC TỐT ĐẸP</h3>
+                    <p>
+                        Inio Asano từ chối cho Punpun một kết thúc hạnh phúc truyền thống. 
+                        Cậu sống, nhưng <span style="color: var(--blood-rust);">với vết sẹo không bao giờ lành</span>. Đó là sự thật duy nhất.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RELATIONSHIPS -->
+    <section class="relation-section">
+        <h2 class="relation-title" data-aos="fade-down">NHỮNG MỐI DÂY</h2>
+        
+        <div class="relation-grid">
+            <div class="relation-card" data-aos="fade-up" data-aos-delay="0">
+                <h4>AIKO TANAKA</h4>
+                <span class="role">ÁNH SÁNG & BÓNG TỐI</span>
+                <p>
+                    Mối tình đầu biến thành ám ảnh. Aiko là lý do để Punpun sống, cũng là lý do để cậu chết. 
+                    Cái kết của họ là <span style="color: var(--blood-rust); font-weight: 800;">bi kịch không thể tránh khỏi</span> của hai tâm hồn bị thương cố gắng chữa lành cho nhau.
+                </p>
+            </div>
+
+            <div class="relation-card" data-aos="fade-up" data-aos-delay="100">
+                <h4>SACHI</h4>
+                <span class="role">NGƯỜI LỚN THỰC TẠI</span>
+                <p>
+                    Người phụ nữ trưởng thành, tổn thương, nhưng vẫn cố gắng. 
+                    Sachi đại diện cho <span style="background: var(--punpun-yellow); padding: 2px 5px;">khả năng chấp nhận</span> - chấp nhận quá khứ đau đớn để tiếp tục sống.
+                </p>
+            </div>
+
+            <div class="relation-card" data-aos="fade-up" data-aos-delay="200">
+                <h4>SHIMIZU</h4>
+                <span class="role">SỰ VÔ TỘI MẤT TRÍ</span>
+                <p>
+                    Người bạn thời thơ ấu, kẻ duy nhất không bị thế giới làm cho u ám. 
+                    Shimizu sống trong <span style="color: var(--decay-brown); font-weight: 800;">ảo tưởng của riêng mình</span>, và đó là cách anh tồn tại.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DECAY TIMELINE -->
+    <section class="decay-section">
+        <h2 class="decay-title" data-aos="fade-down">QUÁ TRÌNH PHÂN HỦY</h2>
+        
+        <div class="decay-timeline">
+            <div class="decay-line"></div>
+
+            <div class="decay-item" data-aos="fade-up">
+                <div class="decay-content">
+                    <h3>THƠ ẤU</h3>
+                    <p>Punpun tin vào "chúa" và tình yêu vĩnh cửu. Cậu là một đứa trẻ nhạy cảm, yêu thương cha mẹ dù họ đang tan vỡ.</p>
+                </div>
+                <div class="decay-dot"></div>
+            </div>
+
+            <div class="decay-item" data-aos="fade-up">
+                <div class="decay-content">
+                    <h3>THIẾU NIÊN</h3>
+                    <p>Nhận ra thế giới không như mơ ước. Cha bỏ đi, mẹ qua đời. Punpun bắt đầu xây dựng "vỏ bọc" để bảo vệ bản thân.</p>
+                </div>
+                <div class="decay-dot"></div>
+            </div>
+
+            <div class="decay-item" data-aos="fade-up">
+                <div class="decay-content">
+                    <h3>THANH XUÂN</h3>
+                    <p>Mối quan hệ với Aiko trở nên độc hại. Punpun dần mất khả năng phân biệt thực và ảo. Cậu bắt đầu có ý định tự tử.</p>
+                </div>
+                <div class="decay-dot"></div>
+            </div>
+
+            <div class="decay-item" data-aos="fade-up">
+                <div class="decay-content">
+                    <h3>NGƯỜI LỚN</h3>
+                    <p>Sống như một xác chết đi. Làm việc, tồn tại, nhưng không còn cảm xúc. Cho đến khi gặp lại Aiko...</p>
+                </div>
+                <div class="decay-dot"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- THE END -->
+    <section class="end-section">
+        <div class="end-content">
+            <h2 class="end-title sfx-text" data-aos="fade-down">Chúc NGỦ NGON :=)!</h2>
+            
+            <div class="final-manga-panel" data-aos="zoom-in-up" data-aos-duration="1000">
+                <p class="end-quote">
+                    "Tôi vẫn ở đây.<br>
+                    Vẫn thở.<br>
+                    Vẫn sống.<br>
+                    Dù không biết vì sao."
+                </p>
+                
+                <div class="end-desc">
+                    <p style="margin-bottom: 20px;">
+                        <span class="end-highlight">Kết thúc mở</span> của Oyasumi Punpun không hứa hẹn hạnh phúc. 
+                        Punpun sống sót, nhưng với <span style="color: var(--blood-rust); font-weight: 800;">vết sẹo vĩnh viễn</span> trong tâm hồn. 
+                        Cậu không được cứu rỗi bởi tình yêu, không tìm thấy ý nghĩa cuộc sống.
+                    </p>
+                    <p style="margin-bottom: 20px;">
+                        Điều duy nhất cậu học được là <strong>chấp nhận sự vô nghĩa</strong>. 
+                        Sống không cần lý do. Thở không cần mục đích. Đó là cách duy nhất để không phát điên trong thế giới này.
+                    </p>
+                    <p style="border-top: 3px solid #000; padding-top: 20px; font-size: 1.2rem; text-align: center; font-family: 'Permanent Marker', cursive; color: var(--decay-brown);">
+                        "Oyasumi Punpun. Chúc ngủ ngon, những giấc mơ đẹp,<br>
+                        và đừng bao giờ thức dậy."
+                    </p>
+                </div>
+            </div>
+
+            <div style="color: #666; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; letter-spacing: 2px;" data-aos="fade-up">
+                GOOD NIGHT, PUNPUN / INIO ASANO / 2007-2013
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        OYASUMI PUNPUN ANALYSIS // GOODNIGHT PUNPUN // INIO ASANO MASTERPIECE
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 100,
+            duration: 1000,
+            easing: 'ease-in-out-sine',
+            once: false,
+        });
+
+        // Add subtle parallax on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.bird-fragments');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px) rotate(${scrolled * 0.1}deg)`;
+            }
+        });
+    </script>
+</body>
+</html>

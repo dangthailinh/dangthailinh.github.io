@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVANGELION | Mục Đích Của Sự Tồn Tại</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Montserrat:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- EVA THEME: GLITCH & EXISTENTIALISM --- */
+        :root {
+            --eva-purple: #9333ea;
+            --eva-dark-purple: #581c87;
+            --eva-green: #10b981;
+            --eva-orange: #f97316;
+            --eva-red: #dc2626;
+            --eva-cyan: #06b6d4;
+            --eva-black: #09090b;
+            --eva-white: #fafafa;
+            --warning-yellow: #facc15;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--eva-black);
+            color: var(--eva-white);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Scanlines + Noise */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.3) 2px,
+                    rgba(0,0,0,0.3) 4px
+                ),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Glitch Animation */
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        .glitch-text {
+            animation: glitch 0.3s infinite;
+            text-shadow: 
+                2px 0 var(--eva-red),
+                -2px 0 var(--eva-cyan);
+        }
+
+        .glitch-text:hover {
+            animation: none;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .sfx-text {
+            font-family: 'Bangers', cursive;
+            color: var(--eva-white);
+            text-shadow: 
+                3px 3px 0 var(--eva-purple),
+                -1px -1px 0 var(--eva-orange);
+            letter-spacing: 3px;
+        }
+
+        .mono-text {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--eva-green);
+        }
+
+        /* --- HERO: SYSTEM FAILURE --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: 
+                linear-gradient(135deg, #1a0b2e 0%, #09090b 50%, #2e0b1f 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 1px,
+                rgba(147, 51, 234, 0.1) 1px,
+                rgba(147, 51, 234, 0.1) 2px
+            );
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Warning Box */
+        .warning-box {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warning-yellow);
+            color: var(--eva-black);
+            padding: 10px 30px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border: 3px solid var(--eva-red);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+            animation: blink 1s infinite;
+            z-index: 10;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            position: relative;
+            padding: 40px;
+            border: 4px solid var(--eva-purple);
+            background: rgba(9, 9, 11, 0.9);
+            box-shadow: 
+                0 0 50px rgba(147, 51, 234, 0.3),
+                inset 0 0 50px rgba(147, 51, 234, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 7rem;
+            line-height: 0.9;
+            margin-bottom: 20px;
+            color: var(--eva-white);
+            text-shadow: 
+                5px 5px 0 var(--eva-purple),
+                10px 10px 0 rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: 'EVANGELION';
+            position: absolute;
+            top: 3px; left: 3px;
+            color: var(--eva-red);
+            opacity: 0.5;
+            z-index: -1;
+            animation: glitch 2s infinite;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: 2.5rem;
+            color: var(--eva-green);
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 8px;
+            margin-top: 15px;
+            text-shadow: 0 0 10px var(--eva-green);
+        }
+
+        .subtitle-box {
+            display: inline-block;
+            background: var(--eva-red);
+            color: var(--eva-white);
+            padding: 12px 30px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border: 2px solid var(--eva-white);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subtitle-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* --- EVA GRID LAYOUT --- */
+        .eva-section {
+            min-height: 100vh;
+            padding: 100px 5vw;
+            position: relative;
+            background: var(--eva-black);
+            border-top: 8px solid var(--eva-purple);
+            overflow: hidden;
+        }
+
+        .eva-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            position: relative;
+        }
+
+        .eva-panel {
+            background: rgba(20, 20, 25, 0.95);
+            border: 3px solid var(--eva-purple);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 30px rgba(147, 51, 234, 0.2),
+                10px 10px 0 rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+
+        .eva-panel:hover {
+            box-shadow: 
+                0 0 50px rgba(147, 51, 234, 0.4),
+                15px 15px 0 rgba(0,0,0,0.6);
+            transform: translateY(-5px);
+        }
+
+        .eva-panel::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(147, 51, 234, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(147, 51, 234, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+
+        .ep-6 { grid-column: span 6; }
+        .ep-4 { grid-column: span 4; }
+        .ep-8 { grid-column: span 8; }
+        .ep-12 { grid-column: span 12; }
+
+        .ep-tall { min-height: 500px; }
+        .ep-short { min-height: 350px; }
+
+        .eva-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(130%) brightness(0.8);
+            opacity: 0.9;
+        }
+
+        .eva-text {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .eva-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1;
+            color: var(--eva-white);
+            border-left: 6px solid var(--eva-orange);
+            padding-left: 20px;
+        }
+
+        .eva-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--eva-cyan);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .eva-text p {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.8;
+            color: #ccc;
+            text-align: justify;
+        }
+
+        .sync-ratio {
+            display: inline-block;
+            background: var(--eva-green);
+            color: var(--eva-black);
+            padding: 3px 10px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .warning-text {
+            color: var(--eva-red);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- HEDGEHOG SECTION --- */
+        .hedgehog-section {
+            background: linear-gradient(to bottom, #1a0b2e, #0f0518);
+            padding: 120px 5vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hedgehog-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(147,51,234,0.1) 100%);
+        }
+
+        .hedgehog-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hedgehog-title {
+            font-size: 5rem;
+            color: var(--eva-white);
+            margin-bottom: 40px;
+            text-shadow: 
+                4px 4px 0 var(--eva-purple),
+                8px 8px 0 rgba(0,0,0,0.5);
+        }
+
+        .hedgehog-quote {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--eva-green);
+            border: 2px solid var(--eva-green);
+            padding: 30px;
+            background: rgba(0,0,0,0.6);
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+        }
+
+        .hedgehog-quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px; left: 20px;
+            font-size: 4rem;
+            color: var(--eva-purple);
+            font-family: serif;
+        }
+
+        .hedgehog-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            text-align: left;
+        }
+
+        .hedgehog-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid var(--eva-purple);
+            padding: 30px;
+            position: relative;
+        }
+
+        .hedgehog-card h3 {
+            color: var(--eva-orange);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hedgehog-card p {
+            color: #aaa;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        /* --- INSTRUMENTALITY --- */
+        .instrumentality-section {
+            background: var(--eva-white);
+            color: var(--eva-black);
+            padding: 100px 5vw;
+            position: relative;
+        }
+
+        .instrumentality-title {
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 60px;
+            color: var(--eva-purple);
+            text-shadow: 3px 3px 0 var(--eva-orange);
+        }
+
+        .fusion-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .fusion-card {
+            background: var(--eva-black);
+            color: var(--eva-white);
+            border: 4px solid var(--eva-purple);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fusion-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(147,51,234,0.1) 10px,
+                rgba(147,51,234,0.1) 20px
+            );
+        }
+
+        .fusion-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--eva-cyan);
+            position: relative;
+            z-index: 2;
+        }
+
+        .fusion-card p {
+            font-weight: 600;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .fusion-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- PILOTS GRID --- */
+        .pilots-section {
+            background: var(--eva-black);
+            padding: 100px 5vw;
+        }
+
+        .pilots-title {
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 60px;
+            color: var(--eva-white);
+            text-shadow: 3px 3px 0 var(--eva-red);
+        }
+
+        .pilots-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .pilot-card {
+            background: rgba(255,255,255,0.03);
+            border: 3px solid;
+            padding: 35px;
+            position: relative;
+        }
+
+        .pilot-card:nth-child(1) { border-color: var(--eva-purple); }
+        .pilot-card:nth-child(2) { border-color: var(--eva-red); }
+        .pilot-card:nth-child(3) { border-color: var(--eva-cyan); }
+
+        .pilot-card h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .pilot-card:nth-child(1) h3 { color: var(--eva-purple); }
+        .pilot-card:nth-child(2) h3 { color: var(--eva-red); }
+        .pilot-card:nth-child(3) h3 { color: var(--eva-cyan); }
+
+        .pilot-card .unit {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .pilot-card p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* --- THE CHOICE --- */
+        .choice-section {
+            min-height: 100vh;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(147,51,234,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(249,115,22,0.2) 0%, transparent 50%),
+                var(--eva-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .choice-content {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .choice-title {
+            font-size: 6rem;
+            color: var(--eva-white);
+            margin-bottom: 50px;
+            text-shadow: 
+                5px 5px 0 var(--eva-red),
+                10px 10px 20px rgba(0,0,0,0.5);
+            animation: glitch 3s infinite;
+        }
+
+        .final-scene {
+            background: rgba(20, 20, 25, 0.95);
+            border: 6px solid var(--eva-orange);
+            padding: 50px;
+            position: relative;
+            box-shadow: 
+                0 0 60px rgba(249, 115, 22, 0.3),
+                inset 0 0 60px rgba(0,0,0,0.5);
+        }
+
+        .final-scene::before {
+            content: 'END OF EVANGELION';
+            position: absolute;
+            top: -15px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--eva-orange);
+            color: var(--eva-black);
+            padding: 5px 20px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .scene-quote {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 2rem;
+            color: var(--eva-white);
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .scene-desc {
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.9;
+            color: #ccc;
+            text-align: justify;
+        }
+
+        .scene-highlight {
+            background: var(--eva-orange);
+            color: var(--eva-black);
+            padding: 3px 8px;
+            font-weight: 800;
+        }
+
+        /* --- CONGRATULATIONS --- */
+        .congratulations-section {
+            min-height: 80vh;
+            background: var(--eva-white);
+            color: var(--eva-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .congratulations-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(147,51,234,0.05) 10px,
+                    rgba(147,51,234,0.05) 20px
+                );
+        }
+
+        .congratulations-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .congratulations-title {
+            font-family: 'Bangers', cursive;
+            font-size: 6rem;
+            color: var(--eva-red);
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 0 var(--eva-black);
+            animation: glitch 2s infinite;
+        }
+
+        .congratulations-text {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--eva-black);
+            color: var(--eva-green);
+            text-align: center;
+            padding: 40px;
+            border-top: 5px solid var(--eva-purple);
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 3px;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 4rem; }
+            .hero h1 span { font-size: 1.5rem; }
+            .warning-box { font-size: 0.9rem; padding: 8px 15px; }
+            
+            .eva-grid { grid-template-columns: 1fr; }
+            .ep-6, .ep-4, .ep-8 { grid-column: span 1; }
+            
+            .hedgehog-grid { grid-template-columns: 1fr; }
+            .fusion-grid { grid-template-columns: 1fr; }
+            .pilots-grid { grid-template-columns: 1fr; }
+            
+            .choice-title { font-size: 3.5rem; }
+            .scene-quote { font-size: 1.3rem; }
+            .congratulations-title { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="warning-box">WARNING: SYSTEM FAILURE / Hedgehog's Dilemma Detected</div>
+        
+        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
+            <h1 class="glitch-text">EVANGELION</h1>
+            <span>NEON GENESIS</span>
+            <div class="subtitle-box">
+                MỤC ĐÍCH CỦA SỰ TỒN TẠI
+            </div>
+        </div>
+
+        <div style="position: absolute; bottom: 10%; left: 5%; max-width: 400px; color: var(--eva-green); font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; opacity: 0.8; z-index: 5;" data-aos="fade-up" data-aos-delay="600">
+            > Synchronization Rate: 400%<br>
+            > AT Field: COLLAPSING<br>
+            > Mental State: CRITICAL<br>
+            > Status: MUSTN'T RUN AWAY
+        </div>
+    </header>
+
+    <!-- SHINJI IKARI -->
+    <section class="eva-section">
+        <div class="eva-grid">
+            
+            <!-- Panel 1: The Boy -->
+            <div class="eva-panel ep-6 ep-tall" data-aos="fade-right">
+                <div class="eva-text">
+                    <h2>IKARI SHINJI</h2>
+                    <h3>PILOT-01 / DEPRESSION</h3>
+                    <p>
+                        Một cậu bé 14 tuổi không muốn làm bất cứ điều gì. Không có ước mơ, không có ý chí, 
+                        chỉ có <span class="warning-text">nỗi sợ bị từ chối</span> và thói quen trốn tránh.
+                    </p>
+                    <p style="margin-top: 20px;">
+                        Shinji không lái Eva vì lý tưởng bảo vệ thế giới. Cậu làm vì <span style="color: var(--eva-orange); font-weight: 800;">sự chấp nhận duy nhất</span> 
+                        từ cha mình - Gendo Ikari, người đã bỏ rơi cậu 10 năm trước.
+                    </p>
+                    <div class="sync-ratio">SYNC RATIO: 54.8%</div>
+                </div>
+            </div>
+
+            <!-- Panel 2: Unit-01 -->
+            <div class="eva-panel ep-6 ep-tall" data-aos="fade-left">
+                <div style="height: 100%; position: relative; background: linear-gradient(to bottom, #2e1065, #000);">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                        <div style="font-size: 8rem; color: var(--eva-purple); text-shadow: 0 0 50px var(--eva-purple);">01</div>
+                        <div style="font-family: 'Share Tech Mono'; color: var(--eva-green); font-size: 1.2rem; letter-spacing: 5px;">UNIT-01</div>
+                        <div style="color: var(--eva-orange); margin-top: 20px; font-weight: 800;">THE BEAST</div>
+                    </div>
+                    <div style="position: absolute; bottom: 30px; left: 30px; right: 30px; color: #aaa; font-size: 0.9rem;">
+                        "Eva không phải robot. Chúng là những sinh vật sống, và Shinji phải đồng bộ tâm hồn với chúng - 
+                        đặt linh hồn mình vào trong cơ thể của một vị thần."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 3: I mustn't run away -->
+            <div class="eva-panel ep-12 ep-short" style="background: var(--eva-red); color: white;" data-aos="fade-up">
+                <div style="padding: 40px; text-align: center;">
+                    <h2 style="border: none; font-size: 4rem; margin: 0; text-shadow: 3px 3px 0 #000;">
+                        "MÌNH KHÔNG ĐƯỢC CHẠY TRỐN"
+                    </h2>
+                    <p style="font-family: 'Share Tech Mono'; font-size: 1.2rem; margin-top: 20px; opacity: 0.9;">
+                        Câu thần chú duy nhất giữ Shinji lại với thực tại. Mỗi lần cậu muốn bỏ chạy, 
+                        câu nói này lại vang lên - không phải vì dũng cảm, mà vì <strong>sợ bị ghét bỏ nhiều hơn</strong>.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- HEDGEHOG'S DILEMMA -->
+    <section class="hedgehog-section">
+        <div class="hedgehog-content">
+            <h2 class="hedgehog-title sfx-text" data-aos="fade-down">NỖI ĐAU CỦA NHỮNG CON NHÍM</h2>
+            
+            <div class="hedgehog-quote" data-aos="fade-up">
+                "Con nhím muốn đến gần nhau để sưởi ấm, nhưng khi chúng đến gần, 
+                chúng lại làm đau nhau bằng những cái gai của mình."
+            </div>
+
+            <div class="hedgehog-grid">
+                <div class="hedgehog-card" data-aos="fade-right">
+                    <h3>SỰ CÔ LẬP</h3>
+                    <p>
+                        Shinji chọn cô đơn vì sợ bị tổn thương. Cậu đeo tai nghe (SDAT player) không phải để nghe nhạc, 
+                        mà để <span style="color: var(--eva-orange);">ngăn cách thế giới bên ngoài</span> - tạo ra một AT Field vô hình xung quanh tâm hồn.
+                    </p>
+                </div>
+
+                <div class="hedgehog-card" data-aos="fade-left">
+                    <h3>KẾT NỐI ĐAU ĐỚN</h3>
+                    <p>
+                        Misato, Rei, Asuka - tất cả đều mang vết thương tâm lý. Họ cố gắng kết nối nhưng chỉ làm nhau đau thêm. 
+                        Đó là <span style="color: var(--eva-red);">bản chất của con người</span>: chúng ta cần nhau, nhưng sự gần gũi luôn đi kèm với đau đớn.
+                    </p>
+                </div>
+
+                <div class="hedgehog-card" data-aos="fade-right">
+                    <h3>AT FIELD</h3>
+                    <p>
+                        Trong Evangelion, <span style="color: var(--eva-cyan);">Absolute Terror Field</span> không chỉ là lá chắn vật lý. 
+                        Đó là biểu tượng cho bức tường tâm lý mỗi người dựng lên để bảo vệ cái tôi khỏi sự xâm nhập của người khác.
+                    </p>
+                </div>
+
+                <div class="hedgehog-card" data-aos="fade-left">
+                    <h3>THOÁT KHỎI?</h3>
+                    <p>
+                        Human Instrumentality Project hứa hẹn giải pháp: hòa tan mọi AT Field, 
+                        biến tất cả thành một thể thống nhất. Không còn cô đơn, không còn đau đớn... 
+                        nhưng cũng <span style="color: var(--eva-purple);">không còn cái tôi</span>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTRUMENTALITY -->
+    <section class="instrumentality-section">
+        <h2 class="instrumentality-title sfx-text" data-aos="zoom-in">DỰ ÁN HỢP NHẤN LOẠI</h2>
+        
+        <div class="fusion-grid">
+            <div class="fusion-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="fusion-icon">⚠️</span>
+                <h3>SỰ CÔ ĐƠN TUYỆT ĐỐI</h3>
+                <p>
+                    Mỗi người là một hòn đảo cô lập trong đại dương vũ trụ. 
+                    Chúng ta không thể thực sự hiểu nhau, dù có cố gắng đến đâu.
+                </p>
+            </div>
+
+            <div class="fusion-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="fusion-icon">🔄</span>
+                <h3>HÒA TAN BIÊN GIỚI</h3>
+                <p>
+                    Instrumentality xóa bỏ ranh giới giữa các cá nhân. 
+                    Tất cả linh hồn hợp nhất thành một biển LCL vô tận.
+                </p>
+            </div>
+
+            <div class="fusion-card" data-aos="fade-up" data-aos-delay="300">
+                <span class="fusion-icon">❓</span>
+                <h3>GIÁ PHẢI TRẢ</h3>
+                <p>
+                    Hòa bình hoàn hảo, nhưng không còn "tôi" hay "bạn". 
+                    Không còn nghệ thuật, tình yêu, hay ý nghĩa của sự tồn tại.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PILOTS -->
+<section class="pilots-section">
+    <h2 class="pilots-title" data-aos="fade-down">NHỮNG ĐỨA TRẺ MỒ CÔI</h2>
+    
+    <div class="pilots-grid">
+        <div class="pilot-card" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.uwUOsy-G-rZkA0qZ_01OGQHaHc?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Rei Ayanami" class="pilot-img">
+            <h3>REI AYANAMI</h3>
+            <div class="unit">UNIT-00 / CLONE</div>
+            <p>
+                "Tôi là gì?" - Rei không biết mình là ai. Cô là bản sao của mẹ Shinji, 
+                tạo ra để làm công cụ. Sự tồn tại của cô đặt câu hỏi: <strong>ý nghĩa của sự sống là gì nếu ta chỉ là bản sao?</strong>
+            </p>
+        </div>
+
+        <div class="pilot-card" data-aos="fade-up" data-aos-delay="200">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.n11Kv84WAM0jfQJzd-5TLgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Asuka Langley" class="pilot-img">
+            <h3>ASUKA LANGLEY</h3>
+            <div class="unit">UNIT-02 / PRIDE</div>
+            <p>
+                Kiêu hãnh che giấu vết thương sâu. Asuka cần được công nhận để tồn tại. 
+                Khi không còn là Pilot giỏi nhất, cô sụp đổ hoàn toàn - <strong>minh chứng cho việc dựa vào người khác để định nghĩa bản thân</strong>.
+            </p>
+        </div>
+
+        <div class="pilot-card" data-aos="fade-up" data-aos-delay="300">
+            <img src="https://th.bing.com/th/id/OIP._j6dsAEEDWWowaboaL9OlQHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Kaworu Nagisa" class="pilot-img">
+            <h3>KAWORU NAGISA</h3>
+            <div class="unit">UNIT-06 / LOVE</div>
+            <p>
+                Người duy nhất yêu Shinji vô điều kiện. Kaworu đại diện cho <strong>tình yêu hoàn hảo không vị kỷ</strong> - 
+                điều mà con người không thể đạt được, vì chúng ta luôn mang theo nhu cầu và kỳ vọng.
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+.pilot-card {
+    overflow: hidden;
+    padding: 15px;
+}
+
+/* Ảnh nhỏ gọn, không tràn, căn giữa */
+.pilot-img {
+    width: 80%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 auto 10px;
+    display: block;
+}
+</style>
+
+    <!-- THE CHOICE -->
+    <section class="choice-section">
+        <div class="choice-content">
+            <h2 class="choice-title" data-aos="zoom-in">LỰA CHỌN</h2>
+            
+            <div class="final-scene" data-aos="fade-up">
+                <div class="scene-quote">
+                    "Tôi có thể ở đây. Không còn đau đớn, không còn cô đơn...<br>
+                    Nhưng đó không phải là tôi."
+                </div>
+                
+                <div class="scene-desc">
+                    <p>
+                        Shinji đứng trước biển LCL vô tận. Anh có thể chấp nhận Instrumentality - 
+                        hòa tan vào thể thống nhất, không còn đau khổ. Nhưng anh chọn <span class="scene-highlight">TỪ CHỐI</span>.
+                    </p>
+                    <p style="margin-top: 20px;">
+                        Không phải vì thế giới bên ngoài tốt đẹp hơn. Mà vì <strong>sự đau đớn chứng minh ta đang sống</strong>. 
+                        Sự cô đơn là giá phải trả để có thể yêu thương. AT Field không chỉ là bức tường - nó là ranh giới 
+                        định nghĩa "tôi là ai".
+                    </p>
+                    <p style="margin-top: 20px; font-style: italic; color: var(--eva-orange);">
+                        "Tôi muốn gặp họ một lần nữa. Dù không biết sẽ đau đớn đến mức nào."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONGRATULATIONS -->
+    <section class="congratulations-section">
+        <div class="congratulations-content" data-aos="zoom-in">
+            <h2 class="congratulations-title">CHÚC MỪNG!</h2>
+            <div class="congratulations-text">
+                <p>
+                    Bạn đã đến đây. Điều đó có nghĩa là bạn vẫn đang cố gắng.
+                </p>
+                <p style="margin-top: 20px;">
+                    Evangelion không đưa ra câu trả lời. Nó chỉ nói rằng: 
+                    <strong>sống là đau đớn, nhưng sống cũng là đẹp đẽ</strong>. 
+                    Chúng ta không thể tránh khỏi việc làm tổn thương nhau, 
+                    nhưng chúng ta cũng không thể sống mà không cần nhau.
+                </p>
+                <p style="margin-top: 20px; font-size: 1.4rem; color: var(--eva-red); font-weight: 800;">
+                    Chúc mừng bạn đã sinh ra trên thế giới này.<br>
+                    おめでとう。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>NEON GENESIS EVANGELION | 新世紀エヴァンゲリオン</p>
+        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">"Mankind's greatest fear is the fear of the unknown"</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

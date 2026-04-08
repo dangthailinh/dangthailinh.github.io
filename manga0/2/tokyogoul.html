@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京喰種 // TOKYO GHOUL // MANGA EDITION</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Permanent+Marker&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --manga-black: #000000;
+            --manga-white: #ffffff;
+            --manga-gray: #f0f0f0;
+            --manga-ink: #1a1a1a;
+            --blood-red: #cc0000;
+            --screentone: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23000' fill-opacity='0.15'/%3E%3C/svg%3E");
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--manga-white);
+            color: var(--manga-black);
+            font-family: 'Noto Sans JP', sans-serif;
+            overflow-x: hidden;
+            background-image: var(--screentone);
+        }
+
+        /* MANGA SPEED LINES */
+        @keyframes speed-line {
+            0% { transform: scale(1) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: scale(1.5) rotate(5deg); opacity: 0; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-2px, 2px) rotate(-1deg); }
+            75% { transform: translate(2px, -2px) rotate(1deg); }
+        }
+
+        @keyframes ink-spread {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 0.1; }
+        }
+
+        @keyframes flash {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        /* SPEED LINES BACKGROUND */
+        .speed-lines {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+            background: repeating-conic-gradient(
+                from 0deg at 50% 50%,
+                transparent 0deg,
+                transparent 2deg,
+                var(--manga-black) 2deg,
+                var(--manga-black) 3deg
+            );
+        }
+
+        /* PAGE CONTAINER */
+        .manga-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* TITLE HEADER */
+        .manga-header {
+            text-align: center;
+            padding: 60px 20px;
+            border: 4px solid var(--manga-black);
+            background: var(--manga-white);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manga-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.05) 10px,
+                rgba(0,0,0,0.05) 20px
+            );
+            animation: speed-line 10s linear infinite;
+        }
+
+        .chapter-number {
+            font-family: 'Kosugi Maru', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--manga-black);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .manga-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 5rem;
+            line-height: 0.9;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 10;
+            text-shadow: 
+                3px 3px 0 var(--manga-white),
+                6px 6px 0 rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
+        }
+
+        .manga-title-jp {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tragedy-banner {
+            background: var(--manga-black);
+            color: var(--manga-white);
+            padding: 20px 40px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.8rem;
+            display: inline-block;
+            transform: rotate(-1deg);
+            position: relative;
+            z-index: 10;
+        }
+
+        .tragedy-banner .highlight {
+            color: var(--blood-red);
+            font-size: 2.2rem;
+        }
+
+        /* MANGA PANEL GRID */
+        .panel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .panel {
+            background: var(--manga-white);
+            border: 3px solid var(--manga-black);
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .panel:hover {
+            transform: scale(1.02);
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        .panel-2x2 { grid-column: span 2; grid-row: span 2; }
+        .panel-2x1 { grid-column: span 2; }
+        .panel-1x2 { grid-row: span 2; }
+
+        /* PANEL CONTENT */
+        .panel-content {
+            padding: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .panel-bg-screentone {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 70%, rgba(0,0,0,0.1) 0%, transparent 50%);
+        }
+
+        .panel-bg-gradient {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(204,0,0,0.1) 0%, transparent 50%);
+        }
+
+        /* SPEECH BUBBLES */
+        .speech-bubble {
+            background: var(--manga-white);
+            border: 3px solid var(--manga-black);
+            border-radius: 50%;
+            padding: 25px;
+            position: relative;
+            margin: 20px;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30%;
+            width: 0; height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid var(--manga-black);
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 30%;
+            width: 0; height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid var(--manga-white);
+            z-index: 1;
+        }
+
+        .speech-text {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.3rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .thought-bubble {
+            border-radius: 20px;
+            border-style: dashed;
+        }
+
+        .thought-bubble::after,
+        .thought-bubble::before {
+            border-top-style: dashed;
+        }
+
+        /* SFX TEXT */
+        .sfx {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 3rem;
+            color: var(--manga-black);
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            position: absolute;
+            transform: rotate(-15deg);
+            z-index: 20;
+        }
+
+        .sfx-red {
+            color: var(--blood-red);
+            font-size: 4rem;
+            text-shadow: 
+                2px 2px 0 var(--manga-white),
+                4px 4px 0 var(--blood-red);
+        }
+
+        .sfx-crunch { top: 10px; right: 10px; }
+        .sfx-drip { bottom: 20px; left: 20px; font-size: 2rem; }
+        .sfx-scream { top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-5deg); font-size: 5rem; }
+
+        /* CHARACTER PANELS */
+        .character-name {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            border-bottom: 3px solid var(--manga-black);
+            display: inline-block;
+        }
+
+        .character-title {
+            font-family: 'Kosugi Maru', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            color: var(--blood-red);
+            font-weight: 700;
+        }
+
+        .panel-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .emphasis {
+            background: var(--manga-black);
+            color: var(--manga-white);
+            padding: 2px 6px;
+            font-weight: 700;
+        }
+
+        .red-text {
+            color: var(--blood-red);
+            font-weight: 900;
+        }
+
+        /* FLASHBACK PANEL */
+        .flashback {
+            background: var(--manga-gray);
+            border-style: dashed;
+        }
+
+        .flashback-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--manga-black);
+            color: var(--manga-white);
+            padding: 5px 15px;
+            font-family: 'Kosugi Maru', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        /* ACTION LINES */
+        .action-lines {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 5px,
+                rgba(0,0,0,0.1) 5px,
+                rgba(0,0,0,0.1) 10px
+            );
+            pointer-events: none;
+        }
+
+        /* FULL WIDTH PANEL */
+        .full-width-panel {
+            grid-column: 1 / -1;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--manga-black);
+            color: var(--manga-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .full-width-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(204,0,0,0.3) 0%, transparent 70%);
+        }
+
+        .big-quote {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 3rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            line-height: 1.3;
+            padding: 40px;
+        }
+
+        .big-quote .tragedy-word {
+            color: var(--blood-red);
+            font-size: 4rem;
+            display: block;
+            margin-top: 20px;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+        }
+
+        /* PAGE NUMBER */
+        .page-number {
+            text-align: center;
+            font-family: 'Kosugi Maru', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 2px solid var(--manga-black);
+        }
+
+        /* INK SPLATTER DECORATION */
+        .ink-splatter {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--manga-black);
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(20px);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .panel-grid { grid-template-columns: 1fr; }
+            .panel-2x2, .panel-2x1, .panel-1x2 { 
+                grid-column: span 1; 
+                grid-row: span 1; 
+            }
+            .manga-title { font-size: 3rem; }
+            .big-quote { font-size: 1.8rem; }
+            .big-quote .tragedy-word { font-size: 2.5rem; }
+            .sfx { font-size: 2rem; }
+            .sfx-red { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="speed-lines"></div>
+
+    <div class="manga-page">
+        
+        <!-- HEADER -->
+        <header class="manga-header" data-aos="fade-down">
+            <div class="chapter-number">CHAPTER 01 // TRAGEDY</div>
+            <h1 class="manga-title">TOKYO GHOUL</h1>
+            <div class="manga-title-jp">東京喰種</div>
+            <div class="tragedy-banner">
+                A <span class="highlight">TRAGEDY</span>
+            </div>
+        </header>
+
+        <!-- PANEL GRID 1: INTRODUCTION -->
+        <div class="panel-grid">
+            <!-- Panel 1: The Quote -->
+            <div class="panel panel-2x2" data-aos="fade-right">
+                <div class="panel-bg-screentone"></div>
+                <div class="panel-content">
+                    <div class="speech-bubble thought-bubble">
+                        <p class="speech-text">
+                            "If you were to write a story with me in the lead role..."
+                        </p>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <span class="character-name">KANEKI</span>
+                        <div class="character-title">// THE EYEPATCH</div>
+                    </div>
+                </div>
+                <div class="sfx sfx-crunch">CRUNCH...</div>
+            </div>
+
+            <!-- Panel 2: Close up -->
+            <div class="panel" data-aos="fade-left">
+                <div class="panel-bg-gradient"></div>
+                <div class="panel-content" style="align-items: center;">
+                    <div style="font-size: 4rem; color: var(--blood-red); animation: flash 2s infinite;">◉</div>
+                    <div class="character-title" style="margin-top: 20px;">KAGUNE ACTIVATED</div>
+                </div>
+                <div class="sfx sfx-red sfx-drip">DRIP... DRIP...</div>
+            </div>
+
+            <!-- Panel 3: The Word -->
+            <div class="panel" data-aos="fade-up">
+                <div class="action-lines"></div>
+                <div class="panel-content" style="justify-content: center; align-items: center;">
+                    <div style="font-family: 'Permanent Marker', cursive; font-size: 3rem; color: var(--blood-red); transform: rotate(-5deg);">
+                        TRAGEDY
+                    </div>
+                    <div style="font-size: 0.8rem; margin-top: 10px; letter-spacing: 5px;">トラジェディ</div>
+                </div>
+            </div>
+
+                <!-- Panel 4: Transformation -->
+                <div class="panel flashback" data-aos="fade-up">
+                    <div class="flashback-label">FLASHBACK</div>
+                    <div class="panel-content">
+                        <div class="character-name">BEFORE</div>
+                        <p class="panel-text">
+                            Một sinh viên đại học bình thường. Yêu thích văn học. Sống trong thế giới loài người.
+                        </p>
+                        <p class="panel-text" style="margin-top: 10px;">
+                            <span class="emphasis">Rize Kamishiro</span> đã thay đổi tất cả.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Panel 5: The Operation -->
+                <div class="panel" data-aos="fade-up">
+                    <div class="panel-bg-gradient"></div>
+                    <div class="panel-content">
+                        <div class="character-title">OPERATION: TRANSPLANT</div>
+                        <p class="panel-text">
+                            Cơ thể <span class="red-text">Rize</span> được cấy vào anh.
+                        </p>
+                        <p class="panel-text" style="margin-top: 10px;">
+                            Từ đó, anh trở thành <span class="emphasis">nửa người, nửa ghoul</span>.
+                        </p>
+                    </div>
+                    <div class="sfx sfx-red" style="bottom: 10px; right: 10px; font-size: 2rem;">SQUELCH</div>
+                </div>
+            </div>
+
+        <!-- FULL WIDTH PANEL: THE CONFESSION -->
+        <div class="full-width-panel" data-aos="zoom-in">
+            <div class="big-quote">
+                "In this world,<br>
+                the weak are eaten<br>
+                by the strong."
+                <span class="tragedy-word">THAT'S THE RULE.</span>
+            </div>
+            <div class="ink-splatter" style="top: 20%; left: 10%;"></div>
+            <div class="ink-splatter" style="bottom: 20%; right: 10%; width: 150px; height: 150px;"></div>
+        </div>
+
+        <!-- PANEL GRID 2: THE STRUGGLE -->
+        <div class="panel-grid" style="margin-top: 40px;">
+            <!-- Panel 6: The Hunger -->
+            <div class="panel panel-1x2" data-aos="fade-right">
+                <div class="action-lines"></div>
+                <div class="panel-content">
+                    <div class="character-name">THE HUNGER</div>
+                    <div class="speech-bubble" style="margin: 20px 0;">
+                        <p class="speech-text" style="font-size: 1rem;">
+                            "Tôi... đói..."
+                        </p>
+                    </div>
+                    <p class="panel-text">
+                        Cơn đói ghoul không giống đói bình thường. Đó là <span class="red-text">thèm khát thịt người</span>.
+                    </p>
+                    <p class="panel-text" style="margin-top: 15px;">
+                        Mỗi ngụm cà phê đều vị như <span class="emphasis">bùn đất</span>.
+                    </p>
+                </div>
+                <div class="sfx sfx-red sfx-scream">GROWL</div>
+            </div>
+
+            <!-- Panel 7: The Mask -->
+            <div class="panel" data-aos="fade-up">
+                <div class="panel-content" style="text-align: center;">
+                    <div style="width: 100px; height: 100px; border: 4px solid var(--manga-black); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; background: var(--manga-black);">
+                        <span style="color: var(--blood-red); font-size: 2rem; font-weight: 900;">● ●</span>
+                    </div>
+                    <div class="character-name">THE MASK</div>
+                    <p class="panel-text" style="font-size: 0.85rem;">
+                        Che giấu con mắt ghoul. Che giấu bản thân.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Panel 8: The Torture -->
+            <div class="panel" data-aos="fade-up">
+                <div class="panel-bg-gradient"></div>
+                <div class="panel-content">
+                    <div class="character-title" style="color: var(--manga-black);">JASON'S CHAIR</div>
+                    <div style="font-family: 'Permanent Marker', cursive; font-size: 2.5rem; color: var(--blood-red); text-align: center; margin: 20px 0;">
+                        1036
+                    </div>
+                    <p class="panel-text" style="text-align: center; font-size: 0.9rem;">
+                        Lần bị tra tấn. Mỗi ngón tay bị cắt và tái sinh.
+                    </p>
+                </div>
+                <div class="sfx sfx-red" style="top: 10px; right: 10px;">CRACK</div>
+            </div>
+
+            <!-- Panel 9: The Breaking Point -->
+            <div class="panel panel-2x1" data-aos="fade-up">
+                <div class="panel-bg-screentone"></div>
+                <div class="panel-content" style="flex-direction: row; gap: 30px;">
+                    <div style="flex: 1;">
+                        <div class="speech-bubble">
+                            <p class="speech-text" style="font-size: 1.1rem;">
+                                "Tôi sẽ... không tha thứ... cho ai nữa..."
+                            </p>
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="character-name">WHITE HAIR</div>
+                        <p class="panel-text">
+                            Đau đớn vượt quá giới hạn. <span class="red-text">Kaneki cũ đã chết</span>. 
+                            Thay vào đó là một sinh vật chấp nhận bóng tối.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL PANEL -->
+        <div class="panel" style="min-height: 500px; margin-top: 40px; background: var(--manga-black); color: var(--manga-white);" data-aos="fade-up">
+            <div class="panel-content" style="text-align: center; position: relative; z-index: 10;">
+                <div style="font-family: 'Kosugi Maru', sans-serif; font-size: 1rem; letter-spacing: 5px; margin-bottom: 30px; opacity: 0.7;">
+                    END OF CHAPTER 01
+                </div>
+                
+                <div style="font-family: 'Permanent Marker', cursive; font-size: 2.5rem; line-height: 1.4; margin-bottom: 40px;">
+                    "If you were to write a story<br>
+                    with me in the lead role..."
+                </div>
+
+                <div style="font-size: 4rem; color: var(--blood-red); font-family: 'Permanent Marker', cursive; margin-bottom: 40px; text-shadow: 4px 4px 0 rgba(0,0,0,0.5); animation: shake 0.5s infinite;">
+                    A TRAGEDY
+                </div>
+
+                <div style="font-family: 'Noto Sans JP', sans-serif; font-size: 1.2rem; letter-spacing: 10px;">
+                    金木 研 // KANEKI KEN
+                </div>
+
+                <div style="margin-top: 40px; font-size: 0.9rem; opacity: 0.6; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    "Nhưng ngay cả trong một tragedy, tôi vẫn muốn được yêu thương. 
+                    Dù đó là điều ích kỷ nhất trên đời."
+                </div>
+            </div>
+            
+            <div class="ink-splatter" style="top: 10%; left: 5%; width: 200px; height: 200px; background: var(--blood-red); opacity: 0.2;"></div>
+            <div class="ink-splatter" style="bottom: 10%; right: 5%; width: 300px; height: 300px; opacity: 0.15;"></div>
+        </div>
+
+        <!-- PAGE NUMBER -->
+        <div class="page-number">
+            — 34 —
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
+        });
+    </script>
+</body>
+</html>'''
