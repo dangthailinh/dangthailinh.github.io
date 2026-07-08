@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOL Profile - Anime Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff006e;
+            --secondary: #8338ec;
+            --accent: #3a86ff;
+            --gold: #ffd700;
+            --dark: #0a0a0f;
+            --card-bg: rgba(20, 20, 35, 0.9);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--dark);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.6;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+            letter-spacing: 4px;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px var(--primary)); }
+            to { filter: drop-shadow(0 0 40px var(--secondary)); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            margin-top: 10px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+            border-radius: 20px;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 10s linear infinite;
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .summoner-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 5px;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .tagline {
+            text-align: center;
+            color: #aaa;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .rank-badge {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            transform: perspective(500px) rotateX(10deg);
+            transition: transform 0.3s;
+        }
+
+        .rank-badge:hover {
+            transform: perspective(500px) rotateX(0deg) scale(1.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .stat-box:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Content Sections */
+        .content-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,0,110,0.1));
+            pointer-events: none;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+        }
+
+        .section-title::before {
+            content: '▸';
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Champions Grid */
+        .champions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 15px;
+        }
+
+        .champ-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .champ-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
+            z-index: 10;
+        }
+
+        .champ-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .champ-mastery {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 5px;
+            font-size: 0.7rem;
+            text-align: center;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Skills Bars */
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .skill-bar {
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 6px;
+            position: relative;
+            animation: fillBar 2s ease-out;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+        }
+
+        @keyframes fillBar {
+            from { width: 0; }
+        }
+
+        .skill-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Love/Hate Section */
+        .feelings-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .feeling-box {
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .love-box {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.2), rgba(131, 56, 236, 0.2));
+            border: 2px solid var(--primary);
+        }
+
+        .hate-box {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.2), rgba(131, 56, 236, 0.2));
+            border: 2px solid var(--accent);
+        }
+
+        .feeling-title {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .love-box .feeling-title { color: var(--primary); }
+        .hate-box .feeling-title { color: var(--accent); }
+
+        .feeling-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .feeling-tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid currentColor;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .feeling-tag:hover {
+            transform: scale(1.1);
+            background: currentColor;
+            color: white;
+        }
+
+        /* Recent Matches */
+        .match-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .match-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border-left: 3px solid;
+            transition: all 0.3s;
+        }
+
+        .match-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
+        }
+
+        .match-item.victory { border-left-color: #00ff88; }
+        .match-item.defeat { border-left-color: #ff4757; }
+
+        .match-result {
+            font-weight: bold;
+            margin-right: 15px;
+            font-family: 'Orbitron', sans-serif;
+            min-width: 60px;
+        }
+
+        .victory .match-result { color: #00ff88; }
+        .defeat .match-result { color: #ff4757; }
+
+        .match-champ {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            margin-right: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .match-details {
+            flex: 1;
+        }
+
+        .match-kda {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.4);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .logo { font-size: 2rem; }
+            .feelings-container { grid-template-columns: 1fr; }
+        }
+
+        /* Floating Elements */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 5px;
+        }
+
+        /* Edit Button */
+        .edit-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 0, 110, 0.5);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .edit-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.8);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 50px rgba(255, 0, 110, 0.5);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 0, 110, 0.3);
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <h1 class="logo">LEAGUE OF LEGENDS</h1>
+        <p class="subtitle">Anime Style Profile</p>
+    </header>
+
+    <div class="container">
+        <!-- Left Column - Profile Card -->
+        <div class="profile-card floating">
+            <div class="avatar-container">
+                <div class="avatar-ring"></div>
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=LOLPlayer&backgroundColor=b6e3f4" alt="Avatar" class="avatar" id="avatarImg">
+            </div>
+            
+            <h2 class="summoner-name" id="summonerName">KawaiiSlayer</h2>
+            <p class="tagline" id="tagline">"Mid or Feed ~UwU~"</p>
+            
+            <div class="rank-badge" id="rankBadge">💎 DIAMOND IV</div>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="winRate">58%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalGames">1,234</div>
+                    <div class="stat-label">Games</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="kda">3.5</div>
+                    <div class="stat-label">KDA</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="mvpCount">89</div>
+                    <div class="stat-label">MVP</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Content -->
+        <div class="content-sections">
+            <!-- Main Champions -->
+            <div class="section">
+                <h3 class="section-title">Main Champions</h3>
+                <div class="champions-grid" id="mainChamps">
+                    <div class="champ-icon">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Ahri.png" alt="Ahri">
+                        <div class="champ-mastery">M7 580k</div>
+                    </div>
+                    <div class="champ-icon">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Lux.png" alt="Lux">
+                        <div class="champ-mastery">M7 420k</div>
+                    </div>
+                    <div class="champ-icon">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png" alt="Jinx">
+                        <div class="champ-mastery">M6 280k</div>
+                    </div>
+                    <div class="champ-icon">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Yasuo.png" alt="Yasuo">
+                        <div class="champ-mastery">M5 150k</div>
+                    </div>
+                    <div class="champ-icon">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Neeko.png" alt="Neeko">
+                        <div class="champ-mastery">M6 320k</div>
+                    </div>
+                    <div class="champ-icon">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Seraphine.png" alt="Seraphine">
+                        <div class="champ-mastery">M7 510k</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="section">
+                <h3 class="section-title">Skill Analysis</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span>Mechanics</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span>Game Sense</span>
+                        <span>78%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 78%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span>Team Fighting</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span>Map Awareness</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 70%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span>Tilting Resistance</span>
+                        <span>45%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width: 45%; background: linear-gradient(90deg, #ff4757, #ff6b81)"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Love & Hate -->
+            <div class="section">
+                <h3 class="section-title">Preferences</h3>
+                <div class="feelings-container">
+                    <div class="feeling-box love-box">
+                        <div class="feeling-title">
+                            <span>❤️</span> Love
+                        </div>
+                        <div class="feeling-list" id="loveList">
+                            <span class="feeling-tag">Aram</span>
+                            <span class="feeling-tag">Star Guardian</span>
+                            <span class="feeling-tag">Bard</span>
+                            <span class="feeling-tag">Late Game</span>
+                            <span class="feeling-tag">Warding</span>
+                        </div>
+                    </div>
+                    <div class="feeling-box hate-box">
+                        <div class="feeling-title">
+                            <span>💔</span> Hate
+                        </div>
+                        <div class="feeling-list" id="hateList">
+                            <span class="feeling-tag">Yasuo on my team</span>
+                            <span class="feeling-tag">Smurfs</span>
+                            <span class="feeling-tag">No FF @ 15</span>
+                            <span class="feeling-tag">Jungle Diff</span>
+                            <span class="feeling-tag">Teemo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Matches -->
+            <div class="section">
+                <h3 class="section-title">Recent Matches</h3>
+                <div class="match-list">
+                    <div class="match-item victory">
+                        <span class="match-result">VICTORY</span>
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Ahri.png" class="match-champ">
+                        <div class="match-details">
+                            <div>Ranked Solo/Duo</div>
+                            <small>24 mins ago</small>
+                        </div>
+                        <div class="match-kda">12/3/8</div>
+                    </div>
+                    <div class="match-item defeat">
+                        <span class="match-result">DEFEAT</span>
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Lux.png" class="match-champ">
+                        <div class="match-details">
+                            <div>Ranked Solo/Duo</div>
+                            <small>1 hour ago</small>
+                        </div>
+                        <div class="match-kda">4/7/12</div>
+                    </div>
+                    <div class="match-item victory">
+                        <span class="match-result">VICTORY</span>
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png" class="match-champ">
+                        <div class="match-details">
+                            <div>ARAM</div>
+                            <small>3 hours ago</small>
+                        </div>
+                        <div class="match-kda">18/5/9</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with 💜 for League Players</p>
+        <div class="social-links">
+            <a href="#" class="social-btn">📱</a>
+            <a href="#" class="social-btn">💬</a>
+            <a href="#" class="social-btn">🎮</a>
+            <a href="#" class="social-btn">📺</a>
+        </div>
+    </footer>
+
+    <!-- Edit Button -->
+    <button class="edit-btn" onclick="openModal()">✏️</button>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content" style="position: relative;">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">Edit Profile</h2>
+            
+            <div class="input-group">
+                <label>Summoner Name</label>
+                <input type="text" id="editName" value="KawaiiSlayer">
+            </div>
+            
+            <div class="input-group">
+                <label>Tagline</label>
+                <input type="text" id="editTagline" value="Mid or Feed ~UwU~">
+            </div>
+            
+            <div class="input-group">
+                <label>Rank</label>
+                <input type="text" id="editRank" value="DIAMOND IV">
+            </div>
+            
+            <div class="input-group">
+                <label>Win Rate (%)</label>
+                <input type="number" id="editWinRate" value="58">
+            </div>
+            
+            <div class="input-group">
+                <label>Love (comma separated)</label>
+                <input type="text" id="editLove" value="Aram, Star Guardian, Bard, Late Game, Warding">
+            </div>
+            
+            <div class="input-group">
+                <label>Hate (comma separated)</label>
+                <input type="text" id="editHate" value="Yasuo on my team, Smurfs, No FF @ 15, Jungle Diff, Teemo">
+            </div>
+            
+            <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        function saveProfile() {
+            // Update profile info
+            document.getElementById('summonerName').textContent = document.getElementById('editName').value;
+            document.getElementById('tagline').textContent = '"' + document.getElementById('editTagline').value + '"';
+            document.getElementById('rankBadge').textContent = '💎 ' + document.getElementById('editRank').value;
+            document.getElementById('winRate').textContent = document.getElementById('editWinRate').value + '%';
+            
+            // Update love tags
+            const loveTags = document.getElementById('editLove').value.split(',').map(tag => tag.trim());
+            const loveContainer = document.getElementById('loveList');
+            loveContainer.innerHTML = '';
+            loveTags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'feeling-tag';
+                span.textContent = tag;
+                loveContainer.appendChild(span);
+            });
+            
+            // Update hate tags
+            const hateTags = document.getElementById('editHate').value.split(',').map(tag => tag.trim());
+            const hateContainer = document.getElementById('hateList');
+            hateContainer.innerHTML = '';
+            hateTags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'feeling-tag';
+                span.textContent = tag;
+                hateContainer.appendChild(span);
+            });
+            
+            closeModal();
+            
+            // Add save animation
+            const btn = document.querySelector('.edit-btn');
+            btn.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Add hover effects to champion icons
+        document.querySelectorAll('.champ-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.zIndex = '100';
+            });
+            icon.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fills = entry.target.querySelectorAll('.skill-fill');
+                    fills.forEach(fill => {
+                        const width = fill.style.width;
+                        fill.style.width = '0';
+                        setTimeout(() => {
+                            fill.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
