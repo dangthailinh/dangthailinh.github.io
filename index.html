@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linh-Osimi</title>
     <link rel="stylesheet" href="linhkun.css">
+    
     <style>
       
         .hero {
@@ -858,17 +859,93 @@ function toggleMenu() {
 
 
 
-
 <section class="hero" style="position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
     <div class="hero-content" style="max-width: 1200px; width: 100%; padding: 0 20px; display: flex; flex-direction: column; align-items: center; gap: 40px; position: relative; z-index: 2;">
-        <h1 id="hero-title" style="margin: 0; font-size: 3rem; text-align: center;">LINH OsiMi Wellcome to my page!</h1>
-        
+       <!-- ===== NEON ROOSTER LOGO – Linh OSIMI ===== -->
+<div class="neonLO-wrap">
+  <svg class="neonLO-svg" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+    <path class="neonLO-flame" d="M175,60 C 190,10 215,-5 235,-20 C 220,5 225,25 245,15 C 235,35 235,55 255,50 C 240,70 230,90 215,95"/>
+    <path class="neonLO-comb" d="M120,55 C 115,35 130,30 135,45 C 140,28 155,28 158,45 C 163,30 178,32 175,52"/>
+    <path class="neonLO-comb" d="M108,120 C 100,132 100,146 112,150 C 105,158 108,168 118,166"/>
+    <path class="neonLO-body" d="M175,60 C 200,70 215,95 210,120 C 208,140 195,155 180,163 C 185,178 178,190 165,188 C 158,198 145,200 138,190 C 118,195 100,182 98,162 C 82,158 75,145 82,132 C 75,120 80,105 95,102 C 92,85 102,70 118,68 C 122,55 140,48 155,55 C 162,50 172,52 175,60 Z"/>
+    <path class="neonLO-body" d="M82,132 C 65,130 55,138 58,150 C 68,150 78,146 82,138"/>
+    <circle class="neonLO-eye" cx="150" cy="95" r="5"/>
+  </svg>
+
+  <div class="neonLO-text">
+    <div class="neonLO-line-yellow">Linh</div>
+    <div class="neonLO-line-pink">OSIMI</div>
+  </div>
+</div>
+
+<style>
+  .neonLO-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:10px;
+  }
+  .neonLO-svg{
+    width:clamp(90px,14vw,150px);
+    height:auto;
+    overflow:visible;
+    margin-bottom:-10px;
+  }
+  .neonLO-body{
+    fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;
+    filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px #fff) drop-shadow(0 0 22px #cfd8ff);
+    animation:neonLO-flicker-y 3.5s infinite alternate;
+  }
+  .neonLO-eye{
+    fill:#fff;
+    filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 8px #fff);
+  }
+  .neonLO-comb{
+    fill:none;stroke:#ff5a1f;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;
+    filter:drop-shadow(0 0 4px #ff7a3d) drop-shadow(0 0 10px #ff5a1f) drop-shadow(0 0 24px #ff3d00);
+    animation:neonLO-flicker-p 4s infinite alternate;
+  }
+  .neonLO-flame{
+    fill:none;stroke:#2f231f;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;
+    filter:drop-shadow(0 0 4px #ff8a4d) drop-shadow(0 0 12px #ff5a1f) drop-shadow(0 0 30px #ff3d00);
+    animation:neonLO-flicker-p 4s infinite alternate;
+  }
+  .neonLO-text{
+    font-family:'Bangers', cursive;
+    font-size:clamp(28px,6vw,58px);
+    font-weight:900;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    line-height:1.1;
+  }
+  .neonLO-line-yellow{
+    color:#fdf4c9;
+    animation:neonLO-flicker-y 3.5s infinite alternate;
+    text-shadow:0 0 5px #fff9d6,0 0 10px #fff9d6,0 0 20px #F2D02B,0 0 40px #F2D02B,0 0 80px #F2D02B;
+  }
+  .neonLO-line-pink{
+    color:#ffe8ec;
+    animation:neonLO-flicker-p 4s infinite alternate;
+    text-shadow:0 0 5px #ffd7de,0 0 10px #ffd7de,0 0 20px #ff2d6b,0 0 40px #ff2d6b,0 0 80px #ff2d6b;
+  }
+  @keyframes neonLO-flicker-y{
+    0%,18%,22%,25%,53%,57%,100%{opacity:1;}
+    20%,24%,55%{opacity:.4;}
+  }
+  @keyframes neonLO-flicker-p{
+    0%,15%,17%,62%,64%,100%{opacity:1;}
+    16%,63%{opacity:.35;}
+  }
+</style>
+
+      <h1 id="hero-title" style="margin: 0; font-size: 3rem; text-align: center;">LINH OsiMi Wellcome to my page!</h1>
+        <div class="hero-content" style="max-width: 1200px; ..."></div>
         
         <div class="profile-section" id="profile-section" style="display: flex; align-items: center; justify-content: center; gap: 30px; max-width: 800px; width: 100%; flex-wrap: wrap; overflow: hidden;">
             <img src="img/linh.jpg" alt="Ảnh cá nhân" class="profile-img" id="profile-img" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; flex-shrink: 0;"> <!-- Thay src bằng ảnh thật -->
             <div class="about-me" id="about-me" style="flex: 1; min-width: 300px; max-width: 500px;">
                 <p id="p1">Chào , tôi là Linh....</p>
-                <p id="p2">Với hơn 21 năm kinh nghiệm ăn cơm và hít thở , tôi tự tin tôi là 1 chuyên gia trong lĩnh vực sinh tồn!</p>
+                <p id="p2">Với hơn 22 năm kinh nghiệm ăn cơm và hít thở , tôi tự tin tôi là 1 chuyên gia trong lĩnh vực sinh tồn!</p>
                 <p id="p3">Đây là trang web viết blog , xạo que ,của em các anh ạ @!</p>
             </div>
         </div>
@@ -1474,11 +1551,16 @@ lightbox.addEventListener('click', (e) => {
     
     const myVideos = [
         { id: 'AN1RJF55NXI', title: 'Never Fade Away' },
+        { id: 'Igq3d6XA75Y', title: ' Chippin’' },
+        {id: 'XiHw7MrTx30', title: 'The Ballad of Buck Ravers by SAMURAI' },
+        {id: 'VOXOdflScCY', title: 'A Like Supreme' },
+        {id: 'Es4N8Hwjoac', title: 'Black Dog ' },
+        {id: 'P4bKZT_Eg4A', title: 'Never Fade Away by P. T. Adamczyk' },
         { id: 'KvMY1uzSC1E', title: 'I Really Want to Stay At Your House' },
         { id: 'mSfgFcWPL-Q', title: 'Weight of the World' },
         { id: 'E2Rj2gQAyPA', title: 'The line' },
         { id: 'pFoc5XKkIIw', title: 'Call Your Name (hay vl)' },
-        { id: 'lTRiuFIWV54', title: 'Nintendo Sleepy' }
+        
     ];
 
     const videoSlider = document.querySelector('.video-slider');
@@ -2360,32 +2442,8 @@ lightbox.addEventListener('click', (e) => {
 <script>
 (function(){
 
-/* ================================================================
-   ✏️  DỮ LIỆU PROJECT — SỬA TẠI ĐÂY
-   ================================================================
 
-   videoYoutubeId:  ID video YouTube (phần sau watch?v=)
-                    Ví dụ: "AN1RJF55NXI"
-                    Để null nếu chưa có video.
 
-   videoTitle:      Tiêu đề hiển thị trên tab video
-
-   videoChapters:   Mảng các mốc thời gian trong video
-                    { time: "0:00", label: "Giới thiệu" }
-                    Để [] nếu không cần.
-
-   stack:           Mảng { name, pct } — thanh tiến độ tech stack
-                    pct: 0–100
-
-   complexity:      Mảng { label, pct, color } — độ phức tạp
-                    color: chuỗi CSS cho thanh màu
-
-   funcCards:       Phân tích chức năng — { icon, name, detail }
-
-   challenges:      { problem, solution }
-
-   snippets:        Mảng code — { title, lang, code, desc }
-================================================================ */
 const PROJECTS = [
   {
     title: "Linh-Osimi Blog",
