@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trò chơi Wildfire - Chữa cháy rừng</title>
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+:root {
+    --color-primary: #ACB49C;
+    --color-neutral-light: #EAE4D4;
+    --color-neutral: #E4D9BC;
+    --color-neutral-dark: #D3C6A4;
+    --color-black: #332E20;
+    --color-white: #fff;
+    --sans-serif: 'Source Sans Pro', sans-serif;
+    --serif: 'Source Serif Pro', serif;
+}
+
+html.dark:root {
+    --color-primary: #67896F;
+    --color-neutral-light: #222F25;
+    --color-neutral: #0E130F;
+    --color-neutral-dark: #0A0E0B;
+    --color-orange: #DC8A3E;
+    --color-red: #C13333;
+}
+
+html.dark body {
+    background-color: var(--color-neutral);
+}
+
+html.dark h1 {
+    color: var(--color-primary);
+}
+
+html.dark .numbering__value {
+    color: var(--color-primary);
+}
+
+html.dark .grid {
+    background-color: var(--color-neutral-light);
+    border-color: var(--color-neutral-light);
+}
+
+html.dark .grid__square {
+    background-color: var(--color-neutral-dark);
+}
+
+html.dark .grid__square:hover {
+    background-color: var(--color-neutral);
+}
+
+html.dark .grid__square--home svg {
+    stroke: var(--color-white);
+}
+
+html.dark .grid__square--slash svg {
+    filter: drop-shadow(0 0 8px var(--color-orange));
+    stroke: var(--color-orange);
+}
+
+html.dark .grid__square--dig svg,
+html.dark .grid__square--douse svg {
+    stroke: var(--color-primary);
+}
+
+html.dark .grid__square--fire > svg {
+    stroke: var(--color-orange);
+}
+
+html.dark .grid__square--fire div svg {
+    filter: drop-shadow(0 0 8px var(--color-red));
+    stroke: var(--color-red);
+}
+
+html.dark .grid__square--fire.grid__square--home > svg {
+    filter: drop-shadow(0 0 8px var(--color-red));
+    stroke: var(--color-red);
+}
+
+html.dark .grid__square--coordinates {
+    outline-color: var(--color-primary);
+}
+
+html.dark .actions {
+    background-color: var(--color-neutral-dark);
+    border-color: var(--color-neutral-light);
+    color: var(--color-primary);
+}
+
+html.dark .actions__item svg {
+    stroke: var(--color-primary);
+}
+
+html.dark .message {
+    background-color: var(--color-neutral-dark);
+    border-color: var(--color-neutral-light);
+    color: var(--color-primary);
+}
+
+html.dark .menu .menu__item:hover {
+    background-color: var(--color-neutral-light);
+}
+
+html.dark .menu .menu__item:hover svg {
+    stroke: var(--color-white);
+}
+
+html.dark .menu .menu__item--active {
+    background-color: var(--color-neutral-light);
+}
+
+html.dark .menu .menu__item--active svg {
+    stroke: var(--color-white);
+}
+
+html.dark .menu svg {
+    stroke: var(--color-primary);
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+body {
+    background-color: var(--color-neutral);
+    font-family: var(--sans-serif);
+    display: grid;
+    place-items: center;
+    margin: 0;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    position: relative;
+}
+
+h1 {
+    font-family: var(--serif);
+    font-weight: normal;
+}
+
+#game {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding: 24px 0;
+    position: relative;
+}
+
+#board {
+    position: relative;
+}
+
+.dice {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 40px;
+    margin-top: auto;
+    padding: 8px 0;
+    position: relative;
+}
+
+.dice__cube {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-black);
+    border-radius: 4px;
+    height: 48px;
+    width: 48px;
+}
+
+.dice__cube[data-value="1"] {
+    background-image: radial-gradient(circle 6px at center, black 50%, transparent 50%);
+}
+
+.dice__cube[data-value="2"] {
+    background-image: radial-gradient(circle 6px at 14px 14px, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at calc(100% - 14px) calc(100% - 14px), black 50%, transparent 50%);
+}
+
+.dice__cube[data-value="3"] {
+    background-image: radial-gradient(circle 6px at calc(100% - 12px) 12px, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at center, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at 12px calc(100% - 12px), black 50%, transparent 50%);
+}
+
+.dice__cube[data-value="4"] {
+    background-image: radial-gradient(circle 6px at 14px 14px, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at calc(100% - 14px) 14px, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at 14px calc(100% - 14px), black 50%, transparent 50%),
+                      radial-gradient(circle 6px at calc(100% - 14px) calc(100% - 14px), black 50%, transparent 50%);
+}
+
+.dice__cube[data-value="5"] {
+    background-image: radial-gradient(circle 6px at 14px 14px, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at calc(100% - 14px) 14px, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at center, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at 14px calc(100% - 14px), black 50%, transparent 50%),
+                      radial-gradient(circle 6px at calc(100% - 14px) calc(100% - 14px), black 50%, transparent 50%);
+}
+
+.dice__cube[data-value="6"] {
+    background-image: radial-gradient(circle 6px at 14px 12px, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at calc(100% - 14px) 12px, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at 14px 50%, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at calc(100% - 14px) 50%, black 50%, transparent 50%),
+                      radial-gradient(circle 6px at 14px calc(100% - 12px), black 50%, transparent 50%),
+                      radial-gradient(circle 6px at calc(100% - 14px) calc(100% - 12px), black 50%, transparent 50%);
+}
+
+.numbering {
+    list-style: none;
+    position: absolute;
+}
+
+.numbering--columns {
+    bottom: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 8px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.numbering--rows {
+    align-items: center;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    height: 100%;
+    padding: 0 16px;
+    right: 100%;
+    text-align: center;
+}
+
+.numbering__value {
+    font-family: var(--serif);
+    font-style: italic;
+}
+
+.grid {
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-black);
+    border-radius: 4px;
+    display: grid;
+    gap: 2px;
+    grid-template-columns: repeat(6, 40px);
+    grid-template-rows: repeat(6, 40px);
+}
+
+.grid__square {
+    background-color: var(--color-neutral-light);
+    cursor: pointer;
+    display: grid;
+}
+
+.grid__square:nth-child(1) {
+    border-top-left-radius: 4px;
+}
+
+.grid__square:nth-child(6) {
+    border-top-right-radius: 4px;
+}
+
+.grid__square:nth-child(31) {
+    border-bottom-left-radius: 4px;
+}
+
+.grid__square:nth-child(36) {
+    border-bottom-right-radius: 4px;
+}
+
+@media (hover: hover) {
+    .grid__square:hover {
+        background-color: var(--color-neutral);
+    }
+}
+
+.grid__square--coordinates {
+    outline: 2px solid var(--color-black);
+}
+
+.grid__square svg {
+    animation: showSVG 0.5s ease forwards;
+    clip-path: polygon(-2px -2px, -2px -2px, -2px calc(100% + 2px), -2px calc(100% + 2px));
+    grid-area: 1 / 1 / 1 / 1;
+    pointer-events: none;
+    stroke: var(--color-black);
+    user-select: none;
+}
+
+.grid__square div {
+    grid-area: 1 / 1 / 1 / 1;
+}
+
+@keyframes showSVG {
+    to {
+        clip-path: polygon(-2px -2px, calc(100% + 2px) -2px, calc(100% + 2px) calc(100% + 2px), -2px calc(100% + 2px));
+    }
+}
+
+.actions {
+    align-items: center;
+    background-color: var(--color-neutral-light);
+    border: 2px solid var(--color-black);
+    border-radius: 4px;
+    display: flex;
+    gap: 0;
+    margin-bottom: auto;
+    margin-top: 16px;
+    padding: 0 2px 0 16px;
+    width: 100%;
+}
+
+.actions--hidden {
+    display: none;
+}
+
+.actions__text {
+    font-weight: bold;
+    margin-right: auto;
+}
+
+.actions__item--disabled {
+    opacity: 0.25;
+}
+
+.actions__item--douse svg {
+    padding: 2px;
+}
+
+.actions__item svg {
+    height: 40px;
+    stroke: var(--color-black);
+    width: 40px;
+}
+
+.message {
+    align-items: center;
+    background-color: var(--color-neutral-light);
+    border: 2px solid var(--color-black);
+    border-radius: 4px;
+    display: none;
+    font-weight: bold;
+    gap: 0;
+    justify-content: space-between;
+    margin-bottom: auto;
+    margin-top: 16px;
+    padding: 8px 16px;
+    width: 100%;
+}
+
+.message--active {
+    display: flex;
+}
+
+.menu {
+    display: flex;
+    gap: 8px;
+    padding-top: 24px;
+    position: relative;
+}
+
+.menu__item {
+    background-color: var(--color-neutral-dark);
+    border-radius: 50%;
+    cursor: pointer;
+    display: grid;
+    height: 40px;
+    place-content: center;
+    user-select: none;
+    width: 40px;
+}
+
+@media (hover: hover) {
+    .menu__item:hover {
+        background-color: var(--color-black);
+    }
+    .menu__item:hover svg {
+        stroke: var(--color-primary);
+    }
+}
+
+.menu__item--active {
+    background-color: var(--color-neutral-dark);
+}
+
+.menu__item svg {
+    height: 24px;
+    pointer-events: none;
+    stroke: var(--color-black);
+    width: 24px;
+}
+
+/* Luật chơi */
+.rules-panel {
+    background-color: var(--color-neutral-light);
+    border: 2px solid var(--color-black);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 260px;
+}
+
+.rules-panel h2 {
+    font-family: var(--serif);
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--color-black);
+}
+
+.rules-panel ul {
+    padding-left: 1.2rem;
+    margin: 0;
+}
+
+.rules-panel li {
+    margin-bottom: 4px;
+}
+
+.rules-panel .highlight {
+    font-weight: bold;
+    color: #C13333;
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+<main id="game">
+	<h1>🔥 Chữa cháy rừng</h1>
+	<div class="dice">
+		<div class="dice__cube dice__cube--column" data-value="1"></div>
+		<div class="dice__cube dice__cube--row" data-value="1"></div>
+	</div>
+	<div id="board">
+		<ul class="numbering numbering--columns">
+			<li class="numbering__value">1</li>
+			<li class="numbering__value">2</li>
+			<li class="numbering__value">3</li>
+			<li class="numbering__value">4</li>
+			<li class="numbering__value">5</li>
+			<li class="numbering__value">6</li>
+		</ul>
+		<ul class="numbering numbering--rows">
+			<li class="numbering__value">1</li>
+			<li class="numbering__value">2</li>
+			<li class="numbering__value">3</li>
+			<li class="numbering__value">4</li>
+			<li class="numbering__value">5</li>
+			<li class="numbering__value">6</li>
+		</ul>
+		<div class="grid">
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+			<div class="grid__square"></div>
+		</div>
+	</div>
+	<nav class="actions">
+		<div class="actions__text">Hành động: <span class="actions__available">0</span></div>
+		<div class="actions__item actions__item--douse actions__item--disabled" title="Dập lửa">
+			<svg viewBox="0 0 32 32">
+				<use xlink:href="#douse"></use>
+			</svg>
+		</div>
+		<div class="actions__item actions__item--dig actions__item--disabled" title="Đào hào">
+			<svg viewBox="0 0 32 32">
+				<use xlink:href="#dig"></use>
+			</svg>
+		</div>
+	</nav>
+	<div class="message"></div>
+	<nav class="menu">
+		<div class="menu__item menu__item--restart" title="Chơi lại">
+			<svg viewBox="0 0 32 32">
+				<use xlink:href="#restart"></use>
+			</svg>
+		</div>
+		
+		<div class="menu__item menu__item--mode" title="Chế độ tối/sáng">
+			<svg viewBox="0 0 32 32">
+				<use xlink:href="#mode"></use>
+			</svg>
+		</div>
+	</nav>
+
+	<!-- Luật chơi bằng tiếng Việt -->
+	<div class="rules-panel">
+		<h2>📜 Luật chơi</h2>
+		<ul>
+			<li><span class="highlight">🎯 Mục tiêu:</span> Bảo vệ ngôi nhà 🏠 khỏi đám cháy rừng!</li>
+			<li><span class="highlight">🎲 Xúc xắc:</span> Mỗi lượt, 2 xúc xắc sẽ chỉ định vị trí ô trên bảng 6×6.</li>
+			<li><span class="highlight">🔥 Cháy rừng:</span> Ô trống sẽ bị đánh dấu cháy (gạch chéo), ô cháy sẽ lan thành lửa thật và lan sang 4 ô xung quanh.</li>
+			<li><span class="highlight">💧 Dập lửa:</span> Nhấp vào ô đang cháy (gạch chéo) để dập lửa, tiêu tốn 1 hành động.</li>
+			<li><span class="highlight">⛏️ Đào hào:</span> Nhấp vào ô trống để đào hào chống cháy, ngăn lửa lan. Số lần đào hào có hạn!</li>
+			<li><span class="highlight">⚡ Hành động:</span> Mỗi lượt bạn có 1 hành động. Nếu xúc xắc rơi vào nhà, bạn được thêm 1 hành động.</li>
+			<li><span class="highlight">🏆 Chiến thắng:</span> Dập tắt toàn bộ đám cháy trước khi lửa chạm vào nhà!</li>
+			<li><span class="highlight">💀 Thua cuộc:</span> Nếu lửa cháy đến nhà, trò chơi kết thúc.</li>
+		</ul>
+	</div>
+</main>
+
+<svg class="sprite" style="display: none;">
+	<defs>
+		<g id="restart" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+			<path d="M29 16 C29 22 24 29 16 29 8 29 3 22 3 16 3 10 8 3 16 3 21 3 25 6 27 9 M20 10 L27 9 28 2" />
+		</g>
+		<g id="info" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+			<path d="M16 14 L16 23 M16 8 L16 10" />
+			<circle cx="16" cy="16" r="14" />
+		</g>
+		<g id="mode" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+			<path d="M14 2C 9 2 3 7 3 15 3 23 9 29 17 29 25 29 30 23 30 18 19 25 7 13 14 2Z" />
+		</g>
+		<g id="home" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+			<path d="M14.2679 8C15.0377 6.66667 16.9623 6.66667 17.7321 8L24.6603 20C25.4301 21.3333 24.4678 23 22.9282 23H9.0718C7.5322 23 6.56995 21.3333 7.33975 20L14.2679 8Z"/>
+		</g>
+		<g id="slash" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+			<path d="M9 23L23 9"/>
+		</g>
+		<g id="fire" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+			<path d="M9 23L23 9M23 23L9 9"/>
+		</g>
+		<g id="douse" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+			<circle cx="16" cy="16" r="10"/>
+		</g>
+		<g id="dig" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+			<rect x="8" y="8" width="16" height="16" rx="1"/>
+		</g>
+	</defs>
+</svg>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Elements
+    const DICE_COL = document.querySelector('.dice__cube--column');
+    const DICE_ROW = document.querySelector('.dice__cube--row');
+    const GRID = document.querySelector('.grid');
+    const ACTION = document.querySelector('.actions');
+    const ACTIONS = document.querySelector('.actions__available');
+    const MESSAGE = document.querySelector('.message');
+
+    // Global
+    var digCount = 2;
+    var gameEnded = false;
+
+    // Icons
+    const HOME_SVG = `<svg viewBox="0 0 32 32"><use xlink:href="#home"></use></svg>`;
+    const SLASH_SVG = `<svg viewBox="0 0 32 32"><use xlink:href="#slash"></use></svg>`;
+    const FIRE_SVG = `<svg viewBox="0 0 32 32"><use xlink:href="#fire"></use></svg>`;
+    const DOUSE_SVG = `<svg viewBox="0 0 32 32"><use xlink:href="#douse"></use></svg>`;
+    const DIG_SVG = `<svg viewBox="0 0 32 32"><use xlink:href="#dig"></use></svg>`;
+
+    // Start Game
+    function newGame() {
+        // Place home
+        let col = Math.floor(Math.random() * 6) + 1;
+        let row = Math.floor(Math.random() * 6) + 1;
+        let homeCoordinates = ((row - 1) * 6) + col;
+        DICE_COL.setAttribute('data-value', col);
+        DICE_ROW.setAttribute('data-value', row);
+        GRID.querySelector('.grid__square:nth-child('+homeCoordinates+')').classList.add('grid__square--home');
+        GRID.querySelector('.grid__square:nth-child('+homeCoordinates+')').innerHTML = HOME_SVG;
+
+        // determine how many digs available
+        if ([1, 6, 31, 36].indexOf(homeCoordinates) >= 0) {
+            digCount = 0;
+        } else if ([2, 3, 4, 5, 7, 12, 13, 18, 19, 24, 25, 30, 32, 33, 34, 35].indexOf(homeCoordinates) >= 0) {
+            digCount = 1;
+        }
+
+        // Start fire
+        let homeNeighbors = [];
+
+        homeNeighbors.push(homeCoordinates);
+        if (homeCoordinates > 6 && (homeCoordinates - 1) % 6 !== 0) { homeNeighbors.push(homeCoordinates - 7); }
+        if (homeCoordinates > 6) { homeNeighbors.push(homeCoordinates - 6); }
+        if (homeCoordinates > 6 && homeCoordinates % 6 !== 0) { homeNeighbors.push(homeCoordinates - 5); }
+        if ((homeCoordinates - 1) % 6 !== 0) { homeNeighbors.push(homeCoordinates - 1); }
+        if (homeCoordinates % 6 !== 0) { homeNeighbors.push(homeCoordinates + 1); }
+        if (homeCoordinates < 31 && (homeCoordinates - 1) % 6 !== 0) { homeNeighbors.push(homeCoordinates + 5); }
+        if (homeCoordinates < 31) { homeNeighbors.push(homeCoordinates + 6); }
+        if (homeCoordinates < 31 && homeCoordinates % 6 !== 0) { homeNeighbors.push(homeCoordinates + 7); }
+
+        setTimeout(function() {
+            let fireCoordinates;
+            do {
+                col = Math.floor(Math.random() * 6) + 1;
+                row = Math.floor(Math.random() * 6) + 1;
+                fireCoordinates = ((row - 1) * 6) + col;
+                DICE_COL.setAttribute('data-value', col);
+                DICE_ROW.setAttribute('data-value', row);
+            } while (homeNeighbors.indexOf(fireCoordinates) !== -1);
+
+            spreadFire(fireCoordinates);
+        }, 500);
+
+        // Next turn
+        setTimeout(function() {
+            rollDice();
+        }, 1000);
+
+    }
+
+    // Player Turn
+    function playerAction(event) {
+        // if slash, then douse
+        if (event.target.classList.contains('grid__square--slash') && !event.target.classList.contains('grid__square--douse')) {
+            disableActions();
+            ACTIONS.innerHTML = parseInt(ACTIONS.innerHTML) - 1;
+            event.target.classList.remove('grid__square--slash');
+            event.target.classList.add('grid__square--douse');
+            let douse = document.createElement('div');
+            douse.innerHTML = DOUSE_SVG;
+            event.target.appendChild(douse);
+        }
+
+        // if empty, then dig (if able)
+        else if (event.target.classList.length === 1 && digCount > 0) {
+            disableActions();
+            ACTIONS.innerHTML = parseInt(ACTIONS.innerHTML) - 1;
+            event.target.classList.add('grid__square--dig');
+            event.target.innerHTML = DIG_SVG;
+            digCount -= 1;
+        }
+
+        // selected something else
+        else {
+            return;
+        }
+
+        // check for extra action
+        if (parseInt(ACTIONS.innerHTML) > 0) {
+            // check if won
+            if (document.querySelectorAll('.grid__square--slash').length < 1) {
+                endGame();
+                return;
+            }
+
+            enableActions();
+            return;
+        }
+
+        // Fire spreads
+        setTimeout(function() {
+            let slashes = document.querySelectorAll('.grid__square--slash');
+
+            if (slashes.length < 1) {
+                endGame();
+            } else {
+                slashes.forEach(function(slash) {
+                    let nthSquare = Array.from(GRID.children).indexOf(slash) + 1;
+                    spreadFire(nthSquare);
+                });
+
+                // check home
+                if (document.querySelector('.grid__square--home').classList.contains('grid__square--slash')) {
+                    endGame();
+                }
+            }
+        }, 500);
+
+        // Random event
+        setTimeout(function() {
+            if (!gameEnded) {
+                rollDice();
+            }
+        }, 1000);
+    }
+
+    // Functions
+    function disableActions() {
+        GRID.style.pointerEvents = 'none';
+        document.querySelector('.actions__item--douse').classList.add('actions__item--disabled');
+        document.querySelector('.actions__item--dig').classList.add('actions__item--disabled');
+    }
+
+    function enableActions() {
+        GRID.style.pointerEvents = '';
+        document.querySelector('.actions__item--douse').classList.remove('actions__item--disabled');
+
+        if (digCount > 0) {
+            document.querySelector('.actions__item--dig').classList.remove('actions__item--disabled');
+        }
+    }
+
+    function rollDice() {
+        // reset actions
+        let actionCount = 1;
+
+        // new dice values
+        let col = Math.floor(Math.random() * 6) + 1;
+        let row = Math.floor(Math.random() * 6) + 1;
+        let nthSquare = ((row - 1) * 6) + col;
+
+        DICE_COL.setAttribute('data-value', col);
+        DICE_ROW.setAttribute('data-value', row);
+
+        // is empty
+        if (GRID.querySelector('.grid__square:nth-child('+nthSquare+')').classList.length === 1) {
+            GRID.querySelector('.grid__square:nth-child('+nthSquare+')').classList.add('grid__square--slash');
+            GRID.querySelector('.grid__square:nth-child('+nthSquare+')').innerHTML = SLASH_SVG;
+        }
+
+        // is slash
+        else if (GRID.querySelector('.grid__square:nth-child('+nthSquare+')').classList.contains('grid__square--slash')) {
+            spreadFire(nthSquare);
+        }
+
+        // is home
+        else if (GRID.querySelector('.grid__square:nth-child('+nthSquare+')').classList.contains('grid__square--home')) {
+            actionCount = 2;
+        }   
+
+        // highlight coordinates
+        if (GRID.querySelectorAll('.grid__square--coordinates').length > 0) {
+            GRID.querySelector('.grid__square--coordinates').classList.remove('grid__square--coordinates');
+        }
+
+        GRID.querySelector('.grid__square:nth-child('+nthSquare+')').classList.add('grid__square--coordinates');
+
+        // check if fire can still spread
+        let slashes = document.querySelectorAll('.grid__square--slash');
+
+        if (slashes.length < 1) {
+            endGame();
+        }
+
+        // check if house got burned
+        if (document.querySelector('.grid__square--home').classList.contains('grid__square--slash')) {
+            endGame();
+        }
+
+        // display available actions
+        if (!gameEnded) {
+            setTimeout(function() {
+                ACTIONS.innerHTML = actionCount;
+                enableActions();
+            }, 500);
+        }
+    }
+
+    function spreadFire(nthSquare) {
+        GRID.querySelector('.grid__square:nth-child('+nthSquare+')').classList.remove('grid__square--slash');
+        GRID.querySelector('.grid__square:nth-child('+nthSquare+')').classList.add('grid__square--fire');
+        let fire = document.createElement('div');
+        fire.innerHTML = FIRE_SVG;
+        GRID.querySelector('.grid__square:nth-child('+nthSquare+')').appendChild(fire);
+
+        let neighboringSquares = [];
+
+        if (nthSquare > 6) { neighboringSquares.push(nthSquare - 6); }
+        if (nthSquare < 31) { neighboringSquares.push(nthSquare + 6); }
+        if (nthSquare % 6 !== 0) { neighboringSquares.push(nthSquare + 1); }
+        if ((nthSquare - 1) % 6 !== 0) { neighboringSquares.push(nthSquare - 1); }
+
+        neighboringSquares.forEach(function(neighbor) {
+            // douse or dig
+            if (GRID.querySelector('.grid__square:nth-child('+neighbor+')').classList.contains('grid__square--douse') ||
+                GRID.querySelector('.grid__square:nth-child('+neighbor+')').classList.contains('grid__square--dig')) {
+                return;
+            }
+
+            // home, not burned
+            else if (GRID.querySelector('.grid__square:nth-child('+neighbor+')').classList.contains('grid__square--home') && !gameEnded) {
+                GRID.querySelector('.grid__square:nth-child('+neighbor+')').classList.add('grid__square--slash');
+                let slash = document.createElement('div');
+                slash.innerHTML = SLASH_SVG;
+                GRID.querySelector('.grid__square:nth-child('+neighbor+')').appendChild(slash);
+                return;
+            }
+
+            // fire
+            else if (GRID.querySelector('.grid__square:nth-child('+neighbor+')').classList.contains('grid__square--fire')) {
+                return;
+            }
+
+            // slash
+            else if (GRID.querySelector('.grid__square:nth-child('+neighbor+')').classList.contains('grid__square--slash')) {
+                return;
+            }
+
+            // not home (at this point, an empty square)
+            else if (!GRID.querySelector('.grid__square:nth-child('+neighbor+')').classList.contains('grid__square--home')) {
+                GRID.querySelector('.grid__square:nth-child('+neighbor+')').classList.add('grid__square--slash');
+                GRID.querySelector('.grid__square:nth-child('+neighbor+')').innerHTML = SLASH_SVG;
+            }
+        });
+    }
+
+    function endGame() {
+        // used to stop random event
+        gameEnded = true;
+
+        // disable actions
+        disableActions();
+
+        // if home is burned, spread fire until unable and compose message
+        if (document.querySelector('.grid__square--home').classList.contains('grid__square--slash')) {
+            let spreadInterval = setInterval(function() {
+                let slashes = document.querySelectorAll('.grid__square--slash');
+                if (slashes.length > 0) {
+                    slashes.forEach(function(slash) {
+                        let nthSquare = Array.from(GRID.children).indexOf(slash) + 1;
+                        if (slash.classList.contains('grid__square--slash')) {
+                            spreadFire(nthSquare);
+                        }
+                    });
+                } else {
+                    clearInterval(spreadInterval);
+                    let emptySquares = document.querySelectorAll('[class="grid__square"]');
+                    MESSAGE.innerHTML = `<span>Bạn đã thua!</span><span>Điểm: ${emptySquares.length}</span>`;
+                    ACTION.classList.add('actions--hidden');
+                    MESSAGE.classList.add('message--active');
+                }
+            }, 500);
+        }
+
+        // if home is saved, calculate points and compose message
+        if (!document.querySelector('.grid__square--home').classList.contains('grid__square--slash')) {
+            let emptySquares = document.querySelectorAll('[class="grid__square"]');
+            MESSAGE.innerHTML = `<span>Bạn đã thắng!</span><span>Điểm: ${emptySquares.length}</span>`;
+            ACTION.classList.add('actions--hidden');
+            MESSAGE.classList.add('message--active');
+        }        
+    }
+
+    function restart() {
+        // disable restart button
+        document.querySelector('.menu__item--restart').style.pointerEvents = 'none';
+
+        // reset data
+        digCount = 2;
+        gameEnded = false;
+
+        // reset board
+        GRID.querySelectorAll('.grid__square').forEach(function(square) {
+            square.innerHTML = '';
+            square.classList = 'grid__square';
+        });
+
+        // reset actions and message
+        ACTION.classList.remove('actions--hidden');
+        MESSAGE.classList.remove('message--active');
+
+        // start new game
+        newGame();
+
+        // enable restart button once game is ready
+        setTimeout(function() {
+            document.querySelector('.menu__item--restart').style.pointerEvents = '';
+        }, 1000);
+
+    }
+
+    function toggleMode() {
+        // change color scheme
+        document.querySelector('.menu__item--mode').classList.toggle('menu__item--active');
+        document.querySelector('html').classList.toggle('dark');
+
+        // save data
+        localStorage.setItem('theme', document.querySelector('html').getAttribute('class'));
+
+        // update favicon
+        let favicons = document.querySelectorAll('link[rel*="icon"]');
+
+        if (document.querySelector('html').classList.contains('dark')) {
+            favicons.forEach(function(link) {
+                let href = link.getAttribute('href').replace('favicon/', 'favicon/dark-');
+                link.setAttribute('href', href);
+            });
+        } else {
+            favicons.forEach(function(link) {
+                let href = link.getAttribute('href').replace('favicon/dark-', 'favicon/');
+                link.setAttribute('href', href);
+            });
+        }
+    }
+
+    function checkTheme() {
+        if (localStorage.getItem('theme')) {
+            toggleMode();
+        }
+    }
+
+    GRID.addEventListener('click', function(event) {
+        playerAction(event);
+    });
+
+    document.querySelector('.menu__item--restart').addEventListener('click', restart);
+    document.querySelector('.menu__item--mode').addEventListener('click', toggleMode);
+
+    checkTheme();
+    newGame();
+
+}, false);
+</script>
+</body>
+</html>
