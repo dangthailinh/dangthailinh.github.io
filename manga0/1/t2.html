@@ -422,6 +422,12 @@ function toggleMenu() {
         transform: translate(2px, 2px);
         box-shadow: 3px 3px 0 #000;
     }
+  /* Giữ kiểu manga cũ, chỉ thu gọn và đưa nút về góc trái. */
+  .main { justify-content:flex-start; margin-top:22px; padding-left:clamp(16px,4vw,48px); }
+  .manga-btn { padding:9px 17px; font-size:13px; box-shadow:4px 4px 0 #000; }
+  .manga-btn:hover { transform:translate(-3px,-3px); box-shadow:7px 7px 0 #e63946; }
+  .manga-btn:active { transform:translate(1px,1px); box-shadow:2px 2px 0 #000; }
+  @media (max-width:480px) { .main { padding-left:14px; } .manga-btn { padding:8px 13px; font-size:12px; } }
 </style>
 </head>
 

@@ -980,7 +980,7 @@ function toggleMenu() {
 
       <h1 id="hero-title" style="margin: 0; font-size: 3rem; text-align: center;">LINH OsiMi Wellcome to my page!</h1>
 
-      <section class="linh-helpdesk" id="linhHelpDesk" aria-label="Linh Help Desk">
+      <section class="linh-helpdesk is-hidden" id="linhHelpDesk" aria-label="Linh Help Desk">
         <div class="linh-helpdesk__bar">
           <span class="linh-helpdesk__app-icon">✦</span>
           <strong>Linh Help Desk</strong>
@@ -1013,7 +1013,7 @@ function toggleMenu() {
           <div class="linh-helpdesk__route-grid" id="helpDeskRouteGrid"></div>
         </div>
       </section>
-      <button class="linh-helpdesk__reopen" id="helpDeskReopen" type="button" hidden>Mở Linh Help Desk</button>
+      <button class="linh-helpdesk__reopen" id="helpDeskReopen" type="button">Mở Linh Help Desk</button>
         <div class="hero-content" style="max-width: 1200px; ..."></div>
         
         <div class="profile-section" id="profile-section" style="display: flex; align-items: center; justify-content: center; gap: 30px; max-width: 800px; width: 100%; flex-wrap: wrap; overflow: hidden;">
@@ -3563,17 +3563,17 @@ function escHtml(str) {
   setInterval(fetchCryptoPrices, 60000); // cập nhật mỗi phút
 </script>
 
-<!-- 🔹 Vietnam Weather Info (Animated & Random Render) -->
-<div class="vn-weather-card">
-  <div class="vn-weather-icon" id="weather-icon">🌤️</div>
-  <div class="vn-weather-title">Vietnam Weather</div>
+<!-- 🔹 Local weather, based on the visitor's browser-approved location -->
+<div class="vn-weather-card" aria-live="polite">
+  <div class="vn-weather-icon" id="weather-icon">📍</div>
+  <div class="vn-weather-title">Thời tiết tại vị trí của bạn</div>
   <div class="vn-weather-info">
     <div><strong>Temperature:</strong> <span id="temp">--</span>°C</div>
     <div><strong>Humidity:</strong> <span id="humidity">--</span>%</div>
     <div><strong>Condition:</strong> <span id="condition">--</span></div>
     <div><strong>Wind:</strong> <span id="wind">--</span> km/h</div>
   </div>
-  <div class="vn-update-time" id="weather-update-time"></div>
+  <div class="vn-update-time" id="weather-update-time">Đang xin quyền xem vị trí…</div>
 </div>
 
 <style>
@@ -3631,39 +3631,79 @@ function escHtml(str) {
 </style>
 
 <script>
-  const weatherStates = [
-    { icon: "☀️", condition: "Sunny", tempRange: [30, 36], humidity: [30, 50], wind: [5, 15] },
-    { icon: "🌤️", condition: "Partly Cloudy", tempRange: [27, 33], humidity: [40, 60], wind: [5, 18] },
-    { icon: "⛅", condition: "Cloudy", tempRange: [25, 30], humidity: [50, 70], wind: [10, 20] },
-    { icon: "🌧️", condition: "Rainy", tempRange: [22, 28], humidity: [70, 95], wind: [10, 25] },
-    { icon: "⛈️", condition: "Thunderstorm", tempRange: [23, 29], humidity: [80, 100], wind: [20, 35] },
-    { icon: "🌫️", condition: "Foggy", tempRange: [20, 25], humidity: [80, 95], wind: [2, 8] }
-  ];
+  (function () {
+    const weatherCode = {
+      0: ['☀️', 'Trời quang'], 1: ['🌤️', 'Ít mây'], 2: ['⛅', 'Có mây'], 3: ['☁️', 'Nhiều mây'],
+      45: ['🌫️', 'Sương mù'], 48: ['🌫️', 'Sương mù đóng băng'],
+      51: ['🌦️', 'Mưa phùn nhẹ'], 53: ['🌦️', 'Mưa phùn'], 55: ['🌧️', 'Mưa phùn dày'],
+      56: ['🌧️', 'Mưa phùn đóng băng'], 57: ['🌧️', 'Mưa phùn đóng băng dày'],
+      61: ['🌦️', 'Mưa nhẹ'], 63: ['🌧️', 'Mưa vừa'], 65: ['🌧️', 'Mưa to'],
+      66: ['🌧️', 'Mưa đóng băng'], 67: ['🌧️', 'Mưa đóng băng to'],
+      71: ['🌨️', 'Tuyết nhẹ'], 73: ['🌨️', 'Tuyết vừa'], 75: ['❄️', 'Tuyết dày'], 77: ['❄️', 'Hạt tuyết'],
+      80: ['🌦️', 'Mưa rào nhẹ'], 81: ['🌧️', 'Mưa rào'], 82: ['⛈️', 'Mưa rào to'],
+      85: ['🌨️', 'Tuyết rào nhẹ'], 86: ['❄️', 'Tuyết rào dày'],
+      95: ['⛈️', 'Dông'], 96: ['⛈️', 'Dông có mưa đá'], 99: ['⛈️', 'Dông mạnh có mưa đá']
+    };
+    const icon = document.getElementById('weather-icon');
+    const temp = document.getElementById('temp');
+    const humidity = document.getElementById('humidity');
+    const condition = document.getElementById('condition');
+    const wind = document.getElementById('wind');
+    const updated = document.getElementById('weather-update-time');
 
-  function getRandomInRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+    function showUnavailable(message) {
+      icon.textContent = '📍';
+      temp.textContent = '—';
+      humidity.textContent = '—';
+      condition.textContent = 'Chưa có dữ liệu';
+      wind.textContent = '—';
+      updated.textContent = message;
+    }
 
-  function renderWeather() {
-    const randomWeather = weatherStates[Math.floor(Math.random() * weatherStates.length)];
-    const temp = getRandomInRange(randomWeather.tempRange[0], randomWeather.tempRange[1]);
-    const humidity = getRandomInRange(randomWeather.humidity[0], randomWeather.humidity[1]);
-    const wind = getRandomInRange(randomWeather.wind[0], randomWeather.wind[1]);
+    async function loadWeather(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const endpoint = 'https://api.open-meteo.com/v1/forecast?latitude=' + encodeURIComponent(latitude) +
+        '&longitude=' + encodeURIComponent(longitude) +
+        '&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto';
 
-    document.getElementById("weather-icon").textContent = randomWeather.icon;
-    document.getElementById("condition").textContent = randomWeather.condition;
-    document.getElementById("temp").textContent = temp;
-    document.getElementById("humidity").textContent = humidity;
-    document.getElementById("wind").textContent = wind;
+      try {
+        const response = await fetch(endpoint);
+        if (!response.ok) throw new Error('Weather request failed');
+        const data = await response.json();
+        const current = data.current;
+        if (!current) throw new Error('Weather data missing');
+        const state = weatherCode[current.weather_code] || ['🌡️', 'Không xác định'];
 
-    const now = new Date();
-    const options = { timeZone: 'Asia/Ho_Chi_Minh', hour12: false };
-    const timeStr = now.toLocaleTimeString('en-GB', options);
-    document.getElementById("weather-update-time").textContent = "Updated at " + timeStr + " ICT";
-  }
+        icon.textContent = state[0];
+        temp.textContent = Math.round(current.temperature_2m);
+        humidity.textContent = Math.round(current.relative_humidity_2m);
+        condition.textContent = state[1];
+        wind.textContent = Math.round(current.wind_speed_10m);
+        updated.textContent = 'Cập nhật lúc ' + String(current.time || '').slice(11, 16) + ' (giờ địa phương)';
+      } catch (error) {
+        console.error('Không thể tải thời tiết:', error);
+        showUnavailable('Không thể tải dữ liệu thời tiết. Hãy thử lại sau.');
+      }
+    }
 
-  renderWeather();
-  setInterval(renderWeather, 60000); // Thay đổi ngẫu nhiên mỗi phút
+    function requestWeather() {
+      if (!navigator.geolocation) {
+        showUnavailable('Trình duyệt này không hỗ trợ định vị.');
+        return;
+      }
+      updated.textContent = 'Đang lấy thời tiết tại vị trí của bạn…';
+      navigator.geolocation.getCurrentPosition(loadWeather, function (error) {
+        const message = error.code === error.PERMISSION_DENIED
+          ? 'Hãy cho phép vị trí để xem thời tiết địa phương.'
+          : 'Không xác định được vị trí hiện tại.';
+        showUnavailable(message);
+      }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 });
+    }
+
+    requestWeather();
+    setInterval(requestWeather, 15 * 60 * 1000);
+  }());
 </script>
 
 </div>
@@ -4251,6 +4291,33 @@ nav a, .logo-container span {
   @keyframes decorFloat { 50% { transform:translateY(-12px) rotate(5deg); } }
   @media (max-width:768px) { .retro-decor__phone,.retro-decor__linux,.retro-decor__finder,.retro-decor__switch,.retro-decor__toaster { display:none; } .retro-decor__windows { top:76px; left:9px; width:34px; opacity:.38; } .dancing-cat { left:9px; bottom:8px; width:72px; } .dancing-cat span { left:62%; top:-5%; font-size:9px; } }
   @media (prefers-reduced-motion:reduce) { .dancing-cat,.retro-decor__item { animation:none; } }
+
+  /* Mobile-only polish: desktop layout intentionally remains unchanged. */
+  @media (max-width:768px) {
+    /* Prevent the inline 100%-wide hero container plus padding from overflowing. */
+    .hero, .hero > .hero-content, .hero .profile-section, .hero .about-me { width:100% !important; max-width:100% !important; box-sizing:border-box; }
+    .hero { background-size:100% auto !important; background-position:center top !important; background-repeat:repeat-y !important; }
+    .hero > .hero-content { padding:0 12px !important; align-items:center !important; }
+    #hero-title { width:100%; max-width:100%; overflow-wrap:anywhere; text-align:center !important; }
+    .hero .profile-section { flex-direction:column !important; align-items:center !important; }
+    .hero .about-me, .hero .about-me p { overflow-wrap:anywhere; word-break:normal; }
+    .linh-helpdesk { max-width:100% !important; box-sizing:border-box; }
+    html { font-size:15px; scroll-padding-top:72px; } body { overflow-x:hidden; }
+    .main-header { position:sticky !important; top:0; z-index:10050; min-height:62px; padding:8px 14px !important; background:rgba(15,15,24,.94) !important; backdrop-filter:blur(14px); }
+    .main-header .header-inner { position:relative; min-height:44px; gap:10px; } .logo-container { gap:8px; } .logo-container img { width:38px !important; height:38px !important; } .logo-container span { font-size:16px !important; letter-spacing:.8px; }
+    .menu-toggle { display:grid !important; place-items:center; width:42px; height:42px; margin-left:auto; border:1px solid rgba(255,255,255,.26); border-radius:12px; background:rgba(255,255,255,.09); font-size:23px !important; }
+    .main-header #nav-menu { display:block; position:absolute; top:calc(100% + 8px); left:0; right:0; max-height:0; overflow:hidden; opacity:0; pointer-events:none; border:1px solid transparent; border-radius:16px; background:rgba(18,18,30,.98); box-shadow:0 16px 38px rgba(0,0,0,.42); transform:translateY(-8px); transition:max-height .28s ease,opacity .2s ease,transform .28s ease,border-color .2s ease; }
+    .main-header #nav-menu.active { display:block; max-height:calc(100vh - 82px); padding:8px; overflow:auto; opacity:1; pointer-events:auto; border-color:rgba(255,255,255,.15); transform:translateY(0); }
+    .main-header #nav-menu ul { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; } .main-header #nav-menu li { width:auto; padding:0; } .main-header #nav-menu a { display:block; padding:11px 8px; border-radius:10px; background:rgba(255,255,255,.07); font-size:13px !important; line-height:1.15; text-align:center; }
+    .hero { min-height:unset !important; padding:34px 14px 54px !important; background-size:cover !important; background-position:58% center !important; background-attachment:scroll !important; }
+    .hero > .hero-content { padding:0 !important; gap:20px !important; } #hero-title { font-size:clamp(1.8rem,9vw,2.55rem) !important; line-height:1.08 !important; padding:0 4px !important; }
+    .neonLO-wrap { transform:scale(.72); margin:-28px 0 -54px; } .profile-section { gap:16px !important; padding:14px !important; border-radius:18px; } .profile-img { width:104px !important; height:104px !important; object-fit:cover; object-position:center top; } .about-me { min-width:0 !important; padding:0 !important; font-size:.92rem !important; text-align:center !important; }
+    .linh-helpdesk { width:100% !important; margin:-8px auto 4px !important; border-width:2px; border-radius:8px; } .linh-helpdesk__main { min-height:0; } .linh-helpdesk__choices { gap:7px; padding:12px; } .linh-helpdesk__choices button { min-height:34px; padding:7px 9px; font-size:13px; } .linh-helpdesk__dialogue { min-height:54px; padding:9px 12px; } .linh-helpdesk__dialogue p { font-size:15px; } .linh-helpdesk__conversation { max-height:84px; padding:0 10px 8px; } .linh-helpdesk__routes { padding:9px; } .linh-helpdesk__route-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+    .share-slider-container,.video-gallery-section,.projects-section { width:calc(100vw - 28px) !important; } .share-track { gap:10px; padding:7px 4px; } .share-img { width:84px !important; height:84px !important; object-fit:cover; } .slide-btn { width:38px !important; height:38px !important; padding:0 !important; font-size:18px !important; }
+    .video-card { flex-basis:220px !important; height:142px !important; } .topic-card { padding:14px !important; } .topic-card p { font-size:.88rem !important; } .proj-card__thumb img,.share-img,.profile-img { object-fit:cover; }
+    #soundBtn { right:12px !important; bottom:12px !important; width:46px !important; height:46px !important; } .intro-text span { font-size:clamp(1.55rem,8vw,2.4rem); }
+  }
+  @media (max-width:390px) { .main-header #nav-menu ul { grid-template-columns:1fr; } .logo-container span { font-size:14px !important; } .linh-helpdesk__progress { display:none; } .linh-helpdesk__route-grid { grid-template-columns:1fr; } }
 </style>
 
 <script>
