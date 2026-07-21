@@ -772,3 +772,26 @@ body {
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
   z-index: 2;
 }
+
+/* Site-wide responsive baseline for every linked page. */
+html { -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body { overflow-x:hidden; }
+img, video, iframe { max-width:100%; }
+img { height:auto; }
+button, a, input, select, textarea { -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+@media (max-width:768px) {
+  body { font-size:15px; }
+  header { padding:12px 15px; }
+  .container, .container-detail, .detail-content { width:min(100%, 720px); box-sizing:border-box; margin-left:auto; margin-right:auto; padding-left:14px; padding-right:14px; }
+  .sidebar, .sidebar-detail, .main { width:100%; box-sizing:border-box; margin-left:0; margin-right:0; }
+  .header-image { height:clamp(150px,42vw,230px); object-fit:cover; object-position:center; }
+  .detail-title { font-size:clamp(1.45rem,6vw,2rem); line-height:1.2; }
+  .detail-content img { width:100%; object-fit:cover; }
+  .gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; padding:14px; }
+  .item { min-height:130px; } .item img, .item video { aspect-ratio:1/1; object-fit:cover; }
+  .horizontal-container { gap:14px; padding:14px; }
+}
+@media (max-width:420px) {
+  .gallery { grid-template-columns:1fr; }
+  .container, .container-detail, .detail-content { padding-left:12px; padding-right:12px; }
+}

