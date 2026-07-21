@@ -937,6 +937,34 @@ function toggleMenu() {
 </style>
 
       <h1 id="hero-title" style="margin: 0; font-size: 3rem; text-align: center;">LINH OsiMi Wellcome to my page!</h1>
+
+      <section class="linh-portal" id="linh-portal" aria-label="Cánh cửa khám phá Linh Osimi">
+        <div class="linh-portal__topline"><span></span> MINI QUEST <span></span></div>
+        <div class="linh-portal__scene" id="portalScene">
+          <span class="linh-portal__spark linh-portal__spark--one"></span>
+          <span class="linh-portal__spark linh-portal__spark--two"></span>
+          <span class="linh-portal__spark linh-portal__spark--three"></span>
+          <button class="linh-portal__door" id="portalDoor" type="button" aria-expanded="false" aria-describedby="portalHint">
+            <span class="linh-portal__door-frame">
+              <span class="linh-portal__glow"></span>
+              <span class="linh-portal__inside"><img src="img/assistant-character.gif" alt="Người dẫn đường của Linh Osimi" /></span>
+              <span class="linh-portal__leaf linh-portal__leaf--left"><i></i></span>
+              <span class="linh-portal__leaf linh-portal__leaf--right"><i></i></span>
+              <span class="linh-portal__rune">LO</span>
+            </span>
+          </button>
+        </div>
+        <div class="linh-portal__hud">
+          <div class="linh-portal__level"><span>LV. 01</span><b>KHÁM PHÁ LINH-OSIMI</b><span id="portalScore">0 / 3</span></div>
+          <div class="linh-portal__meter"><i id="portalProgress"></i></div>
+          <p class="linh-portal__dialogue" id="portalHint" aria-live="polite">Chạm vào cánh cửa để bắt đầu hành trình.</p>
+          <div class="linh-portal__actions" id="portalActions" hidden>
+            <button type="button" data-portal-target="#profile-section" data-portal-text="Bạn đã mở hồ sơ của Linh. Cuộn xuống để khám phá câu chuyện!">Hồ sơ Linh</button>
+            <button type="button" data-portal-target="#my-projects" data-portal-text="Quest mới: ghé qua kho dự án của Linh.">Kho dự án</button>
+            <button type="button" data-portal-target="#topicsScroll" data-portal-text="Bản đồ đã mở: chọn một thế giới bạn muốn xem.">Bản đồ chủ đề</button>
+          </div>
+        </div>
+      </section>
         <div class="hero-content" style="max-width: 1200px; ..."></div>
         
         <div class="profile-section" id="profile-section" style="display: flex; align-items: center; justify-content: center; gap: 30px; max-width: 800px; width: 100%; flex-wrap: wrap; overflow: hidden;">
@@ -1216,6 +1244,10 @@ function toggleMenu() {
 .share-track::-webkit-scrollbar-track {
     background: #111;
 }
+
+
+
+
 
 /* --- Ảnh --- */
 .share-img {
@@ -2618,14 +2650,14 @@ document.querySelectorAll('img[data-src]')
   },
 
   {
-    title: "AI Chat Assistant",
+    title: "Interactive Portal",
     num: "03",
-    tags: ["Python", "Gemini API", "Flask"],
-    badge: "AI",
+    tags: ["HTML", "CSS", "JavaScript"],
+    badge: "Game UI",
     image: "img/joker.jpg",
     github: "https://github.com/dangthailinh",
     demo: "assistant.html",
-    desc: "Chatbot web tích hợp Anthropic Claude API với giao diện retro terminal. Backend Flask xử lý conversation history, streaming response real-time qua SSE, hỗ trợ markdown + code highlight.",
+    desc: "Cánh cửa tương tác mini-game ngay trên trang chủ. Người xem mở cổng, nhận nhiệm vụ và di chuyển mượt đến hồ sơ, kho dự án hoặc bản đồ chủ đề.",
 
     videoYoutubeId: "G-rJivBanOM",        
     videoTitle: "AI Chat — Streaming demo với Claude API",
@@ -3704,9 +3736,6 @@ function escHtml(str) {
 })();
 </script>
         </div>
-            <a href="assistant.html" class="chat-icon" style="position: fixed; bottom: 20px; left: 20px; z-index: 100; opacity: 0.7; transition: all 0.3s ease; font-size: 40px; text-decoration: none; color: white; background: rgba(0,0,0,0.5); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-        💬
-    </a>
        
 
     </div>
@@ -4087,5 +4116,88 @@ nav a, .logo-container span {
 }
 
 </style> 
+<style>
+  .linh-portal { --portal-gold:#f8d57a; --portal-pink:#fd5d98; width:min(660px,100%); margin:-20px auto 4px; text-align:center; font-family:Arial,sans-serif; }
+  .linh-portal__topline { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:2px; color:rgba(255,238,192,.86); font:700 10px/1 Arial,sans-serif; letter-spacing:3px; }
+  .linh-portal__topline span { display:block; width:42px; height:1px; background:linear-gradient(90deg,transparent,var(--portal-gold)); }
+  .linh-portal__topline span:last-child { transform:scaleX(-1); }
+  .linh-portal__scene { position:relative; display:grid; place-items:center; min-height:250px; isolation:isolate; }
+  .linh-portal__scene::before { content:""; position:absolute; width:235px; height:235px; border-radius:50%; background:radial-gradient(circle,rgba(253,93,152,.35) 0,rgba(207,89,255,.13) 38%,transparent 68%); filter:blur(5px); animation:portalBreathe 3.4s ease-in-out infinite; }
+  .linh-portal__door { position:relative; z-index:1; width:178px; height:222px; padding:0; border:0; background:transparent; cursor:pointer; filter:drop-shadow(0 18px 19px rgba(0,0,0,.48)); }
+  .linh-portal__door:focus-visible { outline:2px solid #fff4b1; outline-offset:7px; border-radius:12px; }
+  .linh-portal__door-frame { position:absolute; inset:0; display:block; overflow:hidden; border:6px solid #f4c968; border-radius:92px 92px 8px 8px; background:linear-gradient(120deg,#401d4b,#160d28 58%); box-shadow:inset 0 0 0 3px #6d2c77,inset 0 0 30px rgba(255,114,193,.32),0 0 0 3px rgba(255,255,255,.1),0 0 30px rgba(255,197,101,.55); }
+  .linh-portal__door-frame::before { content:""; position:absolute; inset:7px; border:1px solid rgba(255,243,171,.7); border-radius:84px 84px 4px 4px; pointer-events:none; }
+  .linh-portal__inside { position:absolute; inset:8px; display:grid; place-items:end center; overflow:hidden; border-radius:82px 82px 3px 3px; opacity:0; transform:scale(.85); transition:opacity .35s ease .28s,transform .5s cubic-bezier(.2,.8,.2,1) .2s; background:radial-gradient(circle at 50% 24%,#ffe096,#ce4683 28%,#291141 71%); }
+  .linh-portal__inside img { width:142px; height:185px; object-fit:cover; object-position:center top; filter:drop-shadow(0 0 13px rgba(255,255,255,.74)); }
+  .linh-portal__leaf { position:absolute; top:7px; bottom:7px; width:50%; overflow:hidden; background:linear-gradient(125deg,#301638,#6f2b63 50%,#28152d); transition:transform .85s cubic-bezier(.2,.8,.2,1); }
+  .linh-portal__leaf::after { content:""; position:absolute; inset:10px; border:1px solid rgba(255,220,130,.52); border-radius:70px 70px 2px 2px; }
+  .linh-portal__leaf i { position:absolute; top:43%; width:14px; height:14px; border-radius:50%; background:#ffd968; box-shadow:0 0 10px #fff0a1; }
+  .linh-portal__leaf--left { left:0; transform-origin:left center; border-radius:82px 0 0 2px; border-right:1px solid rgba(255,227,143,.7); }
+  .linh-portal__leaf--left i { right:11px; }
+  .linh-portal__leaf--right { right:0; transform-origin:right center; border-radius:0 82px 2px 0; border-left:1px solid rgba(255,227,143,.7); }
+  .linh-portal__leaf--right i { left:11px; }
+  .linh-portal__rune { position:absolute; z-index:2; left:50%; top:23px; display:grid; place-items:center; width:37px; height:37px; border:2px solid #ffe287; border-radius:50%; transform:translateX(-50%); color:#fff7d5; background:#8c3569; box-shadow:0 0 12px rgba(255,216,125,.9); font:700 12px/1 Georgia,serif; letter-spacing:1px; transition:opacity .2s ease; }
+  .linh-portal__glow { position:absolute; inset:9px; border-radius:82px 82px 2px 2px; opacity:0; background:linear-gradient(90deg,rgba(255,178,83,.12),rgba(255,255,239,.95),rgba(255,114,209,.14)); mix-blend-mode:screen; transition:opacity .3s ease; }
+  .linh-portal__door:hover { transform:translateY(-4px); }
+  .linh-portal__scene.is-open .linh-portal__inside { opacity:1; transform:scale(1); }
+  .linh-portal__scene.is-open .linh-portal__leaf--left { transform:perspective(420px) rotateY(-72deg); }
+  .linh-portal__scene.is-open .linh-portal__leaf--right { transform:perspective(420px) rotateY(72deg); }
+  .linh-portal__scene.is-open .linh-portal__rune { opacity:0; }
+  .linh-portal__scene.is-open .linh-portal__glow { opacity:1; animation:portalFlash .75s ease-out; }
+  .linh-portal__spark { position:absolute; z-index:2; width:5px; height:5px; border-radius:50%; background:#fff0ad; box-shadow:0 0 12px 4px rgba(255,122,195,.75); animation:portalFloat 2.7s ease-in-out infinite; }
+  .linh-portal__spark--one { margin:-126px 0 0 -162px; } .linh-portal__spark--two { margin:74px 0 0 156px; animation-delay:.7s; } .linh-portal__spark--three { margin:105px 0 0 -142px; animation-delay:1.4s; }
+  .linh-portal__hud { width:min(510px,100%); margin:0 auto; padding:13px 17px 15px; border:1px solid rgba(255,229,158,.38); border-radius:15px; background:linear-gradient(110deg,rgba(20,11,42,.78),rgba(86,26,68,.68)); box-shadow:0 10px 28px rgba(0,0,0,.28); backdrop-filter:blur(8px); }
+  .linh-portal__level { display:flex; justify-content:space-between; gap:10px; color:#fff3cb; font:700 10px/1 Arial,sans-serif; letter-spacing:1.4px; } .linh-portal__level b { color:#fff; font-size:11px; }
+  .linh-portal__meter { height:6px; margin:9px 0 11px; overflow:hidden; border:1px solid rgba(255,255,255,.16); border-radius:99px; background:rgba(0,0,0,.28); } .linh-portal__meter i { display:block; width:0; height:100%; border-radius:inherit; background:linear-gradient(90deg,#fecc61,#ff6eab,#a36bff); box-shadow:0 0 10px #ff89c5; transition:width .5s ease; }
+  .linh-portal__dialogue { min-height:20px; margin:0; color:rgba(255,255,255,.9); font:14px/1.45 Arial,sans-serif; }
+  .linh-portal__actions { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:12px; } .linh-portal__actions button { min-height:37px; border:1px solid rgba(255,236,174,.4); border-radius:9px; padding:7px 6px; color:#fff; background:rgba(255,255,255,.08); font:700 11px/1.2 Arial,sans-serif; cursor:pointer; transition:transform .16s ease,background .16s ease; } .linh-portal__actions button:hover,.linh-portal__actions button:focus-visible { transform:translateY(-2px); background:linear-gradient(135deg,rgba(245,100,169,.68),rgba(130,75,190,.72)); }
+  @keyframes portalBreathe { 50% { transform:scale(1.14); opacity:.72; } } @keyframes portalFloat { 50% { transform:translateY(-13px) scale(1.4); opacity:.45; } } @keyframes portalFlash { from { opacity:0; } 45% { opacity:.95; } to { opacity:1; } }
+  @media (max-width:600px) { .linh-portal { margin:-27px auto 6px; } .linh-portal__scene { min-height:218px; } .linh-portal__door { width:157px; height:198px; } .linh-portal__inside img { width:126px; height:166px; } .linh-portal__hud { box-sizing:border-box; } .linh-portal__actions { grid-template-columns:1fr; } }
+</style>
+
+<script>
+  (function () {
+    var scene = document.getElementById('portalScene');
+    var door = document.getElementById('portalDoor');
+    var hint = document.getElementById('portalHint');
+    var actions = document.getElementById('portalActions');
+    var score = document.getElementById('portalScore');
+    var progress = document.getElementById('portalProgress');
+    if (!scene || !door || !hint || !actions) return;
+
+    var completed = [];
+    try { completed = JSON.parse(localStorage.getItem('linhPortalQuest') || '[]'); } catch (error) { completed = []; }
+    function updateQuest() {
+      var count = Math.min(completed.length, 3);
+      score.textContent = count + ' / 3';
+      progress.style.width = (count / 3 * 100) + '%';
+    }
+    function writeHint(text) { hint.textContent = text; }
+    function openDoor() {
+      if (scene.classList.contains('is-open')) return;
+      scene.classList.add('is-open');
+      door.setAttribute('aria-expanded', 'true');
+      actions.hidden = false;
+      writeHint('Cánh cửa đã mở! Người dẫn đường đang chờ bạn chọn một nhiệm vụ.');
+      if (completed.indexOf('open') === -1) completed.push('open');
+      localStorage.setItem('linhPortalQuest', JSON.stringify(completed));
+      updateQuest();
+    }
+    door.addEventListener('click', openDoor);
+    actions.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-portal-target]');
+      if (!button) return;
+      var target = document.querySelector(button.getAttribute('data-portal-target'));
+      var quest = button.getAttribute('data-portal-target');
+      writeHint(button.getAttribute('data-portal-text'));
+      if (completed.indexOf(quest) === -1) completed.push(quest);
+      localStorage.setItem('linhPortalQuest', JSON.stringify(completed));
+      updateQuest();
+      if (target) setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 380);
+    });
+    updateQuest();
+  }());
+</script>
+
 </body>
 </html>
