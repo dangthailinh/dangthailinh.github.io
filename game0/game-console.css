@@ -138,6 +138,7 @@ body.game-hub .card::before { position: absolute !important; z-index: 4 !importa
 body.game-hub .card::after { position: absolute; z-index: 2; top: 0; right: 0; left: 0; height: 4px; content: ""; background: linear-gradient(90deg,var(--game-violet),var(--game-cyan)); }
 body.game-hub .card:hover { border-color: var(--game-cyan) !important; box-shadow: 0 15px 45px rgba(0,0,0,.35), 0 0 0 1px rgba(75,216,255,.28) !important; transform: translateY(-6px) !important; }
 body.game-hub .card-img { width: 100% !important; height: 242px !important; margin: 0 0 23px !important; display: block !important; object-fit: cover !important; background: #171a25 !important; border: 0 !important; border-bottom: 1px solid #313547 !important; border-radius: 0 !important; box-shadow: none !important; image-rendering: auto !important; filter: saturate(.9) contrast(1.05); transition: transform .35s !important; }
+body.game-hub[data-game-page="game2.html"] .card-img { padding: 18px !important; object-fit: contain !important; background: radial-gradient(circle at 50% 45%,#22283b,#0d0f18 72%) !important; }
 body.game-hub .card:hover .card-img { transform: scale(1.035); }
 body.game-hub .playtime { margin: 0 21px 11px !important; color: var(--game-cyan) !important; font-family: var(--game-sans) !important; font-size: 9px !important; font-weight: 800; letter-spacing: .1em !important; text-transform: uppercase; }
 body.game-hub .genre-tags { margin-inline: 21px !important; }

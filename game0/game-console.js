@@ -118,12 +118,12 @@
         ['/game0/0/game-fun.html','Riddle Quest','Đấu trí sinh tồn','/game0/assets/ui/frog-color.png'],
         ['/game0/0/game-fun2.html','Mini Mario','Platformer · chiến đấu','/game0/assets/ui/mario.png'],
         ['/game0/0/game-fun3.html','Pacman Combat','Pixel maze · săn ma','/game0/assets/ui/frog-pixel.png'],
-        ['/game0/1/1.html','Gorillas','Pháo binh · tính hướng gió','/game0/assets/captures/uncharted-02.png'],
-        ['/game0/1/2.html','Tìm Cặp','Memory game · mở thẻ','/game0/assets/ui/ransei-dance.gif'],
-        ['/game0/1/3.html','Zuma','Bắn bi màu · phản xạ','/game0/assets/ui/kirby-headphones.png'],
-        ['/game0/1/4.html','Wildfire','Giải cứu rừng · chữa cháy','/game0/assets/captures/uncharted-04.png'],
-        ['/game0/1/5.html','Stick Hero','Canh cầu · phiêu lưu','/game0/assets/captures/uncharted-06.png'],
-        ['/game0/1/6.html','Super Hopper','Arcade · nhảy vượt chướng ngại','/game0/assets/ui/mario.png'],
+        ['/game0/1/1.html','Gorillas','Pháo binh · tính hướng gió','/game0/assets/games/gorillas.png'],
+        ['/game0/1/2.html','Tìm Cặp','Memory game · mở thẻ','/game0/assets/games/memory-match.png'],
+        ['/game0/1/3.html','Zuma','Bắn bi màu · phản xạ','/game0/assets/games/zuma.png'],
+        ['/game0/1/4.html','Wildfire','Giải cứu rừng · chữa cháy','/game0/assets/games/wildfire.png'],
+        ['/game0/1/5.html','Stick Hero','Canh cầu · phiêu lưu','/game0/assets/games/stick-hero.png'],
+        ['/game0/1/6.html','Super Hopper','Arcade · nhảy vượt chướng ngại','/game0/assets/games/super-hopper.png'],
       ];
       main.innerHTML = `<div class="card-grid">${playableGames.map(([href,title,meta,image]) => `<a href="${href}" class="card-link"><div class="card"><img src="${image}" alt="${title}" class="card-img"><div class="playtime">Ready to play</div><h3>${title}</h3><div class="card-meta">${meta}</div></div></a>`).join('')}</div>`;
     }
