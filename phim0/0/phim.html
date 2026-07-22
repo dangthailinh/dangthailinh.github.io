@@ -1,425 +1,250 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linh-Osimi</title>
-    <link rel="icon" type="image/png" href="../../favicon.png?v=2">
-    <link rel="shortcut icon" type="image/png" href="../../favicon.png?v=2">
-    <link rel="apple-touch-icon" href="../../favicon.png?v=2">
-    <link rel="stylesheet" href="/linhkun.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://tse1.explicit.bing.net/th/id/OIP.sMgdCx5ly0B97pjrzodZCQHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #fff;
-            min-height: 100vh;
-        }
-        /* Hero Section cho Phim */
-        .hero-film {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1489599150581-9b41ad72a5a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            text-align: center;
-            padding: 120px 20px 80px;
-            position: relative;
-            font-family: 'Cinzel', serif;
-        }
-        .hero-film::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(220,53,69,0.2) 0%, transparent 70%);
-            z-index: 1;
-        }
-        .hero-film-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
-        .hero-film h1 { font-size: 52px; margin-bottom: 10px; text-shadow: 3px 3px 10px rgba(0,0,0,0.8); animation: fadeInDown 1s ease; font-weight: 700; letter-spacing: 2px; }
-        .hero-film p { font-size: 20px; opacity: 0.95; animation: fadeInUp 1s ease 0.3s both; font-style: italic; }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Main */
-        .main { background: rgba(0,0,0,0.85); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); max-width: 1200px; margin: 0 auto; backdrop-filter: blur(10px); }
-        .back-btn { background: #dc3545; color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor: pointer; margin-bottom: 30px; transition: all 0.3s; font-weight: 600; box-shadow: 0 4px 15px rgba(220,53,69,0.4); }
-        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220,53,69,0.5); }
-        .main h1 { color: #fff; text-align: center; font-size: 36px; margin-bottom: 10px; font-family: 'Cinzel', serif; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
-        .main p { text-align: center; font-size: 18px; color: #ccc; margin-bottom: 40px; }
-
-        /* Card Grid */
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px; }
-        .card-link { text-decoration: none; color: inherit; display: block; }
-        .card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: all 0.4s ease;
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(5px);
-        }
-        .card::before {
-            content: '';
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #dc3545, rgba(220,53,69,0.5));
-        }
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            background: rgba(255,255,255,0.15);
-        }
-        .card-img { 
-            width: 100%; 
-            height: 180px; 
-            object-fit: cover; 
-            border-radius: 10px; 
-            margin-bottom: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .genre-tags { display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }
-        .genre-tag { background: rgba(220,53,69,0.2); padding: 4px 8px; border-radius: 12px; font-size: 12px; color: #dc3545; font-weight: 500; }
-        .card h3 { color: #fff; margin: 15px 0 10px; font-size: 22px; font-weight: 600; font-family: 'Cinzel', serif; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
-        .card-meta { font-size: 14px; color: #ccc; margin-bottom: 0; font-style: italic; }
-
-        /* Sub-section */
-        .sub-section { margin-top: 70px; padding-top: 40px; border-top: 2px dashed rgba(255,255,255,0.3); }
-        .sub-section h2 { color: #fff; text-align: center; font-size: 32px; margin-bottom: 30px; position: relative; font-family: 'Cinzel', serif; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
-        .sub-section h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: #dc3545; border-radius: 2px; box-shadow: 0 0 10px #dc3545; }
-
-        /* Pagination */
-        .pagination { display: flex; justify-content: center; gap: 15px; margin-top: 50px; }
-        .pagination button { padding: 12px 20px; border: 2px solid #fff; background: transparent; color: #fff; cursor: pointer; border-radius: 30px; transition: all 0.3s; font-weight: 500; font-size: 16px; backdrop-filter: blur(5px); }
-        .pagination button:hover, .pagination button.active { background: #dc3545; color: white; transform: scale(1.05); box-shadow: 0 5px 15px rgba(220,53,69,0.5); }
-
-        /* Xóa gạch dưới tất cả link */
-        a { text-decoration: none !important; }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-film { background-attachment: scroll; padding: 80px 15px 60px; }
-            .hero-film h1 { font-size: 36px; }
-            .main { padding: 20px; margin: 20px; }
-            .card-grid { grid-template-columns: 1fr; gap: 20px; }
-            .sub-section h2 { font-size: 28px; }
-            .genre-tags { justify-content: center; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Linh Osimi Movie Club — góc xem phim, phân tích nhân vật và lưu lại những thước phim đáng nhớ.">
+  <meta name="theme-color" content="#f24b2f">
+  <title>Movie Club — Linh Osimi</title>
+  <link rel="icon" type="image/png" href="../../favicon.png?v=2">
+  <link rel="stylesheet" href="../movie.css">
 </head>
 <body>
-  <header class="linh-header">
-  <div class="logo-container">
-    <div class="logo-circle">
-      <span>🎬</span>
-    </div>
-    <span class="logo-text">LINH OSIMI</span>
-  </div>
+  <a class="skip-link" href="#movie-library">Đi đến thư viện phim</a>
 
-  <!-- Nút menu khi ở mobile -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <header class="site-header" data-header>
+    <a class="brand" href="../../index.html" aria-label="Linh Osimi — Trang chủ">
+      <span class="brand-mark" aria-hidden="true">LO</span>
+      <span class="brand-copy">
+        <strong>LINH OSIMI</strong>
+        <small>home video club</small>
+      </span>
+    </a>
 
-  <nav id="mainNav" class="nav-hidden">
-    <ul>
-      <li><a href="/khoa-hoc0/0/khoa-hoc.html">Khoa Học</a></li>
-      <li><a href="/nghe-thuat0/nghe-thuat.html">Nghệ Thuật</a></li>
-      <li><a href="phim.html" class="active">Phim</a></li>
-      <li><a href="/manga0/0/truyen-manga.html">Truyện (Manga)</a></li>
-      <li><a href="/game0/0/game.html">Game</a></li>
-      <li><a href="/kienthuc/0/kienthuc.html">Kiến thức</a></li>
-    </ul>
-  </nav>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
+      <span></span><span></span><span></span>
+      <span class="sr-only">Mở menu</span>
+    </button>
 
-  <div class="header-right">
-    
-  </div>
-</header>
+    <nav class="site-nav" id="site-nav" aria-label="Điều hướng chính" data-menu>
+      <a href="../../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+      <a href="../../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+      <a class="is-active" href="phim.html" aria-current="page">Movie</a>
+      <a href="../../manga0/0/truyen-manga.html">Manga</a>
+      <a href="../../game0/0/game.html">Game</a>
+      <a href="../../kienthuc/0/kienthuc.html">Kiến thức</a>
+    </nav>
 
-<style>
-/* ==== PHONG CÁCH CHÍNH ==== */
-.linh-header {
-  background: linear-gradient(135deg, #1a0000 0%, #2d0000 100%);
-  border-bottom: 3px solid #dc3545;
-  box-shadow: 0 4px 20px rgba(220,53,69,0.4);
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Inter', sans-serif;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: all 0.3s ease;
-}
-@media (min-width: 769px) {
-  #mainNav {
-    max-height: none !important;
-    opacity: 1 !important;
-  }
-}
+    <a class="home-link" href="../../index.html">
+      <span aria-hidden="true">↙</span> Trang chủ
+    </a>
+  </header>
 
-/* Logo */
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.logo-circle {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #dc3545, #721c24);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(220,53,69,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.logo-circle span {
-  font-size: 18px;
-  color: white;
-}
-.logo-text {
-  font-size: 24px;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: 1px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grain" aria-hidden="true"></div>
+      <img class="hero-sticker hero-sticker--cat" src="../assets/movie-decor/blue-cat.png" alt="" aria-hidden="true">
+      <img class="hero-sticker hero-sticker--dino" src="../assets/movie-decor/trex.png" alt="" aria-hidden="true">
 
-/* Navigation */
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-}
-nav a {
-  text-decoration: none;
-  color: rgba(255,255,255,0.8);
-  transition: all 0.3s;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 5px;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
-}
-nav a:hover, nav a.active {
-  color: white;
-  border-bottom-color: white;
-  transform: scale(1.05);
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-
-/* Theme button */
-.theme-toggle {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(220,53,69,0.2);
-}
-.theme-toggle:hover {
-  background: rgba(255,255,255,0.2);
-  box-shadow: 0 2px 10px rgba(220,53,69,0.3);
-  transform: scale(1.05);
-}
-
-/* Nút menu (chỉ hiện ở mobile) */
-.menu-toggle {
-  display: none;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
-  font-size: 22px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.menu-toggle:hover {
-  background: rgba(255,255,255,0.2);
-}
-
-/* Hiệu ứng ẩn hiện nav */
-#mainNav {
-  overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.3s ease;
-}
-.nav-hidden {
-  max-height: 0;
-  opacity: 0;
-}
-.nav-show {
-  max-height: 300px;
-  opacity: 1;
-}
-
-/* ==== GIAO DIỆN MOBILE ==== */
-@media (max-width: 768px) {
-  .linh-header {
-    flex-wrap: wrap;
-    padding: 10px 15px;
-  }
-  .menu-toggle {
-    display: block;
-  }
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-  }
-  .header-right {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 5px;
-  }
-  .logo-text { font-size: 20px; }
-}
-</style>
-
-<script>
-function toggleMenu() {
-  const nav = document.getElementById("mainNav");
-  nav.classList.toggle("nav-show");
-  nav.classList.toggle("nav-hidden");
-}
-</script>
-
-
-    <!-- Hero Section -->
-    <section class="hero-film">
-        <div class="hero-film-content">
-            <h1>PHIM ảnh movie!</h1>
-            <p>Một số bộ phim và phân tích nhân vật hehe.</p>
+      <div class="hero-copy">
+        <p class="eyebrow"><span>●</span> Personal cinema archive / 2026</p>
+        <h1 id="hero-title"><span>Movie</span> club</h1>
+        <p class="hero-intro">Một góc nhỏ cho những bộ phim lớn — nơi mình soi từng nhân vật, nhặt từng chi tiết và giữ lại cảm giác sau màn hình.</p>
+        <div class="hero-actions">
+          <a class="button button--light" href="#movie-library">Mở thư viện <span aria-hidden="true">↓</span></a>
+          <a class="text-link" href="phim-bai1.html">Xem bài tuyển chọn <span aria-hidden="true">↗</span></a>
         </div>
+        <div class="hero-notes" aria-label="Thông tin thư viện">
+          <span><strong>06</strong> bài viết</span>
+          <span><strong>03</strong> chủ đề</span>
+          <span><strong>∞</strong> cảm xúc</span>
+        </div>
+      </div>
+
+      <div class="feature-stage">
+        <div class="feature-label"><span>Now screening</span><b>01 / 06</b></div>
+        <a class="crt" href="phim-bai0.html" aria-label="Đọc Tâm lý kẻ sát nhân trong phim">
+          <span class="crt-top"><i></i><i></i><i></i><em>LINH-O-VISION</em></span>
+          <span class="crt-screen">
+            <span class="screen-noise" aria-hidden="true"></span>
+            <span class="screen-kicker">Psychology · Horror</span>
+            <strong>Tâm lý<br>kẻ sát<br>nhân</strong>
+            <span class="screen-play">PLAY <b>▶</b></span>
+            <img src="../assets/movie-decor/pumpkin.png" alt="" aria-hidden="true">
+          </span>
+          <span class="crt-controls" aria-hidden="true">
+            <i></i><i></i><i></i><b></b><b></b>
+          </span>
+        </a>
+        <img class="boombox" src="../assets/movie-decor/boombox.png" alt="Máy cassette màu sắc phong cách retro">
+        <img class="remote" src="../assets/movie-decor/remote.png" alt="" aria-hidden="true">
+        <div class="feature-caption">
+          <span>Editor’s pick</span>
+          <p>Nhấn play và bước vào phần tối nhất của điện ảnh.</p>
+        </div>
+      </div>
     </section>
 
-    <main class="main">
-        <button class="back-btn" onclick="window.location.href='/index.html'">← Quay về Trang chủ</button>
-        
-        <!-- Grid card chính -->
-        <div class="card-grid">
-            <a href="phim-bai0.html" class="card-link">
-                <div class="card">
-                    <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2022/06/10-Best-Masked-Killers-In-Movies-According-To-Ranker.jpg" alt="Dune" class="card-img">
-                    <div class="genre-tags">
-                        <span class="genre-tag">Sci-Fi</span>
-                        <span class="genre-tag">Adventure</span>
-                    </div>
-                    <h3>Tâm lý kẻ sát nhân trong phim</h3>
-                    <div class="card-meta">Killer mind or st!</div>
-                </div>
-            </a>
-
-            <a href="phim-bai1.html" class="card-link">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Oppenheimer" class="card-img">
-                    <div class="genre-tags">
-                        <span class="genre-tag">Drama</span>
-                        <span class="genre-tag">History</span>
-                    </div>
-                    <h3>Top Các Phim Hay Nhất Mà Tôi Từng Xem</h3>
-                    <div class="card-meta"> Film Critic</div>
-                </div>
-            </a>
-
-            <a href="phim-bai2.html" class="card-link">
-                <div class="card">
-                    <img src="https://th.bing.com/th/id/R.fe3f3ae9ce39c2f74f88fbfe7effeb0c?rik=llzhpCax1QH8Sg&pid=ImgRaw&r=0" alt="Barbie" class="card-img">
-                    <div class="genre-tags">
-                        <span class="genre-tag">Comedy</span>
-                        <span class="genre-tag">Fantasy</span>
-                    </div>
-                    <h3>ái Ác Có Thật Sự Tồn Tại?</h3>
-                    <div class="card-meta"> Tốt và xấu trong</div>
-                </div>
-            </a>
-        </div>
-
-        <!-- Phần phụ -->
-        <div class="sub-section">
-            <h2>Những nhân vật tôi thích nhất trong moviee</h2>
-            <div class="card-grid">
-                <a href="phim-nang-cao-bai0.html" class="card-link">
-                    <div class="card">
-                        <img src="https://th.bing.com/th/id/OIP.egJguqELzhakB3BzLL03VwHaHa?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Inception" class="card-img">
-                        <div class="genre-tags">
-                            <span class="genre-tag">Sci-Fi</span>
-                            <span class="genre-tag">Thriller</span>
-                        </div>
-                        <h3>VikTor arcane</h3>
-                        <div class="card-meta">Cái giá của giấc mơ.</div>
-                    </div>
-                </a>
-
-                <a href="phim-nang-cao-bai1.html" class="card-link">
-                    <div class="card">
-                        <img src="https://th.bing.com/th/id/R.490cee4465bf6c7df4fb5e66610de16f?rik=QR72S7QsK1sqrg&riu=http%3a%2f%2f4.bp.blogspot.com%2f-MFAKBOurZAU%2fUI9lp7uKunI%2fAAAAAAAAFl8%2fJ1MdD6fmGTA%2fs1600%2fJoker2.jpg&ehk=pSopyFx5o9YD9%2bIbi9J7E9Dbv1QK%2bnvfES2Dj8woYQ8%3d&risl=&pid=ImgRaw&r=0" alt="Parasite" class="card-img">
-                        <div class="genre-tags">
-                            <span class="genre-tag">Thriller</span>
-                            <span class="genre-tag">Drama</span>
-                        </div>
-                        <h3>Joker</h3>
-                        <div class="card-meta">Sự điên loạn và trật tự</div>
-                    </div>
-                </a>
-
-                <a href="phim-nang-cao-bai2.html" class="card-link">
-                    <div class="card">
-                        <img src="https://th.bing.com/th/id/OIP.fDch9URDwUw2aNnkTSuGTwHaEo?o=7&cb=12rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="The Godfather" class="card-img">
-                        <div class="genre-tags">
-                            <span class="genre-tag">Crime</span>
-                            <span class="genre-tag">Drama</span>
-                        </div>
-                        <h3>Mr.white a.k.a Heisenberg</h3>
-                        <div class="card-meta">Tìm ra bản chất của chính mình</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-      <div class="pagination"> 
-  <button onclick="changePage(1, 'khoa-hoc')" class="active">1</button>
-  <button onclick="changePage(2, 'khoa-hoc')">2</button>
-</div>
-
-<script>
-function changePage(pageNumber, baseName) {
-  // baseName: phần tên file, ví dụ 'khoa-hoc'
-  if (pageNumber === 1) {
-    window.location.href = `${baseName}.html`;
-  } else {
-    window.location.href = `${baseName}${pageNumber}.html`;
-  }
-}
-</script>
-
-    </main>
-<footer style="background: linear-gradient(135deg, #1a0000 0%, #2d0000 100%); border-top: 3px solid #dc3545; box-shadow: 0 4px 20px rgba(220,53,69,0.4); padding: 20px; text-align: center; font-family: 'Inter', serif; font-style: italic; position: relative; overflow: hidden;">
-    <p style="color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); margin: 0; font-size: 14px;">&copy; 2025 Kiến Thức VN | Phim Focus</p>
-    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence baseFrequency=%220.5%22 numOctaves=%221%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0%22/%3E%3C/filter%3E%3Crect width=%22100%22 height=%22100%22 filter=%22url(%23noise)%22 opacity=%220.05%22/%3E%3C/svg%3E'); background-size: 100px 100px;"></div>
-    <span style="position: absolute; bottom: 10px; right: 10px; font-size: 24px; opacity: 0.3;">🎬</span>
-</footer>
-<div id="postModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2 id="modalTitle"></h2>
-        <p id="modalContent"></p>
+    <div class="ticker" aria-label="Chủ đề nổi bật">
+      <div class="ticker-track">
+        <span>HORROR MOVIES</span><i>✦</i><span>CULT CLASSICS</span><i>✦</i><span>CHARACTER STUDY</span><i>✦</i><span>GOOD VS EVIL</span><i>✦</i>
+        <span aria-hidden="true">HORROR MOVIES</span><i aria-hidden="true">✦</i><span aria-hidden="true">CULT CLASSICS</span><i aria-hidden="true">✦</i><span aria-hidden="true">CHARACTER STUDY</span><i aria-hidden="true">✦</i><span aria-hidden="true">GOOD VS EVIL</span><i aria-hidden="true">✦</i>
+      </div>
     </div>
-</div>
 
-<script src="/linhkun.js"></script>
+    <section class="library" id="movie-library" aria-labelledby="library-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow eyebrow--dark">Curated by Linh Osimi</p>
+          <h2 id="library-title">Trong kệ phim</h2>
+        </div>
+        <p>Không chấm điểm bằng sao. Chỉ giữ lại những bộ phim và nhân vật khiến mình còn nghĩ đến sau khi credit đã chạy hết.</p>
+      </div>
+
+      <div class="library-tools">
+        <div class="filter-list" aria-label="Lọc bài viết">
+          <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">Tất cả <sup>06</sup></button>
+          <button class="filter-chip" type="button" data-filter="analysis" aria-pressed="false">Phân tích <sup>02</sup></button>
+          <button class="filter-chip" type="button" data-filter="list" aria-pressed="false">Tuyển chọn <sup>01</sup></button>
+          <button class="filter-chip" type="button" data-filter="character" aria-pressed="false">Nhân vật <sup>03</sup></button>
+        </div>
+        <label class="search-box">
+          <span class="sr-only">Tìm trong thư viện</span>
+          <span aria-hidden="true">⌕</span>
+          <input type="search" placeholder="Tìm phim, nhân vật..." autocomplete="off" data-search>
+          <kbd>/</kbd>
+        </label>
+      </div>
+
+      <div class="result-line" aria-live="polite">
+        <span data-result-count>Đang hiển thị 6 bài viết</span>
+        <button type="button" data-show-saved>Đã lưu <b data-saved-count>0</b></button>
+      </div>
+
+      <div class="movie-grid" data-movie-grid>
+        <article class="movie-card movie-card--wide" data-category="analysis" data-searchable="tâm lý kẻ sát nhân horror psychology">
+          <a class="poster poster--killer" href="phim-bai0.html" aria-label="Đọc Tâm lý kẻ sát nhân trong phim">
+            <span class="poster-index">No. 01</span>
+            <span class="poster-copy"><small>Inside the</small><strong>Killer<br>Mind</strong><em>Fear lives here</em></span>
+            <img src="../assets/movie-decor/pumpkin.png" alt="" aria-hidden="true">
+            <span class="poster-stamp">18+</span>
+          </a>
+          <div class="card-body">
+            <div class="card-topline"><span>Phân tích · 8 phút đọc</span><button class="save-button" type="button" data-save="killer-mind" aria-label="Lưu bài Tâm lý kẻ sát nhân"><span>♡</span></button></div>
+            <h3><a href="phim-bai0.html">Tâm lý kẻ sát nhân trong phim</a></h3>
+            <p>Điều gì ẩn sau chiếc mặt nạ và vì sao điện ảnh khiến ta vừa sợ hãi, vừa không thể rời mắt?</p>
+            <a class="card-link" href="phim-bai0.html">Đọc bài <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="movie-card" data-category="list" data-searchable="top phim hay nhất tuyển chọn film critic">
+          <a class="poster poster--top" href="phim-bai1.html" aria-label="Đọc Top các phim hay nhất mà tôi từng xem">
+            <span class="poster-index">No. 02</span>
+            <span class="poster-copy"><small>Linh's essential</small><strong>Watch<br>List</strong><em>Rewind the feeling</em></span>
+            <img src="../assets/movie-decor/flying-chao.png" alt="" aria-hidden="true">
+            <span class="poster-stamp">TOP</span>
+          </a>
+          <div class="card-body">
+            <div class="card-topline"><span>Tuyển chọn · 12 phút đọc</span><button class="save-button" type="button" data-save="watch-list" aria-label="Lưu bài Top các phim hay nhất"><span>♡</span></button></div>
+            <h3><a href="phim-bai1.html">Top phim hay nhất mình từng xem</a></h3>
+            <p>Một danh sách rất riêng: xem vì tò mò, ở lại vì cảm xúc.</p>
+            <a class="card-link" href="phim-bai1.html">Đọc bài <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="movie-card" data-category="analysis" data-searchable="ái ác có thật sự tồn tại tốt xấu good evil">
+          <a class="poster poster--evil" href="phim-bai2.html" aria-label="Đọc Ái ác có thật sự tồn tại?">
+            <span class="poster-index">No. 03</span>
+            <span class="poster-copy"><small>A study of</small><strong>Good<br>/ Evil</strong><em>Pick a side?</em></span>
+            <img src="../assets/movie-decor/alien.png" alt="" aria-hidden="true">
+            <span class="poster-stamp">?</span>
+          </a>
+          <div class="card-body">
+            <div class="card-topline"><span>Tiểu luận · 7 phút đọc</span><button class="save-button" type="button" data-save="good-evil" aria-label="Lưu bài Ái ác có thật sự tồn tại"><span>♡</span></button></div>
+            <h3><a href="phim-bai2.html">Ái ác có thật sự tồn tại?</a></h3>
+            <p>Tốt và xấu có ranh giới rõ ràng, hay chỉ là góc máy ta chọn?</p>
+            <a class="card-link" href="phim-bai2.html">Đọc bài <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="movie-card" data-category="character" data-searchable="viktor arcane nhân vật dream evolution">
+          <a class="poster poster--viktor" href="phim-nang-cao-bai0.html" aria-label="Đọc Viktor — cái giá của tiến hóa">
+            <span class="poster-index">No. 04</span>
+            <span class="poster-copy"><small>Arcane files</small><strong>Vik<br>tor</strong><em>Glorious evolution</em></span>
+            <img src="../assets/movie-decor/pixel-chao.png" alt="" aria-hidden="true">
+            <span class="poster-stamp">VX</span>
+          </a>
+          <div class="card-body">
+            <div class="card-topline"><span>Nhân vật · Arcane</span><button class="save-button" type="button" data-save="viktor" aria-label="Lưu bài Viktor"><span>♡</span></button></div>
+            <h3><a href="phim-nang-cao-bai0.html">Viktor — cái giá của tiến hóa</a></h3>
+            <p>Giữa giấc mơ cứu người và nỗi ám ảnh vượt khỏi giới hạn.</p>
+            <a class="card-link" href="phim-nang-cao-bai0.html">Đọc bài <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="movie-card movie-card--wide" data-category="character" data-searchable="joker điên loạn trật tự nhân vật dc">
+          <a class="poster poster--joker" href="phim-nang-cao-bai1.html" aria-label="Đọc Joker — sự điên loạn và trật tự">
+            <span class="poster-index">No. 05</span>
+            <span class="poster-copy"><small>Put on a</small><strong>Happy<br>Face</strong><em>Chaos has a smile</em></span>
+            <img src="../assets/movie-decor/blue-cat.png" alt="" aria-hidden="true">
+            <span class="poster-stamp">HA!</span>
+          </a>
+          <div class="card-body">
+            <div class="card-topline"><span>Nhân vật · DC</span><button class="save-button" type="button" data-save="joker" aria-label="Lưu bài Joker"><span>♡</span></button></div>
+            <h3><a href="phim-nang-cao-bai1.html">Joker — sự điên loạn và trật tự</a></h3>
+            <p>Khi xã hội cần một trật tự, Joker chỉ muốn chứng minh rằng tất cả đều có thể vỡ vụn.</p>
+            <a class="card-link" href="phim-nang-cao-bai1.html">Đọc bài <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="movie-card" data-category="character" data-searchable="walter white heisenberg breaking bad bản chất nhân vật">
+          <a class="poster poster--white" href="phim-nang-cao-bai2.html" aria-label="Đọc Walter White — đi tìm bản chất chính mình">
+            <span class="poster-index">No. 06</span>
+            <span class="poster-copy"><small>Say my name</small><strong>Mr.<br>White</strong><em>I am the danger</em></span>
+            <img src="../assets/movie-decor/trex.png" alt="" aria-hidden="true">
+            <span class="poster-stamp">Br⁷⁹</span>
+          </a>
+          <div class="card-body">
+            <div class="card-topline"><span>Nhân vật · Breaking Bad</span><button class="save-button" type="button" data-save="walter-white" aria-label="Lưu bài Walter White"><span>♡</span></button></div>
+            <h3><a href="phim-nang-cao-bai2.html">Walter White — bản chất chính mình</a></h3>
+            <p>Một người đàn ông bình thường đã trở thành Heisenberg như thế nào?</p>
+            <a class="card-link" href="phim-nang-cao-bai2.html">Đọc bài <span>↗</span></a>
+          </div>
+        </article>
+      </div>
+
+      <div class="empty-state" hidden data-empty>
+        <img src="../assets/movie-decor/blue-cat.png" alt="">
+        <h3>Không tìm thấy cuộn phim nào</h3>
+        <p>Thử một từ khóa khác hoặc quay về xem tất cả nhé.</p>
+        <button class="button button--dark" type="button" data-reset>Đặt lại bộ lọc</button>
+      </div>
+    </section>
+
+    <section class="intermission" aria-labelledby="intermission-title">
+      <img class="intermission-chao" src="../assets/movie-decor/flying-chao.png" alt="Nhân vật Chao đang bay trên chổi">
+      <div class="intermission-copy">
+        <p class="eyebrow">Intermission</p>
+        <h2 id="intermission-title">Có phim hay?<br><em>Gửi mình một cái tên.</em></h2>
+        <p>Watchlist luôn còn chỗ cho một câu chuyện mới. Gợi ý của bạn có thể là bài viết tiếp theo trong Movie Club.</p>
+        <a class="button button--light" href="mailto:dangthailinh2004@gmail.com?subject=Gợi%20ý%20phim%20cho%20Movie%20Club">Gợi ý phim <span>↗</span></a>
+      </div>
+      <div class="intermission-art" aria-hidden="true">
+        <div class="ticket"><span>ADMIT ONE</span><strong>LO<br>VIDEO<br>CLUB</strong><small>NO. 0006</small></div>
+        <img src="../assets/movie-decor/remote.png" alt="">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">LO</span>
+      <p><strong>Linh Osimi Movie Club</strong><br><span>Made with late nights &amp; rewind noise.</span></p>
+    </div>
+    <img src="../assets/movie-decor/horror-movies.png" alt="I love horror movies">
+    <p class="copyright">© <span data-year>2026</span> Linh Osimi <b>●</b> End of tape</p>
+  </footer>
+
+  <script src="../movie.js"></script>
 </body>
 </html>

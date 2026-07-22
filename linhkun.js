@@ -220,6 +220,7 @@ function renderAudioPosts(category, page) {
 // Trong window.onload, nếu category === 'am-nhac', dùng renderAudioPosts
 window.onload = function() {
     // ... code cũ ...
+    const currentPageType = window.location.pathname.split('/').pop().split('.')[0] || 'index';
     const category = currentPageType === 'index' ? 'all' : currentPageType.replace('-', '');
     if (category === 'amnhac') { // Adapt tên 'am-nhac' → 'amnhac'
         renderAudioPosts(category, 1);
