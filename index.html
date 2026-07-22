@@ -1198,6 +1198,7 @@ nav a {
   <script>
     const sounds = [
       { title: "NEVER", file: "muv/never.mp3.mp3", type: "BGM" },
+      { title: "UNRAVEL", file: "muv/unravel.mp3", type: "BGM" },
       { title: "CRY FOR ME", file: "Cry For Me (feat. 愛海).mp3", type: "SONG" },
       { title: "LOVE YOU", file: "muv/loveyou.mp3", type: "REC" },
       { title: "LOVE BITCH", file: "muv/lovebitch.mp3", type: "REC" },
@@ -1649,146 +1650,211 @@ function toggleMenu() {
         </div>
 
       
-<div id="hacker-container">
-   <img id="hacker-image" src="https://th.bing.com/th/id/R.2bd985f36962435ab9be0291e2cab9db?rik=GjB%2fY5VH3Kityw&pid=ImgRaw&r=0" alt="Hacker Icon">
-  <div id="hacker-typing-box">
-    <div id="hacker-content"></div>
+<section id="hacker-container" aria-label="Linh Osimi broadcast message">
+  <div class="hacker-avatar-frame">
+    <span class="hacker-avatar-status"><i></i> ONLINE</span>
+    <img id="hacker-image" src="https://th.bing.com/th/id/R.2bd985f36962435ab9be0291e2cab9db?rik=GjB%2fY5VH3Kityw&pid=ImgRaw&r=0" alt="Nhân vật phát tín hiệu của Linh Osimi">
+    <span class="hacker-avatar-id">LINH//09</span>
   </div>
-
-  
-  
-</div>
+  <div id="hacker-typing-box">
+    <div class="hacker-terminal-bar">
+      <span>OSIMI://BROADCAST</span>
+      <span class="hacker-terminal-code">受信中&nbsp; 00:09</span>
+    </div>
+    <div class="hacker-terminal-label">INCOMING MESSAGE / 受信メッセージ</div>
+    <div id="hacker-content"></div>
+    <div class="hacker-terminal-foot">
+      <span>CH.09&nbsp; ◆ &nbsp;TOKYO NET</span>
+      <span class="hacker-signal" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </div>
+  </div>
+</section>
 
 <style>
-
   #hacker-container {
-    display: flex;
+    position: relative;
+    display: grid;
+    grid-template-columns: 126px minmax(0, 1fr);
     align-items: center;
-    gap: 10px; 
-    padding: 15px;
-    max-width: 600px;
-     margin: 10px 0 20px 0px;
+    gap: 18px;
+    width: min(760px, calc(100% - 28px));
+    margin: 22px auto 30px;
+    padding: 18px;
+    box-sizing: border-box;
+    color: #f7f3ff;
+    background:
+      linear-gradient(135deg, rgba(6, 9, 20, .94), rgba(18, 7, 28, .9)),
+      repeating-linear-gradient(90deg, transparent 0 16px, rgba(81, 240, 255, .03) 17px 18px);
+    border: 1px solid rgba(87, 236, 255, .42);
+    clip-path: polygon(16px 0, calc(100% - 52px) 0, 100% 34px, 100% calc(100% - 13px), calc(100% - 13px) 100%, 45px 100%, 0 calc(100% - 28px), 0 16px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, .52), inset 0 0 32px rgba(89, 26, 120, .18);
+    isolation: isolate;
   }
 
+  #hacker-container::before {
+    content: "電脳通信 // LINH OSIMI NETWORK";
+    position: absolute;
+    z-index: 3;
+    top: -1px;
+    right: 40px;
+    padding: 3px 12px 4px;
+    color: #090a11;
+    background: #f0ff4d;
+    font: 900 9px/1.1 "MS Gothic", "Courier New", monospace;
+    letter-spacing: 1.2px;
+    transform: skewX(-12deg);
+  }
+
+  #hacker-container::after {
+    content: "09";
+    position: absolute;
+    z-index: -1;
+    right: 18px;
+    bottom: -20px;
+    color: rgba(255, 63, 178, .08);
+    font: 900 96px/1 Arial, sans-serif;
+  }
+
+  .hacker-avatar-frame {
+    position: relative;
+    padding: 24px 8px 20px;
+    overflow: hidden;
+    background: linear-gradient(155deg, rgba(30, 8, 45, .96), rgba(3, 19, 27, .96));
+    border: 1px solid #ff4bbb;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    box-shadow: inset 0 0 20px rgba(255, 52, 172, .16), 6px 6px 0 rgba(65, 230, 255, .12);
+  }
+
+  .hacker-avatar-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.06) 4px);
+    mix-blend-mode: screen;
+  }
+
+  #hacker-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center top;
+    background: #080b13;
+    border: 1px solid rgba(95, 238, 255, .72);
+    filter: saturate(.85) contrast(1.08) drop-shadow(0 0 9px rgba(78, 232, 255, .3));
+    transition: filter .25s ease, transform .25s ease;
+  }
+
+  .hacker-avatar-frame:hover #hacker-image {
+    filter: saturate(1.15) contrast(1.12) drop-shadow(0 0 12px rgba(255, 69, 181, .5));
+    transform: scale(1.04);
+  }
+
+  .hacker-avatar-status,
+  .hacker-avatar-id {
+    position: absolute;
+    z-index: 2;
+    left: 8px;
+    font: 800 8px/1 "MS Gothic", "Courier New", monospace;
+    letter-spacing: 1px;
+  }
+
+  .hacker-avatar-status { top: 9px; color: #74f7ff; }
+  .hacker-avatar-status i { display: inline-block; width: 5px; height: 5px; margin-right: 4px; border-radius: 50%; background: #f0ff4d; box-shadow: 0 0 8px #f0ff4d; animation: hackerPulse 1.1s steps(2, end) infinite; }
+  .hacker-avatar-id { bottom: 7px; color: #ff63be; }
 
   #hacker-typing-box {
-    width: 320px;
-    height: 120px;
-    background-color: #468b8b;
-    border: 1px solid rgb(0, 0, 0);
-    font-family: 'Courier New', monospace;
-    color: rgb(238, 245, 238);
-    font-size: 14px;
-    padding: 10px;
-    box-sizing: border-box;
-    overflow: hidden;
-    white-space: pre-wrap;
-    line-height: 1.4;
     position: relative;
+    min-width: 0;
+    min-height: 146px;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(70, 230, 255, .06) 1px, transparent 1px),
+      linear-gradient(rgba(70, 230, 255, .045) 1px, transparent 1px),
+      linear-gradient(145deg, rgba(5, 10, 20, .98), rgba(19, 7, 24, .96));
+    background-size: 20px 20px, 20px 20px, auto;
+    border: 1px solid rgba(83, 232, 255, .68);
+    box-shadow: inset 0 0 28px rgba(38, 166, 255, .08), 7px 7px 0 rgba(255, 57, 174, .12);
+    font-family: "MS Gothic", "Courier New", monospace;
   }
 
-  /* Con trỏ nhấp nháy */
-  #hacker-typing-box::after {
-    content: '|';
+  #hacker-typing-box::before {
+    content: "";
     position: absolute;
-    right: 5px;
-    bottom: 2px;
-    animation: blink 1s infinite;
-    color: rgb(251, 251, 251);
+    z-index: 2;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(transparent 50%, rgba(0, 0, 0, .16) 50%);
+    background-size: 100% 4px;
+    opacity: .65;
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  
-  #hacker-image {
-    width: 100px;       
-    height: auto;
-    border-radius: 8px; 
- 
-  }
-
-   #hacker-container {
+  .hacker-terminal-bar,
+  .hacker-terminal-foot {
+    position: relative;
+    z-index: 3;
     display: flex;
     align-items: center;
-    gap: 15px; 
-    padding: 20px;
-    max-width: 600px;
-    margin: 20px auto;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 16px;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    justify-content: space-between;
+    gap: 10px;
+    color: #090a11;
+    background: linear-gradient(90deg, #52ecff 0 42%, #ff55b8 42% 44%, #ebeaff 44% 100%);
+    font: 900 9px/1 "MS Gothic", "Courier New", monospace;
+    letter-spacing: 1px;
   }
 
+  .hacker-terminal-bar { min-height: 25px; padding: 0 10px; }
+  .hacker-terminal-code { color: #6f0b50; }
+  .hacker-terminal-label { position: relative; z-index: 3; width: max-content; margin: 10px 12px 0; padding: 3px 7px; color: #f0ff4d; border-left: 3px solid #ff4eb6; background: rgba(255, 71, 181, .08); font: 800 9px/1 "MS Gothic", "Courier New", monospace; letter-spacing: 1.1px; }
 
-  #hacker-typing-box {
-    width: 320px;
-    height: 120px;
-    background: linear-gradient(145deg, #000000, #3a2f23);
-    border: 2px solid #00ff41; 
-    border-radius: 16px; /* Bo tròn */
-    font-family: 'Courier New', monospace;
-    color: #00ff41; 
-    font-size: 14px;
-    padding: 12px;
-    box-sizing: border-box;
-    overflow: hidden;
-    white-space: pre-wrap;
-    line-height: 1.4;
+  #hacker-content {
     position: relative;
-    box-shadow:
-      inset 0 0 10px rgba(0, 255, 65, 0.3),
-      0 6px 12px rgba(0, 0, 0, 0.6),
-      0 0 0 4px rgba(0, 255, 65, 0.1); /* Hiệu ứng viền sáng ngoài */
-    text-shadow: 0 0 8px rgba(136, 116, 64, 0.7); /* Chữ phát sáng */
-    transition: transform 0.2s ease;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    min-height: 61px;
+    padding: 4px 24px 7px 18px;
+    box-sizing: border-box;
+    color: #f7f5ff;
+    font-size: clamp(13px, 2vw, 16px);
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: .25px;
+    text-shadow: -1px 0 rgba(255, 57, 176, .75), 1px 0 rgba(72, 229, 255, .72), 0 0 10px rgba(154, 105, 255, .32);
   }
 
-  /* Hiệu ứng nhấn nhẹ khi hover (tùy chọn) */
-  #hacker-typing-box:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      inset 0 0 12px rgba(129, 134, 58, 0.5),
-      0 8px 16px rgba(0, 0, 0, 0.7),
-      0 0 0 4px rgba(0, 255, 65, 0.2);
+  #hacker-content::after {
+    content: "▌";
+    margin-left: 3px;
+    color: #f0ff4d;
+    text-shadow: 0 0 7px #f0ff4d;
+    animation: hackerBlink .75s steps(2, end) infinite;
   }
 
-  /* Con trỏ nhấp nháy */
-  #hacker-typing-box::after {
-    content: '|';
-    position: absolute;
-    right: 10px;
-    bottom: 8px;
-    animation: blink 1s infinite;
-    color: #ecebe9;
-    text-shadow: 0 0 6px rgba(240, 239, 235, 0.8);
+  .hacker-terminal-foot { min-height: 19px; padding: 0 8px; color: #90f5ff; background: rgba(61, 219, 255, .09); border-top: 1px solid rgba(80, 226, 255, .26); font-size: 8px; }
+  .hacker-signal { display: flex; align-items: end; gap: 2px; height: 10px; }
+  .hacker-signal i { display: block; width: 3px; background: #f0ff4d; box-shadow: 0 0 5px rgba(240, 255, 77, .7); }
+  .hacker-signal i:nth-child(1) { height: 3px; } .hacker-signal i:nth-child(2) { height: 5px; } .hacker-signal i:nth-child(3) { height: 7px; } .hacker-signal i:nth-child(4) { height: 9px; }
+
+  @keyframes hackerBlink { 50% { opacity: 0; } }
+  @keyframes hackerPulse { 50% { opacity: .25; } }
+
+  @media (max-width: 620px) {
+    #hacker-container { grid-template-columns: 86px minmax(0, 1fr); gap: 10px; width: calc(100% - 18px); margin: 16px auto 23px; padding: 12px; clip-path: polygon(12px 0, calc(100% - 34px) 0, 100% 25px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 28px 100%, 0 calc(100% - 20px), 0 12px); }
+    #hacker-container::before { right: 25px; max-width: 64%; overflow: hidden; white-space: nowrap; }
+    #hacker-container::after { right: 8px; bottom: -10px; font-size: 62px; }
+    .hacker-avatar-frame { padding: 22px 6px 18px; }
+    #hacker-typing-box { min-height: 132px; }
+    .hacker-terminal-bar { padding: 0 7px; letter-spacing: .4px; }
+    .hacker-terminal-code { display: none; }
+    .hacker-terminal-label { margin: 8px 8px 0; font-size: 7px; letter-spacing: .5px; }
+    #hacker-content { min-height: 59px; padding: 4px 10px 5px; font-size: 12px; line-height: 1.35; }
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .hacker-avatar-status i, #hacker-content::after { animation: none; }
   }
-
-  /* Ảnh cũng bo tròn + hiệu ứng 3D nhẹ */
-  #hacker-image {
-    width: 100px;
-    height: auto;
-    border-radius: 16px; /* Bo tròn đồng bộ */
-    border: 2px solid #00ff41;
-    box-shadow:
-      0 6px 12px rgba(0, 0, 0, 0.6),
-      inset 0 0 8px rgba(0, 255, 65, 0.2);
-    transition: transform 0.3s ease;
-  }
-
-  #hacker-image:hover {
-    transform: scale(1.03) rotate(2deg);
-  }
-
-
 </style>
 
 <script>
