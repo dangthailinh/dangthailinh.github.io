@@ -81,7 +81,7 @@
     },
     3: {
       eyebrow: 'Photo archive / Page 03', title: 'Capture <span>mode</span>',
-      description: 'Bộ sưu tập những khoảnh khắc mình đã ghi lại trong Uncharted 4 và Cyberpunk 2077.',
+      description: 'Bộ sưu tập những khoảnh khắc mình đã ghi lại qua nhiều thế giới game.',
       image: '/game0/assets/captures/uncharted-05.png', action: 'Xem ảnh', target: '#game-captures',
     },
   }[hubPage];
@@ -93,7 +93,7 @@
     hero.innerHTML = `
       <div class="game-hero-copy"><p class="game-eyebrow">${hubCopy.eyebrow}</p><h1>${hubCopy.title}</h1><p class="game-hero-description">${hubCopy.description}</p>
         <div class="game-hero-actions"><a class="game-button" href="${hubCopy.target}">${hubCopy.action} <span>→</span></a></div>
-        <div class="game-status-row"><div><strong>09</strong><span>Articles</span></div><div><strong>09</strong><span>Playable</span></div><div><strong>07</strong><span>Captures</span></div></div>
+        <div class="game-status-row"><div><strong>09</strong><span>Articles</span></div><div><strong>09</strong><span>Playable</span></div><div><strong>18</strong><span>Captures</span></div></div>
       </div>
       <aside class="game-player-card"><div class="game-player-top"><span>Player profile</span><b>● Online</b></div><div class="game-avatar"><img src="/game0/assets/ui/ransei-dance.gif" alt="Anime gamer mascot"></div><div class="game-player-info"><div><small>Current player</small><strong>Linh Osimi</strong></div><span class="game-level">LV.9</span></div></aside>
       <img class="game-hero-decal game-hero-decal--frog" src="/game0/assets/ui/frog-color.png" alt=""><img class="game-hero-decal game-hero-decal--kirby" src="/game0/assets/ui/kirby-headphones.png" alt="">`;
@@ -160,11 +160,25 @@
     }
 
     if (hubPage === 3) {
-      const shots = ['uncharted-01.png','uncharted-02.png','uncharted-03.png','uncharted-04.png','uncharted-05.png','uncharted-06.png','cyberpunk-01.png'];
+      const shots = [
+        ...['uncharted-01.png','uncharted-02.png','uncharted-03.png','uncharted-04.png','uncharted-05.png','uncharted-06.png'].map((file) => ({ file, game: 'Uncharted 4' })),
+        { file: 'cyberpunk-01.png', game: 'Cyberpunk 2077' },
+        ...['genshin-impact-01.png','genshin-impact-02.png','genshin-impact-03.png'].map((file) => ({ file, game: 'Genshin Impact' })),
+        { file: 'puzzle-world-01.png', game: 'Puzzle World' },
+        ...['the-last-of-us-part-ii-01.png','the-last-of-us-part-ii-02.png','the-last-of-us-part-ii-03.png','the-last-of-us-part-ii-04.png'].map((file) => ({ file, game: 'The Last of Us Part II' })),
+        { file: 'underwater-01.png', game: 'Underwater' },
+        ...['cyberpunk-02.png','cyberpunk-03.png'].map((file) => ({ file, game: 'Cyberpunk 2077' })),
+      ];
+      const gameSequence = new Map();
+      const captures = shots.map((shot) => {
+        const number = (gameSequence.get(shot.game) || 0) + 1;
+        gameSequence.set(shot.game, number);
+        return `<button class="game-capture" type="button" data-full="/game0/assets/captures/${shot.file}"><img src="/game0/assets/captures/${shot.file}" alt="Screenshot ${shot.game} ${number}" loading="lazy"><span>${shot.game} / ${String(number).padStart(2, '0')}</span></button>`;
+      }).join('');
       const gallery = document.createElement('section');
       gallery.className = 'game-captures';
       gallery.id = 'game-captures';
-      gallery.innerHTML = `<div class="game-captures-head"><h2>Capture <span>mode</span></h2><p>Những khoảnh khắc mình đã chụp lại trong hành trình chơi Uncharted 4 và Cyberpunk 2077 — không filter, chỉ có ánh sáng trong game.</p></div><div class="game-capture-grid">${shots.map((shot,index) => `<button class="game-capture" type="button" data-full="/game0/assets/captures/${shot}"><img src="/game0/assets/captures/${shot}" alt="Screenshot ${index < 6 ? 'Uncharted 4' : 'Cyberpunk 2077'} ${index + 1}" loading="lazy"><span>${index < 6 ? 'Uncharted 4' : 'Cyberpunk 2077'} / 0${index + 1}</span></button>`).join('')}</div>`;
+      gallery.innerHTML = `<div class="game-captures-head"><h2>Capture <span>mode</span></h2><p>Những khoảnh khắc mình đã chụp lại trong các hành trình game — không filter, chỉ có ánh sáng trong game.</p></div><div class="game-capture-grid">${captures}</div>`;
       main?.insertAdjacentElement('afterend', gallery);
       const lightbox = document.createElement('div');
       lightbox.className = 'game-lightbox';

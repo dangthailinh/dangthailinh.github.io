@@ -157,13 +157,12 @@ body.game-hub[data-game-page="game3.html"] main.main { display: none !important;
 .game-captures-head h2 { margin: 0; font-family: var(--game-display); font-size: clamp(58px,7.6vw,116px); font-weight: 900; line-height: .76; letter-spacing: -.02em; text-transform: uppercase; }
 .game-captures-head h2 span { color: transparent; -webkit-text-stroke: 1px var(--game-cyan); }
 .game-captures-head p { margin: 0; padding-left: 20px; color: var(--game-muted); border-left: 3px solid var(--game-violet); font-size: 13px; line-height: 1.65; }
-.game-capture-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); grid-auto-rows: 155px; gap: 12px; }
-.game-capture { position: relative; display: block; overflow: hidden; background: var(--game-panel); border: 1px solid #343849; border-radius: 8px; cursor: zoom-in; }
-.game-capture:nth-child(1) { grid-column: span 7; grid-row: span 3; }
-.game-capture:nth-child(2) { grid-column: span 5; grid-row: span 2; }
-.game-capture:nth-child(3) { grid-column: span 5; grid-row: span 2; }
-.game-capture:nth-child(4), .game-capture:nth-child(5), .game-capture:nth-child(6) { grid-column: span 4; grid-row: span 2; }
-.game-capture:nth-child(7) { grid-column: span 12; grid-row: span 3; }
+.game-capture-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); grid-auto-flow: dense; grid-auto-rows: 155px; gap: 12px; }
+.game-capture { position: relative; display: block; grid-column: span 4; grid-row: span 2; overflow: hidden; background: var(--game-panel); border: 1px solid #343849; border-radius: 8px; cursor: zoom-in; }
+.game-capture:nth-child(7n + 1) { grid-column: span 7; grid-row: span 3; }
+.game-capture:nth-child(7n + 2) { grid-column: span 5; grid-row: span 2; }
+.game-capture:nth-child(7n + 3) { grid-column: span 5; grid-row: span 2; }
+.game-capture:nth-child(7n) { grid-column: span 12; grid-row: span 3; }
 .game-capture img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s, filter .4s; }
 .game-capture:hover img { transform: scale(1.035); filter: brightness(1.08); }
 .game-capture span { position: absolute; right: 10px; bottom: 10px; padding: 6px 8px; color: #fff; background: rgba(7,8,16,.78); border: 1px solid rgba(255,255,255,.3); border-radius: 3px; font-size: 8px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
