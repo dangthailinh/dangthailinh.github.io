@@ -1133,7 +1133,6 @@ nav a {
         <li><a href="nghe-thuat0/nghe-thuat.html" data-jp="芸術">Nghệ Thuật</a></li>
         <li><a href="phim0/0/phim.html" data-jp="映画">Phim</a></li>
         <li><a href="manga0/0/truyen-manga.html" data-jp="漫画">Truyện (Manga)</a></li>
-        <li><a href="am-nhac.html" data-jp="音楽">Âm Nhạc</a></li>
         <li><a href="/game0/0/game.html" data-jp="ゲーム">Game</a></li>
         <li><a href="kienthuc/0/kienthuc.html" data-jp="知識">Kiến thức</a></li>
       </ul>
@@ -1152,73 +1151,182 @@ nav a {
     <img class="nav-sticker nav-sticker--earth" src="img/nav-punk-earth.png" alt="" draggable="false">
     <img class="nav-sticker nav-sticker--moon" src="img/nav-punk-moon.png" alt="" draggable="false">
   </div>
+</header>
 
-  <!-- Nút phát âm thanh (giữ nguyên vị trí fixed bottom) -->
-  <button id="soundBtn" title="Phát âm thanh" style="
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(6px);
-    color: white;
-    font-size: 22px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-    cursor: pointer;
-    transition: all 0.25s ease;
-    z-index: 9999;
-    opacity: 0.6;
-  ">
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M11 5L6 9H2v6h4l5 4V5zm8.5 7a4.5 4.5 0 0 0-3-4.24v8.48a4.5 4.5 0 0 0 3-4.24zM16 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>
-    </svg>
-  </button>
+  <aside class="audio-terminal" id="audioTerminal" aria-label="Máy phát nhạc cassette">
+    <section class="audio-terminal__library" id="audioLibrary" aria-label="Danh sách file âm thanh" hidden>
+      <header>
+        <div><small>C:\LINH\AUDIO&gt;</small><strong>REC_TAPE SELECTOR</strong></div>
+        <span id="audioFileCount">00 FILES</span>
+        <button type="button" id="audioLibraryClose" aria-label="Đóng danh sách âm thanh">×</button>
+      </header>
+      <div class="audio-terminal__command" aria-hidden="true">SELECT * FROM LOCAL_RECORDINGS <i>█</i></div>
+      <div class="audio-terminal__tracks" id="audioTrackList" role="listbox" aria-label="Chọn file âm thanh"></div>
+      <footer><span><i></i> LOCAL AUDIO READY</span><b>ENTER / CLICK TO PLAY</b></footer>
+    </section>
+
+    <div class="audio-terminal__dock">
+      <button class="audio-terminal__cassette" id="audioLibraryToggle" type="button" aria-expanded="false" aria-controls="audioLibrary">
+        <span class="audio-terminal__cassette-art"><img src="img/audio-cassette-console.png" alt="" draggable="false"></span>
+        <span class="audio-terminal__cassette-copy">
+          <small>NOW PLAYING // 再生中</small>
+          <strong id="audioCurrentTitle">NEVER</strong>
+          <em>CLICK TAPE FOR FILE LIST</em>
+        </span>
+      </button>
+
+      <div class="audio-terminal__transport" aria-label="Điều khiển máy phát nhạc">
+        <button type="button" id="audioPrev" aria-label="File âm thanh trước">◀◀</button>
+        <button type="button" id="soundBtn" aria-label="Phát nhạc" aria-pressed="false" title="Phát hoặc dừng nhạc">
+          <svg class="audio-terminal__speaker-on" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Zm5 2.3v2.1a3 3 0 0 1 0 5.2v2.1a5 5 0 0 0 0-9.4Zm0-4.1v2a8 8 0 0 1 0 13.6v2a10 10 0 0 0 0-17.6Z"/></svg>
+          <svg class="audio-terminal__speaker-off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Zm4.4 5.2L18.2 13l1.4-1.4-2.8-2.8 2.8-2.8-1.4-1.4-2.8 2.8-2.8-2.8L11.2 6l2.8 2.8-2.8 2.8 1.4 1.4 2.8-2.8Z"/></svg>
+          <span>PLAY</span>
+        </button>
+        <button type="button" id="audioNext" aria-label="File âm thanh tiếp theo">▶▶</button>
+      </div>
+
+      <div class="audio-terminal__progress" aria-hidden="true">
+        <span id="audioCurrentTime">00:00</span>
+        <div><i id="audioProgressBar"></i></div>
+        <span id="audioDuration">00:00</span>
+      </div>
+    </div>
+
+    <audio id="siteAudio" src="muv/never.mp3.mp3" preload="metadata" loop></audio>
+  </aside>
 
   <script>
-    // Danh sách file MP3
     const sounds = [
-     
-      "muv/giude.mp3",
-        "muv/loveyou.mp3",
-      "muv/tuturu.mp3",
-      "muv/Cver.mp3",
-      "muv/yamate.mp3",
-      "muv/kimochi.mp3",
-      "muv/Augg.mp3",
+      { title: "NEVER", file: "muv/never.mp3.mp3", type: "BGM" },
+      { title: "CRY FOR ME", file: "Cry For Me (feat. 愛海).mp3", type: "SONG" },
+      { title: "LOVE YOU", file: "muv/loveyou.mp3", type: "REC" },
+      { title: "LOVE BITCH", file: "muv/lovebitch.mp3", type: "REC" },
+      { title: "MAJOR", file: "muv/major.mp3", type: "TAPE" },
+      { title: "STAY AT YA", file: "muv/stay-at-ya.mp3", type: "TAPE" },
+      { title: "WASTED", file: "muv/wasted.mp3", type: "TAPE" },
+      { title: "PP SHIT", file: "muv/ppshit.mp3", type: "REC" },
+      { title: "CVER", file: "muv/Cver.mp3", type: "REC" },
+      { title: "KIMOCHI", file: "muv/kimochi.mp3", type: "VOICE" },
+      { title: "YAMATE", file: "muv/yamate.mp3", type: "VOICE" },
+      { title: "TUTURU", file: "muv/Tuturu.mp3", type: "VOICE" },
+      { title: "GIUDE", file: "muv/giude.mp3", type: "VOICE" },
+      { title: "AUGG", file: "muv/Augg.mp3", type: "VOICE" }
     ];
 
     let currentIndex = 0;
+    let audioActivated = false;
+    const audioTerminal = document.getElementById("audioTerminal");
+    const audio = document.getElementById("siteAudio");
     const btn = document.getElementById("soundBtn");
-    let currentAudio = null;
+    const library = document.getElementById("audioLibrary");
+    const libraryToggle = document.getElementById("audioLibraryToggle");
+    const libraryClose = document.getElementById("audioLibraryClose");
+    const trackList = document.getElementById("audioTrackList");
+    const currentTitle = document.getElementById("audioCurrentTitle");
+    const currentTime = document.getElementById("audioCurrentTime");
+    const duration = document.getElementById("audioDuration");
+    const progress = document.getElementById("audioProgressBar");
 
-    btn.addEventListener("click", () => {
-      if (sounds.length === 0) {
-        alert("Chưa có file âm thanh nào!");
-        return;
+    audio.volume = 0.55;
+    document.getElementById("audioFileCount").textContent = String(sounds.length).padStart(2, "0") + " FILES";
+
+    function formatAudioTime(value) {
+      if (!Number.isFinite(value) || value < 0) return "00:00";
+      const minutes = Math.floor(value / 60);
+      const seconds = Math.floor(value % 60);
+      return String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+    }
+
+    function updateAudioUI() {
+      const playing = !audio.paused && !audio.ended;
+      audioTerminal.classList.toggle("is-playing", playing);
+      btn.setAttribute("aria-pressed", String(playing));
+      btn.setAttribute("aria-label", playing ? "Dừng nhạc" : "Phát nhạc");
+      btn.querySelector("span").textContent = playing ? "STOP" : "PLAY";
+      currentTitle.textContent = sounds[currentIndex].title;
+      currentTime.textContent = formatAudioTime(audio.currentTime);
+      duration.textContent = formatAudioTime(audio.duration);
+      progress.style.width = Number.isFinite(audio.duration) && audio.duration > 0
+        ? Math.min(100, (audio.currentTime / audio.duration) * 100) + "%"
+        : "0%";
+      trackList.querySelectorAll("[data-audio-index]").forEach(function (trackButton) {
+        const active = Number(trackButton.dataset.audioIndex) === currentIndex;
+        trackButton.classList.toggle("active", active);
+        trackButton.setAttribute("aria-selected", String(active));
+      });
+    }
+
+    function playAudio() {
+      audioActivated = true;
+      const request = audio.play();
+      if (request && typeof request.catch === "function") {
+        request.catch(function () { audioTerminal.classList.add("is-blocked"); });
       }
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
+    }
+
+    function selectTrack(index, shouldPlay) {
+      currentIndex = (index + sounds.length) % sounds.length;
+      audio.src = sounds[currentIndex].file;
+      audio.load();
+      audioTerminal.classList.remove("is-blocked", "has-error");
+      updateAudioUI();
+      if (shouldPlay) playAudio();
+    }
+
+    function setLibrary(open) {
+      library.hidden = !open;
+      libraryToggle.setAttribute("aria-expanded", String(open));
+      audioTerminal.classList.toggle("library-open", open);
+      if (open) {
+        const activeTrack = trackList.querySelector(".active") || trackList.querySelector("button");
+        if (activeTrack) setTimeout(function () { activeTrack.focus({ preventScroll: true }); }, 80);
       }
-      currentAudio = new Audio(sounds[currentIndex]);
-      currentAudio.play().catch(()=>{ /* ignore play errors on mobile autoplay */ });
+    }
 
-      btn.style.transform = "scale(0.95)";
-      setTimeout(() => (btn.style.transform = "scale(1)"), 150);
-      currentIndex = (currentIndex + 1) % sounds.length;
+    sounds.forEach(function (sound, index) {
+      const trackButton = document.createElement("button");
+      trackButton.type = "button";
+      trackButton.dataset.audioIndex = String(index);
+      trackButton.setAttribute("role", "option");
+      trackButton.innerHTML = '<b>' + String(index + 1).padStart(2, "0") + '</b><span><strong>' + sound.title + '</strong><small>' + sound.file + '</small></span><em>' + sound.type + '</em>';
+      trackButton.addEventListener("click", function () { selectTrack(index, true); });
+      trackList.appendChild(trackButton);
     });
 
-    btn.addEventListener("mouseenter", () => {
-      btn.style.opacity = "1";
-      btn.style.background = "rgba(255, 255, 255, 0.25)";
+    btn.addEventListener("click", function () {
+      if (audio.paused) playAudio();
+      else audio.pause();
     });
-    btn.addEventListener("mouseleave", () => {
-      btn.style.opacity = "0.6";
-      btn.style.background = "rgba(255, 255, 255, 0.15)";
+    document.getElementById("audioPrev").addEventListener("click", function () { selectTrack(currentIndex - 1, true); });
+    document.getElementById("audioNext").addEventListener("click", function () { selectTrack(currentIndex + 1, true); });
+    libraryToggle.addEventListener("click", function () { setLibrary(library.hidden); });
+    libraryClose.addEventListener("click", function () { setLibrary(false); libraryToggle.focus({ preventScroll: true }); });
+
+    audio.addEventListener("play", updateAudioUI);
+    audio.addEventListener("pause", updateAudioUI);
+    audio.addEventListener("loadedmetadata", updateAudioUI);
+    audio.addEventListener("timeupdate", updateAudioUI);
+    audio.addEventListener("error", function () { audioTerminal.classList.add("has-error"); updateAudioUI(); });
+
+    function startAudioOnFirstInteraction(event) {
+      if (audioActivated) return;
+      if (event.target && event.target.closest && event.target.closest("#soundBtn")) return;
+      playAudio();
+    }
+
+    document.addEventListener("pointerdown", startAudioOnFirstInteraction, { once: true, capture: true });
+    document.addEventListener("keydown", startAudioOnFirstInteraction, { once: true, capture: true });
+    document.addEventListener("click", function (event) {
+      if (!library.hidden && !audioTerminal.contains(event.target)) setLibrary(false);
     });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !library.hidden) {
+        setLibrary(false);
+        libraryToggle.focus({ preventScroll: true });
+      }
+    });
+
+    updateAudioUI();
 
     // ensure mobile menu toggling uses absolute overlay (no layout shift)
     function toggleMenu() {
@@ -1241,7 +1349,6 @@ nav a {
       }
     }, {passive:true});
   </script>
-</header>
 
 <style>
 
@@ -1479,7 +1586,6 @@ function toggleMenu() {
             <button type="button" data-helpdesk="linh">Linh Osimi là ai?</button>
             <button type="button" data-helpdesk="projects">Mở kho dự án</button>
             <button type="button" data-helpdesk="topics">Tôi muốn khám phá chủ đề</button>
-            <button type="button" data-helpdesk="music" data-helpdesk-href="am-nhac.html">Có gì để nghe không?</button>
             <button type="button" data-helpdesk="map">Bản đồ toàn website</button>
           </div>
         </div>
@@ -2337,6 +2443,124 @@ lightbox.addEventListener('click', (e) => {
 
 
 
+
+<section class="net-sticker-board" id="web-stickers" aria-labelledby="web-stickers-title">
+  <div class="net-sticker-board__head">
+    <span><i></i> WEBRING CONNECTED</span>
+    <h2 id="web-stickers-title">STICKER_DUMP <b>★</b> 電脳街</h2>
+    <em>VOL. 2000</em>
+  </div>
+
+  <div class="net-sticker-board__content">
+    <figure class="net-sticker-feature" role="button" tabindex="0" data-thought-target="thought-01" aria-controls="stickerThought01" aria-expanded="false">
+      <span class="net-sticker-feature__tape">FOUND_ON_THE_WEB.GIF</span>
+      <img src="img/sticker-geocities-banner.png" alt="Banner Geocities phong cách web đầu những năm 2000" draggable="false">
+      <figcaption><b>01</b><span>CYBER BEACH TRANSMISSION</span><em>431 × 71 PX</em></figcaption>
+      <span class="net-sticker-feature__prompt"><i></i> CLICK TO OPEN THOUGHT_LOG_01</span>
+    </figure>
+
+    <div class="net-sticker-bank">
+      <div class="net-sticker-bank__label"><span>88×31 BUTTON BANK</span><b>04 FILES</b></div>
+      <div class="net-sticker-badges">
+        <img src="img/sticker-combat-baby.png" alt="Combat Baby — mở dòng suy nghĩ số 02" draggable="false" role="button" tabindex="0" data-thought-target="thought-02" aria-controls="stickerThought02" aria-expanded="false" title="Mở THOUGHT_LOG_02">
+        <img src="img/sticker-miss-xp.png" alt="I miss Windows XP" draggable="false">
+        <img src="img/sticker-aol-instant.png" alt="AOL Instant Messenger" draggable="false">
+        <img src="img/sticker-south-beach.png" alt="South Beach" draggable="false">
+      </div>
+      <span class="net-sticker-bank__thought-hint"><i></i> COMBAT BABY → THOUGHT_LOG_02</span>
+      <div class="net-sticker-emotes" aria-label="Biểu tượng cảm xúc pixel">
+        <img src="img/sticker-smiley-kiss.png" alt="Mặt cười gửi nụ hôn" draggable="false">
+        <span>EMOTICON.dll</span>
+        <img src="img/sticker-smiley-halo.png" alt="Mặt cười thiên thần" draggable="false">
+      </div>
+    </div>
+  </div>
+
+  <article class="sticker-thought" id="stickerThought01" data-thought-panel="thought-01" hidden>
+    <header class="sticker-thought__head">
+      <div><small>PRIVATE_BRAIN_DUMP.TXT</small><strong>THOUGHT_LOG_01 // “TAO” LÀ CÁI GÌ?</strong></div>
+      <span>READ_ONLY</span>
+      <button type="button" data-thought-close aria-label="Đóng dòng suy nghĩ">×</button>
+    </header>
+    <div class="sticker-thought__terminal" aria-hidden="true">C:\LINH\MIND&gt; open consciousness_01.txt <span>█</span></div>
+    <div class="sticker-thought__body">
+      <p>Nhưng thế thì tao là cái đéo gì nếu “nhận thức về ý thức” cũng chỉ là một giác quan nữa thôi?</p>
+      <p>Tao đéo phải cái thị giác của tao, đéo phải cảm giác nóng lạnh của tao, đó chỉ là mấy tín hiệu được chuyển hóa thành thứ tao “nhận biết” được thôi! Chúng chỉ là từ mô tả, đéo phải trạng thái thật sự!</p>
+
+      <p>Vậy cái gì đang “nhận biết” ở đây?</p>
+      <p>Chỉ có thể là chính cái quá trình đó thôi.<br>
+      Cái trạng thái từng khoảnh khắc đang liên tục thay đổi, điều chỉnh.<br>
+      Đó chính là “tao hiện tại” chứ còn đéo gì nữa.<br>
+      Thằng tao đang giật tay lại ngay lập tức khi chạm vào cái nóng bỏ mẹ, thằng tao đang đọc cái post này ngay lúc này, và thằng tao đã viết nó ở một khoảnh khắc cực kỳ cụ thể trong thời gian.</p>
+
+      <p>Ký ức là “tao dài hạn”.</p>
+      <p>Là những trạng thái mà tao từng nhận biết, giờ đang được đem ra so sánh với mọi thứ tao đang làm ở khoảnh khắc này.<br>
+      Lý trí thì tao biết ký ức của thằng nhóc 7 tuổi trong đầu chính là tao, nhưng tao đéo tài nào connect được. Nó mờ nhạt vl, tao đéo nhớ mình đã nghĩ gì, cảm thấy gì, thế giới trông ra sao khi còn bé tí. Mai tao quên mẹ nó luôn cũng đéo sao, chỉ ảnh hưởng vài chi tiết lặt vặt trong quyết định hiện tại thôi.</p>
+
+      <p>Nếu mày đồng ý mọi thứ tao vừa viết là đúng, thì tụi mình sẽ đéo bao giờ tìm được thứ gì đáng gọi là “có ý thức” cả.<br>
+      Ý thức chỉ là một bộ tham số cực kỳ cụ thể được xử lý theo cách cực kỳ cụ thể mà cơ thể người làm ra thôi. Rất con người. Muốn gán ý thức cho thứ gì khác thì phải nghĩ kiểu phi nhân loại luôn.</p>
+
+      <p>Nhưng đồng thời, như thế lại có nghĩa là hầu hết mọi quá trình đều có chút xíu ý thức trong đó.<br>
+      Chúng đéo tự nhận thức được, và cũng đéo có ký ức để so sánh gì cả.<br>
+      Nhưng vẫn luôn có “trạng thái tiếp theo” cần được quyết định theo một cách nào đó.</p>
+
+      <p>Mày gọi cái đó là gì?</p>
+      <p class="sticker-thought__questions">Ngẫu nhiên?<br>Nhân quả?<br>Ý chí thần thánh?<br>Entropy?<br>Sự sống?</p>
+
+      <p>Gọi thế đéo nào đi nữa thì mày có thấy buồn không khi một quá trình bị kết thúc?<br>
+      Buồn cũng là cảm xúc cực kỳ con người luôn.</p>
+
+      <p>Câu trả lời duy nhất tao nghĩ ra được là: <strong>“tùy”.</strong><br>
+      Không tùy vào cái quá trình đó, mà tùy vào tao.<br>
+      Tùy vào tao coi trọng cái gì, và tao là ai.</p>
+    </div>
+    <footer class="sticker-thought__foot"><span>EOF // 01</span><b>CLICK STICKER AGAIN TO CLOSE</b><em>LINH_OSIMI</em></footer>
+  </article>
+
+  <article class="sticker-thought" id="stickerThought02" data-thought-panel="thought-02" hidden>
+    <header class="sticker-thought__head">
+      <div><small>PRIVATE_BRAIN_DUMP.TXT</small><strong>THOUGHT_LOG_02 // LÀM HÒA VỚI CHÍNH MÌNH</strong></div>
+      <span>READ_ONLY</span>
+      <button type="button" data-thought-close aria-label="Đóng dòng suy nghĩ số 02">×</button>
+    </header>
+    <div class="sticker-thought__terminal" aria-hidden="true">C:\LINH\MIND&gt; open self_acceptance_02.txt <span>█</span></div>
+    <div class="sticker-thought__body">
+      <p>Thay đổi hẳn thì gần như đéo thể, nói thẳng là từ “cực kỳ khó” đến “bất khả thi” luôn. Tao thử vài lần rồi, chắc đa số anh em cũng thế. Lúc đó toàn bị nỗi xấu hổ nó hành, cộng thêm cái khao khát “trở thành người bình thường” nên mới cố. Ai mà thực sự “thoát” được thì chắc chắn đéo quay lại đây khoe đâu, kiểu trốn mẹ luôn ấy.</p>
+
+      <p>Cách tốt nhất là coi nó như một phần cố định, không thay đổi được của mình. Đa số tụi mình sinh ra đã thế rồi, đéo cậy ra được đâu. Ít nhất ba thế hệ thử rồi, toàn fail.</p>
+
+      <p>Cứ chấp nhận mẹ đi: mày là ABDL, và nó sẽ đi theo mày đến chết. Tao mất cả đống năm, cộng thêm vài lần sụt cân kinh hoàng trong một tuần (do stress + purge), mới chịu chấp nhận. Không recommend cách giảm cân đó đâu, kinh lắm.</p>
+
+      <p>Cứ tiếp tục xấu hổ thì chỉ tự hành hạ tinh thần mình, rồi lại càng ám ảnh hơn. Chấp nhận xong thì nhẹ người vl, học cách quản lý cơn thèm một cách lành mạnh, để khỏi rơi vào vòng binge/purge: đốt vài triệu mua đồ, mặc 24/7 cả tuần, xong xấu hổ dồn đến thì quăng hết mẹ vào sọt rác.</p>
+
+      <p>Thật ra nó đéo phải vấn đề to tát như cái đầu mày đang thổi phồng lên đâu. Nó chưa phá nát đời yêu đương của tao, chưa làm tao mất việc, cũng chưa bị xã hội văn minh đuổi đánh. Chỉ là một loại quần lót thôi mà. <strong>No big deal.</strong></p>
+
+      <p>Khuyên thật: tìm thêm mấy hoạt động khác để nhét thời gian vào, đỡ phải ngồi nghĩ về bỉm suốt ngày. Ra ngoài hít cỏ, đọc sách, leo núi, sơn warhammer, học ngoại ngữ, xem đá banh, chơi thể thao… bất cứ cái gì cũng được. Cho cái não nó có việc khác để tập trung trong lúc mày từ từ làm hòa với chính mình.</p>
+
+      <p class="sticker-thought__closing">Xong rồi sẽ thấy nhẹ nhõm lắm, thật đấy.</p>
+    </div>
+    <footer class="sticker-thought__foot"><span>EOF // 02</span><b>CLICK STICKER AGAIN TO CLOSE</b><em>LINH_OSIMI</em></footer>
+  </article>
+
+  <div class="net-sticker-characters" aria-label="Nhân vật pixel của khu phố điện tử">
+    <figure class="net-sticker-character net-sticker-character--girl">
+      <img src="img/sticker-pixel-girl.png" alt="Nhân vật pixel đang ngồi" draggable="false">
+      <figcaption>USER_01 // IDLE</figcaption>
+    </figure>
+    <figure class="net-sticker-character net-sticker-character--dj">
+      <img src="img/sticker-pixel-dj.png" alt="Nhân vật pixel DJ" draggable="false">
+      <figcaption>DJ_SIGNAL // PLAY</figcaption>
+    </figure>
+    <figure class="net-sticker-character net-sticker-character--smoker">
+      <img src="img/sticker-pixel-smoker.png" alt="Nhân vật pixel đang ngồi hút thuốc" draggable="false">
+      <figcaption>AFK_ZONE // 03</figcaption>
+    </figure>
+  </div>
+
+  <div class="net-sticker-marquee" aria-hidden="true">
+    <span>★ KEEP THE OLD WEB ALIVE ★ NO ALGORITHM ★ HUMAN MADE HOMEPAGE ★ リンクフリー ★ BEST VIEWED AT 1024×768 ★</span>
+  </div>
+</section>
 
 <section id="my-projects" class="projects-section">
   <div class="projects-header">
@@ -4336,12 +4560,6 @@ function escHtml(str) {
       </div>
 
       <div class="topic-card" role="listitem">
-        <h3>Âm Nhạc</h3>
-        <p>Album hot, playlist và phân tích.</p>
-        <a href="am-nhac.html" class="topic-link">Khám phá</a>
-      </div>
-
-      <div class="topic-card" role="listitem">
         <h3>Game</h3>
         <p>Guide, update và review game.</p>
         <a href="game0/0/game.html" class="topic-link">Khám phá</a>
@@ -4950,7 +5168,6 @@ nav a, .logo-container span {
       linh: 'Mình là người dẫn đường của Linh. Chọn “Đi tới” để xem lời giới thiệu ngay trong trang chủ.',
       projects: 'Đã đánh dấu Kho dự án! Ở đó có các project web, game và những thử nghiệm của Linh.',
       topics: 'Bản đồ chủ đề đã sẵn sàng: manga, game, phim, nghệ thuật, khoa học và nhiều hơn nữa.',
-      music: 'Có chứ! Mình dẫn bạn đến phòng âm nhạc của Linh nhé.',
       map: 'Đây là bản đồ toàn website. Chọn một điểm đến hoặc dùng ô tìm kiếm để khám phá nhanh.'
     };
     var targetMap = { linh: '#profile-section', projects: '#my-projects', topics: '#nav-menu' };
@@ -4960,7 +5177,6 @@ nav a, .logo-container span {
         { icon:'📚', label:'Manga', href:'manga0/0/truyen-manga.html', reply:'Đưa bạn đến thế giới manga.' },
         { icon:'🎮', label:'Game', href:'game0/0/game.html', reply:'Chuyển sang khu trò chơi.' },
         { icon:'🎬', label:'Phim', href:'phim0/0/phim.html', reply:'Đưa bạn đến góc phim ảnh.' },
-        { icon:'🎵', label:'Âm nhạc', href:'am-nhac.html', reply:'Mở phòng âm nhạc.' },
         { icon:'🔭', label:'Khoa học', href:'khoa-hoc0/0/khoa-hoc.html', reply:'Khám phá chuyên mục khoa học.' }
       ],
       linh: [
@@ -4979,11 +5195,6 @@ nav a, .logo-container span {
         { icon:'🎬', label:'Phim', href:'phim0/0/phim.html', reply:'Mở khu phim.' },
         { icon:'🎨', label:'Nghệ thuật', href:'nghe-thuat0/nghe-thuat.html', reply:'Mở phòng nghệ thuật.' },
         { icon:'🔭', label:'Khoa học', href:'khoa-hoc0/0/khoa-hoc.html', reply:'Mở khu khoa học.' },
-        { icon:'🎵', label:'Âm nhạc', href:'am-nhac.html', reply:'Mở phòng âm nhạc.' }
-      ],
-      music: [
-        { icon:'🎵', label:'Vào phòng nhạc', href:'am-nhac.html', reply:'Mở phòng âm nhạc ngay.' },
-        { icon:'▶', label:'Video yêu thích', target:'.video-gallery-section', reply:'Cuộn đến thư viện video.' }
       ]
     };
     var allRoutes = [
@@ -4992,7 +5203,6 @@ nav a, .logo-container span {
       { id:'manga', icon:'📚', label:'Manga', href:'manga0/0/truyen-manga.html', reply:'Mở thế giới manga.' },
       { id:'game', icon:'🎮', label:'Game', href:'game0/0/game.html', reply:'Mở khu trò chơi.' },
       { id:'film', icon:'🎬', label:'Phim', href:'phim0/0/phim.html', reply:'Mở góc phim ảnh.' },
-      { id:'music', icon:'🎵', label:'Âm nhạc', href:'am-nhac.html', reply:'Mở phòng âm nhạc.' },
       { id:'art', icon:'🎨', label:'Nghệ thuật', href:'nghe-thuat0/nghe-thuat.html', reply:'Mở phòng nghệ thuật.' },
       { id:'science', icon:'🔭', label:'Khoa học', href:'khoa-hoc0/0/khoa-hoc.html', reply:'Mở khu khoa học.' },
       { id:'discord', icon:'🤖', label:'Discord Bot', href:'discordbot45/discordbot.html', reply:'Mở dự án Discord Bot.' },
@@ -8147,6 +8357,1079 @@ nav a, .logo-container span {
     #my-projects .proj-card__thumb img { transition: none; }
   }
 </style>
+
+<style id="retro-web-sticker-wall">
+  .net-sticker-board {
+    --sticker-cyan: #55f6ff;
+    --sticker-pink: #ff3b91;
+    --sticker-lime: #eaff38;
+    position: relative;
+    isolation: isolate;
+    width: min(1180px, calc(100% - 34px));
+    margin: clamp(36px, 6vw, 74px) auto;
+    padding: 41px clamp(18px, 3.2vw, 38px) 50px;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: #eefaff;
+    background:
+      linear-gradient(90deg, rgba(85,246,255,.045) 1px, transparent 1px),
+      linear-gradient(rgba(85,246,255,.04) 1px, transparent 1px),
+      radial-gradient(circle at 15% 15%, rgba(255,59,145,.16), transparent 27%),
+      radial-gradient(circle at 86% 76%, rgba(85,246,255,.13), transparent 28%),
+      rgba(3,5,13,.94);
+    background-size: 28px 28px, 28px 28px, auto, auto, auto;
+    border: 1px solid rgba(85,246,255,.5);
+    border-top: 5px solid var(--sticker-pink);
+    clip-path: polygon(0 0, 68% 0, 70% 8px, 96% 8px, 100% 13%, 100% 100%, 5% 100%, 0 91%);
+    box-shadow: 9px 10px 0 rgba(255,59,145,.2), -7px -6px 0 rgba(85,246,255,.12), 0 26px 70px rgba(0,0,0,.55);
+  }
+
+  .net-sticker-board::before {
+    content: "LINK FREE  /  PERSONAL WEBRING  /  INTERNET ARCHAEOLOGY  /  保存中";
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    padding-inline: 12px;
+    overflow: hidden;
+    color: #050711;
+    background: repeating-linear-gradient(135deg, var(--sticker-lime) 0 24px, #fff 24px 27px, var(--sticker-lime) 27px 51px);
+    font: 900 8px/1 "Courier New", monospace;
+    letter-spacing: .14em;
+    white-space: nowrap;
+  }
+
+  .net-sticker-board::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 25px 0 0;
+    pointer-events: none;
+    opacity: .22;
+    background: repeating-linear-gradient(0deg, rgba(2,3,10,.28) 0 1px, transparent 1px 4px);
+  }
+
+  .net-sticker-board > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .net-sticker-board figure { margin: 0; }
+
+  .net-sticker-board__head {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 25px;
+    padding: 12px 15px;
+    background: linear-gradient(90deg, rgba(85,246,255,.09), transparent 50%, rgba(255,59,145,.08));
+    border-left: 4px solid var(--sticker-cyan);
+    border-right: 1px solid rgba(255,59,145,.55);
+  }
+
+  .net-sticker-board__head > span,
+  .net-sticker-board__head > em {
+    font: 800 8px/1 "Courier New", monospace;
+    letter-spacing: .13em;
+    font-style: normal;
+  }
+
+  .net-sticker-board__head > span { color: var(--sticker-cyan); }
+  .net-sticker-board__head > em { color: rgba(255,255,255,.38); text-align: right; }
+  .net-sticker-board__head i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 5px;
+    border-radius: 50%;
+    background: #72ff92;
+    box-shadow: 0 0 9px #72ff92;
+    animation: sticker-online-blink 1.15s steps(1) infinite;
+  }
+
+  .net-sticker-board__head h2 {
+    margin: 0;
+    color: #fff;
+    font: italic 900 clamp(24px, 3.3vw, 42px)/.9 Impact, "Arial Black", sans-serif;
+    letter-spacing: .035em;
+    text-align: center;
+    text-shadow: 3px 0 var(--sticker-pink), -3px 0 var(--sticker-cyan);
+  }
+
+  .net-sticker-board__head h2 b { color: var(--sticker-lime); font-weight: inherit; }
+
+  .net-sticker-board__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(310px, .8fr);
+    gap: clamp(17px, 2.5vw, 30px);
+  }
+
+  .net-sticker-feature {
+    position: relative;
+    min-height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 26px 22px 17px;
+    background: #050812;
+    border: 1px solid rgba(85,246,255,.35);
+    border-left: 4px solid var(--sticker-cyan);
+    clip-path: polygon(0 0, 94% 0, 100% 16%, 100% 100%, 5% 100%, 0 87%);
+    box-shadow: inset 0 0 28px rgba(85,246,255,.05);
+  }
+
+  .net-sticker-feature::after {
+    content: "WEB_CAPTURE_01";
+    position: absolute;
+    right: 12px;
+    top: 11px;
+    color: rgba(255,255,255,.3);
+    font: 700 7px/1 "Courier New", monospace;
+    letter-spacing: .12em;
+  }
+
+  .net-sticker-feature__tape {
+    position: absolute;
+    z-index: 4;
+    left: 15px;
+    top: 9px;
+    padding: 4px 7px;
+    color: #050711;
+    background: var(--sticker-lime);
+    border: 1px solid #fff;
+    font: 900 7px/1 "Courier New", monospace;
+    letter-spacing: .08em;
+    transform: rotate(-2deg);
+    box-shadow: 3px 3px 0 var(--sticker-pink);
+  }
+
+  .net-sticker-feature > img {
+    width: min(100%, 550px);
+    margin: 8px auto 13px;
+    image-rendering: auto;
+    border: 2px solid #070912;
+    outline: 1px solid rgba(255,255,255,.28);
+    filter: saturate(1.08) contrast(1.05);
+    box-shadow: 7px 7px 0 rgba(255,59,145,.28), -5px -5px 0 rgba(85,246,255,.2);
+    transition: transform .24s steps(3, end), filter .24s;
+  }
+
+  .net-sticker-feature:hover > img {
+    transform: translateY(-4px) rotate(-.4deg);
+    filter: saturate(1.28) contrast(1.08);
+  }
+
+  .net-sticker-feature[role="button"] { cursor: pointer; }
+  .net-sticker-feature[role="button"]:focus-visible {
+    outline: 2px solid var(--sticker-lime);
+    outline-offset: 5px;
+    box-shadow: 7px 7px 0 var(--sticker-pink), 0 0 25px rgba(234,255,56,.28);
+  }
+
+  .net-sticker-feature[aria-expanded="true"] {
+    border-color: var(--sticker-lime);
+    box-shadow: inset 0 0 25px rgba(234,255,56,.08), 6px 6px 0 rgba(255,59,145,.25);
+  }
+
+  .net-sticker-feature figcaption {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 9px;
+    align-items: center;
+    font: 800 7px/1 "Courier New", monospace;
+    letter-spacing: .1em;
+  }
+
+  .net-sticker-feature figcaption b { padding: 4px 6px; color: #050711; background: var(--sticker-pink); }
+  .net-sticker-feature figcaption span { color: var(--sticker-cyan); }
+  .net-sticker-feature figcaption em { color: rgba(255,255,255,.33); font-style: normal; }
+
+  .net-sticker-feature__prompt {
+    align-self: flex-end;
+    margin-top: 10px;
+    color: var(--sticker-lime);
+    font: 900 7px/1 "Courier New", monospace;
+    letter-spacing: .1em;
+    text-shadow: 0 0 7px rgba(234,255,56,.55);
+  }
+
+  .net-sticker-feature__prompt i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 5px;
+    background: var(--sticker-pink);
+    box-shadow: 0 0 7px var(--sticker-pink);
+    animation: sticker-online-blink .9s steps(1) infinite;
+  }
+
+  .net-sticker-feature[aria-expanded="true"] .net-sticker-feature__prompt::after { content: " // OPEN"; color: var(--sticker-cyan); }
+
+  .net-sticker-bank {
+    padding: 18px;
+    display: grid;
+    align-content: center;
+    gap: 17px;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 8px, transparent 8px 16px), #080a13;
+    border: 1px solid rgba(255,59,145,.42);
+    border-top: 4px solid var(--sticker-pink);
+    box-shadow: 6px 6px 0 rgba(85,246,255,.15);
+  }
+
+  .net-sticker-bank__label {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(85,246,255,.28);
+    color: var(--sticker-pink);
+    font: 900 8px/1 "Courier New", monospace;
+    letter-spacing: .09em;
+  }
+
+  .net-sticker-bank__label b { color: rgba(255,255,255,.35); }
+
+  .net-sticker-bank__thought-hint {
+    justify-self: center;
+    color: var(--sticker-lime);
+    font: 900 6px/1 "Courier New", monospace;
+    letter-spacing: .08em;
+    text-shadow: 0 0 6px rgba(234,255,56,.45);
+  }
+
+  .net-sticker-bank__thought-hint i {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 4px;
+    background: var(--sticker-pink);
+    box-shadow: 0 0 6px var(--sticker-pink);
+    animation: sticker-online-blink .9s steps(1) infinite;
+  }
+
+  .net-sticker-badges {
+    display: grid;
+    grid-template-columns: repeat(2, 88px);
+    justify-content: center;
+    gap: 13px 18px;
+  }
+
+  .net-sticker-badges img {
+    width: 88px;
+    height: 31px;
+    max-width: none;
+    image-rendering: pixelated;
+    border: 1px solid rgba(255,255,255,.45);
+    box-shadow: 3px 3px 0 rgba(0,0,0,.7);
+    transition: transform .18s steps(2, end), box-shadow .18s;
+  }
+
+  .net-sticker-badges img:nth-child(even) { transform: rotate(1.5deg); }
+  .net-sticker-badges img:nth-child(odd) { transform: rotate(-1.5deg); }
+  .net-sticker-badges img:hover { transform: translateY(-4px) scale(1.08); box-shadow: 4px 6px 0 var(--sticker-pink); }
+
+  .net-sticker-badges img[data-thought-target] { cursor: pointer; }
+  .net-sticker-badges img[data-thought-target]:focus-visible {
+    outline: 2px solid var(--sticker-lime);
+    outline-offset: 4px;
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 4px 6px 0 var(--sticker-pink), 0 0 12px rgba(234,255,56,.5);
+  }
+
+  .net-sticker-badges img[data-thought-target][aria-expanded="true"] {
+    outline: 2px solid var(--sticker-lime);
+    outline-offset: 3px;
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 4px 6px 0 var(--sticker-cyan), 0 0 13px rgba(234,255,56,.5);
+  }
+
+  .net-sticker-emotes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255,255,255,.4);
+    font: 700 7px/1 "Courier New", monospace;
+    letter-spacing: .1em;
+  }
+
+  .net-sticker-emotes img {
+    width: 28px;
+    height: 28px;
+    max-width: none;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 6px rgba(234,255,56,.6));
+    animation: sticker-emote-bop 2.4s steps(2, end) infinite;
+  }
+
+  .net-sticker-emotes img:last-child { animation-delay: -1.2s; }
+
+  .net-sticker-characters {
+    min-height: 140px;
+    margin-top: 22px;
+    padding: 12px 7% 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    gap: 20px;
+    background:
+      linear-gradient(180deg, transparent 0 70%, rgba(85,246,255,.08) 70%),
+      linear-gradient(90deg, transparent, rgba(255,59,145,.08), transparent);
+    border-bottom: 2px solid rgba(85,246,255,.5);
+  }
+
+  .net-sticker-character {
+    position: relative;
+    min-width: 150px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 9px;
+    transition: transform .22s steps(3, end);
+  }
+
+  .net-sticker-character:hover { transform: translateY(-7px); }
+
+  .net-sticker-character img {
+    max-width: none;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(5px 6px 0 rgba(0,0,0,.55)) drop-shadow(0 0 5px rgba(85,246,255,.25));
+  }
+
+  .net-sticker-character--girl img { width: 81px; height: 126px; }
+  .net-sticker-character--dj img { width: 127px; height: 110px; }
+  .net-sticker-character--smoker img { width: 96px; height: 96px; }
+
+  .net-sticker-character figcaption {
+    margin-bottom: 9px;
+    padding: 4px 6px;
+    color: #050711;
+    background: var(--sticker-cyan);
+    border: 1px solid #fff;
+    font: 900 7px/1 "Courier New", monospace;
+    letter-spacing: .08em;
+    white-space: nowrap;
+    box-shadow: 3px 3px 0 var(--sticker-pink);
+  }
+
+  .net-sticker-character--dj figcaption { background: var(--sticker-pink); color: #fff; }
+  .net-sticker-character--smoker figcaption { background: var(--sticker-lime); }
+
+  .net-sticker-marquee {
+    margin: 18px -38px -30px;
+    padding: 7px 0;
+    overflow: hidden;
+    color: #050711;
+    background: var(--sticker-cyan);
+    border-block: 1px solid #fff;
+    font: 900 8px/1 "Courier New", monospace;
+    letter-spacing: .13em;
+    white-space: nowrap;
+  }
+
+  .net-sticker-marquee span {
+    display: inline-block;
+    min-width: max-content;
+    padding-left: 100%;
+    animation: sticker-marquee 18s linear infinite;
+  }
+
+  .sticker-thought[hidden] { display: none; }
+
+  .sticker-thought {
+    position: relative;
+    margin-top: 23px;
+    color: #e8f7fb;
+    background:
+      linear-gradient(90deg, rgba(85,246,255,.035) 1px, transparent 1px),
+      linear-gradient(rgba(85,246,255,.03) 1px, transparent 1px),
+      linear-gradient(150deg, #070b13, #03050b);
+    background-size: 22px 22px, 22px 22px, auto;
+    border: 1px solid rgba(85,246,255,.52);
+    border-left: 5px solid var(--sticker-pink);
+    clip-path: polygon(0 0, 95% 0, 100% 25px, 100% 100%, 3% 100%, 0 93%);
+    box-shadow: 7px 7px 0 rgba(85,246,255,.12), 0 20px 42px rgba(0,0,0,.45);
+    animation: sticker-thought-open .32s steps(5, end) both;
+  }
+
+  .sticker-thought__head {
+    min-height: 52px;
+    padding: 9px 13px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(90deg, rgba(255,59,145,.18), transparent 62%, rgba(85,246,255,.09));
+    border-bottom: 1px solid rgba(85,246,255,.26);
+  }
+
+  .sticker-thought__head > div { min-width: 0; display: grid; gap: 4px; }
+  .sticker-thought__head small {
+    color: var(--sticker-cyan);
+    font: 800 7px/1 "Courier New", monospace;
+    letter-spacing: .13em;
+  }
+
+  .sticker-thought__head strong {
+    overflow: hidden;
+    color: #fff;
+    font: italic 900 clamp(15px, 2vw, 23px)/1 Impact, "Arial Black", sans-serif;
+    letter-spacing: .045em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 2px 0 var(--sticker-pink), -2px 0 var(--sticker-cyan);
+  }
+
+  .sticker-thought__head > span {
+    padding: 5px 7px;
+    color: #050711;
+    background: var(--sticker-lime);
+    font: 900 7px/1 "Courier New", monospace;
+    letter-spacing: .1em;
+    box-shadow: 3px 3px 0 var(--sticker-pink);
+  }
+
+  .sticker-thought__head button {
+    width: 31px;
+    height: 31px;
+    padding: 0;
+    color: #fff;
+    background: var(--sticker-pink);
+    border: 1px solid #fff;
+    border-radius: 0;
+    font: 900 19px/1 monospace;
+    box-shadow: 3px 3px 0 var(--sticker-cyan);
+    cursor: pointer;
+    transition: transform .15s steps(2, end), background .15s;
+  }
+
+  .sticker-thought__head button:hover,
+  .sticker-thought__head button:focus-visible {
+    color: #050711;
+    background: var(--sticker-lime);
+    outline: none;
+    transform: translate(-2px, -2px);
+  }
+
+  .sticker-thought__terminal {
+    padding: 8px 15px;
+    color: #72ff92;
+    background: rgba(0,0,0,.52);
+    border-bottom: 1px dashed rgba(114,255,146,.25);
+    font: 700 8px/1.2 "Courier New", monospace;
+    letter-spacing: .05em;
+  }
+
+  .sticker-thought__terminal span { animation: sticker-online-blink .9s steps(1) infinite; }
+
+  .sticker-thought__body {
+    max-height: 390px;
+    padding: clamp(17px, 3vw, 31px) clamp(17px, 4vw, 48px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sticker-pink) #080b12;
+  }
+
+  .sticker-thought__body::-webkit-scrollbar { width: 8px; }
+  .sticker-thought__body::-webkit-scrollbar-track { background: #080b12; }
+  .sticker-thought__body::-webkit-scrollbar-thumb { background: linear-gradient(var(--sticker-pink), var(--sticker-cyan)); border: 2px solid #080b12; }
+
+  .sticker-thought__body p {
+    max-width: 900px;
+    margin: 0 auto 1.2em;
+    color: rgba(229,241,247,.76);
+    font: 600 clamp(12px, 1.2vw, 14px)/1.78 "Courier New", monospace;
+    letter-spacing: .01em;
+  }
+
+  .sticker-thought__body p:first-child {
+    color: #fff;
+    font-weight: 900;
+    text-shadow: 1px 0 var(--sticker-pink), -1px 0 var(--sticker-cyan);
+  }
+
+  .sticker-thought__body p::before { content: "> "; color: var(--sticker-pink); font-weight: 900; }
+  .sticker-thought__body p strong { color: var(--sticker-lime); font-weight: 900; }
+
+  .sticker-thought__body .sticker-thought__questions {
+    padding: 13px 16px;
+    color: var(--sticker-cyan);
+    background: rgba(85,246,255,.055);
+    border-left: 3px solid var(--sticker-cyan);
+    font-weight: 900;
+    line-height: 1.9;
+    text-shadow: 0 0 7px rgba(85,246,255,.25);
+  }
+
+  .sticker-thought__body .sticker-thought__closing {
+    padding: 13px 16px;
+    color: var(--sticker-lime);
+    background: rgba(234,255,56,.055);
+    border-left: 3px solid var(--sticker-lime);
+    font-weight: 900;
+    text-shadow: 0 0 8px rgba(234,255,56,.28);
+  }
+
+  .sticker-thought__foot {
+    padding: 8px 13px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: rgba(255,255,255,.35);
+    background: rgba(0,0,0,.48);
+    border-top: 1px solid rgba(85,246,255,.2);
+    font: 800 7px/1 "Courier New", monospace;
+    letter-spacing: .1em;
+  }
+
+  .sticker-thought__foot b { color: var(--sticker-lime); }
+  .sticker-thought__foot em { color: var(--sticker-cyan); font-style: normal; }
+
+  @keyframes sticker-online-blink { 0%, 54% { opacity: 1; } 55%, 100% { opacity: .2; } }
+  @keyframes sticker-emote-bop { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-5px) rotate(5deg); } }
+  @keyframes sticker-marquee { to { transform: translateX(-100%); } }
+  @keyframes sticker-thought-open {
+    from { opacity: 0; transform: translateY(-12px); clip-path: inset(0 0 100% 0); }
+    to { opacity: 1; transform: none; clip-path: polygon(0 0, 95% 0, 100% 25px, 100% 100%, 3% 100%, 0 93%); }
+  }
+
+  @media (max-width: 760px) {
+    .net-sticker-board {
+      width: calc(100vw - 18px);
+      margin-block: 28px 45px;
+      padding: 36px 10px 42px;
+      clip-path: polygon(0 0, 72% 0, 75% 6px, 100% 6px, 100% 100%, 6% 100%, 0 95%);
+      box-shadow: 5px 6px 0 rgba(255,59,145,.2), -3px -3px 0 rgba(85,246,255,.12);
+    }
+
+    .net-sticker-board__head {
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 10px;
+    }
+
+    .net-sticker-board__head > span { grid-column: 1 / -1; }
+    .net-sticker-board__head h2 { text-align: left; font-size: clamp(23px, 8vw, 34px); }
+    .net-sticker-board__content { grid-template-columns: 1fr; gap: 14px; }
+    .net-sticker-feature { min-height: 145px; padding: 27px 13px 14px; }
+    .net-sticker-feature > img { margin-top: 3px; }
+    .net-sticker-feature figcaption em { display: none; }
+    .net-sticker-bank { padding: 15px 10px; }
+    .net-sticker-badges { gap: 11px 14px; }
+
+    .sticker-thought { margin-top: 15px; clip-path: polygon(0 0, 92% 0, 100% 22px, 100% 100%, 5% 100%, 0 96%); }
+    .sticker-thought__head { grid-template-columns: minmax(0, 1fr) auto; gap: 7px; padding: 8px 9px; }
+    .sticker-thought__head > span { display: none; }
+    .sticker-thought__head strong { font-size: 15px; }
+    .sticker-thought__body { max-height: 52vh; padding: 17px 14px; }
+    .sticker-thought__body p { font-size: 11px; line-height: 1.68; }
+    .sticker-thought__foot b { display: none; }
+
+    .net-sticker-characters {
+      min-height: 106px;
+      margin-top: 15px;
+      padding-inline: 3px;
+      justify-content: center;
+      gap: clamp(5px, 3vw, 16px);
+    }
+
+    .net-sticker-character { min-width: 0; flex: 1; flex-direction: column; align-items: center; gap: 2px; }
+    .net-sticker-character--girl img { width: 54px; height: 84px; }
+    .net-sticker-character--dj img { width: 81px; height: 70px; }
+    .net-sticker-character--smoker img { width: 68px; height: 68px; }
+    .net-sticker-character figcaption { margin: 0 0 5px; font-size: 5px; box-shadow: 2px 2px 0 var(--sticker-pink); }
+    .net-sticker-marquee { margin-inline: -10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .net-sticker-board *,
+    .net-sticker-board *::before,
+    .net-sticker-board *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<style id="audio-cassette-terminal-ui">
+  .audio-terminal {
+    --audio-green: #9fd273;
+    --audio-dark: #07110c;
+    --audio-cyan: #55f6ff;
+    --audio-pink: #ff3b91;
+    --audio-lime: #eaff38;
+    position: fixed;
+    z-index: 99990;
+    right: 16px;
+    bottom: 16px;
+    width: min(340px, calc(100vw - 24px));
+    color: #edf9f1;
+    font-family: "Courier New", monospace;
+    filter: drop-shadow(0 14px 22px rgba(0,0,0,.55));
+  }
+
+  .audio-terminal button { font-family: inherit; }
+
+  .audio-terminal__dock {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 96px;
+    gap: 7px;
+    padding: 7px;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px),
+      #07110c;
+    border: 1px solid var(--audio-cyan);
+    border-top: 4px solid var(--audio-pink);
+    clip-path: polygon(0 0, 92% 0, 100% 18%, 100% 100%, 5% 100%, 0 84%);
+    box-shadow: 7px 7px 0 rgba(255,59,145,.28), -4px -4px 0 rgba(85,246,255,.16);
+  }
+
+  .audio-terminal__dock::before {
+    content: "AUDIO_IDLE // CLICK PAGE TO PLAY";
+    position: absolute;
+    z-index: 5;
+    left: 9px;
+    top: -12px;
+    padding: 3px 6px;
+    color: #050711;
+    background: var(--audio-lime);
+    border: 1px solid #fff;
+    font: 900 6px/1 "Courier New", monospace;
+    letter-spacing: .08em;
+    box-shadow: 2px 2px 0 var(--audio-pink);
+  }
+
+  .audio-terminal.is-playing .audio-terminal__dock::before {
+    content: "● PLAYING // LOCAL SIGNAL";
+    color: #fff;
+    background: var(--audio-pink);
+    box-shadow: 2px 2px 0 var(--audio-cyan), 0 0 9px rgba(255,59,145,.6);
+  }
+
+  .audio-terminal.is-blocked .audio-terminal__dock::before { content: "CLICK PLAY // AUTOPLAY BLOCKED"; background: #ffb32e; }
+  .audio-terminal.has-error .audio-terminal__dock::before { content: "FILE ERROR // CHECK PATH"; color: #fff; background: #ef233c; }
+
+  .audio-terminal__cassette {
+    min-width: 0;
+    min-height: 77px;
+    padding: 6px;
+    display: grid;
+    grid-template-columns: 89px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    color: #061009;
+    background: linear-gradient(145deg, #d6e8b9, #8dbb67);
+    border: 1px solid #efffdc;
+    border-radius: 0;
+    box-shadow: inset 0 0 0 3px rgba(37,75,29,.25), 3px 3px 0 #020704;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform .16s steps(2, end), filter .16s;
+  }
+
+  .audio-terminal__cassette:hover,
+  .audio-terminal__cassette:focus-visible {
+    outline: 2px solid var(--audio-lime);
+    outline-offset: 2px;
+    transform: translateY(-2px);
+    filter: saturate(1.16) brightness(1.06);
+  }
+
+  .audio-terminal.library-open .audio-terminal__cassette {
+    outline: 2px solid var(--audio-pink);
+    box-shadow: inset 0 0 0 3px rgba(37,75,29,.25), 4px 4px 0 var(--audio-cyan);
+  }
+
+  .audio-terminal__cassette-art {
+    position: relative;
+    display: block;
+    width: 89px;
+    height: 61px;
+    overflow: hidden;
+    background: #8dbb67;
+    border: 1px solid #253a21;
+  }
+
+  .audio-terminal__cassette-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, transparent 1px 3px);
+  }
+
+  .audio-terminal__cassette-art img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    image-rendering: pixelated;
+    filter: contrast(1.08) saturate(.92);
+  }
+
+  .audio-terminal.is-playing .audio-terminal__cassette-art img {
+    animation: audio-tape-jitter .75s steps(2, end) infinite;
+  }
+
+  .audio-terminal__cassette-copy {
+    min-width: 0;
+    display: grid;
+    gap: 4px;
+    text-align: left;
+  }
+
+  .audio-terminal__cassette-copy small,
+  .audio-terminal__cassette-copy em {
+    overflow: hidden;
+    font: 900 5px/1 "Courier New", monospace;
+    letter-spacing: .07em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .audio-terminal__cassette-copy small { color: #315a29; }
+  .audio-terminal__cassette-copy em { color: #182818; font-style: normal; }
+  .audio-terminal__cassette-copy strong {
+    overflow: hidden;
+    color: #07110c;
+    font: italic 900 17px/.95 Impact, "Arial Black", sans-serif;
+    letter-spacing: .045em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 1px 0 rgba(255,255,255,.75);
+  }
+
+  .audio-terminal.is-playing .audio-terminal__cassette-copy strong {
+    color: #fff;
+    text-shadow: 2px 0 var(--audio-pink), -2px 0 #214b25;
+  }
+
+  .audio-terminal__transport {
+    display: grid;
+    grid-template-columns: 1fr 48px 1fr;
+    gap: 3px;
+    align-items: stretch;
+  }
+
+  .audio-terminal__transport button {
+    min-width: 0;
+    padding: 0;
+    color: #c9f6ff;
+    background: #0e1516;
+    border: 1px solid #334246;
+    border-radius: 0;
+    font: 900 7px/1 "Courier New", monospace;
+    cursor: pointer;
+    transition: color .15s, background .15s, transform .15s;
+  }
+
+  .audio-terminal__transport button:hover,
+  .audio-terminal__transport button:focus-visible {
+    color: #050711;
+    background: var(--audio-lime);
+    border-color: #fff;
+    outline: none;
+    transform: translateY(-2px);
+  }
+
+  .audio-terminal #soundBtn {
+    position: static !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 48px !important;
+    height: auto !important;
+    min-height: 57px;
+    padding: 5px 3px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #07110c !important;
+    background: var(--audio-cyan) !important;
+    border: 1px solid #fff !important;
+    border-radius: 0 !important;
+    opacity: 1 !important;
+    box-shadow: 3px 3px 0 var(--audio-pink) !important;
+    transform: none !important;
+  }
+
+  .audio-terminal #soundBtn svg { width: 22px; height: 22px; fill: currentColor; }
+  .audio-terminal #soundBtn span { font: 900 6px/1 "Courier New", monospace; letter-spacing: .08em; }
+  .audio-terminal #soundBtn .audio-terminal__speaker-on { display: none; }
+  .audio-terminal #soundBtn .audio-terminal__speaker-off { display: block; }
+
+  .audio-terminal.is-playing #soundBtn {
+    color: #fff !important;
+    background: var(--audio-pink) !important;
+    box-shadow: 3px 3px 0 var(--audio-cyan), 0 0 12px rgba(255,59,145,.55) !important;
+  }
+
+  .audio-terminal.is-playing #soundBtn .audio-terminal__speaker-on { display: block; animation: audio-speaker-pulse .8s steps(2, end) infinite; }
+  .audio-terminal.is-playing #soundBtn .audio-terminal__speaker-off { display: none; }
+
+  .audio-terminal__progress {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 35px minmax(0, 1fr) 35px;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,.48);
+    font: 800 6px/1 "Courier New", monospace;
+  }
+
+  .audio-terminal__progress > div {
+    height: 5px;
+    overflow: hidden;
+    background: repeating-linear-gradient(90deg, #171f20 0 8px, #313c3e 8px 10px);
+    border: 1px solid #303d40;
+  }
+
+  .audio-terminal__progress i {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--audio-pink), var(--audio-lime), var(--audio-cyan));
+    box-shadow: 0 0 6px var(--audio-cyan);
+  }
+
+  .audio-terminal__library[hidden] { display: none; }
+
+  .audio-terminal__library {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 11px);
+    width: min(390px, calc(100vw - 24px));
+    max-height: min(500px, 65vh);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: #eafbff;
+    background:
+      linear-gradient(90deg, rgba(85,246,255,.035) 1px, transparent 1px),
+      linear-gradient(rgba(85,246,255,.03) 1px, transparent 1px),
+      #050811;
+    background-size: 22px 22px, 22px 22px, auto;
+    border: 1px solid var(--audio-cyan);
+    border-top: 5px solid var(--audio-pink);
+    clip-path: polygon(0 0, 92% 0, 100% 28px, 100% 100%, 5% 100%, 0 94%);
+    box-shadow: 9px 9px 0 rgba(255,59,145,.25), -5px -5px 0 rgba(85,246,255,.13), 0 25px 60px rgba(0,0,0,.72);
+    animation: audio-library-open .27s steps(4, end) both;
+  }
+
+  .audio-terminal__library > header {
+    min-height: 50px;
+    padding: 8px 10px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, rgba(255,59,145,.15), transparent 65%, rgba(85,246,255,.08));
+    border-bottom: 1px solid rgba(85,246,255,.24);
+  }
+
+  .audio-terminal__library > header > div { min-width: 0; display: grid; gap: 3px; }
+  .audio-terminal__library > header small { color: var(--audio-cyan); font: 800 6px/1 "Courier New", monospace; letter-spacing: .1em; }
+  .audio-terminal__library > header strong { color: #fff; font: italic 900 20px/1 Impact, sans-serif; letter-spacing: .05em; text-shadow: 2px 0 var(--audio-pink), -2px 0 var(--audio-cyan); }
+  .audio-terminal__library > header > span { color: var(--audio-lime); font: 900 6px/1 "Courier New", monospace; letter-spacing: .08em; }
+
+  .audio-terminal__library > header button {
+    width: 29px;
+    height: 29px;
+    padding: 0;
+    color: #fff;
+    background: var(--audio-pink);
+    border: 1px solid #fff;
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--audio-cyan);
+    font: 900 18px/1 monospace;
+    cursor: pointer;
+  }
+
+  .audio-terminal__command {
+    padding: 7px 10px;
+    color: #72ff92;
+    background: rgba(0,0,0,.5);
+    border-bottom: 1px dashed rgba(114,255,146,.25);
+    font: 700 7px/1 "Courier New", monospace;
+    letter-spacing: .06em;
+  }
+
+  .audio-terminal__command i { font-style: normal; animation: audio-cursor-blink .9s steps(1) infinite; }
+
+  .audio-terminal__tracks {
+    min-height: 0;
+    padding: 8px;
+    display: grid;
+    gap: 5px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--audio-pink) #071016;
+  }
+
+  .audio-terminal__tracks::-webkit-scrollbar { width: 7px; }
+  .audio-terminal__tracks::-webkit-scrollbar-track { background: #071016; }
+  .audio-terminal__tracks::-webkit-scrollbar-thumb { background: linear-gradient(var(--audio-pink), var(--audio-cyan)); border: 2px solid #071016; }
+
+  .audio-terminal__tracks button {
+    min-height: 43px;
+    padding: 6px 8px;
+    display: grid;
+    grid-template-columns: 27px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    color: rgba(233,247,251,.7);
+    background: rgba(255,255,255,.025);
+    border: 1px solid #263138;
+    border-left: 3px solid #34444c;
+    border-radius: 0;
+    text-align: left;
+    cursor: pointer;
+    transition: background .14s, border-color .14s, transform .14s;
+  }
+
+  .audio-terminal__tracks button:hover,
+  .audio-terminal__tracks button:focus-visible {
+    outline: none;
+    color: #fff;
+    background: rgba(85,246,255,.08);
+    border-color: var(--audio-cyan);
+    transform: translateX(3px);
+  }
+
+  .audio-terminal__tracks button.active {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(255,59,145,.18), rgba(85,246,255,.06));
+    border-color: var(--audio-pink);
+    border-left-color: var(--audio-lime);
+    box-shadow: inset 3px 0 0 var(--audio-lime);
+  }
+
+  .audio-terminal__tracks button > b { color: var(--audio-pink); font: 900 10px/1 "Courier New", monospace; }
+  .audio-terminal__tracks button.active > b { color: var(--audio-lime); }
+  .audio-terminal__tracks button > span { min-width: 0; display: grid; gap: 3px; }
+  .audio-terminal__tracks button strong { overflow: hidden; font: 900 9px/1 "Courier New", monospace; letter-spacing: .07em; text-overflow: ellipsis; white-space: nowrap; }
+  .audio-terminal__tracks button small { overflow: hidden; color: rgba(255,255,255,.32); font: 700 6px/1 "Courier New", monospace; text-overflow: ellipsis; white-space: nowrap; }
+  .audio-terminal__tracks button em { padding: 3px 5px; color: #050711; background: var(--audio-cyan); font: 900 5px/1 "Courier New", monospace; font-style: normal; }
+
+  .audio-terminal__library > footer {
+    padding: 7px 11px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: rgba(255,255,255,.35);
+    background: rgba(0,0,0,.48);
+    border-top: 1px solid rgba(85,246,255,.2);
+    font: 800 6px/1 "Courier New", monospace;
+    letter-spacing: .07em;
+  }
+
+  .audio-terminal__library > footer span { color: #72ff92; }
+  .audio-terminal__library > footer i { display: inline-block; width: 5px; height: 5px; margin-right: 4px; border-radius: 50%; background: #72ff92; box-shadow: 0 0 6px #72ff92; }
+  .audio-terminal__library > footer b { color: var(--audio-cyan); }
+
+  @keyframes audio-tape-jitter { 0%, 100% { transform: translate(0); } 50% { transform: translate(1px, -1px); } }
+  @keyframes audio-speaker-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+  @keyframes audio-cursor-blink { 0%, 52% { opacity: 1; } 53%, 100% { opacity: .15; } }
+  @keyframes audio-library-open { from { opacity: 0; transform: translateY(12px); clip-path: inset(100% 0 0); } to { opacity: 1; transform: none; clip-path: polygon(0 0, 92% 0, 100% 28px, 100% 100%, 5% 100%, 0 94%); } }
+
+  @media (max-width: 560px) {
+    .audio-terminal {
+      right: 8px;
+      bottom: 8px;
+      width: min(310px, calc(100vw - 16px));
+    }
+
+    .audio-terminal__dock { grid-template-columns: minmax(0, 1fr) 86px; padding: 6px; }
+    .audio-terminal__cassette { grid-template-columns: 72px minmax(0, 1fr); min-height: 68px; }
+    .audio-terminal__cassette-art { width: 72px; height: 51px; }
+    .audio-terminal__cassette-copy strong { font-size: 14px; }
+    .audio-terminal__transport { grid-template-columns: 1fr 42px 1fr; }
+    .audio-terminal #soundBtn { width: 42px !important; min-height: 51px; }
+    .audio-terminal__library { right: 0; width: min(360px, calc(100vw - 16px)); max-height: 58vh; }
+    .audio-terminal__library > header > span { display: none; }
+    .audio-terminal__library > footer b { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .audio-terminal *,
+    .audio-terminal *::before,
+    .audio-terminal *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script id="sticker-thought-toggle">
+  (function () {
+    var triggers = Array.from(document.querySelectorAll('[data-thought-target]'));
+    var panels = Array.from(document.querySelectorAll('[data-thought-panel]'));
+    if (!triggers.length || !panels.length) return;
+
+    function panelFor(trigger) {
+      return document.querySelector('[data-thought-panel="' + trigger.dataset.thoughtTarget + '"]');
+    }
+
+    function triggerFor(panel) {
+      return document.querySelector('[data-thought-target="' + panel.dataset.thoughtPanel + '"]');
+    }
+
+    function closePanel(panel, restoreFocus) {
+      var trigger = triggerFor(panel);
+      panel.hidden = true;
+      if (trigger) {
+        trigger.setAttribute('aria-expanded', 'false');
+        if (restoreFocus) trigger.focus({ preventScroll: true });
+      }
+    }
+
+    function openPanel(trigger, panel) {
+      panels.forEach(function (otherPanel) {
+        if (otherPanel !== panel && !otherPanel.hidden) closePanel(otherPanel, false);
+      });
+      panel.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(function () {
+        panel.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'nearest'
+        });
+      });
+    }
+
+    function toggleThought(trigger) {
+      var panel = panelFor(trigger);
+      if (!panel) return;
+      if (panel.hidden) openPanel(trigger, panel);
+      else closePanel(panel, false);
+    }
+
+    triggers.forEach(function (trigger) {
+      trigger.addEventListener('click', function () { toggleThought(trigger); });
+      trigger.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggleThought(trigger);
+        }
+      });
+    });
+
+    panels.forEach(function (panel) {
+      var closeButton = panel.querySelector('[data-thought-close]');
+      if (closeButton) closeButton.addEventListener('click', function () { closePanel(panel, true); });
+    });
+  }());
+</script>
 
 </body>
 </html>
