@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tự động hóa kiểm thử, đóng gói và triển khai phần mềm.">
+  <meta name="theme-color" content="#f4efe4">
+  <title>CI/CD Pipeline — Thư viện kiến thức</title>
+  <link rel="icon" type="image/png" href="../../../favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/article.css">
+  <script src="../../assets/js/knowledge-data.js" defer></script>
+  <script src="../../assets/js/article.js" defer></script>
+</head>
+<body data-article-id="ci-cd" data-category="devops">
+  <a class="skip-link" href="#article-content">Bỏ qua đến nội dung</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../../../index.html" aria-label="Về trang chủ">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Linh Osimi</strong><small>Góc ghi chép cá nhân</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span><span class="sr-only">Mở menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <a href="../../../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+        <a href="../../../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+        <a href="../../../phim0/0/phim.html">Phim</a>
+        <a href="../../../manga0/0/truyen-manga.html">Manga</a>
+        <a href="../../../game0/0/game.html">Game</a>
+        <a class="active" href="../../index.html" aria-current="page">Kiến thức</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header class="article-hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <nav class="breadcrumbs" aria-label="Đường dẫn">
+            <a href="../../index.html">Kiến thức</a><span>/</span>
+            <a href="../../index.html?category=devops">DevOps</a><span>/</span>
+            <span>Bài 07</span>
+          </nav>
+          <p class="article-kicker">01 · DevOps căn bản</p>
+          <h1>CI/CD Pipeline</h1>
+          <p class="article-lead">Tự động hóa kiểm thử, đóng gói và triển khai phần mềm.</p>
+          <div class="article-meta">
+            <img src="../../../img/linhkun.jpg" alt="Linh Osimi">
+            <p><strong>Linh Osimi</strong><br>Oct 22, 2025 • 2:30 PM</p>
+            <span data-reading-time>Đang tính thời gian đọc…</span>
+          </div>
+        </div>
+        <figure class="cover-paper">
+          <img src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/4c8416f0-ba9c-44a4-a5f8-c771612613c0/javier-miranda-MrWOCGKFVDg-unsplash/w=1920,quality=90,fit=scale-down" alt="Ảnh bìa CI/CD Pipeline" fetchpriority="high">
+          <figcaption>DevOps / note 07</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="reading-layout">
+      <aside class="article-rail" aria-label="Thông tin bài viết">
+        <a class="back-library" href="../../index.html">← Thư viện</a>
+        <p class="rail-note">Một ghi chép trong bộ sưu tập DevOps căn bản.</p>
+        <span class="rail-symbol" aria-hidden="true">⌁</span>
+      </aside>
+
+      <div class="article-main">
+        <article class="post" id="article-content">
+<h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>CI/CD (Continuous Integration / Continuous Delivery hoặc Deployment) là trái tim của mọi hệ thống DevOps hiện đại. Nó giúp tự động hóa quy trình từ khi lập trình viên push code đến khi ứng dụng được triển khai lên môi trường production — nhanh chóng, an toàn và lặp lại được.</p>
+        <p>Trong bài viết này, chúng ta sẽ tìm hiểu CI/CD là gì, tại sao nó quan trọng, và các công cụ phổ biến mà DevOps Engineer thường sử dụng hàng ngày.</p>
+
+        <figure>
+          <img 
+            src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/d8fcc4d1-5087-4854-aeb1-bf4ea036c2f4/Kubernetes_c_bn_(1)/w=1920,quality=90,fit=scale-down" 
+            width="800"
+            height="400"
+            alt="Quy trình CI/CD trong DevOps">
+          <figcaption>
+            Quy trình CI/CD giúp đưa code từ developer đến người dùng cuối một cách tự động và đáng tin cậy.
+          </figcaption>
+        </figure>
+
+        <h2 id="ci-la-gi">CI là gì? (Continuous Integration)</h2>
+        <p>Continuous Integration là thực hành mà các lập trình viên thường xuyên merge code vào nhánh chính (main branch) — thường nhiều lần mỗi ngày. Mỗi lần merge sẽ kích hoạt một pipeline tự động để:</p>
+        <ul>
+          <li>Build mã nguồn</li>
+          <li>Chạy unit test, integration test</li>
+          <li>Quét lỗ hổng bảo mật (SAST)</li>
+          <li>Kiểm tra chất lượng code (code linting, coverage)</li>
+        </ul>
+        <p>Mục tiêu: phát hiện lỗi sớm, tránh “integration hell”.</p>
+
+        <h2 id="cd-la-gi">CD là gì? (Continuous Delivery / Deployment)</h2>
+        <p>Có hai cách hiểu về CD:</p>
+        <ul>
+          <li><strong>Continuous Delivery</strong>: Mã đã sẵn sàng để deploy bất kỳ lúc nào — nhưng vẫn cần thao tác thủ công (ví dụ: nhấn nút “Deploy to Prod”).</li>
+          <li><strong>Continuous Deployment</strong>: Mọi commit hợp lệ sau CI sẽ tự động được deploy lên production — không cần can thiệp thủ công.</li>
+        </ul>
+        <p>Cả hai đều yêu cầu kiểm thử tự động toàn diện và hạ tầng có thể tái tạo (infrastructure as code).</p>
+
+        <figure>
+          <img 
+            src="https://th.bing.com/th/id/R.ec6aecf589400fddb037be447abfe554?rik=AYfbgOUnPtgKBA&pid=ImgRaw&r=0" 
+            width="800"
+            height="400"
+            alt="So sánh Continuous Delivery và Continuous Deployment">
+          <figcaption>
+            Continuous Delivery cần phê duyệt thủ công; Continuous Deployment là hoàn toàn tự động.
+          </figcaption>
+        </figure>
+
+        <h2 id="cac-cong-cu-ci-cd">Các công cụ CI/CD phổ biến</h2>
+        <p>Dưới đây là những công cụ được dùng rộng rãi trong ngành:</p>
+
+        <h3>1. GitHub Actions</h3>
+        <p>Tích hợp sâu với GitHub, dễ dùng, miễn phí cho public repo. Viết pipeline bằng YAML trong thư mục <code>.github/workflows/</code>.</p>
+
+        <h3>2. GitLab CI/CD</h3>
+        <p>Được tích hợp sẵn trong GitLab. Hỗ trợ từ mã nguồn đến deploy, monitoring. Dùng file <code>.gitlab-ci.yml</code>.</p>
+
+        <h3>3. Jenkins</h3>
+        <p>Công cụ mã nguồn mở lâu đời, cực kỳ linh hoạt nhờ hệ sinh thái plugin phong phú. Tuy nhiên cần quản trị server và cấu hình phức tạp hơn.</p>
+
+        <h3>4. CircleCI</h3>
+        <p>Dễ cấu hình, tốc độ build nhanh, hỗ trợ tốt cho các dự án cloud-native. Có cả cloud và self-hosted.</p>
+
+        <h3>5. Argo CD</h3>
+        <p>Không phải CI tool, mà là **CD tool theo mô hình GitOps** — đồng bộ trạng thái cluster Kubernetes với manifest trong Git repo.</p>
+
+        <h2 id="vi-du-pipeline">Ví dụ đơn giản về pipeline</h2>
+        <p>Dưới đây là một pipeline CI cơ bản với GitHub Actions:</p>
+        <pre><code>name: CI Pipeline
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npm test
+</code></pre>
+        <p>Pipeline này sẽ chạy mỗi khi có push, cài dependencies và chạy test.</p>
+
+        <h2 id="best-practices">Best practices cho CI/CD</h2>
+        <ul>
+          <li>Luôn chạy test trong pipeline — không deploy nếu test fail.</li>
+          <li>Sử dụng environment (dev, staging, prod) và approval gate cho production.</li>
+          <li>Secrets (mật khẩu, API key) phải được quản lý an toàn — không hardcode.</li>
+          <li>Infrastructure as Code (Terraform, Pulumi) nên được tích hợp vào pipeline.</li>
+          <li>Giữ pipeline nhanh — nếu quá chậm, developer sẽ né CI.</li>
+        </ul>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>CI/CD không chỉ là công cụ — mà là văn hóa và quy trình. Khi được triển khai đúng, nó giúp team giao hàng nhanh hơn, giảm lỗi production, và tăng độ tin cậy hệ thống.</p>
+        <p>Hãy bắt đầu từ một pipeline đơn giản, rồi dần mở rộng: thêm test, thêm môi trường, thêm tự động hóa. DevOps không cần hoàn hảo ngay từ đầu — chỉ cần **bắt đầu**.</p>
+        </article>
+      </div>
+
+      <aside class="toc-card" aria-label="Mục lục bài viết">
+        <p>Trong bài này</p>
+        <h2>Mục lục</h2>
+        <ol id="article-toc"></ol>
+        <div class="toc-reading"><span aria-hidden="true">◷</span><span data-reading-time></span></div>
+      </aside>
+    </div>
+
+    <nav class="article-pager" aria-label="Điều hướng bài viết"></nav>
+
+    <section class="related-section" aria-labelledby="related-title">
+      <div class="related-inner">
+        <p class="section-kicker">Đọc tiếp theo</p>
+        <h2 id="related-title">Cùng chủ đề</h2>
+        <div class="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="current-year">2026</span> Linh Osimi</p>
+    <p>Được ghi lại bằng sự tò mò ✦</p>
+    <a href="#top" onclick="window.scrollTo({top:0});return false">Lên đầu trang ↑</a>
+  </footer>
+</body>
+</html>

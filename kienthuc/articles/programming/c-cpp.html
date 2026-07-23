@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hai ngôn ngữ nền tảng và các khái niệm cốt lõi.">
+  <meta name="theme-color" content="#f4efe4">
+  <title>C và C++ — Thư viện kiến thức</title>
+  <link rel="icon" type="image/png" href="../../../favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/article.css">
+  <script src="../../assets/js/knowledge-data.js" defer></script>
+  <script src="../../assets/js/article.js" defer></script>
+</head>
+<body data-article-id="c-cpp" data-category="programming">
+  <a class="skip-link" href="#article-content">Bỏ qua đến nội dung</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../../../index.html" aria-label="Về trang chủ">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Linh Osimi</strong><small>Góc ghi chép cá nhân</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span><span class="sr-only">Mở menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <a href="../../../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+        <a href="../../../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+        <a href="../../../phim0/0/phim.html">Phim</a>
+        <a href="../../../manga0/0/truyen-manga.html">Manga</a>
+        <a href="../../../game0/0/game.html">Game</a>
+        <a class="active" href="../../index.html" aria-current="page">Kiến thức</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header class="article-hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <nav class="breadcrumbs" aria-label="Đường dẫn">
+            <a href="../../index.html">Kiến thức</a><span>/</span>
+            <a href="../../index.html?category=programming">Lập trình</a><span>/</span>
+            <span>Bài 05</span>
+          </nav>
+          <p class="article-kicker">04 · Lập trình từ nền tảng</p>
+          <h1>C và C++</h1>
+          <p class="article-lead">Hai ngôn ngữ nền tảng và các khái niệm cốt lõi.</p>
+          <div class="article-meta">
+            <img src="../../../img/linhkun.jpg" alt="Linh Osimi">
+            <p><strong>Linh Osimi</strong><br>Oct 28, 2025 • 10:15 AM</p>
+            <span data-reading-time>Đang tính thời gian đọc…</span>
+          </div>
+        </div>
+        <figure class="cover-paper">
+          <img src="https://www.educative.io/api/page/5295407815458816/image/download/4810048073629696" alt="Ảnh bìa C và C++" fetchpriority="high">
+          <figcaption>Lập trình / note 05</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="reading-layout">
+      <aside class="article-rail" aria-label="Thông tin bài viết">
+        <a class="back-library" href="../../index.html">← Thư viện</a>
+        <p class="rail-note">Một ghi chép trong bộ sưu tập Lập trình từ nền tảng.</p>
+        <span class="rail-symbol" aria-hidden="true">{ }</span>
+      </aside>
+
+      <div class="article-main">
+        <article class="post" id="article-content">
+<h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>Trong thế giới lập trình, <strong>C và C++</strong> được xem là hai ngôn ngữ nền tảng, đóng vai trò cốt lõi trong việc xây dựng phần mềm, hệ điều hành và công nghệ hiện đại. Dù ra đời từ hàng chục năm trước, C/C++ vẫn là công cụ không thể thiếu với lập trình viên chuyên nghiệp, đặc biệt trong các lĩnh vực yêu cầu hiệu năng cao và kiểm soát chặt chẽ tài nguyên.</p>
+        <p>Bài viết này sẽ cung cấp cái nhìn tổng quan về lịch sử phát triển, đặc điểm nổi bật, so sánh giữa C và C++, cũng như ứng dụng thực tế và hướng học tập dành cho người mới bắt đầu.</p>
+        <figure>
+          <img src="https://www.educative.io/api/page/5295407815458816/image/download/4810048073629696" width="800" height="400">
+          <figcaption>C và C++ là “ngôn ngữ cốt lõi” được sử dụng trong hàng triệu hệ thống phần mềm trên thế giới.</figcaption>
+        </figure>
+
+        <h2 id="lich-su">Lịch sử phát triển</h2>
+        <p>Ngôn ngữ <strong>C</strong> được phát triển vào đầu những năm 1970 bởi <em>Dennis Ritchie</em> tại Bell Labs, với mục tiêu viết lại hệ điều hành Unix. C nhanh chóng trở thành tiêu chuẩn nhờ khả năng gần gũi phần cứng nhưng vẫn có cấu trúc rõ ràng.</p>
+        <p>Đến những năm 1980, <strong>Bjarne Stroustrup</strong> mở rộng C để tạo ra <strong>C++</strong> – thêm các khái niệm hướng đối tượng (OOP) như class, inheritance, và polymorphism. C++ giúp lập trình viên quản lý dự án lớn dễ dàng hơn, đồng thời vẫn giữ được hiệu suất mạnh mẽ của C.</p>
+        
+        <h2 id="dac-diem-c">Đặc điểm của ngôn ngữ C</h2>
+        <ul>
+          <li><strong>Hiệu năng cao:</strong> C được biên dịch trực tiếp thành mã máy, giúp chương trình chạy nhanh và tối ưu tài nguyên.</li>
+          <li><strong>Gần gũi phần cứng:</strong> C cho phép truy cập bộ nhớ, thao tác con trỏ, phù hợp cho lập trình hệ thống và nhúng.</li>
+          <li><strong>Cấu trúc rõ ràng:</strong> Dù gần phần cứng, C vẫn có cú pháp logic, giúp người học dễ hiểu cách máy tính hoạt động.</li>
+          <li><strong>Tính di động:</strong> Chương trình C có thể chạy trên nhiều nền tảng với ít thay đổi mã nguồn.</li>
+        </ul>
+
+        <figure>
+          <img src="https://tse3.mm.bing.net/th/id/OIP.-ZUY2DbID8cqzUs7UGxy9gHaE6?rs=1&pid=ImgDetMain&o=7&rm=3" width="800" height="400">
+          <figcaption>C – ngôn ngữ cốt lõi trong các hệ điều hành như Unix, Linux và Windows Kernel.</figcaption>
+        </figure>
+
+        <h2 id="dac-diem-cpp">Đặc điểm của ngôn ngữ C++</h2>
+        <ul>
+          <li><strong>Hỗ trợ lập trình hướng đối tượng (OOP):</strong> Cho phép mô hình hóa các đối tượng thực tế, tái sử dụng mã nguồn và dễ mở rộng.</li>
+          <li><strong>Hiệu năng mạnh mẽ:</strong> C++ vẫn giữ khả năng tối ưu tương tự C, nhưng có thêm nhiều công cụ quản lý bộ nhớ và mô-đun.</li>
+          <li><strong>Hỗ trợ lập trình đa mô hình:</strong> Ngoài OOP, C++ còn hỗ trợ lập trình hàm, lập trình generic (templates), và lập trình song song.</li>
+          <li><strong>Thư viện phong phú:</strong> STL (Standard Template Library) cung cấp hàng trăm cấu trúc dữ liệu, thuật toán và công cụ sẵn có.</li>
+        </ul>
+
+        <h2 id="so-sanh">So sánh C và C++</h2>
+        <table border="1" cellpadding="8" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Tiêu chí</th>
+              <th>C</th>
+              <th>C++</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Phong cách lập trình</td>
+              <td>Thủ tục (Procedural)</td>
+              <td>Hướng đối tượng (OOP)</td>
+            </tr>
+            <tr>
+              <td>Quản lý bộ nhớ</td>
+              <td>Thủ công (malloc, free)</td>
+              <td>Tự động hơn (constructor, destructor)</td>
+            </tr>
+            <tr>
+              <td>Tính mở rộng</td>
+              <td>Khó mở rộng khi dự án lớn</td>
+              <td>Dễ mở rộng với class, kế thừa</td>
+            </tr>
+            <tr>
+              <td>Tốc độ biên dịch & thực thi</td>
+              <td>Rất nhanh</td>
+              <td>Gần tương đương, đôi khi chậm hơn do cấu trúc phức tạp</td>
+
+            </tr>
+            <tr>
+              <td>Thư viện chuẩn</td>
+              <td>Hạn chế</td>
+              <td>Rất phong phú (STL)</td>
+          </tbody>
+        </table>
+
+        <h2 id="ung-dung">Ứng dụng thực tế</h2>
+        <p>C và C++ là nền tảng của nhiều hệ thống và phần mềm lớn nhất thế giới:</p>
+        <ul>
+          <li><strong>Hệ điều hành:</strong> Windows, Linux, macOS đều được viết phần lớn bằng C/C++.</li>
+          <li><strong>Trình duyệt web:</strong> Chrome, Firefox, Safari đều có lõi viết bằng C++.</li>
+          <li><strong>Game Engine:</strong> Unreal Engine, Unity (phần lõi), CryEngine.</li>
+          <li><strong>Phần mềm nhúng:</strong> Vi điều khiển, hệ thống IoT, thiết bị y tế, robot, ô tô thông minh.</li>
+            <li><strong>Ứng dụng tài chính:</strong> Hệ thống giao dịch tốc độ cao, phân tích dữ liệu lớn.</li>
+            <li><strong>Phần mềm đồ họa và mô phỏng:</strong> AutoCAD, Blender, MATLAB.</li>
+            
+        </ul>
+
+        <figure>
+          <img src="https://internetoflearning.org/wp-content/uploads/2023/05/steps-to-become-c-developer.png" width="800" height="400">
+          <figcaption>C/C++ là nền tảng của phần lớn hệ điều hành, game engine và phần mềm công nghiệp hiện nay.</figcaption>
+        </figure>
+
+        <h2 id="huong-hoc">Hướng học tập cho người mới bắt đầu</h2>
+        <ol>
+          <li><strong>Học cú pháp cơ bản:</strong> Biến, điều kiện, vòng lặp, hàm.</li>
+          <li><strong>Nắm vững con trỏ và bộ nhớ:</strong> Đây là chìa khóa giúp hiểu sâu về hoạt động của máy tính.</li>
+          <li><strong>Làm quen với cấu trúc dữ liệu và thuật toán:</strong> Danh sách, hàng đợi, ngăn xếp, cây, đồ thị.</li>
+          <li><strong>Chuyển sang C++:</strong> Học lập trình hướng đối tượng, class, kế thừa, hàm ảo.</li>
+          <li><strong>Làm dự án nhỏ:</strong> Viết trình quản lý sinh viên, game console đơn giản hoặc mô phỏng hệ thống.</li>
+            <li><strong>Tham gia cộng đồng:</strong> Tham gia diễn đàn, nhóm lập trình để học hỏi và chia sẻ kinh nghiệm.</li>
+            <li><strong>Đọc mã nguồn mở:</strong> Nghiên cứu các dự án C/C++ trên GitHub để hiểu cách các lập trình viên khác viết code.</li>
+        </ol>
+        </ol>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>C và C++ không chỉ là những ngôn ngữ “cổ điển”, mà còn là nền móng cho hàng loạt công nghệ hiện đại. Việc thành thạo C/C++ giúp lập trình viên hiểu sâu cách máy tính vận hành, tối ưu chương trình và phát triển kỹ năng tư duy logic mạnh mẽ — điều mà bất kỳ ngôn ngữ lập trình nào khác cũng phải dựa vào.</p>
+        <p>Nếu bạn đang nghiêm túc với nghề lập trình, học C/C++ là một lựa chọn chiến lược, giúp bạn xây dựng nền tảng vững chắc cho sự nghiệp lâu dài.</p>
+        </article>
+      </div>
+
+      <aside class="toc-card" aria-label="Mục lục bài viết">
+        <p>Trong bài này</p>
+        <h2>Mục lục</h2>
+        <ol id="article-toc"></ol>
+        <div class="toc-reading"><span aria-hidden="true">◷</span><span data-reading-time></span></div>
+      </aside>
+    </div>
+
+    <nav class="article-pager" aria-label="Điều hướng bài viết"></nav>
+
+    <section class="related-section" aria-labelledby="related-title">
+      <div class="related-inner">
+        <p class="section-kicker">Đọc tiếp theo</p>
+        <h2 id="related-title">Cùng chủ đề</h2>
+        <div class="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="current-year">2026</span> Linh Osimi</p>
+    <p>Được ghi lại bằng sự tò mò ✦</p>
+    <a href="#top" onclick="window.scrollTo({top:0});return false">Lên đầu trang ↑</a>
+  </footer>
+</body>
+</html>

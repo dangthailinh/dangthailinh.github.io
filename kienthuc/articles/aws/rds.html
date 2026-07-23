@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Triển khai MySQL, PostgreSQL và MariaDB được quản lý.">
+  <meta name="theme-color" content="#f4efe4">
+  <title>RDS · Cơ sở dữ liệu — Thư viện kiến thức</title>
+  <link rel="icon" type="image/png" href="../../../favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/article.css">
+  <script src="../../assets/js/knowledge-data.js" defer></script>
+  <script src="../../assets/js/article.js" defer></script>
+</head>
+<body data-article-id="rds" data-category="aws">
+  <a class="skip-link" href="#article-content">Bỏ qua đến nội dung</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../../../index.html" aria-label="Về trang chủ">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Linh Osimi</strong><small>Góc ghi chép cá nhân</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span><span class="sr-only">Mở menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <a href="../../../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+        <a href="../../../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+        <a href="../../../phim0/0/phim.html">Phim</a>
+        <a href="../../../manga0/0/truyen-manga.html">Manga</a>
+        <a href="../../../game0/0/game.html">Game</a>
+        <a class="active" href="../../index.html" aria-current="page">Kiến thức</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header class="article-hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <nav class="breadcrumbs" aria-label="Đường dẫn">
+            <a href="../../index.html">Kiến thức</a><span>/</span>
+            <a href="../../index.html?category=aws">AWS Cloud</a><span>/</span>
+            <span>Bài 08</span>
+          </nav>
+          <p class="article-kicker">02 · AWS &amp; dịch vụ Cloud</p>
+          <h1>RDS · Cơ sở dữ liệu</h1>
+          <p class="article-lead">Triển khai MySQL, PostgreSQL và MariaDB được quản lý.</p>
+          <div class="article-meta">
+            <img src="../../../img/linhkun.jpg" alt="Linh Osimi">
+            <p><strong>Linh Osimi</strong><br>Oct 23, 2025 • 8:30 AM</p>
+            <span data-reading-time>Đang tính thời gian đọc…</span>
+          </div>
+        </div>
+        <figure class="cover-paper">
+          <img src="https://miro.medium.com/v2/resize:fit:776/1*onVNSsArj7jdZyJMXySCdw.png" alt="Ảnh bìa RDS · Cơ sở dữ liệu" fetchpriority="high">
+          <figcaption>AWS Cloud / note 08</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="reading-layout">
+      <aside class="article-rail" aria-label="Thông tin bài viết">
+        <a class="back-library" href="../../index.html">← Thư viện</a>
+        <p class="rail-note">Một ghi chép trong bộ sưu tập AWS &amp; dịch vụ Cloud.</p>
+        <span class="rail-symbol" aria-hidden="true">☁</span>
+      </aside>
+
+      <div class="article-main">
+        <article class="post" id="article-content">
+<p style="font-style: italic; color: #555;">Tìm hiểu Amazon RDS qua các khái niệm cốt lõi: từ instance, storage, backup đến tính sẵn sàng cao và bảo mật.</p>
+
+        <h2 id="gioi-thieu">1. RDS là gì?</h2>
+        <p>Amazon RDS (Relational Database Service) là dịch vụ cho phép bạn vận hành cơ sở dữ liệu quan hệ trên AWS mà không cần tự quản lý máy chủ, cài đặt phần mềm hay cấu hình sao lưu. AWS đảm nhận toàn bộ phần vận hành — bạn chỉ cần tập trung vào dữ liệu và ứng dụng.</p>
+        <p>RDS hỗ trợ nhiều engine phổ biến:</p>
+        <ul>
+          <li>Amazon Aurora (tối ưu cho AWS, hiệu năng cao)</li>
+          <li>MySQL</li>
+          <li>PostgreSQL</li>
+          <li>MariaDB</li>
+          <li>Oracle</li>
+          <li>Microsoft SQL Server</li>
+        </ul>
+        <p>Với RDS, bạn có thể tạo cơ sở dữ liệu chỉ trong vài phút, mở rộng dung lượng tự động, bật sao lưu định kỳ và thiết lập dự phòng — tất cả qua giao diện AWS Console hoặc API.</p>
+
+        <figure>
+          <img 
+            src="https://en.inmetrics.com.br/wp-content/uploads/sites/7/2023/11/03-Amazon-RDS-v2-pzs37l0am10fienxjgh7x69liojhfr9wdjc61fyhhc.png" 
+            width="800"
+            height="400"
+            alt="Kiến trúc Amazon RDS">
+          <figcaption>
+            Hình 1: RDS tách biệt lớp ứng dụng và lớp cơ sở dữ liệu — AWS quản lý hạ tầng, bạn quản lý dữ liệu.
+          </figcaption>
+        </figure>
+
+        <h2 id="cac-khai-niem-cot-loi">2. Các khái niệm cốt lõi</h2>
+
+        <h3>2.1. DB Instance</h3>
+        <p>DB Instance là đơn vị cơ bản của RDS — tương đương một máy chủ cơ sở dữ liệu đang chạy. Mỗi instance có:</p>
+        <ul>
+          <li>Engine (MySQL, PostgreSQL, v.v.)</li>
+          <li>Phiên bản (version)</li>
+          <li>Cấu hình CPU/RAM (db.t4g.micro, db.m6g.large, v.v.)</li>
+          <li>Dung lượng lưu trữ (từ 20 GB đến 64 TB)</li>
+          <li>Endpoint (địa chỉ kết nối, ví dụ: mydb.123456789012.ap-southeast-1.rds.amazonaws.com)</li>
+        </ul>
+
+        <h3>2.2. Storage và I/O</h3>
+        <p>RDS sử dụng EBS (Elastic Block Store) làm lớp lưu trữ, với ba loại chính:</p>
+        <ul>
+          <li><strong>General Purpose (SSD):</strong> Phù hợp với hầu hết ứng dụng — cân bằng giữa hiệu năng và chi phí.</li>
+          <li><strong>Provisioned IOPS (SSD):</strong> Dành cho workload yêu cầu tốc độ I/O cao và ổn định, như ERP hoặc hệ thống tài chính.</li>
+          <li><strong>Magnetic:</strong> Đã lỗi thời — không khuyến khích sử dụng.</li>
+        </ul>
+        <p>Dung lượng lưu trữ có thể tự động mở rộng nếu bật tính năng <em>Storage Autoscaling</em>.</p>
+
+        <h3>2.3. Backup và Point-in-Time Recovery</h3>
+        <p>RDS cung cấp hai cơ chế sao lưu chính:</p>
+        <ul>
+          <li><strong>Snapshots:</strong> Bản sao thủ công hoặc tự động (khi xóa instance). Có thể dùng để khôi phục thành một instance mới.</li>
+          <li><strong>Automated backups:</strong> Tự động sao lưu hàng ngày và ghi transaction log mỗi 5 phút. Cho phép khôi phục cơ sở dữ liệu về bất kỳ thời điểm nào trong khoảng lưu giữ (mặc định 7 ngày, tối đa 35 ngày) — gọi là <em>Point-in-Time Recovery</em>.</li>
+        </ul>
+        <p>Ví dụ: Nếu bạn xóa nhầm bảng lúc 10:15 AM, bạn có thể khôi phục cơ sở dữ liệu về trạng thái lúc 10:10 AM.</p>
+
+        <h2 id="high-availability">3. High Availability với Multi-AZ</h2>
+        <p>Khi bật Multi-AZ, RDS tự động tạo một bản sao đồng bộ (standby) ở Availability Zone khác trong cùng vùng (region).</p>
+        <p>Cơ chế hoạt động:</p>
+        <ul>
+          <li>Ứng dụng luôn kết nối đến primary instance.</li>
+          <li>Nếu primary gặp sự cố (mất điện, lỗi phần cứng), RDS sẽ tự động chuyển sang standby trong vòng 60–120 giây.</li>
+          <li>Quá trình này diễn ra trong suốt với ứng dụng — chỉ bị gián đoạn ngắn.</li>
+        </ul>
+        <p>Lưu ý: Multi-AZ không dùng để mở rộng khả năng đọc — standby chỉ hoạt động khi failover. Để tăng hiệu suất đọc, hãy sử dụng Read Replicas.</p>
+
+        <figure>
+          <img 
+            src="https://tse4.mm.bing.net/th/id/OIP.0wRJ9Sj54GW0GdvxwHqgBQHaF-?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="400"
+            alt="Multi-AZ trong RDS">
+          <figcaption>
+            Hình 2: Multi-AZ đảm bảo tính sẵn sàng cao bằng cách duy trì standby instance ở vùng khả dụng khác.
+          </figcaption>
+        </figure>
+
+        <h2 id="read-replicas">4. Read Replicas — mở rộng khả năng đọc</h2>
+        <p>Read Replica là bản sao bất đồng bộ của cơ sở dữ liệu chính, dùng để giảm tải cho primary khi có nhiều truy vấn đọc (SELECT).</p>
+        <p>Đặc điểm:</p>
+        <ul>
+          <li>Có thể tạo trong cùng region hoặc khác region.</li>
+          <li>Có endpoint riêng — ứng dụng cần kết nối trực tiếp để đọc dữ liệu.</li>
+          <li>Không hỗ trợ ghi, chỉ đọc.</li>
+          <li>Có độ trễ vài giây so với primary.</li>
+        </ul>
+        <p>Phù hợp cho các mục đích như báo cáo, phân tích hoặc dashboard — nơi không yêu cầu dữ liệu thời gian thực tuyệt đối.</p>
+
+        <h2 id="bao-mat">5. Bảo mật trong RDS</h2>
+        <p>RDS tuân theo mô hình bảo mật nhiều lớp:</p>
+
+        <h3>5.1. Mạng (VPC và Security Group)</h3>
+        <p>Mỗi DB instance chạy trong một VPC riêng, thường nằm trong private subnet — không có public IP. Ứng dụng (EC2, ECS) sẽ kết nối qua mạng nội bộ.</p>
+        <p>Security Group cho RDS chỉ nên mở port database (3306 cho MySQL, 5432 cho PostgreSQL) cho các nguồn tin cậy, chẳng hạn security group của EC2.</p>
+
+        <h3>5.2. Xác thực và mã hóa</h3>
+        <p>- RDS hỗ trợ tạo user/password khi khởi tạo instance.<br>
+        - Dữ liệu được tự động mã hóa khi lưu trữ nếu bật <em>Encryption at rest</em> (sử dụng AWS KMS).<br>
+        - Nên bật SSL/TLS để mã hóa dữ liệu khi truyền — ứng dụng cần kết nối với tham số SSL.</p>
+
+        <h3>5.3. IAM Database Authentication (tùy engine)</h3>
+        <p>Với MySQL và PostgreSQL, bạn có thể sử dụng token xác thực tạm thời từ IAM thay vì mật khẩu, giúp tăng cường bảo mật và dễ quản lý hơn.</p>
+
+        <h2 id="thuc-hanh-toi-uu">6. Best practices khi sử dụng RDS</h2>
+        <ul>
+          <li>Luôn đặt RDS trong private subnet — không công khai ra Internet.</li>
+          <li>Bật Multi-AZ cho môi trường production.</li>
+          <li>Sử dụng Parameter Group để tinh chỉnh cấu hình engine (ví dụ: max_connections).</li>
+          <li>Dùng Option Group để bật các tính năng bổ sung (như Timezone, SQL Server Agent).</li>
+          <li>Giám sát hiệu năng qua CloudWatch (CPU, FreeStorage, ReadIOPS…).</li>
+          <li>Đặt cảnh báo khi dung lượng lưu trữ còn trống thấp.</li>
+        </ul>
+
+        <h2 id="ket-luan">7. Kết luận</h2>
+        <p>Amazon RDS không chỉ là dịch vụ chạy cơ sở dữ liệu — mà là một giải pháp vận hành chuyên nghiệp, giúp bạn đạt được:</p>
+        <ul>
+          <li>Độ tin cậy cao (Multi-AZ, sao lưu tự động)</li>
+          <li>Khả năng mở rộng linh hoạt (autoscaling, read replicas)</li>
+          <li>Bảo mật toàn diện (VPC, KMS, SSL, IAM)</li>
+          <li>Tiết kiệm thời gian — không cần quản trị viên DBA để xử lý patch, backup hay failover</li>
+        </ul>
+        <p>Hãy bắt đầu với một instance đơn giản (db.t4g.micro, MySQL), bật automated backup và Multi-AZ — bạn sẽ có một hệ thống cơ sở dữ liệu sẵn sàng cho production chỉ trong vài phút.</p>
+        <p>Trong DevOps, dữ liệu là tài sản quý giá nhất — và RDS chính là người bảo vệ đáng tin cậy cho tài sản đó.</p>
+        </article>
+      </div>
+
+      <aside class="toc-card" aria-label="Mục lục bài viết">
+        <p>Trong bài này</p>
+        <h2>Mục lục</h2>
+        <ol id="article-toc"></ol>
+        <div class="toc-reading"><span aria-hidden="true">◷</span><span data-reading-time></span></div>
+      </aside>
+    </div>
+
+    <nav class="article-pager" aria-label="Điều hướng bài viết"></nav>
+
+    <section class="related-section" aria-labelledby="related-title">
+      <div class="related-inner">
+        <p class="section-kicker">Đọc tiếp theo</p>
+        <h2 id="related-title">Cùng chủ đề</h2>
+        <div class="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="current-year">2026</span> Linh Osimi</p>
+    <p>Được ghi lại bằng sự tò mò ✦</p>
+    <a href="#top" onclick="window.scrollTo({top:0});return false">Lên đầu trang ↑</a>
+  </footer>
+</body>
+</html>

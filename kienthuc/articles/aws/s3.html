@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dịch vụ object storage linh hoạt, bền vững và bảo mật.">
+  <meta name="theme-color" content="#f4efe4">
+  <title>S3 · Lưu trữ dữ liệu — Thư viện kiến thức</title>
+  <link rel="icon" type="image/png" href="../../../favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/article.css">
+  <script src="../../assets/js/knowledge-data.js" defer></script>
+  <script src="../../assets/js/article.js" defer></script>
+</head>
+<body data-article-id="s3" data-category="aws">
+  <a class="skip-link" href="#article-content">Bỏ qua đến nội dung</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../../../index.html" aria-label="Về trang chủ">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Linh Osimi</strong><small>Góc ghi chép cá nhân</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span><span class="sr-only">Mở menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <a href="../../../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+        <a href="../../../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+        <a href="../../../phim0/0/phim.html">Phim</a>
+        <a href="../../../manga0/0/truyen-manga.html">Manga</a>
+        <a href="../../../game0/0/game.html">Game</a>
+        <a class="active" href="../../index.html" aria-current="page">Kiến thức</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header class="article-hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <nav class="breadcrumbs" aria-label="Đường dẫn">
+            <a href="../../index.html">Kiến thức</a><span>/</span>
+            <a href="../../index.html?category=aws">AWS Cloud</a><span>/</span>
+            <span>Bài 07</span>
+          </nav>
+          <p class="article-kicker">02 · AWS &amp; dịch vụ Cloud</p>
+          <h1>S3 · Lưu trữ dữ liệu</h1>
+          <p class="article-lead">Dịch vụ object storage linh hoạt, bền vững và bảo mật.</p>
+          <div class="article-meta">
+            <img src="../../../img/linhkun.jpg" alt="Linh Osimi">
+            <p><strong>Linh Osimi</strong><br>Oct 2, 2025 • 1:00 AM</p>
+            <span data-reading-time>Đang tính thời gian đọc…</span>
+          </div>
+        </div>
+        <figure class="cover-paper">
+          <img src="https://media.licdn.com/dms/image/D5612AQGH0lpu3SQ4Uw/article-cover_image-shrink_600_2000/0/1719425969338?e=2147483647&amp;v=beta&amp;t=6d-Ec-U-AExJRO4dK7-ThcWQNybHRky3dmzkG7HKcSs" alt="Ảnh bìa S3 · Lưu trữ dữ liệu" fetchpriority="high">
+          <figcaption>AWS Cloud / note 07</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="reading-layout">
+      <aside class="article-rail" aria-label="Thông tin bài viết">
+        <a class="back-library" href="../../index.html">← Thư viện</a>
+        <p class="rail-note">Một ghi chép trong bộ sưu tập AWS &amp; dịch vụ Cloud.</p>
+        <span class="rail-symbol" aria-hidden="true">☁</span>
+      </aside>
+
+      <div class="article-main">
+        <article class="post" id="article-content">
+<p style="font-style: italic; color: #555;">Phân tích kiến trúc, mô hình dữ liệu, tính năng nâng cao và nguyên tắc bảo mật — kèm minh họa trực quan</p>
+
+        <h2 id="gioi-thieu">1. Giới thiệu</h2>
+        <p>Amazon S3 (Simple Storage Service) là dịch vụ lưu trữ đối tượng (object storage) được ra mắt từ năm 2006 — cũng là một trong những dịch vụ đầu tiên của AWS. Ngày nay, S3 không chỉ dùng để lưu file, mà còn là nền tảng cho data lake, backup, phân phối nội dung (CDN), và event-driven architecture.</p>
+        <p>Khác với lưu trữ khối (block storage như EBS) hay lưu trữ tệp (file storage như EFS), S3 lưu dữ liệu dưới dạng **đối tượng (object)** — mỗi đối tượng bao gồm: dữ liệu, metadata và định danh duy nhất (key).</p>
+
+        <figure>
+          <img 
+            src="https://d1.awsstatic.com/s3-pdp-redesign/product-page-diagram_Amazon-S3_HIW.cf4c2bd7aa02f1fe77be8aa120393993e08ac86d.png" 
+            width="800"
+            height="400"
+            alt="Mô hình lưu trữ đối tượng trong S3">
+          <figcaption>
+            Hình 1: So sánh block, file và object storage. S3 thuộc loại object storage — tối ưu cho dữ liệu phi cấu trúc.
+          </figcaption>
+        </figure>
+
+        <h2 id="kien-truc-va-mo-hinh-du-lieu">2. Kiến trúc và mô hình dữ liệu</h2>
+
+        <h3>2.1. Bucket và Object</h3>
+        <p>- **Bucket**: Tương đương “thư mục gốc”, là container chứa các object. Tên bucket **toàn cầu duy nhất** trên AWS (ví dụ: <code>my-company-logs-2025</code>).<br>
+        - **Object**: Đơn vị lưu trữ cơ bản. Mỗi object có:<br>
+          &nbsp;&nbsp;• Key (đường dẫn ảo, ví dụ: <code>photos/2025/summer.jpg</code>)<br>
+          &nbsp;&nbsp;• Value (dữ liệu, tối đa 5 TB)<br>
+          &nbsp;&nbsp;• Metadata (mô tả: content-type, custom tag…)<br>
+          &nbsp;&nbsp;• Version ID (nếu bật versioning)</p>
+
+        <figure>
+          <img 
+            src="https://awstrainingwithjagan.com/wp-content/uploads/2024/02/aws_s3bucket_object.png" 
+            width="800"
+            height="350"
+            alt="Cấu trúc bucket và object trong S3">
+          <figcaption>
+            Hình 2: Cấu trúc logic của bucket và object trong S3.
+          </figcaption>
+        </figure>
+
+        <h3>2.2. Không gian tên (Namespace) và vùng (Region)</h3>
+        <p>- Tên bucket **phải toàn cầu duy nhất** vì S3 sử dụng DNS-based endpoint: <code>https://bucket-name.s3.region.amazonaws.com</code>.<br>
+        - Mỗi bucket được tạo trong **một region cụ thể** — dữ liệu không tự động sao chép sang region khác.<br>
+        - Sau khi tạo, **không thể đổi region** của bucket.</p>
+
+        <h2 id="cac-tinh-nang-cot-loi">3. Các tính năng cốt lõi</h2>
+
+        <h3>3.1. Storage Classes (Lớp lưu trữ)</h3>
+        <p>S3 cung cấp nhiều lớp lưu trữ để tối ưu chi phí theo tần suất truy cập:</p>
+
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse; margin: 16px 0;">
+          <thead>
+            <tr style="background-color: #f5f5f5;">
+              <th>Lớp lưu trữ</th>
+              <th>Mức độ truy cập</th>
+              <th>Độ trễ</th>
+              <th>Phù hợp cho</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>S3 Standard</strong></td><td>Thường xuyên</td><td>Thấp</td><td>Ứng dụng web, phân tích dữ liệu</td></tr>
+            <tr><td><strong>S3 Intelligent-Tiering</strong></td><td>Tự động điều chỉnh</td><td>Thấp</td><td>Dữ liệu có mẫu truy cập không rõ ràng</td></tr>
+            <tr><td><strong>S3 Standard-IA</strong></td><td>Ít truy cập</td><td>Thấp</td><td>Backup, dữ liệu dài hạn</td></tr>
+            <tr><td><strong>S3 Glacier Instant Retrieval</strong></td><td>Rất ít</td><td>1–5 ms</td><td>Lưu trữ archive cần truy xuất nhanh</td></tr>
+            <tr><td><strong>S3 Glacier Flexible/Deep Archive</strong></td><td>Hiếm</td><td>Phút đến giờ</td><td>Lưu trữ pháp lý, archive 7–10 năm</td></tr>
+          </tbody>
+        </table>
+
+        <h3>3.2. Versioning</h3>
+        <p>Khi bật versioning, mọi lần ghi đè hoặc xóa object đều tạo **phiên bản mới** — giúp khôi phục dữ liệu do vô tình ghi đè hoặc xóa.</p>
+        <p>Lưu ý: Versioning **làm tăng chi phí lưu trữ** nếu không quản lý đúng.</p>
+
+        <h3>3.3. Lifecycle Policy</h3>
+        <p>Tự động chuyển object giữa các lớp lưu trữ hoặc xóa sau N ngày.</p>
+        <p>Ví dụ:  
+        - Ngày 0–30: S3 Standard  
+        - Ngày 31–90: Chuyển sang S3 Standard-IA  
+        - Ngày 91+: Chuyển sang Glacier Deep Archive  
+        - Ngày 365: Xóa vĩnh viễn</p>
+
+        <figure>
+          <img 
+            src="https://tse1.explicit.bing.net/th/id/OIP.MJ3AJ7bHR-rlvHKM2aACfAHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="300"
+            alt="Lifecycle policy trong S3">
+          <figcaption>
+            Hình 3: Minh họa chính sách lifecycle tự động tối ưu chi phí lưu trữ.
+          </figcaption>
+        </figure>
+
+        <h2 id="bao-mat-va-quyen-truy-cap">4. Bảo mật và quyền truy cập</h2>
+        <p>S3 có **hai lớp bảo mật chính**:</p>
+
+        <h3>4.1. Identity-Based Policies (IAM)</h3>
+        <p>Gán quyền cho user/role thông qua IAM policy. Ví dụ: cho phép user đọc bucket <code>my-data</code>:</p>
+        <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::my-data/*"
+  }]
+}</code></pre>
+
+        <h3>4.2. Resource-Based Policies (Bucket Policy)</h3>
+        <p>Gắn trực tiếp vào bucket. Dùng để cho phép:</p>
+        <ul>
+          <li>Truy cập công khai (không khuyến khích)</li>
+          <li>Truy cập từ tài khoản AWS khác</li>
+          <li>Truy cập từ dịch vụ như CloudFront</li>
+        </ul>
+
+        <p>Ví dụ bucket policy cho phép CloudFront truy cập:</p>
+        <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": { "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity XYZ" },
+    "Action": "s3:GetObject",
+    "Resource": "arn:aws:s3:::my-website/*"
+  }]
+}</code></pre>
+
+        <h3>4.3. ACL (Access Control List) — nên tránh</h3>
+        <p>ACL là cơ chế cũ, kém linh hoạt. AWS khuyến nghị dùng **bucket policy + IAM** thay thế.</p>
+
+        <h3>4.4. Block Public Access</h3>
+        <p>Tính năng **bắt buộc bật** trong production. Ngăn bucket bị public do cấu hình sai.</p>
+        <p>Có 4 mức chặn:
+          <ul>
+            <li>Block public ACLs</li>
+            <li>Ignore public ACLs</li>
+            <li>Block public policies</li>
+            <li>Restrict public buckets</li>
+          </ul>
+        </p>
+
+        <figure>
+          <img 
+            src="https://tse4.mm.bing.net/th/id/OIP.FVU-DvfX38ztHhZsww_B3wHaD1?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="350"
+            alt="Block Public Access trong S3">
+          
+        </figure>
+
+        <h2 id="tich-hop-va-su-dung-thuc-te">5. Tích hợp và ứng dụng thực tế</h2>
+        <ul>
+          <li><strong>Static Website Hosting</strong>: Lưu HTML/CSS/JS → bật tính năng “Static website hosting”.</li>
+          <li><strong>Data Lake</strong>: Lưu dữ liệu thô (JSON, CSV, Parquet) → phân tích bằng Athena, Redshift.</li>
+          <li><strong>Event-Driven Processing</strong>: Khi upload file → kích hoạt Lambda để xử lý (resize ảnh, parse log…).</li>
+          <li><strong>Backup & Disaster Recovery</strong>: Dùng lifecycle + cross-region replication để sao lưu.</li>
+        </ul>
+
+        <h2 id="ket-luan">6. Kết luận</h2>
+        <p>Amazon S3 không chỉ là “ổ đĩa đám mây” — mà là **nền tảng dữ liệu hiện đại** với độ bền 99.999999999% (11 số 9), khả năng mở rộng vô hạn và hệ sinh thái tích hợp sâu.</p>
+        <p>Tuy nhiên, sức mạnh đi kèm trách nhiệm: hàng nghìn bucket bị rò rỉ dữ liệu mỗi năm do **cấu hình public sai**. Vì vậy, hãy luôn:</p>
+        <ol>
+          <li>Bật <strong>Block Public Access</strong> mặc định.</li>
+          <li>Dùng <strong>IAM + bucket policy</strong> thay vì ACL.</li>
+          <li>Áp dụng <strong>least privilege</strong> và <strong>encryption</strong> (SSE-S3, SSE-KMS).</li>
+          <li>Giám sát bằng <strong>AWS CloudTrail + S3 Access Logs</strong>.</li>
+        </ol>
+        <p>Khi được sử dụng đúng cách, S3 sẽ là “kho báu” — chứ không phải “lỗ hổng” — trong hệ thống của bạn.</p>
+        </article>
+      </div>
+
+      <aside class="toc-card" aria-label="Mục lục bài viết">
+        <p>Trong bài này</p>
+        <h2>Mục lục</h2>
+        <ol id="article-toc"></ol>
+        <div class="toc-reading"><span aria-hidden="true">◷</span><span data-reading-time></span></div>
+      </aside>
+    </div>
+
+    <nav class="article-pager" aria-label="Điều hướng bài viết"></nav>
+
+    <section class="related-section" aria-labelledby="related-title">
+      <div class="related-inner">
+        <p class="section-kicker">Đọc tiếp theo</p>
+        <h2 id="related-title">Cùng chủ đề</h2>
+        <div class="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="current-year">2026</span> Linh Osimi</p>
+    <p>Được ghi lại bằng sự tò mò ✦</p>
+    <a href="#top" onclick="window.scrollTo({top:0});return false">Lên đầu trang ↑</a>
+  </footer>
+</body>
+</html>

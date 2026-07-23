@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mạng nơ-ron sâu, CNN, RNN và những ứng dụng thực tế.">
+  <meta name="theme-color" content="#f4efe4">
+  <title>Deep Learning — Thư viện kiến thức</title>
+  <link rel="icon" type="image/png" href="../../../favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/article.css">
+  <script src="../../assets/js/knowledge-data.js" defer></script>
+  <script src="../../assets/js/article.js" defer></script>
+</head>
+<body data-article-id="deep-learning" data-category="ai">
+  <a class="skip-link" href="#article-content">Bỏ qua đến nội dung</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../../../index.html" aria-label="Về trang chủ">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Linh Osimi</strong><small>Góc ghi chép cá nhân</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span><span class="sr-only">Mở menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <a href="../../../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+        <a href="../../../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+        <a href="../../../phim0/0/phim.html">Phim</a>
+        <a href="../../../manga0/0/truyen-manga.html">Manga</a>
+        <a href="../../../game0/0/game.html">Game</a>
+        <a class="active" href="../../index.html" aria-current="page">Kiến thức</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header class="article-hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <nav class="breadcrumbs" aria-label="Đường dẫn">
+            <a href="../../index.html">Kiến thức</a><span>/</span>
+            <a href="../../index.html?category=ai">AI</a><span>/</span>
+            <span>Bài 03</span>
+          </nav>
+          <p class="article-kicker">03 · AI &amp; Machine Learning</p>
+          <h1>Deep Learning</h1>
+          <p class="article-lead">Mạng nơ-ron sâu, CNN, RNN và những ứng dụng thực tế.</p>
+          <div class="article-meta">
+            <img src="../../../img/linhkun.jpg" alt="Linh Osimi">
+            <p><strong>Linh Osimi</strong><br>Oct 25, 2025 • 8:30 AM</p>
+            <span data-reading-time>Đang tính thời gian đọc…</span>
+          </div>
+        </div>
+        <figure class="cover-paper">
+          <img src="https://th.bing.com/th/id/R.0c0c374b88bdf8ae848a98137f590a61?rik=kf5QQ8q6tcmpVA&amp;pid=ImgRaw&amp;r=0" alt="Ảnh bìa Deep Learning" fetchpriority="high">
+          <figcaption>AI / note 03</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="reading-layout">
+      <aside class="article-rail" aria-label="Thông tin bài viết">
+        <a class="back-library" href="../../index.html">← Thư viện</a>
+        <p class="rail-note">Một ghi chép trong bộ sưu tập AI &amp; Machine Learning.</p>
+        <span class="rail-symbol" aria-hidden="true">✺</span>
+      </aside>
+
+      <div class="article-main">
+        <article class="post" id="article-content">
+<h2 id="gioi-thieu">Giới thiệu</h2>
+        <p>Trong bối cảnh trí tuệ nhân tạo (Artificial Intelligence – AI) đang phát triển nhanh chóng, <strong>Deep Learning</strong> (Học sâu) nổi lên như một trong những trụ cột then chốt thúc đẩy các đột phá công nghệ trong thập kỷ qua. Là một nhánh chuyên sâu của Machine Learning, Deep Learning khai thác kiến trúc mạng nơ-ron nhân tạo nhiều tầng (deep neural networks) để mô phỏng khả năng học và biểu diễn tri thức của não bộ con người.</p>
+        <p>Nhờ khả năng tự động trích xuất đặc trưng từ dữ liệu thô và xử lý các tác vụ phức tạp như nhận dạng hình ảnh, xử lý ngôn ngữ tự nhiên hay sinh nội dung đa phương tiện, Deep Learning đã trở thành nền tảng cho các hệ thống AI tiên tiến như ChatGPT, DALL·E, AlphaFold và xe tự hành. Bài viết này sẽ trình bày cơ sở lý thuyết, kiến trúc cốt lõi, phân loại mô hình và các ứng dụng thực tiễn của Deep Learning theo hướng tiếp cận khoa học và hệ thống.</p>
+
+        <figure>
+          <img 
+            src="https://tse2.mm.bing.net/th/id/OIP.2Md8eSUTUmYv3YFQ4W57DAHaEI?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="400">
+          <figcaption>
+            <p>Sơ đồ minh họa cấu trúc mạng nơ-ron sâu (deep neural network), trong đó thông tin được xử lý qua nhiều tầng biểu diễn trừu tượng.</p>
+          </figcaption>
+        </figure>
+
+        <h2 id="dl-la-gi">Deep Learning là gì?</h2>
+        <p>Deep Learning là một lĩnh vực con của Machine Learning, dựa trên việc huấn luyện các <strong>mạng nơ-ron nhân tạo có độ sâu lớn</strong> (thường từ vài tầng đến hàng trăm tầng). Khác với các mô hình truyền thống yêu cầu kỹ sư đặc tả đặc trưng (feature engineering), Deep Learning có khả năng <strong>tự động học các biểu diễn phân cấp</strong> từ dữ liệu đầu vào thô — từ các mẫu đơn giản ở tầng dưới cùng đến các khái niệm trừu tượng ở tầng trên cùng.</p>
+        <p>Về bản chất, Deep Learning mở rộng nguyên lý của mạng nơ-ron truyền thống bằng cách tăng quy mô kiến trúc, dữ liệu và sức mạnh tính toán, nhờ đó đạt được hiệu suất vượt trội trong các tác vụ phi tuyến và có chiều dữ liệu cao.</p>
+
+        <h3>Nguyên lý hoạt động</h3>
+        <p>Quy trình điển hình của một hệ thống Deep Learning bao gồm các giai đoạn sau:</p>
+        <ol>
+          <li><strong>Thu thập và chuẩn bị dữ liệu:</strong> Dữ liệu thô (hình ảnh, văn bản, âm thanh, v.v.) được thu thập với quy mô lớn và đa dạng để đảm bảo khả năng khái quát của mô hình.</li>
+          <li><strong>Thiết kế kiến trúc mạng:</strong> Lựa chọn loại mạng phù hợp (CNN, RNN, Transformer, v.v.) và xác định số tầng, kích thước lớp, hàm kích hoạt.</li>
+          <li><strong>Khởi tạo và huấn luyện:</strong> Các trọng số được khởi tạo ngẫu nhiên, sau đó được cập nhật lặp đi lặp lại thông qua thuật toán lan truyền ngược (backpropagation) và tối ưu hóa (thường dùng Adam hoặc SGD).</li>
+          <li><strong>Đánh giá và tinh chỉnh:</strong> Mô hình được kiểm tra trên tập dữ liệu độc lập để đo lường độ chính xác, độ tổng quát và khả năng chống overfitting.</li>
+          <li><strong>Suy luận (inference):</strong> Sau khi huấn luyện, mô hình được triển khai để đưa ra dự đoán hoặc sinh dữ liệu mới từ đầu vào chưa thấy trước đó.</li>
+        </ol>
+
+        <h2 id="phan-loai">Phân loại các kiến trúc Deep Learning</h2>
+        <p>Tùy theo đặc điểm của dữ liệu và mục tiêu tác vụ, Deep Learning được hiện thực qua nhiều kiến trúc chuyên biệt. Ba nhóm chính bao gồm:</p>
+
+        <figure>
+          <img 
+            src="https://tse1.mm.bing.net/th/id/OIP.6sfeSUzZDrLBsv6BMGn_-wHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="450">
+          <figcaption>
+            <p>Các kiến trúc Deep Learning phổ biến: Mạng tích chập (CNN), mạng hồi tiếp (RNN), và mô hình Transformer.</p>
+          </figcaption>
+        </figure>
+
+        <h3>1. Convolutional Neural Networks (CNN) – Mạng nơ-ron tích chập</h3>
+        <p>CNN được thiết kế đặc biệt để xử lý dữ liệu có cấu trúc lưới, đặc biệt là hình ảnh. Nhờ cơ chế tích chập (convolution) và gom nhóm (pooling), CNN có khả năng phát hiện các đặc trưng cục bộ (như cạnh, góc, kết cấu) và tổ hợp chúng thành các biểu diễn toàn cục (như khuôn mặt, vật thể).</p>
+        <p><em>Ứng dụng tiêu biểu:</em> Nhận dạng đối tượng trong ảnh (ImageNet), chẩn đoán y khoa qua X-quang, hệ thống thị giác máy tính cho xe tự lái.</p>
+
+        <h3>2. Recurrent Neural Networks (RNN) và biến thể (LSTM, GRU)</h3>
+        <p>RNN được xây dựng để xử lý dữ liệu tuần tự, trong đó đầu ra tại bước thời gian <em>t</em> phụ thuộc vào trạng thái ẩn từ bước <em>t−1</em>. Tuy nhiên, RNN truyền thống gặp khó khăn trong việc học phụ thuộc dài hạn. Do đó, các biến thể như <strong>LSTM</strong> (Long Short-Term Memory) và <strong>GRU</strong> (Gated Recurrent Unit) được đề xuất để khắc phục vấn đề này thông qua cơ chế cổng điều khiển luồng thông tin.</p>
+        <p><em>Ứng dụng tiêu biểu:</em> Dịch máy, nhận dạng giọng nói, dự báo chuỗi thời gian tài chính.</p>
+
+        <h3>3. Transformer và mô hình ngôn ngữ lớn (LLMs)</h3>
+        <p>Transformer, được giới thiệu lần đầu trong bài báo “Attention is All You Need” (Vaswani et al., 2017), thay thế hoàn toàn cơ chế tuần tự của RNN bằng cơ chế <strong>attention</strong> (chú ý), cho phép mô hình xử lý toàn bộ chuỗi đầu vào đồng thời và nắm bắt mối quan hệ ngữ nghĩa ở khoảng cách xa. Kiến trúc này là nền tảng cho các mô hình ngôn ngữ lớn như BERT, GPT và Llama.</p>
+        <p><em>Ứng dụng tiêu biểu:</em> Chatbot thông minh, tổng hợp văn bản, lập trình hỗ trợ AI, sinh ảnh từ văn bản (text-to-image).</p>
+
+        <h2 id="thuat-ngu">Các khái niệm cốt lõi trong Deep Learning</h2>
+        <ul>
+          <li><strong>Neuron (Nơ-ron nhân tạo):</strong> Đơn vị tính toán cơ bản, nhận đầu vào có trọng số, áp dụng hàm kích hoạt (ReLU, sigmoid, tanh) để sinh đầu ra.</li>
+          <li><strong>Backpropagation:</strong> Thuật toán tính gradient của hàm mất mát theo từng trọng số thông qua đạo hàm ngược, làm cơ sở cho cập nhật trọng số.</li>
+          <li><strong>Activation Function:</strong> Hàm phi tuyến giúp mạng học được các mối quan hệ phức tạp; ReLU là lựa chọn phổ biến nhất do hiệu quả tính toán và giảm hiện tượng vanishing gradient.</li>
+          <li><strong>Loss Function:</strong> Đo lường độ lệch giữa dự đoán và giá trị thực (ví dụ: cross-entropy cho phân loại, MSE cho hồi quy).</li>
+          <li><strong>Overfitting và Regularization:</strong> Hiện tượng mô hình học quá kỹ dữ liệu huấn luyện; được kiểm soát bằng dropout, weight decay, hoặc tăng dữ liệu (data augmentation).</li>
+          <li><strong>Transfer Learning:</strong> Kỹ thuật tái sử dụng mô hình đã huấn luyện trên tập dữ liệu lớn để giải quyết tác vụ mới với ít dữ liệu hơn.</li>
+        </ul>
+
+        <h2 id="ung-dung">Ứng dụng thực tiễn của Deep Learning</h2>
+        <p>Deep Learning đã thâm nhập sâu vào nhiều lĩnh vực khoa học và công nghiệp, tạo ra những thay đổi mang tính cách mạng:</p>
+        <ul>
+          <li><strong>Y sinh học:</strong> Dự đoán cấu trúc protein (AlphaFold), phân tích gen, phát hiện khối u từ MRI.</li>
+          <li><strong>Công nghiệp sáng tạo:</strong> Sinh ảnh (Stable Diffusion), tổng hợp giọng nói (TTS), tạo nhạc và video AI.</li>
+          <li><strong>Tự động hóa:</strong> Xe tự hành (Tesla, Waymo), robot thông minh trong sản xuất.</li>
+          <li><strong>Tài chính:</strong> Phân tích cảm xúc thị trường từ tin tức, giao dịch thuật toán, phát hiện gian lận thời gian thực.</li>
+          <li><strong>Giáo dục:</strong> Gia sư AI cá nhân hóa, chấm bài tự động, dịch thuật hỗ trợ học ngoại ngữ.</li>
+        </ul>
+
+        <figure>
+          <img 
+            src="https://apkpcb.com/wp-content/uploads/2024/03/Top-10-Deep-Learning-Real-Life-Examples-1140x641.jpg" 
+            width="800"
+            height="400">
+          <figcaption>
+            <p>Deep Learning đang định hình lại các ngành công nghiệp thông qua khả năng xử lý và hiểu dữ liệu phi cấu trúc ở quy mô lớn.</p>
+          </figcaption>
+        </figure>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>Deep Learning không chỉ là sự mở rộng về quy mô của Machine Learning, mà còn đại diện cho một <strong>paradigm mới trong biểu diễn tri thức</strong> — nơi mà đặc trưng và quy luật được học trực tiếp từ dữ liệu thay vì được thiết kế thủ công. Sự kết hợp giữa dữ liệu lớn, kiến trúc mạng tiên tiến và phần cứng chuyên dụng (GPU/TPU) đã đưa Deep Learning trở thành công cụ không thể thiếu trong hành trình hiện thực hóa trí tuệ nhân tạo tổng quát (AGI).</p>
+        <p>Trong các bài viết tiếp theo, chúng ta sẽ đi sâu vào từng kiến trúc cụ thể — từ cơ chế attention trong Transformer đến nguyên lý hoạt động của các mô hình khuếch tán (diffusion models) — nhằm làm rõ cách AI ngày nay có thể “suy nghĩ” và “sáng tạo” như con người.</p>
+        </article>
+      </div>
+
+      <aside class="toc-card" aria-label="Mục lục bài viết">
+        <p>Trong bài này</p>
+        <h2>Mục lục</h2>
+        <ol id="article-toc"></ol>
+        <div class="toc-reading"><span aria-hidden="true">◷</span><span data-reading-time></span></div>
+      </aside>
+    </div>
+
+    <nav class="article-pager" aria-label="Điều hướng bài viết"></nav>
+
+    <section class="related-section" aria-labelledby="related-title">
+      <div class="related-inner">
+        <p class="section-kicker">Đọc tiếp theo</p>
+        <h2 id="related-title">Cùng chủ đề</h2>
+        <div class="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="current-year">2026</span> Linh Osimi</p>
+    <p>Được ghi lại bằng sự tò mò ✦</p>
+    <a href="#top" onclick="window.scrollTo({top:0});return false">Lên đầu trang ↑</a>
+  </footer>
+</body>
+</html>

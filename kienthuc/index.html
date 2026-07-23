@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Thư viện kiến thức về DevOps, AWS, AI và lập trình của Linh Osimi.">
+  <meta name="theme-color" content="#f4efe4">
+  <title>Knowledge @@ — Linh Osimi</title>
+  <link rel="icon" type="image/png" href="../favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/home.css">
+  <script src="assets/js/home.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#library">Bỏ qua đến nội dung</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" aria-label="Về trang chủ">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span>
+          <strong>Linh Osimi</strong>
+          <small>1 số bài viết xàm loèn của tôi!</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Mở menu</span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <a href="../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+        <a href="../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+        <a href="../phim0/0/phim.html">Phim</a>
+        <a href="../manga0/0/truyen-manga.html">Manga</a>
+        <a href="../game0/0/game.html">Game</a>
+        <a class="active" href="index.html" aria-current="page">Kiến thức</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">09
+        <p class="eyebrow"><span></span> Thư viện kiến thức</p>
+        <h1 id="page-title">chống lại brain root,<br><em>LEts GO!.</em></h1>
+        <p class="hero-description">Những ghi chép đa phần là nhặt về ghi lại hehe về hạ tầng, đám mây, AI và lập trình — được sắp xếp để bạn luôn biết nên đọc gì tiếp theo.</p>
+
+        <div class="search-shell" role="search">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+          <label class="sr-only" for="knowledge-search">Tìm kiếm bài viết</label>
+          <input id="knowledge-search" type="search" autocomplete="off" placeholder="Tìm Linux, Docker, Python..." aria-describedby="search-hint">
+          <kbd>/</kbd>
+          <button class="clear-search" type="button" aria-label="Xóa tìm kiếm">×</button>
+        </div>
+        <p class="search-hint" id="search-hint">Tìm theo tên bài, mô tả hoặc từ khóa.</p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <span class="hero-scribble">notes<br>& ideas</span>
+        <img class="hero-character" src="assets/decor/patchouli-standing.png" alt="">
+        <div class="hero-note">
+          <span class="paper-clip"></span>
+          <p class="note-label">Ghi chú hôm nay</p>
+          <p class="note-quote">“Chỉ cần bắt đầu từ một chủ đề.”</p>
+          <div class="note-footer">
+            <span>27 bài ghi chép</span>
+          </div>
+          <img class="note-mascot" src="assets/decor/patchouli-box.png" alt="">
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-categories" aria-label="Chọn nhanh chủ đề">
+      <button class="filter-chip active" type="button" data-filter="all" aria-pressed="true">
+        <span class="chip-icon">✦</span><span>Tất cả</span><small>27</small>
+      </button>
+      <button class="filter-chip" type="button" data-filter="devops" aria-pressed="false">
+        <span class="chip-icon">⌁</span><span>DevOps</span><small>7</small>
+      </button>
+      <button class="filter-chip" type="button" data-filter="aws" aria-pressed="false">
+        <span class="chip-icon">☁</span><span>AWS Cloud</span><small>9</small>
+      </button>
+      <button class="filter-chip" type="button" data-filter="ai" aria-pressed="false">
+        <span class="chip-icon">✺</span><span>AI</span><small>4</small>
+      </button>
+      <button class="filter-chip" type="button" data-filter="programming" aria-pressed="false">
+        <span class="chip-icon">{ }</span><span>Lập trình</span><small>6</small>
+      </button>
+      <button class="filter-chip" type="button" data-filter="web" aria-pressed="false">
+        <span class="chip-icon">◎</span><span>Web</span><small>1</small>
+      </button>
+    </section>
+
+    <section class="library-layout" id="library">
+      <aside class="topic-index" aria-label="Mục lục chủ đề">
+        <div class="index-card">
+          <p class="index-kicker">Mục lục</p>
+          <h2>Chọn chủ đề</h2>
+          <img class="index-notepad" src="assets/decor/notepad.png" alt="" aria-hidden="true">
+          <nav>
+            <button class="index-link active" type="button" data-filter="all">
+              <span><i class="dot all"></i>Tất cả ghi chép</span><b>27</b>
+            </button>
+            <button class="index-link" type="button" data-filter="devops">
+              <span><i class="dot devops"></i>DevOps căn bản</span><b>7</b>
+            </button>
+            <button class="index-link" type="button" data-filter="aws">
+              <span><i class="dot aws"></i>AWS & Cloud</span><b>9</b>
+            </button>
+            <button class="index-link" type="button" data-filter="ai">
+              <span><i class="dot ai"></i>Trí tuệ nhân tạo</span><b>4</b>
+            </button>
+            <button class="index-link" type="button" data-filter="programming">
+              <span><i class="dot programming"></i>Máy tính & Code</span><b>6</b>
+            </button>
+            <button class="index-link" type="button" data-filter="web">
+              <span><i class="dot web"></i>Nền tảng Web</span><b>1</b>
+            </button>
+          </nav>
+          <div class="index-tip">
+            <span aria-hidden="true">↗</span>
+            <p><strong>Mẹo nhỏ</strong>Dùng phím <kbd>/</kbd> để tìm nhanh.</p>
+          </div>
+        </div>
+      </aside>
+
+      <div class="library-content">
+        <div class="library-heading">
+          <div>
+            <p class="eyebrow"><span></span> Danh sách bài viết</p>
+            <h2 id="result-title">Tất cả ghi chép</h2>
+          </div>
+          <p class="result-count" aria-live="polite"><strong id="visible-count">27</strong> bài viết</p>
+        </div>
+
+        <section class="topic-section" data-category="devops" aria-labelledby="devops-title">
+          <header class="topic-heading">
+            <div class="topic-symbol devops">⌁</div>
+            <div><p>01 · Hạ tầng</p><h3 id="devops-title">DevOps căn bản</h3></div>
+            <span>7 bài</span>
+          </header>
+          <div class="article-grid">
+            <a class="article-card" href="articles/devops/linux.html" data-tags="linux terminal hệ điều hành command line">
+              <span class="article-number">01</span><div><h4>Giới thiệu về Linux</h4><p>Hệ điều hành Linux và những câu lệnh nền tảng cần biết.</p><ul><li>Linux</li><li>Căn bản</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/devops/docker.html" data-tags="docker container image devops">
+              <span class="article-number">02</span><div><h4>Tổng quan về Docker</h4><p>Hiểu container, image và cách Docker vận hành ứng dụng.</p><ul><li>Docker</li><li>Container</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/devops/cloud-computing.html" data-tags="cloud computing điện toán đám mây">
+              <span class="article-number">03</span><div><h4>Cloud Computing</h4><p>Điện toán đám mây và những ứng dụng trong thực tế.</p><ul><li>Cloud</li><li>Tổng quan</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/devops/networking.html" data-tags="networking mạng ip dns giao thức">
+              <span class="article-number">04</span><div><h4>Networking</h4><p>Các khái niệm mạng máy tính căn bản cần làm rõ.</p><ul><li>Network</li><li>Nền tảng</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/devops/terraform.html" data-tags="terraform infrastructure as code iac">
+              <span class="article-number">05</span><div><h4>Terraform</h4><p>Làm quen Infrastructure as Code và các lệnh thường dùng.</p><ul><li>Terraform</li><li>IaC</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/devops/nginx.html" data-tags="nginx web server reverse proxy">
+              <span class="article-number">06</span><div><h4>Nginx</h4><p>Cơ chế hoạt động của web server và reverse proxy Nginx.</p><ul><li>Nginx</li><li>Server</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/devops/ci-cd.html" data-tags="ci cd pipeline triển khai github actions">
+              <span class="article-number">07</span><div><h4>CI/CD Pipeline</h4><p>Tự động hóa kiểm thử, đóng gói và triển khai phần mềm.</p><ul><li>CI/CD</li><li>Automation</li></ul></div><span class="arrow">↗</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="topic-section" data-category="aws" aria-labelledby="aws-title">
+          <header class="topic-heading">
+            <div class="topic-symbol aws">☁</div>
+            <div><p>02 · Đám mây</p><h3 id="aws-title">AWS & dịch vụ Cloud</h3></div>
+            <span>9 bài</span>
+          </header>
+          <div class="article-grid">
+            <a class="article-card" href="articles/aws/overview.html" data-tags="aws amazon web services cloud tổng quan">
+              <span class="article-number">01</span><div><h4>Tổng quan về AWS</h4><p>Bức tranh tổng thể về nền tảng và các dịch vụ phổ biến.</p><ul><li>AWS</li><li>Nhập môn</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/aws/ec2.html" data-tags="aws ec2 máy chủ ảo instance compute">
+              <span class="article-number">02</span><div><h4>EC2 · Máy chủ ảo</h4><p>Khởi tạo và quản lý máy chủ ảo đầu tiên trên AWS.</p><ul><li>EC2</li><li>Compute</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/aws/vpc.html" data-tags="aws vpc mạng riêng ảo subnet route">
+              <span class="article-number">03</span><div><h4>VPC · Mạng riêng ảo</h4><p>Thiết kế mạng nội bộ và kiểm soát luồng truy cập.</p><ul><li>VPC</li><li>Network</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/aws/iam.html" data-tags="aws iam người dùng quyền truy cập bảo mật">
+              <span class="article-number">04</span><div><h4>IAM · Quyền truy cập</h4><p>Quản lý người dùng, nhóm và chính sách bảo mật.</p><ul><li>IAM</li><li>Security</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/aws/ecs.html" data-tags="aws ecs docker container microservices">
+              <span class="article-number">05</span><div><h4>ECS · Chạy Container</h4><p>Triển khai và quản lý ứng dụng Docker bằng ECS.</p><ul><li>ECS</li><li>Container</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/aws/ecr.html" data-tags="aws ecr docker image registry kho lưu trữ">
+              <span class="article-number">06</span><div><h4>ECR · Kho Docker Image</h4><p>Lưu trữ và quản lý container image an toàn trên AWS.</p><ul><li>ECR</li><li>Registry</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/aws/s3.html" data-tags="aws s3 lưu trữ object storage bucket dữ liệu">
+              <span class="article-number">07</span><div><h4>S3 · Lưu trữ dữ liệu</h4><p>Dịch vụ object storage linh hoạt, bền vững và bảo mật.</p><ul><li>S3</li><li>Storage</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/aws/rds.html" data-tags="aws rds database mysql postgresql cơ sở dữ liệu">
+              <span class="article-number">08</span><div><h4>RDS · Cơ sở dữ liệu</h4><p>Triển khai MySQL, PostgreSQL và MariaDB được quản lý.</p><ul><li>RDS</li><li>Database</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/aws/cloudfront.html" data-tags="aws cloudfront cdn phân phối nội dung cache">
+              <span class="article-number">09</span><div><h4>CloudFront · CDN</h4><p>Tăng tốc phân phối và bảo vệ nội dung trên toàn cầu.</p><ul><li>CloudFront</li><li>CDN</li></ul></div><span class="arrow">↗</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="topic-section" data-category="ai" aria-labelledby="ai-title">
+          <header class="topic-heading">
+            <div class="topic-symbol ai">✺</div>
+            <div><p>03 · Trí tuệ nhân tạo</p><h3 id="ai-title">AI & Machine Learning</h3></div>
+            <figure class="topic-photo" aria-hidden="true">
+              <img src="assets/decor/lawliet.jpg" alt="">
+              <figcaption>study file · 03</figcaption>
+            </figure>
+            <span>4 bài</span>
+          </header>
+          <div class="article-grid">
+            <a class="article-card" href="articles/ai/overview.html" data-tags="ai trí tuệ nhân tạo artificial intelligence">
+              <span class="article-number">01</span><div><h4>AI là gì?</h4><p>Khái niệm, lịch sử và vai trò của trí tuệ nhân tạo.</p><ul><li>AI</li><li>Nhập môn</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/ai/machine-learning.html" data-tags="machine learning học máy thuật toán dữ liệu">
+              <span class="article-number">02</span><div><h4>Machine Learning</h4><p>Cách máy tính học từ dữ liệu cùng các thuật toán phổ biến.</p><ul><li>ML</li><li>Thuật toán</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/ai/deep-learning.html" data-tags="deep learning học sâu neural network cnn rnn">
+              <span class="article-number">03</span><div><h4>Deep Learning</h4><p>Mạng nơ-ron sâu, CNN, RNN và những ứng dụng thực tế.</p><ul><li>Deep Learning</li><li>Neural Network</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/ai/ai-in-programming.html" data-tags="ai lập trình copilot công cụ tự động hóa">
+              <span class="article-number">04</span><div><h4>AI trong lập trình</h4><p>Gợi ý mã, phân tích lỗi và tự động hóa quy trình phát triển.</p><ul><li>AI Tools</li><li>Coding</li></ul></div><span class="arrow">↗</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="topic-section" data-category="programming" aria-labelledby="programming-title">
+          <header class="topic-heading">
+            <div class="topic-symbol programming image-symbol"><img src="assets/decor/computer.png" alt="" aria-hidden="true"></div>
+            <div><p>04 · Máy tính</p><h3 id="programming-title">Lập trình từ nền tảng</h3></div>
+            <span>6 bài</span>
+          </header>
+          <div class="article-grid">
+            <a class="article-card" href="articles/programming/computer-basics.html" data-tags="máy tính computer phần cứng phần mềm hoạt động">
+              <span class="article-number">01</span><div><h4>Máy tính hoạt động thế nào?</h4><p>Phần cứng, phần mềm và cách các thành phần phối hợp.</p><ul><li>Computer</li><li>Nền tảng</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/programming/languages.html" data-tags="ngôn ngữ lập trình code programming language">
+              <span class="article-number">02</span><div><h4>Ngôn ngữ lập trình</h4><p>Tổng quan và cách chọn ngôn ngữ phù hợp với mục tiêu.</p><ul><li>Code</li><li>Tổng quan</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/programming/core-concepts.html" data-tags="khái niệm lập trình biến hàm vòng lặp cấu trúc dữ liệu">
+              <span class="article-number">03</span><div><h4>Khái niệm quan trọng</h4><p>Biến, hàm, điều kiện và tư duy nền tảng khi viết code.</p><ul><li>Concept</li><li>Căn bản</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/programming/python.html" data-tags="python ngôn ngữ lập trình backend data ai">
+              <span class="article-number">04</span><div><h4>Python</h4><p>Cú pháp, cấu trúc và những ứng dụng nổi bật của Python.</p><ul><li>Python</li><li>Language</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/programming/c-cpp.html" data-tags="c c++ ngôn ngữ lập trình hệ thống con trỏ">
+              <span class="article-number">05</span><div><h4>C và C++</h4><p>Hai ngôn ngữ nền tảng và các khái niệm cốt lõi.</p><ul><li>C/C++</li><li>System</li></ul></div><span class="arrow">↗</span>
+            </a>
+            <a class="article-card" href="articles/programming/java-javascript.html" data-tags="java javascript ngôn ngữ lập trình web backend">
+              <span class="article-number">06</span><div><h4>Java & JavaScript</h4><p>Phân biệt và tìm hiểu hai ngôn ngữ phổ biến này.</p><ul><li>Java</li><li>JavaScript</li></ul></div><span class="arrow">↗</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="topic-section" data-category="web" aria-labelledby="web-title">
+          <header class="topic-heading">
+            <div class="topic-symbol web">◎</div>
+            <div><p>05 · Nền tảng Web</p><h3 id="web-title">Web & hiệu năng</h3></div>
+            <span>1 bài</span>
+          </header>
+          <div class="article-grid">
+            <a class="article-card" href="articles/web/cloudflare.html" data-tags="cloudflare dns cdn bảo mật hiệu năng web">
+              <span class="article-number">01</span><div><h4>Cloudflare là gì?</h4><p>DNS, CDN, bảo mật và cách Cloudflare tăng tốc website.</p><ul><li>Cloudflare</li><li>Web</li></ul></div><span class="arrow">↗</span>
+            </a>
+          </div>
+        </section>
+
+        <div class="empty-state" hidden>
+          <span aria-hidden="true">⌕</span>
+          <h3>Chưa tìm thấy ghi chép</h3>
+          <p>Thử một từ khóa khác hoặc xem lại tất cả chủ đề.</p>
+          <button type="button" id="reset-search">Xem tất cả bài viết</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="current-year">2026</span> Linh Osimi</p>
+    <p class="footer-note">Được ghi lại bằng sự tò mò , và rảnh lol =() <img src="assets/decor/pixel-patchouli.png" alt="" aria-hidden="true"></p>
+    <a href="#page-title">Lên đầu trang ↑</a>
+  </footer>
+</body>
+</html>

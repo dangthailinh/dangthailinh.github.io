@@ -1,0 +1,21 @@
+@media (pointer: fine) {
+  html,
+  body {
+    cursor: url("/game0/assets/cursors/default.png?v=2") 0 0, auto;
+  }
+
+  a,
+  button,
+  summary,
+  select,
+  label[for],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  [role="button"],
+  [onclick] {
+    cursor: url("/game0/assets/cursors/pointer.png?v=2") 0 0, pointer !important;
+  }
+}

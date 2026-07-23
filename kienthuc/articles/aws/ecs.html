@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Triển khai và quản lý ứng dụng Docker bằng ECS.">
+  <meta name="theme-color" content="#f4efe4">
+  <title>ECS · Chạy Container — Thư viện kiến thức</title>
+  <link rel="icon" type="image/png" href="../../../favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/article.css">
+  <script src="../../assets/js/knowledge-data.js" defer></script>
+  <script src="../../assets/js/article.js" defer></script>
+</head>
+<body data-article-id="ecs" data-category="aws">
+  <a class="skip-link" href="#article-content">Bỏ qua đến nội dung</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../../../index.html" aria-label="Về trang chủ">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Linh Osimi</strong><small>Góc ghi chép cá nhân</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span><span class="sr-only">Mở menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <a href="../../../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+        <a href="../../../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+        <a href="../../../phim0/0/phim.html">Phim</a>
+        <a href="../../../manga0/0/truyen-manga.html">Manga</a>
+        <a href="../../../game0/0/game.html">Game</a>
+        <a class="active" href="../../index.html" aria-current="page">Kiến thức</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header class="article-hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <nav class="breadcrumbs" aria-label="Đường dẫn">
+            <a href="../../index.html">Kiến thức</a><span>/</span>
+            <a href="../../index.html?category=aws">AWS Cloud</a><span>/</span>
+            <span>Bài 05</span>
+          </nav>
+          <p class="article-kicker">02 · AWS &amp; dịch vụ Cloud</p>
+          <h1>ECS · Chạy Container</h1>
+          <p class="article-lead">Triển khai và quản lý ứng dụng Docker bằng ECS.</p>
+          <div class="article-meta">
+            <img src="../../../img/linhkun.jpg" alt="Linh Osimi">
+            <p><strong>Linh Osimi</strong><br>Oct 23, 2025 • 3:30 AM</p>
+            <span data-reading-time>Đang tính thời gian đọc…</span>
+          </div>
+        </div>
+        <figure class="cover-paper">
+          <img src="https://tse4.mm.bing.net/th/id/OIP.1b3INMIZoJmdjxqifSJM7QHaEL?cb=12&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="Ảnh bìa ECS · Chạy Container" fetchpriority="high">
+          <figcaption>AWS Cloud / note 05</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="reading-layout">
+      <aside class="article-rail" aria-label="Thông tin bài viết">
+        <a class="back-library" href="../../index.html">← Thư viện</a>
+        <p class="rail-note">Một ghi chép trong bộ sưu tập AWS &amp; dịch vụ Cloud.</p>
+        <span class="rail-symbol" aria-hidden="true">☁</span>
+      </aside>
+
+      <div class="article-main">
+        <article class="post" id="article-content">
+<p style="font-style: italic; color: #555;">Hiểu ECS qua lăng kính thực tế: khi nào dùng, dùng thế nào, và tại sao nó vẫn là lựa chọn thông minh trong năm 2025</p>
+
+        <h2 id="gioi-thieu">1. Tại sao lại cần ECS?</h2>
+        <p>Bạn đã đóng gói ứng dụng vào Docker container. Giờ bạn muốn chạy nó trên cloud — nhưng không muốn tự quản lý máy chủ, cập nhật Docker daemon, hay lo về scaling.</p>
+        <p>Đây là lúc bạn cần một  dịch vụ container orchestration .</p>
+        <p>Nhiều người nghĩ ngay đến Kubernetes (EKS). Nhưng nếu hệ thống của bạn chưa cần độ phức tạp đó, **Amazon ECS** — dịch vụ quản lý container “native” của AWS — có thể là lựa chọn **đơn giản, nhanh và đủ mạnh**.</p>
+        <p>ECS do AWS xây dựng, tích hợp sâu với IAM, VPC, ALB, CloudWatch… và **không tính phí cho control plane** — bạn chỉ trả tiền cho tài nguyên (EC2 hoặc Fargate).</p>
+
+        <figure>
+          <img 
+            src="https://indaacademy.vn/wp-content/uploads/2023/03/image-4.png" 
+            width="800"
+            height="400"
+            alt="ECS trong hệ sinh thái AWS">
+          <figcaption>
+            Hình 1: ECS nằm giữa Docker, AWS services và ứng dụng — như một lớp điều phối “vô hình”.
+          </figcaption>
+        </figure>
+
+        <h2 id="cac-khai-niem-cot-loi">2. Các khái niệm cốt lõi — hiểu để không bị lạc</h2>
+
+        <h3>2.1. Task và Task Definition</h3>
+        <p>- Task Definition: Là “công thức” để chạy container — tương đương <code>Dockerfile + docker-compose.yml</code> nhưng ở mức AWS.<br>
+        Trong đó bạn khai báo:<br>
+        &nbsp;&nbsp;• Ảnh container (ECR hoặc Docker Hub)<br>
+        &nbsp;&nbsp;• CPU/RAM<br>
+        &nbsp;&nbsp;• Biến môi trường, port, volume, IAM role…</p>
+
+        <p>- **Task**: Là **một lần chạy thực tế** của task definition. Ví dụ: bạn chạy 1 task → có 1 container đang chạy.</p>
+
+        <h3>2.2. Service</h3>
+        <p>Service đảm bảo **luôn có N task đang chạy**. Nếu task crash, service tự khởi động lại. Nếu bạn scale lên 5, service tạo thêm 4 task mới.</p>
+        <p>Service thường gắn với **Application Load Balancer (ALB)** để phân phối traffic.</p>
+
+        <h3>2.3. Cluster</h3>
+        <p>Cluster là **logic grouping** — nơi bạn gom các task/service lại. Cluster không phải là tài nguyên vật lý, mà là “vùng chứa”.</p>
+        <p>Một cluster có thể chạy trên:</p>
+        <ul>
+          <li><strong>EC2 Launch Type</strong>: Bạn quản lý máy chủ (EC2), ECS chỉ điều phối container trên đó.</li>
+          <li><strong>Fargate Launch Type</strong>: AWS quản lý máy chủ — bạn chỉ quan tâm đến container. Trả tiền theo CPU/RAM tiêu thụ.</li>
+        </ul>
+
+        <figure>
+          <img 
+            src="https://tse3.mm.bing.net/th/id/OIP.4-_aD8qvZItepbmDVvq_7gHaDN?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" 
+            width="800"
+            height="450"
+            alt="So sánh EC2 và Fargate trong ECS">
+          <figcaption>
+            Hình 2: EC2 launch type (bạn quản lý máy) vs Fargate (AWS quản lý — serverless container).
+          </figcaption>
+        </figure>
+
+        <h2 id="luong-du-lieu-va-mang">3. Mạng và luồng dữ liệu trong ECS</h2>
+        <p>Khi dùng ECS trong VPC (bắt buộc trong production), bạn cần hiểu:</p>
+        <ul>
+          <li>Mỗi task có **IP riêng** trong subnet bạn chọn.</li>
+          <li>Với **Fargate**, task luôn chạy trong **private subnet** — không có public IP.</li>
+          <li>Để truy cập internet (pull image, gọi API), private subnet phải có **NAT Gateway**.</li>
+          <li>Để client truy cập ứng dụng, bạn cần **ALB trong public subnet** → forward traffic vào task trong private subnet.</li>
+        </ul>
+
+        <p>→ Đây là mô hình **bảo mật chuẩn**: container ẩn sau ALB, không tiếp xúc trực tiếp internet.</p>
+
+        <h2 id="iam-va-bao-mat">4. Bảo mật: IAM cho container</h2>
+        <p>Một trong những lợi thế lớn của ECS so với Kubernetes: **tích hợp IAM ở mức task**.</p>
+        <p>Bạn có thể gán **IAM role trực tiếp cho task** — container trong task sẽ có quyền đó (qua AWS SDK).</p>
+        <p>Ví dụ: task cần ghi log vào S3 → gán role có quyền <code>s3:PutObject</code> → **không cần lưu access key trong container**.</p>
+        <p>→ Đây là best practice bảo mật, và ECS hỗ trợ “out of the box”.</p>
+
+        <h2 id="thuc-hanh-minh-hoa">5. Ví dụ thực tế: Deploy ứng dụng web với Fargate</h2>
+        <p>Giả sử bạn có ứng dụng Node.js trong Docker image, muốn deploy trên AWS mà không quản lý server.</p>
+
+        <p><strong>Bước 1:</strong> Tạo task definition (file JSON hoặc qua console):</p>
+        <pre><code>{
+  "family": "web-app-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::...:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::...:role/app-s3-role",
+  "containerDefinitions": [{
+    "name": "web",
+    "image": "123456789.dkr.ecr.ap-southeast-1.amazonaws.com/my-app:latest",
+    "portMappings": [{ "containerPort": 3000 }],
+    "environment": [{ "name": "NODE_ENV", "value": "production" }]
+  }]
+}</code></pre>
+
+        <p><strong>Bước 2:</strong> Tạo cluster (chọn Fargate).</p>
+        <p><strong>Bước 3:</strong> Tạo service → chọn cluster, task definition, số task = 2, gán ALB.</p>
+        <p><strong>Bước 4:</strong> Truy cập URL của ALB → ứng dụng chạy!</p>
+
+        <p>Toàn bộ quá trình có thể tự động hóa bằng **Terraform hoặc AWS Copilot CLI**.</p>
+
+        <h2 id="khi-nao-dung-ecs">6. Khi nào nên dùng ECS?</h2>
+        <p>ECS phù hợp nếu bạn:</p>
+        <ul>
+          <li>Muốn chạy container **nhanh, đơn giản**, không cần học Kubernetes.</li>
+          <li>Đã dùng nhiều dịch vụ AWS (IAM, VPC, ALB) và muốn **tích hợp liền mạch**.</li>
+          <li>Ưu tiên **bảo mật và compliance** (IAM per task, network isolation).</li>
+          <li>Cần **serverless container** (Fargate) để tránh quản lý hạ tầng.</li>
+        </ul>
+        <p>Không dùng ECS nếu bạn:</p>
+        <ul>
+          <li>Cần di chuyển workload giữa cloud (multi-cloud) → hãy dùng Kubernetes (EKS).</li>
+          <li>Đã có đội ngũ thành thạo Kubernetes và cần tính năng nâng cao (custom controller, operator…).</li>
+        </ul>
+
+        <h2 id="ket-luan">7. Kết luận</h2>
+        <p>Amazon ECS không “kém” Kubernetes — nó **khác**. Trong khi Kubernetes là công cụ mở, linh hoạt nhưng phức tạp, thì ECS là giải pháp **tập trung, tối ưu cho hệ sinh thái AWS**, và đặc biệt thân thiện với team nhỏ hoặc startup.</p>
+        <p>Năm 2025, với Fargate, integration sâu và chi phí minh bạch, ECS vẫn là lựa chọn **thông minh, thực dụng và an toàn** cho hàng triệu workload trên toàn cầu.</p>
+        <p>Đừng chạy theo xu hướng — hãy chọn công cụ phù hợp với **bài toán của bạn**.</p>
+        </article>
+      </div>
+
+      <aside class="toc-card" aria-label="Mục lục bài viết">
+        <p>Trong bài này</p>
+        <h2>Mục lục</h2>
+        <ol id="article-toc"></ol>
+        <div class="toc-reading"><span aria-hidden="true">◷</span><span data-reading-time></span></div>
+      </aside>
+    </div>
+
+    <nav class="article-pager" aria-label="Điều hướng bài viết"></nav>
+
+    <section class="related-section" aria-labelledby="related-title">
+      <div class="related-inner">
+        <p class="section-kicker">Đọc tiếp theo</p>
+        <h2 id="related-title">Cùng chủ đề</h2>
+        <div class="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="current-year">2026</span> Linh Osimi</p>
+    <p>Được ghi lại bằng sự tò mò ✦</p>
+    <a href="#top" onclick="window.scrollTo({top:0});return false">Lên đầu trang ↑</a>
+  </footer>
+</body>
+</html>

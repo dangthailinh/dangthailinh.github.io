@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cú pháp, cấu trúc và những ứng dụng nổi bật của Python.">
+  <meta name="theme-color" content="#f4efe4">
+  <title>Python — Thư viện kiến thức</title>
+  <link rel="icon" type="image/png" href="../../../favicon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/article.css">
+  <script src="../../assets/js/knowledge-data.js" defer></script>
+  <script src="../../assets/js/article.js" defer></script>
+</head>
+<body data-article-id="python" data-category="programming">
+  <a class="skip-link" href="#article-content">Bỏ qua đến nội dung</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../../../index.html" aria-label="Về trang chủ">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span><strong>Linh Osimi</strong><small>Góc ghi chép cá nhân</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span><span class="sr-only">Mở menu</span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <a href="../../../khoa-hoc0/0/khoa-hoc.html">Khoa học</a>
+        <a href="../../../nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>
+        <a href="../../../phim0/0/phim.html">Phim</a>
+        <a href="../../../manga0/0/truyen-manga.html">Manga</a>
+        <a href="../../../game0/0/game.html">Game</a>
+        <a class="active" href="../../index.html" aria-current="page">Kiến thức</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header class="article-hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <nav class="breadcrumbs" aria-label="Đường dẫn">
+            <a href="../../index.html">Kiến thức</a><span>/</span>
+            <a href="../../index.html?category=programming">Lập trình</a><span>/</span>
+            <span>Bài 04</span>
+          </nav>
+          <p class="article-kicker">04 · Lập trình từ nền tảng</p>
+          <h1>Python</h1>
+          <p class="article-lead">Cú pháp, cấu trúc và những ứng dụng nổi bật của Python.</p>
+          <div class="article-meta">
+            <img src="../../../img/linhkun.jpg" alt="Linh Osimi">
+            <p><strong>Linh Osimi</strong><br>Oct 29, 2025 • 10:10 AM</p>
+            <span data-reading-time>Đang tính thời gian đọc…</span>
+          </div>
+        </div>
+        <figure class="cover-paper">
+          <img src="https://th.bing.com/th/id/OIP.XTRl4rwNqniKlEtc6swCMgHaE8?pid=ImgDetMain" alt="Ảnh bìa Python" fetchpriority="high">
+          <figcaption>Lập trình / note 04</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="reading-layout">
+      <aside class="article-rail" aria-label="Thông tin bài viết">
+        <a class="back-library" href="../../index.html">← Thư viện</a>
+        <p class="rail-note">Một ghi chép trong bộ sưu tập Lập trình từ nền tảng.</p>
+        <span class="rail-symbol" aria-hidden="true">{ }</span>
+      </aside>
+
+      <div class="article-main">
+        <article class="post" id="article-content">
+<h2 id="gioi-thieu">Giới thiệu</h2>
+        <p><strong>Python</strong> là một trong những ngôn ngữ lập trình phổ biến nhất thế giới hiện nay. Với cú pháp rõ ràng, dễ đọc, Python được yêu thích không chỉ bởi người mới học mà còn cả những lập trình viên chuyên nghiệp làm việc trong các lĩnh vực như AI, khoa học dữ liệu, web, và tự động hoá.</p>
+        <p>Bài viết này sẽ giúp bạn nắm được những kiến thức tổng quan về Python, cú pháp cơ bản, cũng như những hướng đi nghề nghiệp mà một lập trình viên Python có thể lựa chọn.</p>
+
+        <figure>
+          <img src="https://simplecode.dk/wp-content/uploads/2020/03/Python-logo.png" width="800" height="400" alt="Python Overview">
+          <figcaption>Python – ngôn ngữ đơn giản, mạnh mẽ và linh hoạt bậc nhất trong thế giới lập trình hiện đại.</figcaption>
+        </figure>
+
+        <h2 id="cu-phap">Cú pháp cơ bản của Python</h2>
+        <p>Cú pháp Python được thiết kế để dễ hiểu và gần gũi với ngôn ngữ tự nhiên. Một vài đặc điểm nổi bật:</p>
+        <ul>
+          <li>Không dùng dấu ngoặc nhọn <code>{}</code>, mà dùng <strong>thụt lề (indentation)</strong> để xác định khối lệnh.</li>
+          <li>Không cần khai báo kiểu dữ liệu rõ ràng — Python là <strong>ngôn ngữ thông dịch và kiểu động (dynamic typing)</strong>.</li>
+          <li>Hỗ trợ mạnh mẽ lập trình hướng đối tượng (OOP), lập trình hàm, và script automation.</li>
+        </ul>
+
+<pre><code># Ví dụ Python cơ bản
+def chao_ban(ten):
+    print(f"Xin chào, {ten}!")
+
+chao_ban("Linh")
+</code></pre>
+
+        <figure>
+          <img src="https://tse4.mm.bing.net/th/id/OIP.gvWLALMYUfPHFqqQYYb-iwHaFL?pid=ImgDetMain" width="700" height="380" alt="Python Syntax Example">
+          <figcaption>Đoạn mã Python trên minh họa cú pháp rõ ràng và thân thiện của ngôn ngữ này.</figcaption>
+        </figure>
+
+        <h2 id="thu-vien">Các thư viện phổ biến trong Python</h2>
+        <p>Sức mạnh của Python đến từ <strong>hệ sinh thái thư viện khổng lồ</strong>:</p>
+        <ul>
+          <li><strong>AI & Machine Learning:</strong> TensorFlow, PyTorch, Scikit-learn</li>
+          <li><strong>Phân tích dữ liệu:</strong> Pandas, NumPy, Matplotlib</li>
+          <li><strong>Phát triển web:</strong> Django, Flask, FastAPI</li>
+          <li><strong>Tự động hoá & DevOps:</strong> Selenium, Paramiko, Fabric</li>
+        </ul>
+
+        <figure>
+          <img src="https://i0.wp.com/ajaytech.co/wp-content/uploads/2019/05/python_standard_libraries-1.png?w=1070&ssl=1" width="800" height="400" alt="Python Libraries">
+          <figcaption>Cộng đồng Python phát triển không ngừng với hàng chục nghìn thư viện mã nguồn mở mạnh mẽ.</figcaption>
+        </figure>
+
+        <h2 id="huong-nghe">Hướng phát triển cho lập trình viên Python</h2>
+        <ul>
+          <li><strong>1. Nhà phát triển Web:</strong> Django hoặc Flask.</li>
+          <li><strong>2. Kỹ sư dữ liệu / Data Analyst:</strong> Pandas, NumPy.</li>
+          <li><strong>3. Nhà khoa học dữ liệu (Data Scientist):</strong> ML, DL.</li>
+          <li><strong>4. Kỹ sư AI / ML Engineer:</strong> TensorFlow, PyTorch.</li>
+          <li><strong>5. Lập trình viên tự động hóa / DevOps:</strong> Automation tools.</li>
+        </ul>
+
+        <figure>
+          <img src="https://media.geeksforgeeks.org/wp-content/uploads/20240123150734/Python-AI--(1).webp" width="700" height="380" alt="AI and Python Career">
+          <figcaption>Python là ngôn ngữ hàng đầu trong lĩnh vực AI, phân tích dữ liệu và tự động hoá quy trình.</figcaption>
+        </figure>
+
+        <h2 id="ket-luan">Kết luận</h2>
+        <p>Python là bệ phóng tuyệt vời cho sự nghiệp lập trình — dù bạn chọn hướng AI, web, dữ liệu hay automation. Hãy bắt đầu từ cơ bản, thực hành đều đặn và mở rộng kỹ năng — Python sẽ là người bạn đồng hành tuyệt vời trên con đường công nghệ của bạn.</p>
+        </article>
+      </div>
+
+      <aside class="toc-card" aria-label="Mục lục bài viết">
+        <p>Trong bài này</p>
+        <h2>Mục lục</h2>
+        <ol id="article-toc"></ol>
+        <div class="toc-reading"><span aria-hidden="true">◷</span><span data-reading-time></span></div>
+      </aside>
+    </div>
+
+    <nav class="article-pager" aria-label="Điều hướng bài viết"></nav>
+
+    <section class="related-section" aria-labelledby="related-title">
+      <div class="related-inner">
+        <p class="section-kicker">Đọc tiếp theo</p>
+        <h2 id="related-title">Cùng chủ đề</h2>
+        <div class="related-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="current-year">2026</span> Linh Osimi</p>
+    <p>Được ghi lại bằng sự tò mò ✦</p>
+    <a href="#top" onclick="window.scrollTo({top:0});return false">Lên đầu trang ↑</a>
+  </footer>
+</body>
+</html>
