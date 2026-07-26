@@ -22,11 +22,11 @@
         <meta property="og:url" content="https://github.com/dangthailinh">
         <meta property="og:image" content="https://paveldogreat.github.io/WebGL-Fluid-Simulation/logo.png">
 
-        <script type="text/javascript" src="dat.gui.min.js"></script>
+        <script type="text/javascript" src="lib/dat.gui.min.js"></script>
         <style>
             @font-face {
                 font-family: 'iconfont';
-                src: url('iconfont.ttf') format('truetype');
+                src: url('lib/iconfont.ttf') format('truetype');
             }
 
 
@@ -224,19 +224,14 @@
                     </div>
                     <div class="promo-body">
                         <p> Coler </p>
-                        <div class="links-container">
-                            <a class="link" id="apple_link" target="_blank">
-                                <img class="link-img" alt="" src="img/app_badge.png"/>
-                            </a>
-                            <a class="link" id="google_link" target="_blank">
-                                <img class="link-img" alt="" src="img/gp_badge.png"/>
-                            </a>
-                        </div>
+                        <!-- Đã gỡ 2 badge App Store / Google Play vì ảnh img/app_badge.png
+                             và img/gp_badge.png không tồn tại trong repo (link hỏng từ trước). -->
+                        <div class="links-container"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <script src="./script.js"></script>
+        <script src="lib/script.js"></script>
     </body>
 </html>

@@ -1,0 +1,40 @@
+# Chuẩn hoá ký tự xuống dòng — hết cảnh báo "LF will be replaced by CRLF"
+# Git lưu LF trong repo, tự đổi sang CRLF khi checkout trên Windows.
+* text=auto eol=lf
+
+# Ép LF cho file văn bản / mã nguồn
+*.html   text eol=lf
+*.css    text eol=lf
+*.js     text eol=lf
+*.json   text eol=lf
+*.md     text eol=lf
+*.svg    text eol=lf
+*.xml    text eol=lf
+*.txt    text eol=lf
+*.glsl   text eol=lf
+*.fsh    text eol=lf
+*.vsh    text eol=lf
+*.scss   text eol=lf
+
+# Script PowerShell cần CRLF để chạy đúng trên Windows
+*.ps1    text eol=crlf
+
+# File nhị phân — Git không được đụng vào
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.webp   binary
+*.ico    binary
+*.mp3    binary
+*.mp4    binary
+*.webm   binary
+*.ttf    binary
+*.woff   binary
+*.woff2  binary
+*.pdf    binary
+
+# Không tính các thư viện bên thứ ba vào thống kê ngôn ngữ của repo
+lib/js-libs/**  linguist-vendored
+dist/jsorrery.js linguist-vendored
+discordbot45/assets/** linguist-vendored

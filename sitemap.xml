@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap cho dangthailinh.github.io
+  Liệt kê các trang chính. Bài viết mới đăng qua /admin không cần thêm vào đây
+  vì Google sẽ tìm thấy chúng qua trang danh sách của từng mục.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ─── Trang chủ ─── -->
+  <url><loc>https://dangthailinh.github.io/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+
+  <!-- ─── Trang danh sách các mục ─── -->
+  <url><loc>https://dangthailinh.github.io/kienthuc/index.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://dangthailinh.github.io/khoa-hoc0/0/khoa-hoc.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://dangthailinh.github.io/blog/index.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://dangthailinh.github.io/nghe-thuat0/nghe-thuat.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dangthailinh.github.io/phim0/0/phim.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dangthailinh.github.io/manga0/0/truyen-manga.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dangthailinh.github.io/game0/0/game.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dangthailinh.github.io/blog/gallery.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ─── Khoa học: các trang tiếp theo ─── -->
+  <url><loc>https://dangthailinh.github.io/khoa-hoc0/1/khoa-hoc2.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/khoa-hoc0/2/khoa-hoc3.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/khoa-hoc0/3/khoa-hoc4.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/khoa-hoc0/4/khoa-hoc5.html</loc><priority>0.6</priority></url>
+
+  <!-- ─── Manga / Game: các trang tiếp theo ─── -->
+  <url><loc>https://dangthailinh.github.io/manga0/1/t2.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/manga0/2/t3.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/game0/1/game2.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/game0/2/game3.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/nghe-thuat0/dark-art.html</loc><priority>0.6</priority></url>
+
+  <!-- ─── Kiến thức · DevOps ─── -->
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/devops/linux.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/devops/docker.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/devops/cloud-computing.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/devops/networking.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/devops/terraform.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/devops/nginx.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/devops/ci-cd.html</loc><priority>0.7</priority></url>
+
+  <!-- ─── Kiến thức · AWS ─── -->
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/overview.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/ec2.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/vpc.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/iam.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/ecs.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/ecr.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/s3.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/rds.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/aws/cloudfront.html</loc><priority>0.7</priority></url>
+
+  <!-- ─── Kiến thức · AI ─── -->
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/ai/overview.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/ai/machine-learning.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/ai/deep-learning.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/ai/ai-in-programming.html</loc><priority>0.7</priority></url>
+
+  <!-- ─── Kiến thức · Lập trình ─── -->
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/programming/computer-basics.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/programming/languages.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/programming/core-concepts.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/programming/python.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/programming/c-cpp.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/programming/java-javascript.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dangthailinh.github.io/kienthuc/articles/web/cloudflare.html</loc><priority>0.7</priority></url>
+
+  <!-- ─── Dự án & trang tương tác ─── -->
+  <url><loc>https://dangthailinh.github.io/dist/Solarsysc.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/blackhole.html</loc><priority>0.6</priority></url>
+  <url><loc>https://dangthailinh.github.io/coler-test.html</loc><priority>0.5</priority></url>
+  <url><loc>https://dangthailinh.github.io/3d/room/room.html</loc><priority>0.5</priority></url>
+  <url><loc>https://dangthailinh.github.io/discordbot45/discordbot.html</loc><priority>0.5</priority></url>
+  <url><loc>https://dangthailinh.github.io/achievements.html</loc><priority>0.5</priority></url>
+  <url><loc>https://dangthailinh.github.io/assistant.html</loc><priority>0.5</priority></url>
+
+</urlset>
