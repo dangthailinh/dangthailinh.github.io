@@ -235,14 +235,13 @@ p.content + '\n' +
 '  <meta charset="utf-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
 '  <meta name="description" content="' + esc(p.description) + '">\n' +
-'  <meta name="theme-color" content="#050513">\n' +
+'  <meta name="theme-color" content="#f5f9e9">\n' +
 '  <meta property="og:type" content="article">\n' +
 '  <meta property="og:title" content="' + esc(p.title) + '">\n' +
 '  <meta property="og:description" content="' + esc(p.description) + '">\n' +
 '  <meta property="og:image" content="' + esc(cover) + '">\n' +
 '  <title>' + esc(p.title) + ' — Khoa học · Linh OSIMI</title>\n' +
 '  <link rel="icon" type="image/png" href="/favicon.png?v=2">\n' +
-'  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">\n' +
 '  <link rel="stylesheet" href="/khoa-hoc0/bai-viet/post.css">\n' +
 '  <script src="/cms/post.js" defer></script>\n' +
 '</head>\n' +
