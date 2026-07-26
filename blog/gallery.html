@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7a2f24">
+  <meta name="description" content="Photo Archive — album selfie, kỷ niệm, sở thích và những nơi đã đi qua.">
+  <title>Photo Archive — Linh Osimi</title>
+  <link rel="icon" href="../favicon.png">
+  <link rel="stylesheet" href="blog.css">
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body class="gallery-page">
+  <a class="skip-link" href="#photo-archive">Đi thẳng tới kho ảnh</a>
+
+  <div class="browser-shell">
+    <header class="browser-chrome">
+      <div class="browser-toolbar">
+        <nav class="browser-actions" aria-label="Điều hướng website">
+          <button class="tool-button" type="button" data-history-back title="Quay lại">
+            <span class="tool-icon">←</span><small>Back</small>
+          </button>
+          <button class="tool-button" type="button" data-history-forward title="Đi tới">
+            <span class="tool-icon">→</span><small>Forward</small>
+          </button>
+          <button class="tool-button" type="button" data-scroll-top>
+            <span class="tool-icon">↑</span><small>Top</small>
+          </button>
+          <button class="tool-button" type="button" data-theme-toggle aria-pressed="false">
+            <span class="tool-icon" data-theme-icon>☾</span><small data-theme-label>Night</small>
+          </button>
+        </nav>
+
+        <nav class="site-tabs" aria-label="Chuyên mục">
+          <a href="index.html">
+            <span class="nav-image-frame nav-image-frame--stamp"><img src="assets/nav/nav-fish-tank.png" alt=""></span>
+            <span class="nav-label">Blog</span>
+          </a>
+          <a class="is-active" href="gallery.html" aria-current="page">
+            <span class="nav-image-frame nav-image-frame--character"><img src="assets/nav/nav-blue-girl.png" alt=""></span>
+            <span class="nav-label">Photos</span>
+          </a>
+          <a href="index.html#daily-log">
+            <span class="nav-image-frame nav-image-frame--character"><img src="assets/nav/nav-red-girl.png" alt=""></span>
+            <span class="nav-label">Diary</span>
+          </a>
+          <a href="index.html#guestbook">
+            <span class="nav-image-frame nav-image-frame--character"><img src="assets/nav/nav-pink-girl.png" alt=""></span>
+            <span class="nav-label">Guestbook</span>
+          </a>
+          <a href="index.html#tiny-shrine">
+            <span class="nav-image-frame nav-image-frame--character"><img src="assets/nav/nav-cat-girl.png" alt=""></span>
+            <span class="nav-label">Shrines</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="address-row">
+        <span>Location</span>
+        <div class="address-box">
+          <span class="address-icon">⌂</span>
+          <span>linh-osimi.net/blog/photo-archive</span>
+        </div>
+        <button class="address-copy" type="button" data-copy-link>copy link</button>
+      </div>
+    </header>
+
+    <main id="photo-archive">
+      <section class="gallery-hero">
+        <div class="gallery-hero-copy">
+          <p class="hero-kicker">a folder full of ordinary evidence</p>
+          <h1>PHOTO<br>ARCHIVE</h1>
+          <p class="gallery-hero-jp">写真・小さな記憶・忘れたくない日</p>
+          <p class="gallery-hero-text">
+            Ảnh selfie, kỷ niệm vụn, những thứ mình thích, thế giới macro
+            và vài nơi từng đi qua. Mỗi album là một chỗ trống để sau này
+            mình viết tiếp câu chuyện.
+          </p>
+          <div class="gallery-stats">
+            <span><strong id="photo-total">22</strong> photos</span>
+            <span><strong id="album-total">5</strong> folders</span>
+            <span><strong>∞</strong> memories</span>
+          </div>
+        </div>
+
+        <div class="hero-photo-stack" aria-hidden="true">
+          <figure class="stack-photo stack-photo--one">
+            <img src="assets/gallery/selfie-sunset.png" alt="">
+          </figure>
+          <figure class="stack-photo stack-photo--two">
+            <img src="assets/gallery/place-railway-sunset.png" alt="">
+          </figure>
+          <figure class="stack-photo stack-photo--three">
+            <img src="assets/gallery/favorite-art-print.png" alt="">
+          </figure>
+          <span class="stack-tape stack-tape--top"></span>
+          <span class="stack-tape stack-tape--bottom"></span>
+        </div>
+      </section>
+
+      <div class="marquee" aria-label="Thông báo">
+        <div class="marquee-track">
+          <span>★ JPEG MEMORIES ★ CAMERA ROLL ARCHAEOLOGY ★ DO NOT DELETE ★
+            MỖI TẤM ẢNH ĐỀU CÓ MỘT CÂU CHUYỆN ★ CLICK TO ENLARGE ★</span>
+          <span aria-hidden="true">★ JPEG MEMORIES ★ CAMERA ROLL ARCHAEOLOGY ★ DO NOT DELETE ★
+            MỖI TẤM ẢNH ĐỀU CÓ MỘT CÂU CHUYỆN ★ CLICK TO ENLARGE ★</span>
+        </div>
+      </div>
+
+      <section class="album-control-panel" aria-label="Chọn album">
+        <div class="album-control-copy">
+          <span class="eyebrow">C:\MY_PICTURES\</span>
+          <h2>Chọn một thư mục</h2>
+        </div>
+        <div class="album-tabs" id="album-tabs" role="group" aria-label="Lọc album"></div>
+      </section>
+
+      <div class="album-root" id="album-root" aria-live="polite"></div>
+
+      <section class="gallery-howto">
+        <div>
+          <span class="howto-number">01</span>
+          <h2>Thêm ảnh</h2>
+          <p>Đưa ảnh mới vào <code>blog/assets/gallery/</code>.</p>
+        </div>
+        <div>
+          <span class="howto-number">02</span>
+          <h2>Viết câu chuyện</h2>
+          <p>Mở <code>gallery.js</code>, sửa phần <code>story</code> của album hoặc <code>note</code> của từng ảnh.</p>
+        </div>
+        <div>
+          <span class="howto-number">03</span>
+          <h2>Đăng lên</h2>
+          <p>Thêm một mục ảnh mới vào đúng album; trang sẽ tự cập nhật số lượng và bố cục.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="taskbar">
+      <a class="start-button" href="../index.html">☆ start</a>
+      <a class="task-title" href="index.html">▤ NEET Daily Log</a>
+      <span class="task-title task-title--active">▧ Photo Archive</span>
+      <div class="task-clock">
+        <span id="footer-date">--/--/----</span>
+        <span id="footer-clock">--:--</span>
+      </div>
+    </footer>
+  </div>
+
+  <dialog class="photo-lightbox" id="photo-lightbox">
+    <div class="lightbox-window">
+      <header class="dialog-titlebar">
+        <span id="lightbox-file">photo.png</span>
+        <button type="button" id="lightbox-close" aria-label="Đóng ảnh">×</button>
+      </header>
+      <div class="lightbox-stage">
+        <button class="lightbox-arrow lightbox-arrow--prev" id="lightbox-prev" type="button" aria-label="Ảnh trước">‹</button>
+        <img id="lightbox-image" src="" alt="">
+        <button class="lightbox-arrow lightbox-arrow--next" id="lightbox-next" type="button" aria-label="Ảnh sau">›</button>
+      </div>
+      <footer class="lightbox-caption">
+        <div>
+          <span id="lightbox-album"></span>
+          <h2 id="lightbox-title"></h2>
+        </div>
+        <p id="lightbox-note"></p>
+        <span id="lightbox-index"></span>
+      </footer>
+    </div>
+  </dialog>
+
+  <script src="ui-shell.js"></script>
+  <script src="gallery.js"></script>
+</body>
+</html>

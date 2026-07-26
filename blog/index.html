@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7a2f24">
+  <meta name="description" content="NEET Daily Log — góc nhật ký đời sống, ảnh và video của Linh Osimi.">
+  <title>NEET Daily Log — Linh Osimi</title>
+  <link rel="icon" href="../favicon.png">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+  <a class="skip-link" href="#daily-log">Đi thẳng tới nhật ký</a>
+
+  <div class="browser-shell">
+    <header class="browser-chrome">
+      <div class="browser-toolbar">
+        <nav class="browser-actions" aria-label="Điều hướng website">
+          <button class="tool-button" type="button" data-history-back title="Quay lại">
+            <span class="tool-icon">←</span><small>Back</small>
+          </button>
+          <button class="tool-button" type="button" data-history-forward title="Đi tới">
+            <span class="tool-icon">→</span><small>Forward</small>
+          </button>
+          <button class="tool-button" type="button" data-scroll-top>
+            <span class="tool-icon">↑</span><small>Top</small>
+          </button>
+          <button class="tool-button" type="button" data-theme-toggle aria-pressed="false">
+            <span class="tool-icon" data-theme-icon>☾</span><small data-theme-label>Night</small>
+          </button>
+        </nav>
+
+        <nav class="site-tabs" aria-label="Chuyên mục">
+          <a class="is-active" href="index.html" aria-current="page">
+            <span class="nav-image-frame nav-image-frame--stamp"><img src="assets/nav/nav-fish-tank.png" alt=""></span>
+            <span class="nav-label">Blog</span>
+          </a>
+          <a href="gallery.html">
+            <span class="nav-image-frame nav-image-frame--character"><img src="assets/nav/nav-blue-girl.png" alt=""></span>
+            <span class="nav-label">Photos</span>
+          </a>
+          <a href="#daily-log">
+            <span class="nav-image-frame nav-image-frame--character"><img src="assets/nav/nav-red-girl.png" alt=""></span>
+            <span class="nav-label">Diary</span>
+          </a>
+          <a href="#guestbook">
+            <span class="nav-image-frame nav-image-frame--character"><img src="assets/nav/nav-pink-girl.png" alt=""></span>
+            <span class="nav-label">Guestbook</span>
+          </a>
+          <a href="#tiny-shrine">
+            <span class="nav-image-frame nav-image-frame--character"><img src="assets/nav/nav-cat-girl.png" alt=""></span>
+            <span class="nav-label">Shrines</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="address-row">
+        <span>Location</span>
+        <div class="address-box">
+          <span class="address-icon">⌂</span>
+          <span>linh-osimi.net/blog/daily-log</span>
+        </div>
+        <button class="address-copy" type="button" data-copy-link>copy link</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-ribbon hero-ribbon--left" aria-hidden="true">୨୧</div>
+        <div class="hero-ribbon hero-ribbon--right" aria-hidden="true">୨୧</div>
+        <p class="hero-kicker">a quiet corner of the wired</p>
+        <h1>
+          <span>NEET</span>
+          <span>DAILY LOG</span>
+        </h1>
+        <p class="hero-jp">引きこもりの日記・写真・小さな生活</p>
+        <p class="hero-intro">
+          Một góc nhỏ để ghi lại những ngày bình thường — ảnh linh tinh,
+          video vụn, thứ mình đang nghe và vài dòng không cần phải hoàn hảo.
+        </p>
+        <img class="hero-cat" src="assets/neet-cat.png" alt="Mèo trắng đen đang nằm thư giãn">
+        <div class="hero-status" aria-label="Trạng thái hiện tại">
+          <span class="status-dot"></span>
+          <span>online but hiding</span>
+          <span aria-hidden="true">·</span>
+          <time id="local-clock">--:--</time>
+        </div>
+      </section>
+
+      <div class="marquee" aria-label="Thông báo">
+        <div class="marquee-track">
+          <span>★ KEEP THE OLD WEB ALIVE ★ NO ALGORITHM ★ HUMAN MADE HOMEPAGE ★
+            今日は何もしない ★ BEST VIEWED WITH A BLANKET &amp; HEADPHONES ★</span>
+          <span aria-hidden="true">★ KEEP THE OLD WEB ALIVE ★ NO ALGORITHM ★ HUMAN MADE HOMEPAGE ★
+            今日は何もしない ★ BEST VIEWED WITH A BLANKET &amp; HEADPHONES ★</span>
+        </div>
+      </div>
+
+      <div class="page-grid">
+        <aside class="left-rail" aria-label="Thông tin blog">
+          <section class="paper-widget owner-card">
+            <div class="tape" aria-hidden="true"></div>
+            <p class="widget-label">webmaster</p>
+            <div class="owner-line">
+              <img src="assets/pixel-lamb.png" alt="">
+              <div>
+                <strong>linh / osimi</strong>
+                <span>NEET level: 87%</span>
+              </div>
+            </div>
+            <dl class="tiny-stats">
+              <div><dt>mood</dt><dd>sleepy</dd></div>
+              <div><dt>weather</dt><dd>inside</dd></div>
+              <div><dt>now playing</dt><dd>stay-at-ya.mp3</dd></div>
+            </dl>
+          </section>
+
+          <section class="paper-widget archive-widget">
+            <p class="widget-label">archive.exe</p>
+            <h2>Nhật ký theo tháng</h2>
+            <div id="archive-list" class="archive-list"></div>
+          </section>
+
+          <section class="paper-widget music-widget">
+            <p class="widget-label">winamp-ish</p>
+            <div class="music-screen">
+              <span id="music-state">PAUSED</span>
+              <strong>STAY AT YA</strong>
+              <div class="equalizer" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+            <button class="pixel-button" id="music-toggle" type="button">▶ play tiny song</button>
+            <audio id="tiny-song" preload="none" src="../muv/stay-at-ya.mp3"></audio>
+          </section>
+        </aside>
+
+        <section class="daily-column" id="daily-log">
+          <header class="section-heading">
+            <div>
+              <span class="eyebrow">personal transmission</span>
+              <h2>Những ngày gần đây</h2>
+            </div>
+            <div class="entry-count">
+              <strong id="visible-count">0</strong>
+              <span>entries found</span>
+            </div>
+          </header>
+
+          <div class="filter-bar" aria-label="Lọc bài viết">
+            <div class="filter-buttons" role="group" aria-label="Loại bài">
+              <button class="filter-button is-active" type="button" data-filter="all">Tất cả</button>
+              <button class="filter-button" type="button" data-filter="life">Đời sống</button>
+              <button class="filter-button" type="button" data-filter="photo">Ảnh</button>
+              <button class="filter-button" type="button" data-filter="video">Video</button>
+              <button class="filter-button" type="button" data-filter="thought">Suy nghĩ</button>
+            </div>
+            <label class="search-box">
+              <span>⌕</span>
+              <input id="post-search" type="search" placeholder="tìm trong nhật ký..." autocomplete="off">
+            </label>
+          </div>
+
+          <div id="timeline" class="timeline" aria-live="polite"></div>
+          <p id="empty-state" class="empty-state" hidden>Không tìm thấy mẩu nhật ký nào… (╥﹏╥)</p>
+        </section>
+
+        <aside class="right-rail" aria-label="Ghi chú và liên kết">
+          <section class="todo-card">
+            <img src="assets/todo-note.png" alt="Danh sách việc cần làm theo phong cách pixel">
+            <div class="todo-live">
+              <label><input type="checkbox" checked> <span>tạo góc blog</span></label>
+              <label><input type="checkbox"> <span>đăng một tấm ảnh/ngày</span></label>
+              <label><input type="checkbox"> <span>ra khỏi phòng (maybe)</span></label>
+            </div>
+          </section>
+
+          <section class="paper-widget now-widget">
+            <p class="widget-label">currently...</p>
+            <ul>
+              <li><span>watching</span> Serial Experiments Lain</li>
+              <li><span>reading</span> Oyasumi Punpun</li>
+              <li><span>playing</span> League of Legends</li>
+              <li><span>thinking</span> “mai làm tiếp”</li>
+            </ul>
+          </section>
+
+          <section class="paper-widget shrine-widget" id="tiny-shrine">
+            <p class="widget-label">tiny shrine</p>
+            <img src="assets/pixel-lamb.png" alt="Chú cừu pixel đang nằm">
+            <p>con cừu này bảo rằng nghỉ ngơi cũng là một việc.</p>
+          </section>
+
+          <section class="paper-widget guestbook-widget" id="guestbook">
+            <p class="widget-label">guestbook.txt</p>
+            <h2>Để lại dấu chân</h2>
+            <p>Tính năng sổ lưu bút sẽ xuất hiện ở bản cập nhật sau.</p>
+            <button class="pixel-button" type="button" id="guestbook-button">sign guestbook ♡</button>
+            <p class="guestbook-note" id="guestbook-note" hidden>đã nhận tín hiệu của bạn! (´｡• ᵕ •｡`) ♡</p>
+          </section>
+        </aside>
+      </div>
+
+      <section class="end-zone" aria-label="Cuối trang">
+        <img src="assets/skeleton-arch.png" alt="" aria-hidden="true">
+        <div>
+          <p>YOU HAVE REACHED THE END OF TODAY'S INTERNET</p>
+          <a href="#daily-log">↑ quay lại nhật ký</a>
+        </div>
+        <img src="assets/skeleton-arch.png" alt="" aria-hidden="true">
+      </section>
+    </main>
+
+    <footer class="taskbar">
+      <a class="start-button" href="../index.html">☆ start</a>
+      <span class="task-title">▤ NEET Daily Log — Ramen Explorer</span>
+      <div class="task-clock">
+        <span id="footer-date">--/--/----</span>
+        <span id="footer-clock">--:--</span>
+      </div>
+    </footer>
+  </div>
+
+  <dialog class="post-dialog" id="post-dialog">
+    <div class="dialog-window">
+      <header class="dialog-titlebar">
+        <span id="dialog-window-title">daily-log.txt</span>
+        <button type="button" id="dialog-close" aria-label="Đóng bài viết">×</button>
+      </header>
+      <article id="dialog-content"></article>
+    </div>
+  </dialog>
+
+  <script src="ui-shell.js"></script>
+  <script src="blog.js"></script>
+</body>
+</html>
