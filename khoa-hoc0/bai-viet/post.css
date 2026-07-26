@@ -1,0 +1,178 @@
+/* ═══════════ Giao diện bài viết mục Khoa học ═══════════ */
+:root{
+  --bg:#050513;
+  --bg2:#0a1122;
+  --panel:rgba(255,255,255,.035);
+  --line:rgba(0,255,255,.16);
+  --cyan:#00d4ff;
+  --cyan-soft:#8fe8ff;
+  --text:#dce8f5;
+  --muted:#8ea3bb;
+  --radius:16px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:radial-gradient(1200px 600px at 50% -180px,#0d2242 0%,transparent 65%),
+             linear-gradient(180deg,var(--bg) 0%,#071021 55%,var(--bg) 100%);
+  background-attachment:fixed;
+  color:var(--text);
+  font:16px/1.8 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto}
+a{color:var(--cyan)}
+
+/* ─── Thanh tiến độ đọc ─── */
+.reading-progress{position:fixed;top:0;left:0;width:100%;height:3px;z-index:300;background:rgba(255,255,255,.06)}
+.reading-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#00d4ff,#7b61ff);
+  box-shadow:0 0 12px rgba(0,212,255,.7);transition:width .1s linear}
+
+/* ─── Header ─── */
+.sci-header{
+  position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:26px;flex-wrap:wrap;
+  padding:13px 24px;
+  background:linear-gradient(135deg,rgba(11,12,37,.92),rgba(26,42,58,.92));
+  border-bottom:1px solid var(--line);backdrop-filter:blur(10px)
+}
+.sci-brand{display:flex;align-items:center;gap:10px;text-decoration:none;
+  font:600 20px/1 "Space Grotesk",Inter,sans-serif;color:var(--cyan);text-shadow:0 0 10px rgba(0,208,255,.5)}
+.sci-brand .orb{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:17px;
+  background:radial-gradient(circle,#00d4ff33,#001a3388);border:1px solid var(--line);
+  box-shadow:0 0 18px rgba(0,255,255,.35)
+}
+.sci-nav{display:flex;gap:22px;flex-wrap:wrap;margin-left:auto;font-size:14.5px}
+.sci-nav a{color:rgba(200,255,255,.85);text-decoration:none;padding-bottom:4px;border-bottom:2px solid transparent;transition:.25s}
+.sci-nav a:hover,.sci-nav a.active{color:#00ffff;border-bottom-color:#00ffff;text-shadow:0 0 10px #00eaff}
+
+/* ─── Khung chính ─── */
+.sci-main{max-width:1140px;margin:0 auto;padding:34px 22px 70px}
+.sci-crumbs{margin:0 0 22px;font-size:14px}
+.sci-crumbs a{text-decoration:none;opacity:.85}
+.sci-crumbs a:hover{opacity:1;text-shadow:0 0 10px rgba(0,212,255,.6)}
+
+/* ─── Hero ─── */
+.sci-hero{
+  background:var(--panel);border:1px solid var(--line);border-radius:22px;
+  padding:34px 34px 28px;margin-bottom:34px;box-shadow:0 18px 50px rgba(2,6,23,.55)
+}
+.sci-kicker{
+  display:inline-block;padding:5px 14px;border-radius:30px;margin-bottom:16px;
+  background:rgba(0,212,255,.1);border:1px solid var(--line);
+  color:var(--cyan-soft);font-size:13px;letter-spacing:.03em
+}
+.sci-hero h1{
+  margin:0 0 14px;font:700 clamp(28px,4.2vw,44px)/1.2 "Space Grotesk",Inter,sans-serif;
+  color:#eaf6ff;letter-spacing:-.01em;text-shadow:0 0 26px rgba(0,180,255,.28)
+}
+.sci-lead{margin:0 0 20px;font-size:17.5px;color:var(--muted);max-width:70ch}
+.sci-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);
+  padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.07)}
+.sci-cover{margin:24px 0 0;padding:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.sci-cover img{display:block;width:100%;max-height:440px;object-fit:cover}
+
+/* ─── Bố cục đọc ─── */
+.sci-layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:38px;align-items:start}
+
+/* ─── Nội dung bài ─── */
+.sci-post{min-width:0;font-size:16.5px;line-height:1.9;color:#d5e3f2}
+.sci-post>:first-child{margin-top:0}
+.sci-post h2{
+  margin:52px 0 18px;font:700 clamp(23px,2.8vw,31px)/1.3 "Space Grotesk",Inter,sans-serif;
+  color:#eaf6ff;scroll-margin-top:90px
+}
+.sci-post h2::before{content:"";display:block;width:44px;height:2px;margin-bottom:14px;
+  background:linear-gradient(90deg,#00d4ff,transparent);box-shadow:0 0 10px rgba(0,212,255,.6)}
+.sci-post h3{margin:36px 0 13px;font:600 21px/1.4 "Space Grotesk",Inter,sans-serif;color:#cfe9ff}
+.sci-post h4{margin:26px 0 10px;font:600 17.5px/1.45 Inter,sans-serif;color:#cfe9ff}
+.sci-post p{margin:0 0 20px}
+.sci-post strong{color:#f0f8ff}
+.sci-post a{text-decoration:underline;text-underline-offset:3px}
+.sci-post ul,.sci-post ol{margin:0 0 22px;padding-left:24px}
+.sci-post li{margin:8px 0}
+.sci-post li::marker{color:var(--cyan)}
+.sci-post blockquote{
+  margin:32px 0;padding:20px 26px;border-left:3px solid var(--cyan);border-radius:0 12px 12px 0;
+  background:rgba(0,212,255,.06);color:#cfe4f5;font-style:italic
+}
+.sci-post code{padding:.14em .4em;border-radius:4px;background:rgba(0,212,255,.12);
+  color:#8fe8ff;font:.88em Consolas,Monaco,monospace}
+.sci-post pre{
+  margin:28px 0;padding:20px;border-radius:12px;overflow:auto;
+  background:#0b1220;border:1px solid var(--line);border-left:3px solid var(--cyan);
+  font:13.5px/1.75 Consolas,Monaco,monospace;color:#d8e6f5
+}
+.sci-post pre code{background:transparent;color:inherit;padding:0}
+.sci-post figure{margin:34px 0;padding:9px 9px 4px;background:var(--panel);
+  border:1px solid var(--line);border-radius:14px}
+.sci-post figure img{display:block;width:100%;border-radius:9px;background:#0b1220}
+.sci-post figcaption{padding:11px 6px 10px;text-align:center;color:var(--muted);font-size:13px;font-style:italic}
+.sci-post hr{margin:46px 0;border:0;border-top:1px solid rgba(255,255,255,.1)}
+.table-scroll{margin:28px 0;overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.sci-post table{width:100%;min-width:560px;border-collapse:collapse;font-size:14.5px}
+.sci-post th,.sci-post td{padding:12px 15px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.sci-post th{background:rgba(0,212,255,.09);color:#dff4ff;font-weight:600}
+.sci-post tr:last-child td{border-bottom:0}
+
+/* ─── Mục lục ─── */
+.sci-toc{
+  position:sticky;top:86px;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:20px;max-height:calc(100vh - 120px);overflow-y:auto
+}
+.toc-label{margin:0 0 12px;font:600 12px/1 Inter,sans-serif;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cyan)}
+.sci-toc ol{margin:0;padding-left:18px;font-size:13.5px;line-height:1.6}
+.sci-toc li{margin:9px 0}
+.sci-toc a{color:var(--muted);text-decoration:none;transition:.2s}
+.sci-toc a:hover{color:var(--cyan)}
+
+/* ─── Tag ─── */
+.sci-tags{display:flex;gap:9px;flex-wrap:wrap;margin:38px 0 0}
+.sci-tags span{padding:6px 15px;border-radius:30px;background:rgba(0,212,255,.09);
+  border:1px solid var(--line);color:var(--cyan-soft);font-size:13px}
+
+/* ─── Điều hướng bài ─── */
+.sci-pager{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:44px 0 0}
+.sci-pager .pager-link{
+  display:block;padding:18px 22px;border-radius:14px;text-decoration:none;
+  background:var(--panel);border:1px solid var(--line);transition:.25s
+}
+.sci-pager .pager-link:hover{background:rgba(0,212,255,.09);transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(0,180,255,.15)}
+.sci-pager .pager-link.next{text-align:right}
+.sci-pager .pager-link small{display:block;margin-bottom:6px;color:var(--cyan);font-size:12.5px}
+.sci-pager .pager-link strong{color:#e6f2ff;font-size:15.5px;font-weight:600}
+
+/* ─── Bài liên quan ─── */
+.sci-related{margin:64px 0 0}
+.sci-related h2{margin:0 0 22px;font:700 25px/1.3 "Space Grotesk",Inter,sans-serif;color:#eaf6ff}
+.sci-related .related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.sci-related-card{
+  display:block;text-decoration:none;border-radius:16px;overflow:hidden;
+  background:var(--panel);border:1px solid var(--line);transition:.28s
+}
+.sci-related-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,180,255,.18);
+  border-color:rgba(0,255,255,.4)}
+.sci-related-card img{display:block;width:100%;height:145px;object-fit:cover;background:#0b1220}
+.sci-related-card h3{margin:15px 16px 7px;font:600 16.5px/1.4 "Space Grotesk",Inter,sans-serif;color:#e6f2ff}
+.sci-related-card p{margin:0 16px 18px;font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* ─── Footer ─── */
+.sci-footer{
+  margin-top:70px;padding:26px 22px;text-align:center;
+  border-top:1px solid var(--line);color:var(--muted);font-size:13.5px
+}
+.sci-footer a{display:inline-block;margin-top:9px;text-decoration:none}
+
+/* ─── Màn hình nhỏ ─── */
+@media (max-width:940px){
+  .sci-layout{grid-template-columns:1fr}
+  .sci-toc{position:static;max-height:none;order:-1}
+  .sci-hero{padding:24px 20px 20px}
+  .sci-main{padding:22px 15px 50px}
+  .sci-pager{grid-template-columns:1fr}
+  .sci-pager .pager-link.next{text-align:left}
+  .sci-nav{gap:14px;font-size:13.5px;width:100%;margin-left:0}
+}

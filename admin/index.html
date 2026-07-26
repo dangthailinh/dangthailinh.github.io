@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Bảng quản trị — Linh Osimi</title>
+<link rel="icon" type="image/png" href="/favicon.png?v=2">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<!-- ══════════════ MÀN HÌNH ĐĂNG NHẬP ══════════════ -->
+<section id="screen-login" class="screen active">
+  <div class="login-box">
+    <div class="login-logo">L</div>
+    <h1>Bảng quản trị</h1>
+    <p class="login-sub">Đăng nhập bằng GitHub Token để viết bài mới</p>
+
+    <label class="field">
+      <span>Kho lưu trữ (repository)</span>
+      <input id="in-repo" type="text" value="dangthailinh/dangthailinh.github.io" spellcheck="false">
+    </label>
+
+    <label class="field">
+      <span>Nhánh (branch)</span>
+      <input id="in-branch" type="text" value="main" spellcheck="false">
+    </label>
+
+    <label class="field">
+      <span>GitHub Personal Access Token</span>
+      <input id="in-token" type="password" placeholder="github_pat_... hoặc ghp_..." spellcheck="false" autocomplete="off">
+    </label>
+
+    <label class="checkbox">
+      <input id="in-remember" type="checkbox" checked>
+      <span>Ghi nhớ trên máy này</span>
+    </label>
+
+    <button id="btn-login" class="btn primary block">Đăng nhập</button>
+    <p id="login-msg" class="msg"></p>
+
+    <details class="help">
+      <summary>Chưa có token? Xem hướng dẫn lấy token</summary>
+      <ol>
+        <li>Vào <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a></li>
+        <li><b>Token name</b>: đặt tên bất kỳ, ví dụ <code>blog-admin</code></li>
+        <li><b>Expiration</b>: chọn <code>No expiration</code> (hoặc 1 năm)</li>
+        <li><b>Repository access</b> → <code>Only select repositories</code> → chọn repo web của bạn</li>
+        <li><b>Permissions</b> → <code>Repository permissions</code> → mục <b>Contents</b> đổi thành <b>Read and write</b></li>
+        <li>Bấm <b>Generate token</b>, copy chuỗi token rồi dán vào ô trên</li>
+      </ol>
+      <p class="warn">Token giống chìa khóa nhà — không đưa cho ai, không chụp màn hình gửi người khác.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ══════════════ MÀN HÌNH LÀM VIỆC ══════════════ -->
+<section id="screen-app" class="screen">
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">L</span> Bảng quản trị</div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="write">✎ Viết bài</button>
+      <button class="tab" data-tab="manage">☰ Quản lý bài</button>
+    </nav>
+    <div class="topbar-right">
+      <span id="who" class="who"></span>
+      <button id="btn-logout" class="btn ghost small">Đăng xuất</button>
+    </div>
+  </header>
+
+  <!-- ─────────── TAB VIẾT BÀI ─────────── -->
+  <div id="tab-write" class="tabpanel active">
+    <div class="layout">
+
+      <!-- Cột trái: thông tin bài -->
+      <aside class="side">
+        <h2 class="side-title">Thông tin bài viết</h2>
+
+        <label class="field">
+          <span>Đăng vào mục <b class="req">*</b></span>
+          <select id="f-section">
+            <option value="kienthuc">Kiến thức</option>
+            <option value="khoahoc">Khoa học</option>
+          </select>
+        </label>
+
+        <label class="field" id="wrap-category">
+          <span>Chủ đề</span>
+          <select id="f-category"></select>
+        </label>
+
+        <label class="field">
+          <span>Tiêu đề <b class="req">*</b></span>
+          <input id="f-title" type="text" placeholder="VD: Tìm hiểu về Kubernetes">
+        </label>
+
+        <label class="field">
+          <span>Đường dẫn (tự sinh từ tiêu đề)</span>
+          <input id="f-slug" type="text" spellcheck="false" placeholder="tim-hieu-ve-kubernetes">
+        </label>
+
+        <label class="field">
+          <span>Mô tả ngắn <b class="req">*</b></span>
+          <textarea id="f-desc" rows="3" placeholder="1–2 câu tóm tắt, hiện ở thẻ bài ngoài trang danh sách."></textarea>
+        </label>
+
+        <label class="field">
+          <span>Ảnh bìa (URL)</span>
+          <input id="f-cover" type="text" spellcheck="false" placeholder="https://... hoặc bấm Tải ảnh">
+        </label>
+        <div class="row">
+          <button id="btn-cover-upload" class="btn ghost small block">⬆ Tải ảnh bìa từ máy</button>
+        </div>
+        <div id="cover-preview" class="cover-preview" hidden><img alt=""></div>
+
+        <label class="field">
+          <span>Thẻ / tags (cách nhau bằng dấu phẩy)</span>
+          <input id="f-tags" type="text" placeholder="Kubernetes, DevOps, Container">
+        </label>
+
+        <label class="field">
+          <span>Ngày đăng</span>
+          <input id="f-date" type="date">
+        </label>
+
+        <div class="side-actions">
+          <button id="btn-publish" class="btn primary block">🚀 Đăng bài lên web</button>
+          <button id="btn-preview" class="btn ghost block">👁 Xem trước</button>
+          <button id="btn-newdraft" class="btn ghost block small">🗑 Xóa nháp, viết bài mới</button>
+        </div>
+        <p id="draft-note" class="draft-note"></p>
+      </aside>
+
+      <!-- Cột phải: trình soạn thảo -->
+      <main class="editor-wrap">
+        <div class="toolbar" id="toolbar">
+          <div class="tb-group">
+            <select class="tb-select" data-block>
+              <option value="p">Đoạn văn</option>
+              <option value="h2">Tiêu đề lớn (H2)</option>
+              <option value="h3">Tiêu đề vừa (H3)</option>
+              <option value="h4">Tiêu đề nhỏ (H4)</option>
+              <option value="blockquote">Trích dẫn</option>
+              <option value="pre">Khối code</option>
+            </select>
+          </div>
+          <div class="tb-group">
+            <button class="tb" data-cmd="bold" title="In đậm (Ctrl+B)"><b>B</b></button>
+            <button class="tb" data-cmd="italic" title="In nghiêng (Ctrl+I)"><i>I</i></button>
+            <button class="tb" data-cmd="underline" title="Gạch chân (Ctrl+U)"><u>U</u></button>
+            <button class="tb" data-cmd="strikeThrough" title="Gạch ngang"><s>S</s></button>
+            <button class="tb" data-act="inlinecode" title="Code trong dòng">&lt;/&gt;</button>
+          </div>
+          <div class="tb-group">
+            <button class="tb" data-cmd="insertUnorderedList" title="Danh sách chấm">•&nbsp;List</button>
+            <button class="tb" data-cmd="insertOrderedList" title="Danh sách số">1.&nbsp;List</button>
+          </div>
+          <div class="tb-group">
+            <button class="tb" data-act="link" title="Chèn liên kết">🔗</button>
+            <button class="tb" data-act="image-url" title="Chèn ảnh bằng URL">🖼</button>
+            <button class="tb" data-act="image-upload" title="Tải ảnh từ máy">⬆</button>
+            <button class="tb" data-act="table" title="Chèn bảng">▦</button>
+            <button class="tb" data-cmd="insertHorizontalRule" title="Đường kẻ ngang">―</button>
+          </div>
+          <div class="tb-group">
+            <button class="tb" data-cmd="undo" title="Hoàn tác (Ctrl+Z)">↶</button>
+            <button class="tb" data-cmd="redo" title="Làm lại (Ctrl+Y)">↷</button>
+            <button class="tb" data-act="clean" title="Xóa định dạng">✕ format</button>
+            <button class="tb" data-act="html" title="Xem / sửa HTML thô">HTML</button>
+          </div>
+        </div>
+
+        <div id="editor" class="editor" contenteditable="true" spellcheck="true"></div>
+        <textarea id="html-view" class="html-view" hidden spellcheck="false"></textarea>
+
+        <div class="editor-foot">
+          <span id="wordcount">0 từ</span>
+          <span class="hint">Mẹo: kéo–thả ảnh vào đây, hoặc dán ảnh bằng Ctrl+V để tự tải lên.</span>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ─────────── TAB QUẢN LÝ ─────────── -->
+  <div id="tab-manage" class="tabpanel">
+    <div class="manage-head">
+      <h2>Bài đã đăng qua bảng quản trị</h2>
+      <button id="btn-reload" class="btn ghost small">⟳ Tải lại</button>
+    </div>
+    <div id="post-list" class="post-list"></div>
+  </div>
+</section>
+
+<!-- Lớp phủ trạng thái -->
+<div id="overlay" class="overlay" hidden>
+  <div class="overlay-box">
+    <div class="spinner"></div>
+    <p id="overlay-text">Đang xử lý…</p>
+  </div>
+</div>
+
+<!-- Hộp thoại nhỏ -->
+<div id="modal" class="overlay" hidden>
+  <div class="modal-box">
+    <h3 id="modal-title">Tiêu đề</h3>
+    <div id="modal-body"></div>
+    <div class="modal-actions">
+      <button id="modal-cancel" class="btn ghost">Hủy</button>
+      <button id="modal-ok" class="btn primary">Đồng ý</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+<input id="file-input" type="file" accept="image/*" hidden>
+
+<script src="/admin/templates.js"></script>
+<script src="/admin/admin.js"></script>
+</body>
+</html>
