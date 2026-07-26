@@ -170,11 +170,17 @@ function mediaMarkup(media, controls = false) {
   `;
 }
 
+function plainText(post) {
+  if (Array.isArray(post.body)) return post.body.join(" ");
+  if (post.bodyHtml) return post.bodyHtml.replace(/<[^>]+>/g, " ");
+  return "";
+}
+
 function getVisiblePosts() {
   return POSTS.filter((post) => {
     const matchFilter = activeFilter === "all" || post.category === activeFilter;
     const matchMonth = activeMonth === "all" || post.date.startsWith(activeMonth);
-    const haystack = normalizeText(`${post.title} ${post.excerpt} ${post.body.join(" ")}`);
+    const haystack = normalizeText(`${post.title} ${post.excerpt} ${plainText(post)} ${(post.tags || []).join(" ")}`);
     return matchFilter && matchMonth && haystack.includes(searchTerm);
   });
 }
@@ -257,7 +263,10 @@ function openPost(postId) {
   if (!post) return;
 
   const date = getDateParts(post.date);
-  const paragraphs = post.body.map((paragraph) => `<p>${paragraph}</p>`).join("");
+  // Bài cũ lưu body dạng mảng đoạn văn; bài đăng từ bảng quản trị lưu HTML sẵn.
+  const bodyHtml = post.bodyHtml
+    ? post.bodyHtml
+    : (post.body || []).map((paragraph) => `<p>${paragraph}</p>`).join("");
   const figure = post.media ? `
     <figure>
       ${post.media.type === "video"
@@ -266,13 +275,18 @@ function openPost(postId) {
       <figcaption>${post.media.caption || ""}</figcaption>
     </figure>
   ` : "";
+  const permalink = post.url
+    ? `<p class="dialog-permalink"><a href="${post.url}">↗ mở trang riêng của bài này</a></p>`
+    : "";
 
-  dialogTitle.textContent = `${post.date}_${post.id.split("-").slice(3).join("-")}.txt`;
+  const fileStem = post.slug || post.id.split("-").slice(3).join("-") || post.id;
+  dialogTitle.textContent = `${post.date}_${fileStem}.txt`;
   dialogContent.innerHTML = `
-    <div class="dialog-meta">${date.full} · ${post.time} · ${CATEGORY_LABELS[post.category]} · mood ${post.mood}</div>
+    <div class="dialog-meta">${date.full} · ${post.time} · ${CATEGORY_LABELS[post.category] || post.category} · mood ${post.mood}</div>
     <h2>${post.title}</h2>
-    <div class="dialog-body">${paragraphs}</div>
+    <div class="dialog-body">${bodyHtml}</div>
     ${figure}
+    ${permalink}
   `;
   dialog.showModal();
   document.body.style.overflow = "hidden";
@@ -375,3 +389,52 @@ renderArchive();
 renderTimeline();
 updateClock();
 setInterval(updateClock, 30_000);
+
+/* ══════════════════════════════════════════════════════════════
+   Bài đăng từ bảng quản trị (/admin) — nạp thêm từ /data/posts.json
+   rồi vẽ lại timeline. Bài cũ ở trên vẫn giữ nguyên.
+   ══════════════════════════════════════════════════════════════ */
+function toTimelinePost(entry) {
+  const cover = entry.cover || "";
+  const isVideo = /\.(mp4|webm|ogv|mov)(\?|$)/i.test(cover);
+  return {
+    id: entry.id,
+    slug: entry.slug || "",
+    date: entry.date,
+    time: entry.time || "00:00",
+    category: CATEGORY_LABELS[entry.category] ? entry.category : "life",
+    mood: entry.mood || "(・_・)",
+    title: entry.title,
+    excerpt: entry.description || "",
+    tags: entry.tags || [],
+    bodyHtml: entry.bodyHtml || "",
+    url: entry.url || "",
+    media: cover
+      ? {
+          type: isVideo ? "video" : "image",
+          src: cover,
+          alt: entry.title,
+          caption: entry.description || ""
+        }
+      : null
+  };
+}
+
+fetch(`/data/posts.json?v=${Math.floor(Date.now() / 60000)}`)
+  .then((res) => (res.ok ? res.json() : { posts: [] }))
+  .then((db) => {
+    const incoming = (db && Array.isArray(db.posts) ? db.posts : [])
+      .filter((entry) => entry.section === "blog")
+      .filter((entry) => !POSTS.some((existing) => existing.id === entry.id))
+      .map(toTimelinePost);
+
+    if (!incoming.length) return;
+
+    POSTS.push(...incoming);
+    POSTS.sort((a, b) => `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`));
+    renderArchive();
+    renderTimeline();
+  })
+  .catch(() => {
+    /* Không có mạng hoặc chưa có file — trang vẫn chạy với bài cũ. */
+  });

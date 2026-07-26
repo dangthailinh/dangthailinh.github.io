@@ -25,7 +25,8 @@
     user: null,
     db: null,        // nội dung posts.json
     dbSha: null,     // sha của posts.json trên GitHub
-    editingId: null  // id bài đang sửa (null = bài mới)
+    editingId: null, // id bài đang sửa (null = bài mới)
+    postTime: ''     // giờ đăng, giữ nguyên khi sửa bài blog cũ
   };
 
   /* ───────────────── Tiện ích DOM ───────────────── */
@@ -541,7 +542,7 @@
   /* ───────────────── Biểu mẫu thông tin bài ───────────────── */
   function fillCategories() {
     var section = $('#f-section').value;
-    var map = section === 'khoahoc' ? T.SCIENCE_CATEGORIES : T.KNOWLEDGE_CATEGORIES;
+    var map = T.categoriesOf(section);
     var sel = $('#f-category');
     var current = sel.value;
     sel.innerHTML = '';
@@ -552,9 +553,32 @@
       sel.appendChild(opt);
     });
     if (map[current]) sel.value = current;
+    applySectionUi(section);
+  }
+
+  /* Mỗi mục có vài ô riêng — bật/tắt cho gọn giao diện */
+  function applySectionUi(section) {
+    var isBlog = section === 'blog';
+    $('#wrap-mood').hidden = !isBlog;
+    var coverLabel = $('#f-cover').parentNode.querySelector('span');
+    if (coverLabel) {
+      coverLabel.textContent = isBlog
+        ? 'Ảnh hoặc video kèm bài (URL)'
+        : 'Ảnh bìa (URL)';
+    }
+    var uploadBtn = $('#btn-cover-upload');
+    if (uploadBtn) uploadBtn.textContent = isBlog ? '⬆ Tải ảnh kèm bài từ máy' : '⬆ Tải ảnh bìa từ máy';
   }
 
   $('#f-section').addEventListener('change', function () { fillCategories(); saveDraftSoon(); });
+
+  $('#mood-picker').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-mood]');
+    if (!btn) return;
+    $('#f-mood').value = btn.dataset.mood;
+    saveDraft();
+  });
+  $('#f-mood').addEventListener('input', saveDraftSoon);
 
   var slugTouched = false;
   $('#f-slug').addEventListener('input', function () { slugTouched = true; });
@@ -570,7 +594,8 @@
   function updateCoverPreview() {
     var url = $('#f-cover').value.trim();
     var box = $('#cover-preview');
-    if (!url) { box.hidden = true; return; }
+    /* Video thì không xem trước bằng thẻ ảnh được */
+    if (!url || /\.(mp4|webm|ogv|mov)(\?|$)/i.test(url)) { box.hidden = true; return; }
     box.hidden = false;
     box.querySelector('img').src = url;
   }
@@ -579,19 +604,24 @@
     pickImage(function (url) { $('#f-cover').value = url; updateCoverPreview(); saveDraft(); });
   });
 
+  var ID_PREFIX = { kienthuc: 'kt-', khoahoc: 'kh-', blog: 'bl-' };
+
   function readForm() {
     var title = $('#f-title').value.trim();
     var slug = T.slugify($('#f-slug').value.trim() || title);
+    var section = $('#f-section').value;
     return {
-      section: $('#f-section').value,
+      section: section,
       category: $('#f-category').value,
       title: title,
       slug: slug,
-      id: (S.editingId || (($('#f-section').value === 'khoahoc' ? 'kh-' : 'kt-') + slug)),
+      id: (S.editingId || ((ID_PREFIX[section] || 'kt-') + slug)),
       description: $('#f-desc').value.trim(),
       cover: $('#f-cover').value.trim(),
       tags: $('#f-tags').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean),
       date: $('#f-date').value || new Date().toISOString().slice(0, 10),
+      time: S.postTime || new Date().toTimeString().slice(0, 5),
+      mood: $('#f-mood').value.trim(),
       author: 'Linh Osimi',
       content: exportContent()
     };
@@ -599,8 +629,11 @@
 
   function writeForm(p) {
     $('#f-section').value = p.section || 'kienthuc';
+    S.postTime = p.time || '';
     fillCategories();
-    $('#f-category').value = p.category || 'khac';
+    var fallbackCat = (p.section === 'blog') ? 'life' : 'khac';
+    $('#f-category').value = p.category || fallbackCat;
+    $('#f-mood').value = p.mood || '';
     $('#f-title').value = p.title || '';
     $('#f-slug').value = p.slug || '';
     $('#f-desc').value = p.description || '';
@@ -666,6 +699,33 @@
     w.document.open(); w.document.write(html); w.document.close();
   });
 
+  /* ───────────────── Chờ GitHub Pages build xong ─────────────────
+     Pages mất 30–90 giây để build. Nếu mở link quá sớm, CDN sẽ cache
+     lại trang 404 và người dùng tưởng bài bị lỗi. Hàm này hỏi lại
+     mỗi 4 giây (tối đa 3 phút) cho tới khi file thật sự phục vụ được. */
+  function waitForPages(url) {
+    var deadline = Date.now() + 180000;
+    var started = Date.now();
+
+    function tick() {
+      var left = Math.max(0, Math.round((deadline - Date.now()) / 1000));
+      var spent = Math.round((Date.now() - started) / 1000);
+      busy(true, 'Đã ghi xong. Đang chờ GitHub Pages build… (' + spent + 's)');
+
+      return fetch(url + '?ping=' + Date.now(), { method: 'GET', cache: 'no-store' })
+        .then(function (res) {
+          if (res.ok) return true;
+          if (Date.now() > deadline || left === 0) return false;
+          return new Promise(function (r) { setTimeout(r, 4000); }).then(tick);
+        })
+        .catch(function () {
+          if (Date.now() > deadline) return false;
+          return new Promise(function (r) { setTimeout(r, 4000); }).then(tick);
+        });
+    }
+    return tick();
+  }
+
   /* ───────────────── Đăng bài ───────────────── */
   $('#btn-publish').addEventListener('click', function () {
     var p = readForm();
@@ -718,26 +778,38 @@
           path: p.path, url: p.url,
           updatedAt: new Date().toISOString()
         };
+        /* Mục Blog cần thêm giờ đăng, mood và nội dung đầy đủ để hiện trong timeline */
+        if (p.section === 'blog') {
+          record.time = p.time;
+          record.mood = p.mood || '(・_・)';
+          record.bodyHtml = p.content;
+        }
         var idx = -1;
         S.db.posts.forEach(function (x, i) { if (x.id === record.id) idx = i; });
         if (idx >= 0) S.db.posts[idx] = record; else S.db.posts.push(record);
         return saveDb((isEdit ? 'Cập nhật danh mục: ' : 'Thêm vào danh mục: ') + p.title);
       })
       .then(function () {
-        busy(false);
         localStorage.removeItem(LS.draft);
         S.editingId = null;
         $('#btn-publish').textContent = '🚀 Đăng bài lên web';
         renderPostList();
-        toast('✅ Đã đăng! GitHub Pages cần ~1 phút để cập nhật.', 'ok');
+        /* Chờ GitHub Pages build xong rồi mới mở bài — tránh dính trang 404 bị cache */
+        return waitForPages(p.url);
+      })
+      .then(function (ready) {
+        busy(false);
+        toast(ready ? '✅ Bài đã lên web!' : '✅ Đã đăng, GitHub Pages đang build…', 'ok');
         ask({
-          title: 'Đăng bài thành công',
+          title: ready ? 'Bài đã lên web' : 'Đã đăng, đang chờ build',
           body: '<p>Bài <b>' + T.escapeHtml(p.title) + '</b> đã được ghi vào repo.</p>' +
-                '<p style="color:#7c7264;font-size:13.5px">GitHub Pages thường mất 30–90 giây để build xong. Sau đó bài sẽ hiện ở:</p>' +
+                (ready
+                  ? '<p style="color:#2f7a4a;font-size:13.5px">GitHub Pages đã build xong, bài xem được ngay.</p>'
+                  : '<p style="color:#7a5a2a;font-size:13.5px">Pages build hơi lâu hơn bình thường. Nếu mở ra thấy trang 404, đợi thêm 1 phút rồi bấm <b>Ctrl+Shift+R</b>.</p>') +
                 '<p><code>' + T.escapeHtml(p.url) + '</code></p>',
           okText: 'Mở bài viết'
         }).then(function (r) {
-          if (r) window.open(p.url, '_blank');
+          if (r) window.open(p.url + '?v=' + Date.now(), '_blank');
           resetForm();
         });
       })
@@ -748,22 +820,42 @@
   });
 
   /* ───────────────── Danh sách bài ───────────────── */
+  var SECTION_LABEL = { kienthuc: 'Kiến thức', khoahoc: 'Khoa học', blog: 'Blog' };
+
+  var listFilter = 'all';
+
+  $('#list-filter').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-list]');
+    if (!btn) return;
+    listFilter = btn.dataset.list;
+    $$('#list-filter .seg-btn').forEach(function (b) { b.classList.toggle('active', b === btn); });
+    renderPostList();
+  });
+
   function renderPostList() {
     var wrap = $('#post-list');
     wrap.innerHTML = '';
-    var posts = (S.db && S.db.posts) || [];
+    var all = (S.db && S.db.posts) || [];
+    var posts = listFilter === 'all'
+      ? all
+      : all.filter(function (p) { return p.section === listFilter; });
+
     if (!posts.length) {
-      wrap.innerHTML = '<div class="empty">Chưa có bài nào được đăng qua bảng quản trị.<br>Chuyển sang tab <b>Viết bài</b> để bắt đầu.</div>';
+      wrap.innerHTML = all.length
+        ? '<div class="empty">Chưa có bài nào trong mục này.</div>'
+        : '<div class="empty">Chưa có bài nào được đăng qua bảng quản trị.<br>Chuyển sang tab <b>Viết bài</b> để bắt đầu.</div>';
       return;
     }
     posts.forEach(function (p) {
       var item = document.createElement('div');
       item.className = 'post-item';
       item.innerHTML =
-        '<img class="thumb" src="' + T.escapeHtml(p.cover || '') + '" alt="">' +
+        (p.cover
+          ? '<img class="thumb" src="' + T.escapeHtml(p.cover) + '" alt="" loading="lazy">'
+          : '<div class="thumb thumb-empty" aria-hidden="true">✎</div>') +
         '<div>' +
           '<h4>' + T.escapeHtml(p.title) + '</h4>' +
-          '<p><span class="badge">' + (p.section === 'khoahoc' ? 'Khoa học' : 'Kiến thức') + '</span>' +
+          '<p><span class="badge">' + (SECTION_LABEL[p.section] || 'Kiến thức') + '</span>' +
              T.escapeHtml(p.date || '') + ' · ' + T.escapeHtml(p.url || '') + '</p>' +
         '</div>' +
         '<div class="post-actions">' +
@@ -790,6 +882,7 @@
         writeForm({
           section: p.section, category: p.category, title: p.title, slug: p.slug,
           description: p.description, cover: p.cover, tags: p.tags, date: p.date,
+          time: p.time, mood: p.mood,
           content: body ? body.innerHTML.trim() : ''
         });
         $('#btn-publish').textContent = '💾 Cập nhật bài viết';

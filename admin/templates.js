@@ -15,6 +15,14 @@
     khac:        { label: 'Ghi chép khác',         short: 'Khác',      index: '06', symbol: '✦' }
   };
 
+  /* Danh mục của mục "Blog" — khớp CATEGORY_LABELS trong blog/blog.js */
+  var BLOG_CATEGORIES = {
+    life:    { label: 'Đời sống', symbol: '☕' },
+    photo:   { label: 'Ảnh',      symbol: '✿' },
+    video:   { label: 'Video',    symbol: '▶' },
+    thought: { label: 'Suy nghĩ', symbol: '✎' }
+  };
+
   /* Danh mục của mục "Khoa học" */
   var SCIENCE_CATEGORIES = {
     'vu-tru':    { label: 'Vũ trụ & Thiên văn', symbol: '🌌' },
@@ -258,24 +266,125 @@ p.content + '\n' +
 '</html>\n';
   }
 
+  /* ═══════════ Bài viết mục BLOG ═══════════
+     Đường dẫn: /blog/bai-viet/<slug>.html
+     Bài vẫn hiện trong timeline ở /blog/index.html; trang này để chia sẻ link. */
+  function blogArticle(p) {
+    var cat = BLOG_CATEGORIES[p.category] || BLOG_CATEGORIES.life;
+    var cover = p.cover || '';
+    var isVideo = /\.(mp4|webm|ogv|mov)(\?|$)/i.test(cover);
+    var tagList = (p.tags || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+
+    var media = '';
+    if (cover) {
+      media = '      <figure class="log-media">\n' +
+        (isVideo
+          ? '        <video src="' + esc(cover) + '" controls playsinline preload="metadata"></video>\n'
+          : '        <img src="' + esc(cover) + '" alt="Ảnh của bài ' + esc(p.title) + '" loading="lazy">\n') +
+        '        <figcaption>' + esc(p.description) + '</figcaption>\n' +
+        '      </figure>\n';
+    }
+
+    return '<!doctype html>\n' +
+'<html lang="vi">\n' +
+'<head>\n' +
+'  <meta charset="utf-8">\n' +
+'  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+'  <meta name="description" content="' + esc(p.description) + '">\n' +
+'  <meta name="theme-color" content="#7a2f24">\n' +
+'  <meta property="og:type" content="article">\n' +
+'  <meta property="og:title" content="' + esc(p.title) + '">\n' +
+'  <meta property="og:description" content="' + esc(p.description) + '">\n' +
+(cover && !isVideo ? '  <meta property="og:image" content="' + esc(cover) + '">\n' : '') +
+'  <title>' + esc(p.title) + ' — NEET Daily Log</title>\n' +
+'  <link rel="icon" href="/favicon.png">\n' +
+'  <link rel="stylesheet" href="/blog/bai-viet/post.css">\n' +
+'  <script src="/cms/post.js" defer></script>\n' +
+'</head>\n' +
+'<body data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="blog">\n' +
+'  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
+'\n' +
+'  <div class="browser-shell">\n' +
+'    <header class="browser-chrome">\n' +
+'      <nav class="log-nav" aria-label="Điều hướng">\n' +
+'        <a class="tool-button" href="/blog/index.html">← daily log</a>\n' +
+'        <a class="tool-button" href="/blog/gallery.html">photos</a>\n' +
+'        <a class="tool-button" href="/index.html">☆ start</a>\n' +
+'      </nav>\n' +
+'      <div class="address-row">\n' +
+'        <span>Location</span>\n' +
+'        <div class="address-box"><span class="address-icon">⌂</span><span>linh-osimi.net/blog/' + esc(p.slug) + '</span></div>\n' +
+'      </div>\n' +
+'    </header>\n' +
+'\n' +
+'    <main class="log-main">\n' +
+'      <article class="log-paper">\n' +
+'        <div class="tape tape-left" aria-hidden="true"></div>\n' +
+'        <div class="tape tape-right" aria-hidden="true"></div>\n' +
+'\n' +
+'        <p class="log-stamp">' + esc(cat.symbol) + ' ' + esc(cat.label) + '</p>\n' +
+'        <h1>' + esc(p.title) + '</h1>\n' +
+'        <div class="log-meta">\n' +
+'          <time datetime="' + esc(p.date) + '">' + esc(prettyDate(p.date)) + '</time>\n' +
+'          <span>' + esc(p.time || '') + '</span>\n' +
+'          <span>mood: ' + esc(p.mood || '(・_・)') + '</span>\n' +
+'          <span data-reading-time>…</span>\n' +
+'        </div>\n' +
+'        <p class="log-lead">' + esc(p.description) + '</p>\n' +
+media +
+'\n' +
+'        <div class="log-body" id="article-content">\n' +
+p.content + '\n' +
+'        </div>\n' +
+(tagList ? '        <ul class="log-tags">' + tagList + '</ul>\n' : '') +
+'      </article>\n' +
+'\n' +
+'      <nav class="log-pager article-pager" aria-label="Điều hướng bài viết"></nav>\n' +
+'\n' +
+'      <section class="log-related">\n' +
+'        <h2>Mẩu nhật ký khác</h2>\n' +
+'        <div class="related-grid"></div>\n' +
+'      </section>\n' +
+'    </main>\n' +
+'\n' +
+'    <footer class="taskbar">\n' +
+'      <a class="start-button" href="/blog/index.html">☆ daily log</a>\n' +
+'      <span class="task-title">▤ ' + esc(p.title) + '</span>\n' +
+'      <span class="task-clock">© <span id="current-year">2026</span> linh / osimi</span>\n' +
+'    </footer>\n' +
+'  </div>\n' +
+'</body>\n' +
+'</html>\n';
+  }
+
   /* ─────────── Xuất ra ngoài ─────────── */
   global.CMSTemplates = {
     KNOWLEDGE_CATEGORIES: KNOWLEDGE_CATEGORIES,
     SCIENCE_CATEGORIES: SCIENCE_CATEGORIES,
+    BLOG_CATEGORIES: BLOG_CATEGORIES,
     slugify: slugify,
     escapeHtml: esc,
     prettyDate: prettyDate,
     defaultCover: function (section) {
-      return section === 'khoahoc' ? DEFAULT_COVER_KH : DEFAULT_COVER_KT;
+      if (section === 'khoahoc') return DEFAULT_COVER_KH;
+      if (section === 'blog') return '';   /* blog cho phép bài không có ảnh */
+      return DEFAULT_COVER_KT;
     },
     /* Thư mục lưu bài theo từng mục */
     articlePath: function (section, slug) {
-      return section === 'khoahoc'
-        ? 'khoa-hoc0/bai-viet/' + slug + '.html'
-        : 'kienthuc/articles/blog/' + slug + '.html';
+      if (section === 'khoahoc') return 'khoa-hoc0/bai-viet/' + slug + '.html';
+      if (section === 'blog') return 'blog/bai-viet/' + slug + '.html';
+      return 'kienthuc/articles/blog/' + slug + '.html';
+    },
+    categoriesOf: function (section) {
+      if (section === 'khoahoc') return SCIENCE_CATEGORIES;
+      if (section === 'blog') return BLOG_CATEGORIES;
+      return KNOWLEDGE_CATEGORIES;
     },
     render: function (post) {
-      return post.section === 'khoahoc' ? khoahocArticle(post) : kienthucArticle(post);
+      if (post.section === 'khoahoc') return khoahocArticle(post);
+      if (post.section === 'blog') return blogArticle(post);
+      return kienthucArticle(post);
     }
   };
 })(window);

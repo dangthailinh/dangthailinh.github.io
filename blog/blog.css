@@ -1242,6 +1242,94 @@ input:focus-visible {
   font-size: .72rem;
 }
 
+/* ─── Nội dung phong phú từ bảng quản trị (/admin) ─── */
+#dialog-content .dialog-body h2,
+#dialog-content .dialog-body h3,
+#dialog-content .dialog-body h4 {
+  margin: 1.8rem 0 .7rem;
+  font-family: var(--hand);
+  line-height: 1.25;
+}
+
+#dialog-content .dialog-body h2 { font-size: 1.5rem; border-bottom: 2px dashed var(--line); padding-bottom: .35rem; }
+#dialog-content .dialog-body h3 { font-size: 1.22rem; }
+#dialog-content .dialog-body h4 { font-size: 1.05rem; }
+
+#dialog-content .dialog-body ul,
+#dialog-content .dialog-body ol { margin: 0 0 1.1rem; padding-left: 1.5rem; }
+#dialog-content .dialog-body li { margin: .35rem 0; }
+
+#dialog-content .dialog-body blockquote {
+  margin: 1.4rem 0;
+  padding: .8rem 1.1rem;
+  background: rgba(255, 247, 214, .7);
+  border-left: 4px solid var(--olive);
+  font-style: italic;
+}
+
+#dialog-content .dialog-body code {
+  padding: .1em .35em;
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: .88em;
+}
+
+#dialog-content .dialog-body pre {
+  margin: 1.3rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  color: #f3ead9;
+  background: #3b3222;
+  border-left: 4px solid var(--olive);
+  font-family: var(--mono);
+  font-size: .8rem;
+  line-height: 1.65;
+}
+
+#dialog-content .dialog-body pre code { padding: 0; background: none; border: 0; color: inherit; }
+
+#dialog-content .dialog-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem 0;
+  border: 1px solid var(--line);
+}
+
+#dialog-content .dialog-body table {
+  width: 100%;
+  margin: 1.3rem 0;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: .8rem;
+}
+
+#dialog-content .dialog-body th,
+#dialog-content .dialog-body td {
+  padding: .5rem .65rem;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+#dialog-content .dialog-body th { background: var(--paper-deep); }
+
+#dialog-content .dialog-body hr {
+  margin: 1.8rem 0;
+  border: 0;
+  border-top: 2px dashed var(--line);
+}
+
+#dialog-content .dialog-permalink {
+  margin: 1.6rem 0 0;
+  padding-top: .9rem;
+  border-top: 2px dashed var(--line);
+  font-family: var(--mono);
+  font-size: .8rem;
+}
+
+#dialog-content .dialog-permalink a { color: var(--olive-dark); }
+
 @media (max-width: 1120px) {
   .page-grid {
     grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);

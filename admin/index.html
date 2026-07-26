@@ -83,6 +83,7 @@
           <select id="f-section">
             <option value="kienthuc">Kiến thức</option>
             <option value="khoahoc">Khoa học</option>
+            <option value="blog">Blog · Nhật ký</option>
           </select>
         </label>
 
@@ -90,6 +91,21 @@
           <span>Chủ đề</span>
           <select id="f-category"></select>
         </label>
+
+        <div class="field blog-only" id="wrap-mood" hidden>
+          <span>Mood</span>
+          <input id="f-mood" type="text" placeholder="૮ ˶ᵔ ᵕ ᵔ˶ ა" spellcheck="false">
+          <div class="mood-picker" id="mood-picker">
+            <button type="button" data-mood="૮ ˶ᵔ ᵕ ᵔ˶ ა">૮ ˶ᵔ ᵕ ᵔ˶ ა</button>
+            <button type="button" data-mood="(－_－) zzZ">(－_－) zzZ</button>
+            <button type="button" data-mood="(´• ω •`)">(´• ω •`)</button>
+            <button type="button" data-mood="ᏊˊꈊˋᏊ">ᏊˊꈊˋᏊ</button>
+            <button type="button" data-mood="(ง •̀_•́)ง">(ง •̀_•́)ง</button>
+            <button type="button" data-mood="(╥﹏╥)">(╥﹏╥)</button>
+            <button type="button" data-mood="( ˘ω˘ )ｽﾔｧ">( ˘ω˘ )ｽﾔｧ</button>
+            <button type="button" data-mood="＼(^o^)／">＼(^o^)／</button>
+          </div>
+        </div>
 
         <label class="field">
           <span>Tiêu đề <b class="req">*</b></span>
@@ -187,7 +203,15 @@
   <div id="tab-manage" class="tabpanel">
     <div class="manage-head">
       <h2>Bài đã đăng qua bảng quản trị</h2>
-      <button id="btn-reload" class="btn ghost small">⟳ Tải lại</button>
+      <div class="manage-tools">
+        <div class="seg" id="list-filter">
+          <button class="seg-btn active" type="button" data-list="all">Tất cả</button>
+          <button class="seg-btn" type="button" data-list="kienthuc">Kiến thức</button>
+          <button class="seg-btn" type="button" data-list="khoahoc">Khoa học</button>
+          <button class="seg-btn" type="button" data-list="blog">Blog</button>
+        </div>
+        <button id="btn-reload" class="btn ghost small">⟳ Tải lại</button>
+      </div>
     </div>
     <div id="post-list" class="post-list"></div>
   </div>

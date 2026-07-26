@@ -94,7 +94,7 @@
   /* ─────────── Bài trước / tiếp / liên quan ─────────── */
   function linkPosts(posts) {
     var same = posts
-      .filter(function (p) { return p.section === (mode === 'khoahoc' ? 'khoahoc' : 'kienthuc'); })
+      .filter(function (p) { return p.section === mode; })
       .filter(function (p) { return p.category === category; })
       .sort(function (a, b) { return String(a.date).localeCompare(String(b.date)); });
 
@@ -115,7 +115,7 @@
     /* Nếu chưa đủ 3 bài cùng chủ đề, lấy thêm bài mới nhất cùng mục */
     if (related.length < 3) {
       posts.filter(function (p) {
-        return p.section === (mode === 'khoahoc' ? 'khoahoc' : 'kienthuc') && p.id !== id;
+        return p.section === mode && p.id !== id;
       }).slice(0, 6).forEach(function (p) {
         if (related.length >= 3) return;
         if (related.some(function (r) { return r.id === p.id; })) return;
@@ -123,18 +123,25 @@
       });
     }
 
+    var CARD_CLASS = { khoahoc: 'sci-related-card', blog: 'log-related-card', kienthuc: 'related-card' };
+
     if (grid && related.length) {
       related.forEach(function (p) {
         var a = document.createElement('a');
-        a.className = mode === 'khoahoc' ? 'sci-related-card' : 'related-card';
+        a.className = CARD_CLASS[mode] || 'related-card';
         a.href = p.url;
-        a.innerHTML = mode === 'khoahoc'
-          ? '<img src="' + esc(p.cover) + '" alt="" loading="lazy"><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p>'
-          : '<span>✦</span><small>Bài mới</small><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p><b>Đọc bài ↗</b>';
+        if (mode === 'khoahoc') {
+          a.innerHTML = '<img src="' + esc(p.cover) + '" alt="" loading="lazy"><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p>';
+        } else if (mode === 'blog') {
+          a.innerHTML = (p.cover ? '<img src="' + esc(p.cover) + '" alt="" loading="lazy">' : '') +
+            '<h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p>';
+        } else {
+          a.innerHTML = '<span>✦</span><small>Bài mới</small><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p><b>Đọc bài ↗</b>';
+        }
         grid.appendChild(a);
       });
     } else if (grid) {
-      var section = grid.closest('.related-section') || grid.closest('.sci-related');
+      var section = grid.closest('.related-section') || grid.closest('.sci-related') || grid.closest('.log-related');
       if (section) section.hidden = true;
     }
   }
@@ -151,7 +158,8 @@
 
   /* ─────────── Chạy ─────────── */
   function run() {
-    if (mode === 'khoahoc') {
+    /* Trang Kiến thức đã có article.js lo phần này; hai mục còn lại tự dựng. */
+    if (mode === 'khoahoc' || mode === 'blog') {
       buildToc();
       readingTime();
       progressBar();

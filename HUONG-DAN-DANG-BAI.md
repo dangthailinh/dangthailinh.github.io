@@ -56,17 +56,36 @@ Tick **Ghi nhớ trên máy này** → lần sau vào là tự đăng nhập.
 
 Tab **✎ Viết bài**:
 
-1. **Đăng vào mục** — chọn `Kiến thức` hoặc `Khoa học`
-2. **Chủ đề** — chọn nhóm (DevOps, AWS, AI… / Vũ trụ, Lượng tử, Bí ẩn…)
+1. **Đăng vào mục** — chọn `Kiến thức`, `Khoa học` hoặc `Blog · Nhật ký`
+2. **Chủ đề** — danh sách tự đổi theo mục bạn chọn
 3. **Tiêu đề** — đường dẫn tự sinh theo tiêu đề, muốn đổi thì sửa ô bên dưới
 4. **Mô tả ngắn** — 1–2 câu, hiện trên thẻ bài ở trang danh sách
 5. **Ảnh bìa** — dán URL ảnh, hoặc bấm **⬆ Tải ảnh bìa từ máy**
-6. **Thẻ / tags** — cách nhau bằng dấu phẩy
+6. **Thẻ / tags** — cách nhau bằng **dấu phẩy** (`code, AI` → hai thẻ; `code;AI` → một thẻ)
 7. Viết nội dung ở khung bên phải
 8. Bấm **👁 Xem trước** để kiểm tra
 9. Bấm **🚀 Đăng bài lên web**
 
-Sau 30–90 giây GitHub Pages build xong, bài sẽ tự hiện ở trang danh sách — **không cần sửa code gì cả**.
+Bảng quản trị sẽ tự chờ GitHub Pages build xong (hiện đồng hồ đếm giây) rồi mới cho mở bài, nên bạn không bị dính trang 404.
+
+Bài mới tự hiện ở trang danh sách — **không cần sửa code gì cả**.
+
+### Riêng mục Blog · Nhật ký
+
+Blog có vài điểm khác hai mục kia:
+
+- **Chủ đề**: Đời sống / Ảnh / Video / Suy nghĩ — đúng 4 nhóm của bộ lọc sẵn có trong blog
+- **Mood**: ô nhập kaomoji, có 8 mẫu bấm chọn nhanh — hiện cạnh giờ đăng trên thẻ bài
+- **Ảnh hoặc video kèm bài**: dán URL ảnh *hoặc* video. Link đuôi `.mp4` `.webm` `.mov` sẽ tự thành trình phát video
+- **Giờ đăng** tự lấy theo lúc bạn bấm đăng, không cần nhập
+- **Mô tả ngắn** chính là phần tóm tắt hiện trên thẻ bài ở dòng thời gian
+
+Bài blog xuất hiện ở **hai nơi**:
+
+1. Trong dòng thời gian tại `/blog/index.html` — bấm "mở bài viết" đọc bằng cửa sổ popup như các bài cũ
+2. Một trang riêng tại `/blog/bai-viet/<tên-bài>.html` để chia sẻ link. Trong popup có dòng "↗ mở trang riêng của bài này"
+
+5 bài blog cũ vẫn nằm nguyên trong `blog/blog.js` và không bị ảnh hưởng.
 
 ### Thanh công cụ soạn thảo
 
@@ -97,6 +116,7 @@ Sau 30–90 giây GitHub Pages build xong, bài sẽ tự hiện ở trang danh 
 
 Tab **☰ Quản lý bài**:
 
+- Bộ lọc **Tất cả / Kiến thức / Khoa học / Blog** ở góc trên phải
 - **Xem** — mở bài trên web
 - **Sửa** — tải bài về trình soạn thảo, sửa xong bấm **💾 Cập nhật bài viết**
 - **Xoá** — xoá file bài viết khỏi repo và gỡ khỏi danh mục
@@ -121,14 +141,18 @@ Tab **☰ Quản lý bài**:
 /kienthuc/articles/blog/<ten-bai>.html    Bài mục Kiến thức
 /khoa-hoc0/bai-viet/<ten-bai>.html        Bài mục Khoa học
 /khoa-hoc0/bai-viet/post.css              Giao diện bài mục Khoa học
+/blog/bai-viet/<ten-bai>.html             Bài mục Blog
+/blog/bai-viet/post.css                   Giao diện bài mục Blog
 /uploads/<năm>/<tháng>/...                Ảnh bạn tải lên
 ```
 
-Các file cũ **không bị đụng vào**. Chỉ có 3 thay đổi nhỏ:
+Các file cũ **không bị đụng vào**. Chỉ có vài thay đổi nhỏ:
 
 - `kienthuc/index.html` — thêm 1 dòng `<script>` và thuộc tính `data-cms-feed`
 - `khoa-hoc0/0/khoa-hoc.html` — tương tự
 - `kienthuc/assets/css/article.css` — thêm kiểu cho thẻ tag
+- `blog/blog.js` — thêm đoạn nạp bài mới từ `posts.json` vào cuối file, popup nhận nội dung HTML và có link mở trang riêng
+- `blog/blog.css` — thêm kiểu cho nội dung phong phú trong popup
 
 ---
 
@@ -139,6 +163,7 @@ Các file cũ **không bị đụng vào**. Chỉ có 3 thay đổi nhỏ:
 | "Token không hợp lệ hoặc đã hết hạn" | Token sai hoặc hết hạn → tạo token mới ở bước 2 |
 | "Token thiếu quyền Contents" | Vào lại token, bật **Contents: Read and write** |
 | "Nội dung vừa bị thay đổi ở nơi khác" | Bấm **⟳ Tải lại** ở tab Quản lý rồi đăng lại |
+| Mở bài viết ra thấy trang **404 Page not found** | Bạn mở link lúc GitHub Pages chưa build xong → trình duyệt và CDN cache lại trang 404 đó. Bấm **`Ctrl+Shift+R`**, hoặc thêm `?v=1` vào cuối link. Bài vẫn nguyên vẹn, không mất gì. Bảng quản trị nay đã tự chờ build xong mới cho mở bài nên lỗi này sẽ không lặp lại. |
 | Đăng xong mà web chưa đổi | Đợi thêm 1–2 phút, rồi `Ctrl+Shift+R` để xoá cache |
 | Bài không hiện ở trang danh sách | Mở `https://dangthailinh.github.io/data/posts.json` xem bài có trong đó không. Nếu có mà vẫn không hiện, mở Console (F12) xem báo lỗi gì |
 | Ảnh tải lên bị lỗi | Ảnh phải nhỏ hơn 5MB — nén bớt rồi thử lại |
