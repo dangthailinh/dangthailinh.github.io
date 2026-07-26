@@ -1,5 +1,23 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-26T00:00:00.000Z",
-  "posts": []
+  "updatedAt": "2026-07-26T13:14:14.081Z",
+  "posts": [
+    {
+      "id": "kt-tong-quan-ve-codex",
+      "section": "kienthuc",
+      "category": "khac",
+      "title": "Tổng quan về codex",
+      "slug": "tong-quan-ve-codex",
+      "description": "Codex là gì, dùng ở đâu, hoạt động ra sao, điểm mạnh, giới hạn và khi nào nên dùng.",
+      "cover": "https://d18mzvjk4498x.cloudfront.net/bca41130-9274-43f4-b3d2-4c4233b68ba5",
+      "tags": [
+        "code;AI"
+      ],
+      "date": "2026-07-26",
+      "author": "Linh Osimi",
+      "path": "kienthuc/articles/blog/tong-quan-ve-codex.html",
+      "url": "/kienthuc/articles/blog/tong-quan-ve-codex.html",
+      "updatedAt": "2026-07-26T13:14:14.081Z"
+    }
+  ]
 }
