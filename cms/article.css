@@ -1,0 +1,284 @@
+/* ══════════════════════════════════════════════════════════════
+   cms/article.css — giao diện bài viết dùng chung cho các mục
+   Game · Manga · Nghệ thuật · Phim
+
+   Mỗi mục có bảng màu riêng qua thuộc tính data-section trên <body>,
+   nhưng dùng chung toàn bộ bố cục nên chỉ cần bảo trì một file.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─────────── Bảng màu mặc định ─────────── */
+:root{
+  --bg:#0d0f14;
+  --bg-soft:rgba(255,255,255,.04);
+  --line:rgba(255,255,255,.13);
+  --text:#dfe4ec;
+  --muted:#96a0b2;
+  --head:#f2f5fa;
+  --accent:#7cc4ff;
+  --accent-2:#4b8fd6;
+  --code-bg:#12161f;
+  --radius:16px;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-head:"Space Grotesk","Inter",system-ui,sans-serif;
+}
+
+/* ─── GAME · neon arcade ─── */
+body[data-section="game"]{
+  --bg:#05070a;
+  --bg-soft:rgba(0,255,153,.045);
+  --line:rgba(0,255,153,.18);
+  --text:#d4e6dd;
+  --muted:#7e9a8e;
+  --head:#eafff5;
+  --accent:#00ff99;
+  --accent-2:#00b36b;
+  --code-bg:#08120d;
+  --font-head:"Orbitron","Space Grotesk",system-ui,sans-serif;
+}
+
+/* ─── MANGA · mực đen & đỏ ─── */
+body[data-section="manga"]{
+  --bg:#08080a;
+  --bg-soft:rgba(255,60,70,.05);
+  --line:rgba(255,80,90,.2);
+  --text:#dcd8d6;
+  --muted:#95898a;
+  --head:#f6f2f1;
+  --accent:#ff4d5a;
+  --accent-2:#c02b38;
+  --code-bg:#121012;
+}
+
+/* ─── NGHỆ THUẬT · giấy vẽ ─── */
+body[data-section="nghethuat"]{
+  --bg:#f3ece0;
+  --bg-soft:rgba(120,90,60,.055);
+  --line:rgba(90,66,45,.22);
+  --text:#33291f;
+  --muted:#7d6d59;
+  --head:#241c14;
+  --accent:#a8603a;
+  --accent-2:#7d4526;
+  --code-bg:#e7ddcd;
+  --font-head:"Lora",Georgia,"Times New Roman",serif;
+}
+
+/* ─── PHIM · rạp chiếu ─── */
+body[data-section="phim"]{
+  --bg:#0b0906;
+  --bg-soft:rgba(255,193,90,.05);
+  --line:rgba(255,193,90,.2);
+  --text:#e5ddd0;
+  --muted:#a1927c;
+  --head:#fdf6e9;
+  --accent:#ffc15a;
+  --accent-2:#c99133;
+  --code-bg:#141009;
+}
+
+/* ─────────── Nền chung ─────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:16px/1.75 var(--font-body);
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1100px 520px at 50% -160px,var(--bg-soft),transparent 70%);
+}
+body[data-section="nghethuat"]::before{
+  background:radial-gradient(900px 460px at 50% -140px,rgba(255,255,255,.7),transparent 70%);
+}
+img{max-width:100%;height:auto}
+a{color:var(--accent)}
+
+/* ─────────── Thanh tiến độ đọc ─────────── */
+.reading-progress{position:fixed;top:0;left:0;width:100%;height:3px;z-index:300;background:var(--line)}
+.reading-progress span{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  transition:width .1s linear
+}
+
+/* ─────────── Đầu trang ─────────── */
+.cms-header{
+  position:sticky;top:0;z-index:200;
+  display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+  padding:13px 24px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(12px);
+}
+@supports not (background:color-mix(in srgb,red 50%,blue)){
+  .cms-header{background:var(--bg)}
+}
+.cms-brand{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+  font:700 19px/1 var(--font-head);color:var(--head)
+}
+.cms-brand .mark{
+  width:36px;height:36px;flex-shrink:0;border-radius:10px;
+  display:grid;place-items:center;font-size:17px;
+  background:var(--bg-soft);border:1px solid var(--line);color:var(--accent)
+}
+.cms-nav{display:flex;gap:20px;flex-wrap:wrap;margin-left:auto;font-size:14.5px}
+.cms-nav a{
+  color:var(--muted);text-decoration:none;padding-bottom:4px;
+  border-bottom:2px solid transparent;transition:.22s
+}
+.cms-nav a:hover,.cms-nav a.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ─────────── Khung chính ─────────── */
+.cms-main{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:30px 22px 72px}
+.cms-crumbs{margin:0 0 20px;font-size:13.5px;color:var(--muted)}
+.cms-crumbs a{text-decoration:none}
+.cms-crumbs a:hover{text-decoration:underline}
+.cms-crumbs span{margin:0 7px;opacity:.5}
+
+/* ─────────── Hero ─────────── */
+.cms-hero{
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:22px;
+  padding:32px 32px 26px;margin-bottom:32px
+}
+body[data-section="nghethuat"] .cms-hero{background:rgba(255,255,255,.55)}
+.cms-kicker{
+  display:inline-block;padding:5px 14px;margin-bottom:15px;border-radius:30px;
+  background:var(--bg-soft);border:1px solid var(--line);
+  color:var(--accent);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase
+}
+.cms-hero h1{
+  margin:0 0 13px;color:var(--head);letter-spacing:-.015em;
+  font:700 clamp(28px,4.4vw,44px)/1.18 var(--font-head)
+}
+.cms-lead{margin:0 0 20px;max-width:68ch;color:var(--muted);font-size:17.5px;line-height:1.65}
+.cms-meta{
+  display:flex;gap:10px 22px;flex-wrap:wrap;align-items:center;
+  padding-bottom:22px;border-bottom:1px solid var(--line);
+  color:var(--muted);font-size:13.5px
+}
+.cms-meta .dot{opacity:.4}
+.cms-cover{margin:24px 0 0;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.cms-cover img{display:block;width:100%;max-height:460px;object-fit:cover}
+.cms-cover video{display:block;width:100%;max-height:460px;background:#000}
+
+/* ─────────── Bố cục đọc ─────────── */
+.cms-layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:40px;align-items:start}
+
+/* ─────────── Nội dung ─────────── */
+.cms-post{min-width:0;font-size:16.5px;line-height:1.88}
+.cms-post>:first-child{margin-top:0}
+.cms-post h2{
+  margin:52px 0 18px;color:var(--head);scroll-margin-top:88px;
+  font:700 clamp(23px,2.9vw,31px)/1.3 var(--font-head)
+}
+.cms-post h2::before{
+  content:"";display:block;width:46px;height:2px;margin-bottom:15px;
+  background:linear-gradient(90deg,var(--accent),transparent)
+}
+.cms-post h3{margin:36px 0 13px;color:var(--head);font:600 21px/1.4 var(--font-head)}
+.cms-post h4{margin:26px 0 10px;color:var(--head);font:600 17.5px/1.45 var(--font-body)}
+.cms-post p{margin:0 0 20px}
+.cms-post strong{color:var(--head)}
+.cms-post a{text-decoration:underline;text-underline-offset:3px}
+.cms-post ul,.cms-post ol{margin:0 0 22px;padding-left:25px}
+.cms-post li{margin:8px 0}
+.cms-post li::marker{color:var(--accent)}
+.cms-post blockquote{
+  margin:32px 0;padding:20px 26px;border-left:3px solid var(--accent);
+  border-radius:0 12px 12px 0;background:var(--bg-soft);font-style:italic;color:var(--head)
+}
+.cms-post code{
+  padding:.14em .42em;border-radius:4px;background:var(--code-bg);
+  border:1px solid var(--line);color:var(--accent);font:.87em Consolas,Monaco,monospace
+}
+.cms-post pre{
+  margin:28px 0;padding:20px;border-radius:12px;overflow:auto;
+  background:var(--code-bg);border:1px solid var(--line);border-left:3px solid var(--accent);
+  font:13.5px/1.75 Consolas,Monaco,monospace;color:var(--text)
+}
+.cms-post pre code{padding:0;background:none;border:0;color:inherit}
+.cms-post figure{
+  margin:34px 0;padding:9px 9px 4px;border-radius:14px;
+  background:var(--bg-soft);border:1px solid var(--line)
+}
+.cms-post figure img{display:block;width:100%;border-radius:9px}
+.cms-post figcaption{padding:11px 6px 10px;text-align:center;color:var(--muted);font-size:13px;font-style:italic}
+.cms-post hr{margin:46px 0;border:0;border-top:1px solid var(--line)}
+.table-scroll{margin:28px 0;overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.cms-post table{width:100%;min-width:540px;border-collapse:collapse;font-size:14.5px}
+.cms-post th,.cms-post td{padding:12px 15px;border-bottom:1px solid var(--line);text-align:left}
+.cms-post th{background:var(--bg-soft);color:var(--head);font-weight:600}
+.cms-post tr:last-child td{border-bottom:0}
+
+/* ─────────── Mục lục ─────────── */
+.cms-toc{
+  position:sticky;top:84px;padding:20px;border-radius:16px;
+  background:var(--bg-soft);border:1px solid var(--line);
+  max-height:calc(100vh - 120px);overflow-y:auto
+}
+body[data-section="nghethuat"] .cms-toc{background:rgba(255,255,255,.55)}
+.cms-toc .label{
+  margin:0 0 12px;color:var(--accent);font:600 11.5px/1 var(--font-body);
+  letter-spacing:.15em;text-transform:uppercase
+}
+.cms-toc ol{margin:0;padding-left:18px;font-size:13.5px;line-height:1.55}
+.cms-toc li{margin:9px 0}
+.cms-toc a{color:var(--muted);text-decoration:none;transition:.2s}
+.cms-toc a:hover,.cms-toc a.active{color:var(--accent)}
+
+/* ─────────── Thẻ tag ─────────── */
+.cms-tags{display:flex;gap:9px;flex-wrap:wrap;margin:38px 0 0;padding:0;list-style:none}
+.cms-tags li{
+  padding:6px 15px;border-radius:30px;background:var(--bg-soft);
+  border:1px solid var(--line);color:var(--accent);font-size:13px
+}
+
+/* ─────────── Bài trước / tiếp ─────────── */
+.cms-pager{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:46px 0 0}
+.cms-pager .pager-link{
+  display:block;padding:18px 22px;border-radius:14px;text-decoration:none;
+  background:var(--bg-soft);border:1px solid var(--line);transition:.24s
+}
+.cms-pager .pager-link:hover{
+  border-color:var(--accent);transform:translateY(-3px)
+}
+.cms-pager .pager-link.next{text-align:right}
+.cms-pager .pager-link small{display:block;margin-bottom:6px;color:var(--accent);font-size:12.5px}
+.cms-pager .pager-link strong{color:var(--head);font:600 15.5px/1.35 var(--font-head)}
+
+/* ─────────── Bài liên quan ─────────── */
+.cms-related{margin:64px 0 0}
+.cms-related h2{margin:0 0 22px;color:var(--head);font:700 25px/1.3 var(--font-head)}
+.cms-related .related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.cms-related-card{
+  display:block;text-decoration:none;border-radius:16px;overflow:hidden;
+  background:var(--bg-soft);border:1px solid var(--line);transition:.26s
+}
+.cms-related-card:hover{transform:translateY(-5px);border-color:var(--accent)}
+.cms-related-card img{display:block;width:100%;height:145px;object-fit:cover;background:var(--code-bg)}
+.cms-related-card h3{margin:15px 16px 7px;color:var(--head);font:600 16.5px/1.4 var(--font-head)}
+.cms-related-card p{margin:0 16px 18px;color:var(--muted);font-size:13.5px;line-height:1.6}
+
+/* ─────────── Chân trang ─────────── */
+.cms-footer{
+  position:relative;z-index:1;margin-top:70px;padding:26px 22px;text-align:center;
+  border-top:1px solid var(--line);color:var(--muted);font-size:13.5px
+}
+.cms-footer a{display:inline-block;margin-top:9px;text-decoration:none}
+
+/* ─────────── Màn hình nhỏ ─────────── */
+@media (max-width:940px){
+  .cms-layout{grid-template-columns:1fr}
+  .cms-toc{position:static;max-height:none;order:-1}
+  .cms-hero{padding:24px 20px 20px}
+  .cms-main{padding:22px 15px 50px}
+  .cms-pager{grid-template-columns:1fr}
+  .cms-pager .pager-link.next{text-align:left}
+  .cms-nav{gap:14px;font-size:13.5px;width:100%;margin-left:0}
+}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}

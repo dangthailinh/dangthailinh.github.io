@@ -61,6 +61,7 @@
   <header class="topbar">
     <div class="brand"><span class="brand-mark">L</span> Bảng quản trị</div>
     <nav class="tabs">
+      <button class="tab" data-tab="dashboard">◈ Tổng quan</button>
       <button class="tab active" data-tab="write">✎ Viết bài</button>
       <button class="tab" data-tab="manage">☰ Quản lý bài</button>
     </nav>
@@ -70,13 +71,43 @@
     </div>
   </header>
 
-  <!-- ─────────── TAB VIẾT BÀI ─────────── -->
+  <!-- ═══════════ TAB TỔNG QUAN ═══════════ -->
+  <div id="tab-dashboard" class="tabpanel">
+    <div class="dash">
+      <div class="dash-head">
+        <div>
+          <h2>Tổng quan</h2>
+          <p id="dash-sub" class="dash-sub"></p>
+        </div>
+        <button id="btn-dash-refresh" class="btn ghost small">⟳ Tải lại</button>
+      </div>
+
+      <div class="stat-row" id="stat-row"></div>
+
+      <div class="dash-grid">
+        <section class="dash-card">
+          <h3>Bài theo mục</h3>
+          <div id="dash-sections" class="bar-list"></div>
+        </section>
+
+        <section class="dash-card">
+          <h3>Sửa gần đây</h3>
+          <div id="dash-recent" class="recent-list"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ TAB VIẾT BÀI ═══════════ -->
   <div id="tab-write" class="tabpanel active">
     <div class="layout">
 
       <!-- Cột trái: thông tin bài -->
       <aside class="side">
-        <h2 class="side-title">Thông tin bài viết</h2>
+        <div class="side-status">
+          <span class="pill" id="edit-pill">Bài mới</span>
+          <span id="draft-note" class="draft-note"></span>
+        </div>
 
         <label class="field">
           <span>Đăng vào mục <b class="req">*</b></span>
@@ -84,13 +115,27 @@
             <option value="kienthuc">Kiến thức</option>
             <option value="khoahoc">Khoa học</option>
             <option value="blog">Blog · Nhật ký</option>
+            <option value="game">Game</option>
+            <option value="manga">Manga</option>
+            <option value="nghethuat">Nghệ thuật</option>
+            <option value="phim">Phim</option>
           </select>
         </label>
 
-        <label class="field" id="wrap-category">
+        <label class="field">
           <span>Chủ đề</span>
           <select id="f-category"></select>
         </label>
+
+        <label class="field">
+          <span>Trạng thái</span>
+          <select id="f-status">
+            <option value="published">Đăng ngay</option>
+            <option value="scheduled">Hẹn ngày đăng</option>
+            <option value="draft">Lưu nháp (chưa hiện trên web)</option>
+          </select>
+        </label>
+        <p class="field-hint" id="status-hint"></p>
 
         <div class="field blog-only" id="wrap-mood" hidden>
           <span>Mood</span>
@@ -109,12 +154,12 @@
 
         <label class="field">
           <span>Tiêu đề <b class="req">*</b></span>
-          <input id="f-title" type="text" placeholder="VD: Tìm hiểu về Kubernetes">
+          <input id="f-title" type="text" placeholder="VD: Review Elden Ring">
         </label>
 
         <label class="field">
           <span>Đường dẫn (tự sinh từ tiêu đề)</span>
-          <input id="f-slug" type="text" spellcheck="false" placeholder="tim-hieu-ve-kubernetes">
+          <input id="f-slug" type="text" spellcheck="false" placeholder="review-elden-ring">
         </label>
 
         <label class="field">
@@ -133,7 +178,7 @@
 
         <label class="field">
           <span>Thẻ / tags (cách nhau bằng dấu phẩy)</span>
-          <input id="f-tags" type="text" placeholder="Kubernetes, DevOps, Container">
+          <input id="f-tags" type="text" placeholder="Elden Ring, Soulslike, Review">
         </label>
 
         <label class="field">
@@ -143,10 +188,9 @@
 
         <div class="side-actions">
           <button id="btn-publish" class="btn primary block">🚀 Đăng bài lên web</button>
-          <button id="btn-preview" class="btn ghost block">👁 Xem trước</button>
+          <button id="btn-save-draft" class="btn ghost block">💾 Lưu nháp lên GitHub</button>
           <button id="btn-newdraft" class="btn ghost block small">🗑 Xóa nháp, viết bài mới</button>
         </div>
-        <p id="draft-note" class="draft-note"></p>
       </aside>
 
       <!-- Cột phải: trình soạn thảo -->
@@ -186,10 +230,30 @@
             <button class="tb" data-act="clean" title="Xóa định dạng">✕ format</button>
             <button class="tb" data-act="html" title="Xem / sửa HTML thô">HTML</button>
           </div>
+          <div class="tb-group tb-right">
+            <button class="tb" data-act="preview" title="Bật/tắt khung xem trước">👁 Xem trước</button>
+          </div>
         </div>
 
-        <div id="editor" class="editor" contenteditable="true" spellcheck="true"></div>
-        <textarea id="html-view" class="html-view" hidden spellcheck="false"></textarea>
+        <div class="editor-stage" id="editor-stage">
+          <div class="editor-pane">
+            <div id="editor" class="editor" contenteditable="true" spellcheck="true"></div>
+            <textarea id="html-view" class="html-view" hidden spellcheck="false"></textarea>
+          </div>
+          <div class="preview-pane" id="preview-pane" hidden>
+            <div class="preview-bar">
+              <span>Xem trước</span>
+              <div class="preview-devices">
+                <button class="dev active" type="button" data-device="desktop">Máy tính</button>
+                <button class="dev" type="button" data-device="mobile">Điện thoại</button>
+              </div>
+              <button class="btn ghost small" type="button" id="btn-preview-new">Mở tab mới ↗</button>
+            </div>
+            <div class="preview-frame-wrap" id="preview-frame-wrap">
+              <iframe id="preview-frame" title="Xem trước bài viết"></iframe>
+            </div>
+          </div>
+        </div>
 
         <div class="editor-foot">
           <span id="wordcount">0 từ</span>
@@ -199,20 +263,67 @@
     </div>
   </div>
 
-  <!-- ─────────── TAB QUẢN LÝ ─────────── -->
+  <!-- ═══════════ TAB QUẢN LÝ ═══════════ -->
   <div id="tab-manage" class="tabpanel">
-    <div class="manage-head">
-      <h2>Bài đã đăng qua bảng quản trị</h2>
-      <div class="manage-tools">
-        <div class="seg" id="list-filter">
-          <button class="seg-btn active" type="button" data-list="all">Tất cả</button>
-          <button class="seg-btn" type="button" data-list="kienthuc">Kiến thức</button>
-          <button class="seg-btn" type="button" data-list="khoahoc">Khoa học</button>
-          <button class="seg-btn" type="button" data-list="blog">Blog</button>
-        </div>
-        <button id="btn-reload" class="btn ghost small">⟳ Tải lại</button>
+
+    <div class="manage-toolbar">
+      <div class="search-field">
+        <span aria-hidden="true">⌕</span>
+        <input id="list-search" type="search" placeholder="Tìm theo tiêu đề, mô tả, thẻ…" autocomplete="off">
+      </div>
+
+      <label class="inline-field">
+        <span>Mục</span>
+        <select id="list-section">
+          <option value="all">Tất cả</option>
+          <option value="kienthuc">Kiến thức</option>
+          <option value="khoahoc">Khoa học</option>
+          <option value="blog">Blog</option>
+          <option value="game">Game</option>
+          <option value="manga">Manga</option>
+          <option value="nghethuat">Nghệ thuật</option>
+          <option value="phim">Phim</option>
+        </select>
+      </label>
+
+      <label class="inline-field">
+        <span>Trạng thái</span>
+        <select id="list-status">
+          <option value="all">Tất cả</option>
+          <option value="published">Đã đăng</option>
+          <option value="scheduled">Hẹn đăng</option>
+          <option value="draft">Nháp</option>
+        </select>
+      </label>
+
+      <label class="inline-field">
+        <span>Sắp xếp</span>
+        <select id="list-sort">
+          <option value="date-desc">Mới nhất trước</option>
+          <option value="date-asc">Cũ nhất trước</option>
+          <option value="updated-desc">Vừa sửa gần đây</option>
+          <option value="title-asc">Tiêu đề A → Z</option>
+          <option value="title-desc">Tiêu đề Z → A</option>
+        </select>
+      </label>
+
+      <button id="btn-reload" class="btn ghost small">⟳ Tải lại</button>
+    </div>
+
+    <div class="bulk-bar" id="bulk-bar" hidden>
+      <label class="checkbox tight">
+        <input id="bulk-all" type="checkbox">
+        <span id="bulk-count">Đã chọn 0 bài</span>
+      </label>
+      <div class="bulk-actions" id="bulk-actions">
+        <button class="btn ghost small" type="button" data-bulk="publish">Chuyển sang Đã đăng</button>
+        <button class="btn ghost small" type="button" data-bulk="draft">Chuyển sang Nháp</button>
+        <button class="btn danger small" type="button" data-bulk="delete">Xoá đã chọn</button>
+        <button class="btn ghost small" type="button" data-bulk="clear">Bỏ chọn</button>
       </div>
     </div>
+
+    <p class="list-summary" id="list-summary"></p>
     <div id="post-list" class="post-list"></div>
   </div>
 </section>

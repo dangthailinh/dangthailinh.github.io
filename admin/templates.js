@@ -23,6 +23,43 @@
     thought: { label: 'Suy nghĩ', symbol: '✎' }
   };
 
+  /* ─── Danh mục của 4 mục media ─── */
+  var GAME_CATEGORIES = {
+    review:   { label: 'Review game',      symbol: '🎮' },
+    guide:    { label: 'Hướng dẫn · Mẹo',  symbol: '🗺' },
+    news:     { label: 'Tin tức',          symbol: '📰' },
+    ranking:  { label: 'Bảng xếp hạng',    symbol: '🏆' },
+    indie:    { label: 'Game indie',       symbol: '💎' },
+    khac:     { label: 'Khác',             symbol: '✦' }
+  };
+
+  var MANGA_CATEGORIES = {
+    review:    { label: 'Review truyện',    symbol: '📖' },
+    character: { label: 'Phân tích nhân vật', symbol: '👤' },
+    theory:    { label: 'Giả thuyết',       symbol: '🔮' },
+    seinen:    { label: 'Seinen · Dark',    symbol: '🌑' },
+    shonen:    { label: 'Shonen',           symbol: '⚡' },
+    khac:      { label: 'Khác',             symbol: '✦' }
+  };
+
+  var ART_CATEGORIES = {
+    classic:  { label: 'Cổ điển',        symbol: '🏛' },
+    modern:   { label: 'Hiện đại',       symbol: '🎨' },
+    digital:  { label: 'Nghệ thuật số',  symbol: '🖥' },
+    dark:     { label: 'Dark art',       symbol: '🕯' },
+    photo:    { label: 'Nhiếp ảnh',      symbol: '📷' },
+    khac:     { label: 'Khác',           symbol: '✦' }
+  };
+
+  var FILM_CATEGORIES = {
+    analysis:  { label: 'Phân tích',       symbol: '🔍' },
+    review:    { label: 'Review phim',     symbol: '🎬' },
+    list:      { label: 'Tuyển chọn',      symbol: '📋' },
+    character: { label: 'Nhân vật',        symbol: '👤' },
+    essay:     { label: 'Tiểu luận',       symbol: '✍' },
+    khac:      { label: 'Khác',            symbol: '✦' }
+  };
+
   /* Danh mục của mục "Khoa học" */
   var SCIENCE_CATEGORIES = {
     'vu-tru':    { label: 'Vũ trụ & Thiên văn', symbol: '🌌' },
@@ -357,33 +394,214 @@ p.content + '\n' +
 '</html>\n';
   }
 
+  /* ═══════════ Khuôn dùng chung cho GAME · MANGA · NGHỆ THUẬT · PHIM ═══════════
+     Bốn mục này cùng bố cục, chỉ khác bảng màu — được đổi qua thuộc tính
+     data-section trên <body> và xử lý trong cms/article.css. */
+  var MEDIA_META = {
+    game:      { label: 'Game',       home: '/game0/0/game.html',              back: 'Về mục Game' },
+    manga:     { label: 'Manga',      home: '/manga0/0/truyen-manga.html',     back: 'Về mục Manga' },
+    nghethuat: { label: 'Nghệ thuật', home: '/nghe-thuat0/nghe-thuat.html',    back: 'Về mục Nghệ thuật' },
+    phim:      { label: 'Phim',       home: '/phim0/0/phim.html',              back: 'Về mục Phim' }
+  };
+
+  var MEDIA_FONTS = {
+    game:      'family=Orbitron:wght@400;700&family=Inter:wght@400;500;600;700',
+    manga:     'family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600',
+    nghethuat: 'family=Lora:ital,wght@0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600',
+    phim:      'family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600'
+  };
+
+  function mediaArticle(p) {
+    var meta  = MEDIA_META[p.section] || MEDIA_META.game;
+    var cats  = categoriesFor(p.section);
+    var cat   = cats[p.category] || cats.khac || { label: 'Khác', symbol: '✦' };
+    var cover = p.cover || '';
+    var isVideo = /\.(mp4|webm|ogv|mov)(\?|$)/i.test(cover);
+    var tagList = (p.tags || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+    var fonts = MEDIA_FONTS[p.section] || MEDIA_FONTS.game;
+
+    var coverBlock = '';
+    if (cover) {
+      coverBlock = '        <figure class="cms-cover">\n' +
+        (isVideo
+          ? '          <video src="' + esc(cover) + '" controls playsinline preload="metadata"></video>\n'
+          : '          <img src="' + esc(cover) + '" alt="Ảnh bìa ' + esc(p.title) + '" fetchpriority="high">\n') +
+        '        </figure>\n';
+    }
+
+    return '<!doctype html>\n' +
+'<html lang="vi">\n' +
+'<head>\n' +
+'  <meta charset="utf-8">\n' +
+'  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+'  <meta name="description" content="' + esc(p.description) + '">\n' +
+'  <meta property="og:type" content="article">\n' +
+'  <meta property="og:title" content="' + esc(p.title) + '">\n' +
+'  <meta property="og:description" content="' + esc(p.description) + '">\n' +
+(cover && !isVideo ? '  <meta property="og:image" content="' + esc(cover) + '">\n' : '') +
+'  <title>' + esc(p.title) + ' — ' + esc(meta.label) + ' · Linh Osimi</title>\n' +
+'  <link rel="icon" type="image/png" href="/favicon.png?v=2">\n' +
+'  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+'  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
+'  <link href="https://fonts.googleapis.com/css2?' + fonts + '&display=swap" rel="stylesheet">\n' +
+'  <link rel="stylesheet" href="/cms/article.css">\n' +
+'  <script src="/cms/post.js" defer></script>\n' +
+'</head>\n' +
+'<body data-section="' + esc(p.section) + '" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="' + esc(p.section) + '">\n' +
+'  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
+'\n' +
+'  <header class="cms-header">\n' +
+'    <a class="cms-brand" href="/index.html">\n' +
+'      <span class="mark" aria-hidden="true">' + esc(cat.symbol) + '</span>\n' +
+'      <span>Linh Osimi</span>\n' +
+'    </a>\n' +
+'    <nav class="cms-nav" aria-label="Điều hướng chính">\n' +
+'      <a href="/khoa-hoc0/0/khoa-hoc.html">Khoa học</a>\n' +
+'      <a' + (p.section === 'nghethuat' ? ' class="active"' : '') + ' href="/nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>\n' +
+'      <a' + (p.section === 'phim' ? ' class="active"' : '') + ' href="/phim0/0/phim.html">Phim</a>\n' +
+'      <a' + (p.section === 'manga' ? ' class="active"' : '') + ' href="/manga0/0/truyen-manga.html">Manga</a>\n' +
+'      <a' + (p.section === 'game' ? ' class="active"' : '') + ' href="/game0/0/game.html">Game</a>\n' +
+'      <a href="/kienthuc/index.html">Kiến thức</a>\n' +
+'      <a href="/blog/index.html">Blog</a>\n' +
+'    </nav>\n' +
+'  </header>\n' +
+'\n' +
+'  <main class="cms-main">\n' +
+'    <p class="cms-crumbs"><a href="' + meta.home + '">' + esc(meta.back) + '</a><span>/</span>' + esc(cat.label) + '</p>\n' +
+'\n' +
+'    <header class="cms-hero">\n' +
+'      <span class="cms-kicker">' + esc(cat.symbol) + ' ' + esc(cat.label) + '</span>\n' +
+'      <h1>' + esc(p.title) + '</h1>\n' +
+'      <p class="cms-lead">' + esc(p.description) + '</p>\n' +
+'      <div class="cms-meta">\n' +
+'        <span>' + esc(p.author || 'Linh Osimi') + '</span><span class="dot">·</span>\n' +
+'        <span>' + esc(prettyDate(p.date)) + '</span><span class="dot">·</span>\n' +
+'        <span data-reading-time>…</span>\n' +
+'      </div>\n' +
+coverBlock +
+'    </header>\n' +
+'\n' +
+'    <div class="cms-layout">\n' +
+'      <article class="cms-post" id="article-content">\n' +
+p.content + '\n' +
+'      </article>\n' +
+'      <aside class="cms-toc" aria-label="Mục lục bài viết">\n' +
+'        <p class="label">Mục lục</p>\n' +
+'        <ol id="article-toc"></ol>\n' +
+'      </aside>\n' +
+'    </div>\n' +
+'\n' +
+(tagList ? '    <ul class="cms-tags">' + tagList + '</ul>\n' : '') +
+'    <nav class="cms-pager article-pager" aria-label="Điều hướng bài viết"></nav>\n' +
+'\n' +
+'    <section class="cms-related">\n' +
+'      <h2>Bài khác cùng mục</h2>\n' +
+'      <div class="related-grid"></div>\n' +
+'    </section>\n' +
+'  </main>\n' +
+'\n' +
+'  <footer class="cms-footer">\n' +
+'    <p>© <span id="current-year">2026</span> Linh Osimi · ' + esc(meta.label) + '</p>\n' +
+'    <a href="#" onclick="window.scrollTo({top:0,behavior:\'smooth\'});return false">Lên đầu trang ↑</a>\n' +
+'  </footer>\n' +
+'</body>\n' +
+'</html>\n';
+  }
+
+  /* ─────────── Tra cứu danh mục theo mục ─────────── */
+  var CATEGORY_MAP = {
+    kienthuc:  KNOWLEDGE_CATEGORIES,
+    khoahoc:   SCIENCE_CATEGORIES,
+    blog:      BLOG_CATEGORIES,
+    game:      GAME_CATEGORIES,
+    manga:     MANGA_CATEGORIES,
+    nghethuat: ART_CATEGORIES,
+    phim:      FILM_CATEGORIES
+  };
+
+  function categoriesFor(section) {
+    return CATEGORY_MAP[section] || KNOWLEDGE_CATEGORIES;
+  }
+
+  /* ─────────── Thư mục lưu bài của từng mục ─────────── */
+  var PATH_MAP = {
+    kienthuc:  'kienthuc/articles/blog/',
+    khoahoc:   'khoa-hoc0/bai-viet/',
+    blog:      'blog/bai-viet/',
+    game:      'game0/bai-viet/',
+    manga:     'manga0/bai-viet/',
+    nghethuat: 'nghe-thuat0/bai-viet/',
+    phim:      'phim0/bai-viet/'
+  };
+
+  /* ─────────── Tên hiển thị và tiền tố id ─────────── */
+  var SECTION_LABELS = {
+    kienthuc:  'Kiến thức',
+    khoahoc:   'Khoa học',
+    blog:      'Blog',
+    game:      'Game',
+    manga:     'Manga',
+    nghethuat: 'Nghệ thuật',
+    phim:      'Phim'
+  };
+
+  var ID_PREFIX = {
+    kienthuc:  'kt-',
+    khoahoc:   'kh-',
+    blog:      'bl-',
+    game:      'gm-',
+    manga:     'mg-',
+    nghethuat: 'nt-',
+    phim:      'pm-'
+  };
+
+  var DEFAULT_COVERS = {
+    kienthuc:  DEFAULT_COVER_KT,
+    khoahoc:   DEFAULT_COVER_KH,
+    blog:      '',
+    game:      'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=70',
+    manga:     'https://images.unsplash.com/photo-1613376023733-0a73315d9b06?auto=format&fit=crop&w=1200&q=70',
+    nghethuat: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=70',
+    phim:      'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=70'
+  };
+
   /* ─────────── Xuất ra ngoài ─────────── */
   global.CMSTemplates = {
     KNOWLEDGE_CATEGORIES: KNOWLEDGE_CATEGORIES,
     SCIENCE_CATEGORIES: SCIENCE_CATEGORIES,
     BLOG_CATEGORIES: BLOG_CATEGORIES,
+    GAME_CATEGORIES: GAME_CATEGORIES,
+    MANGA_CATEGORIES: MANGA_CATEGORIES,
+    ART_CATEGORIES: ART_CATEGORIES,
+    FILM_CATEGORIES: FILM_CATEGORIES,
+
+    SECTIONS: ['kienthuc', 'khoahoc', 'blog', 'game', 'manga', 'nghethuat', 'phim'],
+    SECTION_LABELS: SECTION_LABELS,
+    ID_PREFIX: ID_PREFIX,
+
     slugify: slugify,
     escapeHtml: esc,
     prettyDate: prettyDate,
+
+    sectionLabel: function (section) {
+      return SECTION_LABELS[section] || section || 'Kiến thức';
+    },
+    idPrefix: function (section) {
+      return ID_PREFIX[section] || 'kt-';
+    },
     defaultCover: function (section) {
-      if (section === 'khoahoc') return DEFAULT_COVER_KH;
-      if (section === 'blog') return '';   /* blog cho phép bài không có ảnh */
-      return DEFAULT_COVER_KT;
+      var v = DEFAULT_COVERS[section];
+      return v === undefined ? DEFAULT_COVER_KT : v;
     },
-    /* Thư mục lưu bài theo từng mục */
     articlePath: function (section, slug) {
-      if (section === 'khoahoc') return 'khoa-hoc0/bai-viet/' + slug + '.html';
-      if (section === 'blog') return 'blog/bai-viet/' + slug + '.html';
-      return 'kienthuc/articles/blog/' + slug + '.html';
+      return (PATH_MAP[section] || PATH_MAP.kienthuc) + slug + '.html';
     },
-    categoriesOf: function (section) {
-      if (section === 'khoahoc') return SCIENCE_CATEGORIES;
-      if (section === 'blog') return BLOG_CATEGORIES;
-      return KNOWLEDGE_CATEGORIES;
-    },
+    categoriesOf: categoriesFor,
+
     render: function (post) {
       if (post.section === 'khoahoc') return khoahocArticle(post);
       if (post.section === 'blog') return blogArticle(post);
+      if (MEDIA_META[post.section]) return mediaArticle(post);
       return kienthucArticle(post);
     }
   };

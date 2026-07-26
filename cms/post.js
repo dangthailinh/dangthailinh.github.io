@@ -30,7 +30,13 @@
       .replace(/(^-|-$)/g, '');
   }
 
-  /* ─────────── Phần dùng chung cho mục Khoa học ─────────── */
+  /* Các mục tự dựng mục lục, thời gian đọc, thanh tiến độ.
+     Riêng Kiến thức đã có article.js lo phần này. */
+  var SELF_MANAGED = {
+    khoahoc: 1, blog: 1, game: 1, manga: 1, nghethuat: 1, phim: 1
+  };
+
+  /* ─────────── Phần dùng chung ─────────── */
   function buildToc() {
     var tocList = document.querySelector('#article-toc');
     if (!tocList || !post) return 0;
@@ -47,7 +53,7 @@
       tocList.appendChild(li);
     });
     if (!headings.length) {
-      var card = document.querySelector('.sci-toc');
+      var card = document.querySelector('.sci-toc') || document.querySelector('.cms-toc');
       if (card) card.hidden = true;
     }
     return headings.length;
@@ -123,25 +129,32 @@
       });
     }
 
-    var CARD_CLASS = { khoahoc: 'sci-related-card', blog: 'log-related-card', kienthuc: 'related-card' };
+    var CARD_CLASS = {
+      khoahoc: 'sci-related-card',
+      blog: 'log-related-card',
+      kienthuc: 'related-card',
+      game: 'cms-related-card',
+      manga: 'cms-related-card',
+      nghethuat: 'cms-related-card',
+      phim: 'cms-related-card'
+    };
 
     if (grid && related.length) {
       related.forEach(function (p) {
         var a = document.createElement('a');
         a.className = CARD_CLASS[mode] || 'related-card';
         a.href = p.url;
-        if (mode === 'khoahoc') {
-          a.innerHTML = '<img src="' + esc(p.cover) + '" alt="" loading="lazy"><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p>';
-        } else if (mode === 'blog') {
+        if (mode === 'kienthuc') {
+          a.innerHTML = '<span>✦</span><small>Bài mới</small><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p><b>Đọc bài ↗</b>';
+        } else {
           a.innerHTML = (p.cover ? '<img src="' + esc(p.cover) + '" alt="" loading="lazy">' : '') +
             '<h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p>';
-        } else {
-          a.innerHTML = '<span>✦</span><small>Bài mới</small><h3>' + esc(p.title) + '</h3><p>' + esc(p.description) + '</p><b>Đọc bài ↗</b>';
         }
         grid.appendChild(a);
       });
     } else if (grid) {
-      var section = grid.closest('.related-section') || grid.closest('.sci-related') || grid.closest('.log-related');
+      var section = grid.closest('.related-section') || grid.closest('.sci-related') ||
+                    grid.closest('.log-related') || grid.closest('.cms-related');
       if (section) section.hidden = true;
     }
   }
@@ -156,10 +169,17 @@
     return a;
   }
 
+  /* Bản nháp không bao giờ hiện; bài hẹn đăng chỉ hiện khi đã tới ngày */
+  function isLive(p) {
+    var status = p.status || 'published';
+    if (status === 'draft') return false;
+    if (status === 'scheduled') return String(p.date || '') <= new Date().toISOString().slice(0, 10);
+    return true;
+  }
+
   /* ─────────── Chạy ─────────── */
   function run() {
-    /* Trang Kiến thức đã có article.js lo phần này; hai mục còn lại tự dựng. */
-    if (mode === 'khoahoc' || mode === 'blog') {
+    if (SELF_MANAGED[mode]) {
       buildToc();
       readingTime();
       progressBar();
@@ -169,7 +189,7 @@
     fetch('/data/posts.json?v=' + Math.floor(Date.now() / 60000))
       .then(function (r) { return r.ok ? r.json() : { posts: [] }; })
       .then(function (db) {
-        var posts = (db && Array.isArray(db.posts)) ? db.posts : [];
+        var posts = (db && Array.isArray(db.posts)) ? db.posts.filter(isLive) : [];
         if (posts.length) linkPosts(posts);
       })
       .catch(function () { /* offline thì bỏ qua */ });

@@ -423,8 +423,17 @@ function toTimelinePost(entry) {
 fetch(`/data/posts.json?v=${Math.floor(Date.now() / 60000)}`)
   .then((res) => (res.ok ? res.json() : { posts: [] }))
   .then((db) => {
+    const today = new Date().toISOString().slice(0, 10);
+    const isLive = (entry) => {
+      const status = entry.status || "published";
+      if (status === "draft") return false;                     // nháp không hiện
+      if (status === "scheduled") return (entry.date || "") <= today;
+      return true;
+    };
+
     const incoming = (db && Array.isArray(db.posts) ? db.posts : [])
       .filter((entry) => entry.section === "blog")
+      .filter(isLive)
       .filter((entry) => !POSTS.some((existing) => existing.id === entry.id))
       .map(toTimelinePost);
 

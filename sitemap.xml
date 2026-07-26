@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Sitemap cho dangthailinh.github.io
-  Liệt kê các trang chính. Bài viết mới đăng qua /admin không cần thêm vào đây
-  vì Google sẽ tìm thấy chúng qua trang danh sách của từng mục.
--->
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- ─── Trang chủ ─── -->
