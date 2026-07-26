@@ -1,6 +1,10 @@
 /* ═══════════ Trang bài viết mục Khoa học ═══════════
    Dùng đúng bảng màu trong /khoa-hoc0/science.css để bài mới
-   trông liền mạch với các trang Khoa học sẵn có. */
+   trông liền mạch với các trang Khoa học sẵn có.
+
+   Cỡ chữ, khoảng cách, bề ngang trang lấy từ /cms/tokens.css. */
+@import url("/cms/tokens.css");
+
 :root{
   --science-ink:#10091f;
   --science-paper:#f5f9e9;
@@ -37,33 +41,18 @@ a{color:var(--science-blue-dark)}
   transition:width .1s linear
 }
 
-/* ─── Đầu trang ─── */
-.sci-header{
-  position:sticky;top:0;z-index:1000;
-  display:flex;align-items:center;gap:26px;flex-wrap:wrap;
-  min-height:70px;padding:12px clamp(18px,4.5vw,72px);
-  background:var(--science-white);
-  border-bottom:2px solid var(--science-ink)
+/* Thanh điều hướng dùng chung nằm ở /cms/site-nav.css.
+   Ở mục Khoa học ta cho nó viền đen dày cho khớp phong cách trang. */
+[data-site-nav]{--sn-bg:var(--science-white)}
+.sn-bar{border-bottom:2px solid var(--science-ink)}
+.sn-mark{
+  border-radius:50%;background:var(--science-lime);
+  color:var(--science-ink);border:2px solid var(--science-ink);
 }
-.sci-brand{
-  display:flex;align-items:center;gap:11px;text-decoration:none;
-  color:var(--science-ink);font:700 20px/1 var(--science-sans);letter-spacing:-.01em
-}
-.sci-brand .orb{
-  width:38px;height:38px;flex-shrink:0;border-radius:50%;
-  display:grid;place-items:center;font-size:18px;
-  background:var(--science-lime);border:2px solid var(--science-ink)
-}
-.sci-nav{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;font-size:14px}
-.sci-nav a{
-  padding:7px 14px;border-radius:30px;text-decoration:none;
-  color:var(--science-ink);border:1.5px solid transparent;transition:.2s
-}
-.sci-nav a:hover{border-color:var(--science-ink);background:var(--science-white)}
-.sci-nav a.active{background:var(--science-lime);border-color:var(--science-ink);font-weight:700}
+.sn-desktop a.is-active{background:var(--science-lime);border-color:var(--science-ink)}
 
 /* ─── Khung chính ─── */
-.sci-main{max-width:1120px;margin:0 auto;padding:32px clamp(16px,4vw,40px) 72px}
+.sci-main{max-width:var(--page-max,1120px);margin:0 auto;padding:32px var(--page-pad,clamp(16px,4vw,40px)) 72px}
 .sci-crumbs{margin:0 0 22px;font-size:14px;color:var(--science-muted)}
 .sci-crumbs a{color:var(--science-blue-dark);text-decoration:none;font-weight:600}
 .sci-crumbs a:hover{text-decoration:underline}
@@ -155,7 +144,7 @@ a{color:var(--science-blue-dark)}
 
 /* ─── Mục lục ─── */
 .sci-toc{
-  position:sticky;top:92px;padding:20px;
+  position:sticky;top:calc(var(--header-h,64px) + 22px);padding:20px;
   background:var(--science-white);border:2px solid var(--science-ink);
   border-radius:var(--science-radius);box-shadow:5px 6px 0 rgba(16,9,31,.09);
   max-height:calc(100vh - 130px);overflow-y:auto
@@ -209,16 +198,48 @@ a{color:var(--science-blue-dark)}
 }
 .sci-footer a{display:inline-block;margin-top:9px;color:var(--science-blue-dark);text-decoration:none;font-weight:600}
 
-/* ─── Màn hình nhỏ ─── */
+/* ═══════════ MÀN HÌNH NHỎ ═══════════ */
 @media (max-width:940px){
-  .sci-layout{grid-template-columns:1fr}
-  .sci-toc{position:static;max-height:none;order:-1}
-  .sci-hero{padding:24px 20px 20px}
-  .sci-main{padding:22px 15px 50px}
+  .sci-layout{grid-template-columns:1fr;gap:var(--gap,20px)}
+  .sci-toc{position:static;max-height:none;order:-1;padding:16px 18px}
+  .sci-toc ol{columns:2;column-gap:24px}
   .sci-pager{grid-template-columns:1fr}
   .sci-pager .pager-link.next{text-align:left}
-  .sci-nav{gap:5px;font-size:13px;width:100%;margin-left:0}
-  .sci-nav a{padding:6px 11px}
+}
+
+@media (max-width:640px){
+  .sci-hero{padding:20px 16px 18px}
+  .sci-main{padding:18px var(--page-pad,15px) 44px}
+  .sci-toc ol{columns:1}
+
+  /* Ảnh, bảng, khối code tràn viền cho rộng chỗ đọc */
+  .sci-post figure{
+    margin-left:calc(var(--page-pad,15px) * -1);
+    margin-right:calc(var(--page-pad,15px) * -1);
+    border-radius:0;border-left:0;border-right:0;padding:6px 6px 2px;
+    box-shadow:none;
+  }
+  .sci-post figure img{border-radius:6px}
+  .table-scroll{
+    margin-left:calc(var(--page-pad,15px) * -1);
+    margin-right:calc(var(--page-pad,15px) * -1);
+    border-radius:0;border-left:0;border-right:0;
+  }
+  .sci-post pre{
+    margin-left:calc(var(--page-pad,15px) * -1);
+    margin-right:calc(var(--page-pad,15px) * -1);
+    border-radius:0;padding:16px var(--page-pad,15px);font-size:12.5px;
+  }
+  .sci-post blockquote{padding:14px 18px;font-size:16.5px}
+  .sci-post h2{margin-top:38px}
+  .sci-related .related-grid{grid-template-columns:1fr}
+  .sci-cover img{max-height:260px}
+  .sci-hero,.sci-toc,.sci-pager .pager-link,.sci-related-card{box-shadow:3px 4px 0 rgba(16,9,31,.09)}
+}
+
+@media (pointer:coarse){
+  .sci-toc a{display:block;padding:6px 0}
+  .sci-tags span{padding:8px 15px}
 }
 
 :focus-visible{outline:3px solid var(--science-blue);outline-offset:3px}

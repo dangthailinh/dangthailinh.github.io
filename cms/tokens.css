@@ -1,0 +1,258 @@
+/* ══════════════════════════════════════════════════════════════════════
+   cms/tokens.css — BẢNG ĐIỀU KHIỂN GIAO DIỆN CỦA CẢ SITE
+
+   Đây là nơi duy nhất cần sửa khi muốn đổi màu, cỡ chữ hay khoảng cách
+   của bất kỳ mục nào. Không cần đụng vào file CSS của từng trang.
+
+   ┌─ Muốn đổi màu nhấn của mục Game?  → sửa --game-accent bên dưới
+   ├─ Muốn chữ bài viết to hơn?        → sửa --fs-body
+   ├─ Muốn bo góc mềm hơn?             → sửa --radius
+   └─ Muốn đổi phông tiêu đề?          → sửa --font-display
+
+   Cách dùng trong file CSS khác:
+       @import url("/cms/tokens.css");
+       body[data-section="game"] { color: var(--text); }
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root{
+
+  /* ─────────────────────────────────────────────────────────
+     1. CHỮ  —  đổi ở đây là đổi toàn site
+     ───────────────────────────────────────────────────────── */
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-display:"Space Grotesk","Inter",system-ui,sans-serif;
+  --font-serif:Georgia,"Times New Roman",serif;
+  --font-mono:Consolas,Monaco,"Courier New",monospace;
+
+  /* Cỡ chữ bài viết. clamp(nhỏ-nhất, co-giãn, lớn-nhất) */
+  --fs-body:16.5px;                       /* chữ thường trong bài   */
+  --fs-lead:clamp(16px,2.2vw,17.5px);     /* câu mô tả dưới tiêu đề */
+  --fs-h1:clamp(27px,5vw,44px);           /* tiêu đề bài            */
+  --fs-h2:clamp(22px,3.6vw,31px);
+  --fs-h3:clamp(19px,2.6vw,21px);
+  --fs-h4:17.5px;
+  --fs-small:13.5px;
+  --fs-tiny:12.5px;
+
+  --lh-body:1.85;      /* giãn dòng phần nội dung */
+  --lh-head:1.22;      /* giãn dòng tiêu đề       */
+
+  /* ─────────────────────────────────────────────────────────
+     2. KHOẢNG CÁCH & HÌNH KHỐI
+     ───────────────────────────────────────────────────────── */
+  --radius:16px;
+  --radius-sm:10px;
+  --radius-lg:22px;
+
+  --gap:20px;
+  --gap-sm:12px;
+  --gap-lg:38px;
+
+  /* Bề ngang tối đa của phần đọc và lề hai bên.
+     Lề tự co trên điện thoại nên không cần media query riêng. */
+  --page-max:1120px;
+  --page-pad:clamp(14px,4vw,40px);
+  --read-max:70ch;
+
+  /* Chiều cao thanh đầu trang — dùng cho sticky và scroll-margin */
+  --header-h:64px;
+
+  /* ─────────────────────────────────────────────────────────
+     3. MÀU THEO TỪNG MỤC
+     Mỗi mục có 6 biến. Đổi 1 dòng là đổi cả mục đó.
+     ───────────────────────────────────────────────────────── */
+
+  /* ── Khoa học · giấy lime, mực tím than, nhấn xanh ── */
+  --khoahoc-bg:#f5f9e9;
+  --khoahoc-surface:#fffef8;
+  --khoahoc-text:#10091f;
+  --khoahoc-muted:#696977;
+  --khoahoc-accent:#2c98c5;
+  --khoahoc-accent-2:#d8ef74;
+  --khoahoc-line:rgba(16,9,31,.16);
+
+  /* ── Kiến thức · giấy ngà, mực nâu đất ── */
+  --kienthuc-bg:#f4efe4;
+  --kienthuc-surface:#fffdf8;
+  --kienthuc-text:#2b2620;
+  --kienthuc-muted:#7c7264;
+  --kienthuc-accent:#b4552d;
+  --kienthuc-accent-2:#e8dbc6;
+  --kienthuc-line:#e0d7c6;
+
+  /* ── Blog · giấy cũ, olive ── */
+  --blog-bg:#f7f0e6;
+  --blog-surface:#fffaf0;
+  --blog-text:#5c1c12;
+  --blog-muted:#8d5045;
+  --blog-accent:#73773c;
+  --blog-accent-2:#fff7d6;
+  --blog-line:rgba(92,28,18,.25);
+
+  /* ── Game · đen arcade, neon xanh lá ── */
+  --game-bg:#05070a;
+  --game-surface:rgba(0,255,153,.045);
+  --game-text:#d4e6dd;
+  --game-muted:#7e9a8e;
+  --game-accent:#00ff99;
+  --game-accent-2:#00b36b;
+  --game-line:rgba(0,255,153,.18);
+
+  /* ── Manga · mực đen, đỏ ── */
+  --manga-bg:#08080a;
+  --manga-surface:rgba(255,60,70,.05);
+  --manga-text:#dcd8d6;
+  --manga-muted:#95898a;
+  --manga-accent:#ff4d5a;
+  --manga-accent-2:#c02b38;
+  --manga-line:rgba(255,80,90,.2);
+
+  /* ── Nghệ thuật · giấy vẽ, nâu đỏ ── */
+  --nghethuat-bg:#f3ece0;
+  --nghethuat-surface:rgba(255,255,255,.62);
+  --nghethuat-text:#33291f;
+  --nghethuat-muted:#7d6d59;
+  --nghethuat-accent:#a8603a;
+  --nghethuat-accent-2:#e3d3bd;
+  --nghethuat-line:rgba(90,66,45,.22);
+
+  /* ── Phim · rạp tối, vàng đèn ── */
+  --phim-bg:#0b0906;
+  --phim-surface:rgba(255,193,90,.05);
+  --phim-text:#e5ddd0;
+  --phim-muted:#a1927c;
+  --phim-accent:#ffc15a;
+  --phim-accent-2:#c99133;
+  --phim-line:rgba(255,193,90,.2);
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   ÁNH XẠ  —  gán bộ màu của mục vào biến chung.
+   Nhờ đoạn này, file CSS bài viết chỉ cần dùng var(--bg), var(--accent)…
+   mà không quan tâm đang ở mục nào.
+   ══════════════════════════════════════════════════════════════════════ */
+
+body[data-section]{
+  --bg:var(--kienthuc-bg);
+  --surface:var(--kienthuc-surface);
+  --text:var(--kienthuc-text);
+  --muted:var(--kienthuc-muted);
+  --accent:var(--kienthuc-accent);
+  --accent-2:var(--kienthuc-accent-2);
+  --line:var(--kienthuc-line);
+}
+
+body[data-section="khoahoc"]{
+  --bg:var(--khoahoc-bg);        --surface:var(--khoahoc-surface);
+  --text:var(--khoahoc-text);    --muted:var(--khoahoc-muted);
+  --accent:var(--khoahoc-accent);--accent-2:var(--khoahoc-accent-2);
+  --line:var(--khoahoc-line);
+  --font-display:"Trebuchet MS","Segoe UI",Arial,sans-serif;
+  --font-body:"Trebuchet MS","Segoe UI",Arial,sans-serif;
+}
+
+body[data-section="kienthuc"]{
+  --bg:var(--kienthuc-bg);        --surface:var(--kienthuc-surface);
+  --text:var(--kienthuc-text);    --muted:var(--kienthuc-muted);
+  --accent:var(--kienthuc-accent);--accent-2:var(--kienthuc-accent-2);
+  --line:var(--kienthuc-line);
+  --font-display:Lora,Georgia,serif;
+  --font-body:"Be Vietnam Pro",system-ui,sans-serif;
+}
+
+body[data-section="blog"]{
+  --bg:var(--blog-bg);        --surface:var(--blog-surface);
+  --text:var(--blog-text);    --muted:var(--blog-muted);
+  --accent:var(--blog-accent);--accent-2:var(--blog-accent-2);
+  --line:var(--blog-line);
+  --font-display:"Comic Sans MS","Segoe Print",cursive;
+  --font-body:"Courier New",Courier,monospace;
+}
+
+body[data-section="game"]{
+  --bg:var(--game-bg);        --surface:var(--game-surface);
+  --text:var(--game-text);    --muted:var(--game-muted);
+  --accent:var(--game-accent);--accent-2:var(--game-accent-2);
+  --line:var(--game-line);
+  --font-display:"Orbitron","Space Grotesk",system-ui,sans-serif;
+}
+
+body[data-section="manga"]{
+  --bg:var(--manga-bg);        --surface:var(--manga-surface);
+  --text:var(--manga-text);    --muted:var(--manga-muted);
+  --accent:var(--manga-accent);--accent-2:var(--manga-accent-2);
+  --line:var(--manga-line);
+}
+
+body[data-section="nghethuat"]{
+  --bg:var(--nghethuat-bg);        --surface:var(--nghethuat-surface);
+  --text:var(--nghethuat-text);    --muted:var(--nghethuat-muted);
+  --accent:var(--nghethuat-accent);--accent-2:var(--nghethuat-accent-2);
+  --line:var(--nghethuat-line);
+  --font-display:Lora,Georgia,serif;
+  --font-body:"Be Vietnam Pro",system-ui,sans-serif;
+}
+
+body[data-section="phim"]{
+  --bg:var(--phim-bg);        --surface:var(--phim-surface);
+  --text:var(--phim-text);    --muted:var(--phim-muted);
+  --accent:var(--phim-accent);--accent-2:var(--phim-accent-2);
+  --line:var(--phim-line);
+}
+
+/* Mục nền sáng cần đổ bóng, nền code và viền khác mục nền tối */
+body[data-section="khoahoc"],
+body[data-section="kienthuc"],
+body[data-section="blog"],
+body[data-section="nghethuat"]{
+  --is-light:1;
+  --shadow:5px 6px 0 rgba(0,0,0,.09);
+  --shadow-lift:6px 9px 0 rgba(0,0,0,.14);
+  --code-bg:#2c2a27;          /* khối code vẫn nền tối cho dễ đọc */
+  --code-text:#eee8de;
+}
+body[data-section="game"],
+body[data-section="manga"],
+body[data-section="phim"]{
+  --is-light:0;
+  --shadow:0 12px 32px rgba(0,0,0,.35);
+  --shadow-lift:0 18px 44px rgba(0,0,0,.45);
+  --code-bg:#0b0e13;
+  --code-text:var(--text);
+}
+
+/* ─────────────────────────────────────────────────────────
+   Tên gọi cũ — giữ để các file CSS viết trước vẫn chạy
+   ───────────────────────────────────────────────────────── */
+body[data-section]{
+  --bg-soft:var(--surface);
+  --head:var(--text);
+  --font-head:var(--font-display);
+}
+
+/* ─────────────────────────────────────────────────────────
+   ĐIỆN THOẠI  —  chỉ cần chỉnh vài biến, không phải viết lại
+   từng quy tắc CSS cho màn hình nhỏ.
+   ───────────────────────────────────────────────────────── */
+@media (max-width:640px){
+  :root{
+    --fs-body:16px;
+    --lh-body:1.78;
+    --radius:13px;
+    --radius-lg:16px;
+    --gap:14px;
+    --gap-lg:26px;
+    --header-h:56px;
+  }
+}
+
+/* Người dùng bật chế độ giảm chuyển động thì tắt hết hiệu ứng */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}

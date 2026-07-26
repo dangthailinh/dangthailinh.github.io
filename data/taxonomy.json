@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-26T00:00:00.000Z",
+  "_help": "Danh sach chu de con cua tung muc. Quan ly bang tab 'Chu de' trong /admin. Xoa key 'khac' se lam bai cu khong tim thay chu de, nen giu lai.",
+  "sections": {
+    "kienthuc": [
+      { "key": "devops",      "label": "DevOps căn bản",        "symbol": "⌁" },
+      { "key": "aws",         "label": "AWS & dịch vụ Cloud",   "symbol": "☁" },
+      { "key": "ai",          "label": "AI & Machine Learning", "symbol": "✺" },
+      { "key": "programming", "label": "Lập trình từ nền tảng", "symbol": "{ }" },
+      { "key": "web",         "label": "Web & hiệu năng",       "symbol": "◎" },
+      { "key": "khac",        "label": "Ghi chép khác",         "symbol": "✦" }
+    ],
+    "khoahoc": [
+      { "key": "vu-tru",    "label": "Vũ trụ & Thiên văn", "symbol": "🌌" },
+      { "key": "luong-tu",  "label": "Vật lý & Lượng tử",  "symbol": "⚛️" },
+      { "key": "sinh-hoc",  "label": "Sinh học & Sự sống", "symbol": "🧬" },
+      { "key": "cong-nghe", "label": "Công nghệ & AI",     "symbol": "🤖" },
+      { "key": "bi-an",     "label": "Bí ẩn & Fact",       "symbol": "🔍" },
+      { "key": "khac",      "label": "Khoa học khác",      "symbol": "🔬" }
+    ],
+    "blog": [
+      { "key": "life",    "label": "Đời sống", "symbol": "☕" },
+      { "key": "photo",   "label": "Ảnh",      "symbol": "✿" },
+      { "key": "video",   "label": "Video",    "symbol": "▶" },
+      { "key": "thought", "label": "Suy nghĩ", "symbol": "✎" }
+    ],
+    "game": [
+      { "key": "review",  "label": "Review game",     "symbol": "🎮" },
+      { "key": "guide",   "label": "Hướng dẫn · Mẹo", "symbol": "🗺" },
+      { "key": "news",    "label": "Tin tức",         "symbol": "📰" },
+      { "key": "ranking", "label": "Bảng xếp hạng",   "symbol": "🏆" },
+      { "key": "indie",   "label": "Game indie",      "symbol": "💎" },
+      { "key": "khac",    "label": "Khác",            "symbol": "✦" }
+    ],
+    "manga": [
+      { "key": "review",    "label": "Review truyện",      "symbol": "📖" },
+      { "key": "character", "label": "Phân tích nhân vật", "symbol": "👤" },
+      { "key": "theory",    "label": "Giả thuyết",         "symbol": "🔮" },
+      { "key": "seinen",    "label": "Seinen · Dark",      "symbol": "🌑" },
+      { "key": "shonen",    "label": "Shonen",             "symbol": "⚡" },
+      { "key": "khac",      "label": "Khác",               "symbol": "✦" }
+    ],
+    "nghethuat": [
+      { "key": "classic", "label": "Cổ điển",       "symbol": "🏛" },
+      { "key": "modern",  "label": "Hiện đại",      "symbol": "🎨" },
+      { "key": "digital", "label": "Nghệ thuật số", "symbol": "🖥" },
+      { "key": "dark",    "label": "Dark art",      "symbol": "🕯" },
+      { "key": "photo",   "label": "Nhiếp ảnh",     "symbol": "📷" },
+      { "key": "khac",    "label": "Khác",          "symbol": "✦" }
+    ],
+    "phim": [
+      { "key": "analysis",  "label": "Phân tích",  "symbol": "🔍" },
+      { "key": "review",    "label": "Review phim", "symbol": "🎬" },
+      { "key": "list",      "label": "Tuyển chọn",  "symbol": "📋" },
+      { "key": "character", "label": "Nhân vật",    "symbol": "👤" },
+      { "key": "essay",     "label": "Tiểu luận",   "symbol": "✍" },
+      { "key": "khac",      "label": "Khác",        "symbol": "✦" }
+    ]
+  }
+}

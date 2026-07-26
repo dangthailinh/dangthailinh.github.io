@@ -242,23 +242,15 @@ p.content + '\n' +
 '  <meta property="og:image" content="' + esc(cover) + '">\n' +
 '  <title>' + esc(p.title) + ' — Khoa học · Linh OSIMI</title>\n' +
 '  <link rel="icon" type="image/png" href="/favicon.png?v=2">\n' +
+'  <link rel="stylesheet" href="/cms/site-nav.css">\n' +
 '  <link rel="stylesheet" href="/khoa-hoc0/bai-viet/post.css">\n' +
+'  <script src="/cms/site-nav.js" defer></script>\n' +
 '  <script src="/cms/post.js" defer></script>\n' +
 '</head>\n' +
-'<body data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="khoahoc">\n' +
+'<body data-section="khoahoc" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="khoahoc">\n' +
 '  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
 '\n' +
-'  <header class="sci-header">\n' +
-'    <a class="sci-brand" href="/index.html"><span class="orb">⚛️</span><span>Linh OSIMI</span></a>\n' +
-'    <nav class="sci-nav">\n' +
-'      <a class="active" href="/khoa-hoc0/0/khoa-hoc.html">Khoa Học</a>\n' +
-'      <a href="/nghe-thuat0/nghe-thuat.html">Nghệ Thuật</a>\n' +
-'      <a href="/phim0/0/phim.html">Phim</a>\n' +
-'      <a href="/manga0/0/truyen-manga.html">Manga</a>\n' +
-'      <a href="/game0/0/game.html">Game</a>\n' +
-'      <a href="/kienthuc/index.html">Kiến thức</a>\n' +
-'    </nav>\n' +
-'  </header>\n' +
+'  <div data-site-nav="khoahoc"></div>\n' +
 '\n' +
 '  <main class="sci-main">\n' +
 '    <p class="sci-crumbs"><a href="/khoa-hoc0/0/khoa-hoc.html">← Khoa học</a></p>\n' +
@@ -443,27 +435,15 @@ p.content + '\n' +
 '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
 '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
 '  <link href="https://fonts.googleapis.com/css2?' + fonts + '&display=swap" rel="stylesheet">\n' +
+'  <link rel="stylesheet" href="/cms/site-nav.css">\n' +
 '  <link rel="stylesheet" href="/cms/article.css">\n' +
+'  <script src="/cms/site-nav.js" defer></script>\n' +
 '  <script src="/cms/post.js" defer></script>\n' +
 '</head>\n' +
 '<body data-section="' + esc(p.section) + '" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="' + esc(p.section) + '">\n' +
 '  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
 '\n' +
-'  <header class="cms-header">\n' +
-'    <a class="cms-brand" href="/index.html">\n' +
-'      <span class="mark" aria-hidden="true">' + esc(cat.symbol) + '</span>\n' +
-'      <span>Linh Osimi</span>\n' +
-'    </a>\n' +
-'    <nav class="cms-nav" aria-label="Điều hướng chính">\n' +
-'      <a href="/khoa-hoc0/0/khoa-hoc.html">Khoa học</a>\n' +
-'      <a' + (p.section === 'nghethuat' ? ' class="active"' : '') + ' href="/nghe-thuat0/nghe-thuat.html">Nghệ thuật</a>\n' +
-'      <a' + (p.section === 'phim' ? ' class="active"' : '') + ' href="/phim0/0/phim.html">Phim</a>\n' +
-'      <a' + (p.section === 'manga' ? ' class="active"' : '') + ' href="/manga0/0/truyen-manga.html">Manga</a>\n' +
-'      <a' + (p.section === 'game' ? ' class="active"' : '') + ' href="/game0/0/game.html">Game</a>\n' +
-'      <a href="/kienthuc/index.html">Kiến thức</a>\n' +
-'      <a href="/blog/index.html">Blog</a>\n' +
-'    </nav>\n' +
-'  </header>\n' +
+'  <div data-site-nav="' + esc(p.section) + '"></div>\n' +
 '\n' +
 '  <main class="cms-main">\n' +
 '    <p class="cms-crumbs"><a href="' + meta.home + '">' + esc(meta.back) + '</a><span>/</span>' + esc(cat.label) + '</p>\n' +
@@ -518,8 +498,38 @@ p.content + '\n' +
     phim:      FILM_CATEGORIES
   };
 
+  /* Danh sách chủ đề nạp từ /data/taxonomy.json khi trang khởi động.
+     Nếu chưa nạp được thì dùng bản mặc định ở trên làm dự phòng, nên
+     bảng quản trị vẫn chạy được kể cả khi file dữ liệu lỗi. */
+  var liveTaxonomy = null;
+
+  function setTaxonomy(data) {
+    if (!data || !data.sections) return;
+    var out = {};
+    Object.keys(data.sections).forEach(function (section) {
+      var list = data.sections[section];
+      if (!Array.isArray(list)) return;
+      var map = {};
+      list.forEach(function (c) {
+        if (!c || !c.key) return;
+        map[c.key] = { label: c.label || c.key, symbol: c.symbol || '✦' };
+      });
+      if (Object.keys(map).length) out[section] = map;
+    });
+    liveTaxonomy = out;
+  }
+
   function categoriesFor(section) {
+    if (liveTaxonomy && liveTaxonomy[section]) return liveTaxonomy[section];
     return CATEGORY_MAP[section] || KNOWLEDGE_CATEGORIES;
+  }
+
+  /* Trả về danh sách dạng mảng, giữ đúng thứ tự để hiện trong tab Chủ đề */
+  function categoryList(section) {
+    var map = categoriesFor(section);
+    return Object.keys(map).map(function (key) {
+      return { key: key, label: map[key].label, symbol: map[key].symbol };
+    });
   }
 
   /* ─────────── Thư mục lưu bài của từng mục ─────────── */
@@ -596,6 +606,19 @@ p.content + '\n' +
       return (PATH_MAP[section] || PATH_MAP.kienthuc) + slug + '.html';
     },
     categoriesOf: categoriesFor,
+    categoryList: categoryList,
+    setTaxonomy: setTaxonomy,
+    defaultTaxonomy: function () {
+      /* Dùng khi repo chưa có data/taxonomy.json — sinh ra bản đầu tiên */
+      var out = { version: 1, updatedAt: new Date().toISOString(), sections: {} };
+      Object.keys(CATEGORY_MAP).forEach(function (section) {
+        var map = CATEGORY_MAP[section];
+        out.sections[section] = Object.keys(map).map(function (key) {
+          return { key: key, label: map[key].label, symbol: map[key].symbol };
+        });
+      });
+      return out;
+    },
 
     render: function (post) {
       if (post.section === 'khoahoc') return khoahocArticle(post);

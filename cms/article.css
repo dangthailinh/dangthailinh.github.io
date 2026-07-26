@@ -6,75 +6,9 @@
    nhưng dùng chung toàn bộ bố cục nên chỉ cần bảo trì một file.
    ══════════════════════════════════════════════════════════════ */
 
-/* ─────────── Bảng màu mặc định ─────────── */
-:root{
-  --bg:#0d0f14;
-  --bg-soft:rgba(255,255,255,.04);
-  --line:rgba(255,255,255,.13);
-  --text:#dfe4ec;
-  --muted:#96a0b2;
-  --head:#f2f5fa;
-  --accent:#7cc4ff;
-  --accent-2:#4b8fd6;
-  --code-bg:#12161f;
-  --radius:16px;
-  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --font-head:"Space Grotesk","Inter",system-ui,sans-serif;
-}
-
-/* ─── GAME · neon arcade ─── */
-body[data-section="game"]{
-  --bg:#05070a;
-  --bg-soft:rgba(0,255,153,.045);
-  --line:rgba(0,255,153,.18);
-  --text:#d4e6dd;
-  --muted:#7e9a8e;
-  --head:#eafff5;
-  --accent:#00ff99;
-  --accent-2:#00b36b;
-  --code-bg:#08120d;
-  --font-head:"Orbitron","Space Grotesk",system-ui,sans-serif;
-}
-
-/* ─── MANGA · mực đen & đỏ ─── */
-body[data-section="manga"]{
-  --bg:#08080a;
-  --bg-soft:rgba(255,60,70,.05);
-  --line:rgba(255,80,90,.2);
-  --text:#dcd8d6;
-  --muted:#95898a;
-  --head:#f6f2f1;
-  --accent:#ff4d5a;
-  --accent-2:#c02b38;
-  --code-bg:#121012;
-}
-
-/* ─── NGHỆ THUẬT · giấy vẽ ─── */
-body[data-section="nghethuat"]{
-  --bg:#f3ece0;
-  --bg-soft:rgba(120,90,60,.055);
-  --line:rgba(90,66,45,.22);
-  --text:#33291f;
-  --muted:#7d6d59;
-  --head:#241c14;
-  --accent:#a8603a;
-  --accent-2:#7d4526;
-  --code-bg:#e7ddcd;
-  --font-head:"Lora",Georgia,"Times New Roman",serif;
-}
-
-/* ─── PHIM · rạp chiếu ─── */
-body[data-section="phim"]{
-  --bg:#0b0906;
-  --bg-soft:rgba(255,193,90,.05);
-  --line:rgba(255,193,90,.2);
-  --text:#e5ddd0;
-  --muted:#a1927c;
-  --head:#fdf6e9;
-  --accent:#ffc15a;
-  --accent-2:#c99133;
-  --code-bg:#141009;
-}
+/* Toàn bộ màu sắc, phông chữ, khoảng cách lấy từ một nơi duy nhất.
+   Muốn đổi tông của mục nào thì sửa /cms/tokens.css, không sửa file này. */
+@import url("/cms/tokens.css");
 
 /* ─────────── Nền chung ─────────── */
 *,*::before,*::after{box-sizing:border-box}
@@ -83,8 +17,10 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font:16px/1.75 var(--font-body);
+  font:var(--fs-body)/var(--lh-body) var(--font-body);
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;               /* chặn trôi ngang trên điện thoại */
+  overflow-wrap:break-word;        /* URL dài không phá vỡ bố cục */
 }
 body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
@@ -104,36 +40,14 @@ a{color:var(--accent)}
   transition:width .1s linear
 }
 
-/* ─────────── Đầu trang ─────────── */
-.cms-header{
-  position:sticky;top:0;z-index:200;
-  display:flex;align-items:center;gap:22px;flex-wrap:wrap;
-  padding:13px 24px;
-  background:color-mix(in srgb,var(--bg) 88%,transparent);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(12px);
-}
-@supports not (background:color-mix(in srgb,red 50%,blue)){
-  .cms-header{background:var(--bg)}
-}
-.cms-brand{
-  display:flex;align-items:center;gap:10px;text-decoration:none;
-  font:700 19px/1 var(--font-head);color:var(--head)
-}
-.cms-brand .mark{
-  width:36px;height:36px;flex-shrink:0;border-radius:10px;
-  display:grid;place-items:center;font-size:17px;
-  background:var(--bg-soft);border:1px solid var(--line);color:var(--accent)
-}
-.cms-nav{display:flex;gap:20px;flex-wrap:wrap;margin-left:auto;font-size:14.5px}
-.cms-nav a{
-  color:var(--muted);text-decoration:none;padding-bottom:4px;
-  border-bottom:2px solid transparent;transition:.22s
-}
-.cms-nav a:hover,.cms-nav a.active{color:var(--accent);border-bottom-color:var(--accent)}
+/* Thanh điều hướng nằm ở /cms/site-nav.css — dùng chung cho cả site */
 
 /* ─────────── Khung chính ─────────── */
-.cms-main{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:30px 22px 72px}
+.cms-main{
+  position:relative;z-index:1;
+  max-width:var(--page-max);margin:0 auto;
+  padding:30px var(--page-pad) 72px;
+}
 .cms-crumbs{margin:0 0 20px;font-size:13.5px;color:var(--muted)}
 .cms-crumbs a{text-decoration:none}
 .cms-crumbs a:hover{text-decoration:underline}
@@ -270,15 +184,53 @@ body[data-section="nghethuat"] .cms-toc{background:rgba(255,255,255,.55)}
 }
 .cms-footer a{display:inline-block;margin-top:9px;text-decoration:none}
 
-/* ─────────── Màn hình nhỏ ─────────── */
+/* ═══════════ MÀN HÌNH NHỎ ═══════════
+   Phần lớn việc co giãn đã do biến trong tokens.css lo, ở đây chỉ
+   xử lý những thứ phải đổi bố cục thật sự. */
+
+/* Máy tính bảng: bỏ cột mục lục, đưa lên trên dạng hộp gấp gọn */
 @media (max-width:940px){
-  .cms-layout{grid-template-columns:1fr}
-  .cms-toc{position:static;max-height:none;order:-1}
-  .cms-hero{padding:24px 20px 20px}
-  .cms-main{padding:22px 15px 50px}
+  .cms-layout{grid-template-columns:1fr;gap:var(--gap)}
+  .cms-toc{position:static;max-height:none;order:-1;padding:16px 18px}
+  .cms-toc ol{columns:2;column-gap:24px}
   .cms-pager{grid-template-columns:1fr}
   .cms-pager .pager-link.next{text-align:left}
-  .cms-nav{gap:14px;font-size:13.5px;width:100%;margin-left:0}
+}
+
+/* Điện thoại */
+@media (max-width:640px){
+  .cms-hero{padding:20px 16px 18px;border-radius:var(--radius)}
+  .cms-main{padding:18px var(--page-pad) 44px}
+  .cms-toc ol{columns:1}
+
+  /* Ảnh và bảng tràn viền một chút cho rộng chỗ đọc */
+  .cms-post figure{
+    margin-left:calc(var(--page-pad) * -1);
+    margin-right:calc(var(--page-pad) * -1);
+    border-radius:0;border-left:0;border-right:0;padding:6px 6px 2px;
+  }
+  .cms-post figure img{border-radius:6px}
+  .table-scroll{
+    margin-left:calc(var(--page-pad) * -1);
+    margin-right:calc(var(--page-pad) * -1);
+    border-radius:0;border-left:0;border-right:0;
+  }
+  .cms-post pre{
+    margin-left:calc(var(--page-pad) * -1);
+    margin-right:calc(var(--page-pad) * -1);
+    border-radius:0;padding:16px var(--page-pad);font-size:12.5px;
+  }
+  .cms-post blockquote{padding:14px 18px}
+  .cms-post h2{margin-top:38px}
+  .cms-related .related-grid{grid-template-columns:1fr}
+  .cms-tags li{font-size:12px;padding:5px 12px}
+  .cms-cover img,.cms-cover video{max-height:260px}
+}
+
+/* Ngón tay cần vùng bấm đủ lớn */
+@media (pointer:coarse){
+  .cms-toc a{display:block;padding:6px 0}
+  .cms-tags li{padding:8px 15px}
 }
 
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}

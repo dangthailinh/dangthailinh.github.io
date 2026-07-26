@@ -1,0 +1,148 @@
+/* ══════════════════════════════════════════════════════════════════════
+   cms/site-nav.css — giao diện thanh điều hướng dùng chung
+
+   Màu tự lấy theo mục qua các biến trong /cms/tokens.css, nên thanh này
+   tự đổi tông khi đặt data-section trên <body>. Không cần sửa gì thêm.
+   ══════════════════════════════════════════════════════════════════════ */
+@import url("/cms/tokens.css");
+
+/* Giá trị dự phòng cho trang chưa dùng tokens */
+[data-site-nav]{
+  --sn-bg:var(--surface,rgba(255,255,255,.9));
+  --sn-text:var(--text,#20242c);
+  --sn-muted:var(--muted,#6b7280);
+  --sn-accent:var(--accent,#b4552d);
+  --sn-line:var(--line,rgba(0,0,0,.14));
+  --sn-h:var(--header-h,64px);
+  display:block;
+}
+
+/* ─── Thanh trên cùng ─── */
+.sn-bar{
+  position:sticky;top:0;z-index:900;
+  display:flex;align-items:center;gap:18px;
+  min-height:var(--sn-h);
+  padding:10px clamp(14px,4vw,40px);
+  background:var(--sn-bg);
+  border-bottom:1px solid var(--sn-line);
+  backdrop-filter:blur(10px);
+  transition:transform .3s ease;
+}
+.sn-bar.is-hidden{transform:translateY(-100%)}
+
+.sn-brand{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;color:var(--sn-text);
+  font:700 18px/1 var(--font-display,system-ui);letter-spacing:-.01em;
+  white-space:nowrap;
+}
+.sn-mark{
+  width:34px;height:34px;flex-shrink:0;border-radius:10px;
+  display:grid;place-items:center;font-size:16px;
+  background:var(--sn-accent);color:#fff;
+}
+
+/* ─── Menu máy tính ─── */
+.sn-desktop{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.sn-desktop a{
+  padding:8px 14px;border-radius:30px;
+  color:var(--sn-muted);text-decoration:none;
+  font:500 14.5px/1 var(--font-body,system-ui);
+  border:1px solid transparent;transition:.2s;
+}
+.sn-desktop a:hover{color:var(--sn-text);background:rgba(127,127,127,.12)}
+.sn-desktop a.is-active{
+  color:var(--sn-accent);border-color:var(--sn-accent);font-weight:700;
+}
+
+/* ─── Nút hamburger (chỉ hiện trên màn hình nhỏ) ─── */
+.sn-burger{
+  display:none;margin-left:auto;
+  width:42px;height:42px;padding:0;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  background:transparent;border:1px solid var(--sn-line);border-radius:11px;
+  cursor:pointer;
+}
+.sn-burger span{
+  display:block;width:19px;height:2px;border-radius:2px;
+  background:var(--sn-text);
+  transition:transform .3s ease,opacity .2s ease;
+}
+.sn-burger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.sn-burger.is-open span:nth-child(2){opacity:0}
+.sn-burger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ─── Lớp phủ ─── */
+.sn-backdrop{
+  position:fixed;inset:0;z-index:940;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(2px);
+  opacity:0;transition:opacity .3s ease;
+}
+.sn-backdrop.is-on{opacity:1}
+
+/* ─── Ngăn kéo menu ─── */
+.sn-drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:950;
+  width:min(82vw,320px);
+  display:flex;flex-direction:column;
+  background:var(--sn-bg);
+  border-left:1px solid var(--sn-line);
+  box-shadow:-10px 0 40px rgba(0,0,0,.28);
+  transform:translateX(104%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.sn-drawer.is-open{transform:translateX(0)}
+
+.sn-drawer-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 18px;border-bottom:1px solid var(--sn-line);
+}
+.sn-brand-sm{
+  display:flex;align-items:center;gap:10px;
+  color:var(--sn-text);font:700 16px/1 var(--font-display,system-ui);
+}
+.sn-close{
+  width:36px;height:36px;flex-shrink:0;
+  background:transparent;border:1px solid var(--sn-line);border-radius:10px;
+  color:var(--sn-text);font-size:15px;cursor:pointer;
+}
+.sn-close:hover{background:rgba(127,127,127,.14)}
+
+.sn-drawer-nav{list-style:none;margin:0;padding:10px;flex:1}
+.sn-drawer-nav li{
+  opacity:0;transform:translateX(14px);
+  animation:sn-slide .3s ease forwards;
+  animation-delay:calc(var(--i) * 40ms);
+}
+.sn-drawer.is-open li{animation-play-state:running}
+@keyframes sn-slide{to{opacity:1;transform:translateX(0)}}
+
+.sn-drawer-nav a{
+  display:flex;align-items:center;gap:13px;
+  padding:14px 14px;border-radius:12px;
+  color:var(--sn-text);text-decoration:none;
+  font:500 15.5px/1 var(--font-body,system-ui);
+}
+.sn-drawer-nav a:hover{background:rgba(127,127,127,.12)}
+.sn-drawer-nav a.is-active{color:var(--sn-accent);font-weight:700;background:rgba(127,127,127,.1)}
+.sn-drawer-nav .ic{
+  width:34px;height:34px;flex-shrink:0;border-radius:10px;
+  display:grid;place-items:center;font-size:16px;
+  background:rgba(127,127,127,.12);
+}
+.sn-drawer-foot{
+  margin:0;padding:16px 18px;border-top:1px solid var(--sn-line);
+  color:var(--sn-muted);font-size:12.5px;text-align:center;
+}
+
+/* ─── Chuyển sang menu ngăn kéo trên màn hình hẹp ─── */
+@media (max-width:900px){
+  .sn-desktop{display:none}
+  .sn-burger{display:flex}
+}
+
+/* Máy tính thì không cần ngăn kéo */
+@media (min-width:901px){
+  .sn-drawer,.sn-backdrop{display:none !important}
+}

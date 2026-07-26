@@ -47,7 +47,7 @@ nhánh `main`, dán token, tick **Ghi nhớ trên máy này**.
 
 ---
 
-## 4. Ba tab
+## 4. Bốn tab
 
 ### ◈ Tổng quan
 
@@ -63,6 +63,17 @@ giữa khung máy tính và khung điện thoại.
 ### ☰ Quản lý bài
 
 Ô tìm kiếm, ba bộ lọc (mục · trạng thái · sắp xếp), và tick chọn nhiều bài để thao tác hàng loạt.
+
+### 🏷 Chủ đề
+
+Thêm chủ đề con mới cho bất kỳ mục nào **mà không cần sửa code**. Ví dụ thêm "Hóa học"
+vào mục Khoa học: chọn mục → **+ Thêm chủ đề** → gõ tên → **💾 Lưu lên GitHub**.
+Ô Chủ đề bên tab Viết bài có ngay lựa chọn mới.
+
+- Kéo thứ tự bằng nút ▲▼
+- Sửa tên hiển thị, biểu tượng và mã chủ đề ngay tại chỗ
+- Chủ đề **đang có bài thì không xoá được** — chuyển bài sang chủ đề khác trước đã
+- Danh sách lưu ở `data/taxonomy.json`
 
 ---
 
@@ -171,8 +182,11 @@ và một trang riêng để chia sẻ link.
   templates.js      Khuôn HTML sinh ra bài viết cho từng mục
 
 /data/posts.json    Danh mục toàn bộ bài đăng qua bảng quản trị
+/data/taxonomy.json Danh sách chủ đề con của 7 mục
 
 /cms/
+  tokens.css        ★ MÀU SẮC · CỠ CHỮ · KHOẢNG CÁCH của cả site
+  site-nav.js/css   ★ HEADER + MENU dùng chung
   feed.js           Chèn thẻ bài mới vào 6 trang danh sách
   post.js           Mục lục, bài trước/tiếp, bài liên quan
   article.css       Giao diện bài viết cho Game · Manga · Nghệ thuật · Phim
@@ -184,6 +198,19 @@ và một trang riêng để chia sẻ link.
 
 Các trang cũ chỉ bị thêm **một dòng `<script>`** và **một thuộc tính `data-cms-feed`** trên thẻ `<body>`.
 Bài viết cũ không bị đụng vào.
+
+### Sửa giao diện ở đâu
+
+| Muốn đổi | Sửa file | Sửa gì |
+|---|---|---|
+| Màu của một mục | `cms/tokens.css` | Một dòng, ví dụ `--game-accent` |
+| Cỡ chữ bài viết | `cms/tokens.css` | `--fs-body`, `--fs-h1`… |
+| Khoảng cách, bo góc | `cms/tokens.css` | `--gap`, `--radius`, `--page-pad` |
+| Giao diện điện thoại | `cms/tokens.css` | Khối `@media (max-width:640px)` ở cuối |
+| Menu (thêm/bớt mục) | `cms/site-nav.js` | Mảng `MENU` ở đầu file |
+| Tên site trên header | `cms/site-nav.js` | Biến `BRAND` |
+
+Cả 7 mục dùng chung hai file này, nên **sửa một chỗ là toàn site đổi theo**.
 
 ---
 

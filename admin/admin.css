@@ -330,6 +330,46 @@ code{background:#eae2d5;padding:.1em .35em;border-radius:3px;font:.9em Consolas,
 .empty{padding:44px 20px;text-align:center;color:var(--muted);background:var(--paper);
   border:1px dashed var(--line);border-radius:var(--radius)}
 
+/* ═══════════ TAB CHỦ ĐỀ ═══════════ */
+.tax{padding:22px 20px 44px;max-width:900px;margin:0 auto}
+.tax-toolbar{display:flex;align-items:flex-end;gap:11px;flex-wrap:wrap;margin-bottom:18px}
+.tax-dirty{
+  margin-left:auto;padding:5px 12px;border-radius:20px;
+  background:#fdf0dd;color:#a2711f;font-size:12px;font-weight:700
+}
+.tax-list{display:grid;gap:9px}
+.tax-row{
+  display:grid;grid-template-columns:auto 62px 1fr 1fr auto;gap:11px;align-items:center;
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:10px 13px
+}
+.tax-row .move{display:flex;flex-direction:column;gap:2px}
+.tax-row .move button{
+  width:22px;height:16px;padding:0;border:1px solid var(--line);border-radius:4px;
+  background:#faf6ef;cursor:pointer;font-size:9px;line-height:1;color:var(--muted)
+}
+.tax-row .move button:hover{background:var(--accent-soft);color:var(--accent)}
+.tax-row input{
+  width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;
+  background:#fff;font:13.5px inherit;color:var(--ink)
+}
+.tax-row input.sym{text-align:center;font-size:16px}
+.tax-row input.key{font-family:Consolas,monospace;font-size:12.5px}
+.tax-row .used{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.tax-row .del{
+  padding:6px 11px;border:1px solid #e3c4c4;border-radius:8px;background:transparent;
+  color:var(--danger);cursor:pointer;font:600 12px/1 inherit
+}
+.tax-row .del:hover{background:#fbeded}
+.tax-row .del:disabled{opacity:.35;cursor:not-allowed}
+.tax-hint{margin:16px 0 0;padding:11px 14px;background:#faf6ef;border-left:3px solid var(--line);
+  border-radius:0 8px 8px 0;font-size:12.5px;color:var(--muted);line-height:1.6}
+
+@media (max-width:720px){
+  .tax-row{grid-template-columns:auto 54px 1fr;gap:9px}
+  .tax-row .key-wrap{grid-column:2 / -1}
+  .tax-row .used,.tax-row .del{grid-column:1 / -1;justify-self:start}
+}
+
 /* ─── Lớp phủ / hộp thoại / toast ─── */
 .overlay{position:fixed;inset:0;z-index:200;display:grid;place-items:center;
   background:rgba(43,38,32,.5);backdrop-filter:blur(3px);padding:20px}

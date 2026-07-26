@@ -12,6 +12,7 @@
   var T = window.CMSTemplates;
   var API = 'https://api.github.com';
   var DATA_PATH = 'data/posts.json';
+  var TAX_PATH = 'data/taxonomy.json';
   var LS = {
     token: 'cms.token',
     repo: 'cms.repo',
@@ -27,7 +28,10 @@
     dbSha: null,       // sha của posts.json trên GitHub
     editingId: null,   // id bài đang sửa (null = bài mới)
     postTime: '',      // giờ đăng, giữ nguyên khi sửa bài blog cũ
-    selected: {}       // các bài được tick trong tab Quản lý
+    selected: {},      // các bài được tick trong tab Quản lý
+    tax: null,         // nội dung taxonomy.json
+    taxSha: null,
+    taxDirty: false
   };
 
   /* ───────────────── Tiện ích DOM ───────────────── */
@@ -218,14 +222,16 @@
           localStorage.setItem(LS.branch, S.branch);
         }
         $('#who').textContent = '👤 ' + (S.user.login || '') + ' · ' + S.owner + '/' + S.repo;
-        return loadDb();
+        return loadTaxonomy();
       })
+      .then(function () { return loadDb(); })
       .then(function () {
         busy(false);
         show('#screen-app');
         restoreDraft();
         renderPostList();
         renderDashboard();
+        renderTaxonomy();
       })
       .catch(function (err) {
         busy(false);
@@ -272,6 +278,35 @@
     return writeFile(DATA_PATH, json, message, S.dbSha).then(function (res) {
       S.dbSha = res.content.sha;
     });
+  }
+
+  /* ───────────────── Kho chủ đề taxonomy.json ───────────────── */
+  function loadTaxonomy() {
+    return readFile(TAX_PATH).then(function (file) {
+      if (!file) {
+        /* Repo chưa có file — dựng bản đầu tiên từ danh sách mặc định */
+        S.tax = T.defaultTaxonomy();
+        S.taxSha = null;
+      } else {
+        try { S.tax = JSON.parse(file.text); }
+        catch (e) { S.tax = T.defaultTaxonomy(); }
+        S.taxSha = file.sha;
+      }
+      if (!S.tax.sections) S.tax.sections = {};
+      T.setTaxonomy(S.tax);
+      S.taxDirty = false;
+    });
+  }
+
+  function saveTaxonomy() {
+    S.tax.updatedAt = new Date().toISOString();
+    var json = JSON.stringify(S.tax, null, 2) + '\n';
+    return writeFile(TAX_PATH, json, 'Cập nhật danh sách chủ đề', S.taxSha)
+      .then(function (res) {
+        S.taxSha = res.content.sha;
+        S.taxDirty = false;
+        T.setTaxonomy(S.tax);
+      });
   }
 
   function findPost(id) {
@@ -1271,12 +1306,142 @@
     return '<div class="stat ' + (kind || '') + '"><b>' + value + '</b><span>' + label + '</span></div>';
   }
 
+  /* ═══════════════════ TAB CHỦ ĐỀ ═══════════════════ */
+  function taxOf(section) {
+    if (!S.tax.sections[section]) S.tax.sections[section] = [];
+    return S.tax.sections[section];
+  }
+
+  function markTaxDirty() {
+    S.taxDirty = true;
+    $('#tax-dirty').hidden = false;
+  }
+
+  /* Đếm số bài đang dùng chủ đề này — để cảnh báo trước khi xoá */
+  function countUsing(section, key) {
+    return ((S.db && S.db.posts) || []).filter(function (p) {
+      return p.section === section && p.category === key;
+    }).length;
+  }
+
+  function renderTaxonomy() {
+    if (!S.tax) return;
+    var section = $('#tax-section').value;
+    var list = taxOf(section);
+    var wrap = $('#tax-list');
+    $('#tax-dirty').hidden = !S.taxDirty;
+    wrap.innerHTML = '';
+
+    if (!list.length) {
+      wrap.innerHTML = '<div class="empty">Mục này chưa có chủ đề nào. Bấm <b>+ Thêm chủ đề</b>.</div>';
+      return;
+    }
+
+    list.forEach(function (cat, i) {
+      var used = countUsing(section, cat.key);
+      var row = document.createElement('div');
+      row.className = 'tax-row';
+      row.innerHTML =
+        '<div class="move">' +
+          '<button type="button" data-move="up" title="Lên"' + (i === 0 ? ' disabled' : '') + '>▲</button>' +
+          '<button type="button" data-move="down" title="Xuống"' + (i === list.length - 1 ? ' disabled' : '') + '>▼</button>' +
+        '</div>' +
+        '<input class="sym" type="text" value="' + T.escapeHtml(cat.symbol || '') + '" maxlength="4" aria-label="Biểu tượng">' +
+        '<input class="label" type="text" value="' + T.escapeHtml(cat.label || '') + '" placeholder="Tên hiển thị" aria-label="Tên chủ đề">' +
+        '<span class="key-wrap"><input class="key" type="text" value="' + T.escapeHtml(cat.key || '') + '" spellcheck="false" placeholder="ma-chu-de" aria-label="Mã chủ đề"></span>' +
+        '<span class="used">' + (used ? used + ' bài' : 'chưa có bài') + '</span>' +
+        '<button class="del" type="button"' + (used ? ' disabled title="Còn ' + used + ' bài đang dùng"' : '') + '>Xoá</button>';
+
+      row.querySelector('.sym').oninput = function () { cat.symbol = this.value; markTaxDirty(); };
+      row.querySelector('.label').oninput = function () { cat.label = this.value; markTaxDirty(); };
+      row.querySelector('.key').oninput = function () {
+        cat.key = T.slugify(this.value) || this.value.trim();
+        markTaxDirty();
+      };
+      row.querySelector('.key').onblur = function () { this.value = cat.key; renderTaxonomy(); };
+
+      row.querySelectorAll('[data-move]').forEach(function (btn) {
+        btn.onclick = function () {
+          var to = btn.dataset.move === 'up' ? i - 1 : i + 1;
+          if (to < 0 || to >= list.length) return;
+          var tmp = list[i]; list[i] = list[to]; list[to] = tmp;
+          markTaxDirty(); renderTaxonomy();
+        };
+      });
+
+      row.querySelector('.del').onclick = function () {
+        if (used) return;
+        list.splice(i, 1);
+        markTaxDirty(); renderTaxonomy();
+      };
+
+      wrap.appendChild(row);
+    });
+
+    var hint = document.createElement('p');
+    hint.className = 'tax-hint';
+    hint.innerHTML =
+      '<b>Mã chủ đề</b> là phần xuất hiện trong đường dẫn lọc, chỉ dùng chữ thường và dấu gạch ngang — tự chuẩn hoá khi bạn gõ.<br>' +
+      'Chủ đề đang có bài thì không xoá được. Muốn xoá, hãy chuyển các bài đó sang chủ đề khác trước.<br>' +
+      'Nhớ bấm <b>💾 Lưu lên GitHub</b> sau khi sửa, nếu không thay đổi sẽ mất khi tải lại trang.';
+    wrap.appendChild(hint);
+  }
+
+  $('#tax-section').addEventListener('change', renderTaxonomy);
+
+  $('#btn-tax-add').addEventListener('click', function () {
+    var section = $('#tax-section').value;
+    ask({
+      title: 'Thêm chủ đề mới',
+      body: '<label class="field"><span>Tên hiển thị</span><input data-name="label" type="text" placeholder="VD: Hóa học"></label>' +
+            '<label class="field"><span>Biểu tượng (không bắt buộc)</span><input data-name="symbol" type="text" placeholder="🧪" maxlength="4"></label>'
+    }).then(function (r) {
+      if (!r || !r.label) return;
+      var list = taxOf(section);
+      var key = T.slugify(r.label);
+      if (!key) return toast('Tên chủ đề không hợp lệ', 'err');
+      if (list.some(function (c) { return c.key === key; })) {
+        return toast('Đã có chủ đề với mã này', 'err');
+      }
+      list.push({ key: key, label: r.label, symbol: r.symbol || '✦' });
+      markTaxDirty();
+      renderTaxonomy();
+      toast('Đã thêm — nhớ bấm Lưu lên GitHub');
+    });
+  });
+
+  $('#btn-tax-save').addEventListener('click', function () {
+    /* Kiểm tra trùng mã trước khi ghi */
+    var bad = null;
+    Object.keys(S.tax.sections).forEach(function (section) {
+      var seen = {};
+      S.tax.sections[section].forEach(function (c) {
+        if (!c.key) bad = 'Có chủ đề chưa đặt mã trong mục ' + T.sectionLabel(section);
+        if (seen[c.key]) bad = 'Mã "' + c.key + '" bị trùng trong mục ' + T.sectionLabel(section);
+        seen[c.key] = true;
+      });
+    });
+    if (bad) return toast(bad, 'err');
+
+    busy(true, 'Đang lưu danh sách chủ đề…');
+    saveTaxonomy()
+      .then(function () {
+        busy(false);
+        $('#tax-dirty').hidden = true;
+        fillCategories();          /* cập nhật ngay ô Chủ đề bên tab Viết bài */
+        renderTaxonomy();
+        toast('✅ Đã lưu danh sách chủ đề', 'ok');
+      })
+      .catch(function (err) { busy(false); toast(err.message, 'err'); });
+  });
+
   /* ───────────────── Tab ───────────────── */
   function switchTab(name) {
     $$('.tab').forEach(function (t) { t.classList.toggle('active', t.dataset.tab === name); });
     $$('.tabpanel').forEach(function (p) { p.classList.toggle('active', p.id === 'tab-' + name); });
     if (name === 'dashboard') renderDashboard();
     if (name === 'manage') renderPostList();
+    if (name === 'taxonomy') renderTaxonomy();
   }
   $$('.tab').forEach(function (t) {
     t.addEventListener('click', function () { switchTab(t.dataset.tab); });

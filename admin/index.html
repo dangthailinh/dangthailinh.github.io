@@ -64,6 +64,7 @@
       <button class="tab" data-tab="dashboard">◈ Tổng quan</button>
       <button class="tab active" data-tab="write">✎ Viết bài</button>
       <button class="tab" data-tab="manage">☰ Quản lý bài</button>
+      <button class="tab" data-tab="taxonomy">🏷 Chủ đề</button>
     </nav>
     <div class="topbar-right">
       <span id="who" class="who"></span>
@@ -325,6 +326,38 @@
 
     <p class="list-summary" id="list-summary"></p>
     <div id="post-list" class="post-list"></div>
+  </div>
+
+  <!-- ═══════════ TAB CHỦ ĐỀ ═══════════ -->
+  <div id="tab-taxonomy" class="tabpanel">
+    <div class="tax">
+      <div class="dash-head">
+        <div>
+          <h2>Chủ đề con</h2>
+          <p class="dash-sub">Thêm chủ đề mới cho từng mục mà không cần sửa code. Bài viết sẽ chọn được ngay.</p>
+        </div>
+        <button id="btn-tax-save" class="btn primary small">💾 Lưu lên GitHub</button>
+      </div>
+
+      <div class="tax-toolbar">
+        <label class="inline-field">
+          <span>Mục</span>
+          <select id="tax-section">
+            <option value="kienthuc">Kiến thức</option>
+            <option value="khoahoc">Khoa học</option>
+            <option value="blog">Blog</option>
+            <option value="game">Game</option>
+            <option value="manga">Manga</option>
+            <option value="nghethuat">Nghệ thuật</option>
+            <option value="phim">Phim</option>
+          </select>
+        </label>
+        <button id="btn-tax-add" class="btn ghost small">+ Thêm chủ đề</button>
+        <span id="tax-dirty" class="tax-dirty" hidden>Có thay đổi chưa lưu</span>
+      </div>
+
+      <div id="tax-list" class="tax-list"></div>
+    </div>
   </div>
 </section>
 
