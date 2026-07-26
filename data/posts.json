@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-26T14:22:02.245Z",
+  "updatedAt": "2026-07-26T15:13:01.855Z",
   "posts": [
     {
       "id": "kt-tong-quan-ve-codex",
@@ -17,7 +17,8 @@
       "author": "Linh Osimi",
       "path": "kienthuc/articles/blog/tong-quan-ve-codex.html",
       "url": "/kienthuc/articles/blog/tong-quan-ve-codex.html",
-      "updatedAt": "2026-07-26T13:14:14.081Z"
+      "updatedAt": "2026-07-26T13:14:14.081Z",
+      "status": "published"
     },
     {
       "id": "bl-1-so-anh-xam-tiep",
@@ -37,7 +38,26 @@
       "updatedAt": "2026-07-26T14:22:02.243Z",
       "time": "20:33",
       "mood": "(－_－) zzZ",
-      "bodyHtml": "<figure><figure><img src=\"/uploads/2026/07/1785075667196-img-8768.jpeg\" alt=\"IMG_8768\" loading=\"lazy\"><figcaption>IMG_8768</figcaption></figure><img src=\"/uploads/2026/07/1785075621304-img-8779.jpeg\" alt=\"IMG_8779\" loading=\"lazy\"><figcaption>IMG_8779</figcaption></figure><p>Song bird nhân vật peak vl—- cộng thêm quả ảnh đell liên quan</p>"
+      "bodyHtml": "<figure><figure><img src=\"/uploads/2026/07/1785075667196-img-8768.jpeg\" alt=\"IMG_8768\" loading=\"lazy\"><figcaption>IMG_8768</figcaption></figure><img src=\"/uploads/2026/07/1785075621304-img-8779.jpeg\" alt=\"IMG_8779\" loading=\"lazy\"><figcaption>IMG_8779</figcaption></figure><p>Song bird nhân vật peak vl—- cộng thêm quả ảnh đell liên quan</p>",
+      "status": "published"
+    },
+    {
+      "id": "kh-1",
+      "section": "khoahoc",
+      "category": "khac",
+      "status": "published",
+      "title": "Cay có phải 1 vị không?",
+      "slug": "1",
+      "description": "Cay, không phải vị: Một trải nghiệm sinh lý, không phải vị giác",
+      "cover": "https://tse3.mm.bing.net/th/id/OIP.YZG9PcXxvcNJJoLniGmz_wHaE7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "tags": [
+        "code;AI"
+      ],
+      "date": "2026-07-26",
+      "author": "Linh Osimi",
+      "path": "khoa-hoc0/bai-viet/1.html",
+      "url": "/khoa-hoc0/bai-viet/1.html",
+      "updatedAt": "2026-07-26T15:13:01.855Z"
     }
   ]
 }
