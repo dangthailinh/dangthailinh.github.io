@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-26T15:23:14.162Z",
+  "updatedAt": "2026-07-27T01:52:51.268Z",
   "posts": [
     {
       "id": "kt-tong-quan-ve-codex",
@@ -40,6 +40,22 @@
       "mood": "(－_－) zzZ",
       "bodyHtml": "<figure><figure><img src=\"/uploads/2026/07/1785075667196-img-8768.jpeg\" alt=\"IMG_8768\" loading=\"lazy\"><figcaption>IMG_8768</figcaption></figure><img src=\"/uploads/2026/07/1785075621304-img-8779.jpeg\" alt=\"IMG_8779\" loading=\"lazy\"><figcaption>IMG_8779</figcaption></figure><p>Song bird nhân vật peak vl—- cộng thêm quả ảnh đell liên quan</p>",
       "status": "published"
+    },
+    {
+      "id": "mg-ly-do-griffith-phan-boi-guts-va-dong-doi-cua-minh",
+      "section": "manga",
+      "category": "character",
+      "status": "published",
+      "title": "Lý do Griffith phản bội Guts và đồng đội của mình",
+      "slug": "ly-do-griffith-phan-boi-guts-va-dong-doi-cua-minh",
+      "description": "nêu lý do đơn giản thôi@",
+      "cover": "https://images.unsplash.com/photo-1613376023733-0a73315d9b06?auto=format&fit=crop&w=1200&q=70",
+      "tags": [],
+      "date": "2026-07-26",
+      "author": "Linh Osimi",
+      "path": "manga0/bai-viet/ly-do-griffith-phan-boi-guts-va-dong-doi-cua-minh.html",
+      "url": "/manga0/bai-viet/ly-do-griffith-phan-boi-guts-va-dong-doi-cua-minh.html",
+      "updatedAt": "2026-07-27T01:52:51.268Z"
     }
   ]
 }
