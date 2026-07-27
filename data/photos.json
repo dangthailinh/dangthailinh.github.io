@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-27T08:45:41.284Z",
+  "updatedAt": "2026-07-27T08:51:24.025Z",
   "photos": [
     {
       "id": "photo-ms2zf5es-0",
@@ -46,6 +46,66 @@
       "author": "Linh Osimi",
       "createdAt": "2026-07-27T08:45:41.284Z",
       "updatedAt": "2026-07-27T08:45:41.284Z"
+    },
+    {
+      "id": "photo-ms2zmhva-0",
+      "destination": "blog",
+      "album": "small-moments",
+      "category": "classic",
+      "game": "",
+      "title": "Thêm tí ảnh · 01",
+      "src": "/uploads/2026/07/1785142269629-4j0d6-img-8779.jpeg",
+      "date": "2026-07-27",
+      "note": "",
+      "link": "",
+      "author": "Linh Osimi",
+      "createdAt": "2026-07-27T08:51:24.020Z",
+      "updatedAt": "2026-07-27T08:51:24.020Z"
+    },
+    {
+      "id": "photo-ms2zmhva-1",
+      "destination": "blog",
+      "album": "small-moments",
+      "category": "classic",
+      "game": "",
+      "title": "Thêm tí ảnh · 02",
+      "src": "/uploads/2026/07/1785142272796-405il-img-8433.jpeg",
+      "date": "2026-07-27",
+      "note": "",
+      "link": "",
+      "author": "Linh Osimi",
+      "createdAt": "2026-07-27T08:51:24.020Z",
+      "updatedAt": "2026-07-27T08:51:24.020Z"
+    },
+    {
+      "id": "photo-ms2zmhva-2",
+      "destination": "blog",
+      "album": "small-moments",
+      "category": "classic",
+      "game": "",
+      "title": "Thêm tí ảnh · 03",
+      "src": "/uploads/2026/07/1785142274226-tgpun-img-8449.jpeg",
+      "date": "2026-07-27",
+      "note": "",
+      "link": "",
+      "author": "Linh Osimi",
+      "createdAt": "2026-07-27T08:51:24.020Z",
+      "updatedAt": "2026-07-27T08:51:24.020Z"
+    },
+    {
+      "id": "photo-ms2zmhva-3",
+      "destination": "blog",
+      "album": "small-moments",
+      "category": "classic",
+      "game": "",
+      "title": "Thêm tí ảnh · 04",
+      "src": "/uploads/2026/07/1785142278219-20ekn-img-8409.jpeg",
+      "date": "2026-07-27",
+      "note": "",
+      "link": "",
+      "author": "Linh Osimi",
+      "createdAt": "2026-07-27T08:51:24.020Z",
+      "updatedAt": "2026-07-27T08:51:24.020Z"
     }
   ]
 }
