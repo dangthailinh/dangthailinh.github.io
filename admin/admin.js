@@ -1439,6 +1439,22 @@
       '<h2>Kết luận</h2>' +
       '<p>Tóm lại ý nghĩa của chủ đề đối với toàn bộ tác phẩm.</p>';
 
+  var FILM_STRUCTURE =
+      '<h2>Tóm tắt cốt truyện</h2>' +
+      '<p>Giới thiệu tiền đề của bộ phim và hoàn cảnh chính, tránh tiết lộ nút thắt quan trọng.</p>' +
+      '<figure><div class="film-image-placeholder">THÊM ẢNH CẢNH PHIM</div><figcaption>Chú thích cho cảnh phim.</figcaption></figure>' +
+      '<h2>Dàn diễn viên và nhân vật</h2>' +
+      '<p>Giới thiệu những nhân vật quan trọng và cách diễn viên thể hiện họ.</p>' +
+      '<h2>Cảm nhận</h2>' +
+      '<p>Phân tích nhịp phim, cảm xúc và điều khiến bộ phim đáng nhớ.</p>' +
+      '<blockquote>Một câu thoại hoặc câu hỏi trung tâm của bộ phim.</blockquote>' +
+      '<h2>Hình ảnh và âm thanh</h2>' +
+      '<p>Nhận xét về máy quay, màu sắc, dựng phim, âm nhạc và thiết kế âm thanh.</p>' +
+      '<h2>Chủ đề</h2>' +
+      '<p>Trình bày chủ đề chính và cách bộ phim phát triển thông điệp đó.</p>' +
+      '<h2>Đánh giá</h2>' +
+      '<p>Kết luận không spoil: bộ phim phù hợp với ai và có nên xem hay không.</p>';
+
   function applyMangaStructure() {
     var html = MANGA_STRUCTURE;
     function useStructure() {
@@ -1455,6 +1471,28 @@
       title: 'Thay nội dung hiện tại bằng khung Manga?',
       body: '<p>Thao tác này sẽ thay phần nội dung đang soạn. Tiêu đề, ảnh bìa và các thông tin khác vẫn được giữ nguyên.</p>',
       okText: 'Dùng khung mới',
+      danger: true
+    }).then(function (answer) {
+      if (answer) useStructure();
+    });
+  }
+
+  function applyFilmStructure() {
+    var html = FILM_STRUCTURE;
+    function useStructure() {
+      editor.innerHTML = html;
+      $('#html-view').value = html;
+      $('#html-view').hidden = true;
+      editor.hidden = false;
+      afterEdit();
+      toast('Đã tạo khung bài Phim theo mẫu Cold Fish — hãy thay nội dung gợi ý và thêm ảnh', 'ok');
+    }
+    syncFromHtmlView();
+    if (!editor.innerText.trim()) return useStructure();
+    ask({
+      title: 'Thay nội dung hiện tại bằng khung bài Phim?',
+      body: '<p>Thao tác này sẽ thay phần nội dung đang soạn. Tiêu đề, ảnh bìa và hồ sơ phim vẫn được giữ nguyên.</p>',
+      okText: 'Dùng khung Cold Fish',
       danger: true
     }).then(function (answer) {
       if (answer) useStructure();
@@ -1481,6 +1519,7 @@
     var isBlog = section === 'blog';
     var isGame = section === 'game';
     var isManga = section === 'manga';
+    var isFilm = section === 'phim';
     var gamePlacement = $('#f-game-placement').value || 'article';
     var isBlogPhoto = isBlog && $('#f-category').value === 'photo' && !S.editingId && !S.editingLegacy;
     var isGameCapture = isGame && gamePlacement === 'capture' && !S.editingId && !S.editingLegacy;
@@ -1488,6 +1527,7 @@
     $('#wrap-game-placement').hidden = !isGame;
     $('#wrap-game-target').hidden = !(isGame && gamePlacement === 'play');
     $('#wrap-manga-options').hidden = !isManga;
+    $('#wrap-film-options').hidden = !isFilm;
     $('#blog-photo-notice').hidden = !isBlogPhoto;
     $('#game-capture-notice').hidden = !isGameCapture;
     var coverLabel = $('#f-cover').parentNode.querySelector('span');
@@ -1537,7 +1577,11 @@
   ['#f-manga-kicker', '#f-manga-quote'].forEach(function (sel) {
     $(sel).addEventListener('input', function () { saveDraftSoon(); schedulePreview(); });
   });
+  ['#f-film-year', '#f-film-director', '#f-film-duration', '#f-film-warning'].forEach(function (sel) {
+    $(sel).addEventListener('input', function () { saveDraftSoon(); schedulePreview(); });
+  });
   $('#btn-manga-structure').addEventListener('click', applyMangaStructure);
+  $('#btn-film-structure').addEventListener('click', applyFilmStructure);
   $('#f-status').addEventListener('change', function () { applyStatusUi(); saveDraftSoon(); updateFormStatus(); });
 
   $('#mood-picker').addEventListener('click', function (e) {
@@ -1586,6 +1630,10 @@
       targetUrl: section === 'game' ? $('#f-target-url').value.trim() : '',
       mangaKicker: section === 'manga' ? $('#f-manga-kicker').value.trim() : '',
       mangaQuote: section === 'manga' ? $('#f-manga-quote').value.trim() : '',
+      filmYear: section === 'phim' ? $('#f-film-year').value.trim() : '',
+      filmDirector: section === 'phim' ? $('#f-film-director').value.trim() : '',
+      filmDuration: section === 'phim' ? $('#f-film-duration').value.trim() : '',
+      filmWarning: section === 'phim' ? $('#f-film-warning').value.trim() : '',
       status: $('#f-status').value,
       title: title,
       slug: slug,
@@ -1613,6 +1661,10 @@
     $('#f-target-url').value = p.targetUrl || '';
     $('#f-manga-kicker').value = p.mangaKicker || '';
     $('#f-manga-quote').value = p.mangaQuote || '';
+    $('#f-film-year').value = p.filmYear || '';
+    $('#f-film-director').value = p.filmDirector || '';
+    $('#f-film-duration').value = p.filmDuration || '';
+    $('#f-film-warning').value = p.filmWarning || '';
     $('#f-status').value = p.status || 'published';
     $('#f-mood').value = p.mood || '';
     $('#f-title').value = p.title || '';
@@ -1835,6 +1887,10 @@
           targetUrl: p.targetUrl || '',
           mangaKicker: p.mangaKicker || '',
           mangaQuote: p.mangaQuote || '',
+          filmYear: p.filmYear || '',
+          filmDirector: p.filmDirector || '',
+          filmDuration: p.filmDuration || '',
+          filmWarning: p.filmWarning || '',
           title: p.title, slug: p.slug, description: p.description,
           cover: p.cover, tags: p.tags, date: p.date, author: p.author,
           path: p.path, url: p.url,

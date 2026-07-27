@@ -509,6 +509,89 @@ story + '\n' +
 '</html>\n';
   }
 
+  /* Bài Phim dùng duy nhất bố cục giấy hồ sơ của Cold Fish. Không nạp
+     theme.js để màu chữ sáng của trang danh sách không ghi đè nội dung giấy. */
+  function phimArticle(p) {
+    var cats = categoriesFor('phim');
+    var cat = cats[p.category] || cats.khac || { label: 'Phim', symbol: '🎬' };
+    var cover = p.cover || '';
+    var isVideo = /\.(mp4|webm|ogv|mov)(\?|$)/i.test(cover);
+    var titleParts = String(p.title || 'Bài viết Phim').trim().split(/\s+/);
+    var firstWord = titleParts.shift() || 'Movie';
+    var restTitle = titleParts.join(' ') || 'Review';
+    var year = p.filmYear || String(p.date || '').slice(0, 4) || '—';
+    var director = p.filmDirector || 'Đang cập nhật';
+    var duration = p.filmDuration || 'Thời gian đọc hiển thị trong bài';
+    var warning = p.filmWarning || 'Bài viết có thể nhắc đến các tình tiết quan trọng của bộ phim.';
+    var tags = (p.tags || []).length ? p.tags : [cat.label];
+    var tagList = tags.map(function (tag) { return '<span>' + esc(tag) + '</span>'; }).join('');
+    var story = String(p.content || '').trim();
+    story = ('<section>' +
+      story.replace(/(<h2\b[^>]*>[\s\S]*?<\/h2>)/gi, '</section><section>$1') +
+      '</section>').replace('<section></section>', '');
+    var coverMedia = '';
+    if (cover) {
+      coverMedia = isVideo
+        ? '<video src="' + esc(cover) + '" controls playsinline preload="metadata"></video>'
+        : '<img src="' + esc(cover) + '" alt="Ảnh bìa ' + esc(p.title) + '" fetchpriority="high">';
+    } else {
+      coverMedia = '<div class="film-cover-placeholder">MOVIE<br>PAPER</div>';
+    }
+
+    return '<!doctype html>\n' +
+'<html lang="vi">\n' +
+'<head>\n' +
+'  <meta charset="utf-8">\n' +
+'  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+'  <meta name="description" content="' + esc(p.description) + '">\n' +
+'  <meta property="og:type" content="article">\n' +
+'  <meta property="og:title" content="' + esc(p.title) + '">\n' +
+'  <meta property="og:description" content="' + esc(p.description) + '">\n' +
+(cover && !isVideo ? '  <meta property="og:image" content="' + esc(cover) + '">\n' : '') +
+'  <meta name="theme-color" content="#a71917">\n' +
+'  <title>' + esc(p.title) + ' — Movie Club · Linh Osimi</title>\n' +
+'  <link rel="icon" type="image/png" href="/favicon.png?v=2">\n' +
+'  <link rel="stylesheet" href="/phim0/movie.css?v=20260727-film-paper">\n' +
+'  <link rel="stylesheet" href="/phim0/cold-fish.css?v=20260727-film-paper">\n' +
+'  <script src="/cms/post.js?v=20260727-film-paper" defer></script>\n' +
+'</head>\n' +
+'<body class="cold-fish-page film-paper-page" data-section="phim" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="phim" data-film-template="cold-fish">\n' +
+'  <a class="skip-link" href="#article-content">Đi đến bài viết</a>\n' +
+'  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
+'  <header class="site-header">\n' +
+'    <a class="brand" href="/index.html" aria-label="Linh Osimi — Trang chủ"><span class="brand-mark" aria-hidden="true">LO</span><span class="brand-copy"><strong>LINH OSIMI</strong><small>home video club</small></span></a>\n' +
+'    <button class="menu-button" type="button" aria-expanded="false" aria-controls="film-post-nav" data-film-menu-button><span></span><span></span><span></span><span class="sr-only">Mở menu</span></button>\n' +
+'    <nav class="site-nav" id="film-post-nav" aria-label="Điều hướng chính" data-film-menu>\n' +
+'      <a href="/khoa-hoc0/0/khoa-hoc.html">Khoa học</a><a href="/nghe-thuat0/nghe-thuat.html">Nghệ thuật</a><a class="is-active" href="/phim0/0/phim.html" aria-current="page">Movie</a><a href="/manga0/0/truyen-manga.html">Manga</a><a href="/game0/0/game.html">Game</a><a href="/kienthuc/">Kiến thức</a>\n' +
+'    </nav>\n' +
+'    <a class="home-link" href="/phim0/0/phim.html"><span aria-hidden="true">←</span> Kệ phim</a>\n' +
+'  </header>\n' +
+'  <main id="article">\n' +
+'    <header class="cold-hero">\n' +
+'      <div class="cold-hero__copy">\n' +
+'        <p class="cold-kicker">' + esc(cat.symbol) + ' ' + esc(cat.label) + ' · ' + esc(year) + '</p>\n' +
+'        <h1><span>' + esc(firstWord) + '</span> ' + esc(restTitle) + '</h1>\n' +
+'        <p class="cold-deck">' + esc(p.description) + '</p>\n' +
+'        <div class="cold-tags" aria-label="Thể loại">' + tagList + '</div>\n' +
+'        <a class="cold-scroll" href="#review">Đọc bài <span aria-hidden="true">↓</span></a>\n' +
+'      </div>\n' +
+'      <div class="cold-hero__visual"><div class="cold-poster">' + coverMedia + '<span class="cold-poster__tape" aria-hidden="true"></span></div><p class="cold-case-note">Linh Osimi Movie Club<br><strong>' + esc(cat.label) + ' · ' + esc(prettyDate(p.date)) + '</strong></p></div>\n' +
+'    </header>\n' +
+'    <section class="cold-meta" aria-labelledby="film-info-title">\n' +
+'      <div class="cold-meta__intro"><p class="cold-label">Hồ sơ phim / ' + esc(year) + '</p><h2 id="film-info-title">Thông tin phim</h2><p>' + esc(p.description) + '</p></div>\n' +
+'      <dl class="cold-facts"><div><dt>Năm phát hành</dt><dd>' + esc(year) + '</dd></div><div><dt>Đạo diễn</dt><dd>' + esc(director) + '</dd></div><div><dt>Thời lượng</dt><dd>' + esc(duration) + '</dd></div><div><dt>Thể loại</dt><dd>' + esc(tags.join(' / ')) + '</dd></div></dl>\n' +
+'    </section>\n' +
+'    <div class="cold-content" id="review">\n' +
+'      <article class="cold-article" id="article-content">' + story + '</article>\n' +
+'      <aside class="cold-sidebar" aria-label="Mục lục bài viết"><div class="cold-sidebar__card"><p class="cold-label">Trong bài này</p><nav><ol id="article-toc"></ol></nav><p class="cold-sidebar__warning"><strong>Content warning</strong>' + esc(warning) + '</p></div></aside>\n' +
+'    </div>\n' +
+'  </main>\n' +
+'  <footer class="site-footer"><div class="footer-brand"><span class="brand-mark" aria-hidden="true">LO</span><p><strong>Linh Osimi Movie Club</strong><br><span>Made with late nights &amp; rewind noise.</span></p></div><p class="cold-footer-title">' + esc(p.title) + '</p><p class="copyright">© <span id="current-year">2026</span> Linh Osimi <b>●</b> End of tape</p></footer>\n' +
+'  <script>(function(){var b=document.querySelector("[data-film-menu-button]"),m=document.querySelector("[data-film-menu]");if(b&&m)b.addEventListener("click",function(){var o=b.getAttribute("aria-expanded")!=="true";b.setAttribute("aria-expanded",String(o));m.classList.toggle("is-open",o);});})();</script>\n' +
+'</body>\n' +
+'</html>\n';
+  }
+
   function mediaArticle(p) {
     var meta  = MEDIA_META[p.section] || MEDIA_META.game;
     var cats  = categoriesFor(p.section);
@@ -732,6 +815,7 @@ p.content + '\n' +
       if (post.section === 'khoahoc') return khoahocArticle(post);
       if (post.section === 'blog') return blogArticle(post);
       if (post.section === 'manga') return mangaArticle(post);
+      if (post.section === 'phim') return phimArticle(post);
       if (MEDIA_META[post.section]) return mediaArticle(post);
       return kienthucArticle(post);
     }

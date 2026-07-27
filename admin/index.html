@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Bảng quản trị — Linh Osimi</title>
 <link rel="icon" type="image/png" href="/favicon.png?v=2">
-<link rel="stylesheet" href="/admin/admin.css?v=20260727-paper">
+<link rel="stylesheet" href="/admin/admin.css?v=20260727-film-paper">
 </head>
 <body>
 
@@ -167,6 +167,38 @@
 
           <button id="btn-manga-structure" class="btn manga-structure-btn block" type="button">＋ Tạo khung bài Manga nền trắng</button>
           <small class="field-note">Tất cả bài Manga mới dùng cùng một bố cục trắng, chữ đen và ảnh xen giữa nội dung.</small>
+        </section>
+
+        <section class="film-options" id="wrap-film-options" hidden aria-labelledby="film-options-title">
+          <div class="film-options-head">
+            <div>
+              <span class="film-options-kicker">MOVIE POST · COLD FISH PAPER</span>
+              <strong id="film-options-title">Một mẫu bài Phim cố định</strong>
+            </div>
+            <span class="film-options-badge">Mẫu Cold Fish</span>
+          </div>
+
+          <div class="film-options-grid">
+            <label class="field">
+              <span>Năm phát hành</span>
+              <input id="f-film-year" type="text" maxlength="12" placeholder="VD: 2010">
+            </label>
+            <label class="field">
+              <span>Đạo diễn</span>
+              <input id="f-film-director" type="text" maxlength="80" placeholder="VD: Sion Sono">
+            </label>
+            <label class="field">
+              <span>Thời lượng</span>
+              <input id="f-film-duration" type="text" maxlength="40" placeholder="VD: 2 giờ 25 phút">
+            </label>
+            <label class="field">
+              <span>Cảnh báo nội dung</span>
+              <input id="f-film-warning" type="text" maxlength="160" placeholder="VD: Bạo lực, máu me, nội dung 18+">
+            </label>
+          </div>
+
+          <button id="btn-film-structure" class="btn film-structure-btn block" type="button">＋ Tạo khung bài Phim theo Cold Fish</button>
+          <small class="field-note">Bài Phim mới luôn dùng nền giấy sáng, chữ đen rõ, hồ sơ phim, mục lục và các phần review giống Cold Fish.</small>
         </section>
 
         <div id="blog-photo-notice" class="photo-route-notice" hidden>
@@ -780,7 +812,7 @@
 <input id="file-input" type="file" accept="image/*" hidden>
 <input id="photo-file-input" type="file" accept="image/*" multiple hidden>
 
-<script src="/admin/templates.js?v=20260727-paper"></script>
-<script src="/admin/admin.js?v=20260727-paper"></script>
+<script src="/admin/templates.js?v=20260727-film-paper"></script>
+<script src="/admin/admin.js?v=20260727-film-paper"></script>
 </body>
 </html>

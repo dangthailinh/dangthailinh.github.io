@@ -314,43 +314,52 @@
       analysis: 'Phân tích', review: 'Review', list: 'Tuyển chọn',
       character: 'Nhân vật', essay: 'Tiểu luận', khac: 'Phim'
     };
-    var added = 0;
-
     posts.filter(bySection('phim')).slice().sort(compareOldestFirst).forEach(function (p) {
       if (grid.querySelector('a[href="' + p.url + '"]')) return;
       var article = document.createElement('article');
-      article.className = 'movie-card';
+      article.className = 'movie-card movie-card--coldfish';
       article.setAttribute('data-cms', '1');
       /* Giữ đúng thuộc tính mà bộ lọc sẵn có của trang Phim đang dùng */
       article.setAttribute('data-category', p.category || 'analysis');
       article.setAttribute('data-searchable',
         normalize([p.title, p.description, (p.tags || []).join(' ')].join(' ')));
       article.innerHTML =
-        '<a class="poster" href="' + esc(p.url) + '" aria-label="Đọc ' + esc(p.title) + '">' +
+        '<a class="poster poster--coldfish" href="' + esc(p.url) + '" aria-label="Đọc ' + esc(p.title) + '">' +
           '<span class="poster-index">No. 01</span>' +
           '<img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy">' +
         '</a>' +
         '<div class="card-body">' +
-          '<div class="card-topline"><span>' + esc(CAT[p.category] || 'Phim') + ' · ' + esc(prettyDate(p.date)) + '</span></div>' +
+          '<div class="card-topline"><span>' + esc(CAT[p.category] || 'Phim') + ' · ' + esc(prettyDate(p.date)) + '</span>' +
+            '<button class="save-button" type="button" data-save="' + esc(p.id) + '" aria-label="Lưu bài ' + esc(p.title) + '"><span>♡</span></button></div>' +
           '<h3><a href="' + esc(p.url) + '">' + esc(p.title) + '</a></h3>' +
           '<p>' + esc(p.description) + '</p>' +
           '<a class="card-link" href="' + esc(p.url) + '">Đọc bài <span>↗</span></a>' +
         '</div>';
       grid.insertBefore(article, grid.firstChild);
-      added++;
     });
 
     /* Cập nhật lại con số "Đang hiển thị N bài viết" của trang Phim */
-    if (added) {
-      Array.prototype.forEach.call(grid.querySelectorAll('.movie-card'), function (card, index) {
-        var number = card.querySelector('.poster-index');
-        if (number) number.textContent = 'No. ' + String(index + 1).padStart(2, '0');
-      });
-      var counter = document.querySelector('[data-result-count]');
-      if (counter) {
-        var total = grid.querySelectorAll('.movie-card').length;
-        counter.textContent = 'Đang hiển thị ' + total + ' bài viết';
-      }
+    Array.prototype.forEach.call(grid.querySelectorAll('.movie-card'), function (card, index) {
+      var number = card.querySelector('.poster-index');
+      if (number) number.textContent = 'No. ' + String(index + 1).padStart(2, '0');
+    });
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.movie-card'));
+    var counter = document.querySelector('[data-result-count]');
+    if (counter) counter.textContent = 'Đang hiển thị ' + cards.length + ' bài viết';
+    Array.prototype.forEach.call(document.querySelectorAll('.filter-chip[data-filter]'), function (chip) {
+      var category = chip.getAttribute('data-filter');
+      var count = category === 'all'
+        ? cards.length
+        : cards.filter(function (card) { return card.getAttribute('data-category') === category; }).length;
+      var sup = chip.querySelector('sup');
+      if (sup) sup.textContent = String(count).padStart(2, '0');
+    });
+    var heroCounts = document.querySelectorAll('.hero-notes strong');
+    if (heroCounts[0]) heroCounts[0].textContent = String(cards.length).padStart(2, '0');
+    if (heroCounts[1]) {
+      var categories = {};
+      cards.forEach(function (card) { categories[card.getAttribute('data-category') || 'khac'] = true; });
+      heroCounts[1].textContent = String(Object.keys(categories).length).padStart(2, '0');
     }
   }
 

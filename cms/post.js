@@ -55,7 +55,8 @@
       tocList.appendChild(li);
     });
     if (!headings.length) {
-      var card = document.querySelector('.sci-toc') || document.querySelector('.cms-toc');
+      var card = document.querySelector('.sci-toc') || document.querySelector('.cms-toc') ||
+        document.querySelector('.cold-sidebar');
       if (card) card.hidden = true;
     }
     return headings.length;

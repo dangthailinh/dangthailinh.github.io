@@ -125,6 +125,25 @@
 .cold-article .cold-lead { font-size: clamp(22px, 2.2vw, 28px); font-style: italic; line-height: 1.55; }
 .cold-article em { color: #7c1513; }
 
+/* Nội dung giấy luôn dùng chữ đậm rõ. Trước đây theme Movie Club có thể
+   ghi màu chữ sáng lên nền kem và khiến toàn bộ phần review trông bị mờ. */
+.cold-content,.cold-article{color:#25221e!important;opacity:1!important}
+.cold-article :is(h1,h2,h3,h4,p,li,dd,dt,blockquote,figcaption,td,th){
+  opacity:1!important
+}
+.cold-article :is(h2,h3,h4){color:#10100e!important}
+.cold-article :is(p,li,dd,dt,td,th){color:#25221e!important}
+.cold-article ul,.cold-article ol{margin:0 0 32px;padding-left:25px;font-family:var(--serif);font-size:16px;line-height:1.75}
+.cold-article li{margin:9px 0}
+.cold-article blockquote{margin:5px 0 86px;padding:38px 42px;color:#eee7d8!important;background:var(--cold-blood);border:2px solid var(--cold-black);box-shadow:12px 13px 0 var(--cold-black);font-family:var(--display);font-size:clamp(27px,3.4vw,48px);line-height:1.05;text-transform:uppercase}
+.cold-article figure{margin:2px 0 85px}
+.cold-article figure img,.cold-article figure video{width:100%;border:2px solid var(--cold-black);filter:contrast(1.05) saturate(.82);box-shadow:11px 12px 0 var(--cold-red)}
+.cold-article figure figcaption{margin-top:21px;color:#5e584f!important;font-family:var(--serif);font-size:12px;font-style:italic;line-height:1.5}
+.film-image-placeholder,.film-cover-placeholder{min-height:240px;display:grid;place-items:center;color:#f4ecdc;background:#191816;border:2px solid var(--cold-black);font:900 28px/1.1 var(--display);letter-spacing:.08em;text-align:center}
+.film-cover-placeholder{min-height:470px}
+.film-paper-page .cold-hero h1{font-size:clamp(70px,10vw,155px);line-height:.76;overflow-wrap:anywhere}
+.film-paper-page .cold-poster video{width:100%;display:block}
+
 .cold-cast { margin: 5px 0 0; padding: 0; border-top: 2px solid var(--cold-black); list-style: none; }
 .cold-cast li { padding: 18px 2px; display: grid; grid-template-columns: minmax(150px, .7fr) 1.3fr; gap: 26px; border-bottom: 1px solid #b5ad9d; }
 .cold-cast strong { font-family: var(--display); font-size: 19px; letter-spacing: .02em; text-transform: uppercase; }
@@ -171,6 +190,10 @@
 .cold-sidebar nav a { padding: 13px 0; display: grid; grid-template-columns: 30px 1fr; align-items: center; border-bottom: 1px solid #b4aa98; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .cold-sidebar nav a:hover { color: var(--cold-red); }
 .cold-sidebar nav span { color: #9d2521; font-family: monospace; }
+.cold-sidebar nav ol{margin:0;padding:0;list-style:none;counter-reset:film-toc}
+.cold-sidebar nav li{counter-increment:film-toc}
+.cold-sidebar nav li a{grid-template-columns:30px 1fr}
+.cold-sidebar nav li a::before{content:counter(film-toc,decimal-leading-zero);color:#9d2521;font-family:monospace}
 .cold-sidebar__warning { margin: 25px 0 0; padding: 14px; color: #d5cbbb; background: #1a1816; font-family: var(--serif); font-size: 11px; line-height: 1.55; }
 .cold-sidebar__warning strong { margin-bottom: 5px; display: block; color: #dc3931; font-family: var(--sans); font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
 
@@ -213,6 +236,8 @@
   .cold-spoiler summary i { display: none; }
   .cold-spoiler__body { padding: 38px 21px 4px; }
   .cold-footer-title { display: none; }
+  .film-paper-page .cold-hero h1{font-size:clamp(58px,19vw,105px)}
+  .cold-article blockquote{padding:31px 24px}
 }
 
 @media (prefers-reduced-motion: reduce) {
