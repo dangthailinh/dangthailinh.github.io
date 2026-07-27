@@ -1,7 +1,24 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-27T01:52:51.268Z",
+  "updatedAt": "2026-07-27T05:29:28.858Z",
   "posts": [
+    {
+      "id": "gm-game-bai3",
+      "section": "game",
+      "category": "review",
+      "status": "published",
+      "title": "BLACK MYTH: WUKONG",
+      "slug": "game-bai3",
+      "description": "Bài viết cũ của Linh Osimi.",
+      "cover": "https://www.ludo.guide/images/heroes/black-myth-wu-kong.webp",
+      "tags": [],
+      "date": "2026-07-27",
+      "author": "Linh Osimi",
+      "path": "game0/0/game-bai3.html",
+      "url": "/game0/0/game-bai3.html",
+      "updatedAt": "2026-07-27T05:29:28.858Z",
+      "importedLegacy": true
+    },
     {
       "id": "kt-tong-quan-ve-codex",
       "section": "kienthuc",
