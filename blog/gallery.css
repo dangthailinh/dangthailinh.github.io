@@ -397,49 +397,6 @@
   opacity: .68;
 }
 
-.gallery-howto {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  padding: 3rem max(1rem, calc((100vw - 1320px) / 2)) 5rem;
-  background:
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, .04) 0 8px, transparent 8px 16px),
-    #252918;
-  color: var(--cream);
-  border-top: 3px dashed var(--pink);
-}
-
-.gallery-howto > div {
-  position: relative;
-  min-height: 150px;
-  padding: 1.2rem 1.2rem 1.2rem 4.6rem;
-  border: 1px dotted rgba(255, 247, 214, .35);
-}
-
-.howto-number {
-  position: absolute;
-  left: 1rem;
-  top: .7rem;
-  color: #bbc46c;
-  font-family: Georgia, serif;
-  font-size: 2.6rem;
-}
-
-.gallery-howto h2 {
-  margin: 0 0 .5rem;
-  font-family: var(--hand);
-  font-size: 1.15rem;
-}
-
-.gallery-howto p {
-  margin: 0;
-  font-size: .7rem;
-}
-
-.gallery-howto code {
-  color: #d6dd8d;
-}
-
 .task-title {
   color: inherit;
   text-decoration: none;
@@ -573,9 +530,6 @@
     width: 100%;
   }
 
-  .gallery-howto {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 800px) {
@@ -703,10 +657,6 @@
 
   .photo-card-meta span:last-child {
     display: none;
-  }
-
-  .gallery-howto > div {
-    min-height: 120px;
   }
 
   .lightbox-stage img {
