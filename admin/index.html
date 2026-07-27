@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Bảng quản trị — Linh Osimi</title>
 <link rel="icon" type="image/png" href="/favicon.png?v=2">
-<link rel="stylesheet" href="/admin/admin.css?v=20260727-cursor">
+<link rel="stylesheet" href="/admin/admin.css?v=20260727-paper">
 </head>
 <body>
 
@@ -149,64 +149,24 @@
         <section class="manga-options" id="wrap-manga-options" hidden aria-labelledby="manga-options-title">
           <div class="manga-options-head">
             <div>
-              <span class="manga-options-kicker">MANGA ARTICLE SYSTEM</span>
-              <strong id="manga-options-title">Thiết kế bài Manga</strong>
+              <span class="manga-options-kicker">MANGA POST · WHITE PAPER</span>
+              <strong id="manga-options-title">Một mẫu bài Manga cố định</strong>
             </div>
-            <span class="manga-options-badge">Denji/Reze · Evan</span>
+            <span class="manga-options-badge">Nền trắng</span>
           </div>
 
           <label class="field">
-            <span>Dạng bài</span>
-            <select id="f-manga-form">
-              <option value="profile">Hồ sơ nhân vật</option>
-              <option value="duo">Song nhân vật / mối quan hệ</option>
-              <option value="editorial">Phân tích truyện / chủ đề</option>
-            </select>
-            <small class="field-note">Dạng bài quyết định cách chia khung, vị trí ảnh và cột thông tin.</small>
-          </label>
-
-          <div class="manga-option-grid">
-            <label class="field">
-              <span>Phong cách</span>
-              <select id="f-manga-style">
-                <option value="ink">Mực đen trắng</option>
-                <option value="dark">Dark manga</option>
-                <option value="color">Comic màu</option>
-              </select>
-            </label>
-            <label class="field">
-              <span>Bảng màu</span>
-              <select id="f-manga-palette">
-                <option value="red">Đỏ · Chainsaw / Death Note</option>
-                <option value="purple">Tím · Evangelion</option>
-                <option value="blue">Xanh · Seinen</option>
-                <option value="gold">Vàng · Shonen</option>
-                <option value="green">Lục · Sci-fi</option>
-                <option value="custom">Màu tùy chỉnh</option>
-              </select>
-            </label>
-          </div>
-
-          <label class="field manga-color-field">
-            <span>Màu nhấn</span>
-            <div class="manga-color-control">
-              <input id="f-manga-accent" type="color" value="#e10600" aria-label="Chọn màu nhấn Manga">
-              <output id="manga-accent-value">#E10600</output>
-            </div>
+            <span>Nhãn nhỏ trên tiêu đề (không bắt buộc)</span>
+            <input id="f-manga-kicker" type="text" maxlength="80" placeholder="VD: SERIAL EXPERIMENTS LAIN · KỲ 01">
           </label>
 
           <label class="field">
-            <span>Dòng nhãn trên tiêu đề</span>
-            <input id="f-manga-kicker" type="text" maxlength="80" placeholder="VD: CHARACTER FILE / ARC 02">
-          </label>
-
-          <label class="field">
-            <span>Câu nhấn ở đầu bài</span>
+            <span>Câu trích dẫn đầu bài (không bắt buộc)</span>
             <textarea id="f-manga-quote" rows="2" maxlength="180" placeholder="Một câu thoại hoặc ý chính của bài viết."></textarea>
           </label>
 
-          <button id="btn-manga-structure" class="btn manga-structure-btn block" type="button">＋ Tạo khung nội dung theo dạng bài</button>
-          <small class="field-note">Khung gồm các phần và gợi ý nội dung; bạn vẫn sửa, thêm ảnh và đổi thứ tự như bình thường.</small>
+          <button id="btn-manga-structure" class="btn manga-structure-btn block" type="button">＋ Tạo khung bài Manga nền trắng</button>
+          <small class="field-note">Tất cả bài Manga mới dùng cùng một bố cục trắng, chữ đen và ảnh xen giữa nội dung.</small>
         </section>
 
         <div id="blog-photo-notice" class="photo-route-notice" hidden>
@@ -820,7 +780,7 @@
 <input id="file-input" type="file" accept="image/*" hidden>
 <input id="photo-file-input" type="file" accept="image/*" multiple hidden>
 
-<script src="/admin/templates.js?v=20260727-manga"></script>
-<script src="/admin/admin.js?v=20260727-manga"></script>
+<script src="/admin/templates.js?v=20260727-paper"></script>
+<script src="/admin/admin.js?v=20260727-paper"></script>
 </body>
 </html>

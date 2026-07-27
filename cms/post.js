@@ -40,7 +40,9 @@
   function buildToc() {
     var tocList = document.querySelector('#article-toc');
     if (!tocList || !post) return 0;
-    var headings = Array.prototype.slice.call(post.querySelectorAll('h2'));
+    var headings = Array.prototype.slice.call(post.querySelectorAll('h2')).filter(function (heading) {
+      return heading.textContent.trim().length > 0;
+    });
     var used = {};
     headings.forEach(function (h, i) {
       var hid = h.id || slugify(h.textContent) || ('phan-' + (i + 1));

@@ -400,52 +400,20 @@ p.content + '\n' +
     phim:      'family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600'
   };
 
-  var MANGA_FORM_LABELS = {
-    profile: 'Hồ sơ nhân vật',
-    duo: 'Song nhân vật',
-    editorial: 'Phân tích truyện'
-  };
-
-  var MANGA_STYLE_LABELS = {
-    ink: 'Mực đen trắng',
-    dark: 'Dark manga',
-    color: 'Comic màu'
-  };
-
-  function mangaOption(value, choices, fallback) {
-    return Object.prototype.hasOwnProperty.call(choices, value) ? value : fallback;
-  }
-
-  function mangaColor(value) {
-    return /^#[0-9a-f]{6}$/i.test(String(value || '')) ? String(value) : '#e10600';
-  }
-
-  function cssUrl(value) {
-    return String(value || '')
-      .replace(/\\/g, '%5C').replace(/'/g, '%27')
-      .replace(/\(/g, '%28').replace(/\)/g, '%29')
-      .replace(/[\r\n]/g, '');
-  }
-
-  /* Bài Manga có hệ thiết kế riêng: hero toàn màn hình, texture halftone,
-     khung truyện và bố cục thay đổi theo dạng bài đã chọn trong admin. */
+  /* Bài Manga dùng duy nhất một mẫu giấy trắng, chữ đen và khung nội dung
+     ổn định. Admin không còn lựa chọn form, nền tối hay màu tùy chỉnh. */
   function mangaArticle(p) {
     var cats = categoriesFor('manga');
     var cat = cats[p.category] || cats.khac || { label: 'Manga', symbol: '✦' };
-    var form = mangaOption(p.mangaForm, MANGA_FORM_LABELS, 'profile');
-    var style = mangaOption(p.mangaStyle, MANGA_STYLE_LABELS, 'ink');
-    var accent = mangaColor(p.mangaAccent);
     var cover = p.cover || '';
     var isVideo = /\.(mp4|webm|ogv|mov)(\?|$)/i.test(cover);
-    var kicker = p.mangaKicker || (cat.label + ' / CHARACTER FILE');
+    var kicker = p.mangaKicker || (cat.label + ' / MANGA POST');
     var quote = p.mangaQuote || p.description;
     var tagList = (p.tags || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
     var story = String(p.content || '').trim();
     story = ('<section class="manga-story-panel">' +
       story.replace(/(<h2\b[^>]*>[\s\S]*?<\/h2>)/gi, '</section><section class="manga-story-panel">$1') +
       '</section>').replace('<section class="manga-story-panel"></section>', '');
-    var heroStyle = '--manga-accent:' + accent + ';' +
-      (cover && !isVideo ? '--manga-hero-image:url(\'' + cssUrl(cover) + '\');' : '');
     var coverMedia = '';
     if (cover) {
       coverMedia = isVideo
@@ -472,13 +440,11 @@ p.content + '\n' +
 '  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">\n' +
 '  <link rel="stylesheet" href="/cms/site-nav.css">\n' +
 '  <link rel="stylesheet" href="/cms/article.css">\n' +
-'  <link rel="stylesheet" href="/cms/manga-article.css?v=20260727">\n' +
-'  <link rel="stylesheet" href="/manga0/cursor.css?v=2">\n' +
+'  <link rel="stylesheet" href="/cms/manga-article.css?v=20260727-white">\n' +
 '  <script src="/cms/site-nav.js" defer></script>\n' +
-'  <script src="/cms/post.js" defer></script>\n' +
-'  <script src="/manga0/cursor.js?v=2" defer></script>\n' +
+'  <script src="/cms/post.js?v=20260727-paper" defer></script>\n' +
 '</head>\n' +
-'<body data-section="manga" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="manga" data-manga-form="' + form + '" data-manga-style="' + style + '" style="' + heroStyle + '">\n' +
+'<body data-section="manga" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="manga" data-manga-template="paper">\n' +
 '  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
 '  <div data-site-nav="manga"></div>\n' +
 '\n' +
@@ -500,7 +466,7 @@ p.content + '\n' +
 '      <div class="manga-dossier-copy">\n' +
 '        <span class="manga-index">FILE 01</span>\n' +
 '        <p class="manga-eyebrow">' + esc(cat.symbol) + ' ' + esc(cat.label) + '</p>\n' +
-'        <h2>' + esc(MANGA_FORM_LABELS[form]) + '</h2>\n' +
+'        <h2>Bài phân tích Manga</h2>\n' +
 '        <p>' + esc(p.description) + '</p>\n' +
 '        <div class="manga-byline"><b>' + esc(p.author || 'Linh Osimi') + '</b><span>' + esc(prettyDate(p.date)) + '</span><span data-reading-time>…</span></div>\n' +
 '      </div>\n' +
@@ -508,8 +474,8 @@ p.content + '\n' +
 '      <aside class="manga-stats" aria-label="Thông tin bài viết">\n' +
 '        <h3>Chỉ số</h3>\n' +
 '        <dl>\n' +
-'          <div><dt>Dạng bài</dt><dd>' + esc(MANGA_FORM_LABELS[form]) + '</dd></div>\n' +
-'          <div><dt>Phong cách</dt><dd>' + esc(MANGA_STYLE_LABELS[style]) + '</dd></div>\n' +
+'          <div><dt>Dạng bài</dt><dd>Bài phân tích Manga</dd></div>\n' +
+'          <div><dt>Giao diện</dt><dd>Nền trắng cố định</dd></div>\n' +
 '          <div><dt>Chủ đề</dt><dd>' + esc(cat.label) + '</dd></div>\n' +
 '          <div><dt>Archive</dt><dd>' + esc(String(p.date || '').slice(0, 4) || '—') + '</dd></div>\n' +
 '        </dl>\n' +

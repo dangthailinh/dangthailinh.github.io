@@ -264,6 +264,64 @@
     return gh(repoPath(path), { method: 'PUT', body: body });
   }
 
+  /* Ghi nhiều file trong cùng một commit Git. Đăng bài cần cập nhật đồng thời
+     HTML và posts.json; gom chúng lại tránh tạo hai lượt GitHub Pages rồi lượt
+     đầu bị đánh dấu "cancelled" khi commit sau tới ngay lập tức. */
+  function writeFiles(changes, message) {
+    var root = '/repos/' + S.owner + '/' + S.repo;
+    var branchPath = S.branch.split('/').map(encodeURIComponent).join('/');
+    var headSha = '';
+    var baseTreeSha = '';
+    var blobResults = [];
+
+    return gh(root + '/git/ref/heads/' + branchPath)
+      .then(function (ref) {
+        headSha = ref.object.sha;
+        return gh(root + '/git/commits/' + headSha);
+      })
+      .then(function (commit) {
+        baseTreeSha = commit.tree.sha;
+        return Promise.all(changes.map(function (change) {
+          if (change.remove) return Promise.resolve(null);
+          var b64 = typeof change.content === 'string' ? toB64(change.content) : change.content.b64;
+          return gh(root + '/git/blobs', {
+            method: 'POST',
+            body: { content: b64, encoding: 'base64' }
+          });
+        }));
+      })
+      .then(function (blobs) {
+        blobResults = blobs;
+        var tree = changes.map(function (change, index) {
+          return {
+            path: change.path,
+            mode: '100644',
+            type: 'blob',
+            sha: change.remove ? null : blobs[index].sha
+          };
+        });
+        return gh(root + '/git/trees', {
+          method: 'POST',
+          body: { base_tree: baseTreeSha, tree: tree }
+        });
+      })
+      .then(function (tree) {
+        return gh(root + '/git/commits', {
+          method: 'POST',
+          body: { message: message, tree: tree.sha, parents: [headSha] }
+        });
+      })
+      .then(function (commit) {
+        return gh(root + '/git/refs/heads/' + branchPath, {
+          method: 'PATCH',
+          body: { sha: commit.sha, force: false }
+        });
+      })
+      .then(function (ref) {
+        return { ref: ref, blobs: blobResults };
+      });
+  }
+
   function deleteFile(path, message, sha) {
     return gh(repoPath(path), { method: 'DELETE', body: { message: message, sha: sha, branch: S.branch } });
   }
@@ -673,6 +731,27 @@
 
   /* ───────────────── Trình soạn thảo ───────────────── */
   var editor = $('#editor');
+  var editorPointer = document.createElement('span');
+  editorPointer.className = 'admin-editor-cursor';
+  editorPointer.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(editorPointer);
+  document.documentElement.classList.add('has-admin-editor-cursor');
+
+  function moveEditorPointer(event) {
+    editorPointer.style.left = event.clientX + 'px';
+    editorPointer.style.top = event.clientY + 'px';
+    editorPointer.classList.add('is-visible');
+  }
+
+  function hideEditorPointer() {
+    editorPointer.classList.remove('is-visible');
+  }
+
+  editor.addEventListener('pointerenter', moveEditorPointer);
+  editor.addEventListener('pointermove', moveEditorPointer);
+  editor.addEventListener('pointerleave', hideEditorPointer);
+  editor.addEventListener('pointercancel', hideEditorPointer);
+  window.addEventListener('blur', hideEditorPointer);
 
   function focusEditor() { if (document.activeElement !== editor) editor.focus(); }
 
@@ -1348,39 +1427,7 @@
   });
 
   /* ───────────────── Biểu mẫu thông tin bài ───────────────── */
-  var MANGA_PALETTES = {
-    red: '#e10600',
-    purple: '#8b5cf6',
-    blue: '#087ea4',
-    gold: '#f2b705',
-    green: '#39ff88'
-  };
-
-  var MANGA_STRUCTURES = {
-    profile:
-      '<h2>Hồ sơ nhân vật</h2>' +
-      '<p>Giới thiệu nhân vật, xuất thân và vai trò trong câu chuyện.</p>' +
-      '<figure><div class="manga-image-placeholder">THÊM ẢNH NHÂN VẬT</div><figcaption>Chú thích cho khung hình.</figcaption></figure>' +
-      '<h2>Tính cách & động cơ</h2>' +
-      '<p>Phân tích tính cách, mục tiêu, điểm mạnh và mâu thuẫn bên trong.</p>' +
-      '<blockquote>Một câu thoại hoặc chi tiết thể hiện rõ nhất nhân vật.</blockquote>' +
-      '<h2>Sự biến đổi</h2>' +
-      '<p>Nhân vật đã thay đổi như thế nào qua các biến cố chính?</p>' +
-      '<h2>Dấu ấn để lại</h2>' +
-      '<p>Kết luận về ý nghĩa và ảnh hưởng của nhân vật.</p>',
-    duo:
-      '<h2>Nhân vật thứ nhất</h2>' +
-      '<p>Xuất thân, mong muốn và điều nhân vật đang che giấu.</p>' +
-      '<figure><div class="manga-image-placeholder">THÊM ẢNH NHÂN VẬT 01</div><figcaption>Khung truyện thứ nhất.</figcaption></figure>' +
-      '<h2>Nhân vật thứ hai</h2>' +
-      '<p>Đối chiếu tính cách, mục tiêu và cách nhân vật này tác động đến người còn lại.</p>' +
-      '<figure><div class="manga-image-placeholder">THÊM ẢNH NHÂN VẬT 02</div><figcaption>Khung truyện thứ hai.</figcaption></figure>' +
-      '<h2>Mối quan hệ</h2>' +
-      '<blockquote>Điểm va chạm quan trọng nhất giữa hai nhân vật.</blockquote>' +
-      '<p>Phân tích sự gắn kết, xung đột và bước ngoặt của mối quan hệ.</p>' +
-      '<h2>Dư âm</h2>' +
-      '<p>Kết luận về điều mối quan hệ này để lại cho câu chuyện.</p>',
-    editorial:
+  var MANGA_STRUCTURE =
       '<h2>Bối cảnh</h2>' +
       '<p>Giới thiệu arc, chương truyện hoặc vấn đề cần phân tích.</p>' +
       '<figure><div class="manga-image-placeholder">THÊM KHUNG MANGA</div><figcaption>Bối cảnh của bài viết.</figcaption></figure>' +
@@ -1390,18 +1437,10 @@
       '<h2>Đối chiếu</h2>' +
       '<p>So sánh các nhân vật, biến cố hoặc cách tác giả triển khai chủ đề.</p>' +
       '<h2>Kết luận</h2>' +
-      '<p>Tóm lại ý nghĩa của chủ đề đối với toàn bộ tác phẩm.</p>'
-  };
-
-  function updateMangaAccent(fromPalette) {
-    var palette = $('#f-manga-palette').value || 'red';
-    if (fromPalette && MANGA_PALETTES[palette]) $('#f-manga-accent').value = MANGA_PALETTES[palette];
-    $('#manga-accent-value').textContent = ($('#f-manga-accent').value || '#e10600').toUpperCase();
-  }
+      '<p>Tóm lại ý nghĩa của chủ đề đối với toàn bộ tác phẩm.</p>';
 
   function applyMangaStructure() {
-    var form = $('#f-manga-form').value || 'profile';
-    var html = MANGA_STRUCTURES[form] || MANGA_STRUCTURES.profile;
+    var html = MANGA_STRUCTURE;
     function useStructure() {
       editor.innerHTML = html;
       $('#html-view').value = html;
@@ -1495,18 +1534,7 @@
     schedulePreview();
     updateFormStatus();
   });
-  $('#f-manga-palette').addEventListener('change', function () {
-    updateMangaAccent(true);
-    saveDraftSoon();
-    schedulePreview();
-  });
-  $('#f-manga-accent').addEventListener('input', function () {
-    $('#f-manga-palette').value = 'custom';
-    updateMangaAccent(false);
-    saveDraftSoon();
-    schedulePreview();
-  });
-  ['#f-manga-form', '#f-manga-style', '#f-manga-kicker', '#f-manga-quote'].forEach(function (sel) {
+  ['#f-manga-kicker', '#f-manga-quote'].forEach(function (sel) {
     $(sel).addEventListener('input', function () { saveDraftSoon(); schedulePreview(); });
   });
   $('#btn-manga-structure').addEventListener('click', applyMangaStructure);
@@ -1556,10 +1584,6 @@
       category: $('#f-category').value,
       placement: section === 'game' ? ($('#f-game-placement').value || 'article') : '',
       targetUrl: section === 'game' ? $('#f-target-url').value.trim() : '',
-      mangaForm: section === 'manga' ? ($('#f-manga-form').value || 'profile') : '',
-      mangaStyle: section === 'manga' ? ($('#f-manga-style').value || 'ink') : '',
-      mangaPalette: section === 'manga' ? ($('#f-manga-palette').value || 'red') : '',
-      mangaAccent: section === 'manga' ? ($('#f-manga-accent').value || '#e10600') : '',
       mangaKicker: section === 'manga' ? $('#f-manga-kicker').value.trim() : '',
       mangaQuote: section === 'manga' ? $('#f-manga-quote').value.trim() : '',
       status: $('#f-status').value,
@@ -1587,13 +1611,8 @@
     $('#f-category').value = (p.category && map[p.category]) ? p.category : Object.keys(map)[0];
     $('#f-game-placement').value = p.placement || 'article';
     $('#f-target-url').value = p.targetUrl || '';
-    $('#f-manga-form').value = p.mangaForm || 'profile';
-    $('#f-manga-style').value = p.mangaStyle || 'ink';
-    $('#f-manga-palette').value = p.mangaPalette || 'red';
-    $('#f-manga-accent').value = p.mangaAccent || MANGA_PALETTES[p.mangaPalette] || '#e10600';
     $('#f-manga-kicker').value = p.mangaKicker || '';
     $('#f-manga-quote').value = p.mangaQuote || '';
-    updateMangaAccent(false);
     $('#f-status').value = p.status || 'published';
     $('#f-mood').value = p.mood || '';
     $('#f-title').value = p.title || '';
@@ -1807,23 +1826,6 @@
         });
     }
 
-    if (isDraft) {
-      /* Nháp: không sinh file HTML. Nếu trước đó đã có file thì gỡ đi. */
-      if (oldPath) chain = chain.then(function () { return removeIfExists(oldPath, 'Chuyển về nháp: ' + p.title); });
-      if (oldPath !== p.path) chain = chain.then(function () { return removeIfExists(p.path, 'Dọn file: ' + p.path); });
-    } else {
-      chain = chain
-        .then(function () { return readFile(p.path); })
-        .then(function (file) {
-          return writeFile(p.path, T.render(p),
-            (isEdit ? 'Cập nhật bài: ' : 'Đăng bài mới: ') + p.title,
-            file ? file.sha : null);
-        })
-        .then(function () {
-          if (oldPath && oldPath !== p.path) return removeIfExists(oldPath, 'Dọn file cũ: ' + oldPath);
-        });
-    }
-
     chain
       .then(function () { return loadDb(); })
       .then(function () {
@@ -1831,10 +1833,6 @@
           id: p.id, section: p.section, category: p.category, status: p.status,
           placement: p.placement || '',
           targetUrl: p.targetUrl || '',
-          mangaForm: p.mangaForm || '',
-          mangaStyle: p.mangaStyle || '',
-          mangaPalette: p.mangaPalette || '',
-          mangaAccent: p.mangaAccent || '',
           mangaKicker: p.mangaKicker || '',
           mangaQuote: p.mangaQuote || '',
           title: p.title, slug: p.slug, description: p.description,
@@ -1847,7 +1845,24 @@
         if (p.section === 'blog') { record.time = p.time; record.mood = p.mood || '(・_・)'; }
 
         upsertPost(record);
-        return saveDb((isDraft ? 'Lưu nháp: ' : (isEdit ? 'Cập nhật: ' : 'Thêm bài: ')) + p.title);
+        S.db.updatedAt = new Date().toISOString();
+        S.db.posts.sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
+        var dbJson = JSON.stringify(S.db, null, 2) + '\n';
+        var changes = [];
+
+        if (!isDraft) {
+          changes.push({ path: p.path, content: T.render(p) });
+        }
+        if (oldPath && !wasDraft && (isDraft || oldPath !== p.path)) {
+          changes.push({ path: oldPath, remove: true });
+        }
+        changes.push({ path: DATA_PATH, content: dbJson });
+
+        var message = (isDraft ? 'Lưu nháp: ' : (isEdit ? 'Cập nhật bài: ' : 'Đăng bài: ')) + p.title;
+        return writeFiles(changes, message).then(function (result) {
+          var dataIndex = changes.length - 1;
+          if (result.blobs[dataIndex]) S.dbSha = result.blobs[dataIndex].sha;
+        });
       })
       .then(function () {
         localStorage.removeItem(LS.draft);
@@ -2085,8 +2100,6 @@
         writeForm({
           section: p.section, category: p.category, status: p.status || 'published',
           placement: p.placement || 'article', targetUrl: p.targetUrl || '',
-          mangaForm: p.mangaForm || 'profile', mangaStyle: p.mangaStyle || 'ink',
-          mangaPalette: p.mangaPalette || 'red', mangaAccent: p.mangaAccent || '#e10600',
           mangaKicker: p.mangaKicker || '', mangaQuote: p.mangaQuote || '',
           title: p.title, slug: p.slug, description: p.description, cover: p.cover,
           tags: p.tags, date: p.date, time: p.time, mood: p.mood, content: content
@@ -2302,8 +2315,6 @@
         writeForm({
           section: p.section, category: p.category,
           placement: p.placement || 'article', targetUrl: p.targetUrl || '',
-          mangaForm: p.mangaForm || 'profile', mangaStyle: p.mangaStyle || 'ink',
-          mangaPalette: p.mangaPalette || 'red', mangaAccent: p.mangaAccent || '#e10600',
           mangaKicker: p.mangaKicker || '', mangaQuote: p.mangaQuote || '',
           status: 'draft',                       /* bản sao luôn bắt đầu ở dạng nháp */
           title: p.title + ' (bản sao)',
