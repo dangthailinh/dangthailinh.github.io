@@ -97,7 +97,7 @@ Trông thì có vẻ thừa, nhưng đều đang được dùng:
 ---
 
 ## Quy trình làm việc
-
+Sửa theo quy trình thôi em zai!
 Bảng quản trị commit **thẳng lên GitHub**, nên máy bạn thường bị chậm hơn remote.
 Luôn kéo về trước khi push:
 
