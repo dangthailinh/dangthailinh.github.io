@@ -130,6 +130,7 @@
 '  <script src="/kienthuc/assets/js/knowledge-data.js" defer></script>\n' +
 '  <script src="/kienthuc/assets/js/article.js" defer></script>\n' +
 '  <script src="/cms/post.js" defer></script>\n' +
+'  <script src="/cms/theme.js" defer></script>\n' +
 '</head>\n' +
 '<body data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="kienthuc">\n' +
 '  <a class="skip-link" href="#article-content">Bỏ qua đến nội dung</a>\n' +
@@ -246,6 +247,7 @@ p.content + '\n' +
 '  <link rel="stylesheet" href="/khoa-hoc0/bai-viet/post.css">\n' +
 '  <script src="/cms/site-nav.js" defer></script>\n' +
 '  <script src="/cms/post.js" defer></script>\n' +
+'  <script src="/cms/theme.js" defer></script>\n' +
 '</head>\n' +
 '<body data-section="khoahoc" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="khoahoc">\n' +
 '  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
@@ -328,6 +330,7 @@ p.content + '\n' +
 '  <link rel="icon" href="/favicon.png">\n' +
 '  <link rel="stylesheet" href="/blog/bai-viet/post.css">\n' +
 '  <script src="/cms/post.js" defer></script>\n' +
+'  <script src="/cms/theme.js" defer></script>\n' +
 '</head>\n' +
 '<body data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="blog">\n' +
 '  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
@@ -439,6 +442,7 @@ p.content + '\n' +
 '  <link rel="stylesheet" href="/cms/article.css">\n' +
 '  <script src="/cms/site-nav.js" defer></script>\n' +
 '  <script src="/cms/post.js" defer></script>\n' +
+'  <script src="/cms/theme.js" defer></script>\n' +
 '</head>\n' +
 '<body data-section="' + esc(p.section) + '" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="' + esc(p.section) + '">\n' +
 '  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +

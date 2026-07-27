@@ -64,6 +64,7 @@
       <button class="tab" data-tab="dashboard">◈ Tổng quan</button>
       <button class="tab active" data-tab="write">✎ Viết bài</button>
       <button class="tab" data-tab="manage">☰ Quản lý bài</button>
+      <button class="tab" data-tab="theme">🎨 Giao diện</button>
       <button class="tab" data-tab="taxonomy">🏷 Chủ đề</button>
     </nav>
     <div class="topbar-right">
@@ -155,17 +156,20 @@
 
         <label class="field">
           <span>Tiêu đề <b class="req">*</b></span>
-          <input id="f-title" type="text" placeholder="VD: Review Elden Ring">
+          <input id="f-title" type="text" placeholder="VD: Review Elden Ring" maxlength="120">
+          <small class="field-count" id="f-title-count">0 / 120</small>
         </label>
 
         <label class="field">
           <span>Đường dẫn (tự sinh từ tiêu đề)</span>
-          <input id="f-slug" type="text" spellcheck="false" placeholder="review-elden-ring">
+          <input id="f-slug" type="text" spellcheck="false" placeholder="review-elden-ring" maxlength="70">
+          <small class="field-note">Chỉ dùng chữ thường, số và dấu gạch ngang.</small>
         </label>
 
         <label class="field">
           <span>Mô tả ngắn <b class="req">*</b></span>
-          <textarea id="f-desc" rows="3" placeholder="1–2 câu tóm tắt, hiện ở thẻ bài ngoài trang danh sách."></textarea>
+          <textarea id="f-desc" rows="3" maxlength="240" placeholder="1–2 câu tóm tắt, hiện ở thẻ bài ngoài trang danh sách."></textarea>
+          <small class="field-count" id="f-desc-count">0 / 240</small>
         </label>
 
         <label class="field">
@@ -186,6 +190,11 @@
           <span>Ngày đăng</span>
           <input id="f-date" type="date">
         </label>
+
+        <div id="form-status" class="form-status" aria-live="polite">
+          <strong>Kiểm tra bài viết</strong>
+          <span>Điền thông tin để bắt đầu.</span>
+        </div>
 
         <div class="side-actions">
           <button id="btn-publish" class="btn primary block">🚀 Đăng bài lên web</button>
@@ -326,6 +335,136 @@
 
     <p class="list-summary" id="list-summary"></p>
     <div id="post-list" class="post-list"></div>
+  </div>
+
+  <!-- ═══════════ TAB GIAO DIỆN ═══════════ -->
+  <div id="tab-theme" class="tabpanel">
+    <div class="theme-layout">
+      <aside class="theme-controls">
+        <div class="theme-head">
+          <div>
+            <h2>Giao diện trang</h2>
+            <p>Sửa chữ, ảnh và kiểu trình bày của từng mục.</p>
+          </div>
+          <span id="theme-dirty" class="tax-dirty" hidden>Chưa lưu</span>
+        </div>
+
+        <label class="field">
+          <span>Chọn mục cần sửa</span>
+          <select id="theme-section">
+            <option value="blog">Blog · Nhật ký</option>
+            <option value="khoahoc">Khoa học</option>
+            <option value="kienthuc">Kiến thức</option>
+            <option value="game">Game</option>
+            <option value="manga">Manga</option>
+            <option value="nghethuat">Nghệ thuật</option>
+            <option value="phim">Phim</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Tiêu đề đầu trang</span>
+          <textarea id="theme-title" rows="2" maxlength="120" placeholder="Có thể xuống dòng"></textarea>
+        </label>
+
+        <label class="field">
+          <span>Đoạn giới thiệu</span>
+          <textarea id="theme-description" rows="4" maxlength="360"></textarea>
+        </label>
+
+        <label class="field">
+          <span>Ảnh đầu trang</span>
+          <input id="theme-image" type="text" spellcheck="false" placeholder="/uploads/... hoặc https://...">
+        </label>
+        <div class="theme-image-actions">
+          <button id="btn-theme-upload" class="btn ghost small" type="button">⬆ Tải ảnh mới</button>
+          <button id="btn-theme-image-clear" class="btn ghost small" type="button">Bỏ ảnh</button>
+        </div>
+
+        <fieldset class="theme-group">
+          <legend>Màu sắc</legend>
+          <div class="theme-colors">
+            <label><span>Nền trang</span><input id="theme-bg" type="color"></label>
+            <label><span>Nền nội dung</span><input id="theme-surface" type="color"></label>
+            <label><span>Màu chữ</span><input id="theme-text" type="color"></label>
+            <label><span>Màu nhấn</span><input id="theme-accent" type="color"></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="theme-group">
+          <legend>Kiểu chữ nội dung</legend>
+          <div class="theme-fonts">
+            <label class="field"><span>Chữ bài viết</span>
+              <select id="theme-body-font">
+                <option value="inter">Inter · Hiện đại</option>
+                <option value="be-vietnam">Be Vietnam Pro · Dễ đọc</option>
+                <option value="serif">Georgia · Sách báo</option>
+                <option value="mono">Courier · Nhật ký máy tính</option>
+                <option value="trebuchet">Trebuchet · Gọn gàng</option>
+              </select>
+            </label>
+            <label class="field"><span>Chữ tiêu đề</span>
+              <select id="theme-heading-font">
+                <option value="space-grotesk">Space Grotesk</option>
+                <option value="lora">Lora · Văn học</option>
+                <option value="orbitron">Orbitron · Game</option>
+                <option value="comic">Comic · Old web</option>
+                <option value="inter">Inter · Tối giản</option>
+                <option value="trebuchet">Trebuchet</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="range-field">
+            <span>Cỡ chữ bài viết <output id="theme-size-out">17px</output></span>
+            <input id="theme-size" type="range" min="14" max="24" step="1">
+          </label>
+          <label class="range-field">
+            <span>Giãn dòng <output id="theme-line-out">1.8</output></span>
+            <input id="theme-line" type="range" min="1.4" max="2.2" step="0.05">
+          </label>
+          <label class="range-field">
+            <span>Bề ngang phần đọc <output id="theme-width-out">70ch</output></span>
+            <input id="theme-width" type="range" min="50" max="90" step="2">
+          </label>
+          <label class="range-field">
+            <span>Bo góc ảnh và khối <output id="theme-radius-out">14px</output></span>
+            <input id="theme-radius" type="range" min="0" max="30" step="1">
+          </label>
+        </fieldset>
+
+        <div class="theme-actions">
+          <button id="btn-theme-save" class="btn primary" type="button">💾 Lưu giao diện lên GitHub</button>
+          <button id="btn-theme-reset" class="btn ghost" type="button">Hoàn tác thay đổi mục này</button>
+        </div>
+      </aside>
+
+      <main class="theme-preview-wrap">
+        <div class="theme-preview-bar">
+          <span>Xem trước trực tiếp</span>
+          <small>Gần giống giao diện bài viết sau khi lưu</small>
+        </div>
+        <div id="theme-preview" class="theme-preview">
+          <section class="theme-preview-hero">
+            <div>
+              <span class="theme-preview-kicker">LINH OSIMI · PERSONAL ARCHIVE</span>
+              <h1 id="theme-preview-title"></h1>
+              <p id="theme-preview-description"></p>
+            </div>
+            <img id="theme-preview-image" alt="">
+          </section>
+          <article class="theme-preview-article">
+            <span class="theme-preview-label">BÀI VIẾT MẪU</span>
+            <h2>Một tiêu đề nội dung sẽ trông như thế này</h2>
+            <p>Đây là đoạn văn mẫu để bạn xem trước cỡ chữ, phông chữ, màu sắc và khoảng cách dòng. Khi lưu, kiểu trình bày này sẽ được áp dụng cho nội dung bài viết trong mục đã chọn.</p>
+            <blockquote>Một câu trích dẫn hoặc ghi chú quan trọng trong bài.</blockquote>
+            <figure><div class="theme-preview-placeholder">ẢNH TRONG BÀI</div><figcaption>Chú thích ảnh mẫu</figcaption></figure>
+            <h3>Tiêu đề nhỏ trong bài</h3>
+            <p>Bạn có thể quay lại trang này bất kỳ lúc nào để đổi giao diện mà không cần sửa từng bài viết.</p>
+          </article>
+        </div>
+      </main>
+    </div>
   </div>
 
   <!-- ═══════════ TAB CHỦ ĐỀ ═══════════ -->
