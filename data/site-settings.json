@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "updatedAt": "2026-07-27T03:02:49.004Z",
+  "updatedAt": "2026-07-27T05:36:15.772Z",
   "sections": {
     "blog": {
       "title": "Linh OSIMI DAILY FUCKING VLOGGGGG!!!",
       "description": "i share ....whatever the fuck i want okay?",
       "heroImage": "/blog/assets/neet-cat.png",
-      "pageBackgroundImage": "",
+      "pageBackgroundImage": "https://i.pinimg.com/736x/82/0e/ca/820eca8bdbd2522cf8a0a1ee9d74c995.jpg",
       "heroBackgroundImage": "",
       "backgroundPosition": "center",
       "heroOverlay": 0.4,
@@ -28,16 +28,56 @@
       "showHero": true,
       "showFooter": true,
       "blocks": [
-        { "key": "hero", "visible": true },
-        { "key": "owner", "visible": true },
-        { "key": "archive", "visible": true },
-        { "key": "music", "visible": true },
-        { "key": "daily", "visible": true },
-        { "key": "todo", "visible": true },
-        { "key": "now", "visible": true },
-        { "key": "shrine", "visible": true },
-        { "key": "guestbook", "visible": true },
-        { "key": "ending", "visible": true }
+        {
+          "key": "hero",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "owner",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "archive",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "music",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "daily",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "todo",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "now",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "shrine",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "guestbook",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "ending",
+          "visible": true,
+          "title": ""
+        }
       ]
     },
     "khoahoc": {
@@ -66,9 +106,21 @@
       "showHero": true,
       "showFooter": true,
       "blocks": [
-        { "key": "hero", "visible": true },
-        { "key": "articles", "visible": true },
-        { "key": "pagination", "visible": true }
+        {
+          "key": "hero",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "articles",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "pagination",
+          "visible": true,
+          "title": ""
+        }
       ]
     },
     "kienthuc": {
@@ -97,9 +149,21 @@
       "showHero": true,
       "showFooter": true,
       "blocks": [
-        { "key": "hero", "visible": true },
-        { "key": "quick", "visible": true },
-        { "key": "library", "visible": true }
+        {
+          "key": "hero",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "quick",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "library",
+          "visible": true,
+          "title": ""
+        }
       ]
     },
     "game": {
@@ -128,9 +192,21 @@
       "showHero": true,
       "showFooter": true,
       "blocks": [
-        { "key": "hero", "visible": true },
-        { "key": "articles", "visible": true },
-        { "key": "pagination", "visible": true }
+        {
+          "key": "hero",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "articles",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "pagination",
+          "visible": true,
+          "title": ""
+        }
       ]
     },
     "manga": {
@@ -159,9 +235,21 @@
       "showHero": true,
       "showFooter": true,
       "blocks": [
-        { "key": "hero", "visible": true },
-        { "key": "mainCollection", "visible": true },
-        { "key": "extraCollection", "visible": true }
+        {
+          "key": "hero",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "mainCollection",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "extraCollection",
+          "visible": true,
+          "title": ""
+        }
       ]
     },
     "nghethuat": {
@@ -179,7 +267,7 @@
       "bodyFont": "be-vietnam",
       "headingFont": "lora",
       "bodySize": 17,
-      "lineHeight": 1.82,
+      "lineHeight": 1.8,
       "contentWidth": 70,
       "radius": 14,
       "heroAlign": "original",
@@ -190,10 +278,26 @@
       "showHero": true,
       "showFooter": true,
       "blocks": [
-        { "key": "hero", "visible": true },
-        { "key": "featured", "visible": true },
-        { "key": "collection", "visible": true },
-        { "key": "guestbook", "visible": true }
+        {
+          "key": "featured",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "hero",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "collection",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "guestbook",
+          "visible": true,
+          "title": ""
+        }
       ]
     },
     "phim": {
@@ -222,9 +326,21 @@
       "showHero": true,
       "showFooter": true,
       "blocks": [
-        { "key": "hero", "visible": true },
-        { "key": "library", "visible": true },
-        { "key": "intermission", "visible": true }
+        {
+          "key": "hero",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "library",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "intermission",
+          "visible": true,
+          "title": ""
+        }
       ]
     }
   }
