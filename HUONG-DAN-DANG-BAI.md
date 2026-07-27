@@ -47,7 +47,7 @@ nhánh `main`, dán token, tick **Ghi nhớ trên máy này**.
 
 ---
 
-## 4. Bốn tab
+## 4. Các tab quản trị
 
 ### ◈ Tổng quan
 
@@ -59,6 +59,22 @@ Bên dưới là biểu đồ bài theo từng mục và danh sách **Sửa gầ
 Cột trái là thông tin bài, cột phải là trình soạn thảo. Bấm **👁 Xem trước** trên thanh công cụ
 để chia đôi màn hình — bên phải hiện bài thật, tự cập nhật khi bạn gõ. Có nút chuyển
 giữa khung máy tính và khung điện thoại.
+
+Riêng mục **Game** có thêm lựa chọn nơi hiển thị:
+
+- **01 · Bài viết**: bài xuất hiện ở `game.html`.
+- **02 · Chơi game**: thẻ xuất hiện ở trang Chơi game. Có thể nhập link file game; để trống thì thẻ mở bài vừa viết.
+- **03 · Capture Mode**: admin chuyển sang Thư viện ảnh để tải ảnh, điền tên game và chú thích.
+
+### ▧ Thư viện ảnh
+
+Mỗi ảnh có trường **Nơi hiển thị**:
+
+- **Photos cá nhân**: chọn album như trước.
+- **Nghệ thuật**: chọn nhóm nghệ thuật, thêm chú thích và link bài/trang chi tiết nếu có.
+- **Game · Capture Mode**: điền tên game và chú thích. Ảnh mới nhất tự đứng số 01.
+
+Ảnh ở ba nơi dùng chung màn hình quản lý nhưng không bị hiển thị lẫn sang trang khác.
 
 ### ☰ Quản lý bài
 
@@ -74,6 +90,12 @@ vào mục Khoa học: chọn mục → **+ Thêm chủ đề** → gõ tên →
 - Sửa tên hiển thị, biểu tượng và mã chủ đề ngay tại chỗ
 - Chủ đề **đang có bài thì không xoá được** — chuyển bài sang chủ đề khác trước đã
 - Danh sách lưu ở `data/taxonomy.json`
+
+### ▦ Chỉnh trang
+
+Chọn **Game**, **Khoa học**, **Nghệ thuật**, **Phim** hoặc mục khác để đổi tiêu đề, mô tả,
+ảnh đầu trang, ảnh nền, màu sắc và ẩn/hiện từng khối. Cấu hình Game áp dụng đồng bộ cho
+cả ba trang Bài viết, Chơi game và Capture Mode.
 
 ---
 

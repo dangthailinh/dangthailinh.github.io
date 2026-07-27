@@ -20,13 +20,19 @@
       hero: '.hero', title: '.hero h1', description: '.hero-intro', image: '.hero-cat'
     },
     khoahoc: {
-      hero: '.hero-science', title: '.hero-science h1', description: '.hero-science p', backgroundImage: true
+      hero: '.science-hero, .hero-science',
+      title: '.science-hero h1, .hero-science h1',
+      description: '.science-hero-description, .hero-science p',
+      backgroundImage: true
     },
     kienthuc: {
       hero: '.hero', title: '#page-title', description: '.hero-description', image: '.hero-character'
     },
     game: {
-      hero: '.hero-game', title: '.hero-game h1', description: '.hero-game p', backgroundImage: true
+      hero: '.game-hero, .hero-game',
+      title: '.game-hero h1, .hero-game h1',
+      description: '.game-hero-description, .hero-game p',
+      backgroundImage: true
     },
     manga: {
       hero: '.manga-hero', title: '#pageTitle', description: '.hero-main__copy', image: '.hero-character'
@@ -46,13 +52,16 @@
       guestbook: '.guestbook-widget', ending: '.end-zone'
     },
     khoahoc: {
-      hero: '.hero-science', articles: 'main.main', pagination: '.pagination-container'
+      hero: '.science-hero, .hero-science', collections: '.science-collections',
+      articles: 'main.main', pagination: '.pagination-container'
     },
     kienthuc: {
       hero: '.hero', quick: '.quick-categories', library: '.library-layout'
     },
     game: {
-      hero: '.hero-game', articles: 'main.main', pagination: '.pg-wrap'
+      hero: '.game-hero, .hero-game', tabs: '.game-console-tabs',
+      tools: '.game-library-tools', articles: 'main.main',
+      captures: '.game-captures', pagination: '.pg-wrap'
     },
     manga: {
       hero: '.manga-hero',
@@ -338,13 +347,13 @@
       ':is(main.main,.manga-shell,.shell,.content-board,.library-layout,.desk){' +
       'width:min(calc(100% - 32px),var(--cms-page-max))!important;max-width:var(--cms-page-max)!important;' +
       'margin-inline:auto!important}' +
-    'body[data-cms-hero-align="left"] :is(.hero,.hero-game,.hero-science,.manga-hero,.collage-hero)>:not(img){text-align:left!important}' +
-    'body[data-cms-hero-align="center"] :is(.hero,.hero-game,.hero-science,.manga-hero,.collage-hero)>:not(img){text-align:center!important;margin-inline:auto!important}' +
-    'body[data-cms-hero-align="right"] :is(.hero,.hero-game,.hero-science,.manga-hero,.collage-hero)>:not(img){text-align:right!important;margin-left:auto!important}' +
-    'body[data-cms-hero-height="compact"] :is(.hero,.hero-game,.hero-science,.manga-hero,.collage-hero){min-height:220px!important;padding-block:35px!important}' +
-    'body[data-cms-hero-height="normal"] :is(.hero,.hero-game,.hero-science,.manga-hero,.collage-hero){min-height:440px!important}' +
-    'body[data-cms-hero-height="tall"] :is(.hero,.hero-game,.hero-science,.manga-hero,.collage-hero){min-height:650px!important}' +
-    'body[data-cms-hero-height="screen"] :is(.hero,.hero-game,.hero-science,.manga-hero,.collage-hero){min-height:100vh!important}' +
+    'body[data-cms-hero-align="left"] :is(.hero,.game-hero,.science-hero,.hero-game,.hero-science,.manga-hero,.collage-hero)>:not(img){text-align:left!important}' +
+    'body[data-cms-hero-align="center"] :is(.hero,.game-hero,.science-hero,.hero-game,.hero-science,.manga-hero,.collage-hero)>:not(img){text-align:center!important;margin-inline:auto!important}' +
+    'body[data-cms-hero-align="right"] :is(.hero,.game-hero,.science-hero,.hero-game,.hero-science,.manga-hero,.collage-hero)>:not(img){text-align:right!important;margin-left:auto!important}' +
+    'body[data-cms-hero-height="compact"] :is(.hero,.game-hero,.science-hero,.hero-game,.hero-science,.manga-hero,.collage-hero){min-height:220px!important;padding-block:35px!important}' +
+    'body[data-cms-hero-height="normal"] :is(.hero,.game-hero,.science-hero,.hero-game,.hero-science,.manga-hero,.collage-hero){min-height:440px!important}' +
+    'body[data-cms-hero-height="tall"] :is(.hero,.game-hero,.science-hero,.hero-game,.hero-science,.manga-hero,.collage-hero){min-height:650px!important}' +
+    'body[data-cms-hero-height="screen"] :is(.hero,.game-hero,.science-hero,.hero-game,.hero-science,.manga-hero,.collage-hero){min-height:100vh!important}' +
     'body[data-cms-density="compact"] :is(main.main,.manga-content,.content-board,.library,.desk){gap:12px!important;padding-block:20px!important}' +
     'body[data-cms-density="comfortable"] :is(main.main,.manga-content,.content-board,.library,.desk){gap:24px!important;padding-block:38px!important}' +
     'body[data-cms-density="spacious"] :is(main.main,.manga-content,.content-board,.library,.desk){gap:40px!important;padding-block:65px!important}' +

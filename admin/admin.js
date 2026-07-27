@@ -47,7 +47,8 @@
       { key: 'ending', label: 'Ảnh trang trí cuối trang', selector: '.end-zone' }
     ],
     khoahoc: [
-      { key: 'hero', label: 'Phần giới thiệu khoa học', selector: '.hero-science' },
+      { key: 'hero', label: 'Phần giới thiệu khoa học', selector: '.science-hero, .hero-science' },
+      { key: 'collections', label: 'Thanh chia bộ sưu tập', selector: '.science-collections' },
       { key: 'articles', label: 'Danh sách bài khoa học', selector: 'main.main' },
       { key: 'pagination', label: 'Chuyển trang', selector: '.pagination-container' }
     ],
@@ -57,8 +58,11 @@
       { key: 'library', label: 'Thư viện bài viết', selector: '.library-layout', titleSelector: '#result-title' }
     ],
     game: [
-      { key: 'hero', label: 'Phần giới thiệu Game', selector: '.hero-game' },
+      { key: 'hero', label: 'Phần giới thiệu Game', selector: '.game-hero, .hero-game' },
+      { key: 'tabs', label: 'Thanh Bài viết · Chơi game · Capture', selector: '.game-console-tabs' },
+      { key: 'tools', label: 'Tìm kiếm và số lượng', selector: '.game-library-tools' },
       { key: 'articles', label: 'Danh sách bài và game', selector: 'main.main' },
+      { key: 'captures', label: 'Thư viện Capture Mode', selector: '.game-captures' },
       { key: 'pagination', label: 'Chuyển trang', selector: '.pg-wrap' }
     ],
     manga: [
@@ -101,7 +105,7 @@
     themeSaved: null,  // bản đã lưu gần nhất để hoàn tác
     themeSha: null,
     themeDirty: false,
-    photos: null,      // ảnh thêm trực tiếp vào /blog/gallery.html
+    photos: null,      // thư viện ảnh dùng chung cho Photos · Nghệ thuật · Game Capture
     photosSha: null,
     editingPhotoId: null,
     legacyPosts: [],   // bài HTML cũ chưa được ghi vào posts.json
@@ -1036,6 +1040,33 @@
     'macro-life': 'Ong @@ & thế giới tí hon',
     places: 'Đường đi & nơi chốn'
   };
+  var PHOTO_DESTINATION_LABELS = {
+    blog: 'Photos cá nhân',
+    nghethuat: 'Nghệ thuật',
+    'game-capture': 'Game · Capture Mode'
+  };
+
+  function photoDestination(photo) {
+    return photo && photo.destination ? photo.destination : 'blog';
+  }
+
+  function updatePhotoDestinationUi() {
+    var destination = $('#photo-destination').value;
+    $('#photo-album-wrap').hidden = destination !== 'blog';
+    $('#photo-art-category-wrap').hidden = destination !== 'nghethuat';
+    $('#photo-game-wrap').hidden = destination !== 'game-capture';
+    $('#photo-link-wrap').hidden = destination === 'blog';
+    $('#photo-form-title').textContent = S.editingPhotoId
+      ? 'Sửa ảnh trong ' + PHOTO_DESTINATION_LABELS[destination]
+      : 'Thêm ảnh vào ' + PHOTO_DESTINATION_LABELS[destination];
+    $('#btn-photo-save').textContent = S.editingPhotoId
+      ? '💾 Lưu thay đổi ảnh'
+      : (destination === 'game-capture' ? '▧ Thêm vào Capture Mode' :
+        destination === 'nghethuat' ? '▧ Thêm vào Nghệ thuật' : '▧ Thêm vào Photos');
+    $('#btn-photo-open-gallery').textContent = destination === 'nghethuat'
+      ? 'Mở trang Nghệ thuật ↗'
+      : destination === 'game-capture' ? 'Mở Capture Mode ↗' : 'Mở trang Photos ↗';
+  }
 
   function updatePhotoPreview() {
     var src = $('#photo-src').value.trim();
@@ -1047,16 +1078,17 @@
 
   function resetPhotoForm() {
     S.editingPhotoId = null;
-    $('#photo-form-title').textContent = 'Thêm ảnh vào Photos';
     $('#photo-edit-pill').textContent = 'Ảnh mới';
     $('#photo-edit-pill').classList.remove('editing');
     $('#photo-title').value = '';
     $('#photo-src').value = '';
     $('#photo-note').value = '';
+    $('#photo-game').value = '';
+    $('#photo-link').value = '';
     $('#photo-date').value = todayISO();
     $('#photo-preview').hidden = true;
-    $('#btn-photo-save').textContent = '▧ Thêm vào Photos';
     $('#btn-photo-cancel').hidden = true;
+    updatePhotoDestinationUi();
   }
 
   function renderPhotoList() {
@@ -1065,7 +1097,7 @@
       return String(b.updatedAt || b.date || '').localeCompare(String(a.updatedAt || a.date || ''));
     });
     $('#photo-list-summary').textContent = list.length
-      ? list.length + ' ảnh được quản lý tại đây'
+      ? list.length + ' ảnh được quản lý tại đây · mỗi ảnh chỉ hiện ở nơi đã chọn'
       : 'Chưa có ảnh nào được thêm bằng admin';
     var root = $('#photo-admin-list');
     if (!list.length) {
@@ -1076,7 +1108,10 @@
       return '<article class="photo-admin-item" data-photo-id="' + T.escapeHtml(photo.id) + '">' +
         '<img src="' + T.escapeHtml(photo.src) + '" alt="">' +
         '<div class="photo-admin-copy">' +
-          '<span class="photo-admin-meta">' + T.escapeHtml(PHOTO_ALBUM_LABELS[photo.album] || photo.album) +
+          '<span class="photo-admin-meta">' + T.escapeHtml(PHOTO_DESTINATION_LABELS[photoDestination(photo)]) +
+            ' · ' + T.escapeHtml(photoDestination(photo) === 'blog'
+              ? (PHOTO_ALBUM_LABELS[photo.album] || photo.album)
+              : (photoDestination(photo) === 'game-capture' ? (photo.game || 'Game') : (photo.category || 'Nghệ thuật'))) +
             ' · ' + T.escapeHtml(photo.date || '') + '</span>' +
           '<h3>' + T.escapeHtml(photo.title || 'Ảnh chưa đặt tên') + '</h3>' +
           '<p>' + T.escapeHtml(photo.note || 'Chưa có ghi chú.') + '</p>' +
@@ -1091,16 +1126,20 @@
 
   function editPhoto(photo) {
     S.editingPhotoId = photo.id;
-    $('#photo-form-title').textContent = 'Sửa ảnh trong Photos';
     $('#photo-edit-pill').textContent = 'Đang sửa';
     $('#photo-edit-pill').classList.add('editing');
+    $('#photo-destination').value = PHOTO_DESTINATION_LABELS[photoDestination(photo)]
+      ? photoDestination(photo) : 'blog';
     $('#photo-album').value = PHOTO_ALBUM_LABELS[photo.album] ? photo.album : 'small-moments';
+    $('#photo-art-category').value = photo.category || 'khac';
+    $('#photo-game').value = photo.game || '';
     $('#photo-title').value = photo.title || '';
     $('#photo-src').value = photo.src || '';
     $('#photo-date').value = photo.date || todayISO();
     $('#photo-note').value = photo.note || '';
-    $('#btn-photo-save').textContent = '💾 Lưu thay đổi ảnh';
+    $('#photo-link').value = photo.link || '';
     $('#btn-photo-cancel').hidden = false;
+    updatePhotoDestinationUi();
     updatePhotoPreview();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -1118,13 +1157,18 @@
       if (item.id === S.editingPhotoId) old = item;
     });
     var now = new Date().toISOString();
+    var destination = $('#photo-destination').value;
     var photo = {
       id: old ? old.id : ('photo-' + Date.now().toString(36)),
+      destination: destination,
       album: $('#photo-album').value,
+      category: $('#photo-art-category').value,
+      game: $('#photo-game').value.trim(),
       title: title,
       src: src,
       date: $('#photo-date').value || todayISO(),
       note: $('#photo-note').value.trim(),
+      link: $('#photo-link').value.trim(),
       author: 'Linh Osimi',
       createdAt: old && old.createdAt ? old.createdAt : now,
       updatedAt: now
@@ -1132,13 +1176,13 @@
     var index = S.photos.photos.findIndex(function (item) { return item.id === photo.id; });
     if (index >= 0) S.photos.photos[index] = photo;
     else S.photos.photos.push(photo);
-    busy(true, old ? 'Đang lưu thay đổi ảnh…' : 'Đang thêm ảnh vào Photos…');
-    savePhotos((old ? 'Cập nhật ảnh: ' : 'Thêm ảnh vào Photos: ') + title)
+    busy(true, old ? 'Đang lưu thay đổi ảnh…' : 'Đang thêm ảnh vào thư viện…');
+    savePhotos((old ? 'Cập nhật ảnh: ' : 'Thêm ảnh vào ' + PHOTO_DESTINATION_LABELS[destination] + ': ') + title)
       .then(function () {
         busy(false);
         resetPhotoForm();
         renderPhotoList();
-        toast(old ? '✅ Đã cập nhật ảnh' : '✅ Ảnh đã được thêm vào Photos', 'ok');
+        toast(old ? '✅ Đã cập nhật ảnh' : '✅ Ảnh đã được thêm vào ' + PHOTO_DESTINATION_LABELS[destination], 'ok');
       })
       .catch(function (error) {
         busy(false);
@@ -1149,6 +1193,7 @@
   }
 
   $('#photo-src').addEventListener('input', updatePhotoPreview);
+  $('#photo-destination').addEventListener('change', updatePhotoDestinationUi);
   $('#btn-photo-upload').addEventListener('click', function () {
     pickImage(function (url, name) {
       $('#photo-src').value = url;
@@ -1158,8 +1203,23 @@
   });
   $('#btn-photo-save').addEventListener('click', savePhotoFromForm);
   $('#btn-photo-cancel').addEventListener('click', resetPhotoForm);
-  $('#btn-open-photos').addEventListener('click', function () { switchTab('photos'); });
-  $('#btn-photo-open-gallery').addEventListener('click', function () { window.open('/blog/gallery.html', '_blank'); });
+  $('#btn-open-photos').addEventListener('click', function () {
+    $('#photo-destination').value = 'blog';
+    resetPhotoForm();
+    switchTab('photos');
+  });
+  $('#btn-open-game-captures').addEventListener('click', function () {
+    $('#photo-destination').value = 'game-capture';
+    resetPhotoForm();
+    switchTab('photos');
+  });
+  $('#btn-photo-open-gallery').addEventListener('click', function () {
+    var destination = $('#photo-destination').value;
+    var url = destination === 'nghethuat'
+      ? '/nghe-thuat0/nghe-thuat.html'
+      : destination === 'game-capture' ? '/game0/2/game3.html' : '/blog/gallery.html';
+    window.open(url, '_blank');
+  });
   $('#btn-photo-reload').addEventListener('click', function () {
     busy(true, 'Đang tải lại kho ảnh…');
     loadPhotos().then(function () {
@@ -1174,15 +1234,17 @@
     if (!photo) return;
     if (button.dataset.photoAction === 'edit') return editPhoto(photo);
     ask({
-      title: 'Xóa ảnh khỏi Photos?',
-      body: '<p>Ảnh <b>' + T.escapeHtml(photo.title) + '</b> sẽ biến mất khỏi album. File ảnh đã tải lên vẫn được giữ để tránh xóa nhầm.</p>',
-      okText: 'Xóa khỏi album', danger: true
+      title: 'Xóa ảnh khỏi thư viện?',
+      body: '<p>Ảnh <b>' + T.escapeHtml(photo.title) + '</b> sẽ biến mất khỏi ' +
+        T.escapeHtml(PHOTO_DESTINATION_LABELS[photoDestination(photo)]) +
+        '. File ảnh đã tải lên vẫn được giữ để tránh xóa nhầm.</p>',
+      okText: 'Xóa khỏi thư viện', danger: true
     }).then(function (answer) {
       if (!answer) return;
       S.photos.photos = S.photos.photos.filter(function (item) { return item.id !== photo.id; });
-      busy(true, 'Đang xóa ảnh khỏi album…');
-      savePhotos('Xóa ảnh khỏi Photos: ' + photo.title).then(function () {
-        busy(false); resetPhotoForm(); renderPhotoList(); toast('Đã xóa ảnh khỏi album', 'ok');
+      busy(true, 'Đang xóa ảnh khỏi thư viện…');
+      savePhotos('Xóa ảnh khỏi thư viện: ' + photo.title).then(function () {
+        busy(false); resetPhotoForm(); renderPhotoList(); toast('Đã xóa ảnh khỏi thư viện', 'ok');
       }).catch(function (error) {
         busy(false); loadPhotos().then(renderPhotoList); toast(error.message, 'err');
       });
@@ -1208,15 +1270,21 @@
 
   function applySectionUi(section) {
     var isBlog = section === 'blog';
+    var isGame = section === 'game';
+    var gamePlacement = $('#f-game-placement').value || 'article';
     var isBlogPhoto = isBlog && $('#f-category').value === 'photo' && !S.editingId && !S.editingLegacy;
+    var isGameCapture = isGame && gamePlacement === 'capture' && !S.editingId && !S.editingLegacy;
     $('#wrap-mood').hidden = !isBlog;
+    $('#wrap-game-placement').hidden = !isGame;
+    $('#wrap-game-target').hidden = !(isGame && gamePlacement === 'play');
     $('#blog-photo-notice').hidden = !isBlogPhoto;
+    $('#game-capture-notice').hidden = !isGameCapture;
     var coverLabel = $('#f-cover').parentNode.querySelector('span');
     if (coverLabel) coverLabel.textContent = isBlog ? 'Ảnh hoặc video kèm bài (URL)' : 'Ảnh bìa (URL)';
     var uploadBtn = $('#btn-cover-upload');
     if (uploadBtn) uploadBtn.textContent = isBlog ? '⬆ Tải ảnh kèm bài từ máy' : '⬆ Tải ảnh bìa từ máy';
-    if (isBlogPhoto) {
-      $('#btn-publish').textContent = '▧ Mở Kho ảnh';
+    if (isBlogPhoto || isGameCapture) {
+      $('#btn-publish').textContent = isGameCapture ? '▧ Mở Thư viện ảnh Game' : '▧ Mở Kho ảnh';
       $('#btn-save-draft').hidden = true;
     } else {
       applyStatusUi();
@@ -1230,8 +1298,13 @@
   };
 
   function applyStatusUi() {
-    if ($('#f-section').value === 'blog' && $('#f-category').value === 'photo' && !S.editingId && !S.editingLegacy) {
-      $('#btn-publish').textContent = '▧ Mở Kho ảnh';
+    var routesToPhotos = (
+      ($('#f-section').value === 'blog' && $('#f-category').value === 'photo') ||
+      ($('#f-section').value === 'game' && $('#f-game-placement').value === 'capture')
+    ) && !S.editingId && !S.editingLegacy;
+    if (routesToPhotos) {
+      $('#btn-publish').textContent = $('#f-section').value === 'game'
+        ? '▧ Mở Thư viện ảnh Game' : '▧ Mở Kho ảnh';
       $('#btn-save-draft').hidden = true;
       return;
     }
@@ -1244,6 +1317,12 @@
   }
 
   $('#f-section').addEventListener('change', function () { fillCategories(); saveDraftSoon(); schedulePreview(); updateFormStatus(); });
+  $('#f-game-placement').addEventListener('change', function () {
+    applySectionUi($('#f-section').value);
+    saveDraftSoon();
+    schedulePreview();
+    updateFormStatus();
+  });
   $('#f-status').addEventListener('change', function () { applyStatusUi(); saveDraftSoon(); updateFormStatus(); });
 
   $('#mood-picker').addEventListener('click', function (e) {
@@ -1288,6 +1367,8 @@
     return {
       section: section,
       category: $('#f-category').value,
+      placement: section === 'game' ? ($('#f-game-placement').value || 'article') : '',
+      targetUrl: section === 'game' ? $('#f-target-url').value.trim() : '',
       status: $('#f-status').value,
       title: title,
       slug: slug,
@@ -1311,6 +1392,8 @@
     fillCategories();
     var map = T.categoriesOf(p.section || 'kienthuc');
     $('#f-category').value = (p.category && map[p.category]) ? p.category : Object.keys(map)[0];
+    $('#f-game-placement').value = p.placement || 'article';
+    $('#f-target-url').value = p.targetUrl || '';
     $('#f-status').value = p.status || 'published';
     $('#f-mood').value = p.mood || '';
     $('#f-title').value = p.title || '';
@@ -1445,7 +1528,8 @@
     updateFormStatus();
   }
 
-  ['#f-title', '#f-slug', '#f-section', '#f-category', '#f-status', '#f-desc', '#f-cover', '#f-tags', '#f-date']
+  ['#f-title', '#f-slug', '#f-section', '#f-category', '#f-game-placement', '#f-target-url',
+    '#f-status', '#f-desc', '#f-cover', '#f-tags', '#f-date']
     .forEach(function (selector) {
       $(selector).addEventListener('input', function () {
         this.removeAttribute('aria-invalid');
@@ -1460,6 +1544,13 @@
     $('#f-desc-count').textContent = $('#f-desc').value.length + ' / 240';
     var status = $('#form-status');
     var p = readForm(true);
+    if ((p.section === 'blog' && p.category === 'photo') ||
+        (p.section === 'game' && p.placement === 'capture')) {
+      status.className = 'form-status ok';
+      status.querySelector('strong').textContent = '✓ Sẵn sàng thêm ảnh';
+      status.querySelector('span').textContent = 'Bấm nút bên dưới để tải ảnh và viết chú thích trong Thư viện ảnh.';
+      return;
+    }
     var problems = validateAll(p);
     status.className = 'form-status ' + (problems.length ? 'warn' : 'ok');
     status.querySelector('strong').textContent = problems.length ? 'Bài viết chưa sẵn sàng' : '✓ Sẵn sàng để đăng';
@@ -1473,8 +1564,17 @@
     if (S.editingLegacy) return saveLegacyPost(forceStatus);
     var p = readForm();
     if (p.section === 'blog' && p.category === 'photo' && !S.editingId && !S.editingLegacy) {
+      $('#photo-destination').value = 'blog';
+      resetPhotoForm();
       switchTab('photos');
       toast('Hãy tải ảnh vào album tại đây; admin sẽ không tạo bài blog riêng.', 'ok');
+      return;
+    }
+    if (p.section === 'game' && p.placement === 'capture' && !S.editingId && !S.editingLegacy) {
+      $('#photo-destination').value = 'game-capture';
+      resetPhotoForm();
+      switchTab('photos');
+      toast('Hãy tải ảnh, điền tên game và chú thích; ảnh sẽ vào đúng tab Capture Mode.', 'ok');
       return;
     }
     if (forceStatus) p.status = forceStatus;
@@ -1529,6 +1629,8 @@
       .then(function () {
         var record = {
           id: p.id, section: p.section, category: p.category, status: p.status,
+          placement: p.placement || '',
+          targetUrl: p.targetUrl || '',
           title: p.title, slug: p.slug, description: p.description,
           cover: p.cover, tags: p.tags, date: p.date, author: p.author,
           path: p.path, url: p.url,
@@ -1767,6 +1869,7 @@
         S.editingId = p.id;
         writeForm({
           section: p.section, category: p.category, status: p.status || 'published',
+          placement: p.placement || 'article', targetUrl: p.targetUrl || '',
           title: p.title, slug: p.slug, description: p.description, cover: p.cover,
           tags: p.tags, date: p.date, time: p.time, mood: p.mood, content: content
         });
@@ -1980,6 +2083,7 @@
         }
         writeForm({
           section: p.section, category: p.category,
+          placement: p.placement || 'article', targetUrl: p.targetUrl || '',
           status: 'draft',                       /* bản sao luôn bắt đầu ở dạng nháp */
           title: p.title + ' (bản sao)',
           slug: newSlug,

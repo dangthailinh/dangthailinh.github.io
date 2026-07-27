@@ -128,19 +128,26 @@
       main.innerHTML = `<div class="card-grid">${playableGames.map(([href,title,meta,image]) => `<a href="${href}" class="card-link"><div class="card"><img src="${image}" alt="${title}" class="card-img"><div class="playtime">Ready to play</div><h3>${title}</h3><div class="card-meta">${meta}</div></div></a>`).join('')}</div>`;
     }
     if (hubPage === 3 && main) main.innerHTML = '';
-    const cards = [...document.querySelectorAll('.card-link')];
+    let cards = [...document.querySelectorAll('.card-link')];
     const fallbackCovers = ['uncharted-01.png','uncharted-02.png','cyberpunk-01.png','uncharted-03.png','uncharted-05.png','uncharted-06.png','uncharted-04.png'];
-    cards.forEach((card, index) => {
-      card.querySelector('.card')?.setAttribute('data-index', String(index + 1).padStart(2,'0'));
-      card.dataset.search = repairText(card.textContent).toLocaleLowerCase('vi');
-      const cover = card.querySelector('.card-img');
-      cover?.addEventListener('error', () => {
-        if (!cover.dataset.fallbackApplied) {
-          cover.dataset.fallbackApplied = 'true';
-          cover.src = `/game0/assets/captures/${fallbackCovers[index % fallbackCovers.length]}`;
+    const prepareCards = () => {
+      cards = [...document.querySelectorAll('.card-link')];
+      cards.forEach((card, index) => {
+        card.querySelector('.card')?.setAttribute('data-index', String(index + 1).padStart(2,'0'));
+        card.dataset.search = repairText(card.textContent).toLocaleLowerCase('vi');
+        const cover = card.querySelector('.card-img');
+        if (cover && !cover.dataset.gameFallbackBound) {
+          cover.dataset.gameFallbackBound = 'true';
+          cover.addEventListener('error', () => {
+            if (!cover.dataset.fallbackApplied) {
+              cover.dataset.fallbackApplied = 'true';
+              cover.src = `/game0/assets/captures/${fallbackCovers[index % fallbackCovers.length]}`;
+            }
+          });
         }
       });
-    });
+    };
+    prepareCards();
     if (hubPage !== 3) {
       const tools = document.createElement('div');
       tools.className = 'game-library-tools';
@@ -156,6 +163,11 @@
         count.textContent = `${visible} ${contentType}`;
       };
       search.addEventListener('input', updateSearch);
+      document.addEventListener('cms:feed-updated', (event) => {
+        if (event.detail?.section !== 'game') return;
+        prepareCards();
+        updateSearch();
+      });
       document.addEventListener('keydown', (event) => { if (event.key === '/' && !(event.target instanceof HTMLInputElement)) { event.preventDefault(); search.focus(); } });
     }
 
@@ -183,10 +195,35 @@
       const lightbox = document.createElement('div');
       lightbox.className = 'game-lightbox';
       lightbox.setAttribute('role','dialog'); lightbox.setAttribute('aria-modal','true'); lightbox.setAttribute('aria-label','Xem ảnh game');
-      lightbox.innerHTML = '<button type="button" aria-label="Đóng">×</button><img alt="Ảnh game phóng lớn">';
+      lightbox.innerHTML = '<button type="button" aria-label="Đóng">×</button><figure><img alt="Ảnh game phóng lớn"><figcaption><strong></strong><span></span></figcaption></figure>';
       document.body.appendChild(lightbox);
       const closeLightbox = () => { lightbox.classList.remove('is-open'); document.body.style.overflow = ''; };
-      gallery.querySelectorAll('[data-full]').forEach((button) => button.addEventListener('click', () => { lightbox.querySelector('img').src = button.dataset.full; lightbox.classList.add('is-open'); document.body.style.overflow = 'hidden'; }));
+      const reindexCaptures = () => {
+        gallery.querySelectorAll('.game-capture').forEach((button, index) => {
+          const label = button.querySelector('span');
+          if (!label) return;
+          const original = label.dataset.label || label.textContent.replace(/^\d+\s*·\s*/, '').trim();
+          label.dataset.label = original;
+          label.textContent = `${String(index + 1).padStart(2, '0')} · ${original}`;
+        });
+      };
+      const openCapture = (button) => {
+        const image = lightbox.querySelector('img');
+        image.src = button.dataset.full;
+        image.alt = button.dataset.title || button.querySelector('img')?.alt || 'Ảnh game phóng lớn';
+        lightbox.querySelector('strong').textContent = button.dataset.title || button.querySelector('span')?.dataset.label || '';
+        lightbox.querySelector('figcaption span').textContent = button.dataset.note || '';
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      };
+      gallery.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-full]');
+        if (button) openCapture(button);
+      });
+      reindexCaptures();
+      document.addEventListener('cms:media-updated', (event) => {
+        if (event.detail?.section === 'game-capture') reindexCaptures();
+      });
       lightbox.querySelector('button').addEventListener('click', closeLightbox);
       lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
       document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeLightbox(); });

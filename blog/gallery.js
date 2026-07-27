@@ -365,6 +365,7 @@ document.addEventListener("keydown", (event) => {
 function mergeManagedPhotos(db) {
   const photos = Array.isArray(db?.photos) ? db.photos : [];
   photos.forEach((photo) => {
+    if (photo.destination && photo.destination !== "blog") return;
     const album = ALBUMS.find((item) => item.id === photo.album);
     const source = safePhotoSource(photo.src);
     if (!album || !source) return;

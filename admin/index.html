@@ -63,7 +63,7 @@
     <nav class="tabs">
       <button class="tab" data-tab="dashboard">◈ Tổng quan</button>
       <button class="tab active" data-tab="write">✎ Viết bài</button>
-      <button class="tab" data-tab="photos">▧ Kho ảnh</button>
+      <button class="tab" data-tab="photos">▧ Thư viện ảnh</button>
       <button class="tab" data-tab="manage">☰ Quản lý bài</button>
       <button class="tab" data-tab="theme">▦ Chỉnh trang</button>
       <button class="tab" data-tab="taxonomy">🏷 Chủ đề</button>
@@ -129,10 +129,32 @@
           <span>Chủ đề</span>
           <select id="f-category"></select>
         </label>
+
+        <label class="field game-only" id="wrap-game-placement" hidden>
+          <span>Hiển thị trong Game</span>
+          <select id="f-game-placement">
+            <option value="article">01 · Bài viết</option>
+            <option value="play">02 · Chơi game</option>
+            <option value="capture">03 · Capture Mode</option>
+          </select>
+          <small class="field-note">Chọn đúng tab mà nội dung sẽ xuất hiện trên trang Game.</small>
+        </label>
+
+        <label class="field game-play-only" id="wrap-game-target" hidden>
+          <span>Link mở game (không bắt buộc)</span>
+          <input id="f-target-url" type="text" spellcheck="false" placeholder="/game0/1/ten-game.html hoặc https://...">
+          <small class="field-note">Để trống nếu muốn thẻ Chơi game mở bài vừa viết.</small>
+        </label>
+
         <div id="blog-photo-notice" class="photo-route-notice" hidden>
           <strong>Ảnh sẽ được thêm vào Photos</strong>
           <p>Chế độ này không tạo bài blog riêng. Bạn có thể chọn album, tải ảnh và viết ghi chú trong Kho ảnh.</p>
           <button id="btn-open-photos" class="btn primary block small" type="button">Mở Kho ảnh</button>
+        </div>
+        <div id="game-capture-notice" class="photo-route-notice" hidden>
+          <strong>Capture Mode dùng Thư viện ảnh</strong>
+          <p>Tải từng ảnh chụp game, thêm tên game và chú thích. Ảnh mới nhất sẽ tự lên đầu trang Capture Mode.</p>
+          <button id="btn-open-game-captures" class="btn primary block small" type="button">Mở Thư viện ảnh Game</button>
         </div>
 
         <label class="field">
@@ -279,19 +301,28 @@
     </div>
   </div>
 
-  <!-- ═══════════ TAB KHO ẢNH ═══════════ -->
+  <!-- ═══════════ TAB THƯ VIỆN ẢNH ═══════════ -->
   <div id="tab-photos" class="tabpanel">
     <div class="photos-layout">
       <aside class="photo-form-card">
         <div class="theme-head">
           <div>
-            <h2 id="photo-form-title">Thêm ảnh vào Photos</h2>
-            <p>Ảnh sẽ vào đúng album, không tạo bài viết riêng.</p>
+            <h2 id="photo-form-title">Thêm ảnh vào thư viện</h2>
+            <p>Chọn nơi hiển thị để ảnh không bị lẫn giữa các trang.</p>
           </div>
           <span id="photo-edit-pill" class="pill">Ảnh mới</span>
         </div>
 
         <label class="field">
+          <span>Nơi hiển thị <b class="req">*</b></span>
+          <select id="photo-destination">
+            <option value="blog">Photos cá nhân</option>
+            <option value="nghethuat">Nghệ thuật</option>
+            <option value="game-capture">Game · Capture Mode</option>
+          </select>
+        </label>
+
+        <label class="field" id="photo-album-wrap">
           <span>Album <b class="req">*</b></span>
           <select id="photo-album">
             <option value="selfies">Selfies</option>
@@ -300,6 +331,23 @@
             <option value="macro-life">Ong @@ &amp; thế giới tí hon</option>
             <option value="places">Đường đi &amp; nơi chốn</option>
           </select>
+        </label>
+
+        <label class="field" id="photo-art-category-wrap" hidden>
+          <span>Nhóm nghệ thuật</span>
+          <select id="photo-art-category">
+            <option value="classic">Cổ điển</option>
+            <option value="modern">Hiện đại</option>
+            <option value="digital">Nghệ thuật số</option>
+            <option value="dark">Dark art</option>
+            <option value="photo">Nhiếp ảnh</option>
+            <option value="khac">Khác</option>
+          </select>
+        </label>
+
+        <label class="field" id="photo-game-wrap" hidden>
+          <span>Tên game</span>
+          <input id="photo-game" type="text" maxlength="100" placeholder="VD: Cyberpunk 2077">
         </label>
 
         <label class="field">
@@ -324,8 +372,14 @@
           <textarea id="photo-note" rows="5" maxlength="600" placeholder="Tấm ảnh này được chụp ở đâu, lúc đó có chuyện gì…"></textarea>
         </label>
 
+        <label class="field" id="photo-link-wrap" hidden>
+          <span>Link bài viết / trang chi tiết</span>
+          <input id="photo-link" type="text" spellcheck="false" placeholder="/nghe-thuat0/bai-viet/... hoặc https://...">
+          <small class="field-note">Không bắt buộc. Nếu có, nút trên thẻ ảnh sẽ mở link này.</small>
+        </label>
+
         <div class="photo-form-actions">
-          <button id="btn-photo-save" class="btn primary block" type="button">▧ Thêm vào Photos</button>
+          <button id="btn-photo-save" class="btn primary block" type="button">▧ Thêm vào thư viện</button>
           <button id="btn-photo-cancel" class="btn ghost block small" type="button" hidden>Hủy sửa</button>
         </div>
       </aside>

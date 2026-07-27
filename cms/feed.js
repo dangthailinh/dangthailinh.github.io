@@ -40,6 +40,14 @@
     return true;
   }
 
+  /* Dùng ngày đăng trước, thời điểm sửa làm tiêu chí phụ. Khi chèn từng thẻ
+     vào đầu danh sách, đi từ cũ tới mới để bài mới nhất luôn trở thành số 01. */
+  function compareOldestFirst(a, b) {
+    var date = String(a.date || '').localeCompare(String(b.date || ''));
+    if (date) return date;
+    return String(a.updatedAt || '').localeCompare(String(b.updatedAt || ''));
+  }
+
   function fetchPosts() {
     return fetch('/data/posts.json?v=' + Math.floor(Date.now() / 60000))
       .then(function (r) { return r.ok ? r.json() : { posts: [] }; })
@@ -136,9 +144,8 @@
 
       var grid = section.querySelector('.article-grid');
       if (!grid) return;
-      var offset = grid.querySelectorAll('.article-card').length;
 
-      byCat[cat].forEach(function (p, i) {
+      byCat[cat].sort(compareOldestFirst).forEach(function (p) {
         if (grid.querySelector('[href="' + p.url + '"]')) return;
         var card = document.createElement('a');
         card.className = 'article-card';
@@ -146,12 +153,16 @@
         card.setAttribute('data-tags', (p.tags || []).join(' ').toLowerCase());
         card.setAttribute('data-cms', '1');
         card.innerHTML =
-          '<span class="article-number">' + String(offset + i + 1).padStart(2, '0') + '</span>' +
+          '<span class="article-number">01</span>' +
           '<div><h4>' + esc(p.title) + '</h4><p>' + esc(p.description) + '</p><ul>' +
           (p.tags || []).slice(0, 3).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') +
           '</ul></div><span class="arrow">↗</span>';
         card.dataset.search = normalize(card.textContent + ' ' + (p.tags || []).join(' '));
-        grid.appendChild(card);
+        grid.insertBefore(card, grid.firstChild);
+      });
+      Array.prototype.forEach.call(grid.querySelectorAll('.article-card'), function (card, index) {
+        var number = card.querySelector('.article-number');
+        if (number) number.textContent = String(index + 1).padStart(2, '0');
       });
     });
 
@@ -196,7 +207,7 @@
     };
 
     /* Bài mới nhất lên đầu trang 1 */
-    list.slice().reverse().forEach(function (p) {
+    list.slice().sort(compareOldestFirst).forEach(function (p) {
       if (grid.querySelector('[href="' + p.url + '"]')) return;
       var a = document.createElement('a');
       a.href = p.url;
@@ -210,6 +221,9 @@
         '</div>';
       grid.insertBefore(a, grid.firstChild);
     });
+    Array.prototype.forEach.call(grid.querySelectorAll('.card'), function (card, index) {
+      card.setAttribute('data-index', String(index + 1).padStart(2, '0'));
+    });
   }
 
   /* ═══════════ MỤC GAME ═══════════
@@ -217,14 +231,18 @@
   function renderGame(posts) {
     var grid = document.querySelector('.card-grid');
     if (!grid) return;
+    var page = /\/game0\/1\/game2\.html$/i.test(location.pathname) ? 'play' : 'article';
     var CAT = {
       review: 'Review', guide: 'Hướng dẫn', news: 'Tin tức',
       ranking: 'Xếp hạng', indie: 'Indie', khac: 'Game'
     };
-    posts.filter(bySection('game')).slice().reverse().forEach(function (p) {
-      if (grid.querySelector('[href="' + p.url + '"]')) return;
+    posts.filter(bySection('game')).filter(function (p) {
+      return (p.placement || 'article') === page;
+    }).slice().sort(compareOldestFirst).forEach(function (p) {
+      var target = page === 'play' && p.targetUrl ? p.targetUrl : p.url;
+      if (grid.querySelector('[href="' + target + '"]')) return;
       var a = document.createElement('a');
-      a.href = p.url;
+      a.href = target;
       a.className = 'card-link';
       a.setAttribute('data-cms', '1');
       a.innerHTML =
@@ -234,6 +252,9 @@
           '<div class="card-meta">' + esc(prettyDate(p.date)) + ' | ' + esc(CAT[p.category] || 'Game') + '</div>' +
         '</div>';
       grid.insertBefore(a, grid.firstChild);
+    });
+    Array.prototype.forEach.call(grid.querySelectorAll('.card'), function (card, index) {
+      card.setAttribute('data-index', String(index + 1).padStart(2, '0'));
     });
   }
 
@@ -246,7 +267,7 @@
       review: 'Review', character: 'Nhân vật', theory: 'Giả thuyết',
       seinen: 'Seinen', shonen: 'Shonen', khac: 'Manga'
     };
-    posts.filter(bySection('manga')).slice().reverse().forEach(function (p) {
+    posts.filter(bySection('manga')).slice().sort(compareOldestFirst).forEach(function (p) {
       if (grid.querySelector('[href="' + p.url + '"]')) return;
       var tags = (p.tags || []).slice(0, 3)
         .map(function (t) { return '<span class="genre-tag">' + esc(t) + '</span>'; }).join('');
@@ -270,7 +291,7 @@
   function renderNghethuat(posts) {
     var grid = document.querySelector('.gallery-grid');
     if (!grid) return;
-    posts.filter(bySection('nghethuat')).slice().reverse().forEach(function (p) {
+    posts.filter(bySection('nghethuat')).slice().sort(compareOldestFirst).forEach(function (p) {
       if (grid.querySelector('[href="' + p.url + '"]')) return;
       var item = document.createElement('article');
       item.className = 'gallery-item';
@@ -295,7 +316,7 @@
     };
     var added = 0;
 
-    posts.filter(bySection('phim')).slice().reverse().forEach(function (p) {
+    posts.filter(bySection('phim')).slice().sort(compareOldestFirst).forEach(function (p) {
       if (grid.querySelector('a[href="' + p.url + '"]')) return;
       var article = document.createElement('article');
       article.className = 'movie-card';
@@ -306,7 +327,7 @@
         normalize([p.title, p.description, (p.tags || []).join(' ')].join(' ')));
       article.innerHTML =
         '<a class="poster" href="' + esc(p.url) + '" aria-label="Đọc ' + esc(p.title) + '">' +
-          '<span class="poster-index">Mới</span>' +
+          '<span class="poster-index">No. 01</span>' +
           '<img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy">' +
         '</a>' +
         '<div class="card-body">' +
@@ -321,6 +342,10 @@
 
     /* Cập nhật lại con số "Đang hiển thị N bài viết" của trang Phim */
     if (added) {
+      Array.prototype.forEach.call(grid.querySelectorAll('.movie-card'), function (card, index) {
+        var number = card.querySelector('.poster-index');
+        if (number) number.textContent = 'No. ' + String(index + 1).padStart(2, '0');
+      });
       var counter = document.querySelector('[data-result-count]');
       if (counter) {
         var total = grid.querySelectorAll('.movie-card').length;
@@ -361,6 +386,9 @@
       if (!posts.length) return;
       try {
         RENDERERS[mode](posts);
+        document.dispatchEvent(new CustomEvent('cms:feed-updated', {
+          detail: { section: mode }
+        }));
       } catch (e) {
         if (window.console) console.warn('[cms] Không chèn được bài mới:', e);
       }

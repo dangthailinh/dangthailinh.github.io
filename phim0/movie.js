@@ -2,14 +2,14 @@
   const menuButton = document.querySelector('[data-menu-button]');
   const menu = document.querySelector('[data-menu]');
   const search = document.querySelector('[data-search]');
-  const cards = [...document.querySelectorAll('.movie-card')];
+  let cards = [...document.querySelectorAll('.movie-card')];
   const filters = [...document.querySelectorAll('[data-filter]')];
   const resultCount = document.querySelector('[data-result-count]');
   const emptyState = document.querySelector('[data-empty]');
   const resetButton = document.querySelector('[data-reset]');
   const savedCount = document.querySelector('[data-saved-count]');
   const savedToggle = document.querySelector('[data-show-saved]');
-  const saveButtons = [...document.querySelectorAll('[data-save]')];
+  let saveButtons = [...document.querySelectorAll('[data-save]')];
 
   let activeFilter = 'all';
   let showSavedOnly = false;
@@ -54,13 +54,43 @@
     savedCount.textContent = saved.size;
   };
 
+  const bindSaveButtons = () => {
+    saveButtons.forEach((button) => {
+      if (button.dataset.savedBound) return;
+      button.dataset.savedBound = 'true';
+      button.addEventListener('click', () => {
+        const id = button.dataset.save;
+        saved.has(id) ? saved.delete(id) : saved.add(id);
+        try {
+          localStorage.setItem('linh-movie-saved', JSON.stringify([...saved]));
+        } catch (_) {
+          // The interface remains usable even when local storage is unavailable.
+        }
+        updateSavedUI();
+        updateResults();
+      });
+    });
+  };
+
+  const refreshCards = () => {
+    cards = [...document.querySelectorAll('.movie-card')];
+    saveButtons = [...document.querySelectorAll('[data-save]')];
+    cards.forEach((card, index) => {
+      const number = card.querySelector('.poster-index');
+      if (number) number.textContent = `No. ${String(index + 1).padStart(2, '0')}`;
+    });
+    bindSaveButtons();
+    updateSavedUI();
+    updateResults();
+  };
+
   const updateResults = () => {
     const query = normalize(search.value);
     let visible = 0;
 
     cards.forEach((card) => {
       const matchesFilter = activeFilter === 'all' || card.dataset.category === activeFilter;
-      const matchesSearch = !query || normalize(card.dataset.searchable).includes(query);
+      const matchesSearch = !query || normalize(card.dataset.searchable || card.textContent).includes(query);
       const saveId = card.querySelector('[data-save]')?.dataset.save;
       const matchesSaved = !showSavedOnly || saved.has(saveId);
       const shouldShow = matchesFilter && matchesSearch && matchesSaved;
@@ -99,20 +129,6 @@
     }
   });
 
-  saveButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const id = button.dataset.save;
-      saved.has(id) ? saved.delete(id) : saved.add(id);
-      try {
-        localStorage.setItem('linh-movie-saved', JSON.stringify([...saved]));
-      } catch (_) {
-        // The interface remains usable even when local storage is unavailable.
-      }
-      updateSavedUI();
-      updateResults();
-    });
-  });
-
   savedToggle?.addEventListener('click', () => {
     showSavedOnly = !showSavedOnly;
     savedToggle.classList.toggle('is-active', showSavedOnly);
@@ -135,6 +151,8 @@
   });
 
   document.querySelector('[data-year]').textContent = new Date().getFullYear();
-  updateSavedUI();
-  updateResults();
+  document.addEventListener('cms:feed-updated', (event) => {
+    if (event.detail?.section === 'phim') refreshCards();
+  });
+  refreshCards();
 })();

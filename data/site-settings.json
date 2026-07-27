@@ -112,6 +112,11 @@
           "title": ""
         },
         {
+          "key": "collections",
+          "visible": true,
+          "title": ""
+        },
+        {
           "key": "articles",
           "visible": true,
           "title": ""
@@ -198,7 +203,22 @@
           "title": ""
         },
         {
+          "key": "tabs",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "tools",
+          "visible": true,
+          "title": ""
+        },
+        {
           "key": "articles",
+          "visible": true,
+          "title": ""
+        },
+        {
+          "key": "captures",
           "visible": true,
           "title": ""
         },
