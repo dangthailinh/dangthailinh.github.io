@@ -723,10 +723,34 @@
     return hit;
   }
 
+  function postPathKey(value) {
+    return String(value || '')
+      .split('#')[0].split('?')[0]
+      .replace(/\\/g, '/')
+      .replace(/^\/+/, '')
+      .replace(/\/+/g, '/')
+      .toLocaleLowerCase('vi');
+  }
+
   function upsertPost(record) {
     var idx = -1;
-    S.db.posts.forEach(function (p, i) { if (p.id === record.id) idx = i; });
-    if (idx >= 0) S.db.posts[idx] = record; else S.db.posts.push(record);
+    var recordPath = postPathKey(record.path || record.url);
+    var recordSlug = String(record.slug || '').toLocaleLowerCase('vi');
+    S.db.posts.forEach(function (p, i) {
+      var sameSection = p.section === record.section;
+      var sameId = p.id === record.id;
+      var samePath = sameSection && recordPath && postPathKey(p.path || p.url) === recordPath;
+      var sameSlug = sameSection && recordSlug && String(p.slug || '').toLocaleLowerCase('vi') === recordSlug;
+      if (sameId || samePath || sameSlug) idx = i;
+    });
+    if (idx >= 0) {
+      /* Giữ nguyên định danh của bài đã có: chỉnh sửa luôn thay thế bài cũ,
+         kể cả bài legacy từng được nhập bằng một định danh khác. */
+      record.id = S.db.posts[idx].id || record.id;
+      S.db.posts[idx] = record;
+    } else {
+      S.db.posts.push(record);
+    }
   }
 
   /* ───────────────── Trình soạn thảo ───────────────── */
@@ -2077,7 +2101,10 @@
       var openBtn = item.querySelector('[data-act="open"]');
       if (openBtn) openBtn.onclick = function () { window.open(p.url + '?v=' + Date.now(), '_blank'); };
       item.querySelector('[data-act="edit"]').onclick = function () {
-        if (p._legacy || p.importedLegacy) editLegacyPost(p); else editPost(p);
+        /* Bài Game legacy đã được đưa vào posts.json sẽ chuyển sang luồng sửa chuẩn.
+           Khi lưu, admin dựng lại đúng một file theo mẫu Game mới và xóa file cũ. */
+        if (p._legacy || (p.importedLegacy && p.section !== 'game')) editLegacyPost(p);
+        else editPost(p);
       };
       var duplicate = item.querySelector('[data-act="dup"]');
       var remove = item.querySelector('[data-act="del"]');

@@ -22,6 +22,16 @@
       .replace(/"/g, '&quot;');
   }
 
+  function canonicalLink(value) {
+    try {
+      var url = new URL(String(value || ''), document.baseURI);
+      var path = url.pathname.replace(/\/+/g, '/').replace(/\/$/, '') || '/';
+      return (url.origin === location.origin ? '' : url.origin) + path;
+    } catch (e) {
+      return String(value || '').split('#')[0].split('?')[0].replace(/\/+/g, '/').replace(/\/$/, '');
+    }
+  }
+
   function prettyDate(iso) {
     var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || '');
     if (!m) return iso || '';
@@ -229,7 +239,7 @@
   /* ═══════════ MỤC GAME ═══════════
      Thẻ: .card-grid > a.card-link > div.card > img.card-img + h3 + .card-meta */
   function renderGame(posts) {
-    var grid = document.querySelector('.card-grid');
+    var grid = document.querySelector('[data-game-article-grid]') || document.querySelector('.card-grid');
     if (!grid) return;
     var page = /\/game0\/1\/game2\.html$/i.test(location.pathname) ? 'play' : 'article';
     var CAT = {
@@ -240,17 +250,26 @@
       return (p.placement || 'article') === page;
     }).slice().sort(compareOldestFirst).forEach(function (p) {
       var target = page === 'play' && p.targetUrl ? p.targetUrl : p.url;
-      if (grid.querySelector('[href="' + target + '"]')) return;
-      var a = document.createElement('a');
+      var targetKey = canonicalLink(target);
+      var matches = Array.prototype.filter.call(grid.querySelectorAll('a.card-link'), function (link) {
+        return canonicalLink(link.getAttribute('href')) === targetKey ||
+          (p.id && link.getAttribute('data-post-id') === p.id);
+      });
+      var a = matches.shift() || document.createElement('a');
+      matches.forEach(function (duplicate) { duplicate.remove(); });
       a.href = target;
       a.className = 'card-link';
       a.setAttribute('data-cms', '1');
+      a.setAttribute('data-post-id', p.id || '');
+      a.setAttribute('data-post-path', targetKey);
       a.innerHTML =
         '<div class="card">' +
           '<img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" class="card-img" loading="lazy">' +
           '<h3>' + esc(p.title) + '</h3>' +
           '<div class="card-meta">' + esc(prettyDate(p.date)) + ' | ' + esc(CAT[p.category] || 'Game') + '</div>' +
         '</div>';
+      /* Mỗi bài quản trị chỉ có đúng một thẻ. Khi sửa bài legacy, thẻ cũ
+         được cập nhật và đưa về đúng thứ tự thay vì tạo thêm bản sao. */
       grid.insertBefore(a, grid.firstChild);
     });
     Array.prototype.forEach.call(grid.querySelectorAll('.card'), function (card, index) {
