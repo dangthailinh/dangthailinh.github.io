@@ -1,11 +1,15 @@
 {
-  "version": 1,
+  "version": 2,
   "updatedAt": "2026-07-27T03:02:49.004Z",
   "sections": {
     "blog": {
       "title": "Linh OSIMI DAILY FUCKING VLOGGGGG!!!",
       "description": "i share ....whatever the fuck i want okay?",
       "heroImage": "/blog/assets/neet-cat.png",
+      "pageBackgroundImage": "",
+      "heroBackgroundImage": "",
+      "backgroundPosition": "center",
+      "heroOverlay": 0.4,
       "background": "#f7f0e6",
       "surface": "#fffaf0",
       "text": "#5c1c12",
@@ -15,12 +19,35 @@
       "bodySize": 16,
       "lineHeight": 1.8,
       "contentWidth": 70,
-      "radius": 12
+      "radius": 12,
+      "heroAlign": "original",
+      "heroHeight": "original",
+      "pageWidth": "original",
+      "density": "original",
+      "showNavigation": true,
+      "showHero": true,
+      "showFooter": true,
+      "blocks": [
+        { "key": "hero", "visible": true },
+        { "key": "owner", "visible": true },
+        { "key": "archive", "visible": true },
+        { "key": "music", "visible": true },
+        { "key": "daily", "visible": true },
+        { "key": "todo", "visible": true },
+        { "key": "now", "visible": true },
+        { "key": "shrine", "visible": true },
+        { "key": "guestbook", "visible": true },
+        { "key": "ending", "visible": true }
+      ]
     },
     "khoahoc": {
       "title": "Khoa Học",
       "description": "Khám phá vũ trụ và khoa học hiện đại",
       "heroImage": "",
+      "pageBackgroundImage": "",
+      "heroBackgroundImage": "",
+      "backgroundPosition": "center",
+      "heroOverlay": 0.4,
       "background": "#f5f9e9",
       "surface": "#fffef8",
       "text": "#10091f",
@@ -30,12 +57,28 @@
       "bodySize": 17,
       "lineHeight": 1.82,
       "contentWidth": 70,
-      "radius": 16
+      "radius": 16,
+      "heroAlign": "original",
+      "heroHeight": "original",
+      "pageWidth": "original",
+      "density": "original",
+      "showNavigation": true,
+      "showHero": true,
+      "showFooter": true,
+      "blocks": [
+        { "key": "hero", "visible": true },
+        { "key": "articles", "visible": true },
+        { "key": "pagination", "visible": true }
+      ]
     },
     "kienthuc": {
       "title": "chống lại brain root,\nLEts GO!.",
       "description": "Những ghi chép đa phần là nhặt về ghi lại hehe về hạ tầng, đám mây, AI và lập trình — được sắp xếp để bạn luôn biết nên đọc gì tiếp theo.",
       "heroImage": "/kienthuc/assets/decor/patchouli-standing.png",
+      "pageBackgroundImage": "",
+      "heroBackgroundImage": "",
+      "backgroundPosition": "center",
+      "heroOverlay": 0.4,
       "background": "#f4efe4",
       "surface": "#fffdf8",
       "text": "#2b2620",
@@ -45,12 +88,28 @@
       "bodySize": 17,
       "lineHeight": 1.85,
       "contentWidth": 70,
-      "radius": 16
+      "radius": 16,
+      "heroAlign": "original",
+      "heroHeight": "original",
+      "pageWidth": "original",
+      "density": "original",
+      "showNavigation": true,
+      "showHero": true,
+      "showFooter": true,
+      "blocks": [
+        { "key": "hero", "visible": true },
+        { "key": "quick", "visible": true },
+        { "key": "library", "visible": true }
+      ]
     },
     "game": {
       "title": "GAME ZONE",
       "description": "Blog về game, vài bài review và một số mini game xàm.",
       "heroImage": "",
+      "pageBackgroundImage": "",
+      "heroBackgroundImage": "",
+      "backgroundPosition": "center",
+      "heroOverlay": 0.4,
       "background": "#05070a",
       "surface": "#10151a",
       "text": "#d4e6dd",
@@ -60,12 +119,28 @@
       "bodySize": 16,
       "lineHeight": 1.78,
       "contentWidth": 70,
-      "radius": 8
+      "radius": 8,
+      "heroAlign": "original",
+      "heroHeight": "original",
+      "pageWidth": "original",
+      "density": "original",
+      "showNavigation": true,
+      "showHero": true,
+      "showFooter": true,
+      "blocks": [
+        { "key": "hero", "visible": true },
+        { "key": "articles", "visible": true },
+        { "key": "pagination", "visible": true }
+      ]
     },
     "manga": {
       "title": "MANGA",
       "description": "Cập nhật chap mới, review và spoiler-free. Một kho manga lộn xộn gồm dark fantasy, hành động, seinen và những thứ đủ kỳ lạ để còn nhớ sau khi đọc.",
       "heroImage": "/manga0/assets/manga-ui/blue-girl.png",
+      "pageBackgroundImage": "",
+      "heroBackgroundImage": "",
+      "backgroundPosition": "center",
+      "heroOverlay": 0.4,
       "background": "#08080a",
       "surface": "#151217",
       "text": "#dcd8d6",
@@ -75,12 +150,28 @@
       "bodySize": 16,
       "lineHeight": 1.8,
       "contentWidth": 70,
-      "radius": 10
+      "radius": 10,
+      "heroAlign": "original",
+      "heroHeight": "original",
+      "pageWidth": "original",
+      "density": "original",
+      "showNavigation": true,
+      "showHero": true,
+      "showFooter": true,
+      "blocks": [
+        { "key": "hero", "visible": true },
+        { "key": "mainCollection", "visible": true },
+        { "key": "extraCollection", "visible": true }
+      ]
     },
     "nghethuat": {
       "title": "Nghệ Thuật",
       "description": "Phòng lưu trữ tranh, nghệ sĩ và những tác phẩm khiến mình muốn nhìn lâu hơn.",
       "heroImage": "/nghe-thuat0/assets/collage/art-visitor.png",
+      "pageBackgroundImage": "",
+      "heroBackgroundImage": "",
+      "backgroundPosition": "center",
+      "heroOverlay": 0.4,
       "background": "#f3ece0",
       "surface": "#fffaf2",
       "text": "#33291f",
@@ -90,12 +181,29 @@
       "bodySize": 17,
       "lineHeight": 1.82,
       "contentWidth": 70,
-      "radius": 14
+      "radius": 14,
+      "heroAlign": "original",
+      "heroHeight": "original",
+      "pageWidth": "original",
+      "density": "original",
+      "showNavigation": true,
+      "showHero": true,
+      "showFooter": true,
+      "blocks": [
+        { "key": "hero", "visible": true },
+        { "key": "featured", "visible": true },
+        { "key": "collection", "visible": true },
+        { "key": "guestbook", "visible": true }
+      ]
     },
     "phim": {
       "title": "Movie\nclub",
       "description": "Một góc nhỏ cho những bộ phim lớn — nơi mình soi từng nhân vật, nhặt từng chi tiết và giữ lại cảm giác sau màn hình.",
       "heroImage": "/phim0/assets/movie-decor/blue-cat.png",
+      "pageBackgroundImage": "",
+      "heroBackgroundImage": "",
+      "backgroundPosition": "center",
+      "heroOverlay": 0.4,
       "background": "#0b0906",
       "surface": "#17130e",
       "text": "#e5ddd0",
@@ -105,7 +213,19 @@
       "bodySize": 17,
       "lineHeight": 1.82,
       "contentWidth": 70,
-      "radius": 10
+      "radius": 10,
+      "heroAlign": "original",
+      "heroHeight": "original",
+      "pageWidth": "original",
+      "density": "original",
+      "showNavigation": true,
+      "showHero": true,
+      "showFooter": true,
+      "blocks": [
+        { "key": "hero", "visible": true },
+        { "key": "library", "visible": true },
+        { "key": "intermission", "visible": true }
+      ]
     }
   }
 }

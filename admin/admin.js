@@ -14,6 +14,69 @@
   var DATA_PATH = 'data/posts.json';
   var TAX_PATH = 'data/taxonomy.json';
   var THEME_PATH = 'data/site-settings.json';
+  var PAGE_URLS = {
+    blog: '/blog/',
+    khoahoc: '/khoa-hoc0/0/khoa-hoc.html',
+    kienthuc: '/kienthuc/',
+    game: '/game0/0/game.html',
+    manga: '/manga0/0/truyen-manga.html',
+    nghethuat: '/nghe-thuat0/nghe-thuat.html',
+    phim: '/phim0/0/phim.html'
+  };
+  var PAGE_FILES = {
+    blog: 'blog/index.html',
+    khoahoc: 'khoa-hoc0/0/khoa-hoc.html',
+    kienthuc: 'kienthuc/index.html',
+    game: 'game0/0/game.html',
+    manga: 'manga0/0/truyen-manga.html',
+    nghethuat: 'nghe-thuat0/nghe-thuat.html',
+    phim: 'phim0/0/phim.html'
+  };
+  var PAGE_BLOCKS = {
+    blog: [
+      { key: 'hero', label: 'Phần giới thiệu', selector: '.hero' },
+      { key: 'owner', label: 'Thông tin cá nhân', selector: '.owner-card', titleSelector: '.owner-card h2' },
+      { key: 'archive', label: 'Kho lưu trữ', selector: '.archive-widget', titleSelector: '.archive-widget h2' },
+      { key: 'music', label: 'Đang nghe', selector: '.music-widget', titleSelector: '.music-widget h2' },
+      { key: 'daily', label: 'Nhật ký hằng ngày', selector: '.daily-column', titleSelector: '.daily-column h2' },
+      { key: 'todo', label: 'Danh sách việc cần làm', selector: '.todo-card', titleSelector: '.todo-card h2' },
+      { key: 'now', label: 'Cuộc sống hiện tại', selector: '.now-widget', titleSelector: '.now-widget h2' },
+      { key: 'shrine', label: 'Góc yêu thích', selector: '.shrine-widget', titleSelector: '.shrine-widget h2' },
+      { key: 'guestbook', label: 'Sổ lưu bút', selector: '.guestbook-widget', titleSelector: '.guestbook-widget h2' },
+      { key: 'ending', label: 'Ảnh trang trí cuối trang', selector: '.end-zone' }
+    ],
+    khoahoc: [
+      { key: 'hero', label: 'Phần giới thiệu khoa học', selector: '.hero-science' },
+      { key: 'articles', label: 'Danh sách bài khoa học', selector: 'main.main' },
+      { key: 'pagination', label: 'Chuyển trang', selector: '.pagination-container' }
+    ],
+    kienthuc: [
+      { key: 'hero', label: 'Phần giới thiệu kiến thức', selector: '.hero' },
+      { key: 'quick', label: 'Chọn nhanh chủ đề', selector: '.quick-categories' },
+      { key: 'library', label: 'Thư viện bài viết', selector: '.library-layout', titleSelector: '#result-title' }
+    ],
+    game: [
+      { key: 'hero', label: 'Phần giới thiệu Game', selector: '.hero-game' },
+      { key: 'articles', label: 'Danh sách bài và game', selector: 'main.main' },
+      { key: 'pagination', label: 'Chuyển trang', selector: '.pg-wrap' }
+    ],
+    manga: [
+      { key: 'hero', label: 'Phần giới thiệu Manga', selector: '.manga-hero' },
+      { key: 'mainCollection', label: 'Bộ sưu tập chính', selector: 'section[aria-labelledby="mainCollection"]', titleSelector: '#mainCollection' },
+      { key: 'extraCollection', label: 'Bộ sưu tập bổ sung', selector: 'section[aria-labelledby="extraCollection"]', titleSelector: '#extraCollection' }
+    ],
+    nghethuat: [
+      { key: 'hero', label: 'Phần giới thiệu nghệ thuật', selector: '.collage-hero' },
+      { key: 'featured', label: 'Tác phẩm nổi bật', selector: '#featured', titleSelector: '#featuredTitle' },
+      { key: 'collection', label: 'Bộ sưu tập', selector: '#collection', titleSelector: '#collectionTitle' },
+      { key: 'guestbook', label: 'Sổ lưu bút', selector: '#guestbook', titleSelector: '#guestbookTitle' }
+    ],
+    phim: [
+      { key: 'hero', label: 'Phần giới thiệu Phim', selector: '.hero' },
+      { key: 'library', label: 'Kệ phim', selector: '.library', titleSelector: '#library-title' },
+      { key: 'intermission', label: 'Gợi ý phim cuối trang', selector: '.intermission', titleSelector: '#intermission-title' }
+    ]
+  };
   var LS = {
     token: 'cms.token',
     repo: 'cms.repo',
@@ -36,7 +99,9 @@
     theme: null,       // chữ, ảnh, màu và kiểu chữ của từng mục
     themeSaved: null,  // bản đã lưu gần nhất để hoàn tác
     themeSha: null,
-    themeDirty: false
+    themeDirty: false,
+    legacyPosts: [],   // bài HTML cũ chưa được ghi vào posts.json
+    editingLegacy: null
   };
 
   /* ───────────────── Tiện ích DOM ───────────────── */
@@ -236,6 +301,12 @@
       .then(function () { return loadTheme(); })
       .then(function () { return loadDb(); })
       .then(function () {
+        return scanLegacyPosts(true).catch(function () {
+          S.legacyPosts = [];
+          $('#legacy-scan-status').textContent = 'Chưa quét được bài cũ';
+        });
+      })
+      .then(function () {
         busy(false);
         show('#screen-app');
         restoreDraft();
@@ -298,6 +369,114 @@
     });
   }
 
+  /* ───────────────── Quét các bài HTML cũ ─────────────────
+     Chỉ đọc cây file một lần. Không tự sửa hay di chuyển file cũ. */
+  function legacySection(path) {
+    if (/^blog\/bai-viet\/[^/]+\.html$/i.test(path)) return 'blog';
+    if (/^kienthuc\/articles\/.+\.html$/i.test(path)) return 'kienthuc';
+    if (/^khoa-hoc0\/0\/khoa-hoc-(?:nang-cao-)?bai\d+\.html$/i.test(path)) return 'khoahoc';
+    if (/^game0\/0\/game-(?:nang-cao-)?bai\d+\.html$/i.test(path)) return 'game';
+    if (/^manga0\/0\/truyen-manga-(?:nang-cao-)?bai\d+\.html$/i.test(path)) return 'manga';
+    if (/^phim0\/0\/(?:cold-fish|phim-(?:nang-cao-)?bai\d+)\.html$/i.test(path)) return 'phim';
+    if (/^nghe-thuat0\/(?:[123]|dark-art)\.html$/i.test(path)) return 'nghethuat';
+    return '';
+  }
+
+  function prettyLegacyTitle(path) {
+    var file = path.split('/').pop().replace(/\.html$/i, '');
+    var text = file.replace(/[-_]+/g, ' ').replace(/\b(bai)(\d+)\b/i, 'bài $2');
+    return text.charAt(0).toLocaleUpperCase('vi') + text.slice(1);
+  }
+
+  function linkPath(basePath, href) {
+    if (!href || /^(?:https?:|mailto:|javascript:|#)/i.test(href)) return '';
+    try {
+      return decodeURIComponent(new URL(href, 'https://cms.local/' + basePath).pathname).replace(/^\/+/, '');
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function hydrateLegacyMetadata() {
+    var byPath = {};
+    (S.legacyPosts || []).forEach(function (post) { byPath[post.path] = post; });
+    return Promise.all(Object.keys(PAGE_FILES).map(function (section) {
+      var pagePath = PAGE_FILES[section];
+      return readFile(pagePath).then(function (file) {
+        if (!file) return;
+        var doc = new DOMParser().parseFromString(file.text, 'text/html');
+        Array.prototype.forEach.call(doc.querySelectorAll('a[href]'), function (anchor) {
+          var target = byPath[linkPath(pagePath, anchor.getAttribute('href'))];
+          if (!target) return;
+          var title = anchor.querySelector('h3,h2,.card-title,.post-title');
+          var description = anchor.querySelector('.card-meta,.post-excerpt,.excerpt,p');
+          var image = anchor.querySelector('img');
+          if (title && title.textContent.trim()) target.title = title.textContent.trim();
+          if (description && description.textContent.trim()) target.description = description.textContent.trim();
+          if (image && image.getAttribute('src')) {
+            var src = image.getAttribute('src');
+            target.cover = linkPath(pagePath, src) ? '/' + linkPath(pagePath, src) : src;
+            if (/^https?:\/\//i.test(src)) target.cover = src;
+          }
+        });
+      }).catch(function () { /* Tên file vẫn là dữ liệu dự phòng. */ });
+    }));
+  }
+
+  function scanLegacyPosts(silent) {
+    if (!silent) {
+      busy(true, 'Đang quét các bài HTML cũ…');
+      $('#legacy-scan-status').textContent = 'Đang quét…';
+    }
+    return gh('/repos/' + S.owner + '/' + S.repo + '/git/trees/' +
+      encodeURIComponent(S.branch) + '?recursive=1')
+      .then(function (tree) {
+        var managed = {};
+        ((S.db && S.db.posts) || []).forEach(function (post) {
+          if (post.path) managed[String(post.path).replace(/^\/+/, '')] = true;
+        });
+        S.legacyPosts = (tree.tree || []).filter(function (entry) {
+          return entry.type === 'blob' && legacySection(entry.path) && !managed[entry.path];
+        }).map(function (entry) {
+          var section = legacySection(entry.path);
+          var slug = entry.path.split('/').pop().replace(/\.html$/i, '');
+          return {
+            id: 'legacy:' + entry.path,
+            _legacy: true,
+            section: section,
+            category: '',
+            status: 'published',
+            title: prettyLegacyTitle(entry.path),
+            slug: slug,
+            description: 'Bài HTML cũ — mở để đọc và chỉnh nội dung.',
+            cover: '',
+            tags: [],
+            date: '',
+            path: entry.path,
+            url: '/' + entry.path,
+            blobSha: entry.sha
+          };
+        });
+        return hydrateLegacyMetadata();
+      })
+      .then(function () {
+        $('#legacy-scan-status').textContent = 'Đã tìm thấy ' + S.legacyPosts.length + ' bài cũ';
+        if (!silent) {
+          busy(false);
+          renderPostList();
+          toast('Đã thêm ' + S.legacyPosts.length + ' bài cũ vào danh sách quản lý', 'ok');
+        }
+      })
+      .catch(function (error) {
+        if (!silent) {
+          busy(false);
+          $('#legacy-scan-status').textContent = 'Quét thất bại';
+          toast(error.message, 'err');
+        }
+        throw error;
+      });
+  }
+
   /* ───────────────── Kho chủ đề taxonomy.json ───────────────── */
   function loadTaxonomy() {
     return readFile(TAX_PATH).then(function (file) {
@@ -339,13 +518,17 @@
     var dark = {
       background: '#08080a', surface: '#151217', text: '#dcd8d6', accent: '#ff4d5a'
     };
-    var out = { version: 1, updatedAt: new Date().toISOString(), sections: {} };
+    var out = { version: 2, updatedAt: new Date().toISOString(), sections: {} };
     T.SECTIONS.forEach(function (section) {
       var palette = ['game', 'manga', 'phim'].indexOf(section) >= 0 ? dark : light;
       out.sections[section] = {
         title: T.sectionLabel(section),
         description: 'Góc lưu trữ ' + T.sectionLabel(section).toLocaleLowerCase('vi') + ' của Linh Osimi.',
         heroImage: '',
+        pageBackgroundImage: '',
+        heroBackgroundImage: '',
+        backgroundPosition: 'center',
+        heroOverlay: 0.4,
         background: palette.background,
         surface: palette.surface,
         text: palette.text,
@@ -355,7 +538,17 @@
         bodySize: 17,
         lineHeight: 1.8,
         contentWidth: 70,
-        radius: 14
+        radius: 14,
+        heroAlign: 'original',
+        heroHeight: 'original',
+        pageWidth: 'original',
+        density: 'original',
+        showNavigation: true,
+        showHero: true,
+        showFooter: true,
+        blocks: (PAGE_BLOCKS[section] || []).map(function (block) {
+          return { key: block.key, visible: true };
+        })
       };
     });
     return out;
@@ -368,6 +561,25 @@
       var base = defaults.sections[section];
       Object.keys(base).forEach(function (key) {
         if (target[key] === undefined || target[key] === null) target[key] = base[key];
+      });
+      var oldBlocks = {};
+      (target.blocks || []).forEach(function (block) { oldBlocks[block.key] = block; });
+      var definitions = PAGE_BLOCKS[section] || [];
+      var ordered = [];
+      (target.blocks || []).forEach(function (block) {
+        if (definitions.some(function (definition) { return definition.key === block.key; })) {
+          ordered.push(block.key);
+        }
+      });
+      definitions.forEach(function (block) {
+        if (ordered.indexOf(block.key) < 0) ordered.push(block.key);
+      });
+      target.blocks = ordered.map(function (key) {
+        return {
+          key: key,
+          visible: !oldBlocks[key] || oldBlocks[key].visible !== false,
+          title: oldBlocks[key] && oldBlocks[key].title ? oldBlocks[key].title : ''
+        };
       });
       data.sections[section] = target;
     });
@@ -396,6 +608,7 @@
   }
 
   function saveTheme() {
+    S.theme.version = 2;
     S.theme.updatedAt = new Date().toISOString();
     var json = JSON.stringify(S.theme, null, 2) + '\n';
     return writeFile(THEME_PATH, json, 'Cập nhật giao diện website', S.themeSha)
@@ -818,8 +1031,8 @@
     $('#status-hint').textContent = STATUS_HINT[st] || '';
     $('#btn-publish').textContent = st === 'draft'
       ? '💾 Lưu nháp lên GitHub'
-      : (S.editingId ? '💾 Cập nhật bài viết' : '🚀 Đăng bài lên web');
-    $('#btn-save-draft').hidden = st === 'draft';
+      : ((S.editingId || S.editingLegacy) ? '💾 Cập nhật bài viết' : '🚀 Đăng bài lên web');
+    $('#btn-save-draft').hidden = st === 'draft' || !!S.editingLegacy;
   }
 
   $('#f-section').addEventListener('change', function () { fillCategories(); saveDraftSoon(); schedulePreview(); updateFormStatus(); });
@@ -909,8 +1122,8 @@
 
   function updateEditPill() {
     var pill = $('#edit-pill');
-    if (S.editingId) {
-      pill.textContent = 'Đang sửa bài';
+    if (S.editingId || S.editingLegacy) {
+      pill.textContent = S.editingLegacy ? 'Đang sửa bài cũ' : 'Đang sửa bài';
       pill.classList.add('editing');
     } else {
       pill.textContent = 'Bài mới';
@@ -920,6 +1133,7 @@
 
   function resetForm() {
     S.editingId = null;
+    S.editingLegacy = null;
     writeForm({ date: todayISO(), status: 'published' });
     localStorage.removeItem(LS.draft);
     $('#draft-note').textContent = '';
@@ -945,6 +1159,7 @@
     try {
       var d = JSON.parse(raw);
       S.editingId = d.editingId || null;
+      S.editingLegacy = null;
       writeForm(d);
       $('#draft-note').textContent = 'Khôi phục bản chưa lưu';
     } catch (e) { resetForm(); }
@@ -1043,6 +1258,7 @@
 
   /* ───────────────── Lưu bài (chung cho mọi trạng thái) ───────────────── */
   function savePost(forceStatus) {
+    if (S.editingLegacy) return saveLegacyPost(forceStatus);
     var p = readForm();
     if (forceStatus) p.status = forceStatus;
 
@@ -1182,7 +1398,7 @@
   $('#list-sort').addEventListener('change', function () { listState.sort = this.value; renderPostList(); });
 
   function visiblePosts() {
-    var all = (S.db && S.db.posts) || [];
+    var all = ((S.db && S.db.posts) || []).concat(S.legacyPosts || []);
     var out = all.filter(function (p) {
       if (listState.section !== 'all' && p.section !== listState.section) return false;
       if (listState.status !== 'all' && (p.status || 'published') !== listState.status) return false;
@@ -1197,7 +1413,8 @@
       if (by === 'title-asc')    return String(a.title).localeCompare(String(b.title), 'vi');
       if (by === 'title-desc')   return String(b.title).localeCompare(String(a.title), 'vi');
       if (by === 'updated-desc') return String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''));
-      return String(b.date).localeCompare(String(a.date));
+      if (a._legacy !== b._legacy) return a._legacy ? 1 : -1;
+      return String(b.date || '').localeCompare(String(a.date || ''));
     });
     return out;
   }
@@ -1206,11 +1423,13 @@
 
   function renderPostList() {
     var wrap = $('#post-list');
-    var all = (S.db && S.db.posts) || [];
+    var managedPosts = (S.db && S.db.posts) || [];
+    var all = managedPosts.concat(S.legacyPosts || []);
     var posts = visiblePosts();
 
     $('#list-summary').textContent = all.length
-      ? ('Hiển thị ' + posts.length + ' / ' + all.length + ' bài')
+      ? ('Hiển thị ' + posts.length + ' / ' + all.length + ' bài · ' +
+        managedPosts.length + ' bài quản trị · ' + (S.legacyPosts || []).length + ' bài cũ')
       : '';
 
     wrap.innerHTML = '';
@@ -1227,7 +1446,9 @@
       var item = document.createElement('div');
       item.className = 'post-item' + (S.selected[p.id] ? ' selected' : '');
       item.innerHTML =
-        '<input class="pick" type="checkbox"' + (S.selected[p.id] ? ' checked' : '') + ' aria-label="Chọn bài">' +
+        ((p._legacy || p.importedLegacy)
+          ? '<span class="legacy-pick" aria-hidden="true">⌁</span>'
+          : '<input class="pick" type="checkbox"' + (S.selected[p.id] ? ' checked' : '') + ' aria-label="Chọn bài">') +
         (p.cover
           ? '<img class="thumb" src="' + T.escapeHtml(p.cover) + '" alt="" loading="lazy">'
           : '<div class="thumb thumb-empty" aria-hidden="true">✎</div>') +
@@ -1235,7 +1456,9 @@
           '<h4>' + T.escapeHtml(p.title) + '</h4>' +
           '<p class="meta-line">' +
             '<span class="badge">' + T.escapeHtml(T.sectionLabel(p.section)) + '</span>' +
-            '<span class="status-tag ' + status + '">' + STATUS_LABEL[status] + '</span>' +
+            (p._legacy
+              ? '<span class="status-tag legacy">Bài cũ</span>'
+              : '<span class="status-tag ' + status + '">' + STATUS_LABEL[status] + '</span>') +
             '<span>' + T.escapeHtml(p.date || '') + '</span>' +
             (p.updatedAt ? '<span>· sửa ' + T.escapeHtml(relativeTime(p.updatedAt)) + '</span>' : '') +
             '<span class="path">' + T.escapeHtml(p.url || '') + '</span>' +
@@ -1244,20 +1467,26 @@
         '<div class="post-actions">' +
           (status === 'draft' ? '' : '<button class="btn ghost small" data-act="open">Xem</button>') +
           '<button class="btn ghost small" data-act="edit">Sửa</button>' +
-          '<button class="btn ghost small" data-act="dup">Nhân bản</button>' +
-          '<button class="btn danger small" data-act="del">Xoá</button>' +
+          (p._legacy ? '' :
+            '<button class="btn ghost small" data-act="dup">Nhân bản</button>' +
+            '<button class="btn danger small" data-act="del">Xoá</button>') +
         '</div>';
 
-      item.querySelector('.pick').onchange = function () {
-        if (this.checked) S.selected[p.id] = true; else delete S.selected[p.id];
-        item.classList.toggle('selected', !!S.selected[p.id]);
-        refreshBulkBar();
-      };
+      var pick = item.querySelector('.pick');
+      if (pick) pick.onchange = function () {
+          if (this.checked) S.selected[p.id] = true; else delete S.selected[p.id];
+          item.classList.toggle('selected', !!S.selected[p.id]);
+          refreshBulkBar();
+        };
       var openBtn = item.querySelector('[data-act="open"]');
       if (openBtn) openBtn.onclick = function () { window.open(p.url + '?v=' + Date.now(), '_blank'); };
-      item.querySelector('[data-act="edit"]').onclick = function () { editPost(p); };
-      item.querySelector('[data-act="dup"]').onclick = function () { duplicatePost(p); };
-      item.querySelector('[data-act="del"]').onclick = function () { deletePosts([p]); };
+      item.querySelector('[data-act="edit"]').onclick = function () {
+        if (p._legacy || p.importedLegacy) editLegacyPost(p); else editPost(p);
+      };
+      var duplicate = item.querySelector('[data-act="dup"]');
+      var remove = item.querySelector('[data-act="del"]');
+      if (duplicate) duplicate.onclick = function () { duplicatePost(p); };
+      if (remove) remove.onclick = function () { deletePosts([p]); };
       wrap.appendChild(item);
     });
 
@@ -1273,13 +1502,13 @@
     var n = Object.keys(S.selected).length;
     $('#bulk-bar').hidden = n === 0;
     $('#bulk-count').textContent = 'Đã chọn ' + n + ' bài';
-    var visible = visiblePosts();
+    var visible = visiblePosts().filter(function (p) { return !p._legacy && !p.importedLegacy; });
     var allPicked = visible.length > 0 && visible.every(function (p) { return S.selected[p.id]; });
     $('#bulk-all').checked = allPicked;
   }
 
   $('#bulk-all').addEventListener('change', function () {
-    var visible = visiblePosts();
+    var visible = visiblePosts().filter(function (p) { return !p._legacy && !p.importedLegacy; });
     if (this.checked) visible.forEach(function (p) { S.selected[p.id] = true; });
     else visible.forEach(function (p) { delete S.selected[p.id]; });
     renderPostList();
@@ -1307,12 +1536,13 @@
     return readFile(p.path).then(function (file) {
       if (!file) return p.bodyHtml || '';
       var doc = new DOMParser().parseFromString(file.text, 'text/html');
-      var body = doc.querySelector('#article-content');
+      var body = legacyContentNode(doc);
       return body ? body.innerHTML.trim() : (p.bodyHtml || '');
     });
   }
 
   function editPost(p) {
+    S.editingLegacy = null;
     busy(true, 'Đang tải nội dung bài…');
     loadContent(p)
       .then(function (content) {
@@ -1330,7 +1560,197 @@
       .catch(function (err) { busy(false); toast(err.message, 'err'); });
   }
 
+  var LEGACY_CONTENT_SELECTORS = [
+    '#article-content',
+    '[data-cms-content]',
+    '.cold-article',
+    'main.main',
+    '.post-content',
+    '.article-content',
+    'article.post',
+    'main',
+    'article'
+  ];
+
+  function legacyContentNode(doc) {
+    var node = null;
+    LEGACY_CONTENT_SELECTORS.some(function (selector) {
+      node = doc.querySelector(selector);
+      return !!node;
+    });
+    return node;
+  }
+
+  function metaValue(doc, selector) {
+    var node = doc.querySelector(selector);
+    return node ? (node.getAttribute('content') || '') : '';
+  }
+
+  function parseLegacyFile(post, file) {
+    var doc = new DOMParser().parseFromString(file.text, 'text/html');
+    var contentNode = legacyContentNode(doc);
+    if (!contentNode) throw new Error('Chưa xác định được vùng nội dung của bài cũ này.');
+    var heading = doc.querySelector('h1');
+    var title = heading ? heading.textContent.trim() :
+      ((doc.querySelector('title') && doc.querySelector('title').textContent.trim()) || post.title);
+    var description = metaValue(doc, 'meta[name="description"]') ||
+      metaValue(doc, 'meta[property="og:description"]') ||
+      'Bài viết cũ của Linh Osimi.';
+    var cover = metaValue(doc, 'meta[property="og:image"]');
+    if (!cover) {
+      var firstImage = contentNode.querySelector('img');
+      cover = firstImage ? (firstImage.getAttribute('src') || '') : '';
+    }
+    return {
+      doc: doc,
+      source: file.text,
+      sha: file.sha,
+      node: contentNode,
+      heading: heading,
+      title: title,
+      description: description,
+      cover: cover,
+      content: contentNode.innerHTML.trim()
+    };
+  }
+
+  function editLegacyPost(post) {
+    busy(true, 'Đang đọc bài HTML cũ…');
+    readFile(post.path)
+      .then(function (file) {
+        if (!file) throw new Error('File bài cũ không còn tồn tại.');
+        var parsed = parseLegacyFile(post, file);
+        var categories = T.categoriesOf(post.section);
+        S.editingId = post.importedLegacy ? post.id : null;
+        S.editingLegacy = {
+          post: post,
+          path: post.path,
+          sha: parsed.sha,
+          source: parsed.source
+        };
+        writeForm({
+          section: post.section,
+          category: Object.keys(categories)[0],
+          status: 'published',
+          title: parsed.title,
+          slug: post.slug,
+          description: parsed.description,
+          cover: parsed.cover,
+          tags: [],
+          date: todayISO(),
+          content: parsed.content
+        });
+        busy(false);
+        switchTab('write');
+        updateEditPill();
+        $('#btn-save-draft').hidden = true;
+        $('#draft-note').textContent = 'Bài HTML cũ · sẽ giữ nguyên giao diện gốc';
+        toast('Đã mở bài cũ. Khi lưu, bài sẽ được thêm vào danh sách quản trị.', 'ok');
+      })
+      .catch(function (error) {
+        busy(false);
+        toast(error.message, 'err');
+      });
+  }
+
+  function ensureMeta(doc, attr, name, value) {
+    var selector = 'meta[' + attr + '="' + name + '"]';
+    var meta = doc.querySelector(selector);
+    if (!meta) {
+      meta = doc.createElement('meta');
+      meta.setAttribute(attr, name);
+      doc.head.appendChild(meta);
+    }
+    meta.setAttribute('content', value || '');
+  }
+
+  function serializeDocument(doc, source) {
+    var match = String(source || '').match(/^\s*(<!doctype[^>]*>)/i);
+    return (match ? match[1] : '<!doctype html>') + '\n' + doc.documentElement.outerHTML + '\n';
+  }
+
+  function saveLegacyPost(forceStatus) {
+    if (!S.editingLegacy) return;
+    if (forceStatus === 'draft' || $('#f-status').value === 'draft') {
+      $('#f-status').value = 'published';
+      applyStatusUi();
+      return toast('Hãy lưu bài cũ lần đầu ở trạng thái Đã đăng. Sau đó bạn có thể chuyển bài về nháp.', 'err');
+    }
+    var p = readForm();
+    p.status = 'published';
+    var problem = validate(p);
+    if (problem) return showProblem(problem);
+    var context = S.editingLegacy;
+    var parsed;
+    try {
+      parsed = parseLegacyFile(context.post, { text: context.source, sha: context.sha });
+    } catch (error) {
+      return toast(error.message, 'err');
+    }
+    parsed.node.innerHTML = p.content;
+    parsed.node.setAttribute('data-cms-content', '');
+    if (parsed.heading) parsed.heading.textContent = p.title;
+    var titleNode = parsed.doc.querySelector('title');
+    if (titleNode) titleNode.textContent = p.title + ' — Linh Osimi';
+    ensureMeta(parsed.doc, 'name', 'description', p.description);
+    ensureMeta(parsed.doc, 'property', 'og:title', p.title);
+    ensureMeta(parsed.doc, 'property', 'og:description', p.description);
+    if (p.cover) ensureMeta(parsed.doc, 'property', 'og:image', p.cover);
+    parsed.doc.body.setAttribute('data-cms-post', p.section);
+    if (!parsed.doc.querySelector('script[src="/cms/theme.js"]')) {
+      var themeScript = parsed.doc.createElement('script');
+      themeScript.src = '/cms/theme.js';
+      themeScript.defer = true;
+      parsed.doc.head.appendChild(themeScript);
+    }
+    var html = serializeDocument(parsed.doc, context.source);
+
+    busy(true, 'Đang cập nhật bài cũ và đưa vào hệ thống quản lý…');
+    writeFile(context.path, html, 'Cập nhật bài cũ: ' + p.title, context.sha)
+      .then(function (result) {
+        context.sha = result.content.sha;
+        return loadDb();
+      })
+      .then(function () {
+        var record = {
+          id: S.editingId || (T.idPrefix(p.section) + p.slug),
+          section: p.section,
+          category: p.category,
+          status: 'published',
+          title: p.title,
+          slug: p.slug,
+          description: p.description,
+          cover: p.cover,
+          tags: p.tags,
+          date: p.date,
+          author: p.author,
+          path: context.path,
+          url: '/' + context.path,
+          updatedAt: new Date().toISOString(),
+          importedLegacy: true
+        };
+        upsertPost(record);
+        return saveDb('Đưa bài cũ vào quản trị: ' + p.title);
+      })
+      .then(function () {
+        S.legacyPosts = S.legacyPosts.filter(function (item) { return item.path !== context.path; });
+        S.editingLegacy = null;
+        S.editingId = null;
+        localStorage.removeItem(LS.draft);
+        busy(false);
+        renderPostList();
+        renderDashboard();
+        resetForm();
+        toast('Đã sửa và đưa bài cũ vào hệ thống quản trị', 'ok');
+      })
+      .catch(function (error) {
+        busy(false);
+        toast(error.message, 'err');
+      });
+  }
+
   function duplicatePost(p) {
+    S.editingLegacy = null;
     busy(true, 'Đang tạo bản sao…');
     loadContent(p)
       .then(function (content) {
@@ -1460,17 +1880,21 @@
 
   $('#btn-reload').addEventListener('click', reloadAll);
   $('#btn-dash-refresh').addEventListener('click', reloadAll);
+  $('#btn-scan-legacy').addEventListener('click', function () { scanLegacyPosts(false); });
 
   function reloadAll() {
     busy(true, 'Đang tải lại…');
     loadDb()
+      .then(function () { return scanLegacyPosts(true); })
       .then(function () { busy(false); renderPostList(); renderDashboard(); toast('Đã tải lại danh sách'); })
       .catch(function (e) { busy(false); toast(e.message, 'err'); });
   }
 
   /* ═══════════════════ TAB TỔNG QUAN ═══════════════════ */
   function renderDashboard() {
-    var posts = (S.db && S.db.posts) || [];
+    var managedPosts = (S.db && S.db.posts) || [];
+    var legacyPosts = S.legacyPosts || [];
+    var posts = managedPosts.concat(legacyPosts);
     var today = todayISO();
 
     var counts = { published: 0, draft: 0, scheduled: 0 };
@@ -1488,6 +1912,7 @@
     $('#stat-row').innerHTML =
       stat(posts.length, 'Tổng số bài', '') +
       stat(liveNow, 'Đang hiện trên web', 'ok') +
+      stat(legacyPosts.length, 'Bài cũ có thể sửa', 'mute') +
       stat(counts.scheduled || 0, 'Hẹn đăng', 'warn') +
       stat(counts.draft || 0, 'Bản nháp', 'mute');
 
@@ -1507,7 +1932,7 @@
     }).join('');
 
     /* Sửa gần đây */
-    var recent = posts.slice().sort(function (a, b) {
+    var recent = managedPosts.slice().sort(function (a, b) {
       return String(b.updatedAt || b.date).localeCompare(String(a.updatedAt || a.date));
     }).slice(0, 7);
 
@@ -1524,7 +1949,9 @@
         '<span class="badge">' + T.escapeHtml(T.sectionLabel(p.section)) + '</span>' +
         '<span class="r-title">' + T.escapeHtml(p.title) + '</span>' +
         '<span class="r-when">' + T.escapeHtml(relativeTime(p.updatedAt || p.date)) + '</span>';
-      el.onclick = function () { editPost(p); };
+      el.onclick = function () {
+        if (p.importedLegacy) editLegacyPost(p); else editPost(p);
+      };
       box.appendChild(el);
     });
   }
@@ -1557,6 +1984,10 @@
       title: $('#theme-title').value.trim(),
       description: $('#theme-description').value.trim(),
       heroImage: $('#theme-image').value.trim(),
+      pageBackgroundImage: $('#theme-page-bg-image').value.trim(),
+      heroBackgroundImage: $('#theme-hero-bg-image').value.trim(),
+      backgroundPosition: $('#theme-bg-position').value,
+      heroOverlay: Number($('#theme-overlay').value),
       background: $('#theme-bg').value,
       surface: $('#theme-surface').value,
       text: $('#theme-text').value,
@@ -1566,7 +1997,22 @@
       bodySize: Number($('#theme-size').value),
       lineHeight: Number($('#theme-line').value),
       contentWidth: Number($('#theme-width').value),
-      radius: Number($('#theme-radius').value)
+      radius: Number($('#theme-radius').value),
+      heroAlign: $('#theme-hero-align').value,
+      heroHeight: $('#theme-hero-height').value,
+      pageWidth: $('#theme-page-width').value,
+      density: $('#theme-density').value,
+      showNavigation: $('#theme-show-nav').checked,
+      showHero: $('#theme-show-hero').checked,
+      showFooter: $('#theme-show-footer').checked,
+      blocks: $$('#theme-block-list .theme-block').map(function (row) {
+        var title = row.querySelector('.theme-block-title');
+        return {
+          key: row.dataset.key,
+          visible: row.querySelector('input[type="checkbox"]').checked,
+          title: title ? title.value.trim() : ''
+        };
+      })
     };
   }
 
@@ -1575,6 +2021,10 @@
     $('#theme-title').value = settings.title || '';
     $('#theme-description').value = settings.description || '';
     $('#theme-image').value = settings.heroImage || '';
+    $('#theme-page-bg-image').value = settings.pageBackgroundImage || '';
+    $('#theme-hero-bg-image').value = settings.heroBackgroundImage || '';
+    $('#theme-bg-position').value = settings.backgroundPosition || 'center';
+    $('#theme-overlay').value = String(settings.heroOverlay === undefined ? 0.4 : settings.heroOverlay);
     $('#theme-bg').value = settings.background || '#f4efe4';
     $('#theme-surface').value = settings.surface || '#fffdf8';
     $('#theme-text').value = settings.text || '#2b2620';
@@ -1585,7 +2035,48 @@
     $('#theme-line').value = settings.lineHeight || 1.8;
     $('#theme-width').value = settings.contentWidth || 70;
     $('#theme-radius').value = settings.radius === undefined ? 14 : settings.radius;
+    $('#theme-hero-align').value = settings.heroAlign || 'original';
+    $('#theme-hero-height').value = settings.heroHeight || 'original';
+    $('#theme-page-width').value = settings.pageWidth || 'original';
+    $('#theme-density').value = settings.density || 'original';
+    $('#theme-show-nav').checked = settings.showNavigation !== false;
+    $('#theme-show-hero').checked = settings.showHero !== false;
+    $('#theme-show-footer').checked = settings.showFooter !== false;
+    renderThemeBlocks(settings);
     updateThemePreview();
+  }
+
+  function renderThemeBlocks(settings) {
+    var section = $('#theme-section').value;
+    var definitions = PAGE_BLOCKS[section] || [];
+    $('#theme-block-list').innerHTML = '';
+    var saved = {};
+    (settings.blocks || []).forEach(function (block) { saved[block.key] = block; });
+    var order = (settings.blocks || []).map(function (block) { return block.key; });
+    definitions.slice().sort(function (a, b) {
+      var ai = order.indexOf(a.key);
+      var bi = order.indexOf(b.key);
+      if (ai < 0) ai = definitions.indexOf(a);
+      if (bi < 0) bi = definitions.indexOf(b);
+      return ai - bi;
+    }).forEach(function (block, index, list) {
+      var row = document.createElement('div');
+      row.className = 'theme-block';
+      row.dataset.key = block.key;
+      row.innerHTML =
+        '<input type="checkbox" aria-label="Hiện phần này"' +
+          ((!saved[block.key] || saved[block.key].visible !== false) ? ' checked' : '') + '>' +
+        '<span>' + T.escapeHtml(block.label) + '</span>' +
+        '<div class="theme-block-move">' +
+          '<button type="button" data-move="-1" title="Đưa lên"' + (index === 0 ? ' disabled' : '') + '>↑</button>' +
+          '<button type="button" data-move="1" title="Đưa xuống"' + (index === list.length - 1 ? ' disabled' : '') + '>↓</button>' +
+        '</div>' +
+        (block.titleSelector
+          ? '<input class="theme-block-title" type="text" maxlength="100" placeholder="Đổi tiêu đề phần này (để trống = giữ nguyên)" value="' +
+            T.escapeHtml((saved[block.key] && saved[block.key].title) || '') + '">'
+          : '');
+      $('#theme-block-list').appendChild(row);
+    });
   }
 
   function updateThemeOutputs(settings) {
@@ -1609,8 +2100,25 @@
     preview.style.setProperty('--pv-line', settings.lineHeight);
     preview.style.setProperty('--pv-width', settings.contentWidth + 'ch');
     preview.style.setProperty('--pv-radius', settings.radius + 'px');
+    preview.style.setProperty('--pv-overlay', settings.heroOverlay);
+    preview.dataset.heroAlign = settings.heroAlign;
+    preview.dataset.heroHeight = settings.heroHeight;
+    preview.dataset.density = settings.density;
+    preview.style.backgroundPosition = settings.backgroundPosition;
+    preview.style.backgroundImage = settings.pageBackgroundImage
+      ? 'linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),url("' +
+        settings.pageBackgroundImage.replace(/"/g, '%22') + '")'
+      : 'none';
     $('#theme-preview-title').textContent = settings.title || 'Tiêu đề mục';
     $('#theme-preview-description').textContent = settings.description || 'Đoạn giới thiệu của mục.';
+    var previewHero = preview.querySelector('.theme-preview-hero');
+    previewHero.hidden = !settings.showHero;
+    previewHero.style.backgroundImage = settings.heroBackgroundImage
+      ? 'linear-gradient(rgba(0,0,0,' + settings.heroOverlay + '),rgba(0,0,0,' +
+        settings.heroOverlay + ')),url("' + settings.heroBackgroundImage.replace(/"/g, '%22') + '")'
+      : '';
+    previewHero.style.backgroundSize = settings.heroBackgroundImage ? 'cover' : '';
+    previewHero.style.backgroundPosition = settings.backgroundPosition;
 
     var image = $('#theme-preview-image');
     if (settings.heroImage) {
@@ -1647,6 +2155,21 @@
     if (event.target.id === 'theme-section' || event.target.type === 'range' || event.target.type === 'color') return;
     markThemeDirty();
   });
+  $('#theme-block-list').addEventListener('click', function (event) {
+    var button = event.target.closest('[data-move]');
+    if (!button) return;
+    var row = button.closest('.theme-block');
+    var direction = Number(button.dataset.move);
+    var sibling = direction < 0 ? row.previousElementSibling : row.nextElementSibling;
+    if (!sibling) return;
+    if (direction < 0) row.parentNode.insertBefore(row, sibling);
+    else row.parentNode.insertBefore(sibling, row);
+    $$('#theme-block-list .theme-block').forEach(function (item, index, list) {
+      item.querySelector('[data-move="-1"]').disabled = index === 0;
+      item.querySelector('[data-move="1"]').disabled = index === list.length - 1;
+    });
+    markThemeDirty();
+  });
 
   $('#theme-preview-image').addEventListener('error', function () { this.hidden = true; });
   $('#theme-preview-image').addEventListener('load', function () { this.hidden = false; });
@@ -1662,6 +2185,30 @@
   $('#btn-theme-image-clear').addEventListener('click', function () {
     $('#theme-image').value = '';
     markThemeDirty();
+  });
+
+  function bindThemeBackground(uploadSelector, inputSelector, clearSelector, label) {
+    $(uploadSelector).addEventListener('click', function () {
+      pickImage(function (url) {
+        $(inputSelector).value = url;
+        markThemeDirty();
+        toast(label + ' đã sẵn sàng trong bản xem trước', 'ok');
+      });
+    });
+    $(clearSelector).addEventListener('click', function () {
+      $(inputSelector).value = '';
+      markThemeDirty();
+    });
+  }
+
+  bindThemeBackground('#btn-theme-page-bg-upload', '#theme-page-bg-image',
+    '#btn-theme-page-bg-clear', 'Ảnh nền trang');
+  bindThemeBackground('#btn-theme-hero-bg-upload', '#theme-hero-bg-image',
+    '#btn-theme-hero-bg-clear', 'Ảnh nền đầu trang');
+
+  $('#btn-theme-open-page').addEventListener('click', function () {
+    var url = PAGE_URLS[$('#theme-section').value];
+    if (url) window.open(url + '?v=' + Date.now(), '_blank');
   });
 
   $('#btn-theme-reset').addEventListener('click', function () {

@@ -64,7 +64,7 @@
       <button class="tab" data-tab="dashboard">◈ Tổng quan</button>
       <button class="tab active" data-tab="write">✎ Viết bài</button>
       <button class="tab" data-tab="manage">☰ Quản lý bài</button>
-      <button class="tab" data-tab="theme">🎨 Giao diện</button>
+      <button class="tab" data-tab="theme">▦ Chỉnh trang</button>
       <button class="tab" data-tab="taxonomy">🏷 Chủ đề</button>
     </nav>
     <div class="topbar-right">
@@ -317,7 +317,14 @@
         </select>
       </label>
 
+      <button id="btn-scan-legacy" class="btn ghost small">⌕ Quét bài viết cũ</button>
       <button id="btn-reload" class="btn ghost small">⟳ Tải lại</button>
+    </div>
+
+    <div class="manage-note">
+      <b>Bài quản trị</b> là bài đã được tạo bằng admin. <b>Bài cũ</b> là trang HTML có sẵn;
+      bấm <i>Sửa</i> để đưa bài đó vào hệ thống quản lý mà vẫn giữ giao diện gốc.
+      <span id="legacy-scan-status"></span>
     </div>
 
     <div class="bulk-bar" id="bulk-bar" hidden>
@@ -337,14 +344,14 @@
     <div id="post-list" class="post-list"></div>
   </div>
 
-  <!-- ═══════════ TAB GIAO DIỆN ═══════════ -->
+  <!-- ═══════════ TAB CHỈNH TRANG ═══════════ -->
   <div id="tab-theme" class="tabpanel">
     <div class="theme-layout">
       <aside class="theme-controls">
         <div class="theme-head">
           <div>
-            <h2>Giao diện trang</h2>
-            <p>Sửa chữ, ảnh và kiểu trình bày của từng mục.</p>
+            <h2>Chỉnh toàn bộ trang</h2>
+            <p>Sửa nội dung đầu trang, ảnh nền, giao diện và cấu trúc từng mục.</p>
           </div>
           <span id="theme-dirty" class="tax-dirty" hidden>Chưa lưu</span>
         </div>
@@ -373,13 +380,53 @@
         </label>
 
         <label class="field">
-          <span>Ảnh đầu trang</span>
+          <span>Ảnh trang trí đầu trang</span>
           <input id="theme-image" type="text" spellcheck="false" placeholder="/uploads/... hoặc https://...">
         </label>
         <div class="theme-image-actions">
           <button id="btn-theme-upload" class="btn ghost small" type="button">⬆ Tải ảnh mới</button>
           <button id="btn-theme-image-clear" class="btn ghost small" type="button">Bỏ ảnh</button>
         </div>
+
+        <fieldset class="theme-group">
+          <legend>Ảnh nền</legend>
+          <label class="field">
+            <span>Ảnh nền toàn trang</span>
+            <input id="theme-page-bg-image" type="text" spellcheck="false" placeholder="/uploads/... hoặc https://...">
+          </label>
+          <div class="theme-image-actions">
+            <button id="btn-theme-page-bg-upload" class="btn ghost small" type="button">⬆ Tải ảnh nền trang</button>
+            <button id="btn-theme-page-bg-clear" class="btn ghost small" type="button">Bỏ ảnh</button>
+          </div>
+          <label class="field">
+            <span>Ảnh nền riêng cho phần đầu trang</span>
+            <input id="theme-hero-bg-image" type="text" spellcheck="false" placeholder="/uploads/... hoặc https://...">
+          </label>
+          <div class="theme-image-actions">
+            <button id="btn-theme-hero-bg-upload" class="btn ghost small" type="button">⬆ Tải ảnh nền đầu trang</button>
+            <button id="btn-theme-hero-bg-clear" class="btn ghost small" type="button">Bỏ ảnh</button>
+          </div>
+          <div class="theme-fonts">
+            <label class="field"><span>Vị trí ảnh nền</span>
+              <select id="theme-bg-position">
+                <option value="center">Ở giữa</option>
+                <option value="top">Phía trên</option>
+                <option value="bottom">Phía dưới</option>
+                <option value="left">Bên trái</option>
+                <option value="right">Bên phải</option>
+              </select>
+            </label>
+            <label class="field"><span>Độ tối ảnh đầu trang</span>
+              <select id="theme-overlay">
+                <option value="0">Không phủ tối</option>
+                <option value="0.2">Nhẹ</option>
+                <option value="0.4">Vừa</option>
+                <option value="0.6">Đậm</option>
+                <option value="0.75">Rất đậm</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
 
         <fieldset class="theme-group">
           <legend>Màu sắc</legend>
@@ -433,16 +480,75 @@
           </label>
         </fieldset>
 
+        <fieldset class="theme-group">
+          <legend>Bố cục trang</legend>
+          <div class="theme-fonts">
+            <label class="field"><span>Căn nội dung đầu trang</span>
+              <select id="theme-hero-align">
+                <option value="original">Giữ bố cục gốc</option>
+                <option value="left">Căn trái</option>
+                <option value="center">Căn giữa</option>
+                <option value="right">Căn phải</option>
+              </select>
+            </label>
+            <label class="field"><span>Chiều cao đầu trang</span>
+              <select id="theme-hero-height">
+                <option value="original">Giữ chiều cao gốc</option>
+                <option value="compact">Gọn</option>
+                <option value="normal">Vừa</option>
+                <option value="tall">Cao</option>
+                <option value="screen">Toàn màn hình</option>
+              </select>
+            </label>
+            <label class="field"><span>Bề ngang khu vực trang</span>
+              <select id="theme-page-width">
+                <option value="original">Giữ nguyên</option>
+                <option value="narrow">Hẹp · 980px</option>
+                <option value="normal">Vừa · 1280px</option>
+                <option value="wide">Rộng · 1600px</option>
+                <option value="full">Toàn chiều ngang</option>
+              </select>
+            </label>
+            <label class="field"><span>Mật độ nội dung</span>
+              <select id="theme-density">
+                <option value="original">Giữ nguyên</option>
+                <option value="compact">Gọn hơn</option>
+                <option value="comfortable">Thoáng vừa</option>
+                <option value="spacious">Rất thoáng</option>
+              </select>
+            </label>
+          </div>
+          <label class="checkbox theme-check">
+            <input id="theme-show-nav" type="checkbox">
+            <span>Hiện thanh điều hướng</span>
+          </label>
+          <label class="checkbox theme-check">
+            <input id="theme-show-hero" type="checkbox">
+            <span>Hiện phần đầu trang</span>
+          </label>
+          <label class="checkbox theme-check">
+            <input id="theme-show-footer" type="checkbox">
+            <span>Hiện chân trang</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="theme-group">
+          <legend>Cấu trúc và các phần nội dung</legend>
+          <p class="theme-group-note">Ẩn/hiện hoặc dùng nút mũi tên để đổi thứ tự các phần có cùng khu vực.</p>
+          <div id="theme-block-list" class="theme-block-list"></div>
+        </fieldset>
+
         <div class="theme-actions">
-          <button id="btn-theme-save" class="btn primary" type="button">💾 Lưu giao diện lên GitHub</button>
+          <button id="btn-theme-save" class="btn primary" type="button">💾 Lưu thay đổi trang</button>
           <button id="btn-theme-reset" class="btn ghost" type="button">Hoàn tác thay đổi mục này</button>
+          <button id="btn-theme-open-page" class="btn ghost" type="button">Mở trang thật ↗</button>
         </div>
       </aside>
 
       <main class="theme-preview-wrap">
         <div class="theme-preview-bar">
           <span>Xem trước trực tiếp</span>
-          <small>Gần giống giao diện bài viết sau khi lưu</small>
+          <small>Xem nhanh ảnh nền, nội dung và bố cục trước khi lưu</small>
         </div>
         <div id="theme-preview" class="theme-preview">
           <section class="theme-preview-hero">
