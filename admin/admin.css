@@ -161,6 +161,25 @@ code{background:#eae2d5;padding:.1em .35em;border-radius:3px;font:.9em Consolas,
 .photo-route-notice strong{display:block;color:#5f4516}
 .photo-route-notice p{margin:4px 0 10px}
 
+/* Bộ tạo bài Manga — mô phỏng hệ khung truyện của Denji/Reze và Evan */
+.manga-options{
+  margin:2px 0 16px;padding:14px;border:2px solid #171717;border-radius:3px;
+  background:
+    radial-gradient(circle at 1px 1px,rgba(0,0,0,.1) 1px,transparent 1.2px) 0 0/6px 6px,
+    #fff;color:#171717;box-shadow:5px 5px 0 #171717
+}
+.manga-options[hidden]{display:none}
+.manga-options-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:14px}
+.manga-options-head strong{display:block;margin-top:2px;font-size:15px}
+.manga-options-kicker{display:block;color:#df1f2f;font:800 9px/1.2 Consolas,monospace;letter-spacing:.13em}
+.manga-options-badge{padding:4px 6px;background:#171717;color:#fff;font:700 8.5px/1.2 Consolas,monospace;letter-spacing:.06em}
+.manga-option-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.manga-color-control{display:flex;align-items:center;gap:9px}
+.field .manga-color-control input[type="color"]{width:48px;height:36px;padding:2px;cursor:pointer}
+.manga-color-control output{font:700 11px/1 Consolas,monospace;letter-spacing:.06em}
+.manga-structure-btn{border-color:#171717;background:#171717;color:#fff;box-shadow:3px 3px 0 #df1f2f}
+.manga-structure-btn:hover{background:#df1f2f}
+
 /* ─── Kho ảnh ─── */
 .photos-layout{
   display:grid;grid-template-columns:360px minmax(0,1fr);gap:20px;
@@ -579,4 +598,7 @@ code{background:#eae2d5;padding:.1em .35em;border-radius:3px;font:.9em Consolas,
   .theme-preview-hero{padding:28px 22px;grid-template-columns:1fr}
   .theme-preview-hero img{max-width:180px}
   .theme-preview-article{width:calc(100% - 24px);padding:24px 18px}
+  .manga-option-grid{grid-template-columns:1fr}
+  .manga-options-head{display:block}
+  .manga-options-badge{display:inline-block;margin-top:8px}
 }

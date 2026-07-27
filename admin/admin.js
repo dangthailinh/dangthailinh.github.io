@@ -1348,6 +1348,80 @@
   });
 
   /* ───────────────── Biểu mẫu thông tin bài ───────────────── */
+  var MANGA_PALETTES = {
+    red: '#e10600',
+    purple: '#8b5cf6',
+    blue: '#087ea4',
+    gold: '#f2b705',
+    green: '#39ff88'
+  };
+
+  var MANGA_STRUCTURES = {
+    profile:
+      '<h2>Hồ sơ nhân vật</h2>' +
+      '<p>Giới thiệu nhân vật, xuất thân và vai trò trong câu chuyện.</p>' +
+      '<figure><div class="manga-image-placeholder">THÊM ẢNH NHÂN VẬT</div><figcaption>Chú thích cho khung hình.</figcaption></figure>' +
+      '<h2>Tính cách & động cơ</h2>' +
+      '<p>Phân tích tính cách, mục tiêu, điểm mạnh và mâu thuẫn bên trong.</p>' +
+      '<blockquote>Một câu thoại hoặc chi tiết thể hiện rõ nhất nhân vật.</blockquote>' +
+      '<h2>Sự biến đổi</h2>' +
+      '<p>Nhân vật đã thay đổi như thế nào qua các biến cố chính?</p>' +
+      '<h2>Dấu ấn để lại</h2>' +
+      '<p>Kết luận về ý nghĩa và ảnh hưởng của nhân vật.</p>',
+    duo:
+      '<h2>Nhân vật thứ nhất</h2>' +
+      '<p>Xuất thân, mong muốn và điều nhân vật đang che giấu.</p>' +
+      '<figure><div class="manga-image-placeholder">THÊM ẢNH NHÂN VẬT 01</div><figcaption>Khung truyện thứ nhất.</figcaption></figure>' +
+      '<h2>Nhân vật thứ hai</h2>' +
+      '<p>Đối chiếu tính cách, mục tiêu và cách nhân vật này tác động đến người còn lại.</p>' +
+      '<figure><div class="manga-image-placeholder">THÊM ẢNH NHÂN VẬT 02</div><figcaption>Khung truyện thứ hai.</figcaption></figure>' +
+      '<h2>Mối quan hệ</h2>' +
+      '<blockquote>Điểm va chạm quan trọng nhất giữa hai nhân vật.</blockquote>' +
+      '<p>Phân tích sự gắn kết, xung đột và bước ngoặt của mối quan hệ.</p>' +
+      '<h2>Dư âm</h2>' +
+      '<p>Kết luận về điều mối quan hệ này để lại cho câu chuyện.</p>',
+    editorial:
+      '<h2>Bối cảnh</h2>' +
+      '<p>Giới thiệu arc, chương truyện hoặc vấn đề cần phân tích.</p>' +
+      '<figure><div class="manga-image-placeholder">THÊM KHUNG MANGA</div><figcaption>Bối cảnh của bài viết.</figcaption></figure>' +
+      '<h2>Luận điểm chính</h2>' +
+      '<p>Trình bày ý chính và các chi tiết trong truyện hỗ trợ cho nhận định.</p>' +
+      '<blockquote>Một câu thoại, biểu tượng hoặc chi tiết then chốt.</blockquote>' +
+      '<h2>Đối chiếu</h2>' +
+      '<p>So sánh các nhân vật, biến cố hoặc cách tác giả triển khai chủ đề.</p>' +
+      '<h2>Kết luận</h2>' +
+      '<p>Tóm lại ý nghĩa của chủ đề đối với toàn bộ tác phẩm.</p>'
+  };
+
+  function updateMangaAccent(fromPalette) {
+    var palette = $('#f-manga-palette').value || 'red';
+    if (fromPalette && MANGA_PALETTES[palette]) $('#f-manga-accent').value = MANGA_PALETTES[palette];
+    $('#manga-accent-value').textContent = ($('#f-manga-accent').value || '#e10600').toUpperCase();
+  }
+
+  function applyMangaStructure() {
+    var form = $('#f-manga-form').value || 'profile';
+    var html = MANGA_STRUCTURES[form] || MANGA_STRUCTURES.profile;
+    function useStructure() {
+      editor.innerHTML = html;
+      $('#html-view').value = html;
+      $('#html-view').hidden = true;
+      editor.hidden = false;
+      afterEdit();
+      toast('Đã tạo khung bài Manga — hãy thay nội dung gợi ý và thêm ảnh', 'ok');
+    }
+    syncFromHtmlView();
+    if (!editor.innerText.trim()) return useStructure();
+    ask({
+      title: 'Thay nội dung hiện tại bằng khung Manga?',
+      body: '<p>Thao tác này sẽ thay phần nội dung đang soạn. Tiêu đề, ảnh bìa và các thông tin khác vẫn được giữ nguyên.</p>',
+      okText: 'Dùng khung mới',
+      danger: true
+    }).then(function (answer) {
+      if (answer) useStructure();
+    });
+  }
+
   function fillCategories() {
     var section = $('#f-section').value;
     var map = T.categoriesOf(section);
@@ -1367,12 +1441,14 @@
   function applySectionUi(section) {
     var isBlog = section === 'blog';
     var isGame = section === 'game';
+    var isManga = section === 'manga';
     var gamePlacement = $('#f-game-placement').value || 'article';
     var isBlogPhoto = isBlog && $('#f-category').value === 'photo' && !S.editingId && !S.editingLegacy;
     var isGameCapture = isGame && gamePlacement === 'capture' && !S.editingId && !S.editingLegacy;
     $('#wrap-mood').hidden = !isBlog;
     $('#wrap-game-placement').hidden = !isGame;
     $('#wrap-game-target').hidden = !(isGame && gamePlacement === 'play');
+    $('#wrap-manga-options').hidden = !isManga;
     $('#blog-photo-notice').hidden = !isBlogPhoto;
     $('#game-capture-notice').hidden = !isGameCapture;
     var coverLabel = $('#f-cover').parentNode.querySelector('span');
@@ -1419,6 +1495,21 @@
     schedulePreview();
     updateFormStatus();
   });
+  $('#f-manga-palette').addEventListener('change', function () {
+    updateMangaAccent(true);
+    saveDraftSoon();
+    schedulePreview();
+  });
+  $('#f-manga-accent').addEventListener('input', function () {
+    $('#f-manga-palette').value = 'custom';
+    updateMangaAccent(false);
+    saveDraftSoon();
+    schedulePreview();
+  });
+  ['#f-manga-form', '#f-manga-style', '#f-manga-kicker', '#f-manga-quote'].forEach(function (sel) {
+    $(sel).addEventListener('input', function () { saveDraftSoon(); schedulePreview(); });
+  });
+  $('#btn-manga-structure').addEventListener('click', applyMangaStructure);
   $('#f-status').addEventListener('change', function () { applyStatusUi(); saveDraftSoon(); updateFormStatus(); });
 
   $('#mood-picker').addEventListener('click', function (e) {
@@ -1465,6 +1556,12 @@
       category: $('#f-category').value,
       placement: section === 'game' ? ($('#f-game-placement').value || 'article') : '',
       targetUrl: section === 'game' ? $('#f-target-url').value.trim() : '',
+      mangaForm: section === 'manga' ? ($('#f-manga-form').value || 'profile') : '',
+      mangaStyle: section === 'manga' ? ($('#f-manga-style').value || 'ink') : '',
+      mangaPalette: section === 'manga' ? ($('#f-manga-palette').value || 'red') : '',
+      mangaAccent: section === 'manga' ? ($('#f-manga-accent').value || '#e10600') : '',
+      mangaKicker: section === 'manga' ? $('#f-manga-kicker').value.trim() : '',
+      mangaQuote: section === 'manga' ? $('#f-manga-quote').value.trim() : '',
       status: $('#f-status').value,
       title: title,
       slug: slug,
@@ -1490,6 +1587,13 @@
     $('#f-category').value = (p.category && map[p.category]) ? p.category : Object.keys(map)[0];
     $('#f-game-placement').value = p.placement || 'article';
     $('#f-target-url').value = p.targetUrl || '';
+    $('#f-manga-form').value = p.mangaForm || 'profile';
+    $('#f-manga-style').value = p.mangaStyle || 'ink';
+    $('#f-manga-palette').value = p.mangaPalette || 'red';
+    $('#f-manga-accent').value = p.mangaAccent || MANGA_PALETTES[p.mangaPalette] || '#e10600';
+    $('#f-manga-kicker').value = p.mangaKicker || '';
+    $('#f-manga-quote').value = p.mangaQuote || '';
+    updateMangaAccent(false);
     $('#f-status').value = p.status || 'published';
     $('#f-mood').value = p.mood || '';
     $('#f-title').value = p.title || '';
@@ -1727,6 +1831,12 @@
           id: p.id, section: p.section, category: p.category, status: p.status,
           placement: p.placement || '',
           targetUrl: p.targetUrl || '',
+          mangaForm: p.mangaForm || '',
+          mangaStyle: p.mangaStyle || '',
+          mangaPalette: p.mangaPalette || '',
+          mangaAccent: p.mangaAccent || '',
+          mangaKicker: p.mangaKicker || '',
+          mangaQuote: p.mangaQuote || '',
           title: p.title, slug: p.slug, description: p.description,
           cover: p.cover, tags: p.tags, date: p.date, author: p.author,
           path: p.path, url: p.url,
@@ -1952,7 +2062,16 @@
       if (!file) return p.bodyHtml || '';
       var doc = new DOMParser().parseFromString(file.text, 'text/html');
       var body = legacyContentNode(doc);
-      return body ? body.innerHTML.trim() : (p.bodyHtml || '');
+      if (!body) return p.bodyHtml || '';
+      /* Mẫu Manga mới bọc từng chương trong panel để trình bày. Khi mở lại
+         trong editor chỉ lấy nội dung bên trong, tránh bọc panel lồng nhau. */
+      if (body.classList && body.classList.contains('manga-story')) {
+        var panels = Array.prototype.slice.call(body.children).filter(function (child) {
+          return child.classList && child.classList.contains('manga-story-panel');
+        });
+        if (panels.length) return panels.map(function (panel) { return panel.innerHTML.trim(); }).join('\n');
+      }
+      return body.innerHTML.trim();
     });
   }
 
@@ -1966,6 +2085,9 @@
         writeForm({
           section: p.section, category: p.category, status: p.status || 'published',
           placement: p.placement || 'article', targetUrl: p.targetUrl || '',
+          mangaForm: p.mangaForm || 'profile', mangaStyle: p.mangaStyle || 'ink',
+          mangaPalette: p.mangaPalette || 'red', mangaAccent: p.mangaAccent || '#e10600',
+          mangaKicker: p.mangaKicker || '', mangaQuote: p.mangaQuote || '',
           title: p.title, slug: p.slug, description: p.description, cover: p.cover,
           tags: p.tags, date: p.date, time: p.time, mood: p.mood, content: content
         });
@@ -2180,6 +2302,9 @@
         writeForm({
           section: p.section, category: p.category,
           placement: p.placement || 'article', targetUrl: p.targetUrl || '',
+          mangaForm: p.mangaForm || 'profile', mangaStyle: p.mangaStyle || 'ink',
+          mangaPalette: p.mangaPalette || 'red', mangaAccent: p.mangaAccent || '#e10600',
+          mangaKicker: p.mangaKicker || '', mangaQuote: p.mangaQuote || '',
           status: 'draft',                       /* bản sao luôn bắt đầu ở dạng nháp */
           title: p.title + ' (bản sao)',
           slug: newSlug,
