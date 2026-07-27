@@ -400,6 +400,149 @@ p.content + '\n' +
     phim:      'family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600'
   };
 
+  var MANGA_FORM_LABELS = {
+    profile: 'Hồ sơ nhân vật',
+    duo: 'Song nhân vật',
+    editorial: 'Phân tích truyện'
+  };
+
+  var MANGA_STYLE_LABELS = {
+    ink: 'Mực đen trắng',
+    dark: 'Dark manga',
+    color: 'Comic màu'
+  };
+
+  function mangaOption(value, choices, fallback) {
+    return Object.prototype.hasOwnProperty.call(choices, value) ? value : fallback;
+  }
+
+  function mangaColor(value) {
+    return /^#[0-9a-f]{6}$/i.test(String(value || '')) ? String(value) : '#e10600';
+  }
+
+  function cssUrl(value) {
+    return String(value || '')
+      .replace(/\\/g, '%5C').replace(/'/g, '%27')
+      .replace(/\(/g, '%28').replace(/\)/g, '%29')
+      .replace(/[\r\n]/g, '');
+  }
+
+  /* Bài Manga có hệ thiết kế riêng: hero toàn màn hình, texture halftone,
+     khung truyện và bố cục thay đổi theo dạng bài đã chọn trong admin. */
+  function mangaArticle(p) {
+    var cats = categoriesFor('manga');
+    var cat = cats[p.category] || cats.khac || { label: 'Manga', symbol: '✦' };
+    var form = mangaOption(p.mangaForm, MANGA_FORM_LABELS, 'profile');
+    var style = mangaOption(p.mangaStyle, MANGA_STYLE_LABELS, 'ink');
+    var accent = mangaColor(p.mangaAccent);
+    var cover = p.cover || '';
+    var isVideo = /\.(mp4|webm|ogv|mov)(\?|$)/i.test(cover);
+    var kicker = p.mangaKicker || (cat.label + ' / CHARACTER FILE');
+    var quote = p.mangaQuote || p.description;
+    var tagList = (p.tags || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+    var story = String(p.content || '').trim();
+    story = ('<section class="manga-story-panel">' +
+      story.replace(/(<h2\b[^>]*>[\s\S]*?<\/h2>)/gi, '</section><section class="manga-story-panel">$1') +
+      '</section>').replace('<section class="manga-story-panel"></section>', '');
+    var heroStyle = '--manga-accent:' + accent + ';' +
+      (cover && !isVideo ? '--manga-hero-image:url(\'' + cssUrl(cover) + '\');' : '');
+    var coverMedia = '';
+    if (cover) {
+      coverMedia = isVideo
+        ? '<video src="' + esc(cover) + '" controls playsinline preload="metadata"></video>'
+        : '<img src="' + esc(cover) + '" alt="Ảnh bìa ' + esc(p.title) + '" fetchpriority="high">';
+    } else {
+      coverMedia = '<div class="manga-cover-empty"><span>NO. 01</span>MANGA PANEL</div>';
+    }
+
+    return '<!doctype html>\n' +
+'<html lang="vi">\n' +
+'<head>\n' +
+'  <meta charset="utf-8">\n' +
+'  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+'  <meta name="description" content="' + esc(p.description) + '">\n' +
+'  <meta property="og:type" content="article">\n' +
+'  <meta property="og:title" content="' + esc(p.title) + '">\n' +
+'  <meta property="og:description" content="' + esc(p.description) + '">\n' +
+(cover && !isVideo ? '  <meta property="og:image" content="' + esc(cover) + '">\n' : '') +
+'  <title>' + esc(p.title) + ' — Manga · Linh Osimi</title>\n' +
+'  <link rel="icon" type="image/png" href="/favicon.png?v=2">\n' +
+'  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+'  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
+'  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">\n' +
+'  <link rel="stylesheet" href="/cms/site-nav.css">\n' +
+'  <link rel="stylesheet" href="/cms/article.css">\n' +
+'  <link rel="stylesheet" href="/cms/manga-article.css?v=20260727">\n' +
+'  <link rel="stylesheet" href="/manga0/cursor.css?v=2">\n' +
+'  <script src="/cms/site-nav.js" defer></script>\n' +
+'  <script src="/cms/post.js" defer></script>\n' +
+'  <script src="/manga0/cursor.js?v=2" defer></script>\n' +
+'</head>\n' +
+'<body data-section="manga" data-article-id="' + esc(p.id) + '" data-category="' + esc(p.category) + '" data-cms-post="manga" data-manga-form="' + form + '" data-manga-style="' + style + '" style="' + heroStyle + '">\n' +
+'  <div class="reading-progress" aria-hidden="true"><span></span></div>\n' +
+'  <div data-site-nav="manga"></div>\n' +
+'\n' +
+'  <header class="manga-hero">\n' +
+'    <div class="manga-hero-shade"></div>\n' +
+'    <div class="manga-title-card">\n' +
+'      <span class="manga-file-label">' + esc(kicker) + '</span>\n' +
+'      <h1>' + esc(p.title) + '</h1>\n' +
+'      <p>' + esc(p.description) + '</p>\n' +
+'    </div>\n' +
+'    <blockquote class="manga-speech">' + esc(quote) + '</blockquote>\n' +
+'    <a class="manga-scroll" href="#manga-file" aria-label="Đọc bài viết">SCROLL TO READ ↓</a>\n' +
+'  </header>\n' +
+'\n' +
+'  <main class="manga-main" id="manga-file">\n' +
+'    <p class="manga-crumbs"><a href="/manga0/0/truyen-manga.html">← Kho Manga</a><span>/</span>' + esc(cat.label) + '</p>\n' +
+'\n' +
+'    <section class="manga-dossier">\n' +
+'      <div class="manga-dossier-copy">\n' +
+'        <span class="manga-index">FILE 01</span>\n' +
+'        <p class="manga-eyebrow">' + esc(cat.symbol) + ' ' + esc(cat.label) + '</p>\n' +
+'        <h2>' + esc(MANGA_FORM_LABELS[form]) + '</h2>\n' +
+'        <p>' + esc(p.description) + '</p>\n' +
+'        <div class="manga-byline"><b>' + esc(p.author || 'Linh Osimi') + '</b><span>' + esc(prettyDate(p.date)) + '</span><span data-reading-time>…</span></div>\n' +
+'      </div>\n' +
+'      <figure class="manga-cover-panel">' + coverMedia + '<figcaption>MAIN VISUAL / ' + esc(p.title) + '</figcaption></figure>\n' +
+'      <aside class="manga-stats" aria-label="Thông tin bài viết">\n' +
+'        <h3>Chỉ số</h3>\n' +
+'        <dl>\n' +
+'          <div><dt>Dạng bài</dt><dd>' + esc(MANGA_FORM_LABELS[form]) + '</dd></div>\n' +
+'          <div><dt>Phong cách</dt><dd>' + esc(MANGA_STYLE_LABELS[style]) + '</dd></div>\n' +
+'          <div><dt>Chủ đề</dt><dd>' + esc(cat.label) + '</dd></div>\n' +
+'          <div><dt>Archive</dt><dd>' + esc(String(p.date || '').slice(0, 4) || '—') + '</dd></div>\n' +
+'        </dl>\n' +
+'      </aside>\n' +
+'    </section>\n' +
+'\n' +
+'    <div class="manga-reading-layout">\n' +
+'      <article class="cms-post manga-story" id="article-content" data-cms-content>\n' +
+story + '\n' +
+'      </article>\n' +
+'      <aside class="cms-toc manga-toc" aria-label="Mục lục bài viết">\n' +
+'        <p class="label">CONTENTS</p>\n' +
+'        <ol id="article-toc"></ol>\n' +
+'      </aside>\n' +
+'    </div>\n' +
+'\n' +
+(tagList ? '    <ul class="cms-tags manga-tags">' + tagList + '</ul>\n' : '') +
+'    <nav class="cms-pager article-pager manga-pager" aria-label="Điều hướng bài viết"></nav>\n' +
+'    <section class="cms-related manga-related">\n' +
+'      <span class="manga-index">NEXT FILES</span>\n' +
+'      <h2>Bài Manga khác</h2>\n' +
+'      <div class="related-grid"></div>\n' +
+'    </section>\n' +
+'  </main>\n' +
+'\n' +
+'  <footer class="cms-footer manga-footer">\n' +
+'    <p>© <span id="current-year">2026</span> Linh Osimi · Manga Archive</p>\n' +
+'    <a href="#" onclick="window.scrollTo({top:0,behavior:\'smooth\'});return false">Lên đầu trang ↑</a>\n' +
+'  </footer>\n' +
+'</body>\n' +
+'</html>\n';
+  }
+
   function mediaArticle(p) {
     var meta  = MEDIA_META[p.section] || MEDIA_META.game;
     var cats  = categoriesFor(p.section);
@@ -622,6 +765,7 @@ p.content + '\n' +
     render: function (post) {
       if (post.section === 'khoahoc') return khoahocArticle(post);
       if (post.section === 'blog') return blogArticle(post);
+      if (post.section === 'manga') return mangaArticle(post);
       if (MEDIA_META[post.section]) return mediaArticle(post);
       return kienthucArticle(post);
     }

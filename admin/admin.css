@@ -21,7 +21,13 @@ body{
   color:var(--ink);
   font:15px/1.6 "Be Vietnam Pro","Segoe UI",system-ui,-apple-system,sans-serif;
   -webkit-font-smoothing:antialiased;
+  cursor:default !important;
 }
+/* Admin luôn dùng con trỏ hệ điều hành. Quy tắc !important ngăn giao diện
+   con trỏ tùy chỉnh của các trang nội dung làm mất con trỏ trong editor. */
+button,.btn,a,select,summary,label[for],[role="button"]{cursor:pointer !important}
+input,textarea,[contenteditable="true"],[contenteditable="true"] *{cursor:text !important}
+input[type="checkbox"],input[type="radio"],input[type="color"],input[type="file"]{cursor:pointer !important}
 .screen{display:none}
 .screen.active{display:block}
 a{color:var(--accent)}
@@ -282,8 +288,11 @@ code{background:#eae2d5;padding:.1em .35em;border-radius:3px;font:.9em Consolas,
   flex:1;min-height:0;overflow-y:auto;
   padding:30px 40px 60px;outline:none;
   font:16px/1.85 "Be Vietnam Pro",system-ui,sans-serif;color:var(--ink);
-  overflow-wrap:break-word
+  overflow-wrap:break-word;
+  cursor:text !important;
+  caret-color:var(--accent)
 }
+.editor *{cursor:text !important}
 .editor:empty::before{content:"Bắt đầu viết bài ở đây…";color:#b9ae9c}
 .editor h2{margin:38px 0 14px;font:700 27px/1.3 Lora,Georgia,serif}
 .editor h2::before{content:"";display:block;width:32px;height:2px;background:var(--accent);margin-bottom:12px}
