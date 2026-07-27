@@ -134,7 +134,7 @@ input:focus-visible {
 
 .browser-toolbar {
   display: flex;
-  min-height: 74px;
+  min-height: 66px;
   align-items: stretch;
   justify-content: center;
   gap: .55rem;
@@ -189,8 +189,8 @@ input:focus-visible {
 }
 
 .nav-image-frame {
-  width: 72px;
-  height: 43px;
+  width: 66px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,14 +208,14 @@ input:focus-visible {
 }
 
 .nav-image-frame--stamp img {
-  width: 72px;
-  height: 36px;
+  width: 66px;
+  height: 33px;
   object-fit: fill;
   border: 1px solid rgba(255, 255, 255, .42);
 }
 
 .nav-image-frame--character {
-  height: 47px;
+  height: 41px;
 }
 
 .nav-image-frame--character img {
@@ -1120,87 +1120,6 @@ input:focus-visible {
   background: rgba(255, 255, 255, .12);
 }
 
-/* Công cụ chỉ hiện trên máy đã đăng nhập /admin. */
-.blog-edit-dock {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 60;
-  display: flex;
-  gap: 7px;
-  padding: 7px;
-  border: 1px solid rgba(255, 255, 255, .75);
-  border-radius: 16px;
-  background: rgba(73, 75, 38, .93);
-  box-shadow: 0 8px 30px rgba(44, 31, 20, .28);
-  backdrop-filter: blur(12px);
-}
-
-.blog-edit-dock button {
-  padding: .55rem .75rem;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, .3);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, .12);
-  cursor: pointer;
-  font-size: .72rem;
-}
-
-.blog-edit-dock button:hover {
-  color: var(--olive-dark);
-  background: var(--cream);
-}
-
-.blog-admin-dialog {
-  width: min(1180px, calc(100% - 24px));
-  height: min(860px, calc(100vh - 24px));
-  padding: 0;
-  border: 2px solid var(--olive-dark);
-  border-radius: 16px;
-  background: #f5f1e8;
-  box-shadow: 16px 20px 0 rgba(35, 31, 19, .24);
-  overflow: hidden;
-}
-
-.blog-admin-dialog::backdrop {
-  background: rgba(33, 28, 21, .62);
-  backdrop-filter: blur(4px);
-}
-
-.blog-admin-dialog__bar {
-  min-height: 43px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 9px 7px 14px;
-  color: #fff;
-  background: linear-gradient(90deg, var(--olive-dark), var(--olive));
-  font: .75rem/1 Arial, sans-serif;
-}
-
-.blog-admin-dialog__bar strong {
-  margin-right: auto;
-}
-
-.blog-admin-dialog__bar a,
-.blog-admin-dialog__bar button {
-  padding: 6px 10px;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, .38);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, .1);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.blog-admin-dialog iframe {
-  width: 100%;
-  height: calc(100% - 43px);
-  display: block;
-  border: 0;
-  background: #f5f1e8;
-}
-
 .start-button {
   text-decoration: none;
   font-weight: bold;
@@ -1554,19 +1473,6 @@ input:focus-visible {
 @media (max-width: 560px) {
   .browser-chrome {
     position: relative;
-  }
-
-  .blog-edit-dock {
-    right: 8px;
-    bottom: 8px;
-    left: 8px;
-    justify-content: center;
-  }
-
-  .blog-edit-dock button {
-    flex: 1;
-    padding-inline: .35rem;
-    font-size: .63rem;
   }
 
   .hero {
