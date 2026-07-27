@@ -75,6 +75,9 @@ Mỗi ảnh có trường **Nơi hiển thị**:
 - **Game · Capture Mode**: điền tên game và chú thích. Ảnh mới nhất tự đứng số 01.
 
 Ảnh ở ba nơi dùng chung màn hình quản lý nhưng không bị hiển thị lẫn sang trang khác.
+Nút **Chọn một hoặc nhiều ảnh** cho phép chọn nhiều file trong một lần; admin tải tất cả,
+hiện danh sách xem trước và lưu mỗi file thành một mục ảnh riêng. Nếu để trống tiêu đề,
+tên file sẽ được dùng làm tiêu đề của từng ảnh.
 
 ### ☰ Quản lý bài
 

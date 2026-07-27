@@ -108,6 +108,7 @@
     photos: null,      // thư viện ảnh dùng chung cho Photos · Nghệ thuật · Game Capture
     photosSha: null,
     editingPhotoId: null,
+    pendingPhotoUploads: [],
     legacyPosts: [],   // bài HTML cũ chưa được ghi vào posts.json
     editingLegacy: null
   };
@@ -1007,13 +1008,14 @@
 
   function pickImage(cb) { pendingPick = cb; $('#file-input').click(); }
 
-  function uploadImage(file) {
+  function uploadImage(file, options) {
+    options = options || {};
     if (!file) return Promise.reject(new Error('Không có file'));
     if (file.size > 5 * 1024 * 1024) {
-      toast('Ảnh lớn hơn 5MB, hãy nén bớt trước khi tải lên.', 'err');
+      if (!options.quiet) toast('Ảnh lớn hơn 5MB, hãy nén bớt trước khi tải lên.', 'err');
       return Promise.reject(new Error('Ảnh quá lớn'));
     }
-    busy(true, 'Đang tải ảnh lên GitHub…');
+    if (!options.quiet) busy(true, 'Đang tải ảnh lên GitHub…');
     return new Promise(function (resolve, reject) {
       var reader = new FileReader();
       reader.onload = function () {
@@ -1023,13 +1025,54 @@
         var ext = (file.name.match(/\.[a-z0-9]+$/i) || ['.png'])[0].toLowerCase();
         var path = 'uploads/' + now.getFullYear() + '/' +
                    String(now.getMonth() + 1).padStart(2, '0') + '/' +
-                   Date.now() + '-' + safe + ext;
+                   Date.now() + '-' + Math.random().toString(36).slice(2, 7) + '-' + safe + ext;
         writeFile(path, { b64: b64 }, 'Tải ảnh: ' + path)
-          .then(function () { busy(false); toast('Đã tải ảnh lên', 'ok'); resolve('/' + path); })
-          .catch(function (err) { busy(false); toast(err.message, 'err'); reject(err); });
+          .then(function () {
+            if (!options.quiet) { busy(false); toast('Đã tải ảnh lên', 'ok'); }
+            resolve('/' + path);
+          })
+          .catch(function (err) {
+            if (!options.quiet) { busy(false); toast(err.message, 'err'); }
+            reject(err);
+          });
       };
-      reader.onerror = function () { busy(false); reject(new Error('Không đọc được file')); };
+      reader.onerror = function () {
+        if (!options.quiet) busy(false);
+        reject(new Error('Không đọc được file'));
+      };
       reader.readAsDataURL(file);
+    });
+  }
+
+  function uploadPhotoFiles(files) {
+    var list = Array.prototype.slice.call(files || []).filter(function (file) {
+      return /^image\//.test(file.type);
+    });
+    if (!list.length) return Promise.resolve([]);
+    var tooLarge = list.find(function (file) { return file.size > 5 * 1024 * 1024; });
+    if (tooLarge) {
+      toast('Ảnh "' + tooLarge.name + '" lớn hơn 5MB. Hãy nén ảnh rồi chọn lại.', 'err');
+      return Promise.reject(new Error('Ảnh quá lớn'));
+    }
+    var uploaded = [];
+    return list.reduce(function (chain, file, index) {
+      return chain.then(function () {
+        busy(true, 'Đang tải ảnh ' + (index + 1) + ' / ' + list.length + ' lên GitHub…');
+        return uploadImage(file, { quiet: true }).then(function (url) {
+          uploaded.push({
+            url: url,
+            name: file.name.replace(/\.[^.]+$/, '') || ('Ảnh ' + (index + 1))
+          });
+        });
+      });
+    }, Promise.resolve()).then(function () {
+      busy(false);
+      toast('✅ Đã tải lên ' + uploaded.length + ' ảnh', 'ok');
+      return uploaded;
+    }).catch(function (error) {
+      busy(false);
+      toast(error.message, 'err');
+      throw error;
     });
   }
 
@@ -1071,13 +1114,25 @@
   function updatePhotoPreview() {
     var src = $('#photo-src').value.trim();
     var preview = $('#photo-preview');
+    var uploads = S.pendingPhotoUploads || [];
+    if (uploads.length) {
+      preview.hidden = false;
+      preview.classList.toggle('is-single', uploads.length === 1);
+      preview.innerHTML = uploads.map(function (item) {
+        return '<img src="' + T.escapeHtml(item.url) + '" alt="' + T.escapeHtml(item.name) + '">';
+      }).join('') + '<span class="photo-upload-preview-count">Đã chọn ' + uploads.length +
+        ' ảnh · mỗi ảnh sẽ được lưu thành một mục riêng</span>';
+      return;
+    }
     var valid = /^(?:https?:\/\/|\/(?!\/))/i.test(src);
     preview.hidden = !valid;
-    if (valid) preview.querySelector('img').src = src;
+    preview.classList.add('is-single');
+    preview.innerHTML = valid ? '<img src="' + T.escapeHtml(src) + '" alt="Ảnh xem trước">' : '';
   }
 
   function resetPhotoForm() {
     S.editingPhotoId = null;
+    S.pendingPhotoUploads = [];
     $('#photo-edit-pill').textContent = 'Ảnh mới';
     $('#photo-edit-pill').classList.remove('editing');
     $('#photo-title').value = '';
@@ -1087,6 +1142,8 @@
     $('#photo-link').value = '';
     $('#photo-date').value = todayISO();
     $('#photo-preview').hidden = true;
+    $('#photo-preview').innerHTML = '';
+    $('#btn-photo-upload').textContent = '⬆ Chọn một hoặc nhiều ảnh';
     $('#btn-photo-cancel').hidden = true;
     updatePhotoDestinationUi();
   }
@@ -1126,6 +1183,7 @@
 
   function editPhoto(photo) {
     S.editingPhotoId = photo.id;
+    S.pendingPhotoUploads = [];
     $('#photo-edit-pill').textContent = 'Đang sửa';
     $('#photo-edit-pill').classList.add('editing');
     $('#photo-destination').value = PHOTO_DESTINATION_LABELS[photoDestination(photo)]
@@ -1139,6 +1197,7 @@
     $('#photo-note').value = photo.note || '';
     $('#photo-link').value = photo.link || '';
     $('#btn-photo-cancel').hidden = false;
+    $('#btn-photo-upload').textContent = '⬆ Chọn ảnh thay thế';
     updatePhotoDestinationUi();
     updatePhotoPreview();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1147,8 +1206,12 @@
   function savePhotoFromForm() {
     var title = $('#photo-title').value.trim();
     var src = $('#photo-src').value.trim();
-    if (!title) { $('#photo-title').focus(); return toast('Hãy đặt tiêu đề cho ảnh.', 'err'); }
-    if (!/^(?:https?:\/\/|\/(?!\/))/i.test(src)) {
+    var queued = !S.editingPhotoId ? (S.pendingPhotoUploads || []).slice() : [];
+    if (!queued.length && !title) {
+      $('#photo-title').focus();
+      return toast('Hãy đặt tiêu đề cho ảnh hoặc chọn file để dùng tên file.', 'err');
+    }
+    if (!queued.length && !/^(?:https?:\/\/|\/(?!\/))/i.test(src)) {
       $('#photo-src').focus();
       return toast('Hãy tải ảnh từ máy hoặc nhập URL ảnh hợp lệ.', 'err');
     }
@@ -1158,31 +1221,42 @@
     });
     var now = new Date().toISOString();
     var destination = $('#photo-destination').value;
-    var photo = {
-      id: old ? old.id : ('photo-' + Date.now().toString(36)),
-      destination: destination,
-      album: $('#photo-album').value,
-      category: $('#photo-art-category').value,
-      game: $('#photo-game').value.trim(),
-      title: title,
-      src: src,
-      date: $('#photo-date').value || todayISO(),
-      note: $('#photo-note').value.trim(),
-      link: $('#photo-link').value.trim(),
-      author: 'Linh Osimi',
-      createdAt: old && old.createdAt ? old.createdAt : now,
-      updatedAt: now
-    };
-    var index = S.photos.photos.findIndex(function (item) { return item.id === photo.id; });
-    if (index >= 0) S.photos.photos[index] = photo;
-    else S.photos.photos.push(photo);
-    busy(true, old ? 'Đang lưu thay đổi ảnh…' : 'Đang thêm ảnh vào thư viện…');
-    savePhotos((old ? 'Cập nhật ảnh: ' : 'Thêm ảnh vào ' + PHOTO_DESTINATION_LABELS[destination] + ': ') + title)
+    var sources = queued.length ? queued : [{ url: src, name: title }];
+    var stamp = Date.now().toString(36);
+    var records = sources.map(function (item, itemIndex) {
+      var itemTitle = title
+        ? (sources.length > 1 ? title + ' · ' + String(itemIndex + 1).padStart(2, '0') : title)
+        : item.name;
+      return {
+        id: old ? old.id : ('photo-' + stamp + '-' + itemIndex.toString(36)),
+        destination: destination,
+        album: $('#photo-album').value,
+        category: $('#photo-art-category').value,
+        game: $('#photo-game').value.trim(),
+        title: itemTitle || ('Ảnh ' + (itemIndex + 1)),
+        src: item.url,
+        date: $('#photo-date').value || todayISO(),
+        note: $('#photo-note').value.trim(),
+        link: $('#photo-link').value.trim(),
+        author: 'Linh Osimi',
+        createdAt: old && old.createdAt ? old.createdAt : now,
+        updatedAt: now
+      };
+    });
+    records.forEach(function (photo) {
+      var index = S.photos.photos.findIndex(function (item) { return item.id === photo.id; });
+      if (index >= 0) S.photos.photos[index] = photo;
+      else S.photos.photos.push(photo);
+    });
+    busy(true, old ? 'Đang lưu thay đổi ảnh…' : 'Đang thêm ' + records.length + ' ảnh vào thư viện…');
+    var messageTitle = title || (records.length === 1 ? records[0].title : records.length + ' ảnh');
+    savePhotos((old ? 'Cập nhật ảnh: ' : 'Thêm ảnh vào ' + PHOTO_DESTINATION_LABELS[destination] + ': ') + messageTitle)
       .then(function () {
         busy(false);
         resetPhotoForm();
         renderPhotoList();
-        toast(old ? '✅ Đã cập nhật ảnh' : '✅ Ảnh đã được thêm vào ' + PHOTO_DESTINATION_LABELS[destination], 'ok');
+        toast(old ? '✅ Đã cập nhật ảnh' :
+          '✅ Đã thêm ' + records.length + ' ảnh vào ' + PHOTO_DESTINATION_LABELS[destination], 'ok');
       })
       .catch(function (error) {
         busy(false);
@@ -1192,14 +1266,36 @@
       });
   }
 
-  $('#photo-src').addEventListener('input', updatePhotoPreview);
+  $('#photo-src').addEventListener('input', function () {
+    S.pendingPhotoUploads = [];
+    updatePhotoPreview();
+  });
   $('#photo-destination').addEventListener('change', updatePhotoDestinationUi);
   $('#btn-photo-upload').addEventListener('click', function () {
-    pickImage(function (url, name) {
-      $('#photo-src').value = url;
-      if (!$('#photo-title').value.trim()) $('#photo-title').value = name || '';
+    var input = $('#photo-file-input');
+    input.multiple = !S.editingPhotoId;
+    input.click();
+  });
+  $('#photo-file-input').addEventListener('change', function (event) {
+    var files = Array.prototype.slice.call(event.target.files || []);
+    event.target.value = '';
+    if (!files.length) return;
+    uploadPhotoFiles(files).then(function (uploads) {
+      if (!uploads.length) return;
+      if (S.editingPhotoId) {
+        S.pendingPhotoUploads = [];
+        $('#photo-src').value = uploads[0].url;
+        if (!$('#photo-title').value.trim()) $('#photo-title').value = uploads[0].name;
+      } else {
+        S.pendingPhotoUploads = uploads;
+        $('#photo-src').value = uploads[0].url;
+        if (uploads.length === 1 && !$('#photo-title').value.trim()) {
+          $('#photo-title').value = uploads[0].name;
+        }
+        $('#btn-photo-upload').textContent = '⬆ Đổi danh sách ảnh (' + uploads.length + ')';
+      }
       updatePhotoPreview();
-    });
+    }).catch(function () { /* uploadPhotoFiles đã hiển thị lỗi */ });
   });
   $('#btn-photo-save').addEventListener('click', savePhotoFromForm);
   $('#btn-photo-cancel').addEventListener('click', resetPhotoForm);

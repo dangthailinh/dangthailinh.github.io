@@ -351,16 +351,16 @@
         </label>
 
         <label class="field">
-          <span>Tiêu đề <b class="req">*</b></span>
-          <input id="photo-title" type="text" maxlength="100" placeholder="VD: Một buổi chiều ngoài biển">
+          <span>Tiêu đề / tên chung</span>
+          <input id="photo-title" type="text" maxlength="100" placeholder="Để trống sẽ dùng tên từng file ảnh">
         </label>
 
         <label class="field">
           <span>Ảnh <b class="req">*</b></span>
           <input id="photo-src" type="text" spellcheck="false" placeholder="/uploads/... hoặc https://...">
         </label>
-        <button id="btn-photo-upload" class="btn ghost block" type="button">⬆ Chọn ảnh từ máy</button>
-        <div id="photo-preview" class="photo-upload-preview" hidden><img alt=""></div>
+        <button id="btn-photo-upload" class="btn ghost block" type="button">⬆ Chọn một hoặc nhiều ảnh</button>
+        <div id="photo-preview" class="photo-upload-preview" hidden></div>
 
         <label class="field">
           <span>Ngày chụp / ngày lưu</span>
@@ -755,6 +755,7 @@
 
 <div id="toast" class="toast" hidden></div>
 <input id="file-input" type="file" accept="image/*" hidden>
+<input id="photo-file-input" type="file" accept="image/*" multiple hidden>
 
 <script src="/admin/templates.js"></script>
 <script src="/admin/admin.js"></script>
