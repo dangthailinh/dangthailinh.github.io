@@ -211,6 +211,17 @@ let activeAlbum = "all";
 let visiblePhotos = [];
 let activePhotoIndex = 0;
 
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[char]);
+}
+
+function safePhotoSource(value) {
+  const source = String(value || "").trim();
+  return /^(?:https?:\/\/|\/(?!\/)|assets\/)/i.test(source) ? source : "";
+}
+
 function allPhotos() {
   return ALBUMS.flatMap((album) =>
     album.photos.map((photo) => ({ ...photo, albumId: album.id, albumTitle: album.title }))
@@ -234,17 +245,19 @@ function renderTabs() {
 
 function photoCard(photo, album, photoNumber) {
   const isUnwritten = !photo.note || photo.note.toLowerCase().includes("sẽ được viết sau");
+  const source = safePhotoSource(photo.src);
+  if (!source) return "";
   return `
-    <figure class="photo-card" data-photo-src="${photo.src}">
-      <button type="button" data-open-photo="${photo.src}" aria-label="Mở ảnh: ${photo.title}">
-        <img src="${photo.src}" alt="${photo.title}" loading="lazy">
+    <figure class="photo-card" data-photo-src="${escapeHtml(source)}">
+      <button type="button" data-open-photo="${escapeHtml(source)}" aria-label="Mở ảnh: ${escapeHtml(photo.title)}">
+        <img src="${escapeHtml(source)}" alt="${escapeHtml(photo.title)}" loading="lazy">
         <figcaption class="photo-card-copy">
           <span class="photo-card-meta">
             <span>${String(photoNumber).padStart(2, "0")}.PNG</span>
-            <span>${photo.date}</span>
+            <span>${escapeHtml(photo.date)}</span>
           </span>
-          <h3>${photo.title}</h3>
-          <p class="${isUnwritten ? "unwritten-note" : ""}">${photo.note || "Chưa viết câu chuyện cho tấm ảnh này."}</p>
+          <h3>${escapeHtml(photo.title)}</h3>
+          <p class="${isUnwritten ? "unwritten-note" : ""}">${escapeHtml(photo.note || "Chưa viết câu chuyện cho tấm ảnh này.")}</p>
         </figcaption>
       </button>
     </figure>
@@ -349,17 +362,30 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") stepPhoto(1);
 });
 
-function updateClock() {
-  const now = new Date();
-  document.querySelector("#footer-clock").textContent =
-    now.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
-  document.querySelector("#footer-date").textContent = now.toLocaleDateString("vi-VN");
+function mergeManagedPhotos(db) {
+  const photos = Array.isArray(db?.photos) ? db.photos : [];
+  photos.forEach((photo) => {
+    const album = ALBUMS.find((item) => item.id === photo.album);
+    const source = safePhotoSource(photo.src);
+    if (!album || !source) return;
+    album.photos.unshift({
+      src: source,
+      title: String(photo.title || "Ảnh chưa đặt tên"),
+      date: String(photo.date || "chưa ghi ngày"),
+      note: String(photo.note || "")
+    });
+  });
 }
 
-const photos = allPhotos();
-document.querySelector("#photo-total").textContent = photos.length;
-document.querySelector("#album-total").textContent = ALBUMS.length;
-renderTabs();
-renderAlbums();
-updateClock();
-setInterval(updateClock, 30_000);
+function initGallery() {
+  document.querySelector("#photo-total").textContent = allPhotos().length;
+  document.querySelector("#album-total").textContent = ALBUMS.length;
+  renderTabs();
+  renderAlbums();
+}
+
+fetch(`/data/photos.json?v=${Math.floor(Date.now() / 60000)}`)
+  .then((response) => response.ok ? response.json() : { photos: [] })
+  .then(mergeManagedPhotos)
+  .catch(() => {})
+  .finally(initGallery);

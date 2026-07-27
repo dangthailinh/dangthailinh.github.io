@@ -14,6 +14,7 @@
   var DATA_PATH = 'data/posts.json';
   var TAX_PATH = 'data/taxonomy.json';
   var THEME_PATH = 'data/site-settings.json';
+  var PHOTO_PATH = 'data/photos.json';
   var PAGE_URLS = {
     blog: '/blog/',
     khoahoc: '/khoa-hoc0/0/khoa-hoc.html',
@@ -100,6 +101,9 @@
     themeSaved: null,  // bản đã lưu gần nhất để hoàn tác
     themeSha: null,
     themeDirty: false,
+    photos: null,      // ảnh thêm trực tiếp vào /blog/gallery.html
+    photosSha: null,
+    editingPhotoId: null,
     legacyPosts: [],   // bài HTML cũ chưa được ghi vào posts.json
     editingLegacy: null
   };
@@ -299,6 +303,7 @@
         return loadTaxonomy();
       })
       .then(function () { return loadTheme(); })
+      .then(function () { return loadPhotos(); })
       .then(function () { return loadDb(); })
       .then(function () {
         return scanLegacyPosts(true).catch(function () {
@@ -314,6 +319,8 @@
         renderDashboard();
         renderTaxonomy();
         renderThemeEditor();
+        renderPhotoList();
+        applyRouteFromUrl();
       })
       .catch(function (err) {
         busy(false);
@@ -366,6 +373,34 @@
     var json = JSON.stringify(S.db, null, 2) + '\n';
     return writeFile(DATA_PATH, json, message, S.dbSha).then(function (res) {
       S.dbSha = res.content.sha;
+    });
+  }
+
+  /* ───────────────── Kho ảnh Photos ───────────────── */
+  function loadPhotos() {
+    return readFile(PHOTO_PATH).then(function (file) {
+      if (!file) {
+        S.photos = { version: 1, updatedAt: new Date().toISOString(), photos: [] };
+        S.photosSha = null;
+        return;
+      }
+      try { S.photos = JSON.parse(file.text); }
+      catch (e) {
+        throw new Error('File data/photos.json không đúng định dạng JSON. Admin đã dừng để bảo vệ kho ảnh.');
+      }
+      if (!S.photos || !Array.isArray(S.photos.photos)) {
+        throw new Error('File data/photos.json thiếu mảng "photos".');
+      }
+      S.photosSha = file.sha;
+    });
+  }
+
+  function savePhotos(message) {
+    S.photos.version = 1;
+    S.photos.updatedAt = new Date().toISOString();
+    var json = JSON.stringify(S.photos, null, 2) + '\n';
+    return writeFile(PHOTO_PATH, json, message, S.photosSha).then(function (res) {
+      S.photosSha = res.content.sha;
     });
   }
 
@@ -994,6 +1029,166 @@
     });
   }
 
+  var PHOTO_ALBUM_LABELS = {
+    selfies: 'Selfies',
+    'small-moments': 'Khoảnh khắc nhỏ',
+    favorites: 'Sở thích & đồ nhặt được',
+    'macro-life': 'Ong @@ & thế giới tí hon',
+    places: 'Đường đi & nơi chốn'
+  };
+
+  function updatePhotoPreview() {
+    var src = $('#photo-src').value.trim();
+    var preview = $('#photo-preview');
+    var valid = /^(?:https?:\/\/|\/(?!\/))/i.test(src);
+    preview.hidden = !valid;
+    if (valid) preview.querySelector('img').src = src;
+  }
+
+  function resetPhotoForm() {
+    S.editingPhotoId = null;
+    $('#photo-form-title').textContent = 'Thêm ảnh vào Photos';
+    $('#photo-edit-pill').textContent = 'Ảnh mới';
+    $('#photo-edit-pill').classList.remove('editing');
+    $('#photo-title').value = '';
+    $('#photo-src').value = '';
+    $('#photo-note').value = '';
+    $('#photo-date').value = todayISO();
+    $('#photo-preview').hidden = true;
+    $('#btn-photo-save').textContent = '▧ Thêm vào Photos';
+    $('#btn-photo-cancel').hidden = true;
+  }
+
+  function renderPhotoList() {
+    if (!S.photos) return;
+    var list = S.photos.photos.slice().sort(function (a, b) {
+      return String(b.updatedAt || b.date || '').localeCompare(String(a.updatedAt || a.date || ''));
+    });
+    $('#photo-list-summary').textContent = list.length
+      ? list.length + ' ảnh được quản lý tại đây'
+      : 'Chưa có ảnh nào được thêm bằng admin';
+    var root = $('#photo-admin-list');
+    if (!list.length) {
+      root.innerHTML = '<div class="photo-admin-empty">Tải tấm ảnh đầu tiên để bắt đầu kho Photos.</div>';
+      return;
+    }
+    root.innerHTML = list.map(function (photo) {
+      return '<article class="photo-admin-item" data-photo-id="' + T.escapeHtml(photo.id) + '">' +
+        '<img src="' + T.escapeHtml(photo.src) + '" alt="">' +
+        '<div class="photo-admin-copy">' +
+          '<span class="photo-admin-meta">' + T.escapeHtml(PHOTO_ALBUM_LABELS[photo.album] || photo.album) +
+            ' · ' + T.escapeHtml(photo.date || '') + '</span>' +
+          '<h3>' + T.escapeHtml(photo.title || 'Ảnh chưa đặt tên') + '</h3>' +
+          '<p>' + T.escapeHtml(photo.note || 'Chưa có ghi chú.') + '</p>' +
+        '</div>' +
+        '<div class="photo-admin-buttons">' +
+          '<button class="btn ghost small" type="button" data-photo-action="edit">Sửa</button>' +
+          '<button class="btn danger small" type="button" data-photo-action="delete">Xóa</button>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+  }
+
+  function editPhoto(photo) {
+    S.editingPhotoId = photo.id;
+    $('#photo-form-title').textContent = 'Sửa ảnh trong Photos';
+    $('#photo-edit-pill').textContent = 'Đang sửa';
+    $('#photo-edit-pill').classList.add('editing');
+    $('#photo-album').value = PHOTO_ALBUM_LABELS[photo.album] ? photo.album : 'small-moments';
+    $('#photo-title').value = photo.title || '';
+    $('#photo-src').value = photo.src || '';
+    $('#photo-date').value = photo.date || todayISO();
+    $('#photo-note').value = photo.note || '';
+    $('#btn-photo-save').textContent = '💾 Lưu thay đổi ảnh';
+    $('#btn-photo-cancel').hidden = false;
+    updatePhotoPreview();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function savePhotoFromForm() {
+    var title = $('#photo-title').value.trim();
+    var src = $('#photo-src').value.trim();
+    if (!title) { $('#photo-title').focus(); return toast('Hãy đặt tiêu đề cho ảnh.', 'err'); }
+    if (!/^(?:https?:\/\/|\/(?!\/))/i.test(src)) {
+      $('#photo-src').focus();
+      return toast('Hãy tải ảnh từ máy hoặc nhập URL ảnh hợp lệ.', 'err');
+    }
+    var old = null;
+    (S.photos.photos || []).forEach(function (item) {
+      if (item.id === S.editingPhotoId) old = item;
+    });
+    var now = new Date().toISOString();
+    var photo = {
+      id: old ? old.id : ('photo-' + Date.now().toString(36)),
+      album: $('#photo-album').value,
+      title: title,
+      src: src,
+      date: $('#photo-date').value || todayISO(),
+      note: $('#photo-note').value.trim(),
+      author: 'Linh Osimi',
+      createdAt: old && old.createdAt ? old.createdAt : now,
+      updatedAt: now
+    };
+    var index = S.photos.photos.findIndex(function (item) { return item.id === photo.id; });
+    if (index >= 0) S.photos.photos[index] = photo;
+    else S.photos.photos.push(photo);
+    busy(true, old ? 'Đang lưu thay đổi ảnh…' : 'Đang thêm ảnh vào Photos…');
+    savePhotos((old ? 'Cập nhật ảnh: ' : 'Thêm ảnh vào Photos: ') + title)
+      .then(function () {
+        busy(false);
+        resetPhotoForm();
+        renderPhotoList();
+        toast(old ? '✅ Đã cập nhật ảnh' : '✅ Ảnh đã được thêm vào Photos', 'ok');
+      })
+      .catch(function (error) {
+        busy(false);
+        /* Khôi phục dữ liệu mới nhất nếu lần ghi thất bại. */
+        loadPhotos().then(renderPhotoList);
+        toast(error.message, 'err');
+      });
+  }
+
+  $('#photo-src').addEventListener('input', updatePhotoPreview);
+  $('#btn-photo-upload').addEventListener('click', function () {
+    pickImage(function (url, name) {
+      $('#photo-src').value = url;
+      if (!$('#photo-title').value.trim()) $('#photo-title').value = name || '';
+      updatePhotoPreview();
+    });
+  });
+  $('#btn-photo-save').addEventListener('click', savePhotoFromForm);
+  $('#btn-photo-cancel').addEventListener('click', resetPhotoForm);
+  $('#btn-open-photos').addEventListener('click', function () { switchTab('photos'); });
+  $('#btn-photo-open-gallery').addEventListener('click', function () { window.open('/blog/gallery.html', '_blank'); });
+  $('#btn-photo-reload').addEventListener('click', function () {
+    busy(true, 'Đang tải lại kho ảnh…');
+    loadPhotos().then(function () {
+      busy(false); resetPhotoForm(); renderPhotoList(); toast('Đã tải lại kho ảnh');
+    }).catch(function (error) { busy(false); toast(error.message, 'err'); });
+  });
+  $('#photo-admin-list').addEventListener('click', function (event) {
+    var button = event.target.closest('[data-photo-action]');
+    var row = event.target.closest('[data-photo-id]');
+    if (!button || !row) return;
+    var photo = S.photos.photos.find(function (item) { return item.id === row.dataset.photoId; });
+    if (!photo) return;
+    if (button.dataset.photoAction === 'edit') return editPhoto(photo);
+    ask({
+      title: 'Xóa ảnh khỏi Photos?',
+      body: '<p>Ảnh <b>' + T.escapeHtml(photo.title) + '</b> sẽ biến mất khỏi album. File ảnh đã tải lên vẫn được giữ để tránh xóa nhầm.</p>',
+      okText: 'Xóa khỏi album', danger: true
+    }).then(function (answer) {
+      if (!answer) return;
+      S.photos.photos = S.photos.photos.filter(function (item) { return item.id !== photo.id; });
+      busy(true, 'Đang xóa ảnh khỏi album…');
+      savePhotos('Xóa ảnh khỏi Photos: ' + photo.title).then(function () {
+        busy(false); resetPhotoForm(); renderPhotoList(); toast('Đã xóa ảnh khỏi album', 'ok');
+      }).catch(function (error) {
+        busy(false); loadPhotos().then(renderPhotoList); toast(error.message, 'err');
+      });
+    });
+  });
+
   /* ───────────────── Biểu mẫu thông tin bài ───────────────── */
   function fillCategories() {
     var section = $('#f-section').value;
@@ -1013,11 +1208,19 @@
 
   function applySectionUi(section) {
     var isBlog = section === 'blog';
+    var isBlogPhoto = isBlog && $('#f-category').value === 'photo' && !S.editingId && !S.editingLegacy;
     $('#wrap-mood').hidden = !isBlog;
+    $('#blog-photo-notice').hidden = !isBlogPhoto;
     var coverLabel = $('#f-cover').parentNode.querySelector('span');
     if (coverLabel) coverLabel.textContent = isBlog ? 'Ảnh hoặc video kèm bài (URL)' : 'Ảnh bìa (URL)';
     var uploadBtn = $('#btn-cover-upload');
     if (uploadBtn) uploadBtn.textContent = isBlog ? '⬆ Tải ảnh kèm bài từ máy' : '⬆ Tải ảnh bìa từ máy';
+    if (isBlogPhoto) {
+      $('#btn-publish').textContent = '▧ Mở Kho ảnh';
+      $('#btn-save-draft').hidden = true;
+    } else {
+      applyStatusUi();
+    }
   }
 
   var STATUS_HINT = {
@@ -1027,6 +1230,11 @@
   };
 
   function applyStatusUi() {
+    if ($('#f-section').value === 'blog' && $('#f-category').value === 'photo' && !S.editingId && !S.editingLegacy) {
+      $('#btn-publish').textContent = '▧ Mở Kho ảnh';
+      $('#btn-save-draft').hidden = true;
+      return;
+    }
     var st = $('#f-status').value;
     $('#status-hint').textContent = STATUS_HINT[st] || '';
     $('#btn-publish').textContent = st === 'draft'
@@ -1054,7 +1262,10 @@
     schedulePreview();
   });
   ['#f-desc', '#f-cover', '#f-tags', '#f-date', '#f-category'].forEach(function (sel) {
-    $(sel).addEventListener('input', function () { saveDraftSoon(); schedulePreview(); updateFormStatus(); });
+    $(sel).addEventListener('input', function () {
+      if (sel === '#f-category') applySectionUi($('#f-section').value);
+      saveDraftSoon(); schedulePreview(); updateFormStatus();
+    });
   });
   $('#f-cover').addEventListener('input', updateCoverPreview);
 
@@ -1116,6 +1327,7 @@
     updateFormStatus();
     countWords();
     applyStatusUi();
+    applySectionUi($('#f-section').value);
     updateEditPill();
     schedulePreview();
   }
@@ -1260,6 +1472,11 @@
   function savePost(forceStatus) {
     if (S.editingLegacy) return saveLegacyPost(forceStatus);
     var p = readForm();
+    if (p.section === 'blog' && p.category === 'photo' && !S.editingId && !S.editingLegacy) {
+      switchTab('photos');
+      toast('Hãy tải ảnh vào album tại đây; admin sẽ không tạo bài blog riêng.', 'ok');
+      return;
+    }
     if (forceStatus) p.status = forceStatus;
 
     var problem = validate(p);
@@ -2377,6 +2594,7 @@
     $$('.tab').forEach(function (t) { t.classList.toggle('active', t.dataset.tab === name); });
     $$('.tabpanel').forEach(function (p) { p.classList.toggle('active', p.id === 'tab-' + name); });
     if (name === 'dashboard') renderDashboard();
+    if (name === 'photos') renderPhotoList();
     if (name === 'manage') renderPostList();
     if (name === 'theme') renderThemeEditor();
     if (name === 'taxonomy') renderTaxonomy();
@@ -2384,6 +2602,34 @@
   $$('.tab').forEach(function (t) {
     t.addEventListener('click', function () { switchTab(t.dataset.tab); });
   });
+
+  function applyRouteFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var tab = params.get('tab');
+    var section = params.get('section');
+    if (tab === 'photos') {
+      resetPhotoForm();
+      switchTab('photos');
+      return;
+    }
+    if (tab === 'theme') {
+      if (section && PAGE_URLS[section]) $('#theme-section').value = section;
+      switchTab('theme');
+      renderThemeEditor();
+      return;
+    }
+    if (tab === 'write') {
+      if (section && PAGE_URLS[section]) {
+        $('#f-section').value = section;
+        fillCategories();
+        var category = params.get('category');
+        var categories = T.categoriesOf(section);
+        if (category && categories[category]) $('#f-category').value = category;
+        applySectionUi(section);
+      }
+      switchTab('write');
+    }
+  }
 
   /* ───────────────── Khởi động ───────────────── */
   $('#btn-login').addEventListener('click', function () { doLogin(false); });
@@ -2402,6 +2648,7 @@
   (function init() {
     fillCategories();
     $('#f-date').value = todayISO();
+    $('#photo-date').value = todayISO();
     applyStatusUi();
     var savedRepo = localStorage.getItem(LS.repo);
     var savedBranch = localStorage.getItem(LS.branch);

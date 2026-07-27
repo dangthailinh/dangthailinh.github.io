@@ -379,10 +379,7 @@ if (localStorage.getItem("neet-blog-guestbook-signed") === "yes") {
 function updateClock() {
   const now = new Date();
   const time = now.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
-  const date = now.toLocaleDateString("vi-VN");
   document.querySelector("#local-clock").textContent = time;
-  document.querySelector("#footer-clock").textContent = time;
-  document.querySelector("#footer-date").textContent = date;
 }
 
 renderArchive();

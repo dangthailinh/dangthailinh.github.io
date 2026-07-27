@@ -378,11 +378,6 @@ p.content + '\n' +
 '      </section>\n' +
 '    </main>\n' +
 '\n' +
-'    <footer class="taskbar">\n' +
-'      <a class="start-button" href="/blog/index.html">☆ daily log</a>\n' +
-'      <span class="task-title">▤ ' + esc(p.title) + '</span>\n' +
-'      <span class="task-clock">© <span id="current-year">2026</span> linh / osimi</span>\n' +
-'    </footer>\n' +
 '  </div>\n' +
 '</body>\n' +
 '</html>\n';

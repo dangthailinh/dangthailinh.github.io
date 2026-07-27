@@ -63,6 +63,7 @@
     <nav class="tabs">
       <button class="tab" data-tab="dashboard">◈ Tổng quan</button>
       <button class="tab active" data-tab="write">✎ Viết bài</button>
+      <button class="tab" data-tab="photos">▧ Kho ảnh</button>
       <button class="tab" data-tab="manage">☰ Quản lý bài</button>
       <button class="tab" data-tab="theme">▦ Chỉnh trang</button>
       <button class="tab" data-tab="taxonomy">🏷 Chủ đề</button>
@@ -128,6 +129,11 @@
           <span>Chủ đề</span>
           <select id="f-category"></select>
         </label>
+        <div id="blog-photo-notice" class="photo-route-notice" hidden>
+          <strong>Ảnh sẽ được thêm vào Photos</strong>
+          <p>Chế độ này không tạo bài blog riêng. Bạn có thể chọn album, tải ảnh và viết ghi chú trong Kho ảnh.</p>
+          <button id="btn-open-photos" class="btn primary block small" type="button">Mở Kho ảnh</button>
+        </div>
 
         <label class="field">
           <span>Trạng thái</span>
@@ -269,6 +275,73 @@
           <span id="wordcount">0 từ</span>
           <span class="hint">Mẹo: kéo–thả ảnh vào đây, hoặc dán ảnh bằng Ctrl+V để tự tải lên.</span>
         </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ═══════════ TAB KHO ẢNH ═══════════ -->
+  <div id="tab-photos" class="tabpanel">
+    <div class="photos-layout">
+      <aside class="photo-form-card">
+        <div class="theme-head">
+          <div>
+            <h2 id="photo-form-title">Thêm ảnh vào Photos</h2>
+            <p>Ảnh sẽ vào đúng album, không tạo bài viết riêng.</p>
+          </div>
+          <span id="photo-edit-pill" class="pill">Ảnh mới</span>
+        </div>
+
+        <label class="field">
+          <span>Album <b class="req">*</b></span>
+          <select id="photo-album">
+            <option value="selfies">Selfies</option>
+            <option value="small-moments">Khoảnh khắc nhỏ</option>
+            <option value="favorites">Sở thích &amp; đồ nhặt được</option>
+            <option value="macro-life">Ong @@ &amp; thế giới tí hon</option>
+            <option value="places">Đường đi &amp; nơi chốn</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Tiêu đề <b class="req">*</b></span>
+          <input id="photo-title" type="text" maxlength="100" placeholder="VD: Một buổi chiều ngoài biển">
+        </label>
+
+        <label class="field">
+          <span>Ảnh <b class="req">*</b></span>
+          <input id="photo-src" type="text" spellcheck="false" placeholder="/uploads/... hoặc https://...">
+        </label>
+        <button id="btn-photo-upload" class="btn ghost block" type="button">⬆ Chọn ảnh từ máy</button>
+        <div id="photo-preview" class="photo-upload-preview" hidden><img alt=""></div>
+
+        <label class="field">
+          <span>Ngày chụp / ngày lưu</span>
+          <input id="photo-date" type="date">
+        </label>
+
+        <label class="field">
+          <span>Câu chuyện hoặc ghi chú</span>
+          <textarea id="photo-note" rows="5" maxlength="600" placeholder="Tấm ảnh này được chụp ở đâu, lúc đó có chuyện gì…"></textarea>
+        </label>
+
+        <div class="photo-form-actions">
+          <button id="btn-photo-save" class="btn primary block" type="button">▧ Thêm vào Photos</button>
+          <button id="btn-photo-cancel" class="btn ghost block small" type="button" hidden>Hủy sửa</button>
+        </div>
+      </aside>
+
+      <main class="photo-manage-card">
+        <div class="dash-head">
+          <div>
+            <h2>Ảnh đã thêm từ admin</h2>
+            <p id="photo-list-summary" class="dash-sub"></p>
+          </div>
+          <div class="photo-list-actions">
+            <button id="btn-photo-open-gallery" class="btn ghost small" type="button">Mở trang Photos ↗</button>
+            <button id="btn-photo-reload" class="btn ghost small" type="button">⟳ Tải lại</button>
+          </div>
+        </div>
+        <div id="photo-admin-list" class="photo-admin-list"></div>
       </main>
     </div>
   </div>

@@ -153,6 +153,51 @@ code{background:#eae2d5;padding:.1em .35em;border-radius:3px;font:.9em Consolas,
 .cover-preview{margin:0 0 14px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#eee8dc}
 .cover-preview img{display:block;width:100%;height:130px;object-fit:cover}
 
+.photo-route-notice{
+  margin:2px 0 15px;padding:12px;border:1px solid #d8c081;border-radius:10px;
+  background:#fff8df;color:#72551c;font-size:12px;line-height:1.5
+}
+.photo-route-notice[hidden]{display:none}
+.photo-route-notice strong{display:block;color:#5f4516}
+.photo-route-notice p{margin:4px 0 10px}
+
+/* ─── Kho ảnh ─── */
+.photos-layout{
+  display:grid;grid-template-columns:360px minmax(0,1fr);gap:20px;
+  padding:20px;align-items:start;max-width:1320px;margin:0 auto
+}
+.photo-form-card,.photo-manage-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;box-shadow:0 4px 18px rgba(69,58,42,.05)
+}
+.photo-form-card{position:sticky;top:calc(var(--topbar-h) + 20px)}
+.photo-form-card .theme-head h2,.photo-manage-card h2{margin:0;font-size:18px}
+.photo-form-card .theme-head p{margin:3px 0 0;color:var(--muted);font-size:12px}
+#btn-photo-upload{margin:-7px 0 14px}
+.photo-upload-preview{
+  margin:0 0 14px;border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;background:#eee8dc
+}
+.photo-upload-preview[hidden]{display:none}
+.photo-upload-preview img{display:block;width:100%;max-height:260px;object-fit:contain}
+.photo-form-actions{display:grid;gap:8px;margin-top:4px}
+.photo-list-actions{display:flex;gap:8px;flex-wrap:wrap}
+.photo-admin-list{display:grid;gap:10px;margin-top:18px}
+.photo-admin-item{
+  display:grid;grid-template-columns:112px minmax(0,1fr) auto;gap:14px;
+  align-items:center;padding:10px;border:1px solid var(--line);border-radius:11px;
+  background:#fdfaf4
+}
+.photo-admin-item img{
+  width:112px;height:86px;display:block;object-fit:cover;border-radius:8px;background:#e7dfd2
+}
+.photo-admin-copy{min-width:0}
+.photo-admin-copy h3{margin:0 0 3px;font-size:15px}
+.photo-admin-copy p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.45}
+.photo-admin-meta{font-size:10.5px;color:var(--accent);font-weight:700;text-transform:uppercase}
+.photo-admin-buttons{display:flex;gap:6px;flex-direction:column}
+.photo-admin-empty{padding:45px 18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:11px}
+
 /* ─── Trình soạn thảo ───
    Cột soạn thảo là một khung cao đúng bằng màn hình, tự cuộn bên trong.
    Nhờ vậy thanh công cụ luôn thấy được mà không bao giờ đè lên chữ. */
@@ -506,11 +551,16 @@ code{background:#eae2d5;padding:.1em .35em;border-radius:3px;font:.9em Consolas,
   .post-item .thumb{grid-column:1 / -1;width:100%;height:150px}
   .post-actions{grid-column:1 / -1;justify-content:flex-start}
   .theme-layout{grid-template-columns:1fr;padding:14px}
+  .photos-layout{grid-template-columns:1fr;padding:14px}
+  .photo-form-card{position:static}
   .theme-preview-wrap{position:static}
   .theme-preview{max-height:none}
 }
 
 @media (max-width:720px){
+  .photo-admin-item{grid-template-columns:80px minmax(0,1fr)}
+  .photo-admin-item img{width:80px;height:72px}
+  .photo-admin-buttons{grid-column:1/-1;flex-direction:row}
   .topbar{padding:10px 14px;gap:9px 12px}
   .brand{order:1}
   .topbar-right{order:2;max-width:calc(100% - 145px);gap:7px}

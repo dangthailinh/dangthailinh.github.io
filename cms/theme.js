@@ -126,11 +126,33 @@
       }
       group.items.push({ element: element, index: index });
     });
-    /* Chỉ đổi thứ tự những phần đang cùng một khu vực để không phá HTML gốc. */
+    /* Chỉ đổi thứ tự khi các phần cấu hình nằm liền nhau. Nếu giữa chúng còn
+       nội dung khác (header, danh sách bài, footer...), giữ nguyên HTML để
+       không đẩy thanh điều hướng xuống cuối trang. */
     groups.forEach(function (group) {
       if (group.items.length < 2) return;
+      var elements = group.items.map(function (item) { return item.element; });
+      var first = elements.reduce(function (a, b) {
+        return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_PRECEDING ? b : a;
+      });
+      var last = elements.reduce(function (a, b) {
+        return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? b : a;
+      });
+      var cursor = first;
+      var contiguous = true;
+      while (cursor && cursor !== last) {
+        cursor = cursor.nextElementSibling;
+        if (cursor && cursor !== last && elements.indexOf(cursor) < 0) {
+          contiguous = false;
+          break;
+        }
+      }
+      if (!contiguous || !cursor) return;
+      var marker = document.createComment('cms-block-anchor');
+      group.parent.insertBefore(marker, first);
       group.items.sort(function (a, b) { return a.index - b.index; })
-        .forEach(function (item) { group.parent.appendChild(item.element); });
+        .forEach(function (item) { group.parent.insertBefore(item.element, marker); });
+      marker.remove();
     });
   }
 
@@ -282,7 +304,7 @@
       if (hero) hero.hidden = settings.showHero === false;
     }
 
-    var navigation = document.querySelector('body > header, .manga-header, .site-header');
+    var navigation = document.querySelector('body > header, .browser-chrome, .manga-header, .site-header');
     var footer = document.querySelector('body > footer, footer');
     if (navigation) navigation.hidden = settings.showNavigation === false;
     if (footer) footer.hidden = settings.showFooter === false;
