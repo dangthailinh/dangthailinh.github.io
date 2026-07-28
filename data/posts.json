@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-27T09:50:30.518Z",
+  "updatedAt": "2026-07-28T01:39:35.202Z",
   "posts": [
     {
       "id": "gm-game-bai3",
@@ -41,6 +41,32 @@
       "path": "manga0/bai-viet/lain09.html",
       "url": "/manga0/bai-viet/lain09.html",
       "updatedAt": "2026-07-27T09:50:30.518Z"
+    },
+    {
+      "id": "mg-umibe-no-onnanoko-co-gai-ben-bo-bien",
+      "section": "manga",
+      "category": "review",
+      "status": "published",
+      "placement": "",
+      "targetUrl": "",
+      "mangaKicker": "UMIBE NO ONNANOKO - CÔ GÁI BÊN BỜ BIỂN",
+      "mangaQuote": "",
+      "filmYear": "",
+      "filmDirector": "",
+      "filmDuration": "",
+      "filmWarning": "",
+      "title": "UMIBE NO ONNANOKO - CÔ GÁI BÊN BỜ BIỂN",
+      "slug": "umibe-no-onnanoko-co-gai-ben-bo-bien",
+      "description": "phân tích tí !",
+      "cover": "Đọc xong chưa ? Nếu thế thì chúng ta bắt đầu nhé…  Thú thật tôi không phải là một người đọc nhiều manga, số lượng manga tôi đọc hết e chỉ đếm trên đầu ngón tay. UmiOnna là một trong số ít manga mà tôi dành thời gian để đọc hết (có lẽ vì nó không quá dài).  Tác giả của Umibe no Onnanoko là Inio Asano, một người mà đến sau khi đọc xong manga này tôi mới biết đây là cha đẻ của những tác phẩm hay mà tôi chưa từng đọc qua như Oyasumi Punpun hay Solanin :v Quay trở lại câu chuyện, tôi vừa mới đọc xong Umibe no Onnanoko khoảng vài ngày trước và nó thực sự để lại cho tôi nhiều thứ để suy nghĩ…",
+      "tags": [
+        "908"
+      ],
+      "date": "2026-07-27",
+      "author": "Linh Osimi",
+      "path": "manga0/bai-viet/umibe-no-onnanoko-co-gai-ben-bo-bien.html",
+      "url": "/manga0/bai-viet/umibe-no-onnanoko-co-gai-ben-bo-bien.html",
+      "updatedAt": "2026-07-28T01:39:35.202Z"
     },
     {
       "id": "kt-tong-quan-ve-codex",
