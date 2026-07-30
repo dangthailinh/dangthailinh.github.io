@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-27T08:51:24.025Z",
+  "updatedAt": "2026-07-30T09:46:23.625Z",
   "photos": [
     {
       "id": "photo-ms2zf5es-0",
@@ -106,6 +106,21 @@
       "author": "Linh Osimi",
       "createdAt": "2026-07-27T08:51:24.020Z",
       "updatedAt": "2026-07-27T08:51:24.020Z"
+    },
+    {
+      "id": "photo-ms7bwrux-0",
+      "destination": "blog",
+      "album": "small-moments",
+      "category": "classic",
+      "game": "",
+      "title": "Screenshot 2026-07-30 104315",
+      "src": "/uploads/2026/07/1785404757879-zl01l-screenshot-2026-07-30-104315.png",
+      "date": "2026-07-30",
+      "note": "desktop dcm",
+      "link": "",
+      "author": "Linh Osimi",
+      "createdAt": "2026-07-30T09:46:23.625Z",
+      "updatedAt": "2026-07-30T09:46:23.625Z"
     }
   ]
 }
