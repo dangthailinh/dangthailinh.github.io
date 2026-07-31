@@ -305,6 +305,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 </head>
 <body>
+<a class="ux-skip-link" href="#main-content">Bỏ qua đến nội dung chính</a>
 
 <button class="dancing-cat" id="dancingCat" type="button" aria-label="Chú mèo đang nhảy">
   <img src="img/decor-dancing-cat.png" alt="Mèo nhảy múa" />
@@ -1483,7 +1484,7 @@ function toggleMenu() {
 
 
 
-<section class="hero" style="position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+<section class="hero" id="main-content" tabindex="-1" style="position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
     <div class="hero-video-layer" aria-hidden="true">
       <video id="heroBackgroundVideo" autoplay muted loop playsinline preload="auto" tabindex="-1" disablepictureinpicture>
         <source src="hero-vibe.mp4" type="video/mp4">

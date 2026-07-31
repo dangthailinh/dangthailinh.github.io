@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=IBM+Plex+Mono:wght@400;600;700&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../manga-home.css">
   <script src="/cms/feed.js" defer></script>
+  <script src="/manga0/manga-archive.js?v=20260731" defer></script>
   <script src="/cms/theme.js" defer></script>
 </head>
 <body data-cms-feed="manga">
@@ -42,12 +43,16 @@
       </aside>
     </section>
 
-    <div class="archive-bar"><a class="archive-bar__back" href="../../index.html">← TRANG CHỦ</a><p>PAGE 01 / 03 &nbsp; ◆ &nbsp; MANGA &amp; SERIES FILE</p><strong>6 ENTRIES</strong></div>
+    <div class="archive-bar">
+      <a class="archive-bar__back" href="../../index.html">← TRANG CHỦ</a>
+      <p>PAGE <span data-manga-current-page>01</span> / <span data-manga-total-pages>01</span> &nbsp; ◆ &nbsp; MANGA &amp; SERIES FILE</p>
+      <strong data-manga-entry-count>0 ENTRIES</strong>
+    </div>
 
-    <main class="manga-content">
+    <main class="manga-content" id="mangaArchive" data-manga-archive>
       <section class="collection-section" aria-labelledby="mainCollection">
-        <div class="section-head"><h2 id="mainCollection" data-no="01">Bản ghi chính</h2><p>MAIN SHELF // DARK FANTASY + ACTION</p></div>
-        <div class="card-grid">
+        <div class="section-head"><h2 id="mainCollection" data-no="01">Kho bài Manga</h2><p>ALL FILES // 09 ENTRIES PER PAGE</p></div>
+        <div class="card-grid" data-manga-archive-grid>
           <a href="truyen-manga-bai0.html" class="card-link"><article class="card"><img src="https://th.bing.com/th/id/R.24dff2f067c79deb9e51951b917cd1fa?rik=9HX6om5cn83NYg&amp;pid=ImgRaw&amp;r=0" alt="One Piece" class="card-img"><div class="genre-tags"><span class="genre-tag">Action</span><span class="genre-tag">Adventure</span></div><h3>Berserk</h3><div class="card-meta">Griffith did nothing wrong</div></article></a>
           <a href="truyen-manga-bai1.html" class="card-link"><article class="card"><img src="https://preview.redd.it/attack-on-titan-art-style-v0-ywt0l8zodfzb1.jpg?width=1290&amp;format=pjpg&amp;auto=webp&amp;s=e7ff10ce04c229c151593a97d83d931f517f0996" alt="Attack on Titan" class="card-img"><div class="genre-tags"><span class="genre-tag">Dark Fantasy</span><span class="genre-tag">Action</span></div><h3>Bài 1 - Attack on Titan Ending: Phân tích vòng lặp</h3><div class="card-meta">Nov 01, 2025 | Titan Slayer</div></article></a>
           <a href="truyen-manga-bai2.html" class="card-link"><article class="card"><img src="https://images3.alphacoders.com/134/thumbbig-1341528.webp" alt="Jujutsu Kaisen" class="card-img"><div class="genre-tags"><span class="genre-tag">Supernatural</span><span class="genre-tag">Shonen</span></div><h3>Jujutsu Kaisen: Thầy cúng hack game</h3><div class="card-meta">Nov 05, 2025 | JJK Expert</div></article></a>
@@ -63,10 +68,57 @@
         </div>
       </section>
 
-      <nav class="page-switcher" aria-label="Trang manga"><span>◀</span><a class="active" href="truyen-manga.html" aria-current="page">01</a><a href="../1/t2.html">02</a><a href="../2/t3.html">03</a><span>▶</span></nav>
+      <section class="collection-section" aria-labelledby="aotCollection">
+        <div class="section-head"><h2 id="aotCollection" data-no="03">Nhân vật AOT</h2><p>BORN INTO THIS WORLD // AOT FILES</p></div>
+        <div class="card-grid">
+          <a href="../1/aot.html" class="card-link"><article class="card"><img src="https://tse2.mm.bing.net/th/id/OIP.C5x7KGdEeevwTcCN5fMSRAHaFW?cb=ucfimg2&amp;ucfimg=1&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="Attack on Titan" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Action</span><span class="genre-tag">Adventure</span></div><h3>Attack on Titan</h3><div class="card-meta">BORN INTO THIS WORLD</div></article></a>
+          <a href="../1/aot2.html" class="card-link"><article class="card"><img src="https://tse2.mm.bing.net/th/id/OIP.ZIJ-md_Gd109jtyS7hnZLQHaHa?cb=ucfimg2&amp;ucfimg=1&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="Attack on Titan" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Dark Fantasy</span><span class="genre-tag">Action</span></div><h3>Attack on Titan</h3><div class="card-meta">THE GREATEST SALVATION IS NOT BEING BORN</div></article></a>
+          <a href="../1/aot3.html" class="card-link"><article class="card"><img src="https://images3.alphacoders.com/134/thumbbig-1341528.webp" alt="Zeke và Armin" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Nihilism</span><span class="genre-tag">Absurdism</span></div><h3>Zeke và Armin</h3><div class="card-meta">Nihilism vs. Absurdism</div></article></a>
+        </div>
+      </section>
+
+      <section class="collection-section" aria-labelledby="characterCollection">
+        <div class="section-head"><h2 id="characterCollection" data-no="04">Hồ sơ nhân vật</h2><p>INTELLIGENCE / AMBITION / MONSTER</p></div>
+        <div class="card-grid">
+          <a href="../1/m.html" class="card-link"><article class="card"><img src="https://tse2.mm.bing.net/th/id/OIP.Ury3rGONNsVNJuPKh4k5GQHaEo?cb=ucfimg2&amp;ucfimg=1&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="L Lawliet" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Detective</span><span class="genre-tag">Genius</span></div><h3>L Lawliet</h3><div class="card-meta">Bi kịch của trí tuệ</div></article></a>
+          <a href="../1/m2.html" class="card-link"><article class="card"><img src="https://th.bing.com/th/id/OIP.05B0Hoq3_lqnOlC7fM9_IQHaEQ?o=7&amp;cb=ucfimg2&amp;rm=3&amp;ucfimg=1&amp;rs=1&amp;pid=ImgDetMain" alt="Griffith" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Dark</span><span class="genre-tag">Seinen</span></div><h3>Griffith</h3><div class="card-meta">DID NOTHING WRONG</div></article></a>
+          <a href="../1/m3.html" class="card-link"><article class="card"><img src="https://tse1.mm.bing.net/th/id/OIP.GEs6TYj_TKfzlOYn3uJM8AHaD5?cb=ucfimg2&amp;ucfimg=1&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="Johan Liebert" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Psychology</span><span class="genre-tag">Dark</span><span class="genre-tag">18+</span></div><h3>Johan Liebert</h3><div class="card-meta">A NAMELESS MONSTER</div></article></a>
+        </div>
+      </section>
+
+      <section class="collection-section" aria-labelledby="manga09Collection">
+        <div class="section-head"><h2 id="manga09Collection" data-no="05">Manga #09</h2><p>LOVE / GOD COMPLEX / REVENGE</p></div>
+        <div class="card-grid">
+          <a href="../2/denji_reze.html" class="card-link"><article class="card"><img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/01/img_0784.jpeg" alt="Denji và Reze" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Action</span><span class="genre-tag">Sad</span></div><h3>Denji and Reze</h3><div class="card-meta">IS ALL ABOUT YOU</div></article></a>
+          <a href="../2/Lightyagami.html" class="card-link"><article class="card"><img src="https://media.tenor.com/KYVGTRWokQoAAAAC/death-note-light-yagami.gif" alt="Light Yagami" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Dark</span><span class="genre-tag">Complex</span><span class="genre-tag">Sad</span></div><h3>Light Yagami</h3><div class="card-meta">Bi kịch của kẻ muốn làm thần</div></article></a>
+          <a href="../2/pain.html" class="card-link"><article class="card"><img src="https://c.tenor.com/I92MoA-XbGIAAAAC/pain-naruto.gif" alt="Nagato Pain" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Pain</span><span class="genre-tag">Revenge</span></div><h3>Nagato a.k.a Pain</h3><div class="card-meta">Lòng thù hận và nỗi đau</div></article></a>
+        </div>
+      </section>
+
+      <section class="collection-section" aria-labelledby="darkCollection">
+        <div class="section-head"><h2 id="darkCollection" data-no="06">Kho truyện bóng tối</h2><p>DEPRESSION / MEANING / IDENTITY</p></div>
+        <div class="card-grid">
+          <a href="../2/oyasumipupun.html" class="card-link"><article class="card"><img src="https://tse3.mm.bing.net/th/id/OIP.ewBWuicpCrb0TvLYVjuQ3AHaHa?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="Oyasumi Punpun" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Depressive</span><span class="genre-tag">Existence</span></div><h3>Oyasumi Punpun</h3><div class="card-meta">Thế giới vô nghĩa</div></article></a>
+          <a href="../2/evan.html" class="card-link"><article class="card"><img src="https://tse1.mm.bing.net/th/id/OIP.17kCoyI8btUJuvc4yVMNVQHaEK?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt="Evangelion" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Dark</span><span class="genre-tag">Meaning</span></div><h3>Evangelion</h3><div class="card-meta">Mục đích của sự tồn tại?</div></article></a>
+          <a href="../2/tokyogoul.html" class="card-link"><article class="card"><img src="https://giffiles.alphacoders.com/132/13250.gif" alt="Tokyo Ghoul" class="card-img" loading="lazy"><div class="genre-tags"><span class="genre-tag">Action</span><span class="genre-tag">Dark</span><span class="genre-tag">18+</span></div><h3>Tokyo Ghoul</h3><div class="card-meta">IF YOU WERE TO WRITE A STORY WITH ME</div></article></a>
+        </div>
+      </section>
+
+      <nav class="page-switcher" data-manga-pagination aria-label="Chuyển trang kho Manga">
+        <button class="page-switcher__arrow" type="button" data-manga-prev aria-label="Trang Manga trước">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="page-switcher__viewport" data-manga-page-viewport>
+          <div class="page-switcher__track" data-manga-page-track></div>
+        </div>
+        <button class="page-switcher__arrow" type="button" data-manga-next aria-label="Trang Manga tiếp theo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <span class="visually-hidden" data-manga-page-status aria-live="polite"></span>
+      </nav>
     </main>
 
-    <footer class="manga-footer"><div><img src="../assets/manga-ui/manga-logo.png" alt="Manga"><p>© 2026 Linh Osimi — Cập nhật chap mới, review và spoiler-free.</p></div><div class="manga-footer__code">ARCHIVE PAGE: 01/03<br>STATUS: CONNECTED<br>BEST VIEWED AFTER MIDNIGHT</div></footer>
+    <footer class="manga-footer"><div><img src="../assets/manga-ui/manga-logo.png" alt="Manga"><p>© 2026 Linh Osimi — Cập nhật chap mới, review và spoiler-free.</p></div><div class="manga-footer__code">ARCHIVE PAGE: <span data-manga-current-page>01</span>/<span data-manga-total-pages>01</span><br>STATUS: CONNECTED<br>BEST VIEWED AFTER MIDNIGHT</div></footer>
   </div>
 </body>
 </html>

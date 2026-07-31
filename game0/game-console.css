@@ -1,3 +1,4 @@
+@import url("/cms/ux-foundation.css?v=20260731");
 @import url("/game0/cursor.css?v=2");
 
 :root {
@@ -93,8 +94,8 @@ body.game-hub .hero-game { display: none !important; }
 .game-hero h1 span { display: block; color: transparent; -webkit-text-stroke: 2px var(--game-cyan); }
 .game-hero-description { max-width: 640px; margin: 35px 0 0 !important; color: #c6c9d5 !important; font-size: 16px !important; line-height: 1.65 !important; text-align: left !important; }
 .game-hero-actions { margin-top: 30px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.game-button { min-height: 47px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; color: var(--game-bg); background: var(--game-white); border: 1px solid var(--game-white); border-radius: 4px; font-size: 10px; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; transition: color .2s, background .2s, transform .2s; }
-.game-button:hover { color: #fff; background: var(--game-violet); border-color: var(--game-violet); transform: translateY(-2px); }
+.game-button { min-height: 47px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; color: var(--game-bg) !important; background: var(--game-white); border: 1px solid var(--game-white); border-radius: 4px; font-size: 10px; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; transition: color .2s, background .2s, transform .2s; }
+.game-button:hover { color: #fff !important; background: var(--game-violet); border-color: var(--game-violet); transform: translateY(-2px); }
 .game-button--ghost { color: #fff; background: rgba(7,8,16,.45); border-color: #555a6b; }
 .game-status-row { margin-top: 46px; display: flex; gap: 32px; }
 .game-status-row div { padding-left: 13px; border-left: 2px solid var(--game-violet); }

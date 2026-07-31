@@ -1,3 +1,4 @@
+@import url("/cms/ux-foundation.css?v=20260731");
 @import url("/manga0/cursor.css?v=2");
 
 :root {
@@ -152,10 +153,15 @@ button { font: inherit; }
   transition: transform .2s ease, border-color .2s ease;
 }
 .card::before { content: "0" counter(manga-card); counter-increment: manga-card; position: absolute; z-index: 5; top: 9px; left: 9px; min-width: 27px; padding: 5px; color: var(--void); border: 1px solid var(--void); background: var(--yellow); box-shadow: 3px 3px 0 var(--red); font: 900 9px/1 "IBM Plex Mono", monospace; text-align: center; }
+[data-manga-archive] .card::before { content: attr(data-index); counter-increment: none; }
 .card::after { content: "READ ↗"; position: absolute; z-index: 5; right: 9px; bottom: 9px; color: var(--cyan); font: 800 8px/1 "IBM Plex Mono", monospace; letter-spacing: .09em; opacity: 0; transform: translateX(8px); transition: .2s ease; }
 .card-link:nth-child(2) .card { transform: translateY(12px); }
 .card-link:nth-child(3) .card { transform: translateY(-5px); }
-.card-link:hover .card,.card-link:focus-visible .card { border-color: var(--cyan); transform: translate(-3px,-5px) rotate(-.6deg); outline: 0; }
+[data-manga-archive] .card-link[data-page-position="2"] .card { transform: translateY(12px); }
+[data-manga-archive] .card-link[data-page-position="3"] .card { transform: translateY(-5px); }
+.card-link:hover .card,.card-link:focus-visible .card,
+[data-manga-archive] .card-link:hover .card,
+[data-manga-archive] .card-link:focus-visible .card { border-color: var(--cyan); transform: translate(-3px,-5px) rotate(-.6deg); outline: 0; }
 .card-link:hover .card::after,.card-link:focus-visible .card::after { opacity: 1; transform: translateX(0); }
 .card-img { display: block; width: 100%; height: 235px; object-fit: cover; border-bottom: 1px solid rgba(97,230,238,.32); filter: grayscale(.7) saturate(.55) contrast(1.2) brightness(.78); transition: filter .24s ease, transform .24s ease; }
 .card-link:hover .card-img { filter: grayscale(.12) saturate(.9) contrast(1.12) brightness(.9); transform: scale(1.025); }
@@ -165,10 +171,77 @@ button { font: inherit; }
 .card h3 { min-height: 52px; margin: 10px 12px 5px; padding-right: 12px; color: var(--paper); font: 900 clamp(17px,2vw,25px)/1.08 "Noto Sans JP", sans-serif; letter-spacing: -.035em; }
 .card-meta { min-height: 45px; padding: 0 66px 14px 12px; color: var(--grey); font: 600 8px/1.5 "IBM Plex Mono", monospace; }
 
-.page-switcher { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 44px 0 12px; }
-.page-switcher a,.page-switcher span { display: grid; min-width: 40px; height: 38px; place-items: center; color: var(--cyan); border: 1px solid rgba(97,230,238,.45); background: rgba(7,29,44,.7); font: 900 10px/1 "IBM Plex Mono", monospace; }
-.page-switcher a:hover,.page-switcher a.active { color: var(--void); background: var(--cyan); box-shadow: 4px 4px 0 var(--red); transform: translate(-2px,-2px); }
-.page-switcher span { border-style: dashed; color: var(--grey); }
+.page-switcher {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 46px minmax(0, auto) 46px;
+  justify-content: center;
+  gap: 7px;
+  margin: 44px auto 12px;
+}
+.page-switcher__viewport {
+  max-width: min(360px, calc(100vw - 142px));
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.page-switcher__viewport::-webkit-scrollbar { display: none; }
+.page-switcher__track { display: flex; gap: 7px; width: max-content; padding: 3px; }
+.page-switcher button {
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  color: var(--cyan);
+  border: 1px solid rgba(97,230,238,.55);
+  border-radius: 0;
+  background: rgba(7,29,44,.88);
+  font: 900 10px/1 "IBM Plex Mono", monospace;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.page-switcher button:hover:not(:disabled),
+.page-switcher button.active {
+  color: var(--void);
+  border-color: var(--cyan);
+  background: var(--cyan);
+  box-shadow: 4px 4px 0 var(--red);
+  transform: translate(-2px,-2px);
+}
+.page-switcher button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.page-switcher button:disabled { color: #6d878d; border-style: dashed; cursor: not-allowed; opacity: .58; }
+.page-switcher__arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 2.5; }
+.page-switcher:not([data-manga-pagination]) { display: flex; align-items: center; }
+.page-switcher:not([data-manga-pagination]) > a,
+.page-switcher:not([data-manga-pagination]) > span {
+  display: grid;
+  min-width: 44px;
+  height: 44px;
+  place-items: center;
+  color: var(--cyan);
+  border: 1px solid rgba(97,230,238,.55);
+  background: rgba(7,29,44,.88);
+  font: 900 10px/1 "IBM Plex Mono", monospace;
+  transition: color .2s ease, background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.page-switcher:not([data-manga-pagination]) > a:hover,
+.page-switcher:not([data-manga-pagination]) > a:focus-visible,
+.page-switcher:not([data-manga-pagination]) > a.active {
+  color: var(--void);
+  background: var(--cyan);
+  box-shadow: 4px 4px 0 var(--red);
+  transform: translate(-2px,-2px);
+}
+.page-switcher:not([data-manga-pagination]) > span { color: #6d878d; border-style: dashed; }
+.card-link[hidden],.collection-section[hidden] { display: none !important; }
+.card-link.is-page-entering { animation: mangaCardEnter .24s ease both; }
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
 
 .manga-footer { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 20px; margin: 24px 0 34px; padding: 22px; border-top: 1px solid rgba(97,230,238,.35); background: rgba(3,9,17,.78); }
 .manga-footer img { width: 240px; filter: invert(1); opacity: .8; }
@@ -176,6 +249,10 @@ button { font: inherit; }
 .manga-footer__code { color: var(--cyan); font: 700 8px/1.5 "IBM Plex Mono", monospace; text-align: right; }
 
 @keyframes signalBlink { 50% { opacity: .25; } }
+@keyframes mangaCardEnter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 @media (max-width: 980px) {
   .manga-header { align-items: stretch; flex-direction: column; gap: 0; }

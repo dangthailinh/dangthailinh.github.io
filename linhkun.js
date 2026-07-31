@@ -46,6 +46,7 @@ function renderPosts(category, page) {
     const end = start + postsPerPage;
     const pagePosts = categoryPosts.slice(start, end);
     const postList = document.getElementById('postList');
+    if (!postList) return;
     postList.innerHTML = '';
     pagePosts.forEach(post => {
         const postDiv = document.createElement('div');
@@ -86,7 +87,9 @@ function closeModal() {
 
 // Search function (tìm trong category hiện tại)
 function initSearch(category) {
-    document.getElementById('searchInput').addEventListener('input', function(e) {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+    searchInput.addEventListener('input', function(e) {
         const query = e.target.value.toLowerCase();
         const categoryPosts = posts[category] || posts.all;
         const filteredPosts = categoryPosts.filter(post => post.title.toLowerCase().includes(query) || post.content.toLowerCase().includes(query));
@@ -112,20 +115,22 @@ function toggleTheme() {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     body.setAttribute('data-theme', newTheme);
-    document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    const toggle = document.querySelector('.theme-toggle');
+    if (toggle) toggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     localStorage.setItem('theme', newTheme);
 }
 
 // Load theme
-window.onload = function() {
+window.addEventListener('load', function() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.body.setAttribute('data-theme', savedTheme);
-    document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    const toggle = document.querySelector('.theme-toggle');
+    if (toggle) toggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
     const currentPageType = window.location.pathname.split('/').pop().split('.')[0] || 'index';
     const category = currentPageType === 'index' ? 'all' : currentPageType;
     renderPosts(category, 1);
     initSearch(category);
-};
+});
 
 // Xử lý click card (mở modal)
 document.addEventListener('DOMContentLoaded', function() {
@@ -241,40 +246,42 @@ window.onclick = function(event) {
 
 
 // Lấy các phần tử
-const items = document.querySelectorAll('.item');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxVideo = document.getElementById('lightbox-video');
-const closeBtn = document.querySelector('.close');
+const legacyItems = document.querySelectorAll('.item');
+const legacyLightbox = document.getElementById('lightbox');
+const legacyLightboxImg = document.getElementById('lightbox-img');
+const legacyLightboxVideo = document.getElementById('lightbox-video');
+const legacyCloseBtn = document.querySelector('.close');
 
 // Khi click vào ảnh hoặc video
-items.forEach(item => {
+legacyItems.forEach(item => {
     item.addEventListener('click', () => {
         const img = item.querySelector('img');
         const video = item.querySelector('video');
 
-        if (img) {
-            lightboxImg.src = img.src;
-            lightboxImg.style.display = 'block';
-            lightboxVideo.style.display = 'none';
-        } else if (video) {
-            lightboxVideo.src = video.src;
-            lightboxVideo.style.display = 'block';
-            lightboxImg.style.display = 'none';
+        if (img && legacyLightboxImg) {
+            legacyLightboxImg.src = img.src;
+            legacyLightboxImg.style.display = 'block';
+            if (legacyLightboxVideo) legacyLightboxVideo.style.display = 'none';
+        } else if (video && legacyLightboxVideo) {
+            legacyLightboxVideo.src = video.src;
+            legacyLightboxVideo.style.display = 'block';
+            if (legacyLightboxImg) legacyLightboxImg.style.display = 'none';
         }
 
-        lightbox.style.display = 'flex';
+        if (legacyLightbox) legacyLightbox.style.display = 'flex';
     });
 });
 
 
 
 // Đóng lightbox
-closeBtn.addEventListener('click', () => {
-    lightbox.style.display = 'none';
-    lightboxImg.src = '';
-    lightboxVideo.src = '';
-});
+if (legacyCloseBtn) {
+    legacyCloseBtn.addEventListener('click', () => {
+        if (legacyLightbox) legacyLightbox.style.display = 'none';
+        if (legacyLightboxImg) legacyLightboxImg.src = '';
+        if (legacyLightboxVideo) legacyLightboxVideo.src = '';
+    });
+}
 
 
 

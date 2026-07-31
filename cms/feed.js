@@ -280,23 +280,34 @@
   /* ═══════════ MỤC MANGA ═══════════
      Thẻ: .card-grid > a.card-link > article.card > img + .genre-tags + h3 + .card-meta */
   function renderManga(posts) {
-    var grid = document.querySelector('.card-grid');
+    var archive = document.querySelector('[data-manga-archive]') || document;
+    var grid = archive.querySelector('[data-manga-archive-grid]') || archive.querySelector('.card-grid');
     if (!grid) return;
     var CAT = {
       review: 'Review', character: 'Nhân vật', theory: 'Giả thuyết',
       seinen: 'Seinen', shonen: 'Shonen', khac: 'Manga'
     };
     posts.filter(bySection('manga')).slice().sort(compareOldestFirst).forEach(function (p) {
-      if (grid.querySelector('[href="' + p.url + '"]')) return;
+      var targetKey = canonicalLink(p.url);
+      var matches = Array.prototype.filter.call(
+        archive.querySelectorAll('a.card-link'),
+        function (link) {
+          return canonicalLink(link.getAttribute('href')) === targetKey ||
+            (p.id && link.getAttribute('data-post-id') === p.id);
+        }
+      );
       var tags = (p.tags || []).slice(0, 3)
         .map(function (t) { return '<span class="genre-tag">' + esc(t) + '</span>'; }).join('');
-      var a = document.createElement('a');
+      var a = matches.shift() || document.createElement('a');
+      matches.forEach(function (duplicate) { duplicate.remove(); });
       a.href = p.url;
       a.className = 'card-link';
       a.setAttribute('data-cms', '1');
+      a.setAttribute('data-post-id', p.id || '');
+      a.setAttribute('data-post-path', targetKey);
       a.innerHTML =
         '<article class="card">' +
-          '<img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" class="card-img" loading="lazy">' +
+          '<img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" class="card-img" loading="lazy" decoding="async">' +
           (tags ? '<div class="genre-tags">' + tags + '</div>' : '') +
           '<h3>' + esc(p.title) + '</h3>' +
           '<div class="card-meta">' + esc(prettyDate(p.date)) + ' | ' + esc(CAT[p.category] || 'Manga') + '</div>' +
@@ -411,15 +422,14 @@
     var mode = document.body.getAttribute('data-cms-feed') || guessMode();
     if (!RENDERERS[mode]) return;
     fetchPosts().then(function (posts) {
-      if (!posts.length) return;
       try {
-        RENDERERS[mode](posts);
-        document.dispatchEvent(new CustomEvent('cms:feed-updated', {
-          detail: { section: mode }
-        }));
+        if (posts.length) RENDERERS[mode](posts);
       } catch (e) {
         if (window.console) console.warn('[cms] Không chèn được bài mới:', e);
       }
+      document.dispatchEvent(new CustomEvent('cms:feed-updated', {
+        detail: { section: mode, count: posts.length }
+      }));
     });
   }
 
