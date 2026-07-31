@@ -3,6 +3,49 @@
 (function () {
   'use strict';
 
+  function ensureUxFoundation() {
+    if (document.querySelector('link[href*="/cms/ux-foundation.css"]')) return;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/cms/ux-foundation.css?v=20260731';
+    document.head.appendChild(link);
+  }
+
+  function enhanceDocumentBasics() {
+    var main = document.querySelector('main, [role="main"]');
+    if (main && !main.id) main.id = 'main-content';
+
+    if (main && !document.querySelector('.skip-link, .ux-skip-link')) {
+      var skip = document.createElement('a');
+      skip.className = 'ux-skip-link';
+      skip.href = '#' + main.id;
+      skip.textContent = 'Bỏ qua đến nội dung chính';
+      document.body.insertBefore(skip, document.body.firstChild);
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('a[target="_blank"]'), function (link) {
+      var rel = (link.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+      if (rel.indexOf('noopener') < 0) rel.push('noopener');
+      if (rel.indexOf('noreferrer') < 0) rel.push('noreferrer');
+      link.setAttribute('rel', rel.join(' '));
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('main img:not([loading])'), function (image, index) {
+      if (index === 0 || image.closest('.hero, .cms-hero, .manga-hero, [class*="hero-"]')) return;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+    });
+
+    document.body.setAttribute('data-ux-foundation', 'ready');
+  }
+
+  ensureUxFoundation();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enhanceDocumentBasics, { once: true });
+  } else {
+    enhanceDocumentBasics();
+  }
+
   var FONT_MAP = {
     inter: '"Inter","Segoe UI",system-ui,sans-serif',
     'be-vietnam': '"Be Vietnam Pro","Segoe UI",system-ui,sans-serif',

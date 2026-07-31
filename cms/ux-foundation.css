@@ -1,0 +1,246 @@
+/*
+   UX FOUNDATION · LINH OSIMI
+   Lớp nền dùng chung cho toàn site. Chỉ xử lý accessibility, nhịp tương tác,
+   responsive và khả năng đọc; không ghi đè cá tính màu sắc của từng chuyên mục.
+*/
+
+:root {
+  --ux-color-primary: #18181b;
+  --ux-color-on-primary: #ffffff;
+  --ux-color-accent: #2563eb;
+  --ux-color-background: #fafafa;
+  --ux-color-foreground: #09090b;
+  --ux-color-muted: #e8ecf0;
+  --ux-color-border: #e4e4e7;
+  --ux-color-danger: #dc2626;
+  --ux-focus-ring: #60a5fa;
+  --ux-space-1: .25rem;
+  --ux-space-2: .5rem;
+  --ux-space-3: 1rem;
+  --ux-space-4: 1.5rem;
+  --ux-space-5: 2rem;
+  --ux-space-6: 3rem;
+  --ux-space-7: 4rem;
+  --ux-radius-control: .65rem;
+  --ux-duration-fast: 160ms;
+  --ux-duration-normal: 240ms;
+  --ux-ease-out: cubic-bezier(.2, .8, .2, 1);
+  /* Trang chủ cũ dùng header 9991; skip-link phải luôn nằm trên cùng. */
+  --ux-z-skip: 10000;
+}
+
+html {
+  min-width: 320px;
+  max-width: 100%;
+  overflow-x: clip !important;
+  scroll-padding-top: max(5rem, env(safe-area-inset-top));
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  max-width: 100%;
+  overflow-x: clip !important;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-inline-size: 100%;
+}
+
+img,
+video {
+  block-size: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  max-inline-size: 100%;
+  font: inherit;
+}
+
+:where(
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  [role="button"],
+  .btn,
+  .button,
+  .back-btn,
+  .filter-chip,
+  .card-link,
+  nav a
+) {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(37, 99, 235, .18);
+}
+
+:where(
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  [role="button"],
+  .btn,
+  .button,
+  .back-btn,
+  .filter-chip
+) {
+  min-inline-size: 44px !important;
+  min-block-size: 44px !important;
+  cursor: pointer;
+}
+
+:where(nav a[href]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 44px !important;
+  min-block-size: 44px !important;
+}
+
+:where(a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid var(--ux-focus-ring) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 1px rgba(9, 9, 11, .72) !important;
+}
+
+:where(a[href], button, [role="button"], summary) {
+  cursor: pointer;
+}
+
+:where(button, .btn, .button, .back-btn, .filter-chip, .card-link, nav a) {
+  transition-duration: var(--ux-duration-normal);
+  transition-timing-function: var(--ux-ease-out);
+}
+
+:where(button, input, select, textarea):disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed !important;
+  opacity: .48;
+}
+
+.skip-link,
+.ux-skip-link {
+  position: fixed !important;
+  z-index: var(--ux-z-skip) !important;
+  inset-block-start: max(.75rem, env(safe-area-inset-top)) !important;
+  inset-inline-start: .75rem !important;
+  display: inline-flex !important;
+  align-items: center;
+  min-block-size: 44px;
+  max-inline-size: calc(100vw - 1.5rem);
+  padding: .7rem 1rem !important;
+  border: 2px solid currentColor !important;
+  border-radius: var(--ux-radius-control) !important;
+  background: #ffffff !important;
+  color: #09090b !important;
+  font: 700 1rem/1.2 "Segoe UI", system-ui, sans-serif !important;
+  text-decoration: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .22) !important;
+  transform: translateY(calc(-100% - 2rem));
+  transition: transform var(--ux-duration-fast) var(--ux-ease-out);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible,
+.ux-skip-link:focus,
+.ux-skip-link:focus-visible {
+  transform: translateY(0) !important;
+}
+
+.visually-hidden,
+.sr-only {
+  position: absolute !important;
+  inline-size: 1px !important;
+  block-size: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+:where(.cms-post, .post-content, .article-content, .log-body, .sci-post, #article-content) {
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+
+:where(.cms-post, .post-content, .article-content, .log-body, .sci-post, #article-content)
+  :where(p, li, blockquote) {
+  max-inline-size: 75ch;
+}
+
+:where(.cms-post, .post-content, .article-content, .log-body, .sci-post, #article-content)
+  :where(pre, table) {
+  display: block;
+  max-inline-size: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+:where(.cms-post, .post-content, .article-content, .log-body, .sci-post, #article-content) pre {
+  padding: var(--ux-space-3);
+  tab-size: 2;
+  white-space: pre;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :where(.card-link, .btn, .button, button):not(:disabled):hover {
+    filter: brightness(1.04);
+  }
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: max(4.5rem, env(safe-area-inset-top));
+  }
+
+  :where(input, select, textarea) {
+    min-block-size: 44px;
+    font-size: max(1rem, 16px);
+  }
+
+  :where(.cms-post, .post-content, .article-content, .log-body, .sci-post, #article-content) {
+    font-size: max(1rem, 16px);
+    line-height: 1.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(a[href], button, input, select, textarea, summary):focus-visible {
+    outline-color: Highlight !important;
+  }
+}

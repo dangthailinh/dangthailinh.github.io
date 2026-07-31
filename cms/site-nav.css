@@ -32,24 +32,29 @@
 
 .sn-brand{
   display:flex;align-items:center;gap:10px;
+  min-height:44px;
   text-decoration:none;color:var(--sn-text);
   font:700 18px/1 var(--font-display,system-ui);letter-spacing:-.01em;
   white-space:nowrap;
 }
 .sn-mark{
-  width:34px;height:34px;flex-shrink:0;border-radius:10px;
-  display:grid;place-items:center;font-size:16px;
+  width:36px;height:36px;flex-shrink:0;border-radius:10px;
+  display:grid;place-items:center;font:800 11px/1 var(--font-body,system-ui);
+  letter-spacing:.06em;
   background:var(--sn-accent);color:#fff;
 }
 
 /* ─── Menu máy tính ─── */
 .sn-desktop{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
 .sn-desktop a{
+  display:flex;align-items:center;gap:7px;
+  min-height:44px;
   padding:8px 14px;border-radius:30px;
   color:var(--sn-muted);text-decoration:none;
   font:500 14.5px/1 var(--font-body,system-ui);
   border:1px solid transparent;transition:.2s;
 }
+.sn-icon{display:block;width:18px;height:18px;flex:none}
 .sn-desktop a:hover{color:var(--sn-text);background:rgba(127,127,127,.12)}
 .sn-desktop a.is-active{
   color:var(--sn-accent);border-color:var(--sn-accent);font-weight:700;
@@ -58,7 +63,7 @@
 /* ─── Nút hamburger (chỉ hiện trên màn hình nhỏ) ─── */
 .sn-burger{
   display:none;margin-left:auto;
-  width:42px;height:42px;padding:0;
+  width:44px;height:44px;padding:0;
   flex-direction:column;align-items:center;justify-content:center;gap:5px;
   background:transparent;border:1px solid var(--sn-line);border-radius:11px;
   cursor:pointer;
@@ -103,10 +108,12 @@
   color:var(--sn-text);font:700 16px/1 var(--font-display,system-ui);
 }
 .sn-close{
-  width:36px;height:36px;flex-shrink:0;
+  width:44px;height:44px;flex-shrink:0;
+  display:grid;place-items:center;padding:0;
   background:transparent;border:1px solid var(--sn-line);border-radius:10px;
   color:var(--sn-text);font-size:15px;cursor:pointer;
 }
+.sn-close .sn-icon{width:20px;height:20px}
 .sn-close:hover{background:rgba(127,127,127,.14)}
 
 .sn-drawer-nav{list-style:none;margin:0;padding:10px;flex:1}
@@ -120,6 +127,7 @@
 
 .sn-drawer-nav a{
   display:flex;align-items:center;gap:13px;
+  min-height:52px;
   padding:14px 14px;border-radius:12px;
   color:var(--sn-text);text-decoration:none;
   font:500 15.5px/1 var(--font-body,system-ui);
@@ -128,11 +136,12 @@
 .sn-drawer-nav a.is-active{color:var(--sn-accent);font-weight:700;background:rgba(127,127,127,.1)}
 .sn-drawer-nav .ic{
   width:34px;height:34px;flex-shrink:0;border-radius:10px;
-  display:grid;place-items:center;font-size:16px;
+  display:grid;place-items:center;
   background:rgba(127,127,127,.12);
 }
+.sn-drawer-nav .ic .sn-icon{width:19px;height:19px}
 .sn-drawer-foot{
-  margin:0;padding:16px 18px;border-top:1px solid var(--sn-line);
+  margin:0;padding:16px 18px max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--sn-line);
   color:var(--sn-muted);font-size:12.5px;text-align:center;
 }
 
